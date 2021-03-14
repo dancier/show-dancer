@@ -1,8 +1,8 @@
 <h1>Dancier! {{ title }}</h1>
-<p>Hallo Dominik</p>
 <p>
-  Finde Deinen Tanzpartner, einfach und schnell. Nicht mehr und nicht weniger. 
+  {{ profile.name }}
 </p>
-<p>
-  demnächst hier! {{ profile.name }}
-</p>
+<nav>
+  <a routerLink="/login">Login</a>
+</nav>
+<router-outlet></router-outlet>
