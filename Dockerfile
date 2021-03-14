@@ -10,7 +10,7 @@ WORKDIR /app
 COPY . .
 
 # install node modules and build assets
-RUN npm install -g npm@7.6.1 && npm i && npm run build
+RUN npm install -g npm@7.6.1 && npm i && npm run build --prod
 
 # nginx state for serving content
 FROM nginx:alpine
@@ -20,5 +20,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 # Copy static assets from builder stage
 COPY --from=builder /app/dist/show-dancer .
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Containers run nginx with global directives and daemon off
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
