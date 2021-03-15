@@ -1,14 +1,14 @@
 # Author: Marc Gorzala
 version: "3.9"
+# see https://github.com/traefik/blog-posts/blob/master/2019_09_10-101_docker/docker-compose-07.yml
 services:
   traefik:
     image: ${TRAEFIK_IMAGE}
     command:
       - "--log.level=${TRAEFIK_LOG_LEVEL}"
       - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.websecure.address=:443"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.mytlschallenge.acme.tlschallenge=true"
       #- "--certificatesresolvers.mytlschallenge.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
       - "--certificatesresolvers.mytlschallenge.acme.email=${ACME_MAIL}"
@@ -20,6 +20,11 @@ services:
     volumes:
       - "${VOLUMES_LETSENCRYPT}:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    labels:
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=web"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
   show-dancer:
     image: ${SHOW_DANCER_IMAGE}
     restart: always
@@ -27,6 +32,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.show-dancer.rule=Host(`${SHOW_DANCER_HOSTNAME}`)"
       - "traefik.http.routers.show-dancer.entrypoints=websecure"
+      - "traefik.http.routers.show-dancer.tls=true"
       - "traefik.http.routers.show-dancer.tls.certresolver=mytlschallenge"
     depends_on:
       - traefik
