@@ -38,7 +38,5 @@ jobs:
         run:  docker login --username ${{ secrets.DOCKER_HUB_USER }} --password ${{ secrets.DOCKER_HUB_PASS }}
       - name: build the docker image
         run: ./docker-build-image.sh
-      - name: login to docker
-        run: docker login --username ${{ secrets.DOCKER_HUB_USER }} --password ${{ secrets.DOCKER_HUB_PASS }}
-          pwd
-          ls -l
+      - name: push docker image
+        run: ./docker-push-image.sh
