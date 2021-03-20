@@ -42,7 +42,7 @@ jobs:
         run: ./docker-push-image.sh
       - name: Create ssh key for deployment
         run:  |
-            echo "${{ secrets.DEPLOY_KEY }}" >> ./deploy/dancier.key
+            echo "${{ secrets.DEPLOY_KEY }}" >> ./dancier.key
             chmod 400 ./dancier.key
             ls -l
 
