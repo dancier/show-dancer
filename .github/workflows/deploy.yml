@@ -34,5 +34,9 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - name: build the docker image
+        run: ./docker-build-image.sh
+      - name: login to docker
+        run: docker login --username ${{ secrets.DOCKER_HUB_USER }} --password ${{ secrets.DOCKER_HUB_PASS }}
           pwd
           ls -l
