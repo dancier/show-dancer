@@ -37,9 +37,7 @@
             "type": "attribute"
           }
         ],
-        // enforcing the use of semicolons for typescript
-        "semi": "off",
-        "@typescript-eslint/semi": ["warn"],
+        "prettier/prettier": ["warn"],
         // enforcing the use of double
         "quotes": "off",
         "@typescript-eslint/quotes": ["warn"]
@@ -53,7 +51,9 @@
         "plugin:@angular-eslint/template/recommended",
         "plugin:prettier/recommended"
       ],
-      "rules": {}
+      "rules": {
+        "prettier/prettier": ["warn"]
+      }
     }
   ]
 }
