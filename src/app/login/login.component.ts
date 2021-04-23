@@ -1,24 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service'
-import { OidcProvider } from './oidcProvider';
+import { Component, OnInit } from "@angular/core";
+import { LoginService } from "../login.service";
+import { OidcProvider } from "./oidcProvider";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
+  oidcProvider: OidcProvider[] = [];
 
-  oidcProvider: OidcProvider[] = []
-
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {
-    this.get()
+    this.get();
   }
 
   get() {
-    this.loginService.get().subscribe(oidc => this.oidcProvider = oidc)
+    this.loginService.get().subscribe((oidc) => (this.oidcProvider = oidc));
   }
-
 }
