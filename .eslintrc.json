@@ -1,5 +1,11 @@
 {
   "root": true,
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "env": {
+    "es6": true
+  },
   "ignorePatterns": [
     "projects/**/*"
   ],
@@ -38,9 +44,9 @@
           }
         ],
         "prettier/prettier": ["warn"],
-        // enforcing the use of double
+        // turning off default quotation rules (prettier checks those for us)
         "quotes": "off",
-        "@typescript-eslint/quotes": ["warn"]
+        "@typescript-eslint/quotes": ["off"]
       }
     },
     {
