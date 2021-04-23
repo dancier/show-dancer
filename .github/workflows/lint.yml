@@ -31,3 +31,4 @@ jobs:
           eslint: true
           prettier: true
           eslint_dir: src/
+          eslint_args: "--config .eslintrc.json"
