@@ -30,3 +30,4 @@ jobs:
           # Enable your linters here
           eslint: true
           prettier: true
+          eslint_dir: src/
