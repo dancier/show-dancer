@@ -21,6 +21,9 @@ RUN rm -rf ./*
 # Copy static assets from builder stage
 COPY --from=builder /app/dist/show-dancer .
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx-selfsigned.crt /etc/nginx/conf.d/nginx-selfsigned.crt
+COPY nginx-selfsigned.key /etc/nginx/conf.d/nginx-selfsigned.key
+
 
 # Containers run nginx with global directives and daemon off
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
