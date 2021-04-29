@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  dancerUrl: "http://localhost:3000",
+  dancerUrl: 'http://localhost:8080'
 };
 
 /*

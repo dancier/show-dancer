@@ -1,5 +1,14 @@
 # Show Dancer
 
+## Running with mock server
+
+You can run the frontend application without a real backend. Just run:
+
+```npm run start-mock```
+
+This will start the frontend, along with a mock backend using json-server.
+Edit the files inside ./mock-server to change how the mock server behaves.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
