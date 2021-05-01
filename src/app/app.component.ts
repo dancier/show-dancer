@@ -1,16 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { ProfileService } from "./profile.service";
-import { Profile } from "./profile/profile";
+import { Component, OnInit } from '@angular/core';
+import { ProfileService } from './profile.service';
+import { Profile } from './profile/profile';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = "show-dancer";
+  title = 'show-dancer';
 
-  profile: Profile = { id: "foo", name: "bar" };
+  profile: Profile = { id: 'foo', name: 'bar' };
 
   constructor(private profileService: ProfileService) {}
 

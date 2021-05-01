@@ -7,7 +7,8 @@
     "start-mock": "concurrently -c blue,yellow -n server,frontend \"cd mock-server && node server.js db-existing-profile.json\" \"npm run start\"",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint:show": "ng lint",
+    "lint:fix": "ng lint --fix",
     "e2e": "ng e2e"
   },
   "private": true,
