@@ -1,4 +1,4 @@
 #!/bin/bash
 
 source ./version.conf
-docker run --rm --name show-dancer -v $(pwd)/config.yml:/config.yml -p 4200:8080 --net=host dancier/show-dancer:${VERSION}
+docker run --rm --name show-dancer -v $(pwd)/config.yml:/config.yml -p 80:80 -p 443:443 dancier/show-dancer:${VERSION}
