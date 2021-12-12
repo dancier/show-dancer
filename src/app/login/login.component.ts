@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
+import { LoginService } from '../shared/login.service';
 import { OidcProvider } from './oidcProvider';
 
 @Component({
