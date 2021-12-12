@@ -1,6 +1,15 @@
-<h1>Dancier! {{ title }}</h1>
-<p>{{ profile.name }}</p>
-<nav>
-  <a routerLink="/login">Login</a>
-</nav>
-<router-outlet></router-outlet>
+<mat-toolbar color="primary" class="app-header">
+  <div><a class="dancier" href="https://dancier.net" target="_blank">Dancier</a></div>
+  <span class="nav-tool-items">
+    <a mat-button routerLink="login" routerLinkActive="active">
+      Anmelden
+    </a>
+    <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">
+      Registrieren
+    </a>
+  </span>
+</mat-toolbar>
+
+<div class="page-wrapper">
+  <router-outlet></router-outlet>
+</div>
