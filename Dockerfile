@@ -8,9 +8,8 @@ FROM node:lts AS builder
 WORKDIR /app
 # Copy all files from current directory to working dir in image
 COPY . .
-
 # install node modules and build assets
-RUN npm i && npm run build --prod
+RUN npm ci && npm run build --prod
 
 # nginx state for serving content
 FROM nginx:alpine
@@ -21,9 +20,6 @@ RUN rm -rf ./*
 # Copy static assets from builder stage
 COPY --from=builder /app/dist/show-dancer .
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY nginx-selfsigned.crt /etc/nginx/conf.d/nginx-selfsigned.crt
-COPY nginx-selfsigned.key /etc/nginx/conf.d/nginx-selfsigned.key
-
 
 # Containers run nginx with global directives and daemon off
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

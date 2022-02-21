@@ -5,8 +5,6 @@ import { environment } from '../../environments/environment';
 const baseUrl = `${environment.dancerUrl}/authentication`;
 
 export type UserRegistration = {
-  name: string;
-  username: string;
   email: string;
   password: string;
 };
@@ -18,6 +16,6 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {}
 
   registerUser(userRegistration: UserRegistration) {
-    return this.http.post(baseUrl, userRegistration);
+    return this.http.post(`${baseUrl}/register`, userRegistration);
   }
 }

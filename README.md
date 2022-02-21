@@ -1,13 +1,6 @@
-# Show Dancer
+# ShowDancer
 
-## Running with mock server
-
-You can run the frontend application without a real backend. Just run:
-
-```npm run start-mock```
-
-This will start the frontend, along with a mock backend using json-server.
-Edit the files inside ./mock-server to change how the mock server behaves.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
 
 ## Development server
 
@@ -19,7 +12,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Running unit tests
 
@@ -27,36 +20,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Deploy
-
-### Build the docker image
-
-(requires docker being installed locally)
-```bash
-./docker-build-image.sh
-
-# run it locally
-docker run -it -p 4200:80 dancier/show-dancer:1.1 
-```
-### Push the image
-(requires docker login)
-```bash
-./docker-push-image.sh
-```
-### Acticate the image
-(requires your ssh key being deployed on the target host)
-```bash
-# deploy new docker file config if necessary
-scp .env docker-compose.yml root@dancier.net:/root/
-
-ssh root@dancier.net
-
-docker-compose pull
-
-docker-compose up -d --force-recreate
-```
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Further help
 

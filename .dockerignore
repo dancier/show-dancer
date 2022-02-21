@@ -1,0 +1,6 @@
+# Ignore the following file/folder patterns for the Docker Build context
+.angular
+.git
+.github
+.idea
+node_modules
