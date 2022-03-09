@@ -1,8 +1,5 @@
 {
   "root": true,
-  "env": {
-    "es6": true
-  },
   "ignorePatterns": [
     "projects/**/*"
   ],
@@ -11,41 +8,33 @@
       "files": [
         "*.ts"
       ],
-      "plugins": ["unused-imports"],
       "parserOptions": {
         "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
+          "tsconfig.json"
         ],
         "createDefaultProgram": true
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:prettier/recommended"
+        "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "prefix": "app",
-            "style": "kebab-case",
-            "type": "element"
-          }
-        ],
         "@angular-eslint/directive-selector": [
           "error",
           {
+            "type": "attribute",
             "prefix": "app",
-            "style": "camelCase",
-            "type": "attribute"
+            "style": "camelCase"
           }
         ],
-        "prettier/prettier": ["warn"],
-        // turning off default quotation rules (prettier checks those for us)
-        "quotes": "off",
-        "@typescript-eslint/quotes": ["off"],
-        "unused-imports/no-unused-imports": "warn"
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ]
       }
     },
     {
@@ -53,12 +42,9 @@
         "*.html"
       ],
       "extends": [
-        "plugin:@angular-eslint/template/recommended",
-        "plugin:prettier/recommended"
+        "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {
-        "prettier/prettier": ["warn"]
-      }
+      "rules": {}
     }
   ]
 }
