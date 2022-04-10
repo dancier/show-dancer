@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 export class DataTestDirective {
   constructor(private el: ElementRef, private renderer: Renderer2) {
     if (environment.production) {
-      renderer.removeAttribute(el.nativeElement, 'data-angular');
+      renderer.removeAttribute(el.nativeElement, 'data-test');
     }
   }
 }

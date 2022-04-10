@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegistrationRoutingModule } from '@features/registration/registration-routing.module';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { RegistrationRoutingModule } from '@features/registration/registration-r
     MatButtonModule,
     FlexLayoutModule,
     RegistrationRoutingModule,
+    SharedModule,
   ]
 })
 export class RegistrationModule { }
