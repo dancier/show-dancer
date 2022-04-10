@@ -5,37 +5,36 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
+import { CoreModule } from '@core/core.module';
+import { SharedModule } from '@shared/shared.module';
+import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
+import { NavigationComponent } from './layout/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
-import { RegistrationComponent } from './registration/registration.component';
-import { LoginComponent } from './login/login.component';
-import { MatInputModule } from '@angular/material/input';
-import { DataTestDirective } from './shared/data-test.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent,
-    LoginComponent,
-    DataTestDirective,
+    DefaultLayoutComponent,
+    NavigationComponent,
   ],
   imports: [
+    // Angular
     BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
+    HttpClientModule,
+
+    // Core & Shared
+    CoreModule,
+    SharedModule,
+
+    // App
+    AppRoutingModule,
+
+    // Material UI
     MatToolbarModule,
     MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

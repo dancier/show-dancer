@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService, UserRegistration } from '../shared/authentication.service';
+import { AuthenticationService } from '@data/services/authentication.service';
+import { UserRegistration } from '@data/types/registration.types';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+  selector: 'app-register-user-form',
+  templateUrl: './register-user-form.component.html',
+  styleUrls: ['./register-user-form.component.scss']
 })
-export class RegistrationComponent implements OnInit {
+export class RegisterUserFormComponent implements OnInit {
   registrationForm!: FormGroup;
 
   constructor(

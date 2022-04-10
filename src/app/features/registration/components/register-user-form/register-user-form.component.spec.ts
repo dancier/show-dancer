@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegistrationComponent } from './registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterUserFormComponent } from './register-user-form.component';
 
-describe('RegistrationComponent', () => {
-  let component: RegistrationComponent;
-  let fixture: ComponentFixture<RegistrationComponent>;
+describe('RegisterUserFormComponent', () => {
+  let component: RegisterUserFormComponent;
+  let fixture: ComponentFixture<RegisterUserFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -14,12 +14,12 @@ describe('RegistrationComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
       ],
-      declarations: [RegistrationComponent],
+      declarations: [RegisterUserFormComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegistrationComponent);
+    fixture = TestBed.createComponent(RegisterUserFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -40,6 +40,6 @@ describe('RegistrationComponent', () => {
     expect(passwordField).toBeTruthy();
   });
 
-  // TODO: add more tests for registration
+  // TODO: add more tests
 
 });

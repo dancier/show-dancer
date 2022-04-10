@@ -1,21 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
 
 const routes: Routes = [
   {
-    path: 'login',
-    component: LoginComponent,
+    path: '',
+    component: DefaultLayoutComponent,
+    children: [
+      {
+        path: 'registration',
+        loadChildren: () =>
+          import('@features/registration/registration.module').then(m => m.RegistrationModule)
+      },
+    ],
   },
-  {
-    path: 'register',
-    component: RegistrationComponent,
-  },
+  // Fallback when no prior routes is matched
+  { path: '**', redirectTo: '/registration', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

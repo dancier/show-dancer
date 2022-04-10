@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
+import { UserRegistration } from '@data/types/registration.types';
 
 const baseUrl = `${environment.dancerUrl}/authentication`;
-
-export type UserRegistration = {
-  email: string;
-  password: string;
-};
 
 @Injectable({
   providedIn: 'root',

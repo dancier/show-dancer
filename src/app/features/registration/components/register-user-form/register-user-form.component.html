@@ -9,7 +9,7 @@
       <mat-card-content>
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>E-Mail</mat-label>
-          <input data-test="email-field" matInput formControlName="email" type="email"  placeholder="max.mustermann@beispiel.de" />
+          <input data-test="email-field" matInput formControlName="email" type="email" placeholder="max.mustermann@beispiel.de" />
           <mat-error data-test="email-error-empty" *ngIf="errorHandling('email', 'required')">
             Bitte geben Sie Ihre E-Mail Adresse an.
           </mat-error>
