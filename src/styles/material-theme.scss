@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+@include mat.core();
+
+// see: https://material.angular.io/guide/theming
+$theme-primary: mat.define-palette(mat.$indigo-palette);
+$theme-accent: mat.define-palette(mat.$indigo-palette);
+$theme-warn: mat.define-palette(mat.$indigo-palette);
+
+$theme: mat.define-light-theme(
+    $theme-primary,
+    $theme-accent,
+    $theme-warn
+);
+
+@include mat.all-component-themes($theme);
