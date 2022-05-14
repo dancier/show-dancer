@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
-import { UserRegistration } from '@data/types/registration.types';
+import { UserRegistration } from '@data/types/authentication.types';
 
 @Component({
   selector: 'app-register-user-form',

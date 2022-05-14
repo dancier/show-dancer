@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  dancerUrl: 'http://localhost:8080',
+  dancerUrl: 'http://localhost:4200/api',
 };
 
 /*

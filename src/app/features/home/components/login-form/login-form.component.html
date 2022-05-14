@@ -1,0 +1,35 @@
+<form [formGroup]="loginForm" (ngSubmit)="submitForm()" novalidate>
+  <mat-card-content>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>E-Mail</mat-label>
+      <input data-test="email-field" matInput formControlName="email" type="email" placeholder="max.mustermann@beispiel.de" />
+      <mat-error data-test="email-error-empty" *ngIf="errorHandling('email', 'required')">
+        Bitte geben Sie Ihre E-Mail Adresse an.
+      </mat-error>
+      <mat-error data-test="email-error-format" *ngIf="errorHandling('email', 'email')">
+        Bitte geben Sie eine gültige E-Mail Adresse an.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Passwort</mat-label>
+      <input data-test="password-field" matInput formControlName="password" type="password" />
+      <mat-error data-test="password-field-empty" *ngIf="errorHandling('password', 'required')">
+        Bitte geben Sie ein Passwort ein.
+      </mat-error>
+    </mat-form-field>
+    <button data-test="submit-login" mat-stroked-button color="primary" class="btn-block full-width" [disabled]="!loginForm.valid">Einloggen</button>
+    <mat-error *ngIf="loginAttemptResponse && loginAttemptResponse !== 'SUCCESS'">
+      <span *ngIf="loginAttemptResponse === 'INCORRECT_CREDENTIALS'">
+        Der Nutzername oder das Passwort ist falsch.
+      </span>
+      <span *ngIf="loginAttemptResponse === 'EMAIL_NOT_VALIDATED'">
+        Die E-Mail Adresse wurde noch nicht verifiziert.
+        Bitte schauen Sie in ihrem E-Mail Postfach nach.
+      </span>
+      <span *ngIf="loginAttemptResponse === 'SERVER_ERROR'">
+        Ein unerwarteter Fehler ist aufgetreten.
+        Bitte versuchen Sie es später erneut.
+      </span>
+    </mat-error>
+  </mat-card-content>
+</form>
