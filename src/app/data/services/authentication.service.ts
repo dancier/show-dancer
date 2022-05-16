@@ -17,7 +17,8 @@ export class AuthenticationService {
   }
 
   onceUserLoginAttempt(loginRequest: LoginRequest): Observable<LoginResponse>  {
-    return this.http.post<void>(`${baseUrl}/login`, loginRequest , {withCredentials :true})
+    //return this.http.post<void>(`${baseUrl}/login`, loginRequest , {withCredentials :true})
+    return this.http.post<void>(`${baseUrl}/login`, loginRequest )
       .pipe(
         map((_): LoginResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
