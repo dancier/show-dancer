@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
-import { UserRegistration } from '@data/types/authentication.types';
+import { RegistrationResponse, UserRegistration } from '@data/types/authentication.types';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./register-user-form.component.scss']
 })
 export class RegisterUserFormComponent implements OnInit {
+
   registrationForm!: FormGroup;
+  registrationAttemptResponse: RegistrationResponse | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +41,7 @@ export class RegisterUserFormComponent implements OnInit {
       this.authenticationService
         .onceUserRegistered(this.registrationForm.value as UserRegistration)
         .subscribe((response) => {
+          this.registrationAttemptResponse = response;
           if (response === 'SUCCESS') {
             this.router.navigate(['verify-account'], {relativeTo: this.route.parent});
           }
