@@ -37,12 +37,9 @@ export class LoginFormComponent implements OnInit {
 
   submitForm() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-
       this.authService
         .onceUserLoginAttempt(this.loginForm.value as LoginRequest)
         .subscribe((response) => {
-          console.log('returned', response)
           this.loginAttemptResponse = response;
           if (response === 'SUCCESS') {
             this.router.navigate(['profile']);

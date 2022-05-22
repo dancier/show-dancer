@@ -37,9 +37,13 @@ export class RegisterUserFormComponent implements OnInit {
         .registerUser(this.registrationForm.value as UserRegistration)
         .subscribe({
           next: () => {
+            // TODO: actually implement registration flow, remove console statements
+            // eslint-disable-next-line no-console
             console.log('success');
           },
           error: (err) => {
+            // TODO: actually implement registration flow, remove console statements
+            // eslint-disable-next-line no-console
             console.log('something terrible happened', err);
           }
         });
