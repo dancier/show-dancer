@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
-import { UserRegistration } from '@data/types/registration.types';
+import { UserRegistration } from '@data/types/authentication.types';
 
 @Component({
   selector: 'app-register-user-form',
@@ -37,9 +37,13 @@ export class RegisterUserFormComponent implements OnInit {
         .registerUser(this.registrationForm.value as UserRegistration)
         .subscribe({
           next: () => {
+            // TODO: actually implement registration flow, remove console statements
+            // eslint-disable-next-line no-console
             console.log('success');
           },
           error: (err) => {
+            // TODO: actually implement registration flow, remove console statements
+            // eslint-disable-next-line no-console
             console.log('something terrible happened', err);
           }
         });
