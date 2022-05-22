@@ -24,37 +24,27 @@ export class LoginFormComponent implements OnInit {
   }
 
 
-  private initReactiveForm() {
+  private initReactiveForm(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
   }
 
-  public errorHandling(control: string, error: string) {
+  public errorHandling(control: string, error: string): boolean {
     return this.loginForm.controls[control].hasError(error);
   }
 
-  submitForm() {
+  submitForm(): void {
     if (this.loginForm.valid) {
       this.authService
-        .onceUserLoginAttempt(this.loginForm.value as LoginRequest)
+        .onceUserLoggedIn(this.loginForm.value as LoginRequest)
         .subscribe((response) => {
           this.loginAttemptResponse = response;
           if (response === 'SUCCESS') {
             this.router.navigate(['profile']);
           }
         });
-      // this.authenticationService
-      //   .registerUser(this.registrationForm.value as UserRegistration)
-      //   .subscribe({
-      //     next: () => {
-      //       console.log('success');
-      //     },
-      //     error: (err) => {
-      //       console.log('something terrible happened', err);
-      //     }
-      //   });
     }
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
 import { UserRegistration } from '@data/types/authentication.types';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-user-form',
@@ -13,38 +14,33 @@ export class RegisterUserFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.initReactiveForm();
   }
 
-  private initReactiveForm() {
+  private initReactiveForm(): void {
     this.registrationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
   }
 
-  public errorHandling(control: string, error: string) {
+  public errorHandling(control: string, error: string): boolean {
     return this.registrationForm.controls[control].hasError(error);
   }
 
-  submitForm() {
+  submitForm(): void {
     if (this.registrationForm.valid) {
       this.authenticationService
-        .registerUser(this.registrationForm.value as UserRegistration)
-        .subscribe({
-          next: () => {
-            // TODO: actually implement registration flow, remove console statements
-            // eslint-disable-next-line no-console
-            console.log('success');
-          },
-          error: (err) => {
-            // TODO: actually implement registration flow, remove console statements
-            // eslint-disable-next-line no-console
-            console.log('something terrible happened', err);
+        .onceUserRegistered(this.registrationForm.value as UserRegistration)
+        .subscribe((response) => {
+          if (response === 'SUCCESS') {
+            this.router.navigate(['verify-account'], {relativeTo: this.route.parent});
           }
         });
     }
