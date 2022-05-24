@@ -27,12 +27,14 @@ export class RegisterUserFormComponent implements OnInit {
 
   public resolved(foo: any): void {
     console.log("The Code " + foo);
+    this.registrationForm.setValue({"captchaToken": "bar"})
   }
 
   private initReactiveForm(): void {
     this.registrationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
+      captchaToken: ['foo'],
     });
   }
 
