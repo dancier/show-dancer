@@ -39,6 +39,7 @@ export class AuthenticationService {
       .pipe(
         map((_): LoginResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
+          console.log('error', error);
           switch(error.status) {
             case 401:
               return of('INCORRECT_CREDENTIALS');

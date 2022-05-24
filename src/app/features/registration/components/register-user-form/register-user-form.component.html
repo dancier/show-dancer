@@ -1,4 +1,7 @@
 <div class="registration-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+  <div class="g-recaptcha" data-sitekey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></div>
+
   <mat-card class="box">
 
     <mat-card-header>
@@ -6,8 +9,8 @@
     </mat-card-header>
 
     <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" novalidate>
-      <div class="g-recaptcha" data-sitekey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></div>
       <mat-card-content>
+        <re-captcha (resolved)="resolved($event)" siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>E-Mail</mat-label>
           <input data-test="email-field" matInput formControlName="email" type="email" placeholder="max.mustermann@beispiel.de" />

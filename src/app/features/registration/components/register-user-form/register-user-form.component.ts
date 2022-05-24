@@ -25,6 +25,10 @@ export class RegisterUserFormComponent implements OnInit {
     this.initReactiveForm();
   }
 
+  public resolved(foo: any): void {
+    console.log("The Code " + foo);
+  }
+
   private initReactiveForm(): void {
     this.registrationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
