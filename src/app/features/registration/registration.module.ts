@@ -9,10 +9,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegistrationRoutingModule } from '@features/registration/registration-routing.module';
 import { SharedModule } from '@shared/shared.module';
+import { VerificationRequiredComponent } from './components/verification-required/verification-required.component';
+import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
+import {
+  VerificationSuccessfulComponent
+} from './components/verification-successful/verification-successful.component';
+import { VerificationErrorComponent } from './components/verification-error/verification-error.component';
 
 @NgModule({
   declarations: [
-    RegisterUserFormComponent
+    RegisterUserFormComponent,
+    VerificationRequiredComponent,
+    VerifyAccountComponent,
+    VerificationSuccessfulComponent,
+    VerificationErrorComponent
   ],
   imports: [
     CommonModule,
