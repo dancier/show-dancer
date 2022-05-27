@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import {
   LoginRequest,
@@ -16,10 +16,22 @@ const baseUrl = `${environment.dancerUrl}/authentication`;
   providedIn: 'root',
 })
 export class AuthenticationService {
+
+  private defaultOptions = {
+    withCredentials: true
+  }
+
   constructor(private http: HttpClient) {}
 
-  onceUserRegistered(userRegistration: UserRegistration): Observable<RegistrationResponse> {
-    return this.http.post<void>(`${baseUrl}/register`, userRegistration, {withCredentials :true})
+  onceUserRegistered(userRegistration: UserRegistration, captchaToken: string): Observable<RegistrationResponse> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'X-Captcha-Token': captchaToken,
+      }),
+      ...this.defaultOptions,
+    };
+
+    return this.http.post<void>(`${baseUrl}/register`, userRegistration, httpOptions)
       .pipe(
         map((_): RegistrationResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<RegistrationResponse> => {
@@ -35,7 +47,7 @@ export class AuthenticationService {
   }
 
   onceUserLoggedIn(loginRequest: LoginRequest): Observable<LoginResponse>  {
-    return this.http.post<void>(`${baseUrl}/login`, loginRequest , {withCredentials :true})
+    return this.http.post<void>(`${baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
         map((_): LoginResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
@@ -54,7 +66,7 @@ export class AuthenticationService {
   }
 
   onceAccountVerified(validationCode: string): Observable<VerificationResponse> {
-    return this.http.get<void>(`${baseUrl}/email/validate/${validationCode}`, {withCredentials :true})
+    return this.http.get<void>(`${baseUrl}/email/validate/${validationCode}`, this.defaultOptions)
       .pipe(
         map((_): VerificationResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<VerificationResponse> => {

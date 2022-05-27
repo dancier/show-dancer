@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
-import { RegistrationResponse, UserRegistration } from '@data/types/authentication.types';
+import { RegistrationResponse } from '@data/types/authentication.types';
 import { ActivatedRoute, Router } from '@angular/router';
+import { mustMatch } from '@core/validators/mustMatch';
 
 @Component({
   selector: 'app-register-user-form',
@@ -25,8 +26,7 @@ export class RegisterUserFormComponent implements OnInit {
     this.initReactiveForm();
   }
 
-  public resolved(foo: any): void {
-    console.log("The Code " + foo);
+  public captchaResolved(token: string | null): void {
     this.registrationForm.setValue({"captchaToken": "bar"})
   }
 
@@ -34,18 +34,27 @@ export class RegisterUserFormComponent implements OnInit {
     this.registrationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      captchaToken: ['foo'],
+      passwordConfirm: ['', [Validators.required]],
+      captcha: ['', [Validators.required]],
+    }, {
+      validators: [mustMatch('password', 'passwordConfirm')],
     });
   }
 
-  public errorHandling(control: string, error: string): boolean {
-    return this.registrationForm.controls[control].hasError(error);
+  public errorHandling(controlName: string, error: string): boolean {
+    const control = this.registrationForm.controls[controlName];
+    if (control === undefined) {
+      console.error('unknown control name', controlName);
+      return false;
+    }
+    return control.hasError(error);
   }
 
   submitForm(): void {
     if (this.registrationForm.valid) {
+      const {email, password, captcha} = this.registrationForm.value;
       this.authenticationService
-        .onceUserRegistered(this.registrationForm.value as UserRegistration)
+        .onceUserRegistered({email, password}, captcha)
         .subscribe((response) => {
           this.registrationAttemptResponse = response;
           if (response === 'SUCCESS') {

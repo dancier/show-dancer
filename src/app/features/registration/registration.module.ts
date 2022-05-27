@@ -16,7 +16,7 @@ import {
 } from './components/verification-successful/verification-successful.component';
 import { VerificationErrorComponent } from './components/verification-error/verification-error.component';
 
-import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     MatButtonModule,
     FlexLayoutModule,
     RecaptchaModule,
+    RecaptchaFormsModule,
     ReactiveFormsModule,
     RegistrationRoutingModule,
     SharedModule,
