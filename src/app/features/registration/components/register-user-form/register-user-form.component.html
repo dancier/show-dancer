@@ -33,10 +33,12 @@
             Die eingegebenen Passwörter stimmen nicht überein.
           </mat-error>
         </mat-form-field>
-        <re-captcha formControlName="captcha" (resolved)="captchaResolved($event)" siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
-        <mat-error data-test="email-error-empty" *ngIf="errorHandling('captcha', 'required')">
-          Bitte führen Sie die Recaptcha-Prüfung durch.
-        </mat-error>
+        <ng-container *ngIf="registrationForm.contains('captcha')">
+          <re-captcha formControlName="captcha" siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
+          <mat-error data-test="email-error-empty" *ngIf="errorHandling('captcha', 'required')">
+            Bitte führen Sie die Recaptcha-Prüfung durch.
+          </mat-error>
+        </ng-container>
         <button data-test="confirm-registration" mat-stroked-button color="primary" class="btn-block full-width" [disabled]="!registrationForm.valid">Registrieren</button>
         <mat-error *ngIf="registrationAttemptResponse && registrationAttemptResponse !== 'SUCCESS'">
           <span *ngIf="registrationAttemptResponse === 'EMAIL_ALREADY_IN_USE'">
