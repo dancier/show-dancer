@@ -1,16 +1,11 @@
 <div class="registration-wrapper" fxLayout="row" fxLayoutAlign="center center">
-
-  <div class="g-recaptcha" data-sitekey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></div>
-
   <mat-card class="box">
-
     <mat-card-header>
       <mat-card-title data-test="title">Registrierung</mat-card-title>
     </mat-card-header>
 
     <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" novalidate>
       <mat-card-content>
-        <re-captcha (resolved)="resolved($event)" siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>E-Mail</mat-label>
           <input data-test="email-field" matInput formControlName="email" type="email" placeholder="max.mustermann@beispiel.de" />
@@ -28,6 +23,22 @@
             Bitte geben Sie ein Passwort ein.
           </mat-error>
         </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Passwort wiederholen</mat-label>
+          <input data-test="password-confirm-field" matInput formControlName="passwordConfirm" type="password" />
+          <mat-error data-test="password-confirm-field-empty" *ngIf="errorHandling('passwordConfirm', 'required')">
+            Bitte geben Sie ein Passwort ein.
+          </mat-error>
+          <mat-error data-test="password-confirm-field-no-match" *ngIf="errorHandling('passwordConfirm', 'matching')">
+            Die eingegebenen Passwörter stimmen nicht überein.
+          </mat-error>
+        </mat-form-field>
+        <ng-container *ngIf="registrationForm.contains('captcha')">
+          <re-captcha formControlName="captcha" siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
+          <mat-error data-test="email-error-empty" *ngIf="errorHandling('captcha', 'required')">
+            Bitte führen Sie die Recaptcha-Prüfung durch.
+          </mat-error>
+        </ng-container>
         <button data-test="confirm-registration" mat-stroked-button color="primary" class="btn-block full-width" [disabled]="!registrationForm.valid">Registrieren</button>
         <mat-error *ngIf="registrationAttemptResponse && registrationAttemptResponse !== 'SUCCESS'">
           <span *ngIf="registrationAttemptResponse === 'EMAIL_ALREADY_IN_USE'">
