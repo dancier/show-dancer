@@ -16,11 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DefaultLayoutComponent,
-    NavigationComponent,
-  ],
+  declarations: [AppComponent, DefaultLayoutComponent, NavigationComponent],
   imports: [
     // Angular
     BrowserModule,
@@ -41,6 +37,6 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -9,10 +9,9 @@ describe('LoginFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginFormComponent ],
-      imports: [ ReactiveFormsModule ],
-    })
-    .compileComponents();
+      declarations: [LoginFormComponent],
+      imports: [ReactiveFormsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -26,29 +25,29 @@ describe('LoginFormComponent', () => {
   });
 
   it('should display an email field', () => {
-    const emailField = fixture.nativeElement.querySelector('[data-test="email-field"]');
+    const emailField = fixture.nativeElement.querySelector(
+      '[data-test="email-field"]'
+    );
     expect(emailField).toBeTruthy();
   });
 
   it('should display a password field', () => {
-    const passwordField = fixture.nativeElement.querySelector('[data-test="password-field"]');
+    const passwordField = fixture.nativeElement.querySelector(
+      '[data-test="password-field"]'
+    );
     expect(passwordField).toBeTruthy();
   });
 
   it('should display a submit button', () => {
-    const submitButton = fixture.nativeElement.querySelector('[data-test="submit-login"]');
+    const submitButton = fixture.nativeElement.querySelector(
+      '[data-test="submit-login"]'
+    );
     expect(submitButton).toBeTruthy();
   });
 
   describe('the user enters existing user credentials and submits the form', () => {
-
-    beforeEach(() => {
-
-    });
-
+    beforeEach(() => {});
   });
 
-  xdescribe('the user enters non-existing user credentials and submits the form', () => {
-
-  });
+  xdescribe('the user enters non-existing user credentials and submits the form', () => {});
 });

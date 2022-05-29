@@ -2,40 +2,39 @@
 @import '@angular/material/theming';
 @include mat.core();
 
-
 // Created by http://mcg.mbitson.com/#!?dancierpalette=%23b40720&themename=mcgtheme
 // View the icons: https://fonts.google.com/icons?selected=Material+Icons
 $md-dancier-palette: (
-  50 : #f6e1e4,
-  100 : #e9b5bc,
-  200 : #da8390,
-  300 : #cb5163,
-  400 : #bf2c41,
-  500 : #b40720,
-  600 : #ad061c,
-  700 : #a40518,
-  800 : #9c0413,
-  900 : #8c020b,
-  A100 : #ffb8bb,
-  A200 : #ff8589,
-  A400 : #ff5258,
-  A700 : #ff393f,
+  50: #f6e1e4,
+  100: #e9b5bc,
+  200: #da8390,
+  300: #cb5163,
+  400: #bf2c41,
+  500: #b40720,
+  600: #ad061c,
+  700: #a40518,
+  800: #9c0413,
+  900: #8c020b,
+  A100: #ffb8bb,
+  A200: #ff8589,
+  A400: #ff5258,
+  A700: #ff393f,
   contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #ffffff,
-    400 : #ffffff,
-    500 : #ffffff,
-    600 : #ffffff,
-    700 : #ffffff,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #ffffff,
-  )
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #ffffff,
+  ),
 );
 
 // see: https://material.angular.io/guide/theming
@@ -43,10 +42,6 @@ $theme-primary: mat.define-palette($md-dancier-palette);
 $theme-accent: mat.define-palette(mat.$indigo-palette);
 $theme-warn: mat.define-palette(mat.$indigo-palette);
 
-$theme: mat.define-light-theme(
-    $theme-primary,
-    $theme-accent,
-    $theme-warn
-);
+$theme: mat.define-light-theme($theme-primary, $theme-accent, $theme-warn);
 
 @include mat.all-component-themes($theme);

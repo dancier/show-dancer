@@ -10,10 +10,7 @@ describe('RegisterUserFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        ReactiveFormsModule,
-        HttpClientModule,
-      ],
+      imports: [ReactiveFormsModule, HttpClientModule],
       declarations: [RegisterUserFormComponent],
     }).compileComponents();
   });
@@ -34,12 +31,15 @@ describe('RegisterUserFormComponent', () => {
   });
 
   it('should have an email and password field', () => {
-    const emailField = fixture.nativeElement.querySelector('[data-test="email-field"]');
-    const passwordField = fixture.nativeElement.querySelector('[data-test="password-field"]');
+    const emailField = fixture.nativeElement.querySelector(
+      '[data-test="email-field"]'
+    );
+    const passwordField = fixture.nativeElement.querySelector(
+      '[data-test="password-field"]'
+    );
     expect(emailField).toBeTruthy();
     expect(passwordField).toBeTruthy();
   });
 
   // TODO: add more tests
-
 });

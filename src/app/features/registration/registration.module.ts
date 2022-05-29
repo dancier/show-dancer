@@ -11,9 +11,7 @@ import { RegistrationRoutingModule } from '@features/registration/registration-r
 import { SharedModule } from '@shared/shared.module';
 import { VerificationRequiredComponent } from './components/verification-required/verification-required.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
-import {
-  VerificationSuccessfulComponent
-} from './components/verification-successful/verification-successful.component';
+import { VerificationSuccessfulComponent } from './components/verification-successful/verification-successful.component';
 import { VerificationErrorComponent } from './components/verification-error/verification-error.component';
 
 import { RecaptchaModule } from 'ng-recaptcha';
@@ -24,7 +22,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     VerificationRequiredComponent,
     VerifyAccountComponent,
     VerificationSuccessfulComponent,
-    VerificationErrorComponent
+    VerificationErrorComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +36,6 @@ import { RecaptchaModule } from 'ng-recaptcha';
     ReactiveFormsModule,
     RegistrationRoutingModule,
     SharedModule,
-  ]
+  ],
 })
-export class RegistrationModule { }
+export class RegistrationModule {}

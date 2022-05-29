@@ -8,9 +8,8 @@ describe('ValidateAccountComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VerifyAccountComponent ]
-    })
-    .compileComponents();
+      declarations: [VerifyAccountComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
-import { RegistrationResponse, UserRegistration } from '@data/types/authentication.types';
+import {
+  RegistrationResponse,
+  UserRegistration,
+} from '@data/types/authentication.types';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-user-form',
   templateUrl: './register-user-form.component.html',
-  styleUrls: ['./register-user-form.component.scss']
+  styleUrls: ['./register-user-form.component.scss'],
 })
 export class RegisterUserFormComponent implements OnInit {
-
   registrationForm!: FormGroup;
   registrationAttemptResponse: RegistrationResponse | undefined;
 
@@ -26,7 +28,7 @@ export class RegisterUserFormComponent implements OnInit {
   }
 
   public resolved(foo: any): void {
-    console.log("The Code " + foo);
+    console.log('The Code ' + foo);
   }
 
   private initReactiveForm(): void {
@@ -47,7 +49,9 @@ export class RegisterUserFormComponent implements OnInit {
         .subscribe((response) => {
           this.registrationAttemptResponse = response;
           if (response === 'SUCCESS') {
-            this.router.navigate(['verify-account'], {relativeTo: this.route.parent});
+            this.router.navigate(['verify-account'], {
+              relativeTo: this.route.parent,
+            });
           }
         });
     }
