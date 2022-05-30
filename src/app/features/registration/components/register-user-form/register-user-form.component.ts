@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormControlStatus, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
-import { RegistrationResponse, UserRegistration } from '@data/types/authentication.types';
+import { RegistrationResponse } from '@data/types/authentication.types';
 import { ActivatedRoute, Router } from '@angular/router';
+import { mustMatch } from '@core/validators/mustMatch';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register-user-form',
   templateUrl: './register-user-form.component.html',
   styleUrls: ['./register-user-form.component.scss']
 })
-export class RegisterUserFormComponent implements OnInit {
+export class RegisterUserFormComponent implements OnInit, OnDestroy {
 
   registrationForm!: FormGroup;
   registrationAttemptResponse: RegistrationResponse | undefined;
+  formStatusSubscription: Subscription | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -26,25 +29,44 @@ export class RegisterUserFormComponent implements OnInit {
     this.initReactiveForm();
   }
 
-  public resolved(foo: any): void {
-    console.log('The Code ' + foo);
+  ngOnDestroy(): void {
+    this.formStatusSubscription?.unsubscribe();
   }
 
   private initReactiveForm(): void {
     this.registrationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
+      passwordConfirm: ['', [Validators.required]],
+    }, {
+      validators: [mustMatch('password', 'passwordConfirm')],
+    });
+
+    this.addCaptchaOnFormCompletion();
+  }
+
+  private addCaptchaOnFormCompletion(): void {
+    this.formStatusSubscription = this.registrationForm.statusChanges.subscribe((status: FormControlStatus) => {
+      if (status === 'VALID' && !this.registrationForm.contains('captcha')) {
+        this.registrationForm.addControl('captcha', new FormControl('', [Validators.required]))
+      }
     });
   }
 
-  public errorHandling(control: string, error: string): boolean {
-    return this.registrationForm.controls[control].hasError(error);
+  public errorHandling(controlName: string, error: string): boolean {
+    const control = this.registrationForm.controls[controlName];
+    if (control === undefined) {
+      console.error('unknown control name', controlName);
+      return false;
+    }
+    return control.hasError(error);
   }
 
   submitForm(): void {
     if (this.registrationForm.valid) {
+      const {email, password, captcha} = this.registrationForm.value;
       this.authenticationService
-        .onceUserRegistered(this.registrationForm.value as UserRegistration)
+        .onceUserRegistered({email, password}, captcha)
         .subscribe((response) => {
           this.registrationAttemptResponse = response;
           if (response === 'SUCCESS') {
