@@ -17,7 +17,8 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.verifySubscription = this.route.params.pipe(
@@ -27,9 +28,9 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
       })
     ).subscribe((response: VerificationResponse) => {
       if (response === 'SUCCESS') {
-        this.router.navigate(['verify', 'success'], {relativeTo: this.route.parent});
+        this.router.navigate(['verify', 'success'], { relativeTo: this.route.parent });
       } else {
-        this.router.navigate(['verify', 'error'], {relativeTo: this.route.parent});
+        this.router.navigate(['verify', 'error'], { relativeTo: this.route.parent });
       }
     });
   }

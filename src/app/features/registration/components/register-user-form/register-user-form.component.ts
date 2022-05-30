@@ -19,14 +19,15 @@ export class RegisterUserFormComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.initReactiveForm();
   }
 
   public resolved(foo: any): void {
-    console.log("The Code " + foo);
+    console.log('The Code ' + foo);
   }
 
   private initReactiveForm(): void {
@@ -47,7 +48,7 @@ export class RegisterUserFormComponent implements OnInit {
         .subscribe((response) => {
           this.registrationAttemptResponse = response;
           if (response === 'SUCCESS') {
-            this.router.navigate(['verify-account'], {relativeTo: this.route.parent});
+            this.router.navigate(['verify-account'], { relativeTo: this.route.parent });
           }
         });
     }
