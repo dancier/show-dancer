@@ -12,6 +12,8 @@ import { SharedModule } from '@shared/shared.module';
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { MatButtonModule } from '@angular/material/button';
     // Material UI
     MatToolbarModule,
     MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

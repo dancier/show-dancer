@@ -35,7 +35,7 @@ export class AuthenticationService {
       .pipe(
         map((_): RegistrationResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<RegistrationResponse> => {
-          switch(error.status) {
+          switch (error.status) {
             case 409:
               return of('EMAIL_ALREADY_IN_USE');
             default:
@@ -69,7 +69,7 @@ export class AuthenticationService {
       .pipe(
         map((_): VerificationResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<VerificationResponse> => {
-          switch(error.status) {
+          switch (error.status) {
             case 400:
               return of('VALIDATION_ERROR');
             default:

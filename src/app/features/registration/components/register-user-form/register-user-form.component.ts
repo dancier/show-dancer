@@ -22,7 +22,8 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.initReactiveForm();
@@ -69,7 +70,7 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
         .subscribe((response) => {
           this.registrationAttemptResponse = response;
           if (response === 'SUCCESS') {
-            this.router.navigate(['verify-account'], {relativeTo: this.route.parent});
+            this.router.navigate(['verify-account'], { relativeTo: this.route.parent });
           }
         });
     }
