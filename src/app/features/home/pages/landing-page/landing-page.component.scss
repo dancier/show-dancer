@@ -1,0 +1,25 @@
+.landing-page-info-area h2, .landing-page-info-area p {
+  color: white;
+}
+
+.landing-page-info-area {
+
+  h2 {
+    display: flex;
+    align-items: center;
+
+    .mat-icon {
+      margin-right: 8px;
+    }
+  }
+
+  .card-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.mat-card {
+  padding: 12px 18px;
+}
