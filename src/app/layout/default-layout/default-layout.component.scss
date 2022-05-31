@@ -1,4 +1,7 @@
 .page-wrapper {
   // the navigation has a height of 64px
-  height: calc(100% - 64px);
+  // the footer has a height of 422px
+  margin-top: 64px;
+  overflow: hidden;
+  position: relative;
 }

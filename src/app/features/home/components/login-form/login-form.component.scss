@@ -1,0 +1,11 @@
+.login-form-container {
+  padding: 12px;
+
+  button:enabled {
+    color: white;
+  }
+
+  button:disabled {
+    color: #bf2c41;
+  }
+}

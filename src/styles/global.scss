@@ -1,2 +1,57 @@
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: calc(100% - 64px);
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.font-color-primary-800 {
+  color: map-get($dancier-palette-primary, 800);
+}
+
+.background-color-100 {
+  background-color: map-get($dancier-palette-primary, 100);
+}
+
+.background-color-200 {
+  background-color: map-get($dancier-palette-primary, 200);
+}
+
+.background-color-300 {
+  background-color: map-get($dancier-palette-primary, 300);
+}
+
+.background-color-400 {
+  background-color: map-get($dancier-palette-primary, 400);
+}
+
+.background-color-500 {
+  background-color: map-get($dancier-palette-primary, 500);
+}
+
+.background-color-600 {
+  background-color: map-get($dancier-palette-primary, 600);
+}
+
+.background-color-accent-50 {
+  background-color: map-get($dancier-palette-accent, 50);
+}
+
+.background-color-accent-100 {
+  background-color: map-get($dancier-palette-accent, 100);
+}
+
+.background-color-accent-400 {
+  background-color: map-get($dancier-palette-accent, 400);
+}
+
+.background-color-accent-800 {
+  background-color: map-get($dancier-palette-accent, 800);
+}
+
+.background-color-accent-900 {
+  background-color: map-get($dancier-palette-accent, 900);
+}
+

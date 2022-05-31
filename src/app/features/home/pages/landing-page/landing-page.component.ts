@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,6 +7,28 @@ import { Component } from '@angular/core';
 })
 export class LandingPageComponent {
 
-  constructor() { }
+  windowHeight: number = 0;
+  landingPageContentMinHeight: number = 0;
+  navigationHeight = 64;
+  footerHeight = 218;
+  textContentHeight = 64;
+
+  constructor() {
+  }
+
+  ngOnInit() {
+    this.windowHeight = window.innerHeight;
+    this.calculateLandingPageContentMinHeight();
+  }
+
+  private calculateLandingPageContentMinHeight() {
+    this.landingPageContentMinHeight = this.windowHeight - this.navigationHeight - this.footerHeight - this.textContentHeight;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.windowHeight = window.innerHeight;
+    this.calculateLandingPageContentMinHeight();
+  }
 
 }

@@ -64,9 +64,9 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     if (this.registrationForm.valid) {
-      const {email, password, captcha} = this.registrationForm.value;
+      const { email, password, captcha } = this.registrationForm.value;
       this.authenticationService
-        .onceUserRegistered({email, password}, captcha)
+        .onceUserRegistered({ email, password }, captcha)
         .subscribe((response) => {
           this.registrationAttemptResponse = response;
           if (response === 'SUCCESS') {

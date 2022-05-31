@@ -14,32 +14,36 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { FooterComponent } from './layout/footer/footer/footer.component';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
     AppComponent,
     DefaultLayoutComponent,
     NavigationComponent,
+    FooterComponent,
   ],
-  imports: [
-    // Angular
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
+    imports: [
+        // Angular
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
 
-    // Core & Shared
-    CoreModule,
-    SharedModule,
+        // Core & Shared
+        CoreModule,
+        SharedModule,
 
-    // App
-    AppRoutingModule,
+        // App
+        AppRoutingModule,
 
-    // Material UI
-    MatToolbarModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-  ],
+        // Material UI
+        MatToolbarModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatIconModule,
+        FlexModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
