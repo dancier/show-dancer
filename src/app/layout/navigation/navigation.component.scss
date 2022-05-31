@@ -12,6 +12,16 @@
     align-items: center;
   }
 
+  .mdc-top-app-bar__section {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 40px;
+      margin-right: 8px;
+    }
+  }
+
   .nav-tools {
 
     .nav-icons {
