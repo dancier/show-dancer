@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class LandingPageComponent {
 
-  constructor() { }
+  constructor() {
+  }
 
 }

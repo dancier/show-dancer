@@ -1,8 +1,20 @@
+.landing-page-container {
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.landing-page-content div {
+  padding: 18px;
+}
+
 .landing-page-info-area h2, .landing-page-info-area p {
   color: white;
 }
 
 .landing-page-info-area {
+
+  align-self: flex-end;
 
   h2 {
     display: flex;
