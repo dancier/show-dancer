@@ -2,16 +2,13 @@
 
   <div class="mdc-top-app-bar__row">
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>menu</mat-icon>
-      </button>
       <a href="/" class="title"><span class="mdc-top-app-bar__title">Dancier</span></a>
     </section>
   </div>
-  <mat-menu #menu="matMenu">
+  <mat-menu #menu="matMenu" ngStyle.gt-xs="display:none">
     <button mat-menu-item>
       <mat-icon>login</mat-icon>
-      <span>Login</span>
+      <span>Anmelden</span>
     </button>
     <button mat-menu-item>
       <mat-icon>note_add</mat-icon>
@@ -34,12 +31,29 @@
       <span>Impressum</span>
     </button>
   </mat-menu>
-  <span class="nav-tool-items">
-    <a mat-button routerLink="home/login" routerLinkActive="active">
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+          ngStyle.gt-xs="display:none">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="nav-tool-items" ngStyle.xs="display:none">
+    <div class="nav-tools">
+      <a class="right-separator"><span>Über Uns</span></a>
+      <div class="nav-icons right-separator">
+        <a>
+          <mat-icon>mail</mat-icon>
+        </a>
+        <a >
+          <mat-icon>account_box</mat-icon>
+        </a>
+      </div>
+    </div>
+    <div class="login-nav-tools">
+      <a mat-button routerLink="home/login" routerLinkActive="active">
         Anmelden
-    </a>
-    <a mat-button mat-raised-button routerLink="registration" routerLinkActive="active">
-      Registrieren
-    </a>
-  </span>
+      </a>
+      <a mat-button mat-raised-button routerLink="registration" routerLinkActive="active">
+        Registrieren
+      </a>
+    </div>
+  </div>
 </mat-toolbar>
