@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from '@features/home/pages/landing-page/landing-page.component';
 import { LoginPageComponent } from '@features/home/pages/login-page/login-page.component';
 import { TermsAndConditionsComponent } from '@features/home/pages/terms-and-conditions/terms-and-conditions.component';
+import { AboutUsComponent } from '@features/home/pages/about-us/about-us.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,10 @@ export const routes: Routes = [
     path: 'agb',
     component: TermsAndConditionsComponent,
   },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
+  }
 ];
 
 @NgModule({

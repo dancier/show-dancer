@@ -13,13 +13,15 @@ import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 @NgModule({
   declarations: [
     LandingPageComponent,
     LoginFormComponent,
     LoginPageComponent,
-    TermsAndConditionsComponent
+    TermsAndConditionsComponent,
+    AboutUsComponent
   ],
   imports: [
     CommonModule,
