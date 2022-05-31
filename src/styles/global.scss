@@ -66,6 +66,7 @@ body {
 
 .content-page-inner-container {
   max-width: 480px;
-  margin: 45px;
+  padding: 45px;
+  background-color: map-get($dancier-palette-accent, 100);
 }
 
