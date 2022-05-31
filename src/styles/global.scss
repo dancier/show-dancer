@@ -7,6 +7,10 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.font-color-primary-800 {
+  color: map-get($dancier-palette-primary, 800);
+}
+
 .background-color-100 {
   background-color: map-get($dancier-palette-primary, 100);
 }

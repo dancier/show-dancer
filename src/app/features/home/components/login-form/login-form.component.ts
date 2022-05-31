@@ -4,6 +4,7 @@ import { AuthenticationService } from '@data/services/authentication.service';
 import { LoginRequest, LoginResponse } from '@data/types/authentication.types';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',

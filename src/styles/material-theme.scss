@@ -33,7 +33,7 @@ $dancier-palette-primary: (
     800 : #ffffff,
     900 : #ffffff,
     A100 : #000000,
-    A200 : #000000,
+    A200 : rgba(0, 0, 0, 0.9),
     A400 : #000000,
     A700 : #ffffff,
   )
@@ -75,7 +75,7 @@ $dancier-palette-accent: (
 // see: https://material.angular.io/guide/theming
 $theme-primary: mat.define-palette($dancier-palette-primary);
 $theme-accent: mat.define-palette($dancier-palette-accent);
-$theme-warn: mat.define-palette(mat.$indigo-palette);
+$theme-warn: mat.define-palette($dancier-palette-primary);
 
 $theme: mat.define-light-theme(
     $theme-primary,

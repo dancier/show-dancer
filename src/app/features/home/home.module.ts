@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -18,17 +19,18 @@ import { MatIconModule } from '@angular/material/icon';
     LoginFormComponent,
     LoginPageComponent
   ],
-    imports: [
-        CommonModule,
-        HomeRoutingModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatGridListModule,
-        FlexModule,
-        MatIconModule,
-        ExtendedModule,
-    ]
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatGridListModule,
+    FlexModule,
+    MatIconModule,
+    ExtendedModule,
+    MatButtonModule,
+  ]
 })
 export class HomeModule { }
