@@ -11,7 +11,7 @@ export class LandingPageComponent {
   landingPageContentMinHeight: number = 0;
   navigationHeight = 64;
   footerHeight = 218;
-  textContentHeight = 164;
+  textContentHeight = 64;
 
   constructor() {
   }
