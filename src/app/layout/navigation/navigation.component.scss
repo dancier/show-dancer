@@ -12,6 +12,10 @@
     align-items: center;
   }
 
+  .title {
+    font-size: 24px;
+  }
+
   .mdc-top-app-bar__section {
     display: flex;
     align-items: center;
@@ -19,6 +23,13 @@
     img {
       height: 40px;
       margin-right: 8px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      align-self: flex-end;
+      padding-left: 6px;
+      font-family: Optima, sans-serif, cursive;
     }
   }
 
