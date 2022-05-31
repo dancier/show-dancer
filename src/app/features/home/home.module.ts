@@ -12,12 +12,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
   declarations: [
     LandingPageComponent,
     LoginFormComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    TermsAndConditionsComponent
   ],
   imports: [
     CommonModule,
