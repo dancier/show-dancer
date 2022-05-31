@@ -23,7 +23,6 @@ export class LandingPageComponent {
 
   private calculateLandingPageContentMinHeight() {
     this.landingPageContentMinHeight = this.windowHeight - this.navigationHeight - this.footerHeight - this.textContentHeight;
-    console.log("landingPage min height " + this.landingPageContentMinHeight)
   }
 
   @HostListener('window:resize', ['$event'])
