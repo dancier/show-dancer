@@ -1,5 +1,6 @@
 <div class="landing-page-container" fxFlex>
-  <div class=" background-color-accent-50 landing-page-content" fxLayout="row" fxLayout.xs="column">
+  <div class=" background-color-accent-50 landing-page-content" fxLayout="row" fxLayout.xs="column"
+       [ngStyle]="{'minHeight': landingPageContentMinHeight + 'px' }">
     <div fxFlex class="background-color-accent-50">
       <h2>Start mit Deiner E-Mail</h2>
       <app-login-form></app-login-form>
@@ -16,7 +17,7 @@
 
   </div>
 
-  <div fxLayout="row" fxFlexFill fxLayout.xs="column" class="landing-page-info-area">
+  <div fxLayout="row" fxLayout.xs="column" class="landing-page-info-area">
 
     <div class="mat-card background-color-accent-900" fxFlex>
       <div class="card-title-container">

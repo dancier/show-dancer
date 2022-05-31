@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { FlexModule } from '@angular/flex-layout';
+import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
@@ -18,16 +18,17 @@ import { MatIconModule } from '@angular/material/icon';
     LoginFormComponent,
     LoginPageComponent
   ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatGridListModule,
-    FlexModule,
-    MatIconModule,
-  ]
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatGridListModule,
+        FlexModule,
+        MatIconModule,
+        ExtendedModule,
+    ]
 })
 export class HomeModule { }
