@@ -6,6 +6,68 @@
   justify-content: space-between;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 
+  a {
+    text-decoration: none;
+  }
+
+  .nav-tools, .login-nav-tools {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .mdc-top-app-bar__section {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 40px;
+      margin-right: 8px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      align-self: flex-end;
+      padding-left: 6px;
+      font-family: Optima, sans-serif, cursive;
+      color: white;
+    }
+  }
+
+  .nav-tools {
+
+    .nav-icons {
+      padding: 6px 12px 6px 6px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 6px;
+    }
+
+    .nav-icons a {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    span {
+      padding: 0 8px;
+    }
+
+    a {
+      font-size: 0.7em;
+      color: white;
+    }
+  }
+
+  .right-separator {
+    border-right: solid 1px white;
+  }
+
   .title {
     text-decoration: none;
     color: white;

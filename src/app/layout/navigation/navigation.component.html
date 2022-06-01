@@ -2,16 +2,15 @@
 
   <div class="mdc-top-app-bar__row">
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>menu</mat-icon>
-      </button>
+      <a href="/"><img src='assets/img/dancier-white.png' alt='Dancier Logo' style="height: 40px;"></a>
       <a href="/" class="title"><span class="mdc-top-app-bar__title">Dancier</span></a>
+      <a href="/" class="subtitle"><span >verbindet Tanzer</span></a>
     </section>
   </div>
-  <mat-menu #menu="matMenu">
+  <mat-menu #menu="matMenu" ngStyle.gt-xs="display:none">
     <button mat-menu-item>
       <mat-icon>login</mat-icon>
-      <span>Login</span>
+      <span>Anmelden</span>
     </button>
     <button mat-menu-item>
       <mat-icon>note_add</mat-icon>
@@ -29,17 +28,34 @@
       <mat-icon>groups</mat-icon>
       <span>Über Uns</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item routerLink="home/about-us">
       <mat-icon>contacts</mat-icon>
       <span>Impressum</span>
     </button>
   </mat-menu>
-  <span class="nav-tool-items">
-    <a mat-button routerLink="home/login" routerLinkActive="active">
-      Anmelden
-    </a>
-    <a mat-button mat-raised-button routerLink="registration" routerLinkActive="active">
-      Registrieren
-    </a>
-  </span>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+          ngStyle.gt-xs="display:none">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="nav-tool-items" ngStyle.xs="display:none">
+    <div class="nav-tools">
+      <a class="right-separator" routerLink="home/about-us"><span>Über Uns</span></a>
+      <div class="nav-icons right-separator">
+        <a>
+          <mat-icon>mail</mat-icon>
+        </a>
+        <a >
+          <mat-icon>account_box</mat-icon>
+        </a>
+      </div>
+    </div>
+    <div class="login-nav-tools">
+      <a mat-button routerLink="home/login" routerLinkActive="active">
+        Anmelden
+      </a>
+      <a mat-button mat-raised-button routerLink="registration" routerLinkActive="active">
+        Registrieren
+      </a>
+    </div>
+  </div>
 </mat-toolbar>

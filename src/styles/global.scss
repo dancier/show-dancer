@@ -1,5 +1,9 @@
 html, body {
   height: calc(100% - 64px);
+
+  p {
+    font-weight: 350;
+  }
 }
 
 body {
@@ -53,5 +57,16 @@ body {
 
 .background-color-accent-900 {
   background-color: map-get($dancier-palette-accent, 900);
+}
+
+.content-page-outer-container {
+  display: flex;
+  justify-content: center;
+}
+
+.content-page-inner-container {
+  max-width: 480px;
+  padding: 45px;
+  background-color: map-get($dancier-palette-accent, 100);
 }
 

@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer/footer.component';
-import { FlexModule } from '@angular/flex-layout';
+import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { FlexModule } from '@angular/flex-layout';
         MatMenuModule,
         MatIconModule,
         FlexModule,
+        ExtendedModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

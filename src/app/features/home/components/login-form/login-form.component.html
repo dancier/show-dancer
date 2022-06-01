@@ -19,7 +19,7 @@
       </mat-error>
     </mat-form-field>
     <button data-test="submit-login" mat-raised-button class="full-width background-color-500"
-            [disabled]="!loginForm.valid">Einloggen
+            [disabled]="!loginForm.valid">Anmelden
     </button>
     <mat-error *ngIf="loginAttemptResponse && loginAttemptResponse !== 'SUCCESS'">
       <span *ngIf="loginAttemptResponse === 'INCORRECT_CREDENTIALS'">
