@@ -15,7 +15,7 @@ export const routes: Routes = [
     component: LoginPageComponent,
   },
   {
-    path: 'agb',
+    path: 'terms-and-conditions',
     component: TermsAndConditionsComponent,
   },
   {
