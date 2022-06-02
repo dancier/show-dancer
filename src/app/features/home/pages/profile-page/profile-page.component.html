@@ -1,15 +1,37 @@
-<div class="profile-page-outer-container">
-  <div class="profile-page-inner-container">
-    <div class="profile-title-container">
-      <div class="profile-name-container">
-        <h1>Crystal Liu</h1>
-        <span class="age">35</span>
-        <span class="dance-key-words">Tango, Standard</span>
-      </div>
+<div class="profile-page-outer-container background-color-900">
+  <div class="profile-title-container">
+    <div class="profile-name-container">
+      <h1>Crystal Liu</h1>
+      <span class="age">35</span>
+      <span class="dance-key-words">Tango, Standard</span>
     </div>
-    <mat-tab-group class="dance-details">
-      <mat-tab label="Ich tanze"> Ich tanze </mat-tab>
-      <mat-tab label="Ich suche"> Ich suche </mat-tab>
-    </mat-tab-group>
   </div>
+  <mat-tab-group class="dance-details" mat-align-tabs="center">
+    <mat-tab label="Ich tanze">
+      <div class="dance-types-container" fxLayout.xs="column">
+        <app-dance-type [danceTypeName]="'Tango'"
+                        [danceLevel]="'Beginner'"
+                        [role]="'Folgende'"></app-dance-type>
+        <app-dance-type [danceTypeName]="'Standard'"
+                        [danceLevel]="'Fortschritten'"
+                        [role]="'Folgende'"></app-dance-type>
+        <app-dance-type [danceTypeName]="'Cha Cha'"
+                        [danceLevel]="'Expert'"
+                        [role]="'Folgende'"></app-dance-type>
+      </div>
+    </mat-tab>
+    <mat-tab label="Ich suche">
+      <div class="dance-types-container" fxLayout.xs="column">
+        <app-dance-type [danceTypeName]="'Tango'"
+                        [danceLevel]="'Beginner'"
+                        [role]="'Führender'"></app-dance-type>
+        <app-dance-type [danceTypeName]="'Standard'"
+                        [danceLevel]="'Fortschritten'"
+                        [role]="'Führender'"></app-dance-type>
+        <app-dance-type [danceTypeName]="'Cha Cha'"
+                        [danceLevel]="'Expert'"
+                        [role]="'Führender'"></app-dance-type>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

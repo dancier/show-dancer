@@ -16,6 +16,7 @@ import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { DanceTypeComponent } from './components/dance-type/dance-type.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     LoginPageComponent,
     TermsAndConditionsComponent,
     AboutUsComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    DanceTypeComponent
   ],
     imports: [
         CommonModule,

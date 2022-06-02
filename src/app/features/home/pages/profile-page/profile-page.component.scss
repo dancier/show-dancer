@@ -1,34 +1,26 @@
-
-
-.profile-page-outer-container {
+.profile-title-container {
+  background-image: url('~src/assets/img/sample-profile-picture.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 400px;
+  height: 400px;
+  max-height: 375px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0 auto;
 }
 
-.profile-page-inner-container {
-  max-width: 1024px;
-  background-color: white;
+.dance-types-container {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dance-details {
+  background-color: white;
   flex: 1 0 100%;
-
-  .profile-title-container {
-    background-image: url('~src/assets/img/sample-profile-picture.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 400px;
-    height: 400px;
-    max-height: 375px;
-    display: flex;
-    flex: 1 0 100%;
-  }
-
-  .dance-details {
-    background-color: white;
-    flex: 1 0 100%;
-    height: 300px;
-  }
+  height: 300px;
+  border-radius: 30px 30px 0 0;
+  top: -30px;
+  position: relative;
 }
 
 
