@@ -1,0 +1,61 @@
+
+
+.profile-page-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-page-inner-container {
+  max-width: 1024px;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 0 100%;
+
+  .profile-title-container {
+    background-image: url('~src/assets/img/sample-profile-picture.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 400px;
+    max-height: 375px;
+    display: flex;
+    flex: 1 0 100%;
+  }
+
+  .dance-details {
+    background-color: white;
+    flex: 1 0 100%;
+    height: 300px;
+  }
+}
+
+
+.profile-name-container {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2);
+  align-self: flex-end;
+  width: 100%;
+  margin-bottom: 45px;
+  padding: 12px 0 12px 30px;
+
+  h1 {
+    font-weight: bolder;
+    font-size: 2.3em;
+    display: inline-block;
+  }
+
+  .age {
+    font-size: 2em;
+    display: inline-block;
+    margin-left: 16px;
+  }
+
+  .dance-key-words {
+    display: block;
+    font-size: 1.5em;
+  }
+}
+
+
