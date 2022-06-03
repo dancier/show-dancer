@@ -33,5 +33,19 @@
                         [role]="'Führender'"></app-dance-type>
       </div>
     </mat-tab>
+    <mat-tab label="Persönliche Daten">
+      <app-personal-data
+        [birthday]="'01.01.1987'"
+        [city]="'Dortmund'"
+        [country]="'Deutschland'"
+        [email]="'beispiel@example.com'"
+        [gender]="'Weiblich'"
+        [height]="'165cm'"
+        [username]="'Yifei Liu'"
+        [zipCode]="'44339'"
+        class="personal-data-container"
+      >
+      </app-personal-data>
+    </mat-tab>
   </mat-tab-group>
 </div>
