@@ -13,7 +13,7 @@ export class PersonalDataComponent {
   @Input() gender: String = '';
   @Input() email: String = '';
   @Input() city: String = '';
-  @Input() country: String = "";
+  @Input() country: String = '';
   @Input() zipCode: String = "";
 
   constructor() {
