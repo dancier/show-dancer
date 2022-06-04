@@ -9,7 +9,7 @@ export class DanceTypeComponent {
 
   @Input() danceTypeName: String = '';
   @Input() danceLevel: String = '';
-  @Input() role: String = "";
+  @Input() role: String = '';
 
   constructor() {
   }
