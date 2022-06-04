@@ -14,7 +14,7 @@ export class PersonalDataComponent {
   @Input() email: String = '';
   @Input() city: String = '';
   @Input() country: String = '';
-  @Input() zipCode: String = "";
+  @Input() zipCode: String = '';
 
   constructor() {
   }
