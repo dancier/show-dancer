@@ -11,7 +11,7 @@ export class PersonalDataComponent {
   @Input() height: String = '';
   @Input() birthday: String = '';
   @Input() gender: String = '';
-  @Input() email: String = "";
+  @Input() email: String = '';
   @Input() city: String = "";
   @Input() country: String = "";
   @Input() zipCode: String = "";
