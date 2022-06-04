@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class DanceTypeComponent {
 
   @Input() danceTypeName: String = '';
-  @Input() danceLevel: String = "";
+  @Input() danceLevel: String = '';
   @Input() role: String = "";
 
   constructor() {
