@@ -9,7 +9,7 @@ export class PersonalDataComponent {
 
   @Input() username: String = '';
   @Input() height: String = '';
-  @Input() birthday: String = "";
+  @Input() birthday: String = '';
   @Input() gender: String = '';
   @Input() email: String = "";
   @Input() city: String = "";
