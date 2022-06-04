@@ -1,5 +1,8 @@
+@import "responsive.scss";
+
 html, body {
   height: calc(100% - 64px);
+  background-color: map-get($dancier-palette-accent, A200);
 
   p {
     font-weight: 350;
@@ -39,6 +42,10 @@ body {
   background-color: map-get($dancier-palette-primary, 600);
 }
 
+.background-color-900 {
+  background-color: map-get($dancier-palette-primary, 900);
+}
+
 .background-color-accent-50 {
   background-color: map-get($dancier-palette-accent, 50);
 }
@@ -65,8 +72,19 @@ body {
 }
 
 .content-page-inner-container {
+  max-width: 1024px;
+  background-color: white;
+
+  @include screen('xs') {
+    padding: 16px;
+  }
+
+  @include screen('gt-xs') {
+    padding: 45px;
+  }
+}
+
+.content-page-inner-container-narrow {
   max-width: 480px;
-  padding: 45px;
-  background-color: map-get($dancier-palette-accent, 100);
 }
 

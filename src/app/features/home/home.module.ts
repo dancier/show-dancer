@@ -14,6 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DanceTypeComponent } from './components/dance-type/dance-type.component';
+import { PersonalDataComponent } from './components/personal-data/personal-data.component';
 
 @NgModule({
   declarations: [
@@ -21,20 +25,24 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     LoginFormComponent,
     LoginPageComponent,
     TermsAndConditionsComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    ProfilePageComponent,
+    DanceTypeComponent,
+    PersonalDataComponent
   ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatGridListModule,
-    FlexModule,
-    MatIconModule,
-    ExtendedModule,
-    MatButtonModule,
-  ]
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatGridListModule,
+        FlexModule,
+        MatIconModule,
+        ExtendedModule,
+        MatButtonModule,
+        MatTabsModule,
+    ]
 })
 export class HomeModule { }
