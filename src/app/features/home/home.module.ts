@@ -18,6 +18,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { MatTabsModule } from '@angular/material/tabs';
 import { DanceTypeComponent } from './components/dance-type/dance-type.component';
 import { PersonalDataComponent } from './components/personal-data/personal-data.component';
+import { EnterUserNameComponent } from './pages/enter-user-name/enter-user-name.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PersonalDataComponent } from './components/personal-data/personal-data.
     AboutUsComponent,
     ProfilePageComponent,
     DanceTypeComponent,
-    PersonalDataComponent
+    PersonalDataComponent,
+    EnterUserNameComponent
   ],
     imports: [
         CommonModule,

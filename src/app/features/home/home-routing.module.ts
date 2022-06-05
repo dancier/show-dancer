@@ -5,6 +5,7 @@ import { LoginPageComponent } from '@features/home/pages/login-page/login-page.c
 import { TermsAndConditionsComponent } from '@features/home/pages/terms-and-conditions/terms-and-conditions.component';
 import { AboutUsComponent } from '@features/home/pages/about-us/about-us.component';
 import { ProfilePageComponent } from '@features/home/pages/profile-page/profile-page.component';
+import { EnterUserNameComponent } from '@features/home/pages/enter-user-name/enter-user-name.component';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,10 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePageComponent
+  },
+  {
+    path: 'mail-verified',
+    component: EnterUserNameComponent
   }
 ];
 
