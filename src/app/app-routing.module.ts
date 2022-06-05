@@ -8,20 +8,20 @@ const routes: Routes = [
     component: DefaultLayoutComponent,
     children: [
       {
-        path: 'home',
-        loadChildren: () =>
-          import('@features/home/home.module').then(m => m.HomeModule)
-      },
-      {
         path: 'registration',
         loadChildren: () =>
           import('@features/registration/registration.module').then(m => m.RegistrationModule)
       },
+      {
+        path: '',
+        loadChildren: () =>
+          import('@features/home/home.module').then(m => m.HomeModule)
+      },
       // Fallback when no prior routes is matched
-      { path: '**', redirectTo: '/home', pathMatch: 'full' },
+      { path: '**', redirectTo: '/', pathMatch: 'full' },
     ],
   },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' }
+  { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({
