@@ -1,0 +1,47 @@
+@import '~src/styles/responsive.scss';
+
+.profile-edit-page-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.profile-edit-page-inner-container {
+  max-width: 800px;
+  padding: 32px;
+  background-color: white;
+  height: 100%;
+}
+
+.mat-form-field-wrapper {
+  padding: 0;
+}
+
+.description-section {
+  margin-right: 16px;
+}
+
+.continue-button {
+  width: 100%;
+}
+
+.form-icon {
+  color: #ad061c;
+  margin: 16px 16px 0;
+}
+
+.form-section-container {
+ margin-bottom: 32px;
+}
+
+.form-text {
+  color: #66666B;
+}
+
+.description-section {
+  margin-bottom: 32px;
+
+}
+
+

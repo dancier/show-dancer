@@ -1,0 +1,65 @@
+<div class="profile-edit-page-outer-container background-color-accent-A200">
+  <div class="profile-edit-page-inner-container container-radius" fxLayout="column">
+    <div class="verification-confirmation">
+      <h2 class="font-color-primary-800">Persönliche Daten </h2>
+    </div>
+    <div class="profile-edit-form-container" fxLayout.gt-xs="row" fxLayout.xs="column">
+      <div class="description-section" ngStyle.gt-xs="max-width: 256px;  border-right: 1px solid #8c020b;">
+        <span>
+         Damit passende Tanzpartner automatisch zu dir empfohlen werden, werden noch einige Daten benötigt.
+        </span>
+      </div>
+      <div class="form-section-container">
+        <mat-card-content fxLayout="column" class="card-content-container">
+          <div class="form-section" fxLayout="row">
+            <mat-icon class="form-icon">transgender</mat-icon>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Geschlecht: *</mat-label>
+              <mat-hint>Wird angezeigt auf deinem Profil, und für die Empfehlung wichtig.</mat-hint>
+              <input matInput type="gender"/>
+            </mat-form-field>
+          </div>
+          <div class="form-section" fxLayout="row">
+            <mat-icon class="form-icon">cake</mat-icon>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Geburtsdatum: *</mat-label>
+              <mat-hint>Später wird das Alter auf deinem Profil angezeigt, und das Alter wird auch für die Empfehlung angewendet.</mat-hint>
+              <input matInput type="birthday"/>
+            </mat-form-field>
+          </div>
+          <div class="form-section" fxLayout="row">
+            <mat-icon class="form-icon">accessibility</mat-icon>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Körpergröße: *</mat-label>
+              <input matInput type="height" placeholder="(Deine Körpergröße in CM)"/>
+              <span>cm</span>
+              <mat-hint>Wird angezeigt auf deinem Profil, und für die Empfehlung wichtig.</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="form-section" fxLayout="row">
+            <mat-icon class="form-icon">place</mat-icon>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>PLZ: *</mat-label>
+              <input matInput type="zip" placeholder="(PLZ)"/>
+            </mat-form-field>
+          </div>
+          <div class="form-section" fxLayout="row">
+            <mat-icon class="form-icon">location_city</mat-icon>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Stadt: (Automatisch generiert)</mat-label>
+              <input matInput type="city" placeholder="(Automatisch generiert)" readonly value="Dortmund"/>
+            </mat-form-field>
+          </div>
+          <div class="form-section" fxLayout="row">
+            <mat-icon class="form-icon">map</mat-icon>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Land: (Im moment wird nur Deutschland unterstützt)</mat-label>
+              <input matInput type="land" placeholder="Deutschland" readonly value="Deutschland"/>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </div>
+    </div>
+    <button mat-raised-button class="font-color-primary-800 continue-button">Weiter</button>
+  </div>
+</div>
