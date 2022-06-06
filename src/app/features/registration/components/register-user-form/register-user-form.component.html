@@ -33,12 +33,21 @@
             Die eingegebenen Passwörter stimmen nicht überein.
           </mat-error>
         </mat-form-field>
-        <ng-container *ngIf="registrationForm.contains('captcha')">
-          <re-captcha formControlName="captcha" siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
-          <mat-error data-test="email-error-empty" *ngIf="errorHandling('captcha', 'required')">
-            Bitte führen Sie die Recaptcha-Prüfung durch.
-          </mat-error>
+        <div class="acceptTerms">
+          <mat-checkbox formControlName="acceptTermsAndConditions"></mat-checkbox>
+          <div>Ich habe die <a routerLink="/terms-and-conditions">AGBs</a> und die <a routerLink="/cookie-guidelines">Cookie-Richtlinien</a> gelesen und akzeptiere sie.</div>
+        </div>
+        <ng-container
+          *ngIf="loggedInAsHuman; then thankYouHuman; else captcha">
         </ng-container>
+        <ng-template #thankYouHuman>
+          <p>Vielen Dank!</p>
+        </ng-template>
+        <ng-template #captcha>
+          <div class="captcha">
+            <re-captcha (resolved)="captchaResolved($event)" siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
+          </div>
+        </ng-template>
         <button data-test="confirm-registration" mat-stroked-button color="primary" class="btn-block full-width" [disabled]="!registrationForm.valid">Registrieren</button>
         <mat-error *ngIf="registrationAttemptResponse && registrationAttemptResponse !== 'SUCCESS'">
           <span *ngIf="registrationAttemptResponse === 'EMAIL_ALREADY_IN_USE'">

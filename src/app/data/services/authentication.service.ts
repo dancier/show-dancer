@@ -23,15 +23,8 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  onceUserRegistered(userRegistration: UserRegistration, captchaToken: string): Observable<RegistrationResponse> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'X-Captcha-Token': captchaToken,
-      }),
-      ...this.defaultOptions,
-    };
-
-    return this.http.post<void>(`${baseUrl}/register`, userRegistration, httpOptions)
+  onceUserRegistered(userRegistration: UserRegistration): Observable<RegistrationResponse> {
+    return this.http.post<void>(`${baseUrl}/registrations`, userRegistration, this.defaultOptions)
       .pipe(
         map((_): RegistrationResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<RegistrationResponse> => {
@@ -64,8 +57,31 @@ export class AuthenticationService {
       );
   }
 
+  onceHumanLoggedIn(captchaToken: string): Observable<LoginResponse>  {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'X-Captcha-Token': captchaToken,
+      }),
+      ...this.defaultOptions,
+    };
+
+    return this.http.post<void>(`${baseUrl}/loginAsHuman`, null, httpOptions)
+      .pipe(
+        map((_): LoginResponse => 'SUCCESS'),
+        catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
+          switch(error.status) {
+            case 401:
+              return of('INCORRECT_CREDENTIALS');
+            default:
+              return of('SERVER_ERROR');
+          }
+        }),
+        shareReplay(1)
+      );
+  }
+
   onceAccountVerified(validationCode: string): Observable<VerificationResponse> {
-    return this.http.get<void>(`${baseUrl}/email/validate/${validationCode}`, this.defaultOptions)
+    return this.http.put<void>(`${baseUrl}/email-validations/${validationCode}`, null, this.defaultOptions)
       .pipe(
         map((_): VerificationResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<VerificationResponse> => {

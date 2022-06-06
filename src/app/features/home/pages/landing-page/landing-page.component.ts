@@ -1,11 +1,11 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit {
 
   windowHeight: number = 0;
   landingPageContentMinHeight: number = 0;
@@ -16,17 +16,17 @@ export class LandingPageComponent {
   constructor() {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.windowHeight = window.innerHeight;
     this.calculateLandingPageContentMinHeight();
   }
 
-  private calculateLandingPageContentMinHeight() {
+  private calculateLandingPageContentMinHeight(): void {
     this.landingPageContentMinHeight = this.windowHeight - this.navigationHeight - this.footerHeight - this.textContentHeight;
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(): void {
     this.windowHeight = window.innerHeight;
     this.calculateLandingPageContentMinHeight();
   }
