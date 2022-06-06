@@ -107,6 +107,15 @@ body {
   }
 }
 
+.min-width-360-480 {
+  @include screen('gt-xs') {
+    min-width: 360px;
+  }
+  @include screen('gt-sm') {
+    min-width: 480px;
+  }
+}
+
 .content-page-inner-container-narrow {
   max-width: 480px;
 }

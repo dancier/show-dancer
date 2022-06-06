@@ -18,6 +18,7 @@
 
 .description-section {
   margin-right: 16px;
+  padding-right: 16px;
 }
 
 .continue-button {
@@ -30,7 +31,7 @@
 }
 
 .form-section-container {
- margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .form-text {
@@ -39,7 +40,22 @@
 
 .description-section {
   margin-bottom: 32px;
+}
 
+.city-land-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0;
+
+  label {
+    color: #00000099;
+    margin-right: 8px;
+  }
+
+  .form-icon {
+    margin-top: 0;
+  }
 }
 
 
