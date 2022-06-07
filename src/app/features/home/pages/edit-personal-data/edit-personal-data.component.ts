@@ -15,35 +15,35 @@ export class EditPersonalDataComponent {
   constructor() {
   }
 
-  birthdayFieldOnFocus() {
+  birthdayFieldOnFocus(): void {
     this.isBirthdayFieldOnFocus = true;
   }
 
-  birthdayFieldOnBlur() {
+  birthdayFieldOnBlur(): void {
     this.isBirthdayFieldOnFocus = false;
   }
 
-  genderFieldOnFocus() {
+  genderFieldOnFocus(): void {
     this.isGenderFieldOnFocus = true;
   }
 
-  genderFieldOnBlur() {
+  genderFieldOnBlur(): void {
     this.isGenderFieldOnFocus = false;
   }
 
-  heightFiledOnFocus() {
+  heightFiledOnFocus(): void {
     this.isHeightFieldOnFocus = true;
   }
 
-  heightFieldOnBlur() {
+  heightFieldOnBlur(): void {
     this.isHeightFieldOnFocus = false;
   }
 
-  zipFieldOnFocus() {
+  zipFieldOnFocus(): void {
     this.isZipFieldOnFocus = true;
   }
 
-  zipFieldOnBlur() {
+  zipFieldOnBlur(): void {
     this.isZipFieldOnFocus = false;
   }
 
