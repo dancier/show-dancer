@@ -1,11 +1,11 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-default-layout',
   templateUrl: './default-layout.component.html',
   styleUrls: ['./default-layout.component.scss']
 })
-export class DefaultLayoutComponent {
+export class DefaultLayoutComponent implements OnInit{
 
   windowHeight: number = 0;
   pageContentMinHeight: number = 0;
@@ -14,17 +14,17 @@ export class DefaultLayoutComponent {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.windowHeight = window.innerHeight;
     this.calculatePageContentMinHeight();
   }
 
-  private calculatePageContentMinHeight() {
+  private calculatePageContentMinHeight(): void {
     this.pageContentMinHeight = this.windowHeight - this.navigationHeight - this.footerHeight;
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(): void {
     this.windowHeight = window.innerHeight;
     this.calculatePageContentMinHeight();
   }
