@@ -16,17 +16,17 @@ export class LandingPageComponent {
   constructor() {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.windowHeight = window.innerHeight;
     this.calculateLandingPageContentMinHeight();
   }
 
-  private calculateLandingPageContentMinHeight() {
+  private calculateLandingPageContentMinHeight(): void {
     this.landingPageContentMinHeight = this.windowHeight - this.navigationHeight - this.footerHeight - this.textContentHeight;
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(): void {
     this.windowHeight = window.innerHeight;
     this.calculateLandingPageContentMinHeight();
   }

@@ -14,17 +14,17 @@ export class DefaultLayoutComponent {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.windowHeight = window.innerHeight;
     this.calculatePageContentMinHeight();
   }
 
-  private calculatePageContentMinHeight() {
+  private calculatePageContentMinHeight(): void {
     this.pageContentMinHeight = this.windowHeight - this.navigationHeight - this.footerHeight;
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(): void {
     this.windowHeight = window.innerHeight;
     this.calculatePageContentMinHeight();
   }
