@@ -14,8 +14,16 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.ng-star-inserted {
+  width: 100%;
+}
+
 .font-color-primary-800 {
   color: map-get($dancier-palette-primary, 800);
+}
+
+.background-color-50 {
+  background-color: map-get($dancier-palette-primary, 50);
 }
 
 .background-color-100 {
@@ -48,6 +56,10 @@ body {
 
 .background-color-accent-50 {
   background-color: map-get($dancier-palette-accent, 50);
+}
+
+.background-color-accent-A200 {
+  background-color: map-get($dancier-palette-accent, A200);
 }
 
 .background-color-accent-100 {
@@ -84,7 +96,32 @@ body {
   }
 }
 
+.container-radius{
+
+  @include screen('xs') {
+    border-radius: 0;
+  }
+
+  @include screen('gt-xs') {
+    border-radius: 8px;
+  }
+}
+
+.min-width-360-480 {
+  @include screen('gt-xs') {
+    min-width: 360px;
+  }
+  @include screen('gt-sm') {
+    min-width: 480px;
+  }
+}
+
 .content-page-inner-container-narrow {
   max-width: 480px;
+}
+
+.mat-raised-button {
+  background-color: #9c0413;
+  color: white;
 }
 
