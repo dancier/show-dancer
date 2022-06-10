@@ -5,7 +5,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
   templateUrl: './default-layout.component.html',
   styleUrls: ['./default-layout.component.scss']
 })
-export class DefaultLayoutComponent implements OnInit{
+
+export class DefaultLayoutComponent implements OnInit {
 
   windowHeight: number = 0;
   pageContentMinHeight: number = 0;

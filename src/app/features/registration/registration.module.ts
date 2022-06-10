@@ -17,6 +17,7 @@ import {
 import { VerificationErrorComponent } from './components/verification-error/verification-error.component';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -26,19 +27,20 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
     VerificationSuccessfulComponent,
     VerificationErrorComponent
   ],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    FlexLayoutModule,
-    RecaptchaModule,
-    RecaptchaFormsModule,
-    ReactiveFormsModule,
-    RegistrationRoutingModule,
-    SharedModule,
-  ]
+    imports: [
+        CommonModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        FlexLayoutModule,
+        RecaptchaModule,
+        RecaptchaFormsModule,
+        ReactiveFormsModule,
+        RegistrationRoutingModule,
+        SharedModule,
+        MatCheckboxModule,
+    ]
 })
 export class RegistrationModule { }

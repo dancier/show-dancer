@@ -5,7 +5,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent implements OnInit{
+
+export class LandingPageComponent implements OnInit {
 
   windowHeight: number = 0;
   landingPageContentMinHeight: number = 0;

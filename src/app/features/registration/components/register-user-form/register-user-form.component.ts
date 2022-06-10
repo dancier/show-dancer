@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormControlStatus, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
 import { RegistrationResponse } from '@data/types/authentication.types';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +16,7 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
   registrationForm!: FormGroup;
   registrationAttemptResponse: RegistrationResponse | undefined;
   formStatusSubscription: Subscription | undefined;
+  loggedInAsHuman = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,18 +39,9 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       passwordConfirm: ['', [Validators.required]],
+      acceptTermsAndConditions: [false, [Validators.requiredTrue]],
     }, {
       validators: [mustMatch('password', 'passwordConfirm')],
-    });
-
-    this.addCaptchaOnFormCompletion();
-  }
-
-  private addCaptchaOnFormCompletion(): void {
-    this.formStatusSubscription = this.registrationForm.statusChanges.subscribe((status: FormControlStatus) => {
-      if (status === 'VALID' && !this.registrationForm.contains('captcha')) {
-        this.registrationForm.addControl('captcha', new FormControl('', [Validators.required]))
-      }
     });
   }
 
@@ -63,16 +55,31 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
   }
 
   submitForm(): void {
+    // TODO: does "acceptTermsAndConditions" stay in the API?
+    // adding it for now so registration can work again...
     if (this.registrationForm.valid) {
-      const { email, password, captcha } = this.registrationForm.value;
+      const { email, password, acceptTermsAndConditions } = this.registrationForm.value;
       this.authenticationService
-        .onceUserRegistered({ email, password }, captcha)
-        .subscribe((response) => {
+        .onceUserRegistered({ email, password, acceptTermsAndConditions })
+          .subscribe((response) => {
           this.registrationAttemptResponse = response;
           if (response === 'SUCCESS') {
             this.router.navigate(['verify-account'], { relativeTo: this.route.parent });
           }
         });
     }
+  }
+
+  captchaResolved(captchaToken: string): void {
+    this.authenticationService
+      .onceHumanLoggedIn(captchaToken)
+      .subscribe((response) => {
+        if (response === 'SUCCESS') {
+          console.info('human session created');
+          this.loggedInAsHuman = true;
+        } else {
+          console.error('error while establishing human session');
+        }
+      });
   }
 }
