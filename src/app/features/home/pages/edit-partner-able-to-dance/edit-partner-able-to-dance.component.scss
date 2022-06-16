@@ -1,0 +1,40 @@
+.button-row {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    margin: 8px;
+  }
+}
+
+.dance-edit-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.remove-button-container {
+  display: flex;
+  justify-content: center;
+  background-color: #e9b5bc;
+  margin: 16px 16px 0 16px;
+}
+
+
+.add-button {
+  background-color: #F5F5F5;
+  padding: 16px 90px;
+}
+
+.edit-dance-container {
+  border: 0 solid #66666B;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f2f2f2;
+  margin: 16px 0;
+
+
+  .dance-edit-button {
+    margin: 16px;
+  }
+}
+

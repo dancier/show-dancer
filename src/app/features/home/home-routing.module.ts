@@ -7,7 +7,10 @@ import { AboutUsComponent } from '@features/home/pages/about-us/about-us.compone
 import { ProfilePageComponent } from '@features/home/pages/profile-page/profile-page.component';
 import { EnterUserNameComponent } from '@features/home/pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from '@features/home/pages/edit-personal-data/edit-personal-data.component';
-import { EditAbleToDance } from '@features/home/pages/add-my-dance-types/edit-able-to-dance.component';
+import { EditAbleToDance } from '@features/home/pages/edit-able-to-dance/edit-able-to-dance.component';
+import {
+  EditPartnerAbleToDanceComponent
+} from '@features/home/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +44,10 @@ export const routes: Routes = [
   {
     path: 'add-my-dance-types',
     component: EditAbleToDance
+  },
+  {
+    path: 'add-partner-dance-types',
+    component: EditPartnerAbleToDanceComponent
   }
 ];
 
