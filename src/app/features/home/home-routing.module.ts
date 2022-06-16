@@ -7,6 +7,7 @@ import { AboutUsComponent } from '@features/home/pages/about-us/about-us.compone
 import { ProfilePageComponent } from '@features/home/pages/profile-page/profile-page.component';
 import { EnterUserNameComponent } from '@features/home/pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from '@features/home/pages/edit-personal-data/edit-personal-data.component';
+import { LoggedInGuard } from '@core/guards/logged-in.guard';
 
 export const routes: Routes = [
   {
@@ -27,7 +28,8 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfilePageComponent
+    component: ProfilePageComponent,
+    canActivate: [LoggedInGuard],
   },
   {
     path: 'mail-verified',
@@ -35,7 +37,8 @@ export const routes: Routes = [
   },
   {
     path: 'edit-personal-data',
-    component: EditPersonalDataComponent
+    component: EditPersonalDataComponent,
+    canActivate: [LoggedInGuard],
   }
 ];
 
