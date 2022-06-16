@@ -7,6 +7,7 @@ import { AboutUsComponent } from '@features/home/pages/about-us/about-us.compone
 import { ProfilePageComponent } from '@features/home/pages/profile-page/profile-page.component';
 import { EnterUserNameComponent } from '@features/home/pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from '@features/home/pages/edit-personal-data/edit-personal-data.component';
+import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,9 @@ export const routes: Routes = [
   {
     path: 'edit-personal-data',
     component: EditPersonalDataComponent
+  }, {
+    path: 'image-upload',
+    component: ImageUploadComponent
   }
 ];
 
@@ -43,4 +47,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule {}
+export class HomeRoutingModule { }

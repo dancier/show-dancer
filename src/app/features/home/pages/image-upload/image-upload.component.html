@@ -1,0 +1,48 @@
+<div [lyDisplay]="'flex'">
+  <button mat-button color="primary" (click)="_fileInput.click()">
+    <mat-icon>image</mat-icon>
+    <span>Select File</span>
+  </button>
+  <span [lyFlex]="1"></span>
+  <!-- Hidden input -->
+  <input #_fileInput type="file" (change)="cropper.selectInputEvent($event)" accept="image/*" hidden>
+  <button (click)="uploadImage().subscribe()" raised mat-button bg="accent" *ngIf="croppedImage">Upload</button>
+</div>
+
+<div *ngIf="ready">
+  <button (click)="cropper.zoomIn()" mat-button appearance="icon">
+    <mat-icon>zoom_in</mat-icon>
+  </button>
+  <button (click)="cropper.zoomOut()" mat-button appearance="icon">
+    <mat-icon>zoom_out</mat-icon>
+  </button>
+  <button (click)="cropper.center()" mat-button appearance="icon">
+    <mat-icon>filter_center_focus</mat-icon>
+  </button>
+  <button (click)="cropper.rotate(-90)" mat-button appearance="icon">
+    <mat-icon>rotate_90_degrees_ccw</mat-icon>
+  </button>
+  <button (click)="cropper.fit()" mat-button>Fit</button>
+  <button (click)="cropper.fitToScreen()" mat-button>Fit to screen</button>
+  <button (click)="cropper.setScale(1)" mat-button>1:1</button>
+  <button (click)="cropper.clean()" mat-button>Clean</button>
+</div>
+
+<ly-img-cropper [withClass]="classes.cropper" [config]="myConfig" [(scale)]="scale" (minScale)="minScale = $event"
+  (ready)="ready = true" (cleaned)="ready = false" (cropped)="onCropped($event)" (loaded)="onLoaded($event)"
+  (error)="onError($event)">
+  <span>Drag and drop image</span>
+</ly-img-cropper>
+
+<div *ngIf="ready" [className]="classes.sliderContainer">
+  <ly-slider [thumbVisible]="false" [min]="minScale" [max]="1" [(ngModel)]="scale" (input)="setScale($event.value)"
+    [step]="0.000001"></ly-slider>
+</div>
+
+<button *ngIf="ready" color="accent" (click)="cropper.crop()" mat-button>
+  <mat-icon>crop</mat-icon>crop
+</button>
+
+<div>
+  <img *ngIf="croppedImage" [src]="croppedImage">
+</div>

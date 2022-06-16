@@ -4,7 +4,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { HomeRoutingModule } from '@features/home/home-routing.module';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,6 +20,11 @@ import { DanceTypeComponent } from './components/dance-type/dance-type.component
 import { PersonalDataComponent } from './components/personal-data/personal-data.component';
 import { EnterUserNameComponent } from './pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from './pages/edit-personal-data/edit-personal-data.component';
+import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
+import { LyImageCropperModule } from '@alyle/ui/image-cropper';
+import { LySliderModule } from '@alyle/ui/slider';
+import { LyButtonModule } from '@alyle/ui/button';
+import { LyIconModule } from '@alyle/ui/icon';
 
 @NgModule({
   declarations: [
@@ -32,21 +37,28 @@ import { EditPersonalDataComponent } from './pages/edit-personal-data/edit-perso
     DanceTypeComponent,
     PersonalDataComponent,
     EnterUserNameComponent,
-    EditPersonalDataComponent
+    EditPersonalDataComponent,
+    ImageUploadComponent
   ],
-    imports: [
-        CommonModule,
-        HomeRoutingModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatGridListModule,
-        FlexModule,
-        MatIconModule,
-        ExtendedModule,
-        MatButtonModule,
-        MatTabsModule,
-    ]
+  imports: [
+    FormsModule,
+    LyImageCropperModule,
+    LySliderModule,
+    LyButtonModule,
+    LyIconModule,
+    CommonModule,
+    HomeRoutingModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatGridListModule,
+    FlexModule,
+    MatIconModule,
+    ExtendedModule,
+    MatButtonModule,
+    MatTabsModule,
+  ],
+  exports: [ImageUploadComponent]
 })
 export class HomeModule { }
