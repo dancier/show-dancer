@@ -35,7 +35,7 @@ export class EditDanceTypeComponent implements OnInit {
     }];
 
   danceTypes: string[] = [
-    "Tango", "Salsa", "Standard"
+    'Tango', 'Salsa', 'Standard'
   ]
 
   filteredDanceTypes$!: Observable<string[]>;

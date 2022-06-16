@@ -20,11 +20,11 @@ import { DanceTypeComponent } from './components/dance-type/dance-type.component
 import { PersonalDataComponent } from './components/personal-data/personal-data.component';
 import { EnterUserNameComponent } from './pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from './pages/edit-personal-data/edit-personal-data.component';
-import { EditAbleToDance } from './pages/edit-able-to-dance/edit-able-to-dance.component';
+import { EditAbleToDanceComponent } from './pages/edit-able-to-dance/edit-able-to-dance.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { EditDanceTypeComponent } from '@features/home/pages/dance-type/edit-dance-type.component';
+import { EditDanceTypeComponent } from '@features/home/pages/edit-dance-type/edit-dance-type.component';
 import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
 
 @NgModule({
@@ -39,7 +39,7 @@ import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-da
     PersonalDataComponent,
     EnterUserNameComponent,
     EditPersonalDataComponent,
-    EditAbleToDance,
+    EditAbleToDanceComponent,
     EditDanceTypeComponent,
     EditPartnerAbleToDanceComponent
   ],

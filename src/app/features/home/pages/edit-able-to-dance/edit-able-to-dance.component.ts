@@ -5,31 +5,31 @@ import { Component } from '@angular/core';
   templateUrl: './edit-able-to-dance.html',
   styleUrls: ['./edit-able-to-dance.scss']
 })
-export class EditAbleToDance {
+export class EditAbleToDanceComponent {
 
   dummyDances: Dance[] = [{
-    danceType: "",
-    danceLevel: "",
-    role: ""
+    danceType: '',
+    danceLevel: '',
+    role: ''
   }];
 
   constructor() {
   }
 
 
-  addDance() {
+  addDance(): void{
     this.dummyDances.push(this.createNewEmptyDance());
   }
 
   createNewEmptyDance(): Dance {
     return {
-      danceType: "",
-      danceLevel: "",
-      role: ""
+      danceType: '',
+      danceLevel: '',
+      role: ''
     }
   }
 
-  removeDance(index: number) {
+  removeDance(index: number): void {
     if (this.dummyDances.length > 1) {
       this.dummyDances.splice(index, 1);
     }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditAbleToDance } from './edit-able-to-dance.component';
+import { EditAbleToDanceComponent } from './edit-able-to-dance.component';
 
 describe('AddAbleToDanceComponent', () => {
-  let component: EditAbleToDance;
-  let fixture: ComponentFixture<EditAbleToDance>;
+  let component: EditAbleToDanceComponent;
+  let fixture: ComponentFixture<EditAbleToDanceComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditAbleToDance ]
+      declarations: [ EditAbleToDanceComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditAbleToDance);
+    fixture = TestBed.createComponent(EditAbleToDanceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
