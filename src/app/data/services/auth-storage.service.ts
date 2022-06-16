@@ -50,4 +50,8 @@ export class AuthStorageService {
     this._authData$.next(newAuthData);
   }
 
+  public getSnapshot(): AuthData {
+    return this._authData$.getValue();
+  }
+
 }

@@ -8,7 +8,8 @@ import {
   UserRegistration,
   VerificationResponse
 } from '@data/types/authentication.types';
-import { catchError, map, Observable, of, shareReplay } from 'rxjs';
+import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
+import { AuthStorageService } from '@data/services/auth-storage.service';
 
 const baseUrl = `${environment.dancerUrl}/authentication`;
 
@@ -21,7 +22,10 @@ export class AuthenticationService {
     withCredentials: true
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authStorageService: AuthStorageService,
+  ) {}
 
   onceUserRegistered(userRegistration: UserRegistration): Observable<RegistrationResponse> {
     return this.http.post<void>(`${baseUrl}/registrations`, userRegistration, this.defaultOptions)
@@ -43,6 +47,7 @@ export class AuthenticationService {
     return this.http.post<void>(`${baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
         map((_): LoginResponse => 'SUCCESS'),
+        tap(_ => this.authStorageService.setLoginState(true)),
         catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
           switch(error.status) {
             case 401:
@@ -68,6 +73,7 @@ export class AuthenticationService {
     return this.http.post<void>(`${baseUrl}/loginAsHuman`, null, httpOptions)
       .pipe(
         map((_): LoginResponse => 'SUCCESS'),
+        tap(_ => this.authStorageService.setHumanState(true)),
         catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
           switch(error.status) {
             case 401:
@@ -84,6 +90,7 @@ export class AuthenticationService {
     return this.http.put<void>(`${baseUrl}/email-validations/${validationCode}`, null, this.defaultOptions)
       .pipe(
         map((_): VerificationResponse => 'SUCCESS'),
+        tap(_ => this.authStorageService.setLoginState(true)),
         catchError((error: HttpErrorResponse): Observable<VerificationResponse> => {
           switch (error.status) {
             case 400:
