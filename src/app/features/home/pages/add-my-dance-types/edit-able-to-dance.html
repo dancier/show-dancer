@@ -1,0 +1,46 @@
+<div class="profile-edit-page-outer-container background-color-accent-A200">
+  <div class="profile-edit-page-inner-container container-radius" fxLayout="column">
+    <h2 class="font-color-primary-800">Ich tanze</h2>
+    <div class="profile-edit-form-container" fxLayout.gt-xs="row" fxLayout.xs="column">
+      <div class="description-section"
+           ngStyle.xs="margin-bottom: 16px"
+           ngStyle.gt-xs="max-width: 256px;  border-right: 1px solid #8c020b;"
+           ngStyle.gt-sm="max-width: 300px;">
+        <p>
+          Damit passende Tanzpartner automatisch zu dir empfohlen werden, werden noch einige Daten benötigt.
+        </p>
+
+        <p>
+          Bitte gib an welche Tanzarten, die du gerade tanzt, damit die anderen Tanzer dich finden können.
+        </p>
+      </div>
+      <div class="form-section-container">
+        <div *ngFor="let dance of dummyDances; let i = index">
+          <div class="edit-dance-container">
+            <app-edit-dance-type></app-edit-dance-type>
+            <div class="remove-button-container">
+              <button mat-stroked-button (click)="removeDance(i)" *ngIf="dummyDances.length > 1"
+                      class="font-color-primary-800 remove-button">
+                <mat-icon>remove</mat-icon>
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <div class="dance-edit-button-container">
+          <button mat-stroked-button class="font-color-primary-800 dance-edit-button add-button" (click)="addDance()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div fxLayout.gt-xs="row" fxLayout.xs="column" class="button-row">
+      <button mat-raised-button class="font-color-primary-800 button-width-relative" routerLink="/edit-personal-data">
+        Zurück
+      </button>
+      <button mat-raised-button class="font-color-primary-800 button-width-relative" routerLink="/add-my-dance-types">
+        Weiter
+      </button>
+    </div>
+  </div>
+</div>

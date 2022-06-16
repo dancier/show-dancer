@@ -96,7 +96,7 @@ body {
   }
 }
 
-.container-radius{
+.container-radius {
 
   @include screen('xs') {
     border-radius: 0;
@@ -116,6 +116,15 @@ body {
   }
 }
 
+.button-width-relative {
+  @include screen('gt-xs') {
+    width: 40%;
+  }
+  @include screen('xs') {
+     width: 90%;
+  }
+}
+
 .content-page-inner-container-narrow {
   max-width: 480px;
 }
@@ -124,4 +133,30 @@ body {
   background-color: #9c0413;
   color: white;
 }
+
+/*For general profile editing*/
+.profile-edit-page-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.profile-edit-page-inner-container {
+  max-width: 800px;
+  padding: 32px;
+  background-color: white;
+  height: 100%;
+}
+
+.description-section {
+  margin-right: 16px;
+  padding-right: 16px;
+}
+
+
+.form-section-container {
+  margin-bottom: 32px;
+}
+
 

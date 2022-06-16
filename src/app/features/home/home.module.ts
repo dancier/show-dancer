@@ -20,6 +20,11 @@ import { DanceTypeComponent } from './components/dance-type/dance-type.component
 import { PersonalDataComponent } from './components/personal-data/personal-data.component';
 import { EnterUserNameComponent } from './pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from './pages/edit-personal-data/edit-personal-data.component';
+import { EditAbleToDance } from './pages/add-my-dance-types/edit-able-to-dance.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { EditDanceTypeComponent } from '@features/home/pages/dance-type/edit-dance-type.component';
 
 @NgModule({
   declarations: [
@@ -32,21 +37,26 @@ import { EditPersonalDataComponent } from './pages/edit-personal-data/edit-perso
     DanceTypeComponent,
     PersonalDataComponent,
     EnterUserNameComponent,
-    EditPersonalDataComponent
+    EditPersonalDataComponent,
+    EditAbleToDance,
+    EditDanceTypeComponent
   ],
-    imports: [
-        CommonModule,
-        HomeRoutingModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatGridListModule,
-        FlexModule,
-        MatIconModule,
-        ExtendedModule,
-        MatButtonModule,
-        MatTabsModule,
-    ]
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatGridListModule,
+    FlexModule,
+    MatIconModule,
+    ExtendedModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+  ]
 })
 export class HomeModule { }

@@ -1,0 +1,47 @@
+<mat-card-content fxLayout="column" class="card-content-container">
+  <div class="form-section" fxLayout="row">
+    <div class="form-section-label">
+      <mat-icon class="form-icon">audiotrack</mat-icon>
+      <mat-label>Tanzart *</mat-label>
+    </div>
+    <div>
+      <input type="text"
+             placeholder="Ich tanze"
+             [formControl]="control"
+             [matAutocomplete]="auto"
+      class="dance-type-input">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let danceType of filteredDanceTypes$ | async" [value]="danceType">
+          {{danceType}}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </div>
+
+  <div class="form-section" fxLayout="row">
+    <div class="form-section-label" style="margin-bottom: 20px;">
+      <mat-icon class="form-icon">tune</mat-icon>
+      <mat-label class="dance-level-label">Tanzlevel *</mat-label>
+    </div>
+    <mat-form-field appearance="fill" class="dance-level-value">
+      <mat-select>
+        <mat-option *ngFor="let danceLevel of danceLevels" [value]="danceLevel.levelValue">
+          {{danceLevel.levelLabel}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-section" fxLayout="row">
+    <div class="form-section-label">
+      <mat-icon class="form-icon">people</mat-icon>
+      <mat-label>Role *</mat-label>
+    </div>
+    <mat-radio-group aria-label="Select an option" fxLayout="column">
+      <mat-radio-button value="lead" class="role-button">Ich führe</mat-radio-button>
+      <mat-radio-button value="follow" class="role-button">Ich folge</mat-radio-button>
+      <mat-radio-button value="both" class="role-button">Beides</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+</mat-card-content>
