@@ -37,7 +37,8 @@ export const routes: Routes = [
   },
   {
     path: 'mail-verified',
-    component: EnterUserNameComponent
+    component: EnterUserNameComponent,
+    canActivate: [LoggedInGuard]
   },
   {
     path: 'edit-personal-data',
@@ -46,11 +47,13 @@ export const routes: Routes = [
   },
   {
     path: 'add-my-dance-types',
-    component: EditAbleToDanceComponent
+    component: EditAbleToDanceComponent,
+    canActivate: [LoggedInGuard]
   },
   {
     path: 'add-partner-dance-types',
-    component: EditPartnerAbleToDanceComponent
+    component: EditPartnerAbleToDanceComponent,
+    canActivate: [LoggedInGuard]
   }
 ];
 
