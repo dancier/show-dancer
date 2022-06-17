@@ -53,6 +53,7 @@ export class ImageUploadComponent implements WithStyles, AfterViewInit {
 
     if (this._platform.isBrowser) {
       const config: ImgCropperLoaderConfig = {
+        type: 'blob',
         scale: 0.745864772531767,
         xOrigin: 642.380608078103,
         yOrigin: 236.26357452128866,
