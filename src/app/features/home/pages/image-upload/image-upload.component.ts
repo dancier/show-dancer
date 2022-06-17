@@ -1,18 +1,14 @@
+
 import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
 import { StyleRenderer, lyl, WithStyles } from '@alyle/ui';
 import { ImgCropperConfig, ImgCropperEvent, LyImageCropper, ImgCropperErrorEvent, ImgCropperLoaderConfig } from '@alyle/ui/image-cropper';
 import { Platform } from '@angular/cdk/platform';
-import { catchError, map, Observable, of } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
-
-type ImageUploadResponse =
-  | 'SUCCESS'
-  | 'SERVER_ERROR';
-
+import { ImageUploadService } from '@data/services/image-upload.service';
 
 const baseUrl = `${environment.dancerUrl}/`;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const STYLES = () => ({
   cropper: lyl`{
     max-width: 400px
@@ -46,20 +42,14 @@ export class ImageUploadComponent implements WithStyles, AfterViewInit {
     responsiveArea: true
   };
 
-  private defaultOptions = {
-    withCredentials: true,
-    headers: new HttpHeaders({
-      'Content-Type': 'images/png',
-    })
-  }
 
   constructor(
     readonly sRenderer: StyleRenderer,
     private _platform: Platform,
-    private http: HttpClient
+    private imageUploadService: ImageUploadService
   ) { }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
 
     if (this._platform.isBrowser) {
       const config: ImgCropperLoaderConfig = {
@@ -76,33 +66,23 @@ export class ImageUploadComponent implements WithStyles, AfterViewInit {
 
   }
 
-  onCropped(e: ImgCropperEvent) {
+  onCropped(e: ImgCropperEvent): void {
     this.croppedImage = e.dataURL;
-    console.log('cropped img: ', e);
   }
-  onLoaded(e: ImgCropperEvent) {
-    console.log('img loaded', e);
+  onLoaded(e: ImgCropperEvent): void {
   }
-  onError(e: ImgCropperErrorEvent) {
+  onError(e: ImgCropperErrorEvent): void {
     console.warn(`'${e.name}' is not a valid image`, e);
   }
 
-  setScale(e: any) {
+  setScale(e: any): void {
     if (Number.isNaN(e.value)) {
       this.scale = e.value;
     }
   }
 
-  uploadImage(): Observable<ImageUploadResponse> {
-    return this.http.post<void>(`${baseUrl}/images`, this.croppedImage, this.defaultOptions)
-      .pipe(
-        map((_): ImageUploadResponse => 'SUCCESS'),
-        catchError((error: HttpErrorResponse): Observable<ImageUploadResponse> => {
-          switch (error.status) {
-            default:
-              return of('SERVER_ERROR');
-          }
-        }));
+  upload(): void {
+    this.imageUploadService.uploadImage(this.croppedImage!).subscribe()
   }
 
 }

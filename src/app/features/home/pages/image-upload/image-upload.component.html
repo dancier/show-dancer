@@ -6,7 +6,7 @@
   <span [lyFlex]="1"></span>
   <!-- Hidden input -->
   <input #_fileInput type="file" (change)="cropper.selectInputEvent($event)" accept="image/*" hidden>
-  <button (click)="uploadImage().subscribe()" raised mat-button bg="accent" *ngIf="croppedImage">Upload</button>
+  <button (click)="upload()" raised mat-button bg="accent" *ngIf="croppedImage">Upload</button>
 </div>
 
 <div *ngIf="ready">
