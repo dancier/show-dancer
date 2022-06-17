@@ -8,7 +8,8 @@ import {
   UserRegistration,
   VerificationResponse
 } from '@data/types/authentication.types';
-import { catchError, map, Observable, of, shareReplay } from 'rxjs';
+import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
+import { AuthStorageService } from '@data/services/auth-storage.service';
 
 const baseUrl = `${environment.dancerUrl}/authentication`;
 
@@ -21,17 +22,13 @@ export class AuthenticationService {
     withCredentials: true
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authStorageService: AuthStorageService,
+  ) {}
 
-  onceUserRegistered(userRegistration: UserRegistration, captchaToken: string): Observable<RegistrationResponse> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'X-Captcha-Token': captchaToken,
-      }),
-      ...this.defaultOptions,
-    };
-
-    return this.http.post<void>(`${baseUrl}/register`, userRegistration, httpOptions)
+  onceUserRegistered(userRegistration: UserRegistration): Observable<RegistrationResponse> {
+    return this.http.post<void>(`${baseUrl}/registrations`, userRegistration, this.defaultOptions)
       .pipe(
         map((_): RegistrationResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<RegistrationResponse> => {
@@ -50,6 +47,7 @@ export class AuthenticationService {
     return this.http.post<void>(`${baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
         map((_): LoginResponse => 'SUCCESS'),
+        tap(_ => this.authStorageService.setLoginState(true)),
         catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
           switch(error.status) {
             case 401:
@@ -64,10 +62,35 @@ export class AuthenticationService {
       );
   }
 
+  onceHumanLoggedIn(captchaToken: string): Observable<LoginResponse>  {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'X-Captcha-Token': captchaToken,
+      }),
+      ...this.defaultOptions,
+    };
+
+    return this.http.post<void>(`${baseUrl}/loginAsHuman`, null, httpOptions)
+      .pipe(
+        map((_): LoginResponse => 'SUCCESS'),
+        tap(_ => this.authStorageService.setHumanState(true)),
+        catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
+          switch(error.status) {
+            case 401:
+              return of('INCORRECT_CREDENTIALS');
+            default:
+              return of('SERVER_ERROR');
+          }
+        }),
+        shareReplay(1)
+      );
+  }
+
   onceAccountVerified(validationCode: string): Observable<VerificationResponse> {
-    return this.http.get<void>(`${baseUrl}/email/validate/${validationCode}`, this.defaultOptions)
+    return this.http.put<void>(`${baseUrl}/email-validations/${validationCode}`, null, this.defaultOptions)
       .pipe(
         map((_): VerificationResponse => 'SUCCESS'),
+        tap(_ => this.authStorageService.setLoginState(true)),
         catchError((error: HttpErrorResponse): Observable<VerificationResponse> => {
           switch (error.status) {
             case 400:

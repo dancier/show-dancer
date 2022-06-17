@@ -11,6 +11,7 @@ import { EditAbleToDanceComponent } from '@features/home/pages/edit-able-to-danc
 import {
   EditPartnerAbleToDanceComponent
 } from '@features/home/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
+import { LoggedInGuard } from '@core/guards/logged-in.guard';
 
 export const routes: Routes = [
   {
@@ -31,7 +32,8 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfilePageComponent
+    component: ProfilePageComponent,
+    canActivate: [LoggedInGuard],
   },
   {
     path: 'mail-verified',
@@ -39,7 +41,8 @@ export const routes: Routes = [
   },
   {
     path: 'edit-personal-data',
-    component: EditPersonalDataComponent
+    component: EditPersonalDataComponent,
+    canActivate: [LoggedInGuard]
   },
   {
     path: 'add-my-dance-types',
