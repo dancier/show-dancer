@@ -1,0 +1,32 @@
+.form-section {
+  margin: 8px 0;
+  background-color: white;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-section-label {
+  display: flex;
+  align-items: center;
+}
+
+.dance-level-label {
+  min-width: 80px;
+}
+
+.dance-level-value {
+  margin-left: 12px;
+}
+
+.role-button {
+  min-width: 120px;
+}
+
+.dance-type-input {
+  padding: 16px 8px;
+  background-color: #f2f2f2;
+  border: 0;
+  border-bottom: 1px solid #66666B;
+  min-width: 186px;
+}
