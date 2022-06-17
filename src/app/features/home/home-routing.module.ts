@@ -8,6 +8,7 @@ import { ProfilePageComponent } from '@features/home/pages/profile-page/profile-
 import { EnterUserNameComponent } from '@features/home/pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from '@features/home/pages/edit-personal-data/edit-personal-data.component';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
+import { LoggedInGuard } from '@core/guards/logged-in.guard';
 
 export const routes: Routes = [
   {
@@ -28,7 +29,8 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfilePageComponent
+    component: ProfilePageComponent,
+    canActivate: [LoggedInGuard],
   },
   {
     path: 'mail-verified',
@@ -36,10 +38,15 @@ export const routes: Routes = [
   },
   {
     path: 'edit-personal-data',
+<<<<<<< HEAD
     component: EditPersonalDataComponent
   }, {
     path: 'image-upload',
     component: ImageUploadComponent
+=======
+    component: EditPersonalDataComponent,
+    canActivate: [LoggedInGuard],
+>>>>>>> origin/master
   }
 ];
 
