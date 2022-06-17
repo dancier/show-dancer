@@ -8,6 +8,10 @@ import { ProfilePageComponent } from '@features/home/pages/profile-page/profile-
 import { EnterUserNameComponent } from '@features/home/pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from '@features/home/pages/edit-personal-data/edit-personal-data.component';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
+import { EditAbleToDanceComponent } from '@features/home/pages/edit-able-to-dance/edit-able-to-dance.component';
+import {
+  EditPartnerAbleToDanceComponent
+} from '@features/home/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
 import { LoggedInGuard } from '@core/guards/logged-in.guard';
 
 export const routes: Routes = [
@@ -34,19 +38,27 @@ export const routes: Routes = [
   },
   {
     path: 'mail-verified',
-    component: EnterUserNameComponent
+    component: EnterUserNameComponent,
+    canActivate: [LoggedInGuard]
   },
   {
     path: 'edit-personal-data',
-<<<<<<< HEAD
-    component: EditPersonalDataComponent
+    component: EditPersonalDataComponent,
+    canActivate: [LoggedInGuard]
   }, {
     path: 'image-upload',
-    component: ImageUploadComponent
-=======
-    component: EditPersonalDataComponent,
-    canActivate: [LoggedInGuard],
->>>>>>> origin/master
+    component: ImageUploadComponent,
+    canActivate: [LoggedInGuard]
+  },
+  {
+    path: 'add-my-dance-types',
+    component: EditAbleToDanceComponent,
+    canActivate: [LoggedInGuard]
+  },
+  {
+    path: 'add-partner-dance-types',
+    component: EditPartnerAbleToDanceComponent,
+    canActivate: [LoggedInGuard]
   }
 ];
 

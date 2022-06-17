@@ -25,6 +25,12 @@ import { LyImageCropperModule } from '@alyle/ui/image-cropper';
 import { LySliderModule } from '@alyle/ui/slider';
 import { LyButtonModule } from '@alyle/ui/button';
 import { LyIconModule } from '@alyle/ui/icon';
+import { EditAbleToDanceComponent } from './pages/edit-able-to-dance/edit-able-to-dance.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { EditDanceTypeComponent } from '@features/home/pages/edit-dance-type/edit-dance-type.component';
+import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +44,10 @@ import { LyIconModule } from '@alyle/ui/icon';
     PersonalDataComponent,
     EnterUserNameComponent,
     EditPersonalDataComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    EditAbleToDanceComponent,
+    EditDanceTypeComponent,
+    EditPartnerAbleToDanceComponent
   ],
   imports: [
     FormsModule,
@@ -59,6 +68,11 @@ import { LyIconModule } from '@alyle/ui/icon';
     MatButtonModule,
     MatTabsModule,
   ],
-  exports: [ImageUploadComponent]
+  exports: [
+    ImageUploadComponent,
+    MatRadioModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+  ]
 })
 export class HomeModule { }
