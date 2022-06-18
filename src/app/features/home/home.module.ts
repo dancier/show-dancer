@@ -22,12 +22,10 @@ import { EnterUserNameComponent } from './pages/enter-user-name/enter-user-name.
 import { EditPersonalDataComponent } from './pages/edit-personal-data/edit-personal-data.component';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
 import { LyImageCropperModule } from '@alyle/ui/image-cropper';
-import { LySliderModule } from '@alyle/ui/slider';
-import { LyButtonModule } from '@alyle/ui/button';
-import { LyIconModule } from '@alyle/ui/icon';
 import { EditAbleToDanceComponent } from './pages/edit-able-to-dance/edit-able-to-dance.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { EditDanceTypeComponent } from '@features/home/pages/edit-dance-type/edit-dance-type.component';
 import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
@@ -47,14 +45,11 @@ import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-da
     ImageUploadComponent,
     EditAbleToDanceComponent,
     EditDanceTypeComponent,
-    EditPartnerAbleToDanceComponent
+    EditPartnerAbleToDanceComponent,
   ],
   imports: [
     FormsModule,
     LyImageCropperModule,
-    LySliderModule,
-    LyButtonModule,
-    LyIconModule,
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,
@@ -67,12 +62,13 @@ import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-da
     ExtendedModule,
     MatButtonModule,
     MatTabsModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatAutocompleteModule,
   ],
   exports: [
     ImageUploadComponent,
-    MatRadioModule,
-    MatSelectModule,
-    MatAutocompleteModule,
-  ]
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}

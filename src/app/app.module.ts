@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  HAMMER_GESTURE_CONFIG,
+  HammerModule,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +20,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer/footer.component';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
-import { LyHammerGestureConfig, LY_THEME, LY_THEME_NAME, StyleRenderer, LyTheme2 } from '@alyle/ui';
+import {
+  LyHammerGestureConfig,
+  LY_THEME,
+  LY_THEME_NAME,
+  StyleRenderer,
+  LyTheme2,
+} from '@alyle/ui';
 import { MinimaLight } from '@alyle/ui/themes/minima';
 import { LyImageCropperModule } from '@alyle/ui/image-cropper';
 
@@ -52,7 +62,13 @@ import { LyImageCropperModule } from '@alyle/ui/image-cropper';
     ExtendedModule,
     HammerModule,
   ],
-  providers: [{ provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig }, StyleRenderer, LyTheme2, { provide: LY_THEME_NAME, useValue: 'minima-light' }, { provide: LY_THEME, useClass: MinimaLight, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig },
+    StyleRenderer,
+    LyTheme2,
+    { provide: LY_THEME_NAME, useValue: 'minima-light' },
+    { provide: LY_THEME, useClass: MinimaLight, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

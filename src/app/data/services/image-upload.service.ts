@@ -32,7 +32,7 @@ export class ImageUploadService {
 
   constructor(private http: HttpClient) {}
 
-  uploadImage(croppedImage: string): Observable<ImageUploadResponse> {
+  uploadImage$(croppedImage: string): Observable<ImageUploadResponse> {
     const blobFromDataUrl = this.dataURItoBlob(croppedImage);
     const formData: FormData = new FormData();
     formData.append('file', blobFromDataUrl);
