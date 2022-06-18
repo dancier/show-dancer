@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ImageUploadService } from '@data/services/image-upload.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.scss']
 })
-export class ImageUploadComponent {
+export class ImageUploadComponent implements OnDestroy {
   croppedImage?: string | null | undefined;
   imageChangedEvent: any = '';
   imageUploadSubscription: Subscription | undefined;
