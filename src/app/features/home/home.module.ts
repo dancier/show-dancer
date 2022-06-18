@@ -67,8 +67,6 @@ import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-da
     MatSliderModule,
     MatAutocompleteModule,
   ],
-  exports: [
-    ImageUploadComponent
-  ]
+  exports: [ImageUploadComponent],
 })
 export class HomeModule {}
