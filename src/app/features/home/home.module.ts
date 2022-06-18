@@ -67,12 +67,12 @@ import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-da
     ExtendedModule,
     MatButtonModule,
     MatTabsModule,
-  ],
-  exports: [
-    ImageUploadComponent,
-    MatRadioModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatRadioModule
+  ],
+  exports: [
+    ImageUploadComponent
   ]
 })
 export class HomeModule { }
