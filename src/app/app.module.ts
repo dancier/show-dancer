@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,7 +44,6 @@ import { ExtendedModule, FlexModule } from '@angular/flex-layout';
     MatIconModule,
     FlexModule,
     ExtendedModule,
-    HammerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
