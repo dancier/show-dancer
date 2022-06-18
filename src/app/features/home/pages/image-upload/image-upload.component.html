@@ -5,7 +5,7 @@
   </button>
   <span></span>
   <!-- Hidden input -->
-  <input #_fileInput type="file" (change)="fileChangeEvent($event)" accept="image/*" hidden>
+  <input #fileInput type="file" (change)="fileChangeEvent($event)" accept="image/*" hidden>
   <button (click)="upload()" raised mat-button bg="accent" *ngIf="croppedImage">Hochladen</button>
 </div>
 
