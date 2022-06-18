@@ -49,7 +49,7 @@ import { LyImageCropperModule } from '@alyle/ui/image-cropper';
 
     // App
     AppRoutingModule,
-
+    // Image upload
     BrowserAnimationsModule,
     LyImageCropperModule,
 
@@ -62,13 +62,15 @@ import { LyImageCropperModule } from '@alyle/ui/image-cropper';
     ExtendedModule,
     HammerModule,
   ],
-  providers: [
-    { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig },
-    StyleRenderer,
-    LyTheme2,
-    { provide: LY_THEME_NAME, useValue: 'minima-light' },
-    { provide: LY_THEME, useClass: MinimaLight, multi: true },
-  ],
-  bootstrap: [AppComponent],
+  providers: [{
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: LyHammerGestureConfig
+  }, StyleRenderer, LyTheme2, { provide: LY_THEME_NAME, useValue: 'minima-light' }, {
+    provide: LY_THEME,
+    useClass: MinimaLight,
+    multi: true
+  }],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
