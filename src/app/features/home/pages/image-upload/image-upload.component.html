@@ -1,11 +1,11 @@
 <div>
-  <button mat-button color="primary" (click)="_fileInput.click()">
+  <button mat-button color="primary" (click)="fileInput.click()">
     <mat-icon>image</mat-icon>
     <span>Wähle ein Bild</span>
   </button>
   <span></span>
   <!-- Hidden input -->
-  <input #_fileInput type="file" (change)="fileChangeEvent($event)" accept="image/*" hidden>
+  <input #fileInput type="file" (change)="fileChangeEvent($event)" accept="image/*" hidden>
   <button (click)="upload()" raised mat-button bg="accent" *ngIf="croppedImage">Hochladen</button>
 </div>
 
