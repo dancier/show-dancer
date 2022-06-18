@@ -21,7 +21,6 @@ import { PersonalDataComponent } from './components/personal-data/personal-data.
 import { EnterUserNameComponent } from './pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from './pages/edit-personal-data/edit-personal-data.component';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
-import { LyImageCropperModule } from '@alyle/ui/image-cropper';
 import { EditAbleToDanceComponent } from './pages/edit-able-to-dance/edit-able-to-dance.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -29,6 +28,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { EditDanceTypeComponent } from '@features/home/pages/edit-dance-type/edit-dance-type.component';
 import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,6 @@ import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-da
   ],
   imports: [
     FormsModule,
-    LyImageCropperModule,
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,
@@ -66,6 +65,7 @@ import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-da
     MatSelectModule,
     MatSliderModule,
     MatAutocompleteModule,
+    ImageCropperModule,
   ],
   exports: [ImageUploadComponent],
 })

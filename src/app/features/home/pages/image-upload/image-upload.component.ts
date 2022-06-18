@@ -1,7 +1,7 @@
 
-import { Component, ViewChild } from '@angular/core';
-import { ImgCropperConfig, ImgCropperEvent, LyImageCropper, ImgCropperErrorEvent } from '@alyle/ui/image-cropper';
+import { Component } from '@angular/core';
 import { ImageUploadService } from '@data/services/image-upload.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-image-upload.component.ts',
@@ -9,35 +9,18 @@ import { ImageUploadService } from '@data/services/image-upload.service';
   styleUrls: ['./image-upload.component.scss']
 })
 export class ImageUploadComponent {
-  croppedImage?: string;
-  scale!: number;
-  ready!: boolean;
-  minScale!: number;
-  @ViewChild(LyImageCropper) cropper!: LyImageCropper;
-  myConfig: ImgCropperConfig = {
-    width: 150,
-    height: 150,
-    fill: '#ff2997',
-    type: 'image/png',
-    responsiveArea: true
-  };
+  croppedImage?: string | null | undefined;
+  imageChangedEvent: any = '';
 
   constructor(
     private imageUploadService: ImageUploadService
   ) { }
 
-  onCropped(e: ImgCropperEvent): void {
-    this.croppedImage = e.dataURL;
+  fileChangeEvent(event: any): void {
+      this.imageChangedEvent = event;
   }
-
-  onError(e: ImgCropperErrorEvent): void {
-    console.warn(`'${e.name}' is not a valid image`, e);
-  }
-
-  setScale(e: any): void {
-    if (Number.isNaN(e.value)) {
-      this.scale = e.value;
-    }
+  imageCropped(event: ImageCroppedEvent): void {
+      this.croppedImage = event.base64;
   }
 
   upload(): void {
