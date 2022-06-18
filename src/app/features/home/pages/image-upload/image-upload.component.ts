@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { ImageUploadService } from '@data/services/image-upload.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-image-upload.component.ts',
@@ -11,10 +12,15 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 export class ImageUploadComponent {
   croppedImage?: string | null | undefined;
   imageChangedEvent: any = '';
+  imageUploadSubscription: Subscription | undefined;
 
   constructor(
     private imageUploadService: ImageUploadService
   ) { }
+
+  ngOnDestroy(): void {
+    this.imageUploadSubscription?.unsubscribe();
+  }
 
   fileChangeEvent(event: any): void {
       this.imageChangedEvent = event;
@@ -24,7 +30,7 @@ export class ImageUploadComponent {
   }
 
   upload(): void {
-    this.imageUploadService.uploadImage$(this.croppedImage!).subscribe()
+    this.imageUploadSubscription = this.imageUploadService.uploadImage$(this.croppedImage!).subscribe()
   }
 
 }
