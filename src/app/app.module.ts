@@ -24,28 +24,28 @@ import { ExtendedModule, FlexModule } from '@angular/flex-layout';
     NavigationComponent,
     FooterComponent,
   ],
-    imports: [
-        // Angular
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
+  imports: [
+    // Angular
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
 
-        // Core & Shared
-        CoreModule,
-        SharedModule,
+    // Core & Shared
+    CoreModule,
+    SharedModule,
 
-        // App
-        AppRoutingModule,
+    // App
+    AppRoutingModule,
 
-        // Material UI
-        MatToolbarModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatIconModule,
-        FlexModule,
-        ExtendedModule,
-    ],
+    // Material UI
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    FlexModule,
+    ExtendedModule,
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
