@@ -14,7 +14,7 @@
     <mat-form-field fxFlex appearance="fill" class="full-width">
       <mat-label>Passwort</mat-label>
       <input data-test="password-field" matInput formControlName="password" [type]="hide ? 'password' : 'text'" >
-      <mat-icon class="check" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       <mat-error data-test="password-field-empty" *ngIf="errorHandling('password', 'required')">
         Bitte geben Sie ein Passwort ein.
       </mat-error>
