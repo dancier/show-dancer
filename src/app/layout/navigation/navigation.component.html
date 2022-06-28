@@ -13,6 +13,10 @@
             <mat-icon>login</mat-icon>
             <span>Anmelden</span>
           </button>
+          <button mat-menu-item *ngIf="authData.isLoggedIn" routerLink="logout">
+            <mat-icon>logout</mat-icon>
+            <span>Abmelden</span>
+          </button>
           <button mat-menu-item *ngIf="!authData.isLoggedIn" routerLink="registration">
             <mat-icon>note_add</mat-icon>
             <span>Registrieren</span>
@@ -58,6 +62,11 @@
           </a>
           <a mat-button routerLink="registration" routerLinkActive="active">
             Registrieren
+          </a>
+        </ng-container>
+        <ng-container *ngIf="authData.isLoggedIn">
+          <a mat-button routerLink="logout" routerLinkActive="active">
+            Abmelden
           </a>
         </ng-container>
       </ng-container>
