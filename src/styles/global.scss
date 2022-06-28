@@ -14,6 +14,10 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .font-color-primary-800 {
   color: map-get($dancier-palette-primary, 800);
 }
@@ -149,7 +153,6 @@ body {
   margin-right: 16px;
   padding-right: 16px;
 }
-
 
 .form-section-container {
   margin-bottom: 32px;

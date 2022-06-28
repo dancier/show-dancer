@@ -1,4 +1,4 @@
-.app-header {
+.header {
   position: fixed;
   top: 0;
   display: flex;
@@ -6,27 +6,18 @@
   justify-content: space-between;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 
-  a {
-    text-decoration: none;
-  }
-
-  .nav-tools, .login-nav-tools {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .title {
-    font-size: 24px;
-  }
-
-  .mdc-top-app-bar__section {
+  .header-left {
     display: flex;
     align-items: center;
 
     img {
       height: 40px;
       margin-right: 8px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: white;
     }
 
     .subtitle {
@@ -38,43 +29,38 @@
     }
   }
 
-  .nav-tools {
+  .header-right {
 
-    .nav-icons {
-      padding: 6px 12px 6px 6px;
-      display: inline-flex;
-      justify-content: center;
+    .nav-items {
+      display: flex;
       align-items: center;
-      margin-left: 6px;
-    }
 
-    .nav-icons a {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-    }
+      .nav-icons {
+        margin-left: 14px;
+        display: flex;
+        column-gap: 4px;
+        justify-content: center;
+        align-items: center;
 
-    span {
-      padding: 0 8px;
-    }
+        mat-icon {
+          font-size: 30px;
+          height: 30px;
+          width: 30px;
+        }
 
-    a {
-      font-size: 0.7em;
-      color: white;
+        a {
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
     }
   }
 
-  .right-separator {
-    border-right: solid 1px white;
-  }
-
-  .title {
-    text-decoration: none;
-    color: white;
-  }
-
-  .dancier {
-    text-decoration: none;
-    color: white;
+  .separator {
+    align-self: stretch;
+    width: 1px;
+    background-color: white;
   }
 }

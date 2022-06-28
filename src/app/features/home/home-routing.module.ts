@@ -7,6 +7,7 @@ import { AboutUsComponent } from '@features/home/pages/about-us/about-us.compone
 import { ProfilePageComponent } from '@features/home/pages/profile-page/profile-page.component';
 import { EnterUserNameComponent } from '@features/home/pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from '@features/home/pages/edit-personal-data/edit-personal-data.component';
+import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
 import { EditAbleToDanceComponent } from '@features/home/pages/edit-able-to-dance/edit-able-to-dance.component';
 import {
   EditPartnerAbleToDanceComponent
@@ -44,6 +45,10 @@ export const routes: Routes = [
     path: 'edit-personal-data',
     component: EditPersonalDataComponent,
     canActivate: [LoggedInGuard]
+  }, {
+    path: 'image-upload',
+    component: ImageUploadComponent,
+    canActivate: [LoggedInGuard]
   },
   {
     path: 'add-my-dance-types',
@@ -61,4 +66,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule {}
+export class HomeRoutingModule { }

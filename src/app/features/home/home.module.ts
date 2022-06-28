@@ -4,7 +4,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { HomeRoutingModule } from '@features/home/home-routing.module';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,12 +20,14 @@ import { DanceTypeComponent } from './components/dance-type/dance-type.component
 import { PersonalDataComponent } from './components/personal-data/personal-data.component';
 import { EnterUserNameComponent } from './pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from './pages/edit-personal-data/edit-personal-data.component';
+import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
 import { EditAbleToDanceComponent } from './pages/edit-able-to-dance/edit-able-to-dance.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { EditDanceTypeComponent } from '@features/home/pages/edit-dance-type/edit-dance-type.component';
 import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -39,11 +41,13 @@ import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-da
     PersonalDataComponent,
     EnterUserNameComponent,
     EditPersonalDataComponent,
+    ImageUploadComponent,
     EditAbleToDanceComponent,
     EditDanceTypeComponent,
-    EditPartnerAbleToDanceComponent
+    EditPartnerAbleToDanceComponent,
   ],
   imports: [
+    FormsModule,
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,
@@ -59,6 +63,8 @@ import { EditPartnerAbleToDanceComponent } from './pages/edit-partner-able-to-da
     MatRadioModule,
     MatSelectModule,
     MatAutocompleteModule,
-  ]
+    ImageCropperModule,
+  ],
+  exports: [ImageUploadComponent],
 })
-export class HomeModule { }
+export class HomeModule {}
