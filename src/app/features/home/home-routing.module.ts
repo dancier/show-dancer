@@ -7,12 +7,12 @@ import { TermsAndConditionsComponent } from '@features/home/pages/terms-and-cond
 import { AboutUsComponent } from '@features/home/pages/about-us/about-us.component';
 import { ProfilePageComponent } from '@features/home/pages/profile-page/profile-page.component';
 import { EditPersonalDataComponent } from '@features/home/pages/edit-personal-data/edit-personal-data.component';
-import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
 import { EditAbleToDanceComponent } from '@features/home/pages/edit-able-to-dance/edit-able-to-dance.component';
 import {
   EditPartnerAbleToDanceComponent
 } from '@features/home/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
 import { LoggedInGuard } from '@core/guards/logged-in.guard';
+import { EditProfileImageComponent } from '@features/home/pages/edit-profile-image/edit-profile-image.component';
 
 export const routes: Routes = [
   {
@@ -44,10 +44,6 @@ export const routes: Routes = [
     path: 'edit-personal-data',
     component: EditPersonalDataComponent,
     canActivate: [LoggedInGuard]
-  }, {
-    path: 'image-upload',
-    component: ImageUploadComponent,
-    canActivate: [LoggedInGuard]
   },
   {
     path: 'add-my-dance-types',
@@ -57,6 +53,11 @@ export const routes: Routes = [
   {
     path: 'add-partner-dance-types',
     component: EditPartnerAbleToDanceComponent,
+    canActivate: [LoggedInGuard]
+  },
+  {
+    path: 'add-profile-image',
+    component: EditProfileImageComponent,
     canActivate: [LoggedInGuard]
   }
 ];
