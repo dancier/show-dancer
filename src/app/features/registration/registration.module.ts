@@ -11,9 +11,6 @@ import { RegistrationRoutingModule } from '@features/registration/registration-r
 import { SharedModule } from '@shared/shared.module';
 import { VerificationRequiredComponent } from './components/verification-required/verification-required.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
-import {
-  VerificationSuccessfulComponent
-} from './components/verification-successful/verification-successful.component';
 import { VerificationErrorComponent } from './components/verification-error/verification-error.component';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
@@ -24,7 +21,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     RegisterUserFormComponent,
     VerificationRequiredComponent,
     VerifyAccountComponent,
-    VerificationSuccessfulComponent,
     VerificationErrorComponent
   ],
     imports: [

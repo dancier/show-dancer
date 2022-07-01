@@ -8,9 +8,7 @@ import {
   VerificationRequiredComponent
 } from '@features/registration/components/verification-required/verification-required.component';
 import { VerifyAccountComponent } from '@features/registration/components/verify-account/verify-account.component';
-import {
-  VerificationSuccessfulComponent
-} from '@features/registration/components/verification-successful/verification-successful.component';
+import { EnterUserNameComponent } from '@features/home/pages/enter-user-name/enter-user-name.component';
 
 export const routes: Routes = [
   {
@@ -27,7 +25,7 @@ export const routes: Routes = [
   },
   {
     path: 'verify/success',
-    component: VerificationSuccessfulComponent,
+    component: EnterUserNameComponent,
   },
   {
     path: 'verify/error',
