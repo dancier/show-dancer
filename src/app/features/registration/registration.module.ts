@@ -15,28 +15,34 @@ import { VerificationErrorComponent } from './components/verification-error/veri
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HomeModule } from '@features/home/home.module';
+import { ResendVerificationLinkFormComponent } from './components/resend-verification-link-form/resend-verification-link-form.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     RegisterUserFormComponent,
     VerificationRequiredComponent,
     VerifyAccountComponent,
-    VerificationErrorComponent
+    VerificationErrorComponent,
+    ResendVerificationLinkFormComponent
   ],
-    imports: [
-        CommonModule,
-        MatCardModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        FlexLayoutModule,
-        RecaptchaModule,
-        RecaptchaFormsModule,
-        ReactiveFormsModule,
-        RegistrationRoutingModule,
-        SharedModule,
-        MatCheckboxModule,
-    ]
+  imports: [
+    CommonModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    ReactiveFormsModule,
+    RegistrationRoutingModule,
+    SharedModule,
+    MatCheckboxModule,
+    HomeModule,
+    MatIconModule,
+  ]
 })
 export class RegistrationModule { }

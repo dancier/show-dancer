@@ -65,6 +65,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     MatAutocompleteModule,
     ImageCropperModule,
   ],
-  exports: [ImageUploadComponent],
+    exports: [ImageUploadComponent, LoginFormComponent],
 })
 export class HomeModule {}
