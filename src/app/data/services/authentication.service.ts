@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import {
   LoginRequest,
   LoginResponse,
+  LogoutResponse,
   RegistrationResponse,
   UserRegistration,
   VerificationResponse
@@ -101,5 +102,19 @@ export class AuthenticationService {
         }),
         shareReplay(1)
       );
+  }
+
+  onceUserLoggedOut(): Observable<LogoutResponse> {
+    return this.http.get<void>(`${baseUrl}/logout`, this.defaultOptions)
+    .pipe(
+      map((_): LogoutResponse => 'SUCCESS'),
+      tap(_ => this.authStorageService.setLoginState(false)),
+      catchError((error: HttpErrorResponse): Observable<LogoutResponse> => {
+        switch (error.status) {
+          default:
+            return of('SERVER_ERROR');
+        }
+      })
+    );
   }
 }
