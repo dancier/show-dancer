@@ -20,6 +20,8 @@ export class EventLogService {
   ) { }
 
   postEvent(event: EventLogEvent): Observable<PostEventResponse> {
+    // eslint-disable-next-line no-console
+    console.log(event)
     return this.http.post<void>(`${baseUrl}`, event, this.defaultOptions)
       .pipe(
         map((_): PostEventResponse => 'SUCCESS'),

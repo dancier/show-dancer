@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventLogEvent, Metadata, Topic } from '@data/types/eventlog.types';
+import { Observable, Subject } from 'rxjs';
 import * as uuid from 'uuid';
 
 const APP_INSTANCE_ID = 'appInstanceId';
@@ -9,15 +10,12 @@ const EVENT_LOG_EVENTS = 'eventLogEvents';
   providedIn: 'root',
 })
 export class EventLogStorageService {
+  _eventObservable = new Subject<EventLogEvent>()
+
   constructor() {}
 
-  storeEventInLocalStorage(event: EventLogEvent): void {
-    const unparsedEvents = localStorage.getItem(EVENT_LOG_EVENTS);
-    const existingEvents: EventLogEvent[] = unparsedEvents
-      ? JSON.parse(unparsedEvents)
-      : [];
-    existingEvents.push(event);
-    localStorage.setItem(EVENT_LOG_EVENTS, JSON.stringify(existingEvents));
+  getEventObservable(): Observable<EventLogEvent> {
+    return this._eventObservable
   }
 
   initFromLocalStorage(): string {
@@ -25,17 +23,20 @@ export class EventLogStorageService {
     if (appInstanceId == null) {
       // user accesses dancer the first time from this device
       appInstanceId = uuid.v4();
+      // eslint-disable-next-line no-console
+      console.log('new event');
       localStorage.setItem(APP_INSTANCE_ID, appInstanceId!);
-      // store initial event in local storag
+      // store initial event in local storage
       const initialEvent: EventLogEvent = {
         topic: Topic.app_instance_id_created,
         metaData: {
           sourceTime: new Date().toISOString(),
-          appInstanceId
+          appInstanceId,
         },
-      }
-      this.storeEventInLocalStorage(initialEvent)
+      };
+      this._eventObservable.next(initialEvent)
     }
     return appInstanceId!;
   }
+
 }
