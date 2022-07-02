@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EventLogService } from '@data/services/event-log.service';
 import { EventLogHttpService } from '@data/services/event-log-http.service';
 import { Subscription } from 'rxjs';
+import { Topic } from '@data/types/eventlog.types';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     public eventLogService: EventLogService,
-    public eventLogSHttpervice: EventLogHttpService
+    public eventLogHttpervice: EventLogHttpService
   ) {}
 
   ngOnInit(): void {

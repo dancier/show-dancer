@@ -4,7 +4,7 @@ import {
   PostEventResponse,
   Topic,
 } from '@data/types/eventlog.types';
-import { Observable, Subject, switchMap } from 'rxjs';
+import { mergeMap, Observable, Subject, switchMap } from 'rxjs';
 import { AppInstanceStorageService } from './app-instance-storage.service';
 import { EventLogHttpService } from './event-log-http.service';
 
@@ -21,7 +21,7 @@ export class EventLogService {
 
   getEventObservable(): Observable<PostEventResponse> {
     return this._eventObservable.pipe(
-      switchMap((event) => this.eventLogHttpService.postEvent(event))
+      mergeMap((event) => this.eventLogHttpService.postEvent(event))
     );
   }
 
