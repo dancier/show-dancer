@@ -8,7 +8,6 @@ import {
   VerificationRequiredComponent
 } from '@features/registration/components/verification-required/verification-required.component';
 import { VerifyAccountComponent } from '@features/registration/components/verify-account/verify-account.component';
-import { EnterUserNameComponent } from '@features/home/pages/enter-user-name/enter-user-name.component';
 
 export const routes: Routes = [
   {
@@ -22,10 +21,6 @@ export const routes: Routes = [
   {
     path: 'verify-account/:code',
     component: VerifyAccountComponent,
-  },
-  {
-    path: 'verify/success',
-    component: EnterUserNameComponent,
   },
   {
     path: 'verify/error',

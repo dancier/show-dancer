@@ -4,11 +4,11 @@ import { EnterUserNameComponent } from '@features/profile/pages/enter-user-name/
 import { LoggedInGuard } from '@core/guards/logged-in.guard';
 import { EditPersonalDataComponent } from '@features/profile/pages/edit-personal-data/edit-personal-data.component';
 import { ProfilePageComponent } from '@features/profile/pages/profile-page/profile-page.component';
-import { ImageUploadComponent } from '@features/profile/pages/image-upload/image-upload.component';
 import { EditAbleToDanceComponent } from '@features/profile/pages/edit-able-to-dance/edit-able-to-dance.component';
 import {
   EditPartnerAbleToDanceComponent
 } from '@features/profile/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
+import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-image/edit-profile-image.component';
 
 
 export const routes: Routes = [
@@ -37,14 +37,14 @@ export const routes: Routes = [
         path: 'dances-partner',
         component: EditPartnerAbleToDanceComponent,
       },
+      {
+        path: 'profile-image',
+        component: EditProfileImageComponent,
+        canActivate: [LoggedInGuard]
+      },
       // Fallback when no prior routes are matched
       { path: '**', redirectTo: 'username', pathMatch: 'full' },
     ],
-  },
-  {
-    path: 'image-upload',
-    component: ImageUploadComponent,
-    canActivate: [LoggedInGuard]
   },
   // Fallback when no prior routes are matched
   { path: '**', redirectTo: '', pathMatch: 'full' },

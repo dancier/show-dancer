@@ -23,6 +23,7 @@ import { DanceTypeComponent } from '@features/profile/components/dance-type/danc
 import { ReactiveFormsModule } from '@angular/forms';
 import { PersonalDataComponent } from '@features/profile/components/personal-data/personal-data.component';
 import { ProfileRoutingModule } from '@features/profile/profile-routing.module';
+import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-image/edit-profile-image.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ProfileRoutingModule } from '@features/profile/profile-routing.module';
     EditDanceTypeComponent,
     DanceTypeComponent,
     PersonalDataComponent,
+    EditProfileImageComponent,
   ],
   imports: [
     ProfileRoutingModule,
