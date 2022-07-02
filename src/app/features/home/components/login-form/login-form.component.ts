@@ -14,6 +14,7 @@ export class LoginFormComponent implements OnInit {
 
   loginForm!: FormGroup;
   loginAttemptResponse: LoginResponse | undefined;
+  hide = true
 
   constructor(
     private fb: FormBuilder,

@@ -1,0 +1,50 @@
+<div class="profile-edit-page-outer-container background-color-accent-A200">
+  <div class="profile-edit-page-inner-container container-radius" fxLayout="column">
+    <h2 class="font-color-primary-800">Profilbild hochladen</h2>
+    <div class="profile-edit-form-container" fxLayout.gt-xs="row" fxLayout.xs="column">
+      <div class="description-section"
+           ngStyle.xs="margin-bottom: 16px"
+           ngStyle.gt-xs="max-width: 256px;  border-right: 1px solid #8c020b;"
+           ngStyle.gt-sm="max-width: 300px;">
+        <p>
+          Mit Profilbild hast du bessere Chance angesprochen zu werden.
+        </p>
+        <p>
+          Profilbild kannst du auch später hochladen.
+        </p>
+      </div>
+      <div class="form-section-container">
+        <div>
+          <button mat-button color="primary" (click)="fileInput.click()">
+            <mat-icon>image</mat-icon>
+            <span>Wähle ein Bild</span>
+          </button>
+          <span></span>
+          <!-- Hidden input -->
+          <input #fileInput type="file" (change)="fileChangeEvent($event)" accept="image/*" hidden>
+          <button (click)="upload()" raised mat-button bg="accent" *ngIf="croppedImage">Hochladen</button>
+        </div>
+
+        <div style="width: 200px; height: 200px">
+          <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 4"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+          ></image-cropper>
+        </div>
+
+        <!--TODO: Diese Seite muss noch schöner sein. -->
+      </div>
+    </div>
+    <div fxLayout.gt-xs="row" fxLayout.xs="column" class="button-row">
+      <button mat-raised-button class="font-color-primary-800 button-width-relative" routerLink="/add-partner-dance-types">
+        Zurück
+      </button>
+      <button mat-raised-button class="font-color-primary-800 button-width-relative" routerLink="/profile">
+        Weiter
+      </button>
+    </div>
+  </div>
+</div>

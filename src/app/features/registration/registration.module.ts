@@ -11,36 +11,38 @@ import { RegistrationRoutingModule } from '@features/registration/registration-r
 import { SharedModule } from '@shared/shared.module';
 import { VerificationRequiredComponent } from './components/verification-required/verification-required.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
-import {
-  VerificationSuccessfulComponent
-} from './components/verification-successful/verification-successful.component';
 import { VerificationErrorComponent } from './components/verification-error/verification-error.component';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HomeModule } from '@features/home/home.module';
+import { ResendVerificationLinkFormComponent } from './components/resend-verification-link-form/resend-verification-link-form.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     RegisterUserFormComponent,
     VerificationRequiredComponent,
     VerifyAccountComponent,
-    VerificationSuccessfulComponent,
-    VerificationErrorComponent
+    VerificationErrorComponent,
+    ResendVerificationLinkFormComponent
   ],
-    imports: [
-        CommonModule,
-        MatCardModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        FlexLayoutModule,
-        RecaptchaModule,
-        RecaptchaFormsModule,
-        ReactiveFormsModule,
-        RegistrationRoutingModule,
-        SharedModule,
-        MatCheckboxModule,
-    ]
+  imports: [
+    CommonModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    ReactiveFormsModule,
+    RegistrationRoutingModule,
+    SharedModule,
+    MatCheckboxModule,
+    HomeModule,
+    MatIconModule,
+  ]
 })
 export class RegistrationModule { }

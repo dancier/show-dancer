@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { EnterUserNameComponent } from '@features/profile/pages/enter-user-name/enter-user-name.component';
 import { EditPersonalDataComponent } from '@features/profile/pages/edit-personal-data/edit-personal-data.component';
 import { ProfilePageComponent } from '@features/profile/pages/profile-page/profile-page.component';
-import { ImageUploadComponent } from '@features/profile/pages/image-upload/image-upload.component';
 import { EditAbleToDanceComponent } from '@features/profile/pages/edit-able-to-dance/edit-able-to-dance.component';
 import {
   EditPartnerAbleToDanceComponent
@@ -30,7 +29,6 @@ import { ProfileRoutingModule } from '@features/profile/profile-routing.module';
     EnterUserNameComponent,
     EditPersonalDataComponent,
     ProfilePageComponent,
-    ImageUploadComponent,
     EditAbleToDanceComponent,
     EditPartnerAbleToDanceComponent,
     EditDanceTypeComponent,

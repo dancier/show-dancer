@@ -24,3 +24,7 @@ export type LoginResponse =
   | 'INCORRECT_CREDENTIALS'
   | 'EMAIL_NOT_VALIDATED'
   | 'SERVER_ERROR';
+
+  export type LogoutResponse =
+  | 'SUCCESS'
+  | 'SERVER_ERROR';
