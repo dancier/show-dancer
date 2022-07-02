@@ -1,4 +1,3 @@
-
 import { Component, OnDestroy } from '@angular/core';
 import { ImageUploadService } from '@data/services/image-upload.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';

@@ -13,11 +13,16 @@ const routes: Routes = [
           import('@features/registration/registration.module').then(m => m.RegistrationModule)
       },
       {
+        path: 'profile',
+        loadChildren: () =>
+          import('@features/profile/profile.module').then(m => m.ProfileModule)
+      },
+      {
         path: '',
         loadChildren: () =>
           import('@features/home/home.module').then(m => m.HomeModule)
       },
-      // Fallback when no prior routes is matched
+      // Fallback when no prior routes are matched
       { path: '**', redirectTo: '/', pathMatch: 'full' },
     ],
   },

@@ -1,0 +1,57 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { EnterUserNameComponent } from '@features/profile/pages/enter-user-name/enter-user-name.component';
+import { LoggedInGuard } from '@core/guards/logged-in.guard';
+import { EditPersonalDataComponent } from '@features/profile/pages/edit-personal-data/edit-personal-data.component';
+import { ProfilePageComponent } from '@features/profile/pages/profile-page/profile-page.component';
+import { ImageUploadComponent } from '@features/profile/pages/image-upload/image-upload.component';
+import { EditAbleToDanceComponent } from '@features/profile/pages/edit-able-to-dance/edit-able-to-dance.component';
+import {
+  EditPartnerAbleToDanceComponent
+} from '@features/profile/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
+
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: ProfilePageComponent,
+    canActivate: [LoggedInGuard],
+  },
+  {
+    path: 'initial-setup',
+    canActivate: [LoggedInGuard],
+    children: [
+      {
+        path: 'username',
+        component: EnterUserNameComponent,
+      },
+      {
+        path: 'personal-info',
+        component: EditPersonalDataComponent,
+      },
+      {
+        path: 'dances-self',
+        component: EditAbleToDanceComponent,
+      },
+      {
+        path: 'dances-partner',
+        component: EditPartnerAbleToDanceComponent,
+      },
+      // Fallback when no prior routes are matched
+      { path: '**', redirectTo: 'username', pathMatch: 'full' },
+    ],
+  },
+  {
+    path: 'image-upload',
+    component: ImageUploadComponent,
+    canActivate: [LoggedInGuard]
+  },
+  // Fallback when no prior routes are matched
+  { path: '**', redirectTo: '', pathMatch: 'full' },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class ProfileRoutingModule {}
