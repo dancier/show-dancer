@@ -1,36 +1,62 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EventLogEvent, PostEventResponse } from '@data/types/eventlog.types';
-import { catchError, map, Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
-
-const baseUrl = `${environment.dancerUrl}/eventlog`;
+import {
+  EventLogEvent,
+  PostEventResponse,
+  Topic,
+} from '@data/types/eventlog.types';
+import { Observable, Subject, switchMap } from 'rxjs';
+import * as uuid from 'uuid';
+import { AppInstanceStorageService } from './app-instance-storage.service';
+import { EventLogHttpService } from './event-log-http.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventLogService {
-
-  private defaultOptions = {
-    withCredentials: true
-  }
+  _eventObservable = new Subject<EventLogEvent>();
 
   constructor(
-    private http: HttpClient,
-  ) { }
+    public eventLogHttpService: EventLogHttpService,
+    public appInstanceStorageService: AppInstanceStorageService
+  ) {}
 
-  postEvent(event: EventLogEvent): Observable<PostEventResponse> {
-    // eslint-disable-next-line no-console
-    console.log(event)
-    return this.http.post<void>(`${baseUrl}`, event, this.defaultOptions)
-      .pipe(
-        map((_): PostEventResponse => 'SUCCESS'),
-        catchError((error: HttpErrorResponse): Observable<PostEventResponse> => {
-          switch (error.status) {
-            default:
-              return of('SERVER_ERROR');
-          }
-        })
+  getEventObservable(): Observable<PostEventResponse> {
+    return this._eventObservable.pipe(
+      switchMap((event) => this.eventLogHttpService.postEvent(event))
+    );
+  }
+
+  createEvent(
+    appInstanceId: string,
+    topic: Topic,
+    payload: any = {}
+  ): EventLogEvent {
+    return {
+      topic,
+      metaData: {
+        sourceTime: new Date().toISOString(),
+        appInstanceId,
+      },
+      payload,
+    };
+  }
+
+  handleInitialUserAccess(): void {
+    let appInstanceId = this.appInstanceStorageService.getAppIntanceId();
+    if (appInstanceId == null) {
+      // user accesses dancer the first time from this device
+      appInstanceId = uuid.v4();
+      this.appInstanceStorageService.setAppInstanceId(appInstanceId!);
+      // publish event for initial access
+      const initialEvent = this.createEvent(
+        appInstanceId!,
+        Topic.APP_INSTANCE_ID_CREATED
       );
+      this.pushEvent(initialEvent);
+    }
+  }
+
+  pushEvent(event: EventLogEvent): void {
+    this._eventObservable.next(event);
   }
 }

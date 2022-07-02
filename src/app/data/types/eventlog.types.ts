@@ -3,8 +3,7 @@ export type PostEventResponse =
 | 'SERVER_ERROR';
 
 export enum Topic {
-  app_instance_id_created,
-  registration_succeded_event
+  APP_INSTANCE_ID_CREATED = 'app_instance_id_created',
 }
 
 export type Metadata = {
@@ -15,7 +14,7 @@ export type Metadata = {
 export type EventLogEvent = {
     topic: Topic,
     metaData: Metadata,
-    payload?: {
-      emailAddress: string
+    payload: {
+      emailAddress?: string
     }
 }
