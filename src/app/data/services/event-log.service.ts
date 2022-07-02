@@ -5,7 +5,6 @@ import {
   Topic,
 } from '@data/types/eventlog.types';
 import { Observable, Subject, switchMap } from 'rxjs';
-import * as uuid from 'uuid';
 import { AppInstanceStorageService } from './app-instance-storage.service';
 import { EventLogHttpService } from './event-log-http.service';
 
@@ -45,8 +44,7 @@ export class EventLogService {
     let appInstanceId = this.appInstanceStorageService.getAppIntanceId();
     if (appInstanceId == null) {
       // user accesses dancer the first time from this device
-      appInstanceId = uuid.v4();
-      this.appInstanceStorageService.setAppInstanceId(appInstanceId!);
+      appInstanceId = this.appInstanceStorageService.initializeAppInstanceId();
       // publish event for initial access
       const initialEvent = this.createEvent(
         appInstanceId!,
