@@ -12,20 +12,17 @@ import { EventLogHttpService } from './event-log-http.service';
   providedIn: 'root',
 })
 export class EventLogService {
-  _eventObservable = new Subject<EventLogEvent>();
+  _eventObservable$ = new Subject<EventLogEvent>();
 
   constructor(
     public eventLogHttpService: EventLogHttpService,
     public appInstanceStorageService: AppInstanceStorageService
   ) {}
 
-  getEventObservable(): Observable<PostEventResponse> {
-    return this._eventObservable.pipe(
-      mergeMap((event) => this.eventLogHttpService.postEvent(event))
-    );
+  private pushEvent(event: EventLogEvent): void {
+    this._eventObservable$.next(event);
   }
-
-  createEvent(
+  private createEvent(
     appInstanceId: string,
     topic: Topic,
     payload: any = {}
@@ -46,15 +43,21 @@ export class EventLogService {
       // user accesses dancer the first time from this device
       appInstanceId = this.appInstanceStorageService.initializeAppInstanceId();
       // publish event for initial access
-      const initialEvent = this.createEvent(
-        appInstanceId!,
-        Topic.APP_INSTANCE_ID_CREATED
-      );
-      this.pushEvent(initialEvent);
+      this.createAndPublishEvent(appInstanceId!, Topic.APP_INSTANCE_ID_CREATED);
     }
   }
 
-  pushEvent(event: EventLogEvent): void {
-    this._eventObservable.next(event);
+  getEventObservable(): Observable<PostEventResponse> {
+    return this._eventObservable$.pipe(
+      mergeMap((event) => this.eventLogHttpService.postEvent(event))
+    );
+  }
+
+  createAndPublishEvent(
+    appInstanceId: string,
+    topic: Topic,
+    payload: any = {}
+  ): void {
+    this.pushEvent(this.createEvent(appInstanceId, topic, payload));
   }
 }
