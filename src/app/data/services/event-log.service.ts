@@ -38,12 +38,12 @@ export class EventLogService {
   }
 
   handleInitialUserAccess(): void {
-    let appInstanceId = this.appInstanceStorageService.getAppIntanceId();
+    const appInstanceId = this.appInstanceStorageService.getAppIntanceId();
     if (appInstanceId == null) {
       // user accesses dancer the first time from this device
-      appInstanceId = this.appInstanceStorageService.initializeAppInstanceId();
+      this.appInstanceStorageService.initializeAppInstanceId();
       // publish event for initial access
-      this.createAndPublishEvent(appInstanceId!, Topic.APP_INSTANCE_ID_CREATED);
+      this.createAndPublishEvent(Topic.APP_INSTANCE_ID_CREATED);
     }
   }
 
@@ -54,10 +54,10 @@ export class EventLogService {
   }
 
   createAndPublishEvent(
-    appInstanceId: string,
     topic: Topic,
     payload: any = {}
   ): void {
+    const appInstanceId = this.appInstanceStorageService.getAppIntanceId()!
     this.pushEvent(this.createEvent(appInstanceId, topic, payload));
   }
 }
