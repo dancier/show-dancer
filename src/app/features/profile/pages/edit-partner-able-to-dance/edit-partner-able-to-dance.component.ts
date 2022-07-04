@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Dance } from '@features/home/pages/edit-able-to-dance/edit-able-to-dance.component';
+import { Component } from '@angular/core';
+import { Dance } from '@features/profile/pages/edit-able-to-dance/edit-able-to-dance.component';
 
 @Component({
   selector: 'app-edit-partner-able-to-dance',
@@ -15,7 +15,6 @@ export class EditPartnerAbleToDanceComponent{
   }];
 
   constructor() { }
-
 
   addDance(): void {
     this.dummyDances.push(this.createNewEmptyDance());

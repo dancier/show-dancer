@@ -1,15 +1,14 @@
-
 import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ImageUploadService } from '@data/services/image-upload.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-image-upload.component.ts',
-  templateUrl: './image-upload.component.html',
-  styleUrls: ['./image-upload.component.scss']
+  selector: 'app-edit-profile-image',
+  templateUrl: './edit-profile-image.component.html',
+  styleUrls: ['./edit-profile-image.component.scss']
 })
-export class ImageUploadComponent implements OnDestroy {
+export class EditProfileImageComponent implements OnDestroy {
   croppedImage?: string | null | undefined;
   imageChangedEvent: any = '';
   imageUploadSubscription: Subscription | undefined;
@@ -23,10 +22,10 @@ export class ImageUploadComponent implements OnDestroy {
   }
 
   fileChangeEvent(event: any): void {
-      this.imageChangedEvent = event;
+    this.imageChangedEvent = event;
   }
   imageCropped(event: ImageCroppedEvent): void {
-      this.croppedImage = event.base64;
+    this.croppedImage = event.base64;
   }
 
   upload(): void {

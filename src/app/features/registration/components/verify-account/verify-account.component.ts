@@ -28,7 +28,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
       })
     ).subscribe((response: VerificationResponse) => {
       if (response === 'SUCCESS') {
-        this.router.navigate(['verify', 'success'], { relativeTo: this.route.parent });
+        this.router.navigate(['profile', 'initial-setup']);
       } else {
         this.router.navigate(['verify', 'error'], { relativeTo: this.route.parent });
       }
