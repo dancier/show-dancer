@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  EventLogEvent,
-  PostEventResponse,
-  Topic,
-} from '@data/types/eventlog.types';
-import { mergeMap, Observable, Subject, switchMap } from 'rxjs';
+import { Event, Topic } from '@data/types/eventlog.types';
 import { AppInstanceStorageService } from './app-instance-storage.service';
 import { EventLogHttpService } from './event-log-http.service';
 
@@ -12,21 +7,16 @@ import { EventLogHttpService } from './event-log-http.service';
   providedIn: 'root',
 })
 export class EventLogService {
-  _eventObservable$ = new Subject<EventLogEvent>();
-
   constructor(
-    public eventLogHttpService: EventLogHttpService,
-    public appInstanceStorageService: AppInstanceStorageService
+    private eventLogHttpService: EventLogHttpService,
+    private appInstanceStorageService: AppInstanceStorageService
   ) {}
 
-  private pushEvent(event: EventLogEvent): void {
-    this._eventObservable$.next(event);
-  }
   private createEvent(
     appInstanceId: string,
     topic: Topic,
     payload: any = {}
-  ): EventLogEvent {
+  ): Event {
     return {
       topic,
       metaData: {
@@ -43,21 +33,14 @@ export class EventLogService {
       // user accesses dancer the first time from this device
       this.appInstanceStorageService.initializeAppInstanceId();
       // publish event for initial access
-      this.createAndPublishEvent(Topic.APP_INSTANCE_ID_CREATED);
+      this.createAndPublishEvent('app_instance_id_created');
     }
   }
 
-  getEventObservable(): Observable<PostEventResponse> {
-    return this._eventObservable$.pipe(
-      mergeMap((event) => this.eventLogHttpService.postEvent(event))
-    );
-  }
-
-  createAndPublishEvent(
-    topic: Topic,
-    payload: any = {}
-  ): void {
-    const appInstanceId = this.appInstanceStorageService.getAppIntanceId()!
-    this.pushEvent(this.createEvent(appInstanceId, topic, payload));
+  createAndPublishEvent(topic: Topic, payload: any = {}): void {
+    const appInstanceId = this.appInstanceStorageService.getAppIntanceId()!;
+    this.eventLogHttpService
+      .postEvent$(this.createEvent(appInstanceId, topic, payload))
+      .subscribe();
   }
 }
