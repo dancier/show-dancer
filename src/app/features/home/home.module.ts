@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { MatButtonModule } from '@angular/material/button';
+import { BetaRegistrationPageComponent } from './pages/beta-registration-page/beta-registration-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
     LoginPageComponent,
     TermsAndConditionsComponent,
     AboutUsComponent,
+    BetaRegistrationPageComponent,
   ],
   imports: [
     FormsModule,
