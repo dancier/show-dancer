@@ -1,0 +1,28 @@
+.beta-registration-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.beta-registration-inner-container {
+  max-width: 800px;
+  padding: 32px;
+  background-color: white;
+  height: 100%;
+}
+
+.beta-registration-form {
+  h3 {
+    margin-top: 32px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  button {
+    margin-top: 32px;
+  }
+}
