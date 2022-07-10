@@ -13,7 +13,27 @@
             <mat-label>E-Mail</mat-label>
             <input matInput formControlName="email" type="email" placeholder="(Deine Mail-Adresse)"/>
           </mat-form-field>
-          <button mat-raised-button class="font-color-primary-800" [disabled]="!betaRegistrationForm.valid">Ich bin dabei!</button>
+          <ng-container
+          *ngIf="loggedInAsHuman; then thankYouHuman; else captcha">
+        </ng-container>
+        <ng-template #thankYouHuman>
+          <p>Vielen Dank!</p>
+        </ng-template>
+        <ng-template #captcha>
+          <div class="captcha">
+            <re-captcha (resolved)="captchaResolved($event)" siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
+          </div>
+        </ng-template>
+          <button mat-raised-button class="font-color-primary-800" [disabled]="!betaRegistrationForm.valid || !loggedInAsHuman">Ich bin dabei!</button>
+          <mat-error *ngIf="betaRegistrationAttemptResponse && betaRegistrationAttemptResponse !== 'SUCCESS'">
+            <span *ngIf="betaRegistrationAttemptResponse === 'EMAIL_ALREADY_IN_USE'">
+              Vielen Dank, Sie haben sich bereits zuvor für die Beta registriert.
+            </span>
+            <span *ngIf="betaRegistrationAttemptResponse === 'SERVER_ERROR'">
+              Ein unerwarteter Fehler ist aufgetreten.
+              Bitte versuchen Sie es später erneut.
+            </span>
+          </mat-error>
         </mat-card-content>
       </form>
     </div>

@@ -11,7 +11,8 @@ import { RegistrationResponse } from '@data/types/authentication.types';
 })
 export class BetaRegistrationPageComponent implements OnInit {
   betaRegistrationForm!: FormGroup;
-  registrationAttemptResponse: RegistrationResponse | undefined;
+  betaRegistrationAttemptResponse: RegistrationResponse | undefined;
+  loggedInAsHuman = false;
 
   constructor(
     private fb: FormBuilder,
@@ -36,11 +37,24 @@ export class BetaRegistrationPageComponent implements OnInit {
       this.authenticationService
         .onceUserRegisteredForBeta({ email, message: `${email} registered for beta` })
         .subscribe((response) => {
-          this.registrationAttemptResponse = response;
+          this.betaRegistrationAttemptResponse = response;
           if (response === 'SUCCESS') {
             this.router.navigate(['beta-registration-success'])
           }
         });
     }
+  }
+
+  captchaResolved(captchaToken: string): void {
+    this.authenticationService
+      .onceHumanLoggedIn(captchaToken)
+      .subscribe((response) => {
+        if (response === 'SUCCESS') {
+          console.info('human session created');
+          this.loggedInAsHuman = true;
+        } else {
+          console.error('error while establishing human session');
+        }
+      });
   }
 }
