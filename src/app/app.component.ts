@@ -16,18 +16,19 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.checkForInitialPageRequest();
-    this.checkForAdvertisement();
+    this.publishInitialPageRequestEvent();
+    this.publishAdvertisementEvent();
   }
 
-  checkForInitialPageRequest(): void {
+  publishInitialPageRequestEvent(): void {
     const isInitialPageRequest = this.appInstanceStorageService.isInitialPageRequest();
     if (isInitialPageRequest) {
+      this.appInstanceStorageService.initializeAppInstanceId()
       this.eventLogService.createAndPublishEvent('app_instance_id_created');
     }
   }
 
-  checkForAdvertisement(): void {
+  publishAdvertisementEvent(): void {
     this.route.queryParams.subscribe((params) => {
       // If the user accesses the page via an advertisement a dedicated event will be published
       const campaign = params['ad'];

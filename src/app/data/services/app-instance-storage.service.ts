@@ -19,12 +19,7 @@ export class AppInstanceStorageService {
   }
 
   isInitialPageRequest(): boolean {
-    if (this.getAppIntanceId() == null) {
-      // user accesses dancer the first time from this device
-      this.initializeAppInstanceId();
-      return true;
-    }
-    return false;
+    return this.getAppIntanceId() == null
   }
 
   private setAppInstanceId(appInstanceId: string): string {
