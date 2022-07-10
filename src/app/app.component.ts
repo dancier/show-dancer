@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventLogService } from '@data/services/event-log.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,33 @@ import { EventLogService } from '@data/services/event-log.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private eventLogService: EventLogService) {}
+  constructor(
+    private eventLogService: EventLogService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.eventLogService.handleInitialUserAccess();
+    this.checkForInitialPageRequest();
+    this.checkForAdvertisement();
+  }
+
+  checkForInitialPageRequest(): void {
+    const isInitialPageRequest = this.eventLogService.isInitialPageRequest();
+    if (isInitialPageRequest) {
+      this.eventLogService.createAndPublishEvent('app_instance_id_created');
+    }
+  }
+
+  checkForAdvertisement(): void {
+    this.route.queryParams.subscribe((params) => {
+      // If the user accesses the page via an advertisement a dedicated event will be published
+      const campaign = params['ad'];
+      if (campaign != undefined) {
+        this.eventLogService.createAndPublishEvent(
+          'page_request_via_advertisement',
+          { campaign }
+        );
+      }
+    });
   }
 }

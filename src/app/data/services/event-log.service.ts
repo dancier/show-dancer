@@ -27,14 +27,15 @@ export class EventLogService {
     };
   }
 
-  handleInitialUserAccess(): void {
+  isInitialPageRequest(): boolean {
     const appInstanceId = this.appInstanceStorageService.getAppIntanceId();
     if (appInstanceId == null) {
       // user accesses dancer the first time from this device
       this.appInstanceStorageService.initializeAppInstanceId();
       // publish event for initial access
-      this.createAndPublishEvent('app_instance_id_created');
+      return true
     }
+    return false
   }
 
   createAndPublishEvent(topic: Topic, payload: any = {}): void {
