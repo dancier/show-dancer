@@ -18,6 +18,10 @@ export class AppInstanceStorageService {
     return localStorage.getItem(APP_INSTANCE_ID);
   }
 
+  isInitialPageRequest(): boolean {
+    return this.getAppIntanceId() == null
+  }
+
   private setAppInstanceId(appInstanceId: string): string {
     localStorage.setItem(APP_INSTANCE_ID, appInstanceId);
     return appInstanceId;
