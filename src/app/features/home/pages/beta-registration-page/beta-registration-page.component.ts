@@ -35,7 +35,7 @@ export class BetaRegistrationPageComponent implements OnInit {
       const { email } =
         this.betaRegistrationForm.value;
       this.authenticationService
-        .onceUserRegisteredForBeta({ email, message: `${email} registered for beta` })
+        .onceUserRegisteredForBeta({ sender: email, message: `${email} registered for beta` })
         .subscribe((response) => {
           this.betaRegistrationAttemptResponse = response;
           if (response === 'SUCCESS') {

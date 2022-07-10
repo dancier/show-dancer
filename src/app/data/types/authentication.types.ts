@@ -5,7 +5,7 @@ export type UserRegistration = {
 };
 
 export type UserRegistrationBeta = {
-  email: string;
+  sender: string;
   message: string;
 };
 

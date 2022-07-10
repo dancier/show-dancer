@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './beta-registration-success.component.html',
   styleUrls: ['./beta-registration-success.component.scss']
 })
-export class BetaRegistrationSuccessComponent implements OnInit {
+export class BetaRegistrationSuccessComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
