@@ -27,17 +27,6 @@ export class EventLogService {
     };
   }
 
-  isInitialPageRequest(): boolean {
-    const appInstanceId = this.appInstanceStorageService.getAppIntanceId();
-    if (appInstanceId == null) {
-      // user accesses dancer the first time from this device
-      this.appInstanceStorageService.initializeAppInstanceId();
-      // publish event for initial access
-      return true
-    }
-    return false
-  }
-
   createAndPublishEvent(topic: Topic, payload: any = {}): void {
     const appInstanceId = this.appInstanceStorageService.getAppIntanceId()!;
     this.eventLogHttpService

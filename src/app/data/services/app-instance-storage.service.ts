@@ -18,6 +18,15 @@ export class AppInstanceStorageService {
     return localStorage.getItem(APP_INSTANCE_ID);
   }
 
+  isInitialPageRequest(): boolean {
+    if (this.getAppIntanceId() == null) {
+      // user accesses dancer the first time from this device
+      this.initializeAppInstanceId();
+      return true;
+    }
+    return false;
+  }
+
   private setAppInstanceId(appInstanceId: string): string {
     localStorage.setItem(APP_INSTANCE_ID, appInstanceId);
     return appInstanceId;
