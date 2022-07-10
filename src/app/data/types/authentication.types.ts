@@ -4,6 +4,11 @@ export type UserRegistration = {
   acceptTermsAndConditions: true;
 };
 
+export type UserRegistrationBeta = {
+  email: string;
+  message: string;
+};
+
 export type LoginRequest = {
   email: string;
   password: string;

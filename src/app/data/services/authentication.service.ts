@@ -7,12 +7,14 @@ import {
   LogoutResponse,
   RegistrationResponse,
   UserRegistration,
+  UserRegistrationBeta,
   VerificationResponse
 } from '@data/types/authentication.types';
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { AuthStorageService } from '@data/services/auth-storage.service';
 
 const baseUrl = `${environment.dancerUrl}/authentication`;
+const baseUrlBeta = `${environment.dancerUrl}/contacts`;
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +32,22 @@ export class AuthenticationService {
 
   onceUserRegistered(userRegistration: UserRegistration): Observable<RegistrationResponse> {
     return this.http.post<void>(`${baseUrl}/registrations`, userRegistration, this.defaultOptions)
+      .pipe(
+        map((_): RegistrationResponse => 'SUCCESS'),
+        catchError((error: HttpErrorResponse): Observable<RegistrationResponse> => {
+          switch (error.status) {
+            case 409:
+              return of('EMAIL_ALREADY_IN_USE');
+            default:
+              return of('SERVER_ERROR');
+          }
+        }),
+        shareReplay(1)
+      );
+  }
+
+  onceUserRegisteredForBeta(userRegistrationBeta: UserRegistrationBeta): Observable<RegistrationResponse> {
+    return this.http.post<void>(`${baseUrlBeta}`, userRegistrationBeta, this.defaultOptions)
       .pipe(
         map((_): RegistrationResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<RegistrationResponse> => {

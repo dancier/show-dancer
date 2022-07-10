@@ -7,13 +7,15 @@
       <p>Wir bauen im Moment eine Tanz-Community auf, die dabei hilft, passende Tanzpartner zu finden.</p>
       <p>Hinterlass deine Mail-Adresse, werden wir mit dir Kontakt aufnehmen und gerne erne hören wir deine Meinungen oder Vorstellungen</p>
       <label>Ich möchte gerne Mitglied des Tanz-Communitys werden! </label>
-      <mat-card-content fxLayout="column" class="card-content-container">
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>E-Mail</mat-label>
-          <input matInput type="email" placeholder="(Deine Mail-Adresse)"/>
-        </mat-form-field>
-        <button mat-raised-button class="font-color-primary-800" >Ich bin dabei!</button>
-      </mat-card-content>
+      <form [formGroup]="betaRegistrationForm" (ngSubmit)="submitForm()" novalidate>
+        <mat-card-content fxLayout="column" class="card-content-container">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>E-Mail</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="(Deine Mail-Adresse)"/>
+          </mat-form-field>
+          <button mat-raised-button class="font-color-primary-800" [disabled]="!betaRegistrationForm.valid">Ich bin dabei!</button>
+        </mat-card-content>
+      </form>
     </div>
   </div>
 </div>
