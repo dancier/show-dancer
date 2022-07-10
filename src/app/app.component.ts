@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventLogService } from '@data/services/event-log.service';
 import { ActivatedRoute } from '@angular/router';
+import { AppInstanceStorageService } from '@data/services/app-instance-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 export class AppComponent implements OnInit {
   constructor(
     private eventLogService: EventLogService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appInstanceStorageService: AppInstanceStorageService
   ) {}
 
   ngOnInit(): void {
@@ -19,7 +21,7 @@ export class AppComponent implements OnInit {
   }
 
   checkForInitialPageRequest(): void {
-    const isInitialPageRequest = this.eventLogService.isInitialPageRequest();
+    const isInitialPageRequest = this.appInstanceStorageService.isInitialPageRequest();
     if (isInitialPageRequest) {
       this.eventLogService.createAndPublishEvent('app_instance_id_created');
     }
