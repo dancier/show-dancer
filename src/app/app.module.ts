@@ -14,10 +14,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { HttpHeaderInterceptor } from '@data/interceptors/http-header.interceptor';
+import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
+import { NavigationComponent } from './layout/navigation/navigation.component';
+import { FooterComponent } from './layout/footer/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DefaultLayoutComponent,
+    NavigationComponent,
+    FooterComponent,
   ],
   imports: [
     // Angular
