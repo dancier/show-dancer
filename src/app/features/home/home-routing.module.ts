@@ -3,11 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   BetaRegistrationPageComponent
 } from '@features/home/pages/beta-registration-page/beta-registration-page.component';
+import { BetaRegistrationSuccessComponent } from './pages/beta-registration-success/beta-registration-success.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: BetaRegistrationPageComponent
+  },
+  {
+    path: 'beta-registration-success',
+    component: BetaRegistrationSuccessComponent
   }
 ];
 
