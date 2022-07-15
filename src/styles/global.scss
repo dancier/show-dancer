@@ -1,7 +1,6 @@
 @import "responsive.scss";
 
 html, body {
-  height: calc(100% - 64px);
   background-color: map-get($dancier-palette-accent, A200);
 
   p {

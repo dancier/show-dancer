@@ -11,7 +11,7 @@ export class DefaultLayoutComponent implements OnInit {
   windowHeight: number = 0;
   pageContentMinHeight: number = 0;
   navigationHeight = 64;
-  footerHeight = 218;
+  footerHeight = 94;
 
   constructor() { }
 
