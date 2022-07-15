@@ -20,7 +20,8 @@
             *ngIf="loggedInAsHuman; then thankYouHuman; else captcha">
           </ng-container>
           <ng-template #thankYouHuman>
-            <p>Vielen Dank!</p>
+            <p><b>Juhu, ich bin kein Roboter. </b></p>
+            <p>Klick auf "Ich bin dabei" um dich in unserer Mailingliste zu registrieren.</p>
           </ng-template>
           <ng-template #captcha>
             <div class="captcha">
