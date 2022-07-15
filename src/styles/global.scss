@@ -2,6 +2,8 @@
 
 html, body {
   background-color: map-get($dancier-palette-accent, A200);
+  // Free image from pixabay.com christmas-decoration-holiday-xmas-2908901
+  background-image: url("../assets/img/backgrounds/light-background.jpg");
 
   p {
     font-weight: 350;
