@@ -88,10 +88,12 @@ a {
 
   @include screen('xs') {
     padding: 16px;
+    min-width: 300px;
   }
 
   @include screen('gt-xs') {
     padding: 45px;
+    min-width: 600px;
   }
 }
 
@@ -155,6 +157,10 @@ a {
 
 .form-section-container {
   margin-bottom: 32px;
+}
+
+.space-container {
+  height: 32px;
 }
 
 
