@@ -12,36 +12,38 @@
       <label>Ich möchte gerne Mitglied des Tanz-Communitys werden! </label>
       <form [formGroup]="betaRegistrationForm" (ngSubmit)="submitForm()" novalidate>
         <mat-card-content fxLayout="column" class="card-content-container">
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>E-Mail</mat-label>
-            <input matInput formControlName="email" type="email" placeholder="(Deine Mail-Adresse)"/>
-          </mat-form-field>
-          <ng-container
-            *ngIf="loggedInAsHuman; then thankYouHuman; else captcha">
+          <ng-container *ngIf="authStorageService.authData$ | async as authData">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>E-Mail</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="(Deine Mail-Adresse)"/>
+            </mat-form-field>
+            <ng-container
+              *ngIf="authData.isHuman; then thankYouHuman; else captcha">
+            </ng-container>
+            <ng-template #thankYouHuman>
+              <p><b>Juhu, ich bin kein Roboter. </b></p>
+              <p>Klick auf "Ich bin dabei" um dich in unserer Mailingliste zu registrieren.</p>
+            </ng-template>
+            <ng-template #captcha>
+              <div class="captcha">
+                <re-captcha (resolved)="captchaResolved($event)"
+                            siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
+              </div>
+            </ng-template>
+            <div class="space-container"></div>
+            <button mat-raised-button class="font-color-primary-800"
+                    [disabled]="!betaRegistrationForm.valid || !authData.isHuman">Ich bin dabei!
+            </button>
+            <mat-error *ngIf="betaRegistrationAttemptResponse && betaRegistrationAttemptResponse !== 'SUCCESS'">
+              <span *ngIf="betaRegistrationAttemptResponse === 'EMAIL_ALREADY_IN_USE'">
+                Vielen Dank, Du hast Dich bereits zuvor für die Beta registriert.
+              </span>
+              <span *ngIf="betaRegistrationAttemptResponse === 'SERVER_ERROR'">
+                Ein unerwarteter Fehler ist aufgetreten.
+                Bitte versuche es später erneut.
+              </span>
+            </mat-error>
           </ng-container>
-          <ng-template #thankYouHuman>
-            <p><b>Juhu, ich bin kein Roboter. </b></p>
-            <p>Klick auf "Ich bin dabei" um dich in unserer Mailingliste zu registrieren.</p>
-          </ng-template>
-          <ng-template #captcha>
-            <div class="captcha">
-              <re-captcha (resolved)="captchaResolved($event)"
-                          siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
-            </div>
-          </ng-template>
-          <div class="space-container"></div>
-          <button mat-raised-button class="font-color-primary-800"
-                  [disabled]="!betaRegistrationForm.valid || !loggedInAsHuman">Ich bin dabei!
-          </button>
-          <mat-error *ngIf="betaRegistrationAttemptResponse && betaRegistrationAttemptResponse !== 'SUCCESS'">
-            <span *ngIf="betaRegistrationAttemptResponse === 'EMAIL_ALREADY_IN_USE'">
-              Vielen Dank, Du hast Dich bereits zuvor für die Beta registriert.
-            </span>
-            <span *ngIf="betaRegistrationAttemptResponse === 'SERVER_ERROR'">
-              Ein unerwarteter Fehler ist aufgetreten.
-              Bitte versuche es später erneut.
-            </span>
-          </mat-error>
         </mat-card-content>
       </form>
     </div>
