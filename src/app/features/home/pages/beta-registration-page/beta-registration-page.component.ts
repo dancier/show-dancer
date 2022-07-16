@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthStorageService } from '@data/services/auth-storage.service';
 import { AuthenticationService } from '@data/services/authentication.service';
 import { RegistrationResponse } from '@data/types/authentication.types';
 
@@ -17,7 +18,8 @@ export class BetaRegistrationPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    public authStorageService: AuthStorageService
     ) {}
 
   private initReactiveForm(): void {
@@ -51,7 +53,6 @@ export class BetaRegistrationPageComponent implements OnInit {
       .subscribe((response) => {
         if (response === 'SUCCESS') {
           console.info('human session created');
-          this.loggedInAsHuman = true;
         } else {
           console.error('error while establishing human session');
         }
