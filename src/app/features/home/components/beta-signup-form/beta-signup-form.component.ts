@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { AuthStorageService } from '@data/services/auth-storage.service';
 import { RegistrationResponse } from '@data/types/authentication.types';
 import { SignupType } from '@features/home/types/signup.type';
+import { tap } from 'rxjs';
+import { EventLogService } from '@data/services/event-log.service';
 
 @Component({
   selector: 'app-beta-signup-form',
@@ -13,7 +15,7 @@ import { SignupType } from '@features/home/types/signup.type';
 })
 export class BetaSignupFormComponent implements OnInit {
 
-  @Input() signupType: SignupType = 'customer';
+  @Input() signupType: SignupType = 'participant';
 
   betaRegistrationForm!: FormGroup;
   betaRegistrationAttemptResponse: RegistrationResponse | undefined;
@@ -23,7 +25,8 @@ export class BetaSignupFormComponent implements OnInit {
     private fb: FormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
-    public authStorageService: AuthStorageService
+    public authStorageService: AuthStorageService,
+    private eventLogService: EventLogService,
   ) {}
 
   private initReactiveForm(): void {
@@ -48,6 +51,18 @@ export class BetaSignupFormComponent implements OnInit {
 
       this.authenticationService
         .onceUserRegisteredForBeta({ sender: email, message: message })
+        .pipe(
+          tap((response) => {
+            if (response === 'SUCCESS') {
+              this.eventLogService.createAndPublishEvent(
+                'beta_registration_succeeded',
+                {
+                  type: this.signupType
+                }
+              )
+            }
+          })
+        )
         .subscribe((response) => {
           this.betaRegistrationAttemptResponse = response;
           if (response === 'SUCCESS') {
