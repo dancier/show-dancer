@@ -57,7 +57,8 @@ export class BetaSignupFormComponent implements OnInit {
               this.eventLogService.createAndPublishEvent(
                 'beta_registration_succeeded',
                 {
-                  type: this.signupType
+                  type: this.signupType,
+                  sender: email
                 }
               )
             }
