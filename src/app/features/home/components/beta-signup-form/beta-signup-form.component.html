@@ -1,5 +1,3 @@
-<p>Wir informieren dich per E-Mail über Neuigkeiten zum Projekt.</p>
-
 <form [formGroup]="betaRegistrationForm" (ngSubmit)="submitForm()" novalidate>
   <mat-card-content fxLayout="column" class="card-content-container">
     <ng-container *ngIf="authStorageService.authData$ | async as authData">
@@ -11,8 +9,7 @@
         *ngIf="authData.isHuman; then thankYouHuman; else captcha">
       </ng-container>
       <ng-template #thankYouHuman>
-        <p><b>Juhu, ich bin kein Roboter. </b></p>
-        <p>Klick auf "Ich bin dabei" um dich in unserer Mailingliste zu registrieren.</p>
+        <p>Klicke auf "Ich bin dabei", um dich für unserer Mailingliste einzutragen.</p>
       </ng-template>
       <ng-template #captcha>
         <div class="captcha">

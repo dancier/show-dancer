@@ -51,7 +51,11 @@ export class BetaSignupFormComponent implements OnInit {
         .subscribe((response) => {
           this.betaRegistrationAttemptResponse = response;
           if (response === 'SUCCESS') {
-            this.router.navigate(['beta-registration-success'])
+            if (this.signupType === 'contributor') {
+              this.router.navigate(['contributor-registration-success']);
+            } else {
+              this.router.navigate(['beta-registration-success']);
+            }
           }
         });
     }
