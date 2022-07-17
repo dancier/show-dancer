@@ -3,8 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   BetaRegistrationPageComponent
 } from '@features/home/pages/beta-registration-page/beta-registration-page.component';
-import { BetaRegistrationSuccessComponent } from './pages/beta-registration-success/beta-registration-success.component';
+import {
+  BetaRegistrationSuccessComponent
+} from './pages/beta-registration-success/beta-registration-success.component';
 import { AboutUsComponent } from '@features/home/pages/about-us/about-us.component';
+import { ContributeComponent } from '@features/home/pages/contribute/contribute.component';
 
 export const routes: Routes = [
   {
@@ -18,7 +21,11 @@ export const routes: Routes = [
   {
     path: 'about-us',
     component: AboutUsComponent,
-  }
+  },
+  {
+    path: 'contribute',
+    component: ContributeComponent,
+  },
 ];
 
 @NgModule({

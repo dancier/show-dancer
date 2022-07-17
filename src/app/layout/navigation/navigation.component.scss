@@ -4,7 +4,7 @@
   display: flex;
   z-index: 999;
   justify-content: space-between;
-  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+  height: 64px;
 
   .header-left {
     display: flex;
@@ -31,8 +31,6 @@
 
   .header-right {
 
-    font-size: 14px;
-
     .nav-items {
       display: flex;
       align-items: center;
@@ -49,18 +47,15 @@
           height: 30px;
           width: 30px;
         }
+
+        a {
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
-
-
-
-  }
-
-  a {
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .separator {
