@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SignupType } from '@features/home/types/signup.type';
 
 @Component({
@@ -6,16 +6,13 @@ import { SignupType } from '@features/home/types/signup.type';
   templateUrl: './beta-signup-type-selector.component.html',
   styleUrls: ['./beta-signup-type-selector.component.scss']
 })
-export class BetaSignupTypeSelectorComponent implements OnInit {
+export class BetaSignupTypeSelectorComponent {
 
   @Input() type: SignupType | undefined;
 
   @Output() typeChange = new EventEmitter<SignupType>();
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   changeType(type: SignupType): void {
     this.type = type;
