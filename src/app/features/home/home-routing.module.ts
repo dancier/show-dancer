@@ -8,6 +8,9 @@ import {
 } from './pages/beta-registration-success/beta-registration-success.component';
 import { AboutUsComponent } from '@features/home/pages/about-us/about-us.component';
 import { ContributeComponent } from '@features/home/pages/contribute/contribute.component';
+import {
+  ContributorRegistrationSuccessComponent
+} from '@features/home/pages/contributor-registration-success/contributor-registration-success.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +20,10 @@ export const routes: Routes = [
   {
     path: 'beta-registration-success',
     component: BetaRegistrationSuccessComponent
+  },
+  {
+    path: 'contributor-registration-success',
+    component: ContributorRegistrationSuccessComponent,
   },
   {
     path: 'about-us',
