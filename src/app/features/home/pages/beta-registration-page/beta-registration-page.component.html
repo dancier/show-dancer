@@ -21,6 +21,6 @@
   </div>
 
   <app-beta-signup-type-selector [type]="type" (typeChange)="onTypeChange($event)"></app-beta-signup-type-selector>
-  <ng-container *ngIf="type === 'customer'">    <app-beta-signup-form [signupType]="'customer'"></app-beta-signup-form>
+  <ng-container *ngIf="type === 'participant'">    <app-beta-signup-form [signupType]="'participant'"></app-beta-signup-form>
   </ng-container>
 </div>
