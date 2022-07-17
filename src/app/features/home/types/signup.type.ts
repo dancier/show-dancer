@@ -1,1 +1,1 @@
-export type SignupType = 'customer' | 'contributor';
+export type SignupType = 'participant' | 'contributor';
