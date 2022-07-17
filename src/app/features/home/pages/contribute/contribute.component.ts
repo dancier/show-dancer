@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-contribute',
   templateUrl: './contribute.component.html',
   styleUrls: ['./contribute.component.scss']
 })
-export class ContributeComponent implements OnInit {
+export class ContributeComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

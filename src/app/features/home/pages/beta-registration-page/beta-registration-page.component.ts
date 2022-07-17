@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SignupType } from '@features/home/types/signup.type';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-beta-registration-page',
@@ -8,8 +9,16 @@ import { SignupType } from '@features/home/types/signup.type';
 })
 export class BetaRegistrationPageComponent{
 
-  signupType: SignupType = 'customer';
+  type: SignupType | undefined;
 
-  constructor() {}
+  constructor(
+    private router: Router,
+  ) {}
 
+  onTypeChange(type: SignupType): void {
+    this.type = type;
+    if (type === 'contributor') {
+      this.router.navigate(['contribute']);
+    }
+  }
 }

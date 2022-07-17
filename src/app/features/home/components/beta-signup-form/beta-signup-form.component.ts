@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
 import { Router } from '@angular/router';
@@ -13,10 +13,11 @@ import { SignupType } from '@features/home/types/signup.type';
 })
 export class BetaSignupFormComponent implements OnInit {
 
+  @Input() signupType: SignupType = 'customer';
+
   betaRegistrationForm!: FormGroup;
   betaRegistrationAttemptResponse: RegistrationResponse | undefined;
   loggedInAsHuman = false;
-  signupType: SignupType = 'customer';
 
   constructor(
     private fb: FormBuilder,
@@ -37,10 +38,16 @@ export class BetaSignupFormComponent implements OnInit {
 
   submitForm(): void {
     if (this.betaRegistrationForm.valid) {
-      const { email } =
-        this.betaRegistrationForm.value;
+      const { email } = this.betaRegistrationForm.value;
+      let message = '';
+      if (this.signupType === 'contributor') {
+        message = `🚀 ${email} registered as a contributor! 🚀`;
+      } else {
+        message = `💃 ${email} registered for beta 🕺`;
+      }
+
       this.authenticationService
-        .onceUserRegisteredForBeta({ sender: email, message: `${email} registered for beta` })
+        .onceUserRegisteredForBeta({ sender: email, message: message })
         .subscribe((response) => {
           this.betaRegistrationAttemptResponse = response;
           if (response === 'SUCCESS') {

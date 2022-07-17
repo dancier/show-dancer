@@ -79,23 +79,16 @@ a {
   background-color: map-get($dancier-palette-accent, 900);
 }
 
-.content-page-outer-container {
-  display: flex;
-  justify-content: center;
-}
-
-.content-page-inner-container {
-  max-width: 1024px;
+.content-page-container {
   background-color: white;
+  width: min(100vw, 900px);
 
   @include screen('xs') {
     padding: 16px;
-    min-width: 300px;
   }
 
   @include screen('gt-xs') {
     padding: 45px;
-    min-width: 600px;
   }
 }
 
@@ -146,8 +139,6 @@ a {
 }
 
 .profile-edit-page-inner-container {
-  max-width: 800px;
-  padding: 32px;
   background-color: white;
   height: 100%;
 }

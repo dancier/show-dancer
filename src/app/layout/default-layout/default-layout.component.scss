@@ -2,7 +2,6 @@
   // the navigation has a height of 64px
   // the footer has height of 60px
   margin-top: 64px;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   min-height: calc(100vh - 64px - 60px);
@@ -10,5 +9,6 @@
 
 .page-content-wrapper {
   background: white;
-  width: min(100vw, 928px);
+  width: min(100vw, 900px);
+  padding: 32px;
 }
