@@ -8,7 +8,7 @@ import { SignupType } from '@features/home/types/signup.type';
 })
 export class BetaSignupTypeSelectorComponent implements OnInit {
 
-  @Input() type: SignupType = 'customer';
+  @Input() type: SignupType | undefined;
 
   @Output() typeChange = new EventEmitter<SignupType>();
 
@@ -22,4 +22,7 @@ export class BetaSignupTypeSelectorComponent implements OnInit {
     this.typeChange.emit(type);
   }
 
+  onTypeSelect(type: SignupType): void {
+    this.changeType(type);
+  }
 }

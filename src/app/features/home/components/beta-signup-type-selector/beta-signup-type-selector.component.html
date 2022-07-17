@@ -1,4 +1,8 @@
-<div class="select-option">
-  <h3>Option 1</h3>
-  <p>Irgendein Text dazu....</p>
+<div class="select-option" [class.selected]="type === 'customer'" (click)="onTypeSelect('customer')">
+  <h3>Haltet mich auf dem Laufenden</h3>
+  <p>Wir informieren dich als erstes, wenn Dancier startet.</p>
+</div>
+<div class="select-option" (click)="onTypeSelect('contributor')">
+  <h3>Ich will mitmachen</h3>
+  <p>Du willst bei uns mitmachen? Super, wir freuen uns auf deine Unterstützung!</p>
 </div>

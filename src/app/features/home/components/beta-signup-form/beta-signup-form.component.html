@@ -1,3 +1,5 @@
+<p>Wir informieren dich per E-Mail über Neuigkeiten zum Projekt.</p>
+
 <form [formGroup]="betaRegistrationForm" (ngSubmit)="submitForm()" novalidate>
   <mat-card-content fxLayout="column" class="card-content-container">
     <ng-container *ngIf="authStorageService.authData$ | async as authData">

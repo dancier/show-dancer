@@ -1,14 +1,24 @@
 <div class="beta-registration-container background-color-accent-A200">
-    <div class="beta-registration-info">
-      <h1>Dancier - Tanzen verbindet</h1>
-      <p class="product-summary">Finde deinen perfekten Tanzpartner und werde Teil einer neuen Community.</p>
-    </div>
-    <div class="space-container"></div>
-    <div class="beta-registration-form">
-      <app-beta-signup-type-selector [(type)]="signupType"></app-beta-signup-type-selector>
-      <div class="space-container"></div>
+  <div class="beta-registration-info">
+    <h1>Dancier - Tanzen verbindet</h1>
+    <p class="product-summary">Finde deinen perfekten Tanzpartner und werde Teil einer neuen Community.</p>
+  </div>
 
-      <p>Wir informieren dich per E-Mail über Neuigkeiten zum Projekt.</p>
-      <app-beta-signup-form></app-beta-signup-form>
-    </div>
+  <!-- Hier Texte ersetzen (und diesen Kommentar entfernen) -->
+  <div class="product-info">
+    <p>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+      At vero eos et accusam et justo duo dolores et ea rebum.
+      Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    </p>
+
+    <p>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+      At vero eos et accusam et justo duo dolores et ea rebum.
+      Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    </p>
+  </div>
+
+  <app-beta-signup-type-selector [type]="type" (typeChange)="onTypeChange($event)"></app-beta-signup-type-selector>
+  <app-beta-signup-form *ngIf="type === 'customer'" [signupType]="'customer'"></app-beta-signup-form>
 </div>
