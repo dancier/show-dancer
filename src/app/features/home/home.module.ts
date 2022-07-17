@@ -11,12 +11,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { BetaRegistrationPageComponent } from './pages/beta-registration-page/beta-registration-page.component';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { BetaRegistrationSuccessComponent } from './pages/beta-registration-success/beta-registration-success.component';
+import {
+  BetaRegistrationSuccessComponent
+} from './pages/beta-registration-success/beta-registration-success.component';
+import {
+  BetaSignupTypeSelectorComponent
+} from './components/beta-signup-type-selector/beta-signup-type-selector.component';
+import { ContributeComponent } from './pages/contribute/contribute.component';
+import { BetaSignupFormComponent } from './components/beta-signup-form/beta-signup-form.component';
 
 @NgModule({
   declarations: [
     BetaRegistrationPageComponent,
     BetaRegistrationSuccessComponent,
+    BetaSignupTypeSelectorComponent,
+    ContributeComponent,
+    BetaSignupFormComponent,
   ],
   imports: [
     FormsModule,

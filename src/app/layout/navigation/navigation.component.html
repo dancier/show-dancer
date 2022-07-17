@@ -3,12 +3,29 @@
   <div class="header-left">
     <a href="/"><img src='assets/img/dancier-white.png' alt='Dancier Logo' style="height: 40px;"></a>
     <a href="/" class="title">Dancier</a>
-    <a href="/" class="subtitle">verbindet Tänzer</a>
+    <a href="/" class="subtitle">Tanzen verbindet</a>
   </div>
   <div class="header-right">
-    <a style="width: 146px" routerLink="about-us">
-      <mat-icon>groups</mat-icon>
-      <span style="margin-left: 8px; margin-top: 3px;">Über Uns</span>
-    </a>
+    <div class="burger-menu" ngStyle.gt-xs="display:none">
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="about-us">
+            <mat-icon>groups</mat-icon>
+            <span>Über Uns</span>
+          </button>
+          <button mat-menu-item routerLink="contribute">
+            <mat-icon>campaign</mat-icon>
+            <span>Mitmachen</span>
+          </button>
+      </mat-menu>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+              ngStyle.gt-xs="display:none">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div class="nav-items" ngStyle.xs="display:none">
+        <a mat-button routerLink="about-us" routerLinkActive="active"><span>Über Uns</span></a>
+        <div class="separator"></div>
+        <a mat-button routerLink="contribute" routerLinkActive="active"><span>Mitmachen</span></a>
+    </div>
   </div>
 </mat-toolbar>

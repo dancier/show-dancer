@@ -1,17 +1,22 @@
-.beta-registration-outer-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+.beta-registration-container {
+  max-width: 800px;
+  padding: 80px 32px;
+  background-color: white;
 }
 
-.beta-registration-inner-container {
-  max-width: 800px;
-  padding: 64px;
-  background-color: white;
-  height: 100%;
-  margin-top: 64px;
+h1 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  text-align: center;
 }
+
+.product-summary {
+  font-size: 18px;
+  font-weight: 300;
+  text-align: center;
+}
+
 
 .beta-registration-form {
   h3 {
