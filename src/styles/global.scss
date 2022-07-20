@@ -10,6 +10,16 @@ html, body {
   }
 }
 
+li, p, h3 {
+  @include screen('xs') {
+    font-size: 16px;
+  }
+
+  @include screen('gt-xs') {
+    font-size: 14px;
+  }
+}
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -84,11 +94,19 @@ a {
   width: min(100vw, 900px);
 
   @include screen('xs') {
+  }
+
+  @include screen('gt-xs') {
+  }
+}
+
+.content-inner-container {
+  @include screen('xs') {
     padding: 16px;
   }
 
   @include screen('gt-xs') {
-    padding: 45px;
+    margin: 16px 32px 0 32px;
   }
 }
 
@@ -118,6 +136,16 @@ a {
   }
   @include screen('xs') {
      width: 90%;
+  }
+}
+
+.title-font-responsive {
+  text-align: center;
+  @include screen('gt-xs') {
+    font-size: 36px;
+  }
+  @include screen('xs') {
+    font-size: 24px;
   }
 }
 
