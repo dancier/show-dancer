@@ -12,11 +12,11 @@ html, body {
 
 li, p, h3 {
   @include screen('xs') {
-    font-size: 16px;
+    font-size: 1.2em;
   }
 
   @include screen('gt-xs') {
-    font-size: 14px;
+    font-size: 1.1em;
   }
 }
 
