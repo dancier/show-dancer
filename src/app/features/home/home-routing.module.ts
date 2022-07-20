@@ -11,6 +11,7 @@ import { ContributeComponent } from '@features/home/pages/contribute/contribute.
 import {
   ContributorRegistrationSuccessComponent
 } from '@features/home/pages/contributor-registration-success/contributor-registration-success.component';
+import { ImpressumPageComponent } from '@features/home/pages/impressum-page/impressum-page.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,10 @@ export const routes: Routes = [
     path: 'contribute',
     component: ContributeComponent,
   },
+  {
+    path: 'imprint',
+    component: ImpressumPageComponent
+  }
 ];
 
 @NgModule({

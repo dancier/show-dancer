@@ -92,12 +92,6 @@ a {
 .content-page-container {
   background-color: white;
   width: min(100vw, 900px);
-
-  @include screen('xs') {
-  }
-
-  @include screen('gt-xs') {
-  }
 }
 
 .content-inner-container {
@@ -135,7 +129,7 @@ a {
     width: 40%;
   }
   @include screen('xs') {
-     width: 90%;
+    width: 90%;
   }
 }
 
