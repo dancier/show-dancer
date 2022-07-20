@@ -1,9 +1,5 @@
-<div class="beta-registration-container background-color-accent-A200">
-  <div class="beta-registration-info">
-    <h1>Dancier - Tanzen verbindet!</h1>
-    <p class="product-summary">Wir bauen gerade eine neue Tanz-Community auf!</p>
-  </div>
-
+<app-beta-signup-banner></app-beta-signup-banner>
+<div class="beta-registration-container background-color-accent-A200 content-inner-container">
   <!-- Hier Texte ersetzen (und diesen Kommentar entfernen) -->
   <div class="product-info">
     <p>Nach und nach kannst Du hier...</p>
@@ -14,13 +10,15 @@
       <li>...</li>
     </ul>
     <p>
-      Wir sind eine <a routerLink="about-us">Gruppe von vier Freunden</a> die in Ihrer Freizeit diese Plattform aufbauen.
+      Wir sind eine <a routerLink="about-us">Gruppe von vier Freunden</a> die in Ihrer Freizeit diese Plattform
+      aufbauen.
       Wenn du uns deine E-Mail-Adresse gibst, schreiben wir dich an wenn wir mit der Plattform starten! Wir
-       schreiben dich auch nur einmal an und verwenden deine Adresse für nichts Anderes. Versprochen!
+      schreiben dich auch nur einmal an und verwenden deine Adresse für nichts Anderes. Versprochen!
     </p>
   </div>
 
   <app-beta-signup-type-selector [type]="type" (typeChange)="onTypeChange($event)"></app-beta-signup-type-selector>
-  <ng-container *ngIf="type === 'participant'">    <app-beta-signup-form [signupType]="'participant'"></app-beta-signup-form>
+  <ng-container *ngIf="type === 'participant'">
+    <app-beta-signup-form [signupType]="'participant'"></app-beta-signup-form>
   </ng-container>
 </div>
