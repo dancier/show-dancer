@@ -24,6 +24,7 @@ import {
 } from './pages/contributor-registration-success/contributor-registration-success.component';
 import { BetaSignupBannerComponent } from './components/beta-signup-banner/beta-signup-banner.component';
 import { ImpressumPageComponent } from './pages/impressum-page/impressum-page.component';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ImpressumPageComponent } from './pages/impressum-page/impressum-page.co
     ContributorRegistrationSuccessComponent,
     BetaSignupBannerComponent,
     ImpressumPageComponent,
+    ContactFormComponent,
   ],
   imports: [
     FormsModule,

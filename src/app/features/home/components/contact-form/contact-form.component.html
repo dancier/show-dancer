@@ -1,0 +1,42 @@
+<form [formGroup]="contactForm" (ngSubmit)="submitForm()" novalidate>
+  <mat-card-content fxLayout="column" class="card-content-container">
+    <ng-container *ngIf="authStorageService.authData$ | async as authData">
+      <ng-container
+        *ngIf="authData.isHuman; then thankYouHuman; else captcha">
+      </ng-container>
+      <ng-template #thankYouHuman>
+        <p>Du bist kein Robotortänzer, sehr schön!</p>
+      </ng-template>
+      <ng-template #captcha>
+        <div class="captcha">
+          <re-captcha (resolved)="captchaResolved($event)"
+                      siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
+        </div>
+      </ng-template>
+      <div class="space-container"></div>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>E-Mail</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="(Deine Mail-Adresse)"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Deine Nachricht an uns</mat-label>
+        <textarea matInput formControlName="message" type="text" placeholder="(Deine Nachricht an uns)"
+                  rows="10"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button class="font-color-primary-800"
+              [disabled]="!contactForm.valid || !authData.isHuman">Kontakt uns
+      </button>
+      <mat-error *ngIf="contactUsAttemptResponse && contactUsAttemptResponse !== 'SUCCESS'">
+              <span *ngIf="contactUsAttemptResponse === 'EMAIL_ALREADY_IN_USE'">
+                Vielen Dank, Du hast Dich bereits zuvor für die Beta registriert.
+              </span>
+        <span *ngIf="contactUsAttemptResponse === 'SERVER_ERROR'">
+                Ein unerwarteter Fehler ist aufgetreten.
+                Bitte versuche es später erneut.
+              </span>
+      </mat-error>
+    </ng-container>
+  </mat-card-content>
+</form>
