@@ -1,23 +1,40 @@
-<h1>Kontaktiere uns</h1>
+<div class="content-inner-container">
+  <h1>Kontaktiere uns</h1>
 
-<p>Du kannst das untenstehende Textfeld nutzen, um uns Wünsche, Anregungen, Fragen und mehr zukommen zu lassen.</p>
+  <p>Du kannst das untenstehende Textfeld nutzen, um uns Wünsche, Anregungen, Fragen und mehr zukommen zu lassen.</p>
 
-<p>Wir freuen uns auf deine Nachricht.</p>
+  <p>Wir freuen uns auf deine Nachricht.</p>
 
-<form [formGroup]="contactForm" (ngSubmit)="submitForm()" novalidate>
-  <ng-container *ngIf="authStorageService.authData$ | async as authData">
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>E-Mail</mat-label>
-      <input matInput formControlName="email" type="email" placeholder="(Deine Mail-Adresse)"/>
-    </mat-form-field>
+  <form [formGroup]="contactForm" (ngSubmit)="submitForm()" novalidate>
+    <mat-card-content fxLayout="column" class="card-content-container">
+      <ng-container *ngIf="authStorageService.authData$ | async as authData">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>E-Mail</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="(Deine Mail-Adresse)"/>
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Schreibe uns deine Nachricht</mat-label>
-      <textarea matInput formControlName="message"></textarea>
-    </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Schreibe uns deine Nachricht</mat-label>
+          <textarea rows="10" matInput formControlName="message"></textarea>
+        </mat-form-field>
 
-    <button mat-raised-button class="font-color-primary-800"
-            [disabled]="!contactForm.valid || !authData.isHuman">Ich bin dabei!
-    </button>
-  </ng-container>
-</form>
+        <ng-container *ngIf="!openedPageAsHuman">
+          <div class="captcha">
+            <re-captcha (resolved)="captchaResolved($event)"
+                        siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
+          </div>
+          <mat-error *ngIf="humanSessionResponse && humanSessionResponse !== 'SUCCESS'">
+                <span>
+                  Ein unerwarteter Fehler ist aufgetreten.
+                  Bitte versuche es später erneut.
+                </span>
+          </mat-error>
+        </ng-container>
+
+        <button mat-raised-button class="font-color-primary-800"
+                [disabled]="!contactForm.valid || !authData.isHuman">Nachricht senden
+        </button>
+      </ng-container>
+    </mat-card-content>
+  </form>
+</div>

@@ -3,9 +3,11 @@ export type PostEventResponse =
 | 'SERVER_ERROR';
 
 export type Topic =
-  'app_instance_id_created' |
-  'page_request_via_advertisement' |
-  'beta_registration_succeeded';
+  | 'app_instance_id_created'
+  | 'page_request_via_advertisement'
+  | 'beta_registration_succeeded'
+  | 'human_session_created'
+  ;
 
 export type Metadata = {
   sourceTime: string,
