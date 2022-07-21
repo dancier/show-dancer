@@ -11,6 +11,9 @@ import { ContributeComponent } from '@features/home/pages/contribute/contribute.
 import {
   ContributorRegistrationSuccessComponent
 } from '@features/home/pages/contributor-registration-success/contributor-registration-success.component';
+import { ContactComponent } from '@features/home/pages/contact/contact.component';
+import { ContactSuccessComponent } from '@features/home/pages/contact-success/contact-success.component';
+import { ImprintComponent } from '@features/home/pages/imprint/imprint.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +35,18 @@ export const routes: Routes = [
   {
     path: 'contribute',
     component: ContributeComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
+  },
+  {
+    path: 'contact-success',
+    component: ContactSuccessComponent,
+  },
+  {
+    path: 'imprint',
+    component: ImprintComponent,
   },
 ];
 

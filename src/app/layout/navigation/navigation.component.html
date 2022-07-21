@@ -10,6 +10,10 @@
             <mat-icon>groups</mat-icon>
             <span>Über Uns</span>
           </button>
+          <button mat-menu-item routerLink="contact">
+            <mat-icon>message</mat-icon>
+            <span>Kontakt</span>
+          </button>
           <button mat-menu-item routerLink="contribute">
             <mat-icon>campaign</mat-icon>
             <span>Mitmachen</span>
@@ -22,6 +26,8 @@
     </div>
     <div class="nav-items" ngStyle.xs="display:none">
         <a mat-button routerLink="about-us" routerLinkActive="active"><span>Über Uns</span></a>
+        <div class="separator"></div>
+        <a mat-button routerLink="contact" routerLinkActive="active"><span>Kontakt</span></a>
         <div class="separator"></div>
         <a mat-button routerLink="contribute" routerLinkActive="active"><span>Mitmachen</span></a>
     </div>

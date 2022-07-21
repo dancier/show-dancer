@@ -22,7 +22,10 @@ import { BetaSignupFormComponent } from './components/beta-signup-form/beta-sign
 import {
   ContributorRegistrationSuccessComponent
 } from './pages/contributor-registration-success/contributor-registration-success.component';
+import { ContactComponent } from './pages/contact/contact.component';
 import { BetaSignupBannerComponent } from './components/beta-signup-banner/beta-signup-banner.component';
+import { ContactSuccessComponent } from './pages/contact-success/contact-success.component';
+import { ImprintComponent } from './pages/imprint/imprint.component';
 
 @NgModule({
   declarations: [
@@ -31,8 +34,11 @@ import { BetaSignupBannerComponent } from './components/beta-signup-banner/beta-
     BetaSignupTypeSelectorComponent,
     ContributeComponent,
     BetaSignupFormComponent,
-    ContributorRegistrationSuccessComponent,
     BetaSignupBannerComponent,
+    ContributorRegistrationSuccessComponent,
+    ContactComponent,
+    ContactSuccessComponent,
+    ImprintComponent,
   ],
   imports: [
     FormsModule,

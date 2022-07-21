@@ -19,7 +19,8 @@ export class BetaSignupFormComponent implements OnInit {
 
   betaRegistrationForm!: FormGroup;
   betaRegistrationAttemptResponse: RegistrationResponse | undefined;
-  loggedInAsHuman = false;
+  humanSessionResponse: 'SUCCESS' | 'ERROR' | undefined;
+  openedPageAsHuman = false;
 
   constructor(
     private fb: FormBuilder,
@@ -37,6 +38,7 @@ export class BetaSignupFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initReactiveForm();
+    this.openedPageAsHuman = this.authStorageService.getSnapshot().isHuman;
   }
 
   submitForm(): void {
@@ -82,8 +84,14 @@ export class BetaSignupFormComponent implements OnInit {
       .onceHumanLoggedIn(captchaToken)
       .subscribe((response) => {
         if (response === 'SUCCESS') {
+          this.humanSessionResponse = 'SUCCESS';
           console.info('human session created');
+          this.eventLogService.createAndPublishEvent(
+            'human_session_created',
+            {}
+          );
         } else {
+          this.humanSessionResponse = 'ERROR';
           console.error('error while establishing human session');
         }
       });

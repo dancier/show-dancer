@@ -1,23 +1,24 @@
 <form [formGroup]="betaRegistrationForm" (ngSubmit)="submitForm()" novalidate>
   <mat-card-content fxLayout="column" class="card-content-container">
     <ng-container *ngIf="authStorageService.authData$ | async as authData">
-      <ng-container
-        *ngIf="authData.isHuman; then thankYouHuman; else captcha">
-      </ng-container>
-      <ng-template #thankYouHuman>
-        <p>Du bist kein Robotortänzer, sehr schön!</p>
-      </ng-template>
-      <ng-template #captcha>
-        <div class="captcha">
-          <re-captcha (resolved)="captchaResolved($event)"
-                      siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
-        </div>
-      </ng-template>
       <div class="space-container"></div>
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>E-Mail</mat-label>
         <input matInput formControlName="email" type="email" placeholder="(Deine Mail-Adresse)"/>
       </mat-form-field>
+
+      <ng-container *ngIf="!openedPageAsHuman">
+        <div class="captcha">
+          <re-captcha (resolved)="captchaResolved($event)"
+                      siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
+        </div>
+        <mat-error *ngIf="humanSessionResponse && humanSessionResponse !== 'SUCCESS'">
+              <span>
+                Ein unerwarteter Fehler ist aufgetreten.
+                Bitte versuche es später erneut.
+              </span>
+        </mat-error>
+      </ng-container>
 
       <button mat-raised-button class="font-color-primary-800"
               [disabled]="!betaRegistrationForm.valid || !authData.isHuman">Ich bin dabei!
