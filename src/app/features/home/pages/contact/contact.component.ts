@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from '@data/services/contact.service';
 import { ContactResponse } from '@data/types/contact.types';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { AuthStorageService } from '@data/services/auth-storage.service';
 import { AuthenticationService } from '@data/services/authentication.service';
 import { Router } from '@angular/router';
@@ -52,6 +52,19 @@ export class ContactComponent implements OnInit, OnDestroy {
 
       this.contactServiceSub = this.contactService
         .sendMessage(message, email)
+        .pipe(
+          tap((response) => {
+            if (response === 'SUCCESS') {
+              this.eventLogService.createAndPublishEvent(
+                'contact_message_sent',
+                {
+                  message: message,
+                  sender: email
+                }
+              )
+            }
+          })
+        )
         .subscribe((response) => {
           this.contactResponse = response;
           if (response === 'SUCCESS') {

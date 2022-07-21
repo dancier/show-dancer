@@ -7,6 +7,7 @@ export type Topic =
   | 'page_request_via_advertisement'
   | 'beta_registration_succeeded'
   | 'human_session_created'
+  | 'contact_message_sent'
   ;
 
 export type Metadata = {
