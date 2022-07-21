@@ -1,8 +1,17 @@
-<div class="select-option" [class.selected]="type === 'customer'" (click)="onTypeSelect('customer')">
-  <h3>Haltet mich auf dem Laufenden</h3>
-  <p>Wir informieren dich als erstes, wenn Dancier startet.</p>
+<div class="select-option" [class.selected]="type === 'participant'" (click)="onTypeSelect('participant')">
+  <div style="display: flex; justify-content: space-between">
+    <h3>Schreib mich an, wenn ihr startet!</h3>
+    <mat-icon>mail</mat-icon>
+  </div>
+  <p>Wir schreiben Dich einmal an, wenn wir mit der Plattform starten und machen sonst nix mit Deiner Adresse.</p>
 </div>
 <div class="select-option" (click)="onTypeSelect('contributor')">
-  <h3>Ich will mitmachen</h3>
-  <p>Du willst bei uns mitmachen? Super, wir freuen uns auf deine Unterstützung!</p>
+  <div style="display: flex; justify-content: space-between">
+    <h3>Ich will mitmachen!</h3>
+    <mat-icon>groups</mat-icon>
+  </div>
+  <p>
+    Du willst bei uns mitmachen? Super, wir freuen uns auf deine Unterstützung!
+    Du hast viele Möglichkeiten mitzuwirken.
+  </p>
 </div>

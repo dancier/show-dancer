@@ -23,6 +23,7 @@ import {
   ContributorRegistrationSuccessComponent
 } from './pages/contributor-registration-success/contributor-registration-success.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { BetaSignupBannerComponent } from './components/beta-signup-banner/beta-signup-banner.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ContactComponent } from './pages/contact/contact.component';
     BetaSignupTypeSelectorComponent,
     ContributeComponent,
     BetaSignupFormComponent,
+    BetaSignupBannerComponent,
     ContributorRegistrationSuccessComponent,
     ContactComponent,
   ],

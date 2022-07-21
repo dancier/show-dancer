@@ -2,7 +2,10 @@ export type PostEventResponse =
 | 'SUCCESS'
 | 'SERVER_ERROR';
 
-export type Topic = 'app_instance_id_created' | 'page_request_via_advertisement';
+export type Topic =
+  'app_instance_id_created' |
+  'page_request_via_advertisement' |
+  'beta_registration_succeeded';
 
 export type Metadata = {
   sourceTime: string,
