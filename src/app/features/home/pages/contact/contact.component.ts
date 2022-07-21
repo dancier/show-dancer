@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from '@data/services/contact.service';
 import { ContactResponse } from '@data/types/contact.types';
@@ -13,7 +13,7 @@ import { EventLogService } from '@data/services/event-log.service';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
 
   contactForm!: FormGroup;
   contactResponse: ContactResponse | undefined;
