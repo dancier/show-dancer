@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, shareReplay } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ContactPayload, ContactResponse } from '@data/types/contact.types';
 
@@ -30,6 +30,8 @@ export class ContactService {
         map((_): ContactResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<ContactResponse> => {
           switch (error.status) {
+            case HttpStatusCode.Unauthorized:
+              return of('UNAUTHORIZED');
             default:
               return of('SERVER_ERROR');
           }

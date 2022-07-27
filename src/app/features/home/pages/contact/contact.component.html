@@ -24,13 +24,12 @@
             <re-captcha (resolved)="captchaResolved($event)"
                         siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
           </div>
-          <mat-error *ngIf="(humanSessionResponse && humanSessionResponse !== 'SUCCESS') || (contactResponse && contactResponse !== 'SUCCESS')">
-                <span>
-                  Ein unerwarteter Fehler ist aufgetreten.
-                  Bitte versuche es später erneut.
-                </span>
-          </mat-error>
         </ng-container>
+        <mat-error *ngIf="(humanSessionResponse && humanSessionResponse !== 'SUCCESS') || (contactResponse && contactResponse !== 'SUCCESS')">
+          <span>
+            {{errorMessage}}
+          </span>
+       </mat-error>
 
         <button mat-raised-button class="font-color-primary-800"
                 [disabled]="!contactForm.valid || !authData.isHuman">Nachricht senden

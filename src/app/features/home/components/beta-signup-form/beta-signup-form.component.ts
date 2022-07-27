@@ -20,6 +20,7 @@ export class BetaSignupFormComponent implements OnInit {
   betaRegistrationForm!: FormGroup;
   betaRegistrationAttemptResponse: RegistrationResponse | undefined;
   humanSessionResponse: 'SUCCESS' | 'ERROR' | undefined;
+  errorMessage?: string
 
   constructor(
     private fb: FormBuilder,
@@ -66,14 +67,31 @@ export class BetaSignupFormComponent implements OnInit {
         )
         .subscribe((response) => {
           this.betaRegistrationAttemptResponse = response;
-          if (response === 'SUCCESS') {
-            if (this.signupType === 'contributor') {
-              this.router.navigate(['contributor-registration-success']);
-            } else {
-              this.router.navigate(['beta-registration-success']);
-            }
-          }
+         switch (response) {
+            case 'SUCCESS':
+              this.reroute(this.signupType)
+              break;
+            case 'EMAIL_ALREADY_IN_USE':
+              this.errorMessage = 'Vielen Dank, Du hast Dich bereits zuvor für die Beta registriert.'
+              break;
+            case 'UNAUTHORIZED':
+              this.errorMessage = `Bist du wirklich ein Mensch?
+              Bitte löse das Captcha.`
+              break;
+            default:
+              this.errorMessage = `Ein unerwarteter Fehler ist aufgetreten.
+              Bitte versuche es später erneut.`
+              break;
+         }
         });
+    }
+  }
+
+  reroute(signupType: SignupType): void {
+    if (this.signupType === 'contributor') {
+      this.router.navigate(['contributor-registration-success']);
+    } else {
+      this.router.navigate(['beta-registration-success']);
     }
   }
 

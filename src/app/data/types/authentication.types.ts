@@ -24,7 +24,8 @@ export type VerificationResponse =
 export type RegistrationResponse =
   | 'SUCCESS'
   | 'EMAIL_ALREADY_IN_USE'
-  | 'SERVER_ERROR';
+  | 'SERVER_ERROR'
+  | 'UNAUTHORIZED';
 
 export type LoginResponse =
   | 'SUCCESS'

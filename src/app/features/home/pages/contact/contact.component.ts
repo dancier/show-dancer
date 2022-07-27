@@ -19,6 +19,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   contactResponse: ContactResponse | undefined;
   contactServiceSub: Subscription | undefined;
   humanSessionResponse: 'SUCCESS' | 'ERROR' | undefined;
+  errorMessage?: string
 
   constructor(
     private fb: FormBuilder,
@@ -65,8 +66,18 @@ export class ContactComponent implements OnInit, OnDestroy {
         )
         .subscribe((response) => {
           this.contactResponse = response;
-          if (response === 'SUCCESS') {
-            this.router.navigate(['contact-success']);
+          switch (response) {
+            case 'SUCCESS':
+              this.router.navigate(['contact-success']);
+              break;
+            case 'UNAUTHORIZED':
+              this.errorMessage = `Bist du wirklich ein Mensch?
+              Bitte löse das Captcha.`
+              break;
+            default:
+              this.errorMessage = `Ein unerwarteter Fehler ist aufgetreten.
+              Bitte versuche es später erneut.`
+              break;
           }
         });
     }
@@ -85,6 +96,8 @@ export class ContactComponent implements OnInit, OnDestroy {
           );
         } else {
           this.humanSessionResponse = 'ERROR';
+          this.errorMessage = `Ein unerwarteter Fehler ist aufgetreten.
+          Bitte versuche es später erneut.`
           console.error('error while establishing human session');
         }
       });
