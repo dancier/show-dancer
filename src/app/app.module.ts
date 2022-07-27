@@ -17,6 +17,7 @@ import { HttpHeaderInterceptor } from '@data/interceptors/http-header.intercepto
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { FooterComponent } from './layout/footer/footer/footer.component';
+import { UnauthorizedInterceptor } from '@data/interceptors/unauthorized.interceptor';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { FooterComponent } from './layout/footer/footer/footer.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
