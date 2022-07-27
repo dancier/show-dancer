@@ -48,7 +48,6 @@ export class AuthenticationService {
           }
         })
     }
-
   }
 
   onceUserRegistered(userRegistration: UserRegistration): Observable<RegistrationResponse> {
