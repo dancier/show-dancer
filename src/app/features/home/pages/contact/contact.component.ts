@@ -19,7 +19,6 @@ export class ContactComponent implements OnInit, OnDestroy {
   contactResponse: ContactResponse | undefined;
   contactServiceSub: Subscription | undefined;
   humanSessionResponse: 'SUCCESS' | 'ERROR' | undefined;
-  openedPageAsHuman = false;
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +31,6 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initReactiveForm();
-    this.openedPageAsHuman = this.authStorageService.getSnapshot().isHuman;
   }
 
   ngOnDestroy(): void {

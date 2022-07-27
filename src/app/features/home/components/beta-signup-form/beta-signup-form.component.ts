@@ -20,7 +20,6 @@ export class BetaSignupFormComponent implements OnInit {
   betaRegistrationForm!: FormGroup;
   betaRegistrationAttemptResponse: RegistrationResponse | undefined;
   humanSessionResponse: 'SUCCESS' | 'ERROR' | undefined;
-  openedPageAsHuman = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +37,6 @@ export class BetaSignupFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initReactiveForm();
-    this.openedPageAsHuman = this.authStorageService.getSnapshot().isHuman;
   }
 
   submitForm(): void {

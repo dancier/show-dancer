@@ -19,12 +19,12 @@
           <textarea rows="10" matInput formControlName="message"></textarea>
         </mat-form-field>
 
-        <ng-container *ngIf="!openedPageAsHuman">
+        <ng-container *ngIf="!authData.isHuman">
           <div class="captcha">
             <re-captcha (resolved)="captchaResolved($event)"
                         siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
           </div>
-          <mat-error *ngIf="humanSessionResponse && humanSessionResponse !== 'SUCCESS'">
+          <mat-error *ngIf="(humanSessionResponse && humanSessionResponse !== 'SUCCESS') || (contactResponse && contactResponse !== 'SUCCESS')">
                 <span>
                   Ein unerwarteter Fehler ist aufgetreten.
                   Bitte versuche es später erneut.
