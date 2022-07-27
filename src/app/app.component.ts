@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventLogService } from '@data/services/event-log.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppInstanceStorageService } from '@data/services/app-instance-storage.service';
+import { AuthenticationService } from '@data/services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -12,16 +13,23 @@ export class AppComponent implements OnInit {
   constructor(
     private eventLogService: EventLogService,
     private route: ActivatedRoute,
-    private appInstanceStorageService: AppInstanceStorageService
+    private appInstanceStorageService: AppInstanceStorageService,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
+    this.checkForOutdatedSession();
     this.checkForInitialPageRequest();
     this.checkForAdvertisement();
   }
 
+  checkForOutdatedSession(): void {
+    this.authenticationService.invalidateOldSession();
+  }
+
   checkForInitialPageRequest(): void {
-    const isInitialPageRequest = this.appInstanceStorageService.isInitialPageRequest();
+    const isInitialPageRequest =
+      this.appInstanceStorageService.isInitialPageRequest();
     if (isInitialPageRequest) {
       this.eventLogService.createAndPublishEvent('app_instance_id_created');
     }

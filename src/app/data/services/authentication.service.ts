@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import {
+  GetStatusResponse,
   LoginRequest,
   LoginResponse,
   LogoutResponse,
   RegistrationResponse,
+  Roles,
   UserRegistration,
   UserRegistrationBeta,
   VerificationResponse
@@ -29,6 +31,25 @@ export class AuthenticationService {
     private http: HttpClient,
     private authStorageService: AuthStorageService,
   ) {}
+
+  getLoginStatus(): Observable<GetStatusResponse> {
+    return this.http.get<GetStatusResponse>(`${baseUrl}/whoami`, this.defaultOptions)
+  }
+
+  invalidateOldSession(): void {
+    // If user opens dancier, check if the old human session is still valid, if not, remove it
+    const isUserStausStoredAsHuman = this.authStorageService.getSnapshot().isHuman
+    if (isUserStausStoredAsHuman) {
+      this.getLoginStatus()
+        .subscribe(response => {
+          if(response.roles.includes('ROLE_ANONYMOUS')) {
+            //human  session status in local storage is outdated and needs to be set to false
+            this.authStorageService.setHumanState(false)
+          }
+        })
+    }
+
+  }
 
   onceUserRegistered(userRegistration: UserRegistration): Observable<RegistrationResponse> {
     return this.http.post<void>(`${baseUrl}/registrations`, userRegistration, this.defaultOptions)
