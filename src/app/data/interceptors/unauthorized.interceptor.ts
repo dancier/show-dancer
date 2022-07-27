@@ -8,10 +8,11 @@ import {
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '@data/services/authentication.service';
 
 @Injectable()
 export class UnauthorizedInterceptor implements HttpInterceptor {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authenticationService: AuthenticationService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -26,7 +27,8 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
             if (err.status !== 401) {
               return;
             }
-            this.router.navigate(['logout']);
+            this.authenticationService.onceUserLoggedOut().subscribe()
+            this.router.navigate(['']);
           }
         },
       })
