@@ -23,6 +23,11 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
       tap({
         next: () => {},
         error: (err: any) => {
+          // ignore calls to the logout endpoint
+          const calledEndpoint = this.router.routerState.snapshot.url
+          if (calledEndpoint === '/logout') {
+            return
+          }
           if (err instanceof HttpErrorResponse) {
             if (err.status !== 401) {
               return;
