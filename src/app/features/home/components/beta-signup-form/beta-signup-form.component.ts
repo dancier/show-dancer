@@ -20,7 +20,8 @@ export class BetaSignupFormComponent implements OnInit {
   betaRegistrationForm!: FormGroup;
   betaRegistrationAttemptResponse: RegistrationResponse | undefined;
   humanSessionResponse: 'SUCCESS' | 'ERROR' | undefined;
-  errorMessage?: string
+  errorMessage?: string;
+  isCaptchaSolved = false;
 
   constructor(
     private fb: FormBuilder,
@@ -67,27 +68,27 @@ export class BetaSignupFormComponent implements OnInit {
         )
         .subscribe((response) => {
           this.betaRegistrationAttemptResponse = response;
-         switch (response) {
-            case 'SUCCESS':
-              this.reroute(this.signupType)
-              break;
-            case 'EMAIL_ALREADY_IN_USE':
-              this.errorMessage = 'Vielen Dank, Du hast Dich bereits zuvor für die Beta registriert.'
-              break;
-            case 'UNAUTHORIZED':
-              this.errorMessage = `Bist du wirklich ein Mensch?
-              Bitte löse das Captcha.`
-              break;
-            default:
-              this.errorMessage = `Ein unerwarteter Fehler ist aufgetreten.
-              Bitte versuche es später erneut.`
-              break;
-         }
+          switch (response) {
+              case 'SUCCESS':
+                this.reroute()
+                break;
+              case 'EMAIL_ALREADY_IN_USE':
+                this.errorMessage = 'Vielen Dank, Du hast Dich bereits zuvor für die Beta registriert.'
+                break;
+              case 'UNAUTHORIZED':
+                this.errorMessage = `Bist du wirklich ein Mensch?
+                Bitte löse das Captcha.`
+                break;
+              default:
+                this.errorMessage = `Ein unerwarteter Fehler ist aufgetreten.
+                Bitte versuche es später erneut.`
+                break;
+          }
         });
     }
   }
 
-  reroute(signupType: SignupType): void {
+  reroute(): void {
     if (this.signupType === 'contributor') {
       this.router.navigate(['contributor-registration-success']);
     } else {
@@ -106,6 +107,7 @@ export class BetaSignupFormComponent implements OnInit {
             'human_session_created',
             {}
           );
+          this.isCaptchaSolved = true;
         } else {
           this.humanSessionResponse = 'ERROR';
           console.error('error while establishing human session');

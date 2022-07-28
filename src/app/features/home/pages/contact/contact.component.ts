@@ -19,7 +19,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   contactResponse: ContactResponse | undefined;
   contactServiceSub: Subscription | undefined;
   humanSessionResponse: 'SUCCESS' | 'ERROR' | undefined;
-  errorMessage?: string
+  errorMessage?: string;
+  isCaptchaSolved = false;
 
   constructor(
     private fb: FormBuilder,
@@ -94,6 +95,7 @@ export class ContactComponent implements OnInit, OnDestroy {
             'human_session_created',
             {}
           );
+          this.isCaptchaSolved = true;
         } else {
           this.humanSessionResponse = 'ERROR';
           this.errorMessage = `Ein unerwarteter Fehler ist aufgetreten.

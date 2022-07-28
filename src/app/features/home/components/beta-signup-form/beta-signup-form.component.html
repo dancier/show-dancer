@@ -7,7 +7,7 @@
         <input matInput formControlName="email" type="email" placeholder="(Deine Mail-Adresse)"/>
       </mat-form-field>
 
-      <ng-container *ngIf="!authData.isHuman">
+      <ng-container *ngIf="!authData.isHuman || isCaptchaSolved">
         <div class="captcha">
           <re-captcha (resolved)="captchaResolved($event)"
                       siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
