@@ -5,4 +5,5 @@ export type ContactPayload = {
 
 export type ContactResponse =
   | 'SUCCESS'
-  | 'SERVER_ERROR';
+  | 'SERVER_ERROR'
+  | 'UNAUTHORIZED';

@@ -14,6 +14,8 @@ export type LoginRequest = {
   password: string;
 };
 
+export type Roles = 'ROLE_HUMAN' | 'ROLE_USER' | 'ROLE_ANONYMOUS';
+
 export type VerificationResponse =
   | 'SUCCESS'
   | 'VALIDATION_ERROR'
@@ -22,7 +24,8 @@ export type VerificationResponse =
 export type RegistrationResponse =
   | 'SUCCESS'
   | 'EMAIL_ALREADY_IN_USE'
-  | 'SERVER_ERROR';
+  | 'SERVER_ERROR'
+  | 'UNAUTHORIZED';
 
 export type LoginResponse =
   | 'SUCCESS'
@@ -30,6 +33,9 @@ export type LoginResponse =
   | 'EMAIL_NOT_VALIDATED'
   | 'SERVER_ERROR';
 
-  export type LogoutResponse =
-  | 'SUCCESS'
-  | 'SERVER_ERROR';
+export type LogoutResponse = 'SUCCESS' | 'SERVER_ERROR';
+
+export type GetStatusResponse = {
+  email: string;
+  roles: Roles[];
+};

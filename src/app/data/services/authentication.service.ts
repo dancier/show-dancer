@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import {
+  GetStatusResponse,
   LoginRequest,
   LoginResponse,
   LogoutResponse,
   RegistrationResponse,
+  Roles,
   UserRegistration,
   UserRegistrationBeta,
   VerificationResponse
@@ -30,14 +32,34 @@ export class AuthenticationService {
     private authStorageService: AuthStorageService,
   ) {}
 
+  getLoginStatus(): Observable<GetStatusResponse> {
+    return this.http.get<GetStatusResponse>(`${baseUrl}/whoami`, this.defaultOptions)
+  }
+
+  invalidateOldSession(): void {
+    // If user opens dancier, check if the old human session is still valid, if not, remove it
+    const isUserStausStoredAsHuman = this.authStorageService.getSnapshot().isHuman
+    if (isUserStausStoredAsHuman) {
+      this.getLoginStatus()
+        .subscribe(response => {
+          if(response.roles.includes('ROLE_ANONYMOUS')) {
+            //human  session status in local storage is outdated and needs to be set to false
+            this.authStorageService.setHumanState(false)
+          }
+        })
+    }
+  }
+
   onceUserRegistered(userRegistration: UserRegistration): Observable<RegistrationResponse> {
     return this.http.post<void>(`${baseUrl}/registrations`, userRegistration, this.defaultOptions)
       .pipe(
         map((_): RegistrationResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<RegistrationResponse> => {
           switch (error.status) {
-            case 409:
+            case HttpStatusCode.Conflict:
               return of('EMAIL_ALREADY_IN_USE');
+            case HttpStatusCode.Unauthorized:
+              return of('UNAUTHORIZED');
             default:
               return of('SERVER_ERROR');
           }
@@ -52,8 +74,10 @@ export class AuthenticationService {
         map((_): RegistrationResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<RegistrationResponse> => {
           switch (error.status) {
-            case 409:
+            case HttpStatusCode.Conflict:
               return of('EMAIL_ALREADY_IN_USE');
+            case HttpStatusCode.Unauthorized:
+              return of('UNAUTHORIZED');
             default:
               return of('SERVER_ERROR');
           }
@@ -69,9 +93,9 @@ export class AuthenticationService {
         tap(_ => this.authStorageService.setLoginState(true)),
         catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
           switch(error.status) {
-            case 401:
+            case HttpStatusCode.Unauthorized:
               return of('INCORRECT_CREDENTIALS');
-            case 403:
+            case HttpStatusCode.Forbidden:
               return of('EMAIL_NOT_VALIDATED');
             default:
               return of('SERVER_ERROR');
@@ -95,7 +119,7 @@ export class AuthenticationService {
         tap(_ => this.authStorageService.setHumanState(true)),
         catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
           switch(error.status) {
-            case 401:
+            case HttpStatusCode.Unauthorized:
               return of('INCORRECT_CREDENTIALS');
             default:
               return of('SERVER_ERROR');
@@ -112,7 +136,7 @@ export class AuthenticationService {
         tap(_ => this.authStorageService.setLoginState(true)),
         catchError((error: HttpErrorResponse): Observable<VerificationResponse> => {
           switch (error.status) {
-            case 400:
+            case HttpStatusCode.BadRequest:
               return of('VALIDATION_ERROR');
             default:
               return of('SERVER_ERROR');

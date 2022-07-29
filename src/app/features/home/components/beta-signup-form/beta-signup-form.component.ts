@@ -20,7 +20,8 @@ export class BetaSignupFormComponent implements OnInit {
   betaRegistrationForm!: FormGroup;
   betaRegistrationAttemptResponse: RegistrationResponse | undefined;
   humanSessionResponse: 'SUCCESS' | 'ERROR' | undefined;
-  openedPageAsHuman = false;
+  errorMessage?: string;
+  isCaptchaSolved = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +39,6 @@ export class BetaSignupFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initReactiveForm();
-    this.openedPageAsHuman = this.authStorageService.getSnapshot().isHuman;
   }
 
   submitForm(): void {
@@ -68,14 +68,31 @@ export class BetaSignupFormComponent implements OnInit {
         )
         .subscribe((response) => {
           this.betaRegistrationAttemptResponse = response;
-          if (response === 'SUCCESS') {
-            if (this.signupType === 'contributor') {
-              this.router.navigate(['contributor-registration-success']);
-            } else {
-              this.router.navigate(['beta-registration-success']);
-            }
+          switch (response) {
+              case 'SUCCESS':
+                this.reroute()
+                break;
+              case 'EMAIL_ALREADY_IN_USE':
+                this.errorMessage = 'Vielen Dank, Du hast Dich bereits zuvor für die Beta registriert.'
+                break;
+              case 'UNAUTHORIZED':
+                this.errorMessage = `Bist du wirklich ein Mensch?
+                Bitte löse das Captcha.`
+                break;
+              default:
+                this.errorMessage = `Ein unerwarteter Fehler ist aufgetreten.
+                Bitte versuche es später erneut.`
+                break;
           }
         });
+    }
+  }
+
+  reroute(): void {
+    if (this.signupType === 'contributor') {
+      this.router.navigate(['contributor-registration-success']);
+    } else {
+      this.router.navigate(['beta-registration-success']);
     }
   }
 
@@ -90,6 +107,7 @@ export class BetaSignupFormComponent implements OnInit {
             'human_session_created',
             {}
           );
+          this.isCaptchaSolved = true;
         } else {
           this.humanSessionResponse = 'ERROR';
           console.error('error while establishing human session');

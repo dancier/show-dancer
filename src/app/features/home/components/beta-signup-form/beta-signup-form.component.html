@@ -7,7 +7,7 @@
         <input matInput formControlName="email" type="email" placeholder="(Deine Mail-Adresse)"/>
       </mat-form-field>
 
-      <ng-container *ngIf="!openedPageAsHuman">
+      <ng-container *ngIf="!authData.isHuman || isCaptchaSolved">
         <div class="captcha">
           <re-captcha (resolved)="captchaResolved($event)"
                       siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
@@ -24,12 +24,8 @@
               [disabled]="!betaRegistrationForm.valid || !authData.isHuman">Ich bin dabei!
       </button>
       <mat-error *ngIf="betaRegistrationAttemptResponse && betaRegistrationAttemptResponse !== 'SUCCESS'">
-              <span *ngIf="betaRegistrationAttemptResponse === 'EMAIL_ALREADY_IN_USE'">
-                Vielen Dank, Du hast Dich bereits zuvor für die Beta registriert.
-              </span>
-        <span *ngIf="betaRegistrationAttemptResponse === 'SERVER_ERROR'">
-                Ein unerwarteter Fehler ist aufgetreten.
-                Bitte versuche es später erneut.
+              <span>
+                {{errorMessage}}
               </span>
       </mat-error>
     </ng-container>
