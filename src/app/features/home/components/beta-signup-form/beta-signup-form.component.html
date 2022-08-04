@@ -20,7 +20,7 @@
         </mat-error>
       </ng-container>
 
-      <button mat-raised-button class="font-color-primary-800"
+      <button id="registerButton" mat-raised-button class="font-color-primary-800"
               [disabled]="!betaRegistrationForm.valid || !authData.isHuman">Ich bin dabei!
       </button>
       <mat-error *ngIf="betaRegistrationAttemptResponse && betaRegistrationAttemptResponse !== 'SUCCESS'">
