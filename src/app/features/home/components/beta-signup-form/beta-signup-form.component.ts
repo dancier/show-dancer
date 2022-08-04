@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
 import { Router } from '@angular/router';
@@ -7,13 +7,14 @@ import { RegistrationResponse } from '@data/types/authentication.types';
 import { SignupType } from '@features/home/types/signup.type';
 import { tap } from 'rxjs';
 import { EventLogService } from '@data/services/event-log.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-beta-signup-form',
   templateUrl: './beta-signup-form.component.html',
   styleUrls: ['./beta-signup-form.component.scss']
 })
-export class BetaSignupFormComponent implements OnInit {
+export class BetaSignupFormComponent implements OnInit, AfterViewInit {
 
   @Input() signupType: SignupType = 'participant';
 
@@ -29,6 +30,7 @@ export class BetaSignupFormComponent implements OnInit {
     private router: Router,
     public authStorageService: AuthStorageService,
     private eventLogService: EventLogService,
+    private scroller: ViewportScroller,
   ) {}
 
   private initReactiveForm(): void {
@@ -39,6 +41,12 @@ export class BetaSignupFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initReactiveForm();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.signupType == 'participant') {
+      this.scroller.scrollToAnchor('registerButton')
+    }
   }
 
   submitForm(): void {

@@ -5,6 +5,8 @@ html, body {
   // Free image from pixabay.com christmas-decoration-holiday-xmas-2908901
   background-image: url("../assets/img/backgrounds/light-background.jpg");
 
+  scroll-behavior: smooth;
+
   p {
     font-weight: 350;
   }
@@ -183,5 +185,3 @@ a {
 .space-container {
   height: 32px;
 }
-
-

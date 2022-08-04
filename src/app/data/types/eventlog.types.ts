@@ -8,6 +8,7 @@ export type Topic =
   | 'beta_registration_succeeded'
   | 'human_session_created'
   | 'contact_message_sent'
+  | 'registration_format_selected'
   ;
 
 export type Metadata = {
