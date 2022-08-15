@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditAbleToDanceComponent } from './edit-able-to-dance.component';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('AddAbleToDanceComponent', () => {
   let component: EditAbleToDanceComponent;
@@ -8,7 +9,10 @@ describe('AddAbleToDanceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditAbleToDanceComponent ]
+      declarations: [ EditAbleToDanceComponent ],
+      imports: [
+        MatIconModule,
+      ]
     })
     .compileComponents();
   });

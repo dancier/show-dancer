@@ -3,6 +3,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterUserFormComponent } from './register-user-form.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('RegisterUserFormComponent', () => {
   let component: RegisterUserFormComponent;
@@ -13,6 +20,13 @@ describe('RegisterUserFormComponent', () => {
       imports: [
         ReactiveFormsModule,
         HttpClientModule,
+        RouterTestingModule.withRoutes([]),
+        MatCardModule,
+        MatFormFieldModule,
+        MatCheckboxModule,
+        RecaptchaModule,
+        MatInputModule,
+        BrowserAnimationsModule,
       ],
       declarations: [RegisterUserFormComponent],
     }).compileComponents();
