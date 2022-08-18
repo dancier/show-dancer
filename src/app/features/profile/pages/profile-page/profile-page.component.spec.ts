@@ -1,25 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProfilePageComponent } from './profile-page.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { MockComponents } from 'ng-mocks';
+import { DanceTypeComponent } from '@features/profile/components/dance-type/dance-type.component';
+import { PersonalDataComponent } from '@features/profile/components/personal-data/personal-data.component';
 
 describe('ProfilePageComponent', () => {
-  let component: ProfilePageComponent;
-  let fixture: ComponentFixture<ProfilePageComponent>;
+  let spectator: Spectator<ProfilePageComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ProfilePageComponent ]
-    })
-    .compileComponents();
+  const createComponent = createComponentFactory({
+    component: ProfilePageComponent,
+    imports: [MatTabsModule],
+    declarations: [MockComponents(DanceTypeComponent, PersonalDataComponent)],
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ProfilePageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  beforeEach(() => spectator = createComponent());
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

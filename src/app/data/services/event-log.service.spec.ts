@@ -1,16 +1,18 @@
-import { TestBed } from '@angular/core/testing';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
+import { EventLogService } from '@data/services/event-log.service';
+import { EventLogHttpService } from '@data/services/event-log-http.service';
 
-import { EventLogService } from './event-log.service';
 
-describe('EventLogService', () => {
-  let service: EventLogService;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(EventLogService);
+describe('AuthService', () => {
+  let spectator: SpectatorService<EventLogService>;
+  const createService = createServiceFactory({
+    service: EventLogService,
+    mocks: [EventLogHttpService],
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  beforeEach(() => spectator = createService());
+
+  it('should not be logged in', () => {
+    expect(spectator.service).toBeTruthy();
   });
 });

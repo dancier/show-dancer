@@ -5,6 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 describe('HeaderComponent', () => {
   let component: NavigationComponent;
@@ -13,7 +14,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ NavigationComponent ],
-      imports: [ HttpClientTestingModule, MatMenuModule, MatToolbarModule, MatIconModule ]
+      imports: [ HttpClientTestingModule, MatMenuModule, MatToolbarModule, MatIconModule, MatFormFieldModule ]
     })
     .compileComponents();
   });

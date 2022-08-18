@@ -9,6 +9,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('DanceTypeComponent', () => {
   let component: EditDanceTypeComponent;
@@ -26,6 +27,7 @@ describe('DanceTypeComponent', () => {
         MatRadioModule,
         MatSelectModule,
         BrowserAnimationsModule,
+        ReactiveFormsModule,
       ]
     })
     .compileComponents();

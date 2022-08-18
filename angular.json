@@ -101,8 +101,10 @@
       }
     }
   },
-  "defaultProject": "show-dancer",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "defaultCollection": "@ngneat/spectator",
+    "schematicCollections": [
+      "@angular-eslint/schematics",
+    ]
   }
 }

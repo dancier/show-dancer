@@ -1,25 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EnterUserNameComponent } from './enter-user-name.component';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 describe('EnterUserNameComponent', () => {
-  let component: EnterUserNameComponent;
-  let fixture: ComponentFixture<EnterUserNameComponent>;
+  let spectator: Spectator<EnterUserNameComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ EnterUserNameComponent ]
-    })
-    .compileComponents();
+  const createComponent = createComponentFactory({
+    component: EnterUserNameComponent,
+    imports: [MatCardModule, MatFormFieldModule, MatInputModule],
+    declarations: [],
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(EnterUserNameComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  beforeEach(() => spectator = createComponent());
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

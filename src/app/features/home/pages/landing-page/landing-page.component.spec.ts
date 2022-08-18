@@ -1,25 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { LandingPageComponent } from './landing-page.component';
+import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
+import { MockComponents } from 'ng-mocks';
+import { LoginFormComponent } from '@features/home/components/login-form/login-form.component';
+import { LandingPageComponent } from '@features/home/pages/landing-page/landing-page.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 describe('LandingPageComponent', () => {
-  let component: LandingPageComponent;
-  let fixture: ComponentFixture<LandingPageComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ LandingPageComponent ]
-    })
-    .compileComponents();
+  let spectator: Spectator<LandingPageComponent>;
+  const createComponent = createComponentFactory({
+    component: LandingPageComponent,
+    declarations: [
+      MockComponents(LoginFormComponent)
+    ],
+    imports: [
+      MatCardModule,
+      MatIconModule,
+    ]
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LandingPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  beforeEach(() => spectator = createComponent());
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

@@ -1,13 +1,8 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Event, PostEventResponse } from '@data/types/eventlog.types';
 import { catchError, map, Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
-
-const baseUrl = `${environment.dancerUrl}/eventlog`;
+import { EnvironmentService } from '../../../environments/utils/environment.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +12,13 @@ export class EventLogHttpService {
     withCredentials: true,
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private environment: EnvironmentService,
+    private http: HttpClient
+  ) {}
 
   postEvent$(event: Event): Observable<PostEventResponse> {
-    return this.http.post<void>(`${baseUrl}`, event, this.defaultOptions).pipe(
+    return this.http.post<void>(`${this.environment.getDancerUrl()}/eventlog`, event, this.defaultOptions).pipe(
       map((_): PostEventResponse => 'SUCCESS'),
       catchError((error: HttpErrorResponse): Observable<PostEventResponse> => {
         switch (error.status) {
