@@ -18,7 +18,7 @@ export class EventLogHttpService {
   ) {}
 
   postEvent$(event: Event): Observable<PostEventResponse> {
-    return this.http.post<void>(`${this.environment.getDancerUrl()}/eventlog`, event, this.defaultOptions).pipe(
+    return this.http.post<void>(`${this.environment.getApiUrl()}/eventlog`, event, this.defaultOptions).pipe(
       map((_): PostEventResponse => 'SUCCESS'),
       catchError((error: HttpErrorResponse): Observable<PostEventResponse> => {
         switch (error.status) {

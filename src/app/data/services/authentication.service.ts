@@ -28,7 +28,7 @@ export class AuthenticationService {
     private authStorageService: AuthStorageService,
     private environment: EnvironmentService
   ) {
-    this.baseUrl = `${this.environment.getDancerUrl()}/authentication`;
+    this.baseUrl = `${this.environment.apiUrl()}/authentication`;
   }
 
   onceUserRegistered(userRegistration: UserRegistration): Observable<RegistrationResponse> {

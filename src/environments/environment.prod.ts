@@ -1,6 +1,12 @@
 import { Environment } from './utils/environment.type';
 
+type Env = {
+  apiUrl: string;
+}
+// retrieve environment variables from window.env (see assets/env.template.js)
+const env: Env  = (window as any).env;
+
 export const environment: Environment = {
   production: true,
-  dancerUrl: 'https://dancer.dancier.net',
+  apiUrl: env.apiUrl || 'API_URL_NOT_SET_IN_ENV',
 };

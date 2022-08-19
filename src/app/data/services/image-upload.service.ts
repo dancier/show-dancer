@@ -4,7 +4,6 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
 
 type ImageUploadResponse = 'SUCCESS' | 'SERVER_ERROR';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -35,7 +34,7 @@ export class ImageUploadService {
     const formData: FormData = new FormData();
     formData.append('file', blobFromDataUrl);
     return this.http
-      .post<void>(`${this.environment.getDancerUrl()}/images`, formData, this.defaultOptions)
+      .post<void>(`${this.environment.getApiUrl()}/images`, formData, this.defaultOptions)
       .pipe(
         map((_): ImageUploadResponse => 'SUCCESS'),
         catchError(
