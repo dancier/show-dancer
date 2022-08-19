@@ -104,7 +104,7 @@
   "cli": {
     "defaultCollection": "@ngneat/spectator",
     "schematicCollections": [
-      "@angular-eslint/schematics",
+      "@angular-eslint/schematics"
     ]
   }
 }
