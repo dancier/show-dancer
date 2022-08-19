@@ -12,7 +12,7 @@ import {
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { AuthStorageService } from '@data/services/auth-storage.service';
 
-const baseUrl = `${environment.dancerUrl}/authentication`;
+const baseUrl = `${environment.apiUrl}/authentication`;
 
 @Injectable({
   providedIn: 'root',

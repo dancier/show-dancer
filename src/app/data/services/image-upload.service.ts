@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { catchError, map, Observable, of } from 'rxjs';
 
 type ImageUploadResponse = 'SUCCESS' | 'SERVER_ERROR';
 
-const baseUrl = `${environment.dancerUrl}`;
+const baseUrl = `${environment.apiUrl}`;
 
 @Injectable({
   providedIn: 'root',

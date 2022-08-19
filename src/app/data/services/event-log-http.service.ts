@@ -1,13 +1,10 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Event, PostEventResponse } from '@data/types/eventlog.types';
 import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-const baseUrl = `${environment.dancerUrl}/eventlog`;
+const baseUrl = `${environment.apiUrl}/eventlog`;
 
 @Injectable({
   providedIn: 'root',
