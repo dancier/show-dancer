@@ -1,8 +1,5 @@
-import { Environment } from './utils/environment.type';
+import { Env, Environment } from './utils/environment.type';
 
-type Env = {
-  apiUrl: string;
-}
 // retrieve environment variables from window.env (see assets/env.template.js)
 const env: Env  = (window as any).env;
 

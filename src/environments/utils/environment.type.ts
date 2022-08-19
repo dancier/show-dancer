@@ -1,5 +1,10 @@
 // type to use for all environment files
 export type Environment =  {
   production: boolean;
-  dancerUrl: string;
+  apiUrl: string;
+}
+
+// type to use for the object inside window.env (see assets/env.template.js)
+export type Env = {
+  apiUrl: string;
 }

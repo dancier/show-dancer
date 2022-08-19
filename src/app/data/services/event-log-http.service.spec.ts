@@ -14,7 +14,7 @@ describe('EventLogHttpService', () => {
 
   beforeEach(() => {
     const environment = spectator.inject(EnvironmentService);
-    environment.getDancerUrl.andReturn('testApiUrl');
+    environment.getApiUrl.andReturn('testApiUrl');
   });
 
   it('should create', () => {

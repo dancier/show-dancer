@@ -17,7 +17,7 @@ export class EnvironmentService {
     return environment.production;
   }
 
-  public getDancerUrl(): string {
-    return environment.dancerUrl;
+  public getApiUrl(): string {
+    return environment.apiUrl;
   }
 }
