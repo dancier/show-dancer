@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
-import { LoginRequest, LoginResponse } from '@data/types/authentication.types';
+import { LoginRequest } from '@data/types/authentication.types';
 import { Router } from '@angular/router';
-
+import { APIResponse } from '@data/types/shared.types';
+import { errorMessages } from '@data/constants/error-messages';
 
 @Component({
   selector: 'app-login-form',
@@ -13,8 +14,10 @@ import { Router } from '@angular/router';
 export class LoginFormComponent implements OnInit {
 
   loginForm!: FormGroup;
-  loginAttemptResponse: LoginResponse | undefined;
+  loginAttemptResponse: APIResponse | undefined;
   hide = true
+  errorMessages = errorMessages
+
 
   constructor(
     private fb: FormBuilder,

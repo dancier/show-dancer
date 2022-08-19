@@ -3,14 +3,11 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { environment } from '../../../environments/environment';
 import {
   LoginRequest,
-  LoginResponse,
-  LogoutResponse,
-  RegistrationResponse,
   UserRegistration,
-  VerificationResponse
 } from '@data/types/authentication.types';
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { AuthStorageService } from '@data/services/auth-storage.service';
+import { APIResponse } from '@data/types/shared.types';
 
 const baseUrl = `${environment.dancerUrl}/authentication`;
 
@@ -28,11 +25,11 @@ export class AuthenticationService {
     private authStorageService: AuthStorageService,
   ) {}
 
-  onceUserRegistered(userRegistration: UserRegistration): Observable<RegistrationResponse> {
+  onceUserRegistered(userRegistration: UserRegistration): Observable<APIResponse> {
     return this.http.post<void>(`${baseUrl}/registrations`, userRegistration, this.defaultOptions)
       .pipe(
-        map((_): RegistrationResponse => 'SUCCESS'),
-        catchError((error: HttpErrorResponse): Observable<RegistrationResponse> => {
+        map((_): APIResponse => 'SUCCESS'),
+        catchError((error: HttpErrorResponse): Observable<APIResponse> => {
           switch (error.status) {
             case 409:
               return of('EMAIL_ALREADY_IN_USE');
@@ -44,12 +41,12 @@ export class AuthenticationService {
       );
   }
 
-  onceUserLoggedIn(loginRequest: LoginRequest): Observable<LoginResponse>  {
+  onceUserLoggedIn(loginRequest: LoginRequest): Observable<APIResponse>  {
     return this.http.post<void>(`${baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
-        map((_): LoginResponse => 'SUCCESS'),
+        map((_): APIResponse => 'SUCCESS'),
         tap(_ => this.authStorageService.setLoginState(true)),
-        catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
+        catchError((error: HttpErrorResponse): Observable<APIResponse> => {
           switch(error.status) {
             case 401:
               return of('INCORRECT_CREDENTIALS');
@@ -63,7 +60,7 @@ export class AuthenticationService {
       );
   }
 
-  onceHumanLoggedIn(captchaToken: string): Observable<LoginResponse>  {
+  onceHumanLoggedIn(captchaToken: string): Observable<APIResponse>  {
     const httpOptions = {
       headers: new HttpHeaders({
         'X-Captcha-Token': captchaToken,
@@ -73,9 +70,9 @@ export class AuthenticationService {
 
     return this.http.post<void>(`${baseUrl}/loginAsHuman`, null, httpOptions)
       .pipe(
-        map((_): LoginResponse => 'SUCCESS'),
+        map((_): APIResponse => 'SUCCESS'),
         tap(_ => this.authStorageService.setHumanState(true)),
-        catchError((error: HttpErrorResponse): Observable<LoginResponse> => {
+        catchError((error: HttpErrorResponse): Observable<APIResponse> => {
           switch(error.status) {
             case 401:
               return of('INCORRECT_CREDENTIALS');
@@ -87,12 +84,12 @@ export class AuthenticationService {
       );
   }
 
-  onceAccountVerified(validationCode: string): Observable<VerificationResponse> {
+  onceAccountVerified(validationCode: string): Observable<APIResponse> {
     return this.http.put<void>(`${baseUrl}/email-validations/${validationCode}`, null, this.defaultOptions)
       .pipe(
-        map((_): VerificationResponse => 'SUCCESS'),
+        map((_): APIResponse => 'SUCCESS'),
         tap(_ => this.authStorageService.setLoginState(true)),
-        catchError((error: HttpErrorResponse): Observable<VerificationResponse> => {
+        catchError((error: HttpErrorResponse): Observable<APIResponse> => {
           switch (error.status) {
             case 400:
               return of('VALIDATION_ERROR');
@@ -104,12 +101,12 @@ export class AuthenticationService {
       );
   }
 
-  onceUserLoggedOut(): Observable<LogoutResponse> {
+  onceUserLoggedOut(): Observable<APIResponse> {
     return this.http.get<void>(`${baseUrl}/logout`, this.defaultOptions)
     .pipe(
-      map((_): LogoutResponse => 'SUCCESS'),
+      map((_): APIResponse => 'SUCCESS'),
       tap(_ => this.authStorageService.setLoginState(false)),
-      catchError((error: HttpErrorResponse): Observable<LogoutResponse> => {
+      catchError((error: HttpErrorResponse): Observable<APIResponse> => {
         switch (error.status) {
           default:
             return of('SERVER_ERROR');

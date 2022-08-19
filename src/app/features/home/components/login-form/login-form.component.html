@@ -23,16 +23,8 @@
             [disabled]="!loginForm.valid">Anmelden
     </button>
     <mat-error *ngIf="loginAttemptResponse && loginAttemptResponse !== 'SUCCESS'">
-      <span *ngIf="loginAttemptResponse === 'INCORRECT_CREDENTIALS'">
-        Der Nutzername oder das Passwort ist falsch.
-      </span>
-      <span *ngIf="loginAttemptResponse === 'EMAIL_NOT_VALIDATED'">
-        Die E-Mail Adresse wurde noch nicht verifiziert.
-        Bitte schauen Sie in ihrem E-Mail Postfach nach.
-      </span>
-      <span *ngIf="loginAttemptResponse === 'SERVER_ERROR'">
-        Ein unerwarteter Fehler ist aufgetreten.
-        Bitte versuchen Sie es später erneut.
+      <span>
+        {{errorMessages[loginAttemptResponse]}}
       </span>
     </mat-error>
   </mat-card-content>

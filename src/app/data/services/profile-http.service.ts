@@ -13,7 +13,7 @@ const baseUrl = `${environment.dancerUrl}/eventlog`;
 @Injectable({
   providedIn: 'root',
 })
-export class EventLogHttpService {
+export class ProfileHttpService {
   private defaultOptions = {
     withCredentials: true,
   };

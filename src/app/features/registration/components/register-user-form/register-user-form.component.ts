@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
-import { RegistrationResponse } from '@data/types/authentication.types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mustMatch } from '@core/validators/mustMatch';
 import { Subscription } from 'rxjs';
+import { APIResponse } from '@data/types/shared.types';
+import { errorMessages } from '@data/constants/error-messages';
 
 @Component({
   selector: 'app-register-user-form',
@@ -14,9 +15,10 @@ import { Subscription } from 'rxjs';
 export class RegisterUserFormComponent implements OnInit, OnDestroy {
 
   registrationForm!: FormGroup;
-  registrationAttemptResponse: RegistrationResponse | undefined;
+  registrationAttemptResponse: APIResponse | undefined;
   formStatusSubscription: Subscription | undefined;
   loggedInAsHuman = false;
+  errorMessages = errorMessages;
 
   constructor(
     private fb: FormBuilder,
