@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ResendVerificationLinkFormComponent } from './resend-verification-link-form.component';
+import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
+import {
+  ResendVerificationLinkFormComponent
+} from '@features/registration/components/resend-verification-link-form/resend-verification-link-form.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 describe('ResendVerificationLinkFormComponent', () => {
-  let component: ResendVerificationLinkFormComponent;
-  let fixture: ComponentFixture<ResendVerificationLinkFormComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ResendVerificationLinkFormComponent ]
-    })
-    .compileComponents();
+  let spectator: Spectator<ResendVerificationLinkFormComponent>;
+  const createComponent = createComponentFactory({
+    component: ResendVerificationLinkFormComponent,
+    imports: [
+      MatCardModule,
+      MatFormFieldModule,
+      MatInputModule
+    ]
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ResendVerificationLinkFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  beforeEach(() => spectator = createComponent());
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
 import { LoginRequest, LoginResponse } from '@data/types/authentication.types';
 import { Router } from '@angular/router';
@@ -12,12 +12,12 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent implements OnInit {
 
-  loginForm!: FormGroup;
+  loginForm!: UntypedFormGroup;
   loginAttemptResponse: LoginResponse | undefined;
   hide = true
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private authService: AuthenticationService,
     private router: Router) { }
 

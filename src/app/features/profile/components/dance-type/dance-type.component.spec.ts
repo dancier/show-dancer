@@ -1,25 +1,19 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { DanceTypeComponent } from './dance-type.component';
+import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
+import { MatIconModule } from '@angular/material/icon';
+import { DanceTypeComponent } from '@features/profile/components/dance-type/dance-type.component';
 
 describe('DanceTypeComponent', () => {
-  let component: DanceTypeComponent;
-  let fixture: ComponentFixture<DanceTypeComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ DanceTypeComponent ]
-    })
-    .compileComponents();
+  let spectator: Spectator<DanceTypeComponent>;
+  const createComponent = createComponentFactory({
+    component: DanceTypeComponent,
+    imports: [
+      MatIconModule,
+    ]
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DanceTypeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  beforeEach(() => spectator = createComponent());
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });
