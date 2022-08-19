@@ -56,15 +56,11 @@ describe('LoginFormComponent', () => {
     expect(submitButton).toBeTruthy();
   });
 
-  // describe('the user enters existing user credentials and submits the form', () => {
-  //
-  //   beforeEach(() => {
-  //
-  //   });
-  //
-  // });
+  xdescribe('the user enters existing user credentials and submits the form', () => {
+    // TODO: add more tests
+  });
 
   xdescribe('the user enters non-existing user credentials and submits the form', () => {
-
+    // TODO: add more tests
   });
 });

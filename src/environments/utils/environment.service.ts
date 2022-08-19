@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+// eslint-disable-next-line no-restricted-imports
 import { environment } from '../environment';
 
 /**
