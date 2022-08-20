@@ -1,8 +1,10 @@
 # ShowDancer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
+Frontend for dancier.net. Built with Angular.
 
-## Development server
+## Development
+
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
@@ -10,22 +12,18 @@ The local dev server is configured to use the proxy configuration found in proxy
 The URL for the local backend is defined here.
 With this configuration, [CORS problems during local development can be avoided](https://levelup.gitconnected.com/fixing-cors-errors-with-angular-cli-proxy-e5e0ef143f85).
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
+### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+### Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test` to execute the unit tests via [Jest](https://jestjs.io/).
 
-## Running end-to-end tests
+### Development patterns
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Whenever we decide on a pattern we want to use during development,
+we add it to the list of development patterns.
 
-## Further help
+You can find the development patterns in the [docs/patterns.md](patterns.md) file.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

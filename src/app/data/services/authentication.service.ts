@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import {
   LoginRequest,
   UserRegistration,
@@ -8,8 +7,7 @@ import {
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { AuthStorageService } from '@data/services/auth-storage.service';
 import { APIResponse } from '@data/types/shared.types';
-
-const baseUrl = `${environment.dancerUrl}/authentication`;
+import { EnvironmentService } from '../../../environments/utils/environment.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,15 +16,20 @@ export class AuthenticationService {
 
   private defaultOptions = {
     withCredentials: true
-  }
+  };
+
+  private readonly baseUrl: string;
 
   constructor(
     private http: HttpClient,
     private authStorageService: AuthStorageService,
-  ) {}
+    private environment: EnvironmentService
+  ) {
+    this.baseUrl = `${this.environment.getApiUrl()}/authentication`;
+  }
 
   onceUserRegistered(userRegistration: UserRegistration): Observable<APIResponse> {
-    return this.http.post<void>(`${baseUrl}/registrations`, userRegistration, this.defaultOptions)
+    return this.http.post<void>(`${this.baseUrl}/registrations`, userRegistration, this.defaultOptions)
       .pipe(
         map((_): APIResponse => 'SUCCESS'),
         catchError((error: HttpErrorResponse): Observable<APIResponse> => {
@@ -42,7 +45,7 @@ export class AuthenticationService {
   }
 
   onceUserLoggedIn(loginRequest: LoginRequest): Observable<APIResponse>  {
-    return this.http.post<void>(`${baseUrl}/login`, loginRequest , this.defaultOptions)
+    return this.http.post<void>(`${this.baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
         map((_): APIResponse => 'SUCCESS'),
         tap(_ => this.authStorageService.setLoginState(true)),
@@ -68,7 +71,7 @@ export class AuthenticationService {
       ...this.defaultOptions,
     };
 
-    return this.http.post<void>(`${baseUrl}/loginAsHuman`, null, httpOptions)
+    return this.http.post<void>(`${this.baseUrl}/loginAsHuman`, null, httpOptions)
       .pipe(
         map((_): APIResponse => 'SUCCESS'),
         tap(_ => this.authStorageService.setHumanState(true)),
@@ -85,7 +88,7 @@ export class AuthenticationService {
   }
 
   onceAccountVerified(validationCode: string): Observable<APIResponse> {
-    return this.http.put<void>(`${baseUrl}/email-validations/${validationCode}`, null, this.defaultOptions)
+    return this.http.put<void>(`${this.baseUrl}/email-validations/${validationCode}`, null, this.defaultOptions)
       .pipe(
         map((_): APIResponse => 'SUCCESS'),
         tap(_ => this.authStorageService.setLoginState(true)),
@@ -102,7 +105,7 @@ export class AuthenticationService {
   }
 
   onceUserLoggedOut(): Observable<APIResponse> {
-    return this.http.get<void>(`${baseUrl}/logout`, this.defaultOptions)
+    return this.http.get<void>(`${this.baseUrl}/logout`, this.defaultOptions)
     .pipe(
       map((_): APIResponse => 'SUCCESS'),
       tap(_ => this.authStorageService.setLoginState(false)),

@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditProfileImageComponent } from './edit-profile-image.component';
+import { MatIconModule } from '@angular/material/icon';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('EditProfileImageComponent', () => {
   let component: EditProfileImageComponent;
@@ -8,7 +11,8 @@ describe('EditProfileImageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditProfileImageComponent ]
+      declarations: [ EditProfileImageComponent ],
+      imports: [ HttpClientTestingModule, MatIconModule, ImageCropperModule ]
     })
     .compileComponents();
   });

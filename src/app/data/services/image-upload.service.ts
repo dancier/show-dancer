@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-} from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
+import { EnvironmentService } from '../../../environments/utils/environment.service';
 
 type ImageUploadResponse = 'SUCCESS' | 'SERVER_ERROR';
-
-const baseUrl = `${environment.dancerUrl}`;
-
 @Injectable({
   providedIn: 'root',
 })
@@ -17,6 +11,11 @@ export class ImageUploadService {
   private defaultOptions = {
     withCredentials: true,
   };
+
+  constructor(
+    private http: HttpClient,
+    private environment: EnvironmentService,
+  ) {}
 
   dataURItoBlob(dataURI: string): Blob {
     const binary = atob(dataURI.split(',')[1]);
@@ -30,14 +29,12 @@ export class ImageUploadService {
     });
   }
 
-  constructor(private http: HttpClient) {}
-
   uploadImage$(croppedImage: string): Observable<ImageUploadResponse> {
     const blobFromDataUrl = this.dataURItoBlob(croppedImage);
     const formData: FormData = new FormData();
     formData.append('file', blobFromDataUrl);
     return this.http
-      .post<void>(`${baseUrl}/images`, formData, this.defaultOptions)
+      .post<void>(`${this.environment.getApiUrl()}/images`, formData, this.defaultOptions)
       .pipe(
         map((_): ImageUploadResponse => 'SUCCESS'),
         catchError(

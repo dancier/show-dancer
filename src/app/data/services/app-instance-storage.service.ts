@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 const APP_INSTANCE_ID = 'appInstanceId';
 
@@ -10,7 +10,7 @@ export class AppInstanceStorageService {
   constructor() {}
 
   initializeAppInstanceId(): string {
-    let appInstanceId = uuid.v4();
+    let appInstanceId = uuid();
     return this.setAppInstanceId(appInstanceId);
   }
 

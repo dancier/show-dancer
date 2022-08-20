@@ -2,6 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginFormComponent } from './login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -10,7 +17,16 @@ describe('LoginFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginFormComponent ],
-      imports: [ ReactiveFormsModule ],
+      imports: [
+        ReactiveFormsModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        BrowserAnimationsModule
+      ],
     })
     .compileComponents();
   });
@@ -40,15 +56,11 @@ describe('LoginFormComponent', () => {
     expect(submitButton).toBeTruthy();
   });
 
-  describe('the user enters existing user credentials and submits the form', () => {
-
-    beforeEach(() => {
-
-    });
-
+  xdescribe('the user enters existing user credentials and submits the form', () => {
+    // TODO: add more tests
   });
 
   xdescribe('the user enters non-existing user credentials and submits the form', () => {
-
+    // TODO: add more tests
   });
 });

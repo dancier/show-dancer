@@ -1,4 +1,4 @@
-export type Topic = 'app_instance_id_created' | 'page_request_via_advertisement';
+export type Topic = 'app_instance_id_created' | 'page_request_via_advertisement' | 'test';
 
 export type Metadata = {
   sourceTime: string,

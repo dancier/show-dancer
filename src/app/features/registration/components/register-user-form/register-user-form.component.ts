@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mustMatch } from '@core/validators/mustMatch';
@@ -14,14 +14,14 @@ import { errorMessages } from '@data/constants/error-messages';
 })
 export class RegisterUserFormComponent implements OnInit, OnDestroy {
 
-  registrationForm!: FormGroup;
+  registrationForm!: UntypedFormGroup;
   registrationAttemptResponse: APIResponse | undefined;
   formStatusSubscription: Subscription | undefined;
   loggedInAsHuman = false;
   errorMessages = errorMessages;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router

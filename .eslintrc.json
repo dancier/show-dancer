@@ -19,6 +19,18 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "no-restricted-imports": ["error", {
+          "paths": [{
+            "name": "@ngneat/spectator",
+            "message": "Please use @ngneat/spectator/jest instead of @ngneat/spectator."
+          }],
+          "patterns": [
+            {
+              "group": ["**/environment"],
+              "message": "Please import the EnvironmentService instead (see development patterns)."
+            }
+          ]
+        }],
         "quotes": [2, "single", { "avoidEscape": true }],
         "object-curly-spacing": ["error", "always"],
         "no-console": [
