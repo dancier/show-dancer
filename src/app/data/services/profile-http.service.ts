@@ -6,9 +6,7 @@ import { Injectable } from '@angular/core';
 import { NameAvailability, Profile } from '@data/types/profile.types';
 import { APIResponse } from '@data/types/shared.types';
 import { catchError, map, Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
-
-const baseUrl = `${environment.dancerUrl}/profile`;
+import { EnvironmentService } from '../../../environments/utils/environment.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +15,16 @@ export class ProfileHttpService {
   private defaultOptions = {
     withCredentials: true,
   };
+  private readonly baseUrl: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private environment: EnvironmentService) {
+      this.baseUrl = `${this.environment.getApiUrl()}/profile`;
+    }
 
   getProfile$(): Observable<APIResponse | Profile> {
-    return this.http.get<Profile>(`${baseUrl}`, this.defaultOptions).pipe(
+    return this.http.get<Profile>(`${this.baseUrl}`, this.defaultOptions).pipe(
       catchError((error: HttpErrorResponse): Observable<APIResponse> => {
         switch (error.status) {
           default:
@@ -32,7 +35,7 @@ export class ProfileHttpService {
   }
 
   updateProfile$(profile: Profile): Observable<APIResponse | Profile> {
-    return this.http.put<Profile>(`${baseUrl}`, profile, this.defaultOptions).pipe(
+    return this.http.put<Profile>(`${this.baseUrl}`, profile, this.defaultOptions).pipe(
       catchError((error: HttpErrorResponse): Observable<APIResponse> => {
         switch (error.status) {
           default:
@@ -43,7 +46,7 @@ export class ProfileHttpService {
   }
 
   checkNameAvailability$(dancerName: string): Observable<APIResponse> {
-    return this.http.get<NameAvailability>(`${baseUrl}/checkDancerNameAvailibility/${dancerName}`, this.defaultOptions).pipe(
+    return this.http.get<NameAvailability>(`${this.baseUrl}/checkDancerNameAvailibility/${dancerName}`, this.defaultOptions).pipe(
       map((availability): APIResponse => availability ? 'SUCCESS' : 'NOT_AVAILABLE'),
       catchError((error: HttpErrorResponse): Observable<APIResponse> => {
         switch (error.status) {
