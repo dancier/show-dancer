@@ -22,9 +22,9 @@
     <button data-test="submit-login" mat-raised-button class="full-width background-color-500"
             [disabled]="!loginForm.valid">Anmelden
     </button>
-    <mat-error *ngIf="loginAttemptResponse && loginAttemptResponse !== 'SUCCESS'">
+    <mat-error *ngIf="error">
       <span>
-        {{errorMessages[loginAttemptResponse]}}
+        {{errorMessages[error]}}
       </span>
     </mat-error>
   </mat-card-content>

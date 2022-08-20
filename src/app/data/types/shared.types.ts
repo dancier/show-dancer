@@ -1,8 +1,10 @@
-export type APIResponse =
-| 'SUCCESS'
+export type APIError =
 | 'VALIDATION_ERROR'
 | 'SERVER_ERROR'
 | 'EMAIL_ALREADY_IN_USE'
 | 'INCORRECT_CREDENTIALS'
 | 'EMAIL_NOT_VALIDATED'
 | 'NOT_AVAILABLE'
+
+export type APISuccess =
+| 'SUCCESS'

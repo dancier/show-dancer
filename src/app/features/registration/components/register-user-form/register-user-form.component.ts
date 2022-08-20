@@ -4,8 +4,9 @@ import { AuthenticationService } from '@data/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mustMatch } from '@core/validators/mustMatch';
 import { Subscription } from 'rxjs';
-import { APIResponse } from '@data/types/shared.types';
+import { APIError } from '@data/types/shared.types';
 import { errorMessages } from '@data/constants/error-messages';
+import { isRight, unwrapEither } from '@data/types/either';
 
 @Component({
   selector: 'app-register-user-form',
@@ -15,7 +16,7 @@ import { errorMessages } from '@data/constants/error-messages';
 export class RegisterUserFormComponent implements OnInit, OnDestroy {
 
   registrationForm!: UntypedFormGroup;
-  registrationAttemptResponse: APIResponse | undefined;
+  error?: APIError;
   formStatusSubscription: Subscription | undefined;
   loggedInAsHuman = false;
   errorMessages = errorMessages;
@@ -64,9 +65,10 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
       this.authenticationService
         .onceUserRegistered({ email, password, acceptTermsAndConditions })
           .subscribe((response) => {
-          this.registrationAttemptResponse = response;
-          if (response === 'SUCCESS') {
+          if (isRight(response)) {
             this.router.navigate(['verify-account'], { relativeTo: this.route.parent });
+          } else {
+            this.error = unwrapEither(response)
           }
         });
     }
@@ -76,7 +78,7 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
     this.authenticationService
       .onceHumanLoggedIn(captchaToken)
       .subscribe((response) => {
-        if (response === 'SUCCESS') {
+        if (isRight(response)) {
           console.info('human session created');
           this.loggedInAsHuman = true;
         } else {

@@ -49,9 +49,9 @@
           </div>
         </ng-template>
         <button data-test="confirm-registration" mat-stroked-button color="primary" class="btn-block full-width" [disabled]="!registrationForm.valid">Registrieren</button>
-        <mat-error *ngIf="registrationAttemptResponse && registrationAttemptResponse !== 'SUCCESS'">
+        <mat-error *ngIf="error">
           <span>
-            {{errorMessages[registrationAttemptResponse]}}
+            {{errorMessages[error]}}
           </span>
         </mat-error>
       </mat-card-content>
