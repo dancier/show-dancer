@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Either, makeLeft, makeRight } from '@data/types/either';
+import { Either, asError, asSuccess } from '@data/types/either';
 import { NameAvailability, Profile } from '@data/types/profile.types';
-import { APIError, APISuccess } from '@data/types/shared.types';
+import { APIError } from '@data/types/shared.types';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
 
@@ -24,30 +24,30 @@ export class ProfileHttpService {
 
   getProfile$(): Observable<Either<APIError, Profile>> {
     return this.http.get<Profile>(`${this.baseUrl}`, this.defaultOptions).pipe(
-      map((profile) => makeRight(profile)),
+      map((profile) => asSuccess(profile)),
       catchError(
         (error: HttpErrorResponse): Observable<Either<APIError, Profile>> => {
           switch (error.status) {
             default:
-              return of(makeLeft('SERVER_ERROR' as APIError));
+              return of(asError<APIError>('SERVER_ERROR'));
           }
         }
       )
     );
   }
 
-  updateProfile$(profile: Profile): Observable<Either<APIError, APISuccess>> {
+  updateProfile$(profile: Profile): Observable<Either<APIError, Profile>> {
     return this.http
       .put<Profile>(`${this.baseUrl}`, profile, this.defaultOptions)
       .pipe(
-        map((_) => makeRight('SUCCESS' as APISuccess)),
+        map((profile) => asSuccess<Profile>(profile)),
         catchError(
           (
             error: HttpErrorResponse
-          ): Observable<Either<APIError, APISuccess>> => {
+          ): Observable<Either<APIError, Profile>> => {
             switch (error.status) {
               default:
-                return of(makeLeft('SERVER_ERROR' as APIError));
+                return of(asError<APIError>('SERVER_ERROR'));
             }
           }
         )
@@ -63,12 +63,12 @@ export class ProfileHttpService {
         this.defaultOptions
       )
       .pipe(
-        map((availability) => makeRight(availability.isAvailable)),
+        map((availability) => asSuccess(availability.isAvailable)),
         catchError(
           (error: HttpErrorResponse): Observable<Either<APIError, boolean>> => {
             switch (error.status) {
               default:
-                return of(makeLeft('SERVER_ERROR' as APIError));
+                return of(asError('SERVER_ERROR' as APIError));
             }
           }
         )

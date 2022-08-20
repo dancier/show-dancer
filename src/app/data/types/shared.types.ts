@@ -5,6 +5,3 @@ export type APIError =
 | 'INCORRECT_CREDENTIALS'
 | 'EMAIL_NOT_VALIDATED'
 | 'NOT_AVAILABLE'
-
-export type APISuccess =
-| 'SUCCESS'

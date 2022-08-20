@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Either, makeLeft, makeRight } from '@data/types/either';
+import { Either, asError, asSuccess } from '@data/types/either';
 import { Event } from '@data/types/eventlog.types';
-import { APIError, APISuccess } from '@data/types/shared.types';
+import { APIError } from '@data/types/shared.types';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
 
@@ -19,13 +19,13 @@ export class EventLogHttpService {
     private http: HttpClient
   ) {}
 
-  postEvent$(event: Event): Observable<Either<APIError, APISuccess>> {
+  postEvent$(event: Event): Observable<Either<APIError, void>> {
     return this.http.post<void>(`${this.environment.getApiUrl()}/eventlog`, event, this.defaultOptions).pipe(
-      map((_) => makeRight('SUCCESS' as APISuccess)),
-      catchError((error: HttpErrorResponse): Observable<Either<APIError, APISuccess>> => {
+      map(response => asSuccess<void>(response)),
+      catchError((error: HttpErrorResponse): Observable<Either<APIError, void>> => {
         switch (error.status) {
           default:
-            return of(makeLeft('SERVER_ERROR' as APIError));
+            return of(asError<APIError>('SERVER_ERROR'));
         }
       })
     );

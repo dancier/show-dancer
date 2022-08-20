@@ -8,8 +8,8 @@ import { AuthenticationService } from '@data/services/authentication.service';
 import { LoginRequest } from '@data/types/authentication.types';
 import { Router } from '@angular/router';
 import { errorMessages } from '@data/constants/error-messages';
-import { Either, isLeft, isRight, unwrapEither } from '@data/types/either';
-import { APIError, APISuccess } from '@data/types/shared.types';
+import { isSuccess, unwrapEither } from '@data/types/either';
+import { APIError } from '@data/types/shared.types';
 
 @Component({
   selector: 'app-login-form',
@@ -48,7 +48,7 @@ export class LoginFormComponent implements OnInit {
       this.authService
         .onceUserLoggedIn(this.loginForm.value as LoginRequest)
         .subscribe((response) => {
-          if (isRight(response)) {
+          if (isSuccess(response)) {
             this.router.navigate(['profile']);
           } else {
             this.error = unwrapEither(response)
