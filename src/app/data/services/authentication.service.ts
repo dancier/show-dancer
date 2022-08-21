@@ -46,7 +46,7 @@ export class AuthenticationService {
     return this.http.post<void>(`${this.baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
         map((response): LoginResponse => ({
-          status: 'SUCCESS'
+          isSuccess: true,
         })),
         tap(_ => this.authStorageService.setLoginState(true)),
         catchError((error: HttpErrorResponse) => {

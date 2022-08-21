@@ -43,7 +43,7 @@ export class LoginFormComponent implements OnInit {
       this.authService
         .onceUserLoggedIn(this.loginForm.value as LoginRequest)
         .subscribe((response) => {
-          if (response.status === 'SUCCESS') {
+          if (response.isSuccess) {
             this.router.navigate(['profile']);
           } else {
             this.error = response.error;

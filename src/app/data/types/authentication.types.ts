@@ -17,7 +17,7 @@ export type LoginError = 'INCORRECT_CREDENTIALS' | 'EMAIL_NOT_VALIDATED' | 'SERV
 
 export function asLoginError(error: LoginError): ResponseError<LoginError> {
   return {
-    status: 'ERROR',
+    isSuccess: false,
     error,
   };
 }

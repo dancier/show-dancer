@@ -1,13 +1,13 @@
 export type ResponseSuccessNoPayload = {
-  status: 'SUCCESS'
+  isSuccess: true,
 }
 
 export type ResponseSuccess<T> = {
-  status: 'SUCCESS',
+  isSuccess: true,
   payload: T
 }
 
 export type ResponseError<T> = {
-  status: 'ERROR',
+  isSuccess: false,
   error: T
 }
