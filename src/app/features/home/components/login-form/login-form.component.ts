@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
 import { LoginRequest } from '@data/types/authentication.types';
 import { Router } from '@angular/router';
 import { errorMessages } from '@data/constants/error-messages';
-import { isSuccess, unwrapEither } from '@data/types/either';
 import { APIError } from '@data/types/shared.types';
 
 @Component({
@@ -48,10 +43,10 @@ export class LoginFormComponent implements OnInit {
       this.authService
         .onceUserLoggedIn(this.loginForm.value as LoginRequest)
         .subscribe((response) => {
-          if (isSuccess(response)) {
+          if (response.status === 'SUCCESS') {
             this.router.navigate(['profile']);
           } else {
-            this.error = unwrapEither(response)
+            this.error = response.error;
           }
         });
     }

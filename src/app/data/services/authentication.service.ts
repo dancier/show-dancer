@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import {
-  LoginRequest,
-  UserRegistration,
-} from '@data/types/authentication.types';
+import { asLoginError, LoginRequest, LoginResponse, UserRegistration, } from '@data/types/authentication.types';
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { AuthStorageService } from '@data/services/auth-storage.service';
 import { APIError } from '@data/types/shared.types';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
-import { Either, asError, asSuccess } from '@data/types/either';
+import { asError, asSuccess, Either } from '@data/types/either';
 
 @Injectable({
   providedIn: 'root',
@@ -45,19 +42,21 @@ export class AuthenticationService {
       );
   }
 
-  onceUserLoggedIn(loginRequest: LoginRequest): Observable<Either<APIError, void>>  {
+  onceUserLoggedIn(loginRequest: LoginRequest): Observable<LoginResponse>  {
     return this.http.post<void>(`${this.baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
-        map(response => asSuccess(response)),
+        map((response): LoginResponse => ({
+          status: 'SUCCESS'
+        })),
         tap(_ => this.authStorageService.setLoginState(true)),
-        catchError((error: HttpErrorResponse): Observable<Either<APIError, void>> => {
+        catchError((error: HttpErrorResponse) => {
           switch(error.status) {
             case 401:
-              return of(asError<APIError>('INCORRECT_CREDENTIALS'));
+              return of(asLoginError('INCORRECT_CREDENTIALS'));
             case 403:
-              return of(asError<APIError>('EMAIL_NOT_VALIDATED'));
+              return of(asLoginError('EMAIL_NOT_VALIDATED'));
             default:
-              return of(asError<APIError>('SERVER_ERROR'));
+              return of(asLoginError('SERVER_ERROR'));
           }
         }),
         shareReplay(1)
