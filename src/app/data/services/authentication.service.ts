@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { asLoginError, LoginRequest, LoginResponse, UserRegistration, } from '@data/types/authentication.types';
+import { LoginRequest, UserRegistration, } from '@data/types/authentication.types';
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { AuthStorageService } from '@data/services/auth-storage.service';
-import { APIError } from '@data/types/shared.types';
+import { APIError, asError, asSuccess } from '@data/types/shared.types';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
-import { asError, asSuccess, Either } from '@data/types/either';
+import { APIResponseNoPayload } from '@data/types/response.types';
 
 @Injectable({
   providedIn: 'root',
@@ -26,44 +26,42 @@ export class AuthenticationService {
     this.baseUrl = `${this.environment.getApiUrl()}/authentication`;
   }
 
-  onceUserRegistered(userRegistration: UserRegistration): Observable<Either<APIError, void>> {
+  onceUserRegistered(userRegistration: UserRegistration): Observable<APIResponseNoPayload> {
     return this.http.post<void>(`${this.baseUrl}/registrations`, userRegistration, this.defaultOptions)
       .pipe(
-        map((response) => asSuccess(response)),
-        catchError((error: HttpErrorResponse): Observable<Either<APIError, void>> => {
+        map((_) => asSuccess()),
+        catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             case 409:
-              return of(asError<APIError>('EMAIL_ALREADY_IN_USE'));
+              return of(asError('EMAIL_ALREADY_IN_USE'));
             default:
-              return of(asError<APIError>('SERVER_ERROR'));
+              return of(asError('SERVER_ERROR'));
           }
         }),
         shareReplay(1)
       );
   }
 
-  onceUserLoggedIn(loginRequest: LoginRequest): Observable<LoginResponse>  {
+  onceUserLoggedIn(loginRequest: LoginRequest): Observable<APIResponseNoPayload>  {
     return this.http.post<void>(`${this.baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
-        map((response): LoginResponse => ({
-          isSuccess: true,
-        })),
+        map((_) => asSuccess()),
         tap(_ => this.authStorageService.setLoginState(true)),
         catchError((error: HttpErrorResponse) => {
           switch(error.status) {
             case 401:
-              return of(asLoginError('INCORRECT_CREDENTIALS'));
+              return of(asError('INCORRECT_CREDENTIALS'));
             case 403:
-              return of(asLoginError('EMAIL_NOT_VALIDATED'));
+              return of(asError('EMAIL_NOT_VALIDATED'));
             default:
-              return of(asLoginError('SERVER_ERROR'));
+              return of(asError('SERVER_ERROR'));
           }
         }),
         shareReplay(1)
       );
   }
 
-  onceHumanLoggedIn(captchaToken: string): Observable<Either<APIError, void>>  {
+  onceHumanLoggedIn(captchaToken: string): Observable<APIResponseNoPayload>  {
     const httpOptions = {
       headers: new HttpHeaders({
         'X-Captcha-Token': captchaToken,
@@ -73,46 +71,46 @@ export class AuthenticationService {
 
     return this.http.post<void>(`${this.baseUrl}/loginAsHuman`, null, httpOptions)
       .pipe(
-        map((response) => asSuccess(response)),
+        map((_) => asSuccess()),
         tap(_ => this.authStorageService.setHumanState(true)),
-        catchError((error: HttpErrorResponse): Observable<Either<APIError, void>> => {
+        catchError((error: HttpErrorResponse) => {
           switch(error.status) {
             case 401:
-              return of(asError<APIError>('INCORRECT_CREDENTIALS'));
+              return of(asError('INCORRECT_CREDENTIALS'));
             default:
-              return of(asError<APIError>('SERVER_ERROR'));
+              return of(asError('SERVER_ERROR'));
           }
         }),
         shareReplay(1)
       );
   }
 
-  onceAccountVerified(validationCode: string): Observable<Either<APIError, void>> {
+  onceAccountVerified(validationCode: string): Observable<APIResponseNoPayload> {
     return this.http.put<void>(`${this.baseUrl}/email-validations/${validationCode}`, null, this.defaultOptions)
       .pipe(
-        map(response => asSuccess(response)),
+        map((_) => asSuccess()),
         tap(_ => this.authStorageService.setLoginState(true)),
-        catchError((error: HttpErrorResponse): Observable<Either<APIError, void>>  => {
+        catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             case 400:
-              return of(asError<APIError>('VALIDATION_ERROR'));
+              return of(asError('VALIDATION_ERROR'));
               default:
-                return of(asError(<APIError>'SERVER_ERROR'));
+                return of(asError('SERVER_ERROR'));
           }
         }),
         shareReplay(1)
       );
   }
 
-  onceUserLoggedOut(): Observable<Either<APIError, void>> {
+  onceUserLoggedOut(): Observable<APIResponseNoPayload> {
     return this.http.get<void>(`${this.baseUrl}/logout`, this.defaultOptions)
     .pipe(
-      map(response => asSuccess(response)),
+      map((_) => asSuccess()),
       tap(_ => this.authStorageService.setLoginState(false)),
-      catchError((error: HttpErrorResponse): Observable<Either<APIError, void>> => {
+      catchError((error: HttpErrorResponse) => {
         switch (error.status) {
           default:
-            return of(asError<APIError>('SERVER_ERROR'));
+            return of(asError('SERVER_ERROR'));
         }
       })
     );

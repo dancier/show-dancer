@@ -4,7 +4,6 @@ import { AuthenticationService } from '@data/services/authentication.service';
 import { LoginRequest } from '@data/types/authentication.types';
 import { Router } from '@angular/router';
 import { errorMessages } from '@data/constants/error-messages';
-import { APIError } from '@data/types/shared.types';
 
 @Component({
   selector: 'app-login-form',
@@ -13,9 +12,8 @@ import { APIError } from '@data/types/shared.types';
 })
 export class LoginFormComponent implements OnInit {
   loginForm!: UntypedFormGroup;
-  error?: APIError;
   hide = true;
-  errorMessages = errorMessages;
+  errorMessage?: string;
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -46,7 +44,7 @@ export class LoginFormComponent implements OnInit {
           if (response.isSuccess) {
             this.router.navigate(['profile']);
           } else {
-            this.error = response.error;
+            this.errorMessage = errorMessages[response.error];
           }
         });
     }
