@@ -1,8 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Either, asError, asSuccess } from '@data/types/either';
 import { NameAvailability, Profile } from '@data/types/profile.types';
-import { APIError } from '@data/types/shared.types';
+import {
+  APIResponseWithoutPayload,
+  APIResponseWithPayload,
+  asError,
+  asSuccess,
+  asSuccessWithPayload,
+} from '@data/types/response.types';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
 
@@ -22,56 +27,48 @@ export class ProfileHttpService {
     this.baseUrl = `${this.environment.getApiUrl()}/profile`;
   }
 
-  getProfile$(): Observable<Either<APIError, Profile>> {
+  getProfile$(): Observable<APIResponseWithPayload<Profile>> {
     return this.http.get<Profile>(`${this.baseUrl}`, this.defaultOptions).pipe(
-      map((profile) => asSuccess(profile)),
-      catchError(
-        (error: HttpErrorResponse): Observable<Either<APIError, Profile>> => {
-          switch (error.status) {
-            default:
-              return of(asError<APIError>('SERVER_ERROR'));
-          }
+      map(asSuccessWithPayload),
+      catchError((error: HttpErrorResponse) => {
+        switch (error.status) {
+          default:
+            return of(asError('SERVER_ERROR'));
         }
-      )
+      })
     );
   }
 
-  updateProfile$(profile: Profile): Observable<Either<APIError, Profile>> {
+  updateProfile$(profile: Profile): Observable<APIResponseWithoutPayload> {
     return this.http
       .put<Profile>(`${this.baseUrl}`, profile, this.defaultOptions)
       .pipe(
-        map((profile) => asSuccess<Profile>(profile)),
-        catchError(
-          (
-            error: HttpErrorResponse
-          ): Observable<Either<APIError, Profile>> => {
-            switch (error.status) {
-              default:
-                return of(asError<APIError>('SERVER_ERROR'));
-            }
+        map((_) => asSuccess()),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            default:
+              return of(asError('SERVER_ERROR'));
           }
-        )
+        })
       );
   }
 
   checkNameAvailability$(
     dancerName: string
-  ): Observable<Either<APIError, boolean>> {
+  ): Observable<APIResponseWithPayload<NameAvailability>> {
     return this.http
       .get<NameAvailability>(
         `${this.baseUrl}/checkDancerNameAvailibility/${dancerName}`,
         this.defaultOptions
       )
       .pipe(
-        map((availability) => asSuccess(availability.isAvailable)),
-        catchError(
-          (error: HttpErrorResponse): Observable<Either<APIError, boolean>> => {
-            switch (error.status) {
-              default:
-                return of(asError('SERVER_ERROR' as APIError));
-            }
+        map((availability) => asSuccessWithPayload(availability)),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            default:
+              return of(asError('SERVER_ERROR'));
           }
-        )
+        })
       );
   }
 }

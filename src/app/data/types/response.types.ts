@@ -1,3 +1,5 @@
+import { NameAvailability, Profile } from './profile.types';
+
 export type APIError =
   | 'VALIDATION_ERROR'
   | 'SERVER_ERROR'
@@ -7,22 +9,24 @@ export type APIError =
   | 'NOT_AVAILABLE';
 
 export type ResponseSuccessNoPayload = {
-  isSuccess: true,
-}
+  isSuccess: true;
+};
 
 export type ResponseSuccess<T> = {
-  isSuccess: true,
-  payload: T
-}
+  isSuccess: true;
+  payload: T;
+};
 
 export type ResponseError = {
-  isSuccess: false,
-  error: APIError
-}
+  isSuccess: false;
+  error: APIError;
+};
 
-export type APIResponseNoPayload = ResponseError | ResponseSuccessNoPayload
+export type APIResponseWithoutPayload =
+  | ResponseError
+  | ResponseSuccessNoPayload;
 
-export type APIResponseWithPayload<T> = ResponseError | ResponseSuccess<T>
+export type APIResponseWithPayload<T> = ResponseError | ResponseSuccess<T>;
 
 export const asError = (error: APIError): ResponseError => ({
   isSuccess: false,
@@ -30,3 +34,10 @@ export const asError = (error: APIError): ResponseError => ({
 });
 
 export const asSuccess = (): ResponseSuccessNoPayload => ({ isSuccess: true });
+
+export type AsSuccessWithPayload = <T>(payload: T) => ResponseSuccess<T>
+
+export const asSuccessWithPayload: AsSuccessWithPayload  = (payload) => ({
+  isSuccess: true,
+  payload,
+});
