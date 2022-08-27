@@ -4,7 +4,6 @@ import { AuthenticationService } from '@data/services/authentication.service';
 import { LoginRequest } from '@data/types/authentication.types';
 import { Router } from '@angular/router';
 import { APIError } from '@data/types/response.types';
-import { ErrorMessagePipe } from '@data/pipes/error-message.pipe';
 
 @Component({
   selector: 'app-login-form',
