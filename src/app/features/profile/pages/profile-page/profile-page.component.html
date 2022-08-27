@@ -2,7 +2,7 @@
     <div class="profile-title-container" ngStyle.gt-xs="border-radius: 16px">
       <div class="profile-name-container">
         <h1>{{profileDataService.profile.dancerName}}</h1>
-        <span class="age">{{profileDataService.profile.age}}</span>
+        <span class="age">{{profileDataService.profile.birthDate | age}}</span>
         <span class="dance-key-words">Tango, Standard</span>
       </div>
     </div>

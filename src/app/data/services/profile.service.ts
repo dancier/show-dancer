@@ -42,8 +42,7 @@ export class ProfileService {
       zipCode: '',
       city: '',
       country: '',
-      profileImageHash: '',
-      age: 0,
+      profileImageHash: ''
     };
   }
 }

@@ -40,8 +40,7 @@ export type Profile = {
     zipCode: string,
     city: string,
     country: string,
-    profileImageHash: string,
-    age?: number
+    profileImageHash: string
 }
 
 export type NameAvailability = {
