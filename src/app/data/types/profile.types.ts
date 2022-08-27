@@ -41,6 +41,7 @@ export type Profile = {
     city: string,
     country: string,
     profileImageHash: string,
+    age?: number
 }
 
 export type NameAvailability = {

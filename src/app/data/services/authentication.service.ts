@@ -5,6 +5,7 @@ import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { AuthStorageService } from '@data/services/auth-storage.service';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
 import { APIResponseWithoutPayload, asError, asSuccess } from '@data/types/response.types';
+import { ProfileDataService } from './profile-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,8 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private authStorageService: AuthStorageService,
-    private environment: EnvironmentService
+    private environment: EnvironmentService,
+    private profileDataservice: ProfileDataService
   ) {
     this.baseUrl = `${this.environment.getApiUrl()}/authentication`;
   }
@@ -46,6 +48,7 @@ export class AuthenticationService {
       .pipe(
         map((_) => asSuccess()),
         tap(_ => this.authStorageService.setLoginState(true)),
+        tap(_ => this.profileDataservice.fetchProfileData()),
         catchError((error: HttpErrorResponse) => {
           switch(error.status) {
             case 401:
