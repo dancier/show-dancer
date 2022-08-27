@@ -14,7 +14,7 @@ import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { MatButtonModule } from '@angular/material/button';
 import { BetaRegistrationPageComponent } from './pages/beta-registration-page/beta-registration-page.component';
-import { ErrorMessagePipe } from '@data/pipes/error-message.pipe';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,6 @@ import { ErrorMessagePipe } from '@data/pipes/error-message.pipe';
     TermsAndConditionsComponent,
     AboutUsComponent,
     BetaRegistrationPageComponent,
-    ErrorMessagePipe,
   ],
   imports: [
     FormsModule,
@@ -38,7 +37,8 @@ import { ErrorMessagePipe } from '@data/pipes/error-message.pipe';
     ExtendedModule,
     MatIconModule,
     MatButtonModule,
+    SharedModule,
   ],
-  exports: [LoginFormComponent, ErrorMessagePipe],
+  exports: [LoginFormComponent],
 })
 export class HomeModule {}
