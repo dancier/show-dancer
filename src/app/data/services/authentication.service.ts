@@ -48,7 +48,6 @@ export class AuthenticationService {
       .pipe(
         map(asSuccess),
         tap(_ => this.authStorageService.setLoginState(true)),
-        tap(_ => this.profileDataservice.fetchProfileData()),
         catchError((error: HttpErrorResponse) => {
           switch(error.status) {
             case 401:

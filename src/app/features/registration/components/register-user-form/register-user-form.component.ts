@@ -4,7 +4,6 @@ import { AuthenticationService } from '@data/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mustMatch } from '@core/validators/mustMatch';
 import { Subscription } from 'rxjs';
-import { errorMessages } from '@data/constants/error-messages';
 import { APIError } from '@data/types/response.types';
 
 @Component({
@@ -18,7 +17,6 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
   error?: APIError
   formStatusSubscription: Subscription | undefined;
   loggedInAsHuman = false;
-  errorMessages = errorMessages;
 
   constructor(
     private fb: UntypedFormBuilder,

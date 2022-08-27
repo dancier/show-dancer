@@ -14,6 +14,7 @@ import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { MatButtonModule } from '@angular/material/button';
 import { BetaRegistrationPageComponent } from './pages/beta-registration-page/beta-registration-page.component';
+import { ErrorMessagePipe } from '@data/pipes/error-message.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BetaRegistrationPageComponent } from './pages/beta-registration-page/be
     TermsAndConditionsComponent,
     AboutUsComponent,
     BetaRegistrationPageComponent,
+    ErrorMessagePipe,
   ],
   imports: [
     FormsModule,
@@ -37,6 +39,6 @@ import { BetaRegistrationPageComponent } from './pages/beta-registration-page/be
     MatIconModule,
     MatButtonModule,
   ],
-  exports: [LoginFormComponent],
+  exports: [LoginFormComponent, ErrorMessagePipe],
 })
 export class HomeModule {}

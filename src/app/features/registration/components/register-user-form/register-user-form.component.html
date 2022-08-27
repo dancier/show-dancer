@@ -51,7 +51,7 @@
         <button data-test="confirm-registration" mat-stroked-button color="primary" class="btn-block full-width" [disabled]="!registrationForm.valid">Registrieren</button>
         <mat-error *ngIf="error">
           <span>
-            {{errorMessages[error]}}
+            {{error | errorMessage}}
           </span>
         </mat-error>
       </mat-card-content>

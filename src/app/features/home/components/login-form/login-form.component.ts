@@ -3,7 +3,8 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators, } from '@angular/form
 import { AuthenticationService } from '@data/services/authentication.service';
 import { LoginRequest } from '@data/types/authentication.types';
 import { Router } from '@angular/router';
-import { errorMessages } from '@data/constants/error-messages';
+import { APIError } from '@data/types/response.types';
+import { ErrorMessagePipe } from '@data/pipes/error-message.pipe';
 
 @Component({
   selector: 'app-login-form',
@@ -13,7 +14,7 @@ import { errorMessages } from '@data/constants/error-messages';
 export class LoginFormComponent implements OnInit {
   loginForm!: UntypedFormGroup;
   hide = true;
-  errorMessage?: string;
+  error?: APIError;
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -44,7 +45,7 @@ export class LoginFormComponent implements OnInit {
           if (response.isSuccess) {
             this.router.navigate(['profile']);
           } else {
-            this.errorMessage = errorMessages[response.error];
+            this.error = response.error;
           }
         });
     }
