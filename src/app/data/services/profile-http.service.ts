@@ -2,11 +2,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NameAvailability, Profile } from '@data/types/profile.types';
 import {
-  APIResponseWithoutPayload,
-  APIResponseWithPayload,
+  APIResponse,
   asError,
   asSuccess,
-  asSuccessWithPayload,
 } from '@data/types/response.types';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
@@ -27,9 +25,9 @@ export class ProfileHttpService {
     this.baseUrl = `${this.environment.getApiUrl()}/profile`;
   }
 
-  getProfile$(): Observable<APIResponseWithPayload<Profile>> {
+  getProfile$(): Observable<APIResponse<Profile>> {
     return this.http.get<Profile>(`${this.baseUrl}`, this.defaultOptions).pipe(
-      map(asSuccessWithPayload),
+      map((asSuccess)),
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {
           default:
@@ -39,9 +37,9 @@ export class ProfileHttpService {
     );
   }
 
-  updateProfile$(profile: Profile): Observable<APIResponseWithoutPayload> {
+  updateProfile$(profile: Profile): Observable<APIResponse<void>> {
     return this.http
-      .put<Profile>(`${this.baseUrl}`, profile, this.defaultOptions)
+      .put<void>(`${this.baseUrl}`, profile, this.defaultOptions)
       .pipe(
         map(asSuccess),
         catchError((error: HttpErrorResponse) => {
@@ -55,14 +53,14 @@ export class ProfileHttpService {
 
   checkNameAvailability$(
     dancerName: string
-  ): Observable<APIResponseWithPayload<NameAvailability>> {
+  ): Observable<APIResponse<NameAvailability>> {
     return this.http
       .get<NameAvailability>(
         `${this.baseUrl}/checkDancerNameAvailibility/${dancerName}`,
         this.defaultOptions
       )
       .pipe(
-        map(asSuccessWithPayload),
+        map(asSuccess),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             default:

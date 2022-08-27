@@ -4,8 +4,8 @@ import { LoginRequest, UserRegistration, } from '@data/types/authentication.type
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { AuthStorageService } from '@data/services/auth-storage.service';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
-import { APIResponseWithoutPayload, asError, asSuccess } from '@data/types/response.types';
-import { ProfileDataService } from './profile-data.service';
+import { APIResponse, asError, asSuccess } from '@data/types/response.types';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,15 +22,15 @@ export class AuthenticationService {
     private http: HttpClient,
     private authStorageService: AuthStorageService,
     private environment: EnvironmentService,
-    private profileDataservice: ProfileDataService
+    private profileDataservice: ProfileService
   ) {
     this.baseUrl = `${this.environment.getApiUrl()}/authentication`;
   }
 
-  onceUserRegistered(userRegistration: UserRegistration): Observable<APIResponseWithoutPayload> {
+  onceUserRegistered(userRegistration: UserRegistration): Observable<APIResponse<void>> {
     return this.http.post<void>(`${this.baseUrl}/registrations`, userRegistration, this.defaultOptions)
       .pipe(
-        map(asSuccess),
+        map((_) => asSuccess(_)),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             case 409:
@@ -43,7 +43,7 @@ export class AuthenticationService {
       );
   }
 
-  onceUserLoggedIn(loginRequest: LoginRequest): Observable<APIResponseWithoutPayload>  {
+  onceUserLoggedIn(loginRequest: LoginRequest): Observable<APIResponse<void>>  {
     return this.http.post<void>(`${this.baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
         map(asSuccess),
@@ -63,7 +63,7 @@ export class AuthenticationService {
       );
   }
 
-  onceHumanLoggedIn(captchaToken: string): Observable<APIResponseWithoutPayload>  {
+  onceHumanLoggedIn(captchaToken: string): Observable<APIResponse<void>>  {
     const httpOptions = {
       headers: new HttpHeaders({
         'X-Captcha-Token': captchaToken,
@@ -87,7 +87,7 @@ export class AuthenticationService {
       );
   }
 
-  onceAccountVerified(validationCode: string): Observable<APIResponseWithoutPayload> {
+  onceAccountVerified(validationCode: string): Observable<APIResponse<void>> {
     return this.http.put<void>(`${this.baseUrl}/email-validations/${validationCode}`, null, this.defaultOptions)
       .pipe(
         map(asSuccess),
@@ -104,7 +104,7 @@ export class AuthenticationService {
       );
   }
 
-  onceUserLoggedOut(): Observable<APIResponseWithoutPayload> {
+  onceUserLoggedOut(): Observable<APIResponse<void>> {
     return this.http.get<void>(`${this.baseUrl}/logout`, this.defaultOptions)
     .pipe(
       map(asSuccess),

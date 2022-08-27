@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Profile } from '@data/types/profile.types';
-import { BehaviorSubject } from 'rxjs';
 import { ProfileHttpService } from './profile-http.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileDataService {
+export class ProfileService {
 
   profile: Profile = this.initProfile()
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ProfileDataService } from '@data/services/profile-data.service';
-import { Profile } from '@data/types/profile.types';
+import { ProfileService } from '@data/services/profile.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -9,5 +8,5 @@ import { Profile } from '@data/types/profile.types';
 })
 export class ProfilePageComponent {
 
-  constructor(public profileDataService: ProfileDataService) {}
+  constructor(public profileDataService: ProfileService) {}
 }

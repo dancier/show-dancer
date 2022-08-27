@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
-import { APIResponseWithoutPayload, asError, asSuccess } from '@data/types/response.types';
+import { APIResponse, asError, asSuccess } from '@data/types/response.types';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class ImageUploadService {
     });
   }
 
-  uploadImage$(croppedImage: string): Observable<APIResponseWithoutPayload> {
+  uploadImage$(croppedImage: string): Observable<APIResponse<void>> {
     const blobFromDataUrl = this.dataURItoBlob(croppedImage);
     const formData: FormData = new FormData();
     formData.append('file', blobFromDataUrl);

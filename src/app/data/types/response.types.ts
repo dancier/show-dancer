@@ -22,22 +22,16 @@ export type ResponseError = {
   error: APIError;
 };
 
-export type APIResponseWithoutPayload =
-  | ResponseError
-  | ResponseSuccessNoPayload;
-
-export type APIResponseWithPayload<T> = ResponseError | ResponseSuccess<T>;
+export type APIResponse<T> = ResponseError | ResponseSuccess<T>;
 
 export const asError = (error: APIError): ResponseError => ({
   isSuccess: false,
   error,
 });
 
-export const asSuccess = (): ResponseSuccessNoPayload => ({ isSuccess: true });
+export type AsSuccess = <T>(payload: T) => ResponseSuccess<T>
 
-export type AsSuccessWithPayload = <T>(payload: T) => ResponseSuccess<T>
-
-export const asSuccessWithPayload: AsSuccessWithPayload  = (payload) => ({
+export const asSuccess: AsSuccess  = (payload) => ({
   isSuccess: true,
   payload,
 });
