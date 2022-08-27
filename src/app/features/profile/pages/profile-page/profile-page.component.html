@@ -1,51 +1,39 @@
 <div class="profile-page-outer-container background-color-900">
-  <div class="profile-title-container" ngStyle.gt-xs="border-radius: 16px">
-    <div class="profile-name-container">
-      <h1>Crystal Liu</h1>
-      <span class="age">35</span>
-      <span class="dance-key-words">Tango, Standard</span>
+    <div class="profile-title-container" ngStyle.gt-xs="border-radius: 16px">
+      <div class="profile-name-container">
+        <h1>{{profileDataService.profile.dancerName}}</h1>
+        <span class="age">{{profileDataService.profile.birthDate | age}}</span>
+        <span class="dance-key-words">Tango, Standard</span>
+      </div>
     </div>
-  </div>
-  <mat-tab-group class="dance-details" mat-align-tabs="center">
-    <mat-tab label="Ich tanze">
-      <div class="dance-types-container" fxLayout.xs="column">
-        <app-dance-type [danceTypeName]="'Tango'"
-                        [danceLevel]="'Beginner'"
-                        [role]="'Folgende'"></app-dance-type>
-        <app-dance-type [danceTypeName]="'Standard'"
-                        [danceLevel]="'Fortschritten'"
-                        [role]="'Folgende'"></app-dance-type>
-        <app-dance-type [danceTypeName]="'Cha Cha'"
-                        [danceLevel]="'Expert'"
-                        [role]="'Folgende'"></app-dance-type>
-      </div>
-    </mat-tab>
-    <mat-tab label="Ich suche">
-      <div class="dance-types-container" fxLayout.xs="column">
-        <app-dance-type [danceTypeName]="'Tango'"
-                        [danceLevel]="'Beginner'"
-                        [role]="'Führender'"></app-dance-type>
-        <app-dance-type [danceTypeName]="'Standard'"
-                        [danceLevel]="'Fortschritten'"
-                        [role]="'Führender'"></app-dance-type>
-        <app-dance-type [danceTypeName]="'Cha Cha'"
-                        [danceLevel]="'Expert'"
-                        [role]="'Führender'"></app-dance-type>
-      </div>
-    </mat-tab>
-    <mat-tab label="Persönliche Daten">
-      <app-personal-data
-        [birthday]="'01.01.1987'"
-        [city]="'Dortmund'"
-        [country]="'Deutschland'"
-        [email]="'beispiel@example.com'"
-        [gender]="'Weiblich'"
-        [height]="'165cm'"
-        [username]="'Yifei Liu'"
-        [zipCode]="'44339'"
-        class="personal-data-container"
-      >
-      </app-personal-data>
-    </mat-tab>
-  </mat-tab-group>
+    <mat-tab-group class="dance-details" mat-align-tabs="center">
+      <mat-tab label="Ich tanze">
+        <div class="dance-types-container" fxLayout.xs="column">
+          <app-dance-type *ngFor="let preference of profileDataService.profile?.ableTo" [danceTypeName]="(preference.dance)"
+                          [danceLevel]="(preference.level)"
+                          [role]="(preference.leading)"></app-dance-type>
+        </div>
+      </mat-tab>
+      <mat-tab label="Ich suche">
+        <div class="dance-types-container" fxLayout.xs="column">
+          <app-dance-type *ngFor="let preference of profileDataService.profile?.ableTo" [danceTypeName]="(preference.dance)"
+                          [danceLevel]="(preference.level)"
+                          [role]="(preference.leading)"></app-dance-type>
+        </div>
+      </mat-tab>
+      <mat-tab label="Persönliche Daten">
+        <app-personal-data
+          [birthday]="profileDataService.profile.birthDate"
+          [city]="profileDataService.profile.city"
+          [country]="profileDataService.profile.country"
+          [email]="profileDataService.profile.email"
+          [gender]="profileDataService.profile.gender"
+          [height]="profileDataService.profile.size"
+          [username]="profileDataService.profile.dancerName"
+          [zipCode]="profileDataService.profile.zipCode"
+          class="personal-data-container"
+        >
+        </app-personal-data>
+      </mat-tab>
+    </mat-tab-group>
 </div>

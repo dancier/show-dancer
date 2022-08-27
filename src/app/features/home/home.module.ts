@@ -14,6 +14,7 @@ import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { MatButtonModule } from '@angular/material/button';
 import { BetaRegistrationPageComponent } from './pages/beta-registration-page/beta-registration-page.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { BetaRegistrationPageComponent } from './pages/beta-registration-page/be
     ExtendedModule,
     MatIconModule,
     MatButtonModule,
+    SharedModule,
   ],
   exports: [LoginFormComponent],
 })

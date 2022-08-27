@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
-import { RegistrationResponse } from '@data/types/authentication.types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mustMatch } from '@core/validators/mustMatch';
 import { Subscription } from 'rxjs';
+import { APIError } from '@data/types/response.types';
 
 @Component({
   selector: 'app-register-user-form',
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class RegisterUserFormComponent implements OnInit, OnDestroy {
 
   registrationForm!: UntypedFormGroup;
-  registrationAttemptResponse: RegistrationResponse | undefined;
+  error?: APIError
   formStatusSubscription: Subscription | undefined;
   loggedInAsHuman = false;
 
@@ -62,9 +62,10 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
       this.authenticationService
         .onceUserRegistered({ email, password, acceptTermsAndConditions })
           .subscribe((response) => {
-          this.registrationAttemptResponse = response;
-          if (response === 'SUCCESS') {
+          if (response.isSuccess) {
             this.router.navigate(['verify-account'], { relativeTo: this.route.parent });
+          } else {
+            this.error = response.error
           }
         });
     }
@@ -74,7 +75,7 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
     this.authenticationService
       .onceHumanLoggedIn(captchaToken)
       .subscribe((response) => {
-        if (response === 'SUCCESS') {
+        if (response.isSuccess) {
           console.info('human session created');
           this.loggedInAsHuman = true;
         } else {

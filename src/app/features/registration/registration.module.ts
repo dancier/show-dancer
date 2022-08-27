@@ -15,7 +15,6 @@ import { VerificationErrorComponent } from './components/verification-error/veri
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { HomeModule } from '@features/home/home.module';
 import { ResendVerificationLinkFormComponent } from './components/resend-verification-link-form/resend-verification-link-form.component';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -41,7 +40,6 @@ import { MatIconModule } from '@angular/material/icon';
     RegistrationRoutingModule,
     SharedModule,
     MatCheckboxModule,
-    HomeModule,
     MatIconModule,
   ]
 })

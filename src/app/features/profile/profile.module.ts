@@ -24,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PersonalDataComponent } from '@features/profile/components/personal-data/personal-data.component';
 import { ProfileRoutingModule } from '@features/profile/profile-routing.module';
 import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-image/edit-profile-image.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-
     MatSelectModule,
     MatAutocompleteModule,
     ImageCropperModule,
+    SharedModule
   ]
 })
 export class ProfileModule { }

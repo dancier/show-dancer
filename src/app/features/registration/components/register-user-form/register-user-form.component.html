@@ -49,13 +49,9 @@
           </div>
         </ng-template>
         <button data-test="confirm-registration" mat-stroked-button color="primary" class="btn-block full-width" [disabled]="!registrationForm.valid">Registrieren</button>
-        <mat-error *ngIf="registrationAttemptResponse && registrationAttemptResponse !== 'SUCCESS'">
-          <span *ngIf="registrationAttemptResponse === 'EMAIL_ALREADY_IN_USE'">
-            Ein Account mit dieser E-Mail Adresse existiert bereits.
-          </span>
-          <span *ngIf="registrationAttemptResponse === 'SERVER_ERROR'">
-            Ein unerwarteter Fehler ist aufgetreten.
-            Bitte versuchen Sie es später erneut.
+        <mat-error *ngIf="error">
+          <span>
+            {{error | errorMessage}}
           </span>
         </mat-error>
       </mat-card-content>

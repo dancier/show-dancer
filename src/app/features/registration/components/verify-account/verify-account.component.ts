@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from '@data/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
-import { VerificationResponse } from '@data/types/authentication.types';
 
 @Component({
   selector: 'app-verify-account',
@@ -26,8 +25,8 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
         const verifyCode: string = params['code'];
         return this.authService.onceAccountVerified(verifyCode);
       })
-    ).subscribe((response: VerificationResponse) => {
-      if (response === 'SUCCESS') {
+    ).subscribe(response => {
+      if (response.isSuccess) {
         this.router.navigate(['profile', 'initial-setup']);
       } else {
         this.router.navigate(['verify', 'error'], { relativeTo: this.route.parent });

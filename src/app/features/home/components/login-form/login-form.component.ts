@@ -1,30 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, } from '@angular/forms';
 import { AuthenticationService } from '@data/services/authentication.service';
-import { LoginRequest, LoginResponse } from '@data/types/authentication.types';
+import { LoginRequest } from '@data/types/authentication.types';
 import { Router } from '@angular/router';
-
+import { APIError } from '@data/types/response.types';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
-
   loginForm!: UntypedFormGroup;
-  loginAttemptResponse: LoginResponse | undefined;
-  hide = true
+  hide = true;
+  error?: APIError;
 
   constructor(
     private fb: UntypedFormBuilder,
     private authService: AuthenticationService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initReactiveForm();
   }
-
 
   private initReactiveForm(): void {
     this.loginForm = this.fb.group({
@@ -42,12 +41,12 @@ export class LoginFormComponent implements OnInit {
       this.authService
         .onceUserLoggedIn(this.loginForm.value as LoginRequest)
         .subscribe((response) => {
-          this.loginAttemptResponse = response;
-          if (response === 'SUCCESS') {
+          if (response.isSuccess) {
             this.router.navigate(['profile']);
+          } else {
+            this.error = response.error;
           }
         });
     }
   }
-
 }

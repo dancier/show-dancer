@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class PersonalDataComponent {
 
   @Input() username: String = '';
-  @Input() height: String = '';
+  @Input() height: number = 0;
   @Input() birthday: String = '';
   @Input() gender: String = '';
   @Input() email: String = '';

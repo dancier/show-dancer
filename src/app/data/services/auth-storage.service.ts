@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
 export type AuthData = {
@@ -18,7 +17,7 @@ export class AuthStorageService {
 
   public readonly authData$ = this._authData$.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   private static initFromLocalStorage(): AuthData {
     const authItem = localStorage.getItem(AUTH_DATA_KEY);
