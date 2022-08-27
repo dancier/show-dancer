@@ -43,7 +43,7 @@ export class ProfileHttpService {
     return this.http
       .put<Profile>(`${this.baseUrl}`, profile, this.defaultOptions)
       .pipe(
-        map((_) => asSuccess()),
+        map(asSuccess),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             default:
@@ -62,7 +62,7 @@ export class ProfileHttpService {
         this.defaultOptions
       )
       .pipe(
-        map((availability) => asSuccessWithPayload(availability)),
+        map(asSuccessWithPayload),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             default:

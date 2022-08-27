@@ -20,7 +20,7 @@ export class EventLogHttpService {
 
   postEvent$(event: Event): Observable<APIResponseWithoutPayload> {
     return this.http.post(`${this.environment.getApiUrl()}/eventlog`, event, this.defaultOptions).pipe(
-      map((_) => asSuccess()),
+      map(asSuccess),
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {
           default:

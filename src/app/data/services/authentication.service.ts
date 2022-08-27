@@ -30,7 +30,7 @@ export class AuthenticationService {
   onceUserRegistered(userRegistration: UserRegistration): Observable<APIResponseWithoutPayload> {
     return this.http.post<void>(`${this.baseUrl}/registrations`, userRegistration, this.defaultOptions)
       .pipe(
-        map((_) => asSuccess()),
+        map(asSuccess),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             case 409:
@@ -46,7 +46,7 @@ export class AuthenticationService {
   onceUserLoggedIn(loginRequest: LoginRequest): Observable<APIResponseWithoutPayload>  {
     return this.http.post<void>(`${this.baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
-        map((_) => asSuccess()),
+        map(asSuccess),
         tap(_ => this.authStorageService.setLoginState(true)),
         tap(_ => this.profileDataservice.fetchProfileData()),
         catchError((error: HttpErrorResponse) => {
@@ -73,7 +73,7 @@ export class AuthenticationService {
 
     return this.http.post<void>(`${this.baseUrl}/loginAsHuman`, null, httpOptions)
       .pipe(
-        map((_) => asSuccess()),
+        map(asSuccess),
         tap(_ => this.authStorageService.setHumanState(true)),
         catchError((error: HttpErrorResponse) => {
           switch(error.status) {
@@ -90,7 +90,7 @@ export class AuthenticationService {
   onceAccountVerified(validationCode: string): Observable<APIResponseWithoutPayload> {
     return this.http.put<void>(`${this.baseUrl}/email-validations/${validationCode}`, null, this.defaultOptions)
       .pipe(
-        map((_) => asSuccess()),
+        map(asSuccess),
         tap(_ => this.authStorageService.setLoginState(true)),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
@@ -107,7 +107,7 @@ export class AuthenticationService {
   onceUserLoggedOut(): Observable<APIResponseWithoutPayload> {
     return this.http.get<void>(`${this.baseUrl}/logout`, this.defaultOptions)
     .pipe(
-      map((_) => asSuccess()),
+      map(asSuccess),
       tap(_ => this.authStorageService.setLoginState(false)),
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {
