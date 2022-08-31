@@ -1,3 +1,4 @@
+<form [formGroup]="usernameForm" (ngSubmit)="submitForm()" novalidate>
 <div class="profile-edit-page-outer-container background-color-accent-A200">
   <div class="profile-edit-page-inner-container container-radius">
     <div class="verification-confirmation">
@@ -10,10 +11,14 @@
       <mat-card-content fxLayout="column" class="card-content-container">
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Benutzername *</mat-label>
-          <input matInput type="username" placeholder="(Wie nennen wir dich?)"/>
+          <input data-test="username-field" formControlName="username" matInput type="username" placeholder="(Wie nennen wir dich?)"/>
+          <mat-error data-test="username-field-empty" *ngIf="errorHandling('username', 'required')">
+            Bitte gib einen Benutzernamen ein..
+          </mat-error>
         </mat-form-field>
-        <button mat-raised-button class="font-color-primary-800" routerLink="../personal-info">Weiter</button>
+        <button mat-raised-button class="font-color-primary-800" type="submit">Weiter</button>
       </mat-card-content>
     </div>
   </div>
 </div>
+</form>

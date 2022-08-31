@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProfileService } from '@data/services/profile.service';
 
 @Component({
   selector: 'app-edit-personal-data',
@@ -12,7 +13,7 @@ export class EditPersonalDataComponent {
   isHeightFieldOnFocus: boolean = false;
   isZipFieldOnFocus: boolean = false;
 
-  constructor() {
+  constructor(public profileDataService: ProfileService,) {
   }
 
   birthdayFieldOnFocus(): void {

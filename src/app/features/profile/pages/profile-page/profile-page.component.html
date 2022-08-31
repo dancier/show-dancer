@@ -23,16 +23,8 @@
       </mat-tab>
       <mat-tab label="Persönliche Daten">
         <app-personal-data
-          [birthday]="profileDataService.profile.birthDate"
-          [city]="profileDataService.profile.city"
-          [country]="profileDataService.profile.country"
-          [email]="profileDataService.profile.email"
-          [gender]="profileDataService.profile.gender"
-          [height]="profileDataService.profile.size"
-          [username]="profileDataService.profile.dancerName"
-          [zipCode]="profileDataService.profile.zipCode"
-          class="personal-data-container"
-        >
+          [profile]="profileDataService.profile"
+          class="personal-data-container">
         </app-personal-data>
       </mat-tab>
     </mat-tab-group>

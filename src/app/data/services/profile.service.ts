@@ -29,6 +29,10 @@ export class ProfileService {
     });
   }
 
+  setDancerName(dancerName: string): void {
+    this.profile.dancerName = dancerName
+  }
+
   initProfile(): Profile {
     return {
       aboutMe: '',
