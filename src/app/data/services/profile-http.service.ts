@@ -1,11 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NameAvailability, Profile } from '@data/types/profile.types';
-import {
-  APIResponse,
-  asError,
-  asSuccess,
-} from '@data/types/response.types';
+import { APIResponse, asError, asSuccess } from '@data/types/response.types';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '../../../environments/utils/environment.service';
 
@@ -27,7 +23,7 @@ export class ProfileHttpService {
 
   getProfile$(): Observable<APIResponse<Profile>> {
     return this.http.get<Profile>(`${this.baseUrl}`, this.defaultOptions).pipe(
-      map((asSuccess)),
+      map(asSuccess),
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {
           default:
@@ -56,11 +52,15 @@ export class ProfileHttpService {
   ): Observable<APIResponse<NameAvailability>> {
     return this.http
       .get<NameAvailability>(
-        `${this.baseUrl}/checkDancerNameAvailibility/${dancerName}`,
+        `${this.baseUrl}/checkDancerNameAvailability/${dancerName}`,
         this.defaultOptions
       )
       .pipe(
-        map(asSuccess),
+        map((response) =>
+          response.isAvailable === true
+            ? asSuccess(response)
+            : asError('NAME_ALREADY_EXISTS')
+        ),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             default:

@@ -6,7 +6,8 @@ export type APIError =
   | 'EMAIL_ALREADY_IN_USE'
   | 'INCORRECT_CREDENTIALS'
   | 'EMAIL_NOT_VALIDATED'
-  | 'NOT_AVAILABLE';
+  | 'NOT_AVAILABLE'
+  | 'NAME_ALREADY_EXISTS'
 
 export type ResponseSuccessNoPayload = {
   isSuccess: true;

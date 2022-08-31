@@ -6,6 +6,7 @@ export const errorMessages: Record<APIError, string> = {
   INCORRECT_CREDENTIALS: 'Der Nutzername oder das Passwort ist falsch.',
   EMAIL_NOT_VALIDATED: 'Die E-Mail Adresse wurde noch nicht verifiziert.\nBitte schaue in deinem E-Mail Postfach nach.',
   NOT_AVAILABLE: 'Der Benutzername ist leider schon vergeben.',
-  VALIDATION_ERROR: ''
+  VALIDATION_ERROR: '',
+  NAME_ALREADY_EXISTS: 'Es tut uns leid, der Benutzername ist bereits vergeben. Bitte wähle einen neuen Namen'
 } as const;
 

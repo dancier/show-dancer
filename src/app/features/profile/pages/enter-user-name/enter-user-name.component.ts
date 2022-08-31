@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProfileHttpService } from '@data/services/profile-http.service';
 import { ProfileService } from '@data/services/profile.service';
+import { APIError } from '@data/types/response.types';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-enter-user-name',
@@ -10,8 +17,11 @@ import { ProfileService } from '@data/services/profile.service';
 })
 export class EnterUserNameComponent implements OnInit {
   usernameForm!: UntypedFormGroup;
+  error?: APIError;
+  
   constructor(
     public profileDataService: ProfileService,
+    private profileHttpService: ProfileHttpService,
     private fb: UntypedFormBuilder,
     private router: Router
   ) {}
@@ -22,7 +32,7 @@ export class EnterUserNameComponent implements OnInit {
 
   private initReactiveForm(): void {
     this.usernameForm = this.fb.group({
-      username: ['', [Validators.required,]],
+      username: ['', [Validators.required]],
     });
   }
 
@@ -32,8 +42,17 @@ export class EnterUserNameComponent implements OnInit {
 
   submitForm(): void {
     if (this.usernameForm.valid) {
-      this.profileDataService.setDancerName(this.usernameForm.value.username)
-      this.router.navigate(['profile/initial-setup/personal-info']);
+      const username = this.usernameForm.value.username;
+      this.profileHttpService
+        .checkNameAvailability$(username)
+        .subscribe((response) => {
+          if (response.isSuccess) {
+            this.profileDataService.setDancerName(username);
+            this.router.navigate(['profile/initial-setup/personal-info']);
+          } else {
+            this.error = response.error;
+          }
+        });
     }
   }
 }
