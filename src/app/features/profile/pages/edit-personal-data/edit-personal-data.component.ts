@@ -1,51 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { ProfileService } from '@data/services/profile.service';
+
+type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
 
 @Component({
   selector: 'app-edit-personal-data',
   templateUrl: './edit-personal-data.component.html',
-  styleUrls: ['./edit-personal-data.component.scss']
+  styleUrls: ['./edit-personal-data.component.scss'],
 })
-export class EditPersonalDataComponent {
+export class EditPersonalDataComponent implements OnInit {
+  personalDataForm!: UntypedFormGroup;
+  fieldInFocus?: Field;
 
-  isBirthdayFieldOnFocus: boolean = false;
-  isGenderFieldOnFocus: boolean = false;
-  isHeightFieldOnFocus: boolean = false;
-  isZipFieldOnFocus: boolean = false;
+  constructor(
+    public profileDataService: ProfileService,
+    private fb: UntypedFormBuilder
+  ) {}
 
-  constructor(public profileDataService: ProfileService,) {
+  ngOnInit(): void {
+    this.initReactiveForm();
   }
 
-  birthdayFieldOnFocus(): void {
-    this.isBirthdayFieldOnFocus = true;
+  private initReactiveForm(): void {
+    this.personalDataForm = this.fb.group({
+      birthday: [],
+      zip: ['', ],
+      gender: [],
+      height: []
+    });
   }
 
-  birthdayFieldOnBlur(): void {
-    this.isBirthdayFieldOnFocus = false;
+  hasFocus(field: Field): boolean {
+    return field === this.fieldInFocus
   }
 
-  genderFieldOnFocus(): void {
-    this.isGenderFieldOnFocus = true;
+  setFocus(field: Field): void {
+    this.fieldInFocus = field;
   }
 
-  genderFieldOnBlur(): void {
-    this.isGenderFieldOnFocus = false;
+  unsetFocus(field: Field): void {
+    if (this.fieldInFocus === field) {
+      this.fieldInFocus = undefined
+    }
   }
 
-  heightFiledOnFocus(): void {
-    this.isHeightFieldOnFocus = true;
+  submitForm(): void {
+    if (this.personalDataForm.valid) {
+      // eslint-disable-next-line no-console
+      console.log(this.personalDataForm.value);
+      // routerLink="../dances-self"
+    }
   }
-
-  heightFieldOnBlur(): void {
-    this.isHeightFieldOnFocus = false;
-  }
-
-  zipFieldOnFocus(): void {
-    this.isZipFieldOnFocus = true;
-  }
-
-  zipFieldOnBlur(): void {
-    this.isZipFieldOnFocus = false;
-  }
-
 }

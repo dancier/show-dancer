@@ -44,5 +44,5 @@ export type Profile = {
 }
 
 export type NameAvailability = {
-  isAvailable: true
+  available: boolean
 }

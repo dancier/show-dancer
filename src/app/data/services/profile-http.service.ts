@@ -57,9 +57,10 @@ export class ProfileHttpService {
       )
       .pipe(
         map((response) =>
-          response.isAvailable === true
+          /*response.available === true
             ? asSuccess(response)
-            : asError('NAME_ALREADY_EXISTS')
+            : asError('NAME_ALREADY_EXISTS')*/
+            asSuccess(response)
         ),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
