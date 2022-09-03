@@ -23,7 +23,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
     this.verifySubscription = this.route.params.pipe(
       switchMap((params) => {
         const verifyCode: string = params['code'];
-        return this.authService.onceAccountVerified(verifyCode);
+        return this.authService.verifyAccount(verifyCode);
       })
     ).subscribe(response => {
       if (response.isSuccess) {

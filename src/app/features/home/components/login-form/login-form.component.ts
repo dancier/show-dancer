@@ -39,7 +39,7 @@ export class LoginFormComponent implements OnInit {
   submitForm(): void {
     if (this.loginForm.valid) {
       this.authService
-        .onceUserLoggedIn(this.loginForm.value as LoginRequest)
+        .login(this.loginForm.value as LoginRequest)
         .subscribe((response) => {
           if (response.isSuccess) {
             this.router.navigate(['profile']);

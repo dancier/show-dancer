@@ -60,7 +60,7 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
     if (this.registrationForm.valid) {
       const { email, password, acceptTermsAndConditions } = this.registrationForm.value;
       this.authenticationService
-        .onceUserRegistered({ email, password, acceptTermsAndConditions })
+        .register({ email, password, acceptTermsAndConditions })
           .subscribe((response) => {
           if (response.isSuccess) {
             this.router.navigate(['verify-account'], { relativeTo: this.route.parent });
@@ -73,7 +73,7 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
 
   captchaResolved(captchaToken: string): void {
     this.authenticationService
-      .onceHumanLoggedIn(captchaToken)
+      .loginAsHuman(captchaToken)
       .subscribe((response) => {
         if (response.isSuccess) {
           console.info('human session created');
