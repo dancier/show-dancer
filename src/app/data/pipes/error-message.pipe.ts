@@ -1,15 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ErrorMessages, globalErrorMessages } from '@data/constants/global-error-messages';
+import { errorMessages } from '@data/constants/error-messages';
 import { APIError } from '@data/types/response.types';
 
 @Pipe({
   name: 'errorMessage',
 })
 export class ErrorMessagePipe implements PipeTransform {
-
-  constructor(private errorMessages: ErrorMessages = globalErrorMessages) { }
-
   transform(error: APIError): string {
-    return this.errorMessages[error];
+    return errorMessages[error];
   }
 }
