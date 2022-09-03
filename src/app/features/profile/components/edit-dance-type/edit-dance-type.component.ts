@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
+import { Dance } from '@data/types/profile.types';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -11,6 +12,7 @@ import { map, startWith } from 'rxjs/operators';
 export class EditDanceTypeComponent implements OnInit {
 
   control = new UntypedFormControl('');
+  @Input() dance!: Dance;
 
   readonly danceLevels: Level[] = [
     {

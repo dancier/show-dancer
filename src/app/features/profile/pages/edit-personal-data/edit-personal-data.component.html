@@ -36,14 +36,14 @@
                   wird auch für die Empfehlung
                   angewendet.
                 </mat-hint>
-                <input matInput data-test="birthday-field" formControlName="birthday" type="birthday" (focus)="setFocus('BIRTHDAY')" (blur)="unsetFocus('BIRTHDAY')"/>
+                <input matInput data-test="birthdate-field" formControlName="birthdate" type="birthdate" (focus)="setFocus('BIRTHDAY')" (blur)="unsetFocus('BIRTHDAY')"/>
               </mat-form-field>
             </div>
             <div class="form-section" fxLayout="row" [ngStyle]="{'margin-bottom': hasFocus('HEIGHT') ? '16px' : '0' }">
               <mat-icon class="form-icon">accessibility</mat-icon>
               <mat-form-field appearance="fill" class="full-width">
                 <mat-label>Körpergröße: *</mat-label>
-                <input data-test="height-field" formControlName="height" matInput type="height" placeholder="(Deine Körpergröße in CM)" (focus)="setFocus('HEIGHT')"
+                <input data-test="size-field" formControlName="size" matInput type="size" placeholder="(Deine Körpergröße in CM)" (focus)="setFocus('HEIGHT')"
                       (blur)="unsetFocus('HEIGHT')"/>
                 <span>cm</span>
                 <mat-hint *ngIf="hasFocus('HEIGHT')">Wird angezeigt auf deinem Profil, und für die Empfehlung wichtig.
@@ -54,7 +54,7 @@
               <mat-icon class="form-icon">place</mat-icon>
               <mat-form-field appearance="fill" class="full-width">
                 <mat-label>PLZ: *</mat-label>
-                <input matInput data-test="zip-field" formControlName="zip" type="zip" placeholder="(PLZ)" (focus)="setFocus('ZIP')" (blur)="unsetFocus('ZIP')"/>
+                <input matInput data-test="zipCode-field" formControlName="zipCode" type="zipCode" placeholder="(PLZ)" (focus)="setFocus('ZIP')" (blur)="unsetFocus('ZIP')"/>
                 <mat-hint *ngIf="hasFocus('ZIP')">Auf deinem Profil wird der Ort angezeigt. PLZ ist auch für die
                   Empfehlung des Tanzpartners wichtig.
                 </mat-hint>

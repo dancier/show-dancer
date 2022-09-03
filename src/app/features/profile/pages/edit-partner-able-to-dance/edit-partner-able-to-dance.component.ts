@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Dance } from '@features/profile/pages/edit-able-to-dance/edit-able-to-dance.component';
+import { Router } from '@angular/router';
+import { ProfileService } from '@data/services/profile.service';
+import { Dance, DancePreferences } from '@data/types/profile.types';
 
 @Component({
   selector: 'app-edit-partner-able-to-dance',
@@ -8,30 +10,37 @@ import { Dance } from '@features/profile/pages/edit-able-to-dance/edit-able-to-d
 })
 export class EditPartnerAbleToDanceComponent{
 
-  dummyDances: Dance[] = [{
-    danceType: '',
-    danceLevel: '',
-    role: ''
+  wantsTo: Dance[] = [{
+    dance: undefined,
+    level: undefined,
+    leading: undefined
   }];
 
-  constructor() { }
+  constructor(
+    public profileDataService: ProfileService,
+    private router: Router
+  ) { }
 
   addDance(): void {
-    this.dummyDances.push(this.createNewEmptyDance());
+    this.wantsTo.push(this.createNewEmptyDance());
   }
 
   createNewEmptyDance(): Dance {
     return {
-      danceType: '',
-      danceLevel: '',
-      role: ''
+      dance: undefined,
+      level: undefined,
+      leading: undefined
     }
   }
 
   removeDance(index: number): void {
-    if (this.dummyDances.length > 1) {
-      this.dummyDances.splice(index, 1);
+    if (this.wantsTo.length > 1) {
+      this.wantsTo.splice(index, 1);
     }
   }
-
+  submitForm(): void {
+    this.profileDataService.setPartnerDances(this.wantsTo as DancePreferences[]);
+    this.profileDataService.updateProfile()
+    this.router.navigate(['profile'])
+  }
 }

@@ -3,46 +3,58 @@ export type Level =
   | 'BASIC'
   | 'INTERMEDIATE'
   | 'ADVANCED'
-  | 'PRO'
+  | 'PRO';
 
 export const levelDescription: Record<Level, string> = {
   NO_EXPERIENCE: 'Keine Erfahrung',
   BASIC: 'Beginner',
   INTERMEDIATE: 'Medium',
   ADVANCED: 'Fortschritten',
-  PRO: 'Professionell'
+  PRO: 'Professionell',
 } as const;
 
-export type Gender =
-  | 'MALE'
-  | 'FEMALE'
-  | 'DIVERSE'
+export type Gender = 'MALE' | 'FEMALE' | 'DIVERSE';
 
-export type ROLE =
-  | 'LEADING'
-  | 'FOLLOWING'
+export type Role = 'LEADING' | 'FOLLOWING';
+
+export type DanceTypes= 'TANGO' | 'SALSA' | 'STANDARD';
 
 export type DancePreferences = {
-  dance: string,
-  level: Level,
-  leading: ROLE
-}
+  dance: DanceTypes;
+  level: Level;
+  leading: Role;
+};
+
+export type Dance = {
+  dance?: DanceTypes;
+  level?: Level;
+  leading?: Role;
+};
+
 export type Profile = {
-    id?: string,
-    aboutMe: string,
-    size: number,
-    gender: Gender,
-    dancerName: string,
-    birthDate: string,
-    ableTo: DancePreferences[],
-    wantsTo: DancePreferences[],
-    email: string,
-    zipCode: string,
-    city: string,
-    country: string,
-    profileImageHash: string
-}
+  id?: string;
+  aboutMe: string;
+  size: number;
+  gender: Gender;
+  dancerName: string;
+  birthDate: string;
+  ableTo: DancePreferences[];
+  wantsTo: DancePreferences[];
+  email: string;
+  zipCode: string;
+  city: string;
+  country: string;
+  profileImageHash: string;
+  [key: string]: any;
+};
+
+export type PersonalData = {
+  size: number;
+  gender: Gender;
+  birthDate: string;
+  zipCode: string;
+};
 
 export type NameAvailability = {
-  available: boolean
-}
+  available: boolean;
+};

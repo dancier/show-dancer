@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ProfileService } from '@data/services/profile.service';
+import { Dance, DancePreferences } from '@data/types/profile.types';
 
 @Component({
   selector: 'app-edit-able-to-dance',
@@ -7,38 +11,40 @@ import { Component } from '@angular/core';
 })
 export class EditAbleToDanceComponent {
 
-  dummyDances: Dance[] = [{
-    danceType: '',
-    danceLevel: '',
-    role: ''
+  ableTo: Dance[] = [{
+    dance: undefined,
+    level: undefined,
+    leading: undefined
   }];
 
-  constructor() {
-  }
-
+  constructor(
+    public profileDataService: ProfileService,
+    private router: Router
+  ) {}
 
   addDance(): void{
-    this.dummyDances.push(this.createNewEmptyDance());
+    this.ableTo.push(this.createNewEmptyDance());
   }
 
   createNewEmptyDance(): Dance {
     return {
-      danceType: '',
-      danceLevel: '',
-      role: ''
+      dance: undefined,
+      level: undefined,
+      leading: undefined
     }
   }
 
   removeDance(index: number): void {
-    if (this.dummyDances.length > 1) {
-      this.dummyDances.splice(index, 1);
+    if (this.ableTo.length > 1) {
+      this.ableTo.splice(index, 1);
     }
   }
-}
 
-export interface Dance {
-  danceType: string,
-  danceLevel: string,
-  role: string
+  submitForm(): void {
+    // eslint-disable-next-line no-console
+    console.log(this.ableTo)
+    this.profileDataService.setOwnDances(this.ableTo as DancePreferences[]);
+    this.router.navigate(['profile/initial-setup/dances-partner']);
+  }
 }
 

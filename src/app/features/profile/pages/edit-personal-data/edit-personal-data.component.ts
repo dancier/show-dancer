@@ -4,6 +4,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProfileService } from '@data/services/profile.service';
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
@@ -19,7 +20,8 @@ export class EditPersonalDataComponent implements OnInit {
 
   constructor(
     public profileDataService: ProfileService,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -28,10 +30,10 @@ export class EditPersonalDataComponent implements OnInit {
 
   private initReactiveForm(): void {
     this.personalDataForm = this.fb.group({
-      birthday: [],
-      zip: ['', ],
+      birthdate: [],
+      zipCode: ['', ],
       gender: [],
-      height: []
+      size: []
     });
   }
 
@@ -51,9 +53,8 @@ export class EditPersonalDataComponent implements OnInit {
 
   submitForm(): void {
     if (this.personalDataForm.valid) {
-      // eslint-disable-next-line no-console
-      console.log(this.personalDataForm.value);
-      // routerLink="../dances-self"
+      this.profileDataService.setPersonalData(this.personalDataForm.value);
+      this.router.navigate(['profile/initial-setup/dances-self']);
     }
   }
 }
