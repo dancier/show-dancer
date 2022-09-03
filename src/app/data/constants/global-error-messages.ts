@@ -1,6 +1,8 @@
 import { APIError } from '@data/types/response.types';
 
-export const globalErrorMessages: Record<APIError, string> = {
+export type ErrorMessages = Record<APIError, string>;
+
+export const globalErrorMessages: ErrorMessages = {
   SERVER_ERROR: 'Ein unerwarteter Fehler ist aufgetreten.\nBitte versuche es später erneut.',
   EMAIL_ALREADY_IN_USE: 'Ein Account mit dieser E-Mail Adresse existiert bereits.',
   INCORRECT_CREDENTIALS: 'Der Nutzername oder das Passwort ist falsch.',

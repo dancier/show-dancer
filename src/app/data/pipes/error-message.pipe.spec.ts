@@ -1,18 +1,18 @@
 import { ErrorMessagePipe } from './error-message.pipe';
-import { APIError } from '@data/types/response.types';
+import { ErrorMessages } from '@data/constants/global-error-messages';
 
 describe('ErrorMessagePipe', () => {
-  const fakeErrorMessages = {
-    SERVER_ERROR: 'Server error occured',
-  } as Record<APIError, string>;
+  const fakeErrorMessages: Pick<ErrorMessages, 'SERVER_ERROR'> = {
+    SERVER_ERROR: 'Server error occurred',
+  };
 
   let errorMessagePipe: ErrorMessagePipe;
 
   beforeEach(() => {
-    errorMessagePipe = new ErrorMessagePipe(fakeErrorMessages);
+    errorMessagePipe = new ErrorMessagePipe(fakeErrorMessages as ErrorMessages);
   });
 
   it('returns the error message for the error', () => {
-    expect(errorMessagePipe.transform('SERVER_ERROR')).toBe('Server error occured');
+    expect(errorMessagePipe.transform('SERVER_ERROR')).toBe('Server error occurred');
   });
 });
