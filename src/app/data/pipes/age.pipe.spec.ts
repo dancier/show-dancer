@@ -17,13 +17,8 @@ describe('AgePipe', () => {
     agePipe = new AgePipe();
   });
 
-  it('returns the age for a given birthdate', () => {
-    expect(agePipe.transform('2000-01-01')).toBe(1);
-    expect(agePipe.transform('2000-01-03')).toBe(0);
-  });
-
-  // TODO: use this test instead when we have an exact calculation
-  xit('returns the age for a given birthdate considering leap years', () => {
+  it('returns the age for a given birthdate considering leap years', () => {
+    expect(agePipe.transform('1999-12-31')).toBe(1);
     expect(agePipe.transform('2000-01-01')).toBe(1);
     expect(agePipe.transform('2000-01-02')).toBe(0);
   });

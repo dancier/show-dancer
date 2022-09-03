@@ -10,15 +10,17 @@ export class AgePipe implements PipeTransform {
 }
 
 function calculateAge(birthdate: string): number | string {
-  const birthdateAsDate = Date.parse(birthdate);
-  if (isNaN(birthdateAsDate)) {
-    console.error('Error on parsing birthdate');
+  const birthdateAsDate = new Date(birthdate);
+  if (birthdateAsDate.toString() === 'Invalid Date') {
+    console.error('Error on parsing birthdate', birthdate);
     return 'unknown';
   }
 
-  // TODO: calculation isn't exact because of leap years which have 366 days
-  // TODO: the exact calculation is a bit complicated, see https://stackoverflow.com/a/16436459
-  // TODO: we could use day.js for this
-  const ageInMilliseconds = Date.now() - birthdateAsDate;
-  return Math.floor(ageInMilliseconds / 1000 / 60 / 60 / 24 / 365);
+  // calculating the age this way is taking leap years into account
+  let age = new Date().getFullYear() - birthdateAsDate.getFullYear();
+  const monthDifference = new Date().getMonth() - birthdateAsDate.getMonth();
+  if (monthDifference < 0 || (monthDifference === 0 && new Date().getDate() < birthdateAsDate.getDate())) {
+    age--;
+  }
+  return age;
 }
