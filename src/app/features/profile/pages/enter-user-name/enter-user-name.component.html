@@ -12,7 +12,7 @@
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Benutzername *</mat-label>
           <input data-test="username-field" formControlName="username" matInput type="username" placeholder="(Wie nennen wir dich?)"/>
-          <mat-error data-test="username-field-empty" *ngIf="errorHandling('username', 'required')">
+          <mat-error data-test="username-field-empty" *ngIf="hasUsernameFieldError('required')">
             Bitte gib einen Benutzernamen ein..
           </mat-error>
         </mat-form-field>
