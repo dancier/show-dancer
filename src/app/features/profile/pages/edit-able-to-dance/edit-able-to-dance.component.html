@@ -17,7 +17,7 @@
       <div class="form-section-container">
         <div *ngFor="let dance of ableTo; let i = index">
           <div class="edit-dance-container">
-            <app-edit-dance-type  [dance]="dance"></app-edit-dance-type>
+            <app-edit-dance-type  [(dance)]="dance"></app-edit-dance-type>
             <div class="remove-button-container">
               <button mat-stroked-button (click)="removeDance(i)" *ngIf="ableTo.length > 1"
                       class="font-color-primary-800 remove-button">

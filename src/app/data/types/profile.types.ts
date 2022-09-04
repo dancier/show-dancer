@@ -1,11 +1,11 @@
-export type Level =
+export type DanceLevel =
   | 'NO_EXPERIENCE'
   | 'BASIC'
   | 'INTERMEDIATE'
   | 'ADVANCED'
   | 'PRO';
 
-export const levelDescription: Record<Level, string> = {
+export const levelDescription: Record<DanceLevel, string> = {
   NO_EXPERIENCE: 'Keine Erfahrung',
   BASIC: 'Beginner',
   INTERMEDIATE: 'Medium',
@@ -39,20 +39,20 @@ export const genderList: GenderDescription[] = [
   },
 ];
 
-export type Role = 'LEADING' | 'FOLLOWING';
+export type DanceRole = 'LEADING' | 'FOLLOWING';
 
 export type DanceTypes = 'TANGO' | 'SALSA' | 'STANDARD';
 
-export type DancePreferences = {
-  dance: DanceTypes;
-  level: Level;
-  leading: Role;
-};
+// export type DancePreferences = {
+//   dance: DanceTypes;
+//   level: DanceLevel;
+//   leading: DanceRole;
+// };
 
 export type Dance = {
-  dance?: DanceTypes;
-  level?: Level;
-  leading?: Role;
+  type: DanceTypes;
+  level: DanceLevel;
+  leading: DanceRole;
 };
 
 export type Profile = {
@@ -62,8 +62,8 @@ export type Profile = {
   gender: Gender;
   dancerName: string;
   birthDate: string;
-  ableTo: DancePreferences[];
-  wantsTo: DancePreferences[];
+  ableTo: Dance[];
+  wantsTo: Dance[];
   email: string;
   zipCode: string;
   city: string;
