@@ -34,7 +34,7 @@
               <mat-icon class="form-icon">cake</mat-icon>
               <mat-form-field appearance="fill" class="width-201">
                   <mat-label>Geburtsdatum:</mat-label>
-                  <input [readonly]="true" matInput [matDatepicker]="picker" data-test="birthdate-field" formControlName="birthdate" type="birthdate" (focus)="setFocus('BIRTHDAY')" (blur)="unsetFocus('BIRTHDAY')">
+                  <input [readonly]="true" matInput [matDatepicker]="picker" data-test="birthdate-field" formControlName="birthdate" type="birthdate" (focus)="setFocus('BIRTHDAY')" (blur)="unsetFocus('BIRTHDAY')" (click)="picker.open()">
                   <mat-hint *ngIf="hasFocus('BIRTHDAY')">Später wird das Alter auf deinem Profil angezeigt, und das Alter
                     wird auch für die Empfehlung
                     angewendet.
