@@ -12,11 +12,13 @@ import { SharedModule } from '@shared/shared.module';
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer/footer.component';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { HttpHeaderInterceptor } from '@data/interceptors/http-header.interceptor';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { HttpHeaderInterceptor } from '@data/interceptors/http-header.intercepto
     ExtendedModule,
   ],
   providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
     { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

@@ -13,11 +13,35 @@ export const levelDescription: Record<Level, string> = {
   PRO: 'Professionell',
 } as const;
 
-export type Gender = 'MALE' | 'FEMALE' | 'DIVERSE';
+export type Gender = 'MALE' | 'FEMALE' | 'DIVERS' | 'NA';
+
+export type GenderDescription = {
+  type: Gender;
+  description: string;
+};
+
+export const genderList: GenderDescription[] = [
+  {
+    type: 'MALE',
+    description: 'männlich',
+  },
+  {
+    type: 'FEMALE',
+    description: 'weiblich',
+  },
+  {
+    type: 'DIVERS',
+    description: 'divers',
+  },
+  {
+    type: 'NA',
+    description: 'keine Angabe',
+  },
+];
 
 export type Role = 'LEADING' | 'FOLLOWING';
 
-export type DanceTypes= 'TANGO' | 'SALSA' | 'STANDARD';
+export type DanceTypes = 'TANGO' | 'SALSA' | 'STANDARD';
 
 export type DancePreferences = {
   dance: DanceTypes;

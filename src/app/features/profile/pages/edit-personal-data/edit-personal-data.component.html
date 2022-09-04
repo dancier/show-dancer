@@ -18,31 +18,35 @@
           <mat-card-content fxLayout="column" class="card-content-container">
             <div class="form-section" fxLayout="row" [ngStyle]="{'margin-bottom': hasFocus('GENDER') ? '16px' : '0' }">
               <mat-icon class="form-icon">transgender</mat-icon>
-              <!--TODO: Change into dropdown or radio button-->
-              <mat-form-field appearance="fill" class="full-width min-width-360-480">
-                <mat-label>Geschlecht: *</mat-label>
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Geschlecht:</mat-label>
                 <mat-hint *ngIf="hasFocus('GENDER')">Wird angezeigt auf deinem Profil, und für die Empfehlung wichtig.
                 </mat-hint>
-                <input matInput data-test="gender-field" formControlName="gender" type="gender" (focus)="setFocus('GENDER')" (blur)="unsetFocus('GENDER')"/>
+                <mat-select data-test="gender-field" formControlName="gender" type="gender" (focus)="setFocus('GENDER')" (blur)="unsetFocus('GENDER')">
+                  <mat-option *ngFor="let gender of genderList" [value]="gender.type">
+                    {{gender.description}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
             <div class="form-section" fxLayout="row"
                 [ngStyle]="{'margin-bottom': hasFocus('BIRTHDAY') ? '16px' : '0' }">
               <mat-icon class="form-icon">cake</mat-icon>
-              <mat-form-field appearance="fill" class="full-width">
-                <!--TODO:  Add datepicker -->
-                <mat-label>Geburtsdatum: *</mat-label>
-                <mat-hint *ngIf="hasFocus('BIRTHDAY')">Später wird das Alter auf deinem Profil angezeigt, und das Alter
-                  wird auch für die Empfehlung
-                  angewendet.
-                </mat-hint>
-                <input matInput data-test="birthdate-field" formControlName="birthdate" type="birthdate" (focus)="setFocus('BIRTHDAY')" (blur)="unsetFocus('BIRTHDAY')"/>
+              <mat-form-field appearance="fill" class="width-201">
+                  <mat-label>Geburtsdatum:</mat-label>
+                  <input [readonly]="true" matInput [matDatepicker]="picker" data-test="birthdate-field" formControlName="birthdate" type="birthdate" (focus)="setFocus('BIRTHDAY')" (blur)="unsetFocus('BIRTHDAY')">
+                  <mat-hint *ngIf="hasFocus('BIRTHDAY')">Später wird das Alter auf deinem Profil angezeigt, und das Alter
+                    wird auch für die Empfehlung
+                    angewendet.
+                  </mat-hint>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
             <div class="form-section" fxLayout="row" [ngStyle]="{'margin-bottom': hasFocus('HEIGHT') ? '16px' : '0' }">
               <mat-icon class="form-icon">accessibility</mat-icon>
               <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Körpergröße: *</mat-label>
+                <mat-label>Körpergröße:</mat-label>
                 <input data-test="size-field" formControlName="size" matInput type="size" placeholder="(Deine Körpergröße in CM)" (focus)="setFocus('HEIGHT')"
                       (blur)="unsetFocus('HEIGHT')"/>
                 <span>cm</span>
@@ -53,7 +57,7 @@
             <div class="form-section" fxLayout="row" [ngStyle]="{'margin-bottom': hasFocus('ZIP') ? '16px' : '0' }">
               <mat-icon class="form-icon">place</mat-icon>
               <mat-form-field appearance="fill" class="full-width">
-                <mat-label>PLZ: *</mat-label>
+                <mat-label>PLZ:</mat-label>
                 <input matInput data-test="zipCode-field" formControlName="zipCode" type="zipCode" placeholder="(PLZ)" (focus)="setFocus('ZIP')" (blur)="unsetFocus('ZIP')"/>
                 <mat-hint *ngIf="hasFocus('ZIP')">Auf deinem Profil wird der Ort angezeigt. PLZ ist auch für die
                   Empfehlung des Tanzpartners wichtig.

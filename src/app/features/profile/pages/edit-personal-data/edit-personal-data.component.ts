@@ -6,8 +6,13 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileService } from '@data/services/profile.service';
+import { genderList } from '@data/types/profile.types';
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
+
+const germanDateFormat = /^(0[1-9]|[12][0-9]|3[01])[- //](0[1-9]|1[012])[- //](19|20)\d\d$/g
+const zipFormat = /\d{5}/g
+const sizeFormat = /\d{3}/g
 
 @Component({
   selector: 'app-edit-personal-data',
@@ -17,6 +22,7 @@ type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
 export class EditPersonalDataComponent implements OnInit {
   personalDataForm!: UntypedFormGroup;
   fieldInFocus?: Field;
+  genderList = genderList
 
   constructor(
     public profileDataService: ProfileService,
@@ -30,10 +36,10 @@ export class EditPersonalDataComponent implements OnInit {
 
   private initReactiveForm(): void {
     this.personalDataForm = this.fb.group({
-      birthdate: [],
-      zipCode: ['', ],
-      gender: [],
-      size: []
+      birthdate: ['',  [Validators.required]],
+      zipCode: ['', [Validators.required, Validators.pattern(zipFormat)]],
+      gender: ['',  [Validators.required]],
+      size: ['',  [Validators.required], Validators.pattern(sizeFormat)]
     });
   }
 
@@ -52,6 +58,9 @@ export class EditPersonalDataComponent implements OnInit {
   }
 
   submitForm(): void {
+    // eslint-disable-next-line no-console
+    console.log(this.personalDataForm.value.birthdate)
+    // eslint-disable-next-line no-console
     if (this.personalDataForm.valid) {
       this.profileDataService.setPersonalData(this.personalDataForm.value);
       this.router.navigate(['profile/initial-setup/dances-self']);
