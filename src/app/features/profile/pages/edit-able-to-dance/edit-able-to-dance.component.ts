@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileService } from '@data/services/profile.service';
 import { Dance, DancePreferences } from '@data/types/profile.types';
 
 @Component({
   selector: 'app-edit-able-to-dance',
-  templateUrl: './edit-able-to-dance.html',
-  styleUrls: ['./edit-able-to-dance.scss']
+  templateUrl: './edit-able-to-dance.component.html',
+  styleUrls: ['./edit-able-to-dance.component.scss']
 })
 export class EditAbleToDanceComponent {
 
