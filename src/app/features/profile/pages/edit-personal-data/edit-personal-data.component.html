@@ -22,7 +22,7 @@
                 <mat-label>Geschlecht:</mat-label>
                 <mat-hint *ngIf="hasFocus('GENDER')">Wird angezeigt auf deinem Profil, und für die Empfehlung wichtig.
                 </mat-hint>
-                <mat-select data-test="gender-field" formControlName="gender" type="gender" (focus)="setFocus('GENDER')" (blur)="unsetFocus('GENDER')">
+                <mat-select data-test="gender-field" formControlName="gender" (focus)="setFocus('GENDER')" (blur)="unsetFocus('GENDER')">
                   <mat-option *ngFor="let gender of genderList" [value]="gender.type">
                     {{gender.description}}
                   </mat-option>
@@ -34,7 +34,7 @@
               <mat-icon class="form-icon">cake</mat-icon>
               <mat-form-field appearance="fill" class="width-201">
                   <mat-label>Geburtsdatum:</mat-label>
-                  <input [readonly]="true" matInput [matDatepicker]="picker" data-test="birthdate-field" formControlName="birthdate" type="birthdate" (focus)="setFocus('BIRTHDAY')" (blur)="unsetFocus('BIRTHDAY')" (click)="picker.open()">
+                  <input [readonly]="true" matInput [matDatepicker]="picker" data-test="birthdate-field" formControlName="birthDate" (focus)="setFocus('BIRTHDAY')" (blur)="unsetFocus('BIRTHDAY')" (click)="picker.open()">
                   <mat-hint *ngIf="hasFocus('BIRTHDAY')">Später wird das Alter auf deinem Profil angezeigt, und das Alter
                     wird auch für die Empfehlung
                     angewendet.
@@ -47,9 +47,9 @@
               <mat-icon class="form-icon">accessibility</mat-icon>
               <mat-form-field appearance="fill" class="full-width">
                 <mat-label>Körpergröße:</mat-label>
-                <input data-test="size-field" formControlName="size" matInput type="size" placeholder="(Deine Körpergröße in CM)" (focus)="setFocus('HEIGHT')"
+                <input data-test="size-field" formControlName="size" matInput type="number" placeholder="(Deine Körpergröße in CM)" (focus)="setFocus('HEIGHT')"
                       (blur)="unsetFocus('HEIGHT')"/>
-                <span>cm</span>
+                <span matSuffix>cm</span>
                 <mat-hint *ngIf="hasFocus('HEIGHT')">Wird angezeigt auf deinem Profil, und für die Empfehlung wichtig.
                 </mat-hint>
               </mat-form-field>
@@ -58,7 +58,7 @@
               <mat-icon class="form-icon">place</mat-icon>
               <mat-form-field appearance="fill" class="full-width">
                 <mat-label>PLZ:</mat-label>
-                <input matInput data-test="zipCode-field" formControlName="zipCode" type="zipCode" placeholder="(PLZ)" (focus)="setFocus('ZIP')" (blur)="unsetFocus('ZIP')"/>
+                <input matInput data-test="zipCode-field" formControlName="zipCode" type="text" placeholder="(PLZ)" (focus)="setFocus('ZIP')" (blur)="unsetFocus('ZIP')"/>
                 <mat-hint *ngIf="hasFocus('ZIP')">Auf deinem Profil wird der Ort angezeigt. PLZ ist auch für die
                   Empfehlung des Tanzpartners wichtig.
                 </mat-hint>

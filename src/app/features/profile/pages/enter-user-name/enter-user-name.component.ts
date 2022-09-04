@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileHttpService } from '@data/services/profile-http.service';
 import { ProfileService } from '@data/services/profile.service';
@@ -19,7 +19,7 @@ export class EnterUserNameComponent {
   constructor(
     public profileDataService: ProfileService,
     private profileHttpService: ProfileHttpService,
-    private fb: FormBuilder,
+    private fb: NonNullableFormBuilder,
     private router: Router
   ) {}
 

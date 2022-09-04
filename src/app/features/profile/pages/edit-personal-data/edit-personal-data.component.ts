@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, NonNullableFormBuilder, Validators, } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileService } from '@data/services/profile.service';
-import { genderList } from '@data/types/profile.types';
+import { Gender, genderList } from '@data/types/profile.types';
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
 
@@ -19,29 +15,25 @@ const sizeFormat = /\d{3}/g
   templateUrl: './edit-personal-data.component.html',
   styleUrls: ['./edit-personal-data.component.scss'],
 })
-export class EditPersonalDataComponent implements OnInit {
-  personalDataForm!: UntypedFormGroup;
+export class EditPersonalDataComponent {
+  personalDataForm = this.fb.group({
+    birthDate: ['',  [Validators.required]],
+    zipCode: ['', [Validators.required, Validators.pattern(zipFormat)]],
+    gender: new FormControl<Gender>('NA', {
+      validators: [Validators.required],
+      nonNullable: true
+    }),
+    size: [170,  [Validators.required, Validators.pattern(sizeFormat)]],
+  });
+
   fieldInFocus?: Field;
   genderList = genderList
 
   constructor(
     public profileDataService: ProfileService,
-    private fb: UntypedFormBuilder,
+    private fb: NonNullableFormBuilder,
     private router: Router
   ) {}
-
-  ngOnInit(): void {
-    this.initReactiveForm();
-  }
-
-  private initReactiveForm(): void {
-    this.personalDataForm = this.fb.group({
-      birthdate: ['',  [Validators.required]],
-      zipCode: ['', [Validators.required, Validators.pattern(zipFormat)]],
-      gender: ['',  [Validators.required]],
-      size: ['',  [Validators.required], Validators.pattern(sizeFormat)]
-    });
-  }
 
   hasFocus(field: Field): boolean {
     return field === this.fieldInFocus
@@ -59,10 +51,9 @@ export class EditPersonalDataComponent implements OnInit {
 
   submitForm(): void {
     // eslint-disable-next-line no-console
-    console.log(this.personalDataForm.value.birthdate)
-    // eslint-disable-next-line no-console
+    console.log(this.personalDataForm.value.birthDate)
     if (this.personalDataForm.valid) {
-      this.profileDataService.setPersonalData(this.personalDataForm.value);
+      this.profileDataService.setPersonalData(this.personalDataForm.getRawValue());
       this.router.navigate(['profile/initial-setup/dances-self']);
     }
   }

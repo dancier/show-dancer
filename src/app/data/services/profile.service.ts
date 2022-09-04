@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  DancePreferences,
-  PersonalData,
-  Profile,
-} from '@data/types/profile.types';
+import { DancePreferences, PersonalData, Profile, } from '@data/types/profile.types';
 import { AuthStorageService } from './auth-storage.service';
 import { ProfileHttpService } from './profile-http.service';
 
@@ -49,6 +45,7 @@ export class ProfileService {
     for (const [key, value] of Object.entries(personalData)) {
       this.profile[key] = value;
     }
+    console.info(this.profile);
   }
 
   setOwnDances(ableTo: DancePreferences[]): void {
