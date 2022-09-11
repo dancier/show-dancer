@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from '@data/services/profile.service';
-import { Dance, DancePreferences } from '@data/types/profile.types';
+import { Dance } from '@data/types/profile.types';
 
 @Component({
   selector: 'app-edit-able-to-dance',
@@ -11,7 +11,7 @@ import { Dance, DancePreferences } from '@data/types/profile.types';
 export class EditAbleToDanceComponent {
 
   ableTo: Dance[] = [{
-    dance: undefined,
+    type: undefined,
     level: undefined,
     leading: undefined
   }];
@@ -27,7 +27,7 @@ export class EditAbleToDanceComponent {
 
   createNewEmptyDance(): Dance {
     return {
-      dance: undefined,
+      type: undefined,
       level: undefined,
       leading: undefined
     }
@@ -42,7 +42,7 @@ export class EditAbleToDanceComponent {
   submitForm(): void {
     // eslint-disable-next-line no-console
     console.log(this.ableTo)
-    this.profileDataService.setOwnDances(this.ableTo as DancePreferences[]);
+    this.profileDataService.setOwnDances(this.ableTo as Dance[]);
     this.router.navigate(['profile/initial-setup/dances-partner']);
   }
 }

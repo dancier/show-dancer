@@ -50,9 +50,9 @@ export type DanceTypes = 'TANGO' | 'SALSA' | 'STANDARD';
 // };
 
 export type Dance = {
-  type: DanceTypes;
-  level: DanceLevel;
-  leading: DanceRole;
+  type?: DanceTypes;
+  level?: DanceLevel;
+  leading?: DanceRole;
 };
 
 export type Profile = {

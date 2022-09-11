@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { Dance, DanceLevel, DanceRole } from '@data/types/profile.types';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormGroup, FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
+import { Dance, DanceLevel } from '@data/types/profile.types';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';
+import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
 
 @Component({
   selector: 'app-edit-dance-type',
@@ -13,17 +14,17 @@ import { KeyValue } from '@angular/common';
 export class EditDanceTypeComponent implements OnInit {
 
   // control = new UntypedFormControl('');
-  @Input() dance!: Dance;
+  danceForm!: FormGroup<DanceForm>;
 
   @Output()
   danceChange = new EventEmitter<Dance>();
 
   // typed form
-  danceForm = this.fb.group({
-    dance: ['', [Validators.required]],
-    level: new FormControl<DanceLevel>('NO_EXPERIENCE', { nonNullable: true }),
-    leading: new FormControl<DanceRole>('LEADING', { nonNullable: true }),
-  });
+  // danceForm = this.fb.group({
+  //   dance: ['', [Validators.required]],
+  //   level: new FormControl<DanceLevel>('NO_EXPERIENCE', { nonNullable: true }),
+  //   leading: new FormControl<DanceRole>('LEADING', { nonNullable: true }),
+  // });
 
   danceLevels: Record<DanceLevel, string> = {
     NO_EXPERIENCE: 'Keine',
@@ -65,15 +66,21 @@ export class EditDanceTypeComponent implements OnInit {
     return 0;
   }
 
-  constructor(private fb: NonNullableFormBuilder) {
-  }
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private formGroupDirective: FormGroupDirective,
+  ) {}
 
   ngOnInit(): void {
     this.initDanceTypeAutocompletions();
+    this.danceForm = this.formGroupDirective.form;
   }
 
   private initDanceTypeAutocompletions(): void {
-    this.filteredDanceTypeAutocompletions$ = this.danceForm.controls.dance.valueChanges.pipe(
+    if (!this.danceForm) {
+      return;
+    }
+    this.filteredDanceTypeAutocompletions$ = this.danceForm.controls.type.valueChanges.pipe(
       startWith(''),
       map(formFieldValue => this.filterAutocompletions(formFieldValue)),
     );

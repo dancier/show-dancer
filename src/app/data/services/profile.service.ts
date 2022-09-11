@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DancePreferences, PersonalData, Profile, } from '@data/types/profile.types';
+import { Dance, PersonalData, Profile, } from '@data/types/profile.types';
 import { AuthStorageService } from './auth-storage.service';
 import { ProfileHttpService } from './profile-http.service';
 
@@ -48,13 +48,13 @@ export class ProfileService {
     console.info(this.profile);
   }
 
-  setOwnDances(ableTo: DancePreferences[]): void {
+  setOwnDances(ableTo: Dance[]): void {
     // eslint-disable-next-line no-console
     console.log(ableTo);
     this.profile.ableTo = ableTo;
   }
 
-  setPartnerDances(wantsTo: DancePreferences[]): void {
+  setPartnerDances(wantsTo: Dance[]): void {
     this.profile.wantsTo = wantsTo;
   }
 
