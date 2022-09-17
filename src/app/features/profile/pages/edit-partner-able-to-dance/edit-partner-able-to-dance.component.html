@@ -19,7 +19,7 @@
           <ng-container formArrayName="dances">
             <div *ngFor="let danceFormGroup of dancesFormArray.controls; let i = index">
               <div class="edit-dance-container">
-                <app-edit-dance-type [formGroupName]="i"></app-edit-dance-type>
+                <app-edit-dance-type [formGroup]="danceFormGroup"></app-edit-dance-type>
                 <div class="remove-button-container">
                   <button mat-stroked-button (click)="removeDance(i)" *ngIf="dancesFormArray.length > 1"
                           class="font-color-primary-800 remove-button">
@@ -27,7 +27,6 @@
                   </button>
                 </div>
               </div>
-
             </div>
             <div class="dance-edit-button-container">
               <button mat-stroked-button class="font-color-primary-800 dance-edit-button add-button" (click)="addDance()">

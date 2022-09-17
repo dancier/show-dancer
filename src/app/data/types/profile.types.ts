@@ -41,7 +41,7 @@ export const genderList: GenderDescription[] = [
 
 export type DanceRole = 'LEADING' | 'FOLLOWING';
 
-export type DanceTypes = 'TANGO' | 'SALSA' | 'STANDARD';
+export type DanceTypes = string;
 
 // export type DancePreferences = {
 //   dance: DanceTypes;

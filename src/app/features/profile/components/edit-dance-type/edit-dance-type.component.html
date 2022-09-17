@@ -25,7 +25,7 @@
         <mat-label class="dance-level-label">Tanzlevel *</mat-label>
       </div>
       <mat-form-field appearance="fill" class="dance-level-value">
-        <mat-select>
+        <mat-select formControlName="level">
           <mat-option *ngFor="let danceLevel of danceLevels | keyvalue:originalOrder" [value]="danceLevel.key">
             {{danceLevel.value}}
           </mat-option>
@@ -38,10 +38,10 @@
         <mat-icon class="form-icon">people</mat-icon>
         <mat-label>DanceRole *</mat-label>
       </div>
-      <mat-radio-group aria-label="Select an option" fxLayout="column">
-        <mat-radio-button value="lead" class="role-button">Ich führe</mat-radio-button>
-        <mat-radio-button value="follow" class="role-button">Ich folge</mat-radio-button>
-        <mat-radio-button value="both" class="role-button">Beides</mat-radio-button>
+      <mat-radio-group formControlName="leading" aria-label="Select an option" fxLayout="column">
+        <mat-radio-button value="LEAD" class="role-button">Ich führe</mat-radio-button>
+        <mat-radio-button value="FOLLOW" class="role-button">Ich folge</mat-radio-button>
+        <mat-radio-button value="BOTH" class="role-button">Beides</mat-radio-button>
       </mat-radio-group>
     </div>
   </form>

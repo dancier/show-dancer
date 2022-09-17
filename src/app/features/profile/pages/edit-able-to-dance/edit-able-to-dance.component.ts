@@ -1,48 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from '@data/services/profile.service';
-import { Dance } from '@data/types/profile.types';
+import { Dance, DanceLevel, DanceRole, DanceTypes } from '@data/types/profile.types';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
 
 @Component({
   selector: 'app-edit-able-to-dance',
   templateUrl: './edit-able-to-dance.component.html',
   styleUrls: ['./edit-able-to-dance.component.scss']
 })
-export class EditAbleToDanceComponent {
+export class EditAbleToDanceComponent implements OnInit {
 
-  ableTo: Dance[] = [{
-    type: undefined,
-    level: undefined,
-    leading: undefined
-  }];
+  form = new FormGroup({
+    dances: new FormArray<FormGroup<DanceForm>>([])
+  });
 
   constructor(
     public profileDataService: ProfileService,
-    private router: Router
-  ) {}
-
-  addDance(): void{
-    this.ableTo.push(this.createNewEmptyDance());
+    private router: Router,
+  ) {
+    this.form.valueChanges.subscribe((changes) => {
+      console.info(changes);
+    })
   }
 
-  createNewEmptyDance(): Dance {
-    return {
-      type: undefined,
-      level: undefined,
-      leading: undefined
-    }
+  ngOnInit(): void {
+    this.addDance();
+  }
+
+  addDance(): void {
+    const danceForm = new FormGroup<DanceForm>({
+      type: new FormControl<DanceTypes>('', { nonNullable: true }),
+      leading: new FormControl<DanceRole>('LEADING', { nonNullable: true }),
+      level: new FormControl<DanceLevel>('BASIC', { nonNullable: true }),
+    });
+    this.form.controls.dances.push(danceForm);
+  }
+
+  get dancesFormArray(): FormArray<FormGroup<DanceForm>> {
+    return this.form.controls.dances;
   }
 
   removeDance(index: number): void {
-    if (this.ableTo.length > 1) {
-      this.ableTo.splice(index, 1);
+    if (this.dancesFormArray.length > 0) {
+      this.dancesFormArray.removeAt(index);
     }
   }
 
   submitForm(): void {
-    // eslint-disable-next-line no-console
-    console.log(this.ableTo)
-    this.profileDataService.setOwnDances(this.ableTo as Dance[]);
+    const dances: Dance[] = this.dancesFormArray.value.map((danceForm) => ({
+      type: danceForm.type,
+      leading: danceForm.leading,
+      level: danceForm.level,
+    }));
+    this.profileDataService.setOwnDances(dances);
     this.router.navigate(['profile/initial-setup/dances-partner']);
   }
 }

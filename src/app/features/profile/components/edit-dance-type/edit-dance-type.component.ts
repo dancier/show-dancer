@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
-import { Dance, DanceLevel } from '@data/types/profile.types';
+import { DanceLevel } from '@data/types/profile.types';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';
@@ -13,18 +13,7 @@ import { DanceForm } from '@features/profile/components/dance-type/dance-form.ty
 })
 export class EditDanceTypeComponent implements OnInit {
 
-  // control = new UntypedFormControl('');
   danceForm!: FormGroup<DanceForm>;
-
-  @Output()
-  danceChange = new EventEmitter<Dance>();
-
-  // typed form
-  // danceForm = this.fb.group({
-  //   dance: ['', [Validators.required]],
-  //   level: new FormControl<DanceLevel>('NO_EXPERIENCE', { nonNullable: true }),
-  //   leading: new FormControl<DanceRole>('LEADING', { nonNullable: true }),
-  // });
 
   danceLevels: Record<DanceLevel, string> = {
     NO_EXPERIENCE: 'Keine',
@@ -33,28 +22,6 @@ export class EditDanceTypeComponent implements OnInit {
     ADVANCED: 'Experte',
     PRO: 'Professioneller Tänzer',
   }
-
-  // readonly danceLevels: DanceLevel[] = [
-  //   {
-  //     levelValue: 'NO_EXPERIENCE',
-  //     levelLabel: 'Keine Erfahrung'
-  //   },
-  //   {
-  //     levelValue: 'BASIC',
-  //     levelLabel: 'Beginner'
-  //   },
-  //   {
-  //     levelValue: 'INTERMEDIATE',
-  //     levelLabel: 'Medium'
-  //   },
-  //   {
-  //     levelValue: 'ADVANCED',
-  //     levelLabel: 'Fortschritten'
-  //   },
-  //   {
-  //     levelValue: 'PRO',
-  //     levelLabel: 'Professionell'
-  //   }];
 
   danceTypeAutocompletions: string[] = [
     'Tango', 'Salsa', 'Standard'
@@ -72,8 +39,8 @@ export class EditDanceTypeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initDanceTypeAutocompletions();
     this.danceForm = this.formGroupDirective.form;
+    this.initDanceTypeAutocompletions();
   }
 
   private initDanceTypeAutocompletions(): void {
@@ -93,7 +60,3 @@ export class EditDanceTypeComponent implements OnInit {
 
 }
 
-// export interface Level {
-//   levelValue: String,
-//   levelLabel: String
-// }
