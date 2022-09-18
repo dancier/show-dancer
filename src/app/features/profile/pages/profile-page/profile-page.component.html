@@ -9,14 +9,14 @@
     <mat-tab-group class="dance-details" mat-align-tabs="center">
       <mat-tab label="Ich tanze">
         <div class="dance-types-container" fxLayout.xs="column">
-          <app-dance-type *ngFor="let preference of profileDataService.profile.ableTo" [danceTypeName]="(preference.type!)"
+          <app-dance-type *ngFor="let preference of profileDataService.profile.ableTo" [danceTypeName]="(preference.dance!)"
                           [danceLevel]="(preference.level!)"
                           [role]="(preference.leading!)"></app-dance-type>
         </div>
       </mat-tab>
       <mat-tab label="Ich suche">
         <div class="dance-types-container" fxLayout.xs="column">
-          <app-dance-type *ngFor="let preference of profileDataService.profile.ableTo" [danceTypeName]="(preference.type!)"
+          <app-dance-type *ngFor="let preference of profileDataService.profile.ableTo" [danceTypeName]="(preference.dance!)"
                           [danceLevel]="(preference.level!)"
                           [role]="(preference.leading!)"></app-dance-type>
         </div>

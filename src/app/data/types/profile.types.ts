@@ -41,35 +41,12 @@ export const genderList: GenderDescription[] = [
 
 export type DanceRole = 'LEADING' | 'FOLLOWING';
 
-export type DanceTypes = string;
-
-// export type DancePreferences = {
-//   dance: DanceTypes;
-//   level: DanceLevel;
-//   leading: DanceRole;
-// };
+export type DanceType = string;
 
 export type Dance = {
-  type?: DanceTypes;
-  level?: DanceLevel;
-  leading?: DanceRole;
-};
-
-export type Profile = {
-  id?: string;
-  aboutMe: string;
-  size: number;
-  gender: Gender;
-  dancerName: string;
-  birthDate: string;
-  ableTo: Dance[];
-  wantsTo: Dance[];
-  email: string;
-  zipCode: string;
-  city: string;
-  country: string;
-  profileImageHash: string;
-  [key: string]: any;
+  dance: DanceType;
+  level: DanceLevel;
+  leading: DanceRole;
 };
 
 export type PersonalData = {
@@ -77,6 +54,19 @@ export type PersonalData = {
   gender: Gender;
   birthDate: string;
   zipCode: string;
+};
+
+export type Profile = PersonalData & {
+  id?: string;
+  aboutMe: string;
+  dancerName: string;
+  ableTo: Dance[];
+  wantsTo: Dance[];
+  email: string;
+  city: string;
+  country: string;
+  profileImageHash: string;
+  [key: string]: any;
 };
 
 export type NameAvailability = {

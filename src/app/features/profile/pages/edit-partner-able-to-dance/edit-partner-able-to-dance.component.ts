@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from '@data/services/profile.service';
-import { Dance, DanceLevel, DanceRole, DanceTypes } from '@data/types/profile.types';
+import { Dance, DanceLevel, DanceRole, DanceType } from '@data/types/profile.types';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
 
@@ -31,7 +31,7 @@ export class EditPartnerAbleToDanceComponent implements OnInit {
 
   addDance(): void {
     const danceForm = new FormGroup<DanceForm>({
-      type: new FormControl<DanceTypes>('', { nonNullable: true }),
+      dance: new FormControl<DanceType>('', { nonNullable: true }),
       leading: new FormControl<DanceRole>('LEADING', { nonNullable: true }),
       level: new FormControl<DanceLevel>('BASIC', { nonNullable: true }),
     });
@@ -49,8 +49,8 @@ export class EditPartnerAbleToDanceComponent implements OnInit {
   }
 
   submitForm(): void {
-    const dances: Dance[] = this.dancesFormArray.value.map((danceForm) => ({
-      type: danceForm.type,
+    const dances: Dance[] = this.dancesFormArray.getRawValue().map((danceForm) => ({
+      dance: danceForm.dance,
       leading: danceForm.leading,
       level: danceForm.level,
     }));

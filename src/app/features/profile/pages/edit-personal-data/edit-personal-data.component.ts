@@ -17,6 +17,7 @@ const sizeFormat = /\d{3}/g
 })
 export class EditPersonalDataComponent {
   personalDataForm = this.fb.group({
+    //TODO: birthDate is set as a date by the material datepicker, but the backend expects a string
     birthDate: ['',  [Validators.required]],
     zipCode: ['', [Validators.required, Validators.pattern(zipFormat)]],
     gender: new FormControl<Gender>('NA', {

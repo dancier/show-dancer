@@ -47,7 +47,7 @@ export class EditDanceTypeComponent implements OnInit {
     if (!this.danceForm) {
       return;
     }
-    this.filteredDanceTypeAutocompletions$ = this.danceForm.controls.type.valueChanges.pipe(
+    this.filteredDanceTypeAutocompletions$ = this.danceForm.controls.dance.valueChanges.pipe(
       startWith(''),
       map(formFieldValue => this.filterAutocompletions(formFieldValue)),
     );
