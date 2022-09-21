@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditPartnerAbleToDanceComponent } from './edit-partner-able-to-dance.component';
+import { MockProvider } from 'ng-mocks';
+import { ProfileService } from '@data/services/profile.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('EditPartnerAbleToDanceComponent', () => {
   let component: EditPartnerAbleToDanceComponent;
@@ -8,7 +11,13 @@ describe('EditPartnerAbleToDanceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditPartnerAbleToDanceComponent ]
+      declarations: [ EditPartnerAbleToDanceComponent ],
+      providers: [
+        MockProvider(ProfileService),
+      ],
+      imports: [
+        ReactiveFormsModule,
+      ],
     })
     .compileComponents();
   });
@@ -23,3 +32,4 @@ describe('EditPartnerAbleToDanceComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

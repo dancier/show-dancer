@@ -7,6 +7,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MockProvider } from 'ng-mocks';
+import { ProfileService } from '@data/services/profile.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 describe('EditPersonalDataComponent', () => {
   let component: EditPersonalDataComponent;
@@ -21,7 +27,14 @@ describe('EditPersonalDataComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         BrowserAnimationsModule,
+        ReactiveFormsModule,
+      ],
+      providers: [
+        MockProvider(ProfileService),
       ],
     })
     .compileComponents();

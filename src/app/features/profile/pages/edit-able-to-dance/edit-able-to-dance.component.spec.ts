@@ -1,21 +1,39 @@
 import { EditAbleToDanceComponent } from './edit-able-to-dance.component';
 import { MatIconModule } from '@angular/material/icon';
-import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
-import { MockComponent } from 'ng-mocks';
+import { MockComponent, MockProvider } from 'ng-mocks';
 import { EditDanceTypeComponent } from '@features/profile/components/edit-dance-type/edit-dance-type.component';
+import { ProfileService } from '@data/services/profile.service';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
-describe('AddAbleToDanceComponent', () => {
-  let spectator: Spectator<EditAbleToDanceComponent>;
+describe('EditAbleToDanceComponent', () => {
 
-  const createComponent = createComponentFactory({
-    component: EditAbleToDanceComponent,
-    imports: [MatIconModule],
-    declarations: [MockComponent(EditDanceTypeComponent)],
+  let component: EditAbleToDanceComponent;
+  let fixture: ComponentFixture<EditAbleToDanceComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        EditAbleToDanceComponent,
+        MockComponent(EditDanceTypeComponent),
+      ],
+      providers: [
+        MockProvider(ProfileService),
+      ],
+      imports: [
+        MatIconModule,
+        ReactiveFormsModule,
+      ],
+    }).compileComponents();
   });
 
-  beforeEach(() => spectator = createComponent());
+  beforeEach(() => {
+    fixture = TestBed.createComponent(EditAbleToDanceComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 });
