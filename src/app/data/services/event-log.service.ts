@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Event, Topic } from '@data/types/eventlog.types';
-import { AppInstanceStorageService } from './app-instance-storage.service';
+import { AppInstanceStorageService } from '@core/logging/app-instance/app-instance-storage.service';
 import { EventLogHttpService } from './event-log-http.service';
 
 @Injectable({

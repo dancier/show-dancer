@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { CoreModule } from '@core/core.module';
@@ -16,7 +15,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer/footer.component';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
-import { AppInstanceIdInterceptor } from '@core/logging/app-instance-id.interceptor';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
@@ -30,7 +28,6 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     // Angular
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
 
     // Core & Shared
     CoreModule,
@@ -49,7 +46,6 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
-    { provide: HTTP_INTERCEPTORS, useClass: AppInstanceIdInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
