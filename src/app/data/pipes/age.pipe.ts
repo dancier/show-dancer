@@ -10,11 +10,17 @@ export class AgePipe implements PipeTransform {
 }
 
 function calculateAge(birthdate: string): number | string {
-  try {
-    const ageInMilliseconds = Date.now() - Date.parse(birthdate);
-    return Math.floor(ageInMilliseconds / 1000 / 60 / 60 / 24 / 365);
-  } catch (error) {
-    console.error('Error oin parsing birthdate', error);
+  const birthdateAsDate = new Date(birthdate);
+  if (birthdateAsDate.toString() === 'Invalid Date') {
+    console.error('Error on parsing birthdate', birthdate);
     return 'unknown';
   }
+
+  // calculating the age this way is taking leap years into account
+  let age = new Date().getFullYear() - birthdateAsDate.getFullYear();
+  const monthDifference = new Date().getMonth() - birthdateAsDate.getMonth();
+  if (monthDifference < 0 || (monthDifference === 0 && new Date().getDate() < birthdateAsDate.getDate())) {
+    age--;
+  }
+  return age;
 }

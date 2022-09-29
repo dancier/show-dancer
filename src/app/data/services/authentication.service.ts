@@ -25,7 +25,7 @@ export class AuthenticationService {
     this.baseUrl = `${this.environment.getApiUrl()}/authentication`;
   }
 
-  onceUserRegistered(userRegistration: UserRegistration): Observable<APIResponse<void>> {
+  register(userRegistration: UserRegistration): Observable<APIResponse<void>> {
     return this.http.post<void>(`${this.baseUrl}/registrations`, userRegistration, this.defaultOptions)
       .pipe(
         map(asSuccess),
@@ -41,7 +41,7 @@ export class AuthenticationService {
       );
   }
 
-  onceUserLoggedIn(loginRequest: LoginRequest): Observable<APIResponse<void>>  {
+  login(loginRequest: LoginRequest): Observable<APIResponse<void>>  {
     return this.http.post<void>(`${this.baseUrl}/login`, loginRequest , this.defaultOptions)
       .pipe(
         map(asSuccess),
@@ -60,7 +60,7 @@ export class AuthenticationService {
       );
   }
 
-  onceHumanLoggedIn(captchaToken: string): Observable<APIResponse<void>>  {
+  loginAsHuman(captchaToken: string): Observable<APIResponse<void>>  {
     const httpOptions = {
       headers: new HttpHeaders({
         'X-Captcha-Token': captchaToken,
@@ -84,7 +84,7 @@ export class AuthenticationService {
       );
   }
 
-  onceAccountVerified(validationCode: string): Observable<APIResponse<void>> {
+  verifyAccount(validationCode: string): Observable<APIResponse<void>> {
     return this.http.put<void>(`${this.baseUrl}/email-validations/${validationCode}`, null, this.defaultOptions)
       .pipe(
         map(asSuccess),
@@ -101,7 +101,7 @@ export class AuthenticationService {
       );
   }
 
-  onceUserLoggedOut(): Observable<APIResponse<void>> {
+  logout(): Observable<APIResponse<void>> {
     return this.http.get<void>(`${this.baseUrl}/logout`, this.defaultOptions)
     .pipe(
       map(asSuccess),

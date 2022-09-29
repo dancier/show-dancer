@@ -24,7 +24,7 @@ export class LogoutPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.logoutSubscription = this.authService
-      .onceUserLoggedOut()
+      .logout()
       .subscribe(() => this.router.navigate(['/']));
   }
 }
