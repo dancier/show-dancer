@@ -1,44 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProfileService } from '@data/services/profile.service';
+import { Dance, DanceLevel, DanceRole, DanceType } from '@data/types/profile.types';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
 
 @Component({
   selector: 'app-edit-able-to-dance',
-  templateUrl: './edit-able-to-dance.html',
-  styleUrls: ['./edit-able-to-dance.scss']
+  templateUrl: './edit-able-to-dance.component.html',
+  styleUrls: ['./edit-able-to-dance.component.scss']
 })
-export class EditAbleToDanceComponent {
+export class EditAbleToDanceComponent implements OnInit {
 
-  dummyDances: Dance[] = [{
-    danceType: '',
-    danceLevel: '',
-    role: ''
-  }];
+  form = new FormGroup({
+    dances: new FormArray<FormGroup<DanceForm>>([])
+  });
 
-  constructor() {
+  constructor(
+    public profileDataService: ProfileService,
+    private router: Router,
+  ) {
+    this.form.valueChanges.subscribe((changes) => {
+      console.info(changes);
+    })
   }
 
-
-  addDance(): void{
-    this.dummyDances.push(this.createNewEmptyDance());
+  ngOnInit(): void {
+    this.addDance();
   }
 
-  createNewEmptyDance(): Dance {
-    return {
-      danceType: '',
-      danceLevel: '',
-      role: ''
-    }
+  addDance(): void {
+    const danceForm = new FormGroup<DanceForm>({
+      dance: new FormControl<DanceType>('', { nonNullable: true, validators: [Validators.required] }),
+      leading: new FormControl<DanceRole>('LEADING', { nonNullable: true, validators: [Validators.required] }),
+      level: new FormControl<DanceLevel>('BASIC', { nonNullable: true, validators: [Validators.required] }),
+    });
+    this.form.controls.dances.push(danceForm);
+  }
+
+  get dancesFormArray(): FormArray<FormGroup<DanceForm>> {
+    return this.form.controls.dances;
   }
 
   removeDance(index: number): void {
-    if (this.dummyDances.length > 1) {
-      this.dummyDances.splice(index, 1);
+    if (this.dancesFormArray.length > 0) {
+      this.dancesFormArray.removeAt(index);
     }
   }
-}
 
-export interface Dance {
-  danceType: string,
-  danceLevel: string,
-  role: string
+  submitForm(): void {
+    if (this.form.valid) {
+      // iterate over the values from the dances form array and map them to a Dance array
+      const dances: Dance[] = this.dancesFormArray.getRawValue().map((danceForm) => ({
+        dance: danceForm.dance,
+        leading: danceForm.leading,
+        level: danceForm.level,
+      }));
+      this.profileDataService.setOwnDances(dances);
+      this.router.navigate(['profile/initial-setup/dances-partner']);
+    }
+  }
 }
 

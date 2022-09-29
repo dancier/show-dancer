@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Profile } from '@data/types/profile.types';
 
 @Component({
   selector: 'app-personal-data',
@@ -7,14 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class PersonalDataComponent {
 
-  @Input() username: String = '';
-  @Input() height: number = 0;
-  @Input() birthday: String = '';
-  @Input() gender: String = '';
-  @Input() email: String = '';
-  @Input() city: String = '';
-  @Input() country: String = '';
-  @Input() zipCode: String = '';
+  @Input() profile?: Profile
 
   constructor() {
   }

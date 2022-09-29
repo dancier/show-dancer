@@ -15,30 +15,33 @@
         </p>
       </div>
       <div class="form-section-container">
-        <div *ngFor="let dance of dummyDances; let i = index">
-          <div class="edit-dance-container">
-            <app-edit-dance-type></app-edit-dance-type>
-            <div class="remove-button-container">
-              <button mat-stroked-button (click)="removeDance(i)" *ngIf="dummyDances.length > 1"
-                      class="font-color-primary-800 remove-button">
-                <mat-icon>remove</mat-icon>
+        <form [formGroup]="form">
+          <ng-container formArrayName="dances">
+            <div *ngFor="let danceFormGroup of dancesFormArray.controls; let i = index">
+              <div class="edit-dance-container">
+                <app-edit-dance-type [formGroup]="danceFormGroup"></app-edit-dance-type>
+                <div class="remove-button-container">
+                  <button mat-stroked-button (click)="removeDance(i)" *ngIf="dancesFormArray.length > 1"
+                          class="font-color-primary-800 remove-button">
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="dance-edit-button-container">
+              <button mat-stroked-button class="font-color-primary-800 dance-edit-button add-button" (click)="addDance()">
+                <mat-icon>add</mat-icon>
               </button>
             </div>
-          </div>
-
-        </div>
-        <div class="dance-edit-button-container">
-          <button mat-stroked-button class="font-color-primary-800 dance-edit-button add-button" (click)="addDance()">
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
+          </ng-container>
+        </form>
       </div>
     </div>
     <div fxLayout.gt-xs="row" fxLayout.xs="column" class="button-row">
       <button mat-raised-button class="font-color-primary-800 button-width-relative" routerLink="../personal-info">
         Zurück
       </button>
-      <button mat-raised-button class="font-color-primary-800 button-width-relative" routerLink="../dances-partner">
+      <button mat-raised-button class="font-color-primary-800 button-width-relative" (click)="submitForm()">
         Weiter
       </button>
     </div>

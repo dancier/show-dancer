@@ -1,48 +1,74 @@
-export type Level =
+export type DanceLevel =
   | 'NO_EXPERIENCE'
   | 'BASIC'
   | 'INTERMEDIATE'
   | 'ADVANCED'
-  | 'PRO'
+  | 'PRO';
 
-export const levelDescription: Record<Level, string> = {
+export const levelDescription: Record<DanceLevel, string> = {
   NO_EXPERIENCE: 'Keine Erfahrung',
   BASIC: 'Beginner',
   INTERMEDIATE: 'Medium',
   ADVANCED: 'Fortschritten',
-  PRO: 'Professionell'
+  PRO: 'Professionell',
 } as const;
 
-export type Gender =
-  | 'MALE'
-  | 'FEMALE'
-  | 'DIVERSE'
+export type Gender = 'MALE' | 'FEMALE' | 'DIVERS' | 'NA';
 
-export type ROLE =
-  | 'LEADING'
-  | 'FOLLOWING'
+export type GenderDescription = {
+  type: Gender;
+  description: string;
+};
 
-export type DancePreferences = {
-  dance: string,
-  level: Level,
-  leading: ROLE
-}
-export type Profile = {
-    id?: string,
-    aboutMe: string,
-    size: number,
-    gender: Gender,
-    dancerName: string,
-    birthDate: string,
-    ableTo: DancePreferences[],
-    wantsTo: DancePreferences[],
-    email: string,
-    zipCode: string,
-    city: string,
-    country: string,
-    profileImageHash: string
-}
+export const genderList: GenderDescription[] = [
+  {
+    type: 'MALE',
+    description: 'männlich',
+  },
+  {
+    type: 'FEMALE',
+    description: 'weiblich',
+  },
+  {
+    type: 'DIVERS',
+    description: 'divers',
+  },
+  {
+    type: 'NA',
+    description: 'keine Angabe',
+  },
+];
+
+export type DanceRole = 'LEADING' | 'FOLLOWING';
+
+export type DanceType = string;
+
+export type Dance = {
+  dance: DanceType;
+  level: DanceLevel;
+  leading: DanceRole;
+};
+
+export type PersonalData = {
+  size: number;
+  gender: Gender;
+  birthDate: string;
+  zipCode: string;
+};
+
+export type Profile = PersonalData & {
+  id?: string;
+  aboutMe: string;
+  dancerName: string;
+  ableTo: Dance[];
+  wantsTo: Dance[];
+  email: string;
+  city: string;
+  country: string;
+  profileImageHash: string;
+  [key: string]: any;
+};
 
 export type NameAvailability = {
-  isAvailable: true
-}
+  available: boolean;
+};

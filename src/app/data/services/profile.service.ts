@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Profile } from '@data/types/profile.types';
+import { Dance, PersonalData, Profile, } from '@data/types/profile.types';
 import { AuthStorageService } from './auth-storage.service';
 import { ProfileHttpService } from './profile-http.service';
 
@@ -7,7 +7,7 @@ import { ProfileHttpService } from './profile-http.service';
   providedIn: 'root',
 })
 export class ProfileService {
-  profile: Profile = this.initProfile();
+  profile: Profile = ProfileService.initProfile();
 
   constructor(
     private profileHttpService: ProfileHttpService,
@@ -29,7 +29,43 @@ export class ProfileService {
     });
   }
 
-  initProfile(): Profile {
+  updateProfile(): void {
+    this.profileHttpService.updateProfile$(this.profile).subscribe()
+  }
+
+  getProfile(): Profile {
+    return this.profile;
+  }
+
+  setDancerName(dancerName: string): void {
+    this.profile.dancerName = dancerName;
+    console.debug('dancerName', dancerName);
+    console.debug('profile', this.profile);
+  }
+
+  setPersonalData(personalData: PersonalData): void {
+    this.profile = {
+      ...this.profile,
+      ...personalData,
+    }
+    console.debug('personalData', personalData);
+    console.debug('profile', this.profile);
+  }
+
+  setOwnDances(ableTo: Dance[]): void {
+    // eslint-disable-next-line no-console
+    console.debug('ableTo', ableTo);
+    this.profile.ableTo = ableTo;
+    console.debug('profile', this.profile);
+  }
+
+  setPartnerDances(wantsTo: Dance[]): void {
+    console.debug('wantsTo', wantsTo);
+    this.profile.wantsTo = wantsTo;
+    console.debug('profile', this.profile);
+  }
+
+  private static initProfile(): Profile {
     return {
       aboutMe: '',
       size: 0,
@@ -42,7 +78,7 @@ export class ProfileService {
       zipCode: '',
       city: '',
       country: '',
-      profileImageHash: ''
+      profileImageHash: '',
     };
   }
 }

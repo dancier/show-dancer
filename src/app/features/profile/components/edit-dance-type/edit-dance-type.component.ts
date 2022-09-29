@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormGroup, FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
+import { DanceLevel } from '@data/types/profile.types';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { KeyValue } from '@angular/common';
+import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
 
 @Component({
   selector: 'app-edit-dance-type',
@@ -10,55 +13,50 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class EditDanceTypeComponent implements OnInit {
 
-  control = new UntypedFormControl('');
+  danceForm!: FormGroup<DanceForm>;
 
-  readonly danceLevels: Level[] = [
-    {
-      levelValue: 'NO_EXPERIENCE',
-      levelLabel: 'Keine Erfahrung'
-    },
-    {
-      levelValue: 'BASIC',
-      levelLabel: 'Beginner'
-    },
-    {
-      levelValue: 'INTERMEDIATE',
-      levelLabel: 'Medium'
-    },
-    {
-      levelValue: 'ADVANCED',
-      levelLabel: 'Fortschritten'
-    },
-    {
-      levelValue: 'PRO',
-      levelLabel: 'Professionell'
-    }];
+  danceLevels: Record<DanceLevel, string> = {
+    NO_EXPERIENCE: 'Keine',
+    BASIC: 'Wenig',
+    INTERMEDIATE: 'Fortgeschritten',
+    ADVANCED: 'Experte',
+    PRO: 'Professioneller Tänzer',
+  }
 
-  danceTypes: string[] = [
+  danceTypeAutocompletions: string[] = [
     'Tango', 'Salsa', 'Standard'
   ]
 
-  filteredDanceTypes$!: Observable<string[]>;
-
-  constructor() {
+  filteredDanceTypeAutocompletions$!: Observable<string[]>;
+  // Preserve original property order
+  originalOrder = (a: KeyValue<DanceLevel,string>, b: KeyValue<DanceLevel,string>): number => {
+    return 0;
   }
 
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private formGroupDirective: FormGroupDirective,
+  ) {}
+
   ngOnInit(): void {
-    this.filteredDanceTypes$ = this.control.valueChanges.pipe(
+    this.danceForm = this.formGroupDirective.form;
+    this.initDanceTypeAutocompletions();
+  }
+
+  private initDanceTypeAutocompletions(): void {
+    if (!this.danceForm) {
+      return;
+    }
+    this.filteredDanceTypeAutocompletions$ = this.danceForm.controls.dance.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value || '')),
+      map(formFieldValue => this.filterAutocompletions(formFieldValue)),
     );
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.danceTypes.filter(option => option.toLowerCase().includes(filterValue));
+  private filterAutocompletions(formFieldValue: string): string[] {
+    const filterValue = formFieldValue.toLowerCase();
+    return this.danceTypeAutocompletions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
 }
 
-
-export interface Level {
-  levelValue: String,
-  levelLabel: String
-}

@@ -25,6 +25,8 @@ import { PersonalDataComponent } from '@features/profile/components/personal-dat
 import { ProfileRoutingModule } from '@features/profile/profile-routing.module';
 import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-image/edit-profile-image.component';
 import { SharedModule } from '@shared/shared.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { SharedModule } from '@shared/shared.module';
     MatGridListModule,
     MatIconModule,
     MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatTabsModule,
     MatRadioModule,
     MatSelectModule,
