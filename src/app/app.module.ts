@@ -16,7 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer/footer.component';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
-import { AppInstanceIdInterceptor } from '@core/log/app-instance-id.interceptor';
+import { AppInstanceIdInterceptor } from '@core/logging/app-instance-id.interceptor';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
