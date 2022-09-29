@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { LoginRequest, UserRegistration, } from '@data/types/authentication.types';
+import { LoginRequest, UserRegistration, } from '@core/auth/authentication.types';
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
-import { AuthStorageService } from '@data/services/auth-storage.service';
-import { EnvironmentService } from '../../../environments/utils/environment.service';
+import { AuthStorageService } from '@core/auth/services/auth-storage.service';
+import { EnvironmentService } from '../../../../environments/utils/environment.service';
 import { APIResponse, asError, asSuccess } from '@data/types/response.types';
 
 @Injectable({

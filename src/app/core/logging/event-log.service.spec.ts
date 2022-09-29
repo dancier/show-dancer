@@ -1,6 +1,6 @@
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
-import { EventLogService } from '@data/services/event-log.service';
-import { EventLogHttpService } from '@data/services/event-log-http.service';
+import { EventLogService } from '@core/logging/event-log.service';
+import { EventLogHttpService } from '@core/logging/event-log-http.service';
 
 
 describe('AuthService', () => {

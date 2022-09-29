@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Event } from '@data/types/eventlog.types';
+import { Event } from '@core/logging/eventlog.types';
 import { APIResponse, asError, asSuccess } from '@data/types/response.types';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '../../../environments/utils/environment.service';

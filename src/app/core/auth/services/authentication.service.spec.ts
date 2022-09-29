@@ -1,8 +1,8 @@
 import { AuthenticationService } from './authentication.service';
 import { createHttpFactory, HttpMethod, SpectatorHttp } from '@ngneat/spectator/jest';
-import { AuthStorageService } from '@data/services/auth-storage.service';
-import { EnvironmentService } from '../../../environments/utils/environment.service';
-import { LoginRequest, UserRegistration } from '@data/types/authentication.types';
+import { AuthStorageService } from '@core/auth/services/auth-storage.service';
+import { EnvironmentService } from '../../../../environments/utils/environment.service';
+import { LoginRequest, UserRegistration } from '@core/auth/authentication.types';
 import { MockService } from 'ng-mocks';
 import { APIError } from '@data/types/response.types';
 import { TestRequest } from '@angular/common/http/testing';
