@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Renderer2 } from '@angular/core';
-import { EnvironmentService } from '../../../environments/utils/environment.service';
+import { EnvironmentService } from '@core/common/environment.service';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector

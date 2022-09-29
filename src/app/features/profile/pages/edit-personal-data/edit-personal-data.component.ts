@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, Validators, } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileService } from '@data/services/profile.service';
-import { Gender, genderList } from '@data/types/profile.types';
+import { ProfileService } from '@features/profile/services/profile.service';
+import { Gender, genderList } from '../../types/profile.types';
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
 

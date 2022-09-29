@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
-import { APIResponse, asError, asSuccess } from '@data/types/response.types';
-import { EnvironmentService } from '../../../environments/utils/environment.service';
+import { EnvironmentService } from '@core/common/environment.service';
+import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
 
 @Injectable({
   providedIn: 'root',

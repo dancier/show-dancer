@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { APIError } from '@data/types/response.types';
-import { errorMessages } from '@shared/error-handling/error-messages';
+import { errorMessages } from '@shared/http/error-messages';
+import { APIError } from '@shared/http/response.types';
 
 @Pipe({
   name: 'errorMessage',

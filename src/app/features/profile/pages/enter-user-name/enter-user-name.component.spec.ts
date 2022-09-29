@@ -5,8 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MockProvider } from 'ng-mocks';
-import { ProfileService } from '@data/services/profile.service';
-import { ProfileHttpService } from '@data/services/profile-http.service';
+import { ProfileService } from '@features/profile/services/profile.service';
+import { ProfileHttpService } from '@features/profile/services/profile-http.service';
 
 describe('EnterUserNameComponent', () => {
   let spectator: Spectator<EnterUserNameComponent>;

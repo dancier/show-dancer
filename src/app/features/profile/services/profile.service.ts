@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Dance, PersonalData, Profile, } from '@data/types/profile.types';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 import { ProfileHttpService } from './profile-http.service';
+import { Dance, PersonalData, Profile } from '../types/profile.types';
 
 @Injectable({
   providedIn: 'root',

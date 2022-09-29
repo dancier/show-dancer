@@ -1,6 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { throwIfAlreadyLoaded } from './common/module-import.guard';
+import { throwIfAlreadyLoaded } from './module-import.guard';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppInstanceIdInterceptor } from '@core/logging/app-instance/app-instance-id.interceptor';
 

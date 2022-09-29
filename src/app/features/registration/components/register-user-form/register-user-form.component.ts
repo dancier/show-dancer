@@ -3,8 +3,8 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { AuthenticationService } from '@core/auth/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { APIError } from '@data/types/response.types';
 import { mustMatch } from '@shared/validators/mustMatch';
+import { APIError } from '@shared/http/response.types';
 
 @Component({
   selector: 'app-register-user-form',

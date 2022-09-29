@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileHttpService } from '@data/services/profile-http.service';
-import { ProfileService } from '@data/services/profile.service';
-import { APIError } from '@data/types/response.types';
+import { ProfileHttpService } from '@features/profile/services/profile-http.service';
+import { ProfileService } from '@features/profile/services/profile.service';
+import { APIError } from '@shared/http/response.types';
 
 @Component({
   selector: 'app-enter-user-name',
