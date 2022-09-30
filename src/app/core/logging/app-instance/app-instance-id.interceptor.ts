@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-} from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AppInstanceStorageService } from '@data/services/app-instance-storage.service';
+import { AppInstanceStorageService } from '@core/logging/app-instance/app-instance-storage.service';
 
-@Injectable()
-export class HttpHeaderInterceptor implements HttpInterceptor {
+@Injectable({
+  providedIn: 'root'
+})
+export class AppInstanceIdInterceptor implements HttpInterceptor {
   constructor(private appInstanceStorageService: AppInstanceStorageService) {}
 
   intercept(

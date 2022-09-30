@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ImageUploadService } from '@data/services/image-upload.service';
+import { ImageUploadService } from '@features/profile/services/image-upload.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({

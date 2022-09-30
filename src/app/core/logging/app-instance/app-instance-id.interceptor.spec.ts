@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HttpHeaderInterceptor } from './http-header.interceptor';
+import { AppInstanceIdInterceptor } from './app-instance-id.interceptor';
 
 describe('HttpHeaderInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      HttpHeaderInterceptor
+      AppInstanceIdInterceptor
       ]
   }));
 
   it('should be created', () => {
-    const interceptor: HttpHeaderInterceptor = TestBed.inject(HttpHeaderInterceptor);
+    const interceptor: AppInstanceIdInterceptor = TestBed.inject(AppInstanceIdInterceptor);
     expect(interceptor).toBeTruthy();
   });
 });

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EventLogService } from '@data/services/event-log.service';
+import { EventLogService } from '@core/logging/event-log.service';
 import { ActivatedRoute } from '@angular/router';
-import { AppInstanceStorageService } from '@data/services/app-instance-storage.service';
+import { AppInstanceStorageService } from '@core/logging/app-instance/app-instance-storage.service';
 
 @Component({
   selector: 'app-root',

@@ -1,7 +1,7 @@
 import { createHttpFactory, HttpMethod, SpectatorHttp } from '@ngneat/spectator/jest';
-import { EventLogHttpService } from '@data/services/event-log-http.service';
-import { Event } from '@data/types/eventlog.types';
-import { EnvironmentService } from '../../../environments/utils/environment.service';
+import { EventLogHttpService } from '@core/logging/event-log-http.service';
+import { Event } from '@core/logging/eventlog.types';
+import { EnvironmentService } from '../common/environment.service';
 
 describe('EventLogHttpService', () => {
   let spectator: SpectatorHttp<EventLogHttpService>;

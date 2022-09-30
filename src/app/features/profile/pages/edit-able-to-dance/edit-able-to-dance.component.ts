@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfileService } from '@data/services/profile.service';
-import { Dance, DanceLevel, DanceRole, DanceType } from '@data/types/profile.types';
+import { ProfileService } from '@features/profile/services/profile.service';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
+import { Dance, DanceLevel, DanceRole, DanceType } from '@features/profile/types/profile.types';
 
 @Component({
   selector: 'app-edit-able-to-dance',

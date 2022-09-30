@@ -1,4 +1,4 @@
-import { APIError } from '@data/types/response.types';
+import { APIError } from '@shared/http/response.types';
 
 export const errorMessages: Record<APIError, string> = {
   SERVER_ERROR: 'Ein unerwarteter Fehler ist aufgetreten.\nBitte versuche es später erneut.',

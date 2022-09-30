@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditPartnerAbleToDanceComponent } from './edit-partner-able-to-dance.component';
 import { MockProvider } from 'ng-mocks';
-import { ProfileService } from '@data/services/profile.service';
+import { ProfileService } from '@features/profile/services/profile.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('EditPartnerAbleToDanceComponent', () => {

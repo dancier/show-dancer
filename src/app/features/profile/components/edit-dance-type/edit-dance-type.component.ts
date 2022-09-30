@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
-import { DanceLevel } from '@data/types/profile.types';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';
 import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
+import { DanceLevel } from '../../types/profile.types';
 
 @Component({
   selector: 'app-edit-dance-type',

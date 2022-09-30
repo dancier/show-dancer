@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 // eslint-disable-next-line no-restricted-imports
-import { environment } from '../environment';
+import { environment } from '../../../environments/environment';
 
 /**
  * Service that provides the content of the environments.ts file.

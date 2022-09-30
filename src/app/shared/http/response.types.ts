@@ -1,5 +1,3 @@
-import { NameAvailability, Profile } from './profile.types';
-
 export type APIError =
   | 'VALIDATION_ERROR'
   | 'SERVER_ERROR'

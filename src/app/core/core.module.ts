@@ -1,6 +1,8 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { throwIfAlreadyLoaded } from './guards/module-import.guard';
+import { throwIfAlreadyLoaded } from './module-import.guard';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AppInstanceIdInterceptor } from '@core/logging/app-instance/app-instance-id.interceptor';
 
 
 /**
@@ -9,7 +11,18 @@ import { throwIfAlreadyLoaded } from './guards/module-import.guard';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+  ],
+  exports: [
+    HttpClientModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInstanceIdInterceptor,
+      multi: true
+    },
   ]
 })
 export class CoreModule {

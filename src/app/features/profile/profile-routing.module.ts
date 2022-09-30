@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EnterUserNameComponent } from '@features/profile/pages/enter-user-name/enter-user-name.component';
-import { LoggedInGuard } from '@core/guards/logged-in.guard';
+import { LoggedInGuard } from '@core/auth/guards/logged-in.guard';
 import { EditPersonalDataComponent } from '@features/profile/pages/edit-personal-data/edit-personal-data.component';
 import { ProfilePageComponent } from '@features/profile/pages/profile-page/profile-page.component';
 import { EditAbleToDanceComponent } from '@features/profile/pages/edit-able-to-dance/edit-able-to-dance.component';

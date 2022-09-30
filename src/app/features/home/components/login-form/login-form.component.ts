@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators, } from '@angular/forms';
-import { AuthenticationService } from '@data/services/authentication.service';
-import { LoginRequest } from '@data/types/authentication.types';
+import { AuthenticationService } from '@core/auth/services/authentication.service';
+import { LoginRequest } from '@core/auth/authentication.types';
 import { Router } from '@angular/router';
-import { APIError } from '@data/types/response.types';
+import { APIError } from '@shared/http/response.types';
 
 @Component({
   selector: 'app-login-form',
