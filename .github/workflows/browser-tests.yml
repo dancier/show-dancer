@@ -4,6 +4,8 @@ description: Runs browser tests using Cypress against https://test.dancier.net/
 on:
   schedule:
     - cron: '0 0 * * *' # every day at midnight
+  # Allows manual runs from the Github Actions tab
+  workflow_dispatch:
 
 jobs:
   cypress-run:
