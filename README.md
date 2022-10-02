@@ -20,6 +20,14 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Jest](https://jestjs.io/).
 
+### Running e2e Cypress browser tests
+
+Run `npm run `cy:run` to execute the browser tests via [Cypress](https://www.cypress.io/).
+This command will run in the CLI and run tests inside a headless browser.
+
+For a more interactive experience, run `npm run cy:open` to open the Cypress test runner.
+It allows you to time travel through tests, see the state of the application at any point in time, and more.
+
 ### Development patterns
 
 Whenever we decide on a pattern we want to use during development,
