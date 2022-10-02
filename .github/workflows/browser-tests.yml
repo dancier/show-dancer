@@ -1,5 +1,4 @@
 name: Browser Tests
-description: Runs browser tests using Cypress against https://test.dancier.net/
 
 on:
   schedule:
