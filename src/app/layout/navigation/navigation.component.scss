@@ -4,7 +4,6 @@
   display: flex;
   z-index: 999;
   justify-content: space-between;
-  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 
   .header-left {
     display: flex;
@@ -13,19 +12,6 @@
     img {
       height: 40px;
       margin-right: 8px;
-    }
-
-    .title {
-      font-size: 24px;
-      color: white;
-    }
-
-    .subtitle {
-      font-size: 16px;
-      align-self: flex-end;
-      padding-left: 6px;
-      font-family: Optima, sans-serif, cursive;
-      color: white;
     }
   }
 

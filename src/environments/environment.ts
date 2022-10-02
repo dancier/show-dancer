@@ -7,6 +7,7 @@ import { Environment } from './utils/environment.type';
 export const environment: Environment = {
   production: false,
   apiUrl: 'http://localhost:4200/api',
+  removeTestAttributes: false,
 };
 
 /*
