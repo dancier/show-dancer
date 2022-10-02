@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "lint": "ng lint",
+    "cy:run": "cypress run",
     "prepare": "husky install"
   },
   "husky": {
