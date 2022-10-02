@@ -1,5 +1,4 @@
 name: Browser Tests
-description: Runs browser tests using Cypress against https://test.dancier.net/
 
 on:
   schedule:
@@ -23,3 +22,17 @@ jobs:
         with:
           browser: chrome
           config: baseUrl=https://test.dancier.net/
+
+      # after the test run completes, store videos and any screenshots
+      # NOTE: screenshots will be generated only if E2E test failed
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
