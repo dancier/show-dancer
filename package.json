@@ -9,6 +9,7 @@
     "test": "jest",
     "lint": "ng lint",
     "cy:run": "cypress run",
+    "cy:open": "cypress open --e2e --browser chrome",
     "prepare": "husky install"
   },
   "husky": {
@@ -39,11 +40,11 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.1.2",
-    "@angular-eslint/builder": "14.0.2",
-    "@angular-eslint/eslint-plugin": "14.0.2",
-    "@angular-eslint/eslint-plugin-template": "14.0.2",
-    "@angular-eslint/schematics": "14.0.2",
-    "@angular-eslint/template-parser": "14.0.2",
+    "@angular-eslint/builder": "^14.0.2",
+    "@angular-eslint/eslint-plugin": "^14.0.2",
+    "@angular-eslint/eslint-plugin-template": "^14.0.2",
+    "@angular-eslint/schematics": "^14.0.2",
+    "@angular-eslint/template-parser": "^14.0.2",
     "@angular/cli": "^14.1.2",
     "@angular/compiler-cli": "^14.1.2",
     "@ngneat/spectator": "^11.1.3",
@@ -53,6 +54,7 @@
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
     "cypress": "^10.9.0",
+    "cypress-light-theme": "^1.0.0",
     "eslint": "^8.18.0",
     "husky": "^7.0.0",
     "jest": "^28.1.3",
