@@ -11,7 +11,7 @@ export class DataTestDirective {
     private renderer: Renderer2,
     private environment: EnvironmentService
   ) {
-    if (environment.getProduction()) {
+    if (environment.shouldRemoveTestAttributes()) {
       renderer.removeAttribute(el.nativeElement, 'data-test');
     }
   }

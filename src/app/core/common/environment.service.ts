@@ -20,4 +20,8 @@ export class EnvironmentService {
   public getApiUrl(): string {
     return environment.apiUrl;
   }
+
+  public shouldRemoveTestAttributes(): boolean {
+    return environment.removeTestAttributes;
+  }
 }
