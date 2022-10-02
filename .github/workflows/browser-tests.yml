@@ -1,0 +1,23 @@
+name: Browser Tests
+description: Runs browser tests using Cypress against https://test.dancier.net/
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # every day at midnight
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    # Runs in container with chrome, firefox and edge browsers
+    container: cypress/browsers:node16.16.0-chrome105-ff99-edge
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Installs NPM dependencies, caches them correctly and runs all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v4.2.0
+        with:
+          browser: chrome
+          config: baseUrl=https://test.dancier.net/
