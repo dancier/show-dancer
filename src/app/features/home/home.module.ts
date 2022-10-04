@@ -15,6 +15,8 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { MatButtonModule } from '@angular/material/button';
 import { BetaRegistrationPageComponent } from './pages/beta-registration-page/beta-registration-page.component';
 import { SharedModule } from '@shared/shared.module';
+import { ContactComponent } from './pages/contact/contact.component';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { SharedModule } from '@shared/shared.module';
     TermsAndConditionsComponent,
     AboutUsComponent,
     BetaRegistrationPageComponent,
+    ContactComponent,
   ],
   imports: [
     FormsModule,
@@ -38,6 +41,8 @@ import { SharedModule } from '@shared/shared.module';
     MatIconModule,
     MatButtonModule,
     SharedModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
   ],
   exports: [LoginFormComponent],
 })

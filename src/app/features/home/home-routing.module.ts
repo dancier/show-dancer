@@ -8,6 +8,7 @@ import { AboutUsComponent } from '@features/home/pages/about-us/about-us.compone
 import {
   BetaRegistrationPageComponent
 } from '@features/home/pages/beta-registration-page/beta-registration-page.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'about-us',
     component: AboutUsComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
   },
   {
     path: 'beta-registration',
