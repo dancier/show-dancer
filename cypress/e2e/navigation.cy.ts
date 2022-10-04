@@ -6,28 +6,36 @@ describe('Navigation', () => {
     cy.visit('');
   });
 
+  const navbarPublicPages = [
+    { name: 'Über Uns', pageId: 'page-about-us' },
+    { name: 'Kontakt', pageId: 'page-contact' },
+    // { name: 'Mitmachen', pageId: 'page-contribute' },
+  ];
+
   describe('when on mobile', () => {
 
     beforeEach(() => {
       cy.viewport('iphone-8');
     });
 
-    it('navigates to the "about us" page', () => {
-      getByTestId('burger-menu-opener').click();
-      getByTestId('burger-menu').contains('Über Uns').click();
+    navbarPublicPages.forEach((page) => {
+      it(`can navigate to "${page.name}" page`, () => {
+        getByTestId('burger-menu-opener').click();
+        getByTestId('burger-menu').contains(page.name).click();
 
-      const aboutUsPage = getByTestId('page-about-us');
-      aboutUsPage.should('exist');
+        getByTestId(page.pageId).should('be.visible');
+      });
     });
   });
 
   describe('when on desktop', () => {
 
-    it('navigates to the "about us" page', () => {
-      getByTestId('desktop-nav').contains('Über Uns').click();
+    navbarPublicPages.forEach((page) => {
+      it(`can navigate to "${page.name}" page`, () => {
+        getByTestId('desktop-nav').contains(page.name).click();
 
-      const aboutUsPage = getByTestId('page-about-us');
-      aboutUsPage.should('exist');
+        getByTestId(page.pageId).should('be.visible');
+      });
     });
   });
 

@@ -1,8 +1,13 @@
 @import "responsive.scss";
 
 html, body {
-  height: calc(100% - 64px);
   background-color: map-get($dancier-palette-accent, A200);
+
+  // Free image from pixabay.com christmas-decoration-holiday-xmas-2908901
+  //background-image: url("../assets/img/backgrounds/light-background.jpg");
+
+  scroll-behavior: smooth;
+
 
   p {
     font-weight: 350;
@@ -78,21 +83,24 @@ a {
   background-color: map-get($dancier-palette-accent, 900);
 }
 
-.content-page-outer-container {
-  display: flex;
-  justify-content: center;
+.content-page-container {
+  background-color: white;
+  width: min(100vw, 900px);
+
+  @include screen('xs') {
+  }
+
+  @include screen('gt-xs') {
+  }
 }
 
-.content-page-inner-container {
-  max-width: 1024px;
-  background-color: white;
-
+.content-inner-container {
   @include screen('xs') {
     padding: 16px;
   }
 
   @include screen('gt-xs') {
-    padding: 45px;
+    margin: 16px 32px 0 32px;
   }
 }
 
@@ -143,8 +151,6 @@ a {
 }
 
 .profile-edit-page-inner-container {
-  max-width: 800px;
-  padding: 32px;
   background-color: white;
   height: 100%;
 }
@@ -156,6 +162,10 @@ a {
 
 .form-section-container {
   margin-bottom: 32px;
+}
+
+.space-container {
+  height: 32px;
 }
 
 

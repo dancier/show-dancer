@@ -1,7 +1,9 @@
 <app-navigation></app-navigation>
 
-<div class="page-wrapper" [ngStyle]="{'minHeight': pageContentMinHeight + 'px' }" >
-  <router-outlet></router-outlet>
+<div class="page-wrapper" >
+  <div class="content-page-container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
 <app-footer></app-footer>

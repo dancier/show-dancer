@@ -24,17 +24,13 @@
               <mat-icon>account_box</mat-icon>
               <span>Profil</span>
             </button>
-            <button mat-menu-item *ngIf="authData.isLoggedIn">
-              <mat-icon>mail</mat-icon>
-              <span>Nachrichten</span>
-            </button>
             <button mat-menu-item routerLink="about-us">
               <mat-icon>groups</mat-icon>
               <span>Über Uns</span>
             </button>
-            <button mat-menu-item>
-              <mat-icon>contacts</mat-icon>
-              <span>Impressum</span>
+            <button mat-menu-item routerLink="contact">
+              <mat-icon>message</mat-icon>
+              <span>Kontakt</span>
             </button>
           </ng-container>
         </div>
@@ -48,10 +44,11 @@
       <ng-container *ngIf="authStorageService.authData$ | async as authData">
         <a mat-button routerLink="about-us" routerLinkActive="active"><span>Über Uns</span></a>
         <div class="separator"></div>
+        <a mat-button routerLink="contact" routerLinkActive="active"><span>Kontakt</span></a>
+        <div class="separator"></div>
+        <a mat-button routerLink="contribute" routerLinkActive="active"><span>Mitmachen</span></a>
+        <div class="separator"></div>
         <div *ngIf="authData.isLoggedIn" class="nav-icons">
-          <a>
-            <mat-icon>mail</mat-icon>
-          </a>
           <a routerLink="profile">
             <mat-icon>account_box</mat-icon>
           </a>
