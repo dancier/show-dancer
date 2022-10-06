@@ -34,4 +34,3 @@ Whenever we decide on a pattern we want to use during development,
 we add it to the list of development patterns.
 
 You can find the development patterns in the [docs/patterns.md](patterns.md) file.
-

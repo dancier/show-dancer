@@ -3,7 +3,7 @@ import { EnvironmentService } from '@core/common/environment.service';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[data-test]'
+  selector: '[data-test]',
 })
 export class DataTestDirective {
   constructor(

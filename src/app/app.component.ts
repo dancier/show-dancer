@@ -21,9 +21,10 @@ export class AppComponent implements OnInit {
   }
 
   publishInitialPageRequestEvent(): void {
-    const isInitialPageRequest = this.appInstanceStorageService.isInitialPageRequest();
+    const isInitialPageRequest =
+      this.appInstanceStorageService.isInitialPageRequest();
     if (isInitialPageRequest) {
-      this.appInstanceStorageService.initializeAppInstanceId()
+      this.appInstanceStorageService.initializeAppInstanceId();
       this.eventLogService.createAndPublishEvent('app_instance_id_created');
     }
   }

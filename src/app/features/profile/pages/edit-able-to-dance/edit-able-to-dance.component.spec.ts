@@ -7,7 +7,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('EditAbleToDanceComponent', () => {
-
   let component: EditAbleToDanceComponent;
   let fixture: ComponentFixture<EditAbleToDanceComponent>;
 
@@ -17,13 +16,8 @@ describe('EditAbleToDanceComponent', () => {
         EditAbleToDanceComponent,
         MockComponent(EditDanceTypeComponent),
       ],
-      providers: [
-        MockProvider(ProfileService),
-      ],
-      imports: [
-        MatIconModule,
-        ReactiveFormsModule,
-      ],
+      providers: [MockProvider(ProfileService)],
+      imports: [MatIconModule, ReactiveFormsModule],
     }).compileComponents();
   });
 

@@ -6,17 +6,20 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
  * @param controlName
  * @param matchingControlName
  */
-export function mustMatch(controlName:string, matchingControlName: string): ValidatorFn {
+export function mustMatch(
+  controlName: string,
+  matchingControlName: string
+): ValidatorFn {
   return (controls: AbstractControl): ValidationErrors | null => {
     const control = controls.get(controlName);
     const matchingControl = controls.get(matchingControlName);
 
     if (control === null) {
-      console.error('control name doesn\'t exist', controlName);
+      console.error("control name doesn't exist", controlName);
       return null;
     }
     if (matchingControl === null) {
-      console.error('control name doesn\'t exist', controlName);
+      console.error("control name doesn't exist", controlName);
       return null;
     }
     if (matchingControl.errors && !matchingControl.errors['matching']) {

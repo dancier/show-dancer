@@ -12,7 +12,6 @@ jobs:
     # Runs in container with chrome, firefox and edge browsers
     container: cypress/browsers:node16.16.0-chrome105-ff99-edge
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 

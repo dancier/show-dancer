@@ -22,7 +22,8 @@
       .mat-form-field {
         margin-bottom: 6px;
       }
-      .acceptTerms, .captcha {
+      .acceptTerms,
+      .captcha {
         margin-bottom: 16px;
       }
       // workaround to wrap the label of a checkbox, see: https://github.com/angular/components/issues/8416

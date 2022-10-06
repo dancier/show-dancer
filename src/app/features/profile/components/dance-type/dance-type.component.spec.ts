@@ -6,12 +6,10 @@ describe('DanceTypeComponent', () => {
   let spectator: Spectator<DanceTypeComponent>;
   const createComponent = createComponentFactory({
     component: DanceTypeComponent,
-    imports: [
-      MatIconModule,
-    ]
+    imports: [MatIconModule],
   });
 
-  beforeEach(() => spectator = createComponent());
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

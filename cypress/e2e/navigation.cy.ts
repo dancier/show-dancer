@@ -1,7 +1,6 @@
 import { getByTestId } from '../support/utils';
 
 describe('Navigation', () => {
-
   beforeEach(() => {
     cy.visit('');
   });
@@ -13,7 +12,6 @@ describe('Navigation', () => {
   ];
 
   describe('when on mobile', () => {
-
     beforeEach(() => {
       cy.viewport('iphone-8');
     });
@@ -29,7 +27,6 @@ describe('Navigation', () => {
   });
 
   describe('when on desktop', () => {
-
     navbarPublicPages.forEach((page) => {
       it(`can navigate to "${page.name}" page`, () => {
         getByTestId('desktop-nav').contains(page.name).click();
@@ -38,5 +35,4 @@ describe('Navigation', () => {
       });
     });
   });
-
 });

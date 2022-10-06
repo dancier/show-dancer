@@ -19,7 +19,10 @@ function calculateAge(birthdate: string): number | string {
   // calculating the age this way is taking leap years into account
   let age = new Date().getFullYear() - birthdateAsDate.getFullYear();
   const monthDifference = new Date().getMonth() - birthdateAsDate.getMonth();
-  if (monthDifference < 0 || (monthDifference === 0 && new Date().getDate() < birthdateAsDate.getDate())) {
+  if (
+    monthDifference < 0 ||
+    (monthDifference === 0 && new Date().getDate() < birthdateAsDate.getDate())
+  ) {
     age--;
   }
   return age;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '@core/common/environment.service';
 import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
@@ -14,7 +14,7 @@ export class ImageUploadService {
 
   constructor(
     private http: HttpClient,
-    private environment: EnvironmentService,
+    private environment: EnvironmentService
   ) {}
 
   dataURItoBlob(dataURI: string): Blob {
@@ -34,17 +34,19 @@ export class ImageUploadService {
     const formData: FormData = new FormData();
     formData.append('file', blobFromDataUrl);
     return this.http
-      .post<void>(`${this.environment.getApiUrl()}/images`, formData, this.defaultOptions)
+      .post<void>(
+        `${this.environment.getApiUrl()}/images`,
+        formData,
+        this.defaultOptions
+      )
       .pipe(
         map(asSuccess),
-        catchError(
-          (error: HttpErrorResponse) => {
-            switch (error.status) {
-              default:
-                return of(asError('SERVER_ERROR'));
-            }
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            default:
+              return of(asError('SERVER_ERROR'));
           }
-        )
+        })
       );
   }
 }

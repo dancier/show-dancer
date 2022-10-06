@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AppInstanceStorageService } from '@core/logging/app-instance/app-instance-storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppInstanceIdInterceptor implements HttpInterceptor {
   constructor(private appInstanceStorageService: AppInstanceStorageService) {}

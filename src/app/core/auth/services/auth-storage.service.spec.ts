@@ -15,7 +15,7 @@ describe('AuthStorageService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
   });
 
@@ -80,10 +80,13 @@ describe('AuthStorageService', () => {
     });
 
     it('sets the state in local storage', () => {
-      expect(setItemSpy).toHaveBeenCalledWith('authData', JSON.stringify({
-        isLoggedIn: true,
-        isHuman: false,
-      }));
+      expect(setItemSpy).toHaveBeenCalledWith(
+        'authData',
+        JSON.stringify({
+          isLoggedIn: true,
+          isHuman: false,
+        })
+      );
     });
 
     it('informs subscribers about the change', () => {
@@ -106,10 +109,13 @@ describe('AuthStorageService', () => {
     });
 
     it('sets the state in local storage', () => {
-      expect(setItemSpy).toHaveBeenCalledWith('authData', JSON.stringify({
-        isLoggedIn: false,
-        isHuman: true,
-      }));
+      expect(setItemSpy).toHaveBeenCalledWith(
+        'authData',
+        JSON.stringify({
+          isLoggedIn: false,
+          isHuman: true,
+        })
+      );
     });
 
     it('informs subscribers about the change', () => {
@@ -119,5 +125,4 @@ describe('AuthStorageService', () => {
       });
     });
   });
-
 });

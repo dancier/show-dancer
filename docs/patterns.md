@@ -1,6 +1,5 @@
 # Development Patterns
 
-
 <details>
 <summary>
   <b>Environment:</b>
@@ -21,14 +20,14 @@ import { EnvironmentService } from '@app/core/services/environment.service';
 
 export class MyComponent {
   constructor(private environmentService: EnvironmentService) {}
-  
+
   someMethod(): string {
     return `Value of someKey is ${this.environmentService.get('someKey')}`;
   }
 }
 ```
-</details>
 
+</details>
 
 <details>
 <summary>
@@ -40,6 +39,7 @@ Starting with Angular 14, typed forms have become the new standard.
 We should initialize our form directly as we define the form member variable, rather than using the `ngOnInit` lifecycle hook.
 
 #### Why?
+
 A common pattern was to have a form member variable and initialize it within the `ngOnInit` method.
 This is no longer advised, as you'd have to explicitly define the type of the member variable.
 Instead, simply initialize the form directly when defining the member variable to let Typescript infer the type.
@@ -54,14 +54,16 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 
 export class MyComponent {
   form = this.fb.group({
-    email: ['', {
-      validators: [Validators.required, Validators.email]
-    }],
-    password: ['', [Validators.required, Validators.minLength(8)]]
+    email: [
+      '',
+      {
+        validators: [Validators.required, Validators.email],
+      },
+    ],
+    password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
-  constructor(private fb: NonNullableFormBuilder) {
-  }
+  constructor(private fb: NonNullableFormBuilder) {}
 }
 ```
 

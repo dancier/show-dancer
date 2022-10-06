@@ -1,17 +1,22 @@
 <div class="profile-edit-page-outer-container background-color-accent-A200">
-  <div class="profile-edit-page-inner-container container-radius" fxLayout="column">
+  <div
+    class="profile-edit-page-inner-container container-radius"
+    fxLayout="column"
+  >
     <h2 class="font-color-primary-800">Profilbild hochladen</h2>
-    <div class="profile-edit-form-container" fxLayout.gt-xs="row" fxLayout.xs="column">
-      <div class="description-section"
-           ngStyle.xs="margin-bottom: 16px"
-           ngStyle.gt-xs="max-width: 256px;  border-right: 1px solid #8c020b;"
-           ngStyle.gt-sm="max-width: 300px;">
-        <p>
-          Mit Profilbild hast du bessere Chance angesprochen zu werden.
-        </p>
-        <p>
-          Profilbild kannst du auch später hochladen.
-        </p>
+    <div
+      class="profile-edit-form-container"
+      fxLayout.gt-xs="row"
+      fxLayout.xs="column"
+    >
+      <div
+        class="description-section"
+        ngStyle.xs="margin-bottom: 16px"
+        ngStyle.gt-xs="max-width: 256px;  border-right: 1px solid #8c020b;"
+        ngStyle.gt-sm="max-width: 300px;"
+      >
+        <p>Mit Profilbild hast du bessere Chance angesprochen zu werden.</p>
+        <p>Profilbild kannst du auch später hochladen.</p>
       </div>
       <div class="form-section-container">
         <div>
@@ -21,8 +26,22 @@
           </button>
           <span></span>
           <!-- Hidden input -->
-          <input #fileInput type="file" (change)="fileChangeEvent($event)" accept="image/*" hidden>
-          <button (click)="upload()" raised mat-button bg="accent" *ngIf="croppedImage">Hochladen</button>
+          <input
+            #fileInput
+            type="file"
+            (change)="fileChangeEvent($event)"
+            accept="image/*"
+            hidden
+          />
+          <button
+            (click)="upload()"
+            raised
+            mat-button
+            bg="accent"
+            *ngIf="croppedImage"
+          >
+            Hochladen
+          </button>
         </div>
 
         <div style="width: 200px; height: 200px">
@@ -39,10 +58,18 @@
       </div>
     </div>
     <div fxLayout.gt-xs="row" fxLayout.xs="column" class="button-row">
-      <button mat-raised-button class="font-color-primary-800 button-width-relative" routerLink="../dances-partner">
+      <button
+        mat-raised-button
+        class="font-color-primary-800 button-width-relative"
+        routerLink="../dances-partner"
+      >
         Zurück
       </button>
-      <button mat-raised-button class="font-color-primary-800 button-width-relative" routerLink="/profile">
+      <button
+        mat-raised-button
+        class="font-color-primary-800 button-width-relative"
+        routerLink="/profile"
+      >
         Weiter
       </button>
     </div>

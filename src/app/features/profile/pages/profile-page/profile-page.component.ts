@@ -7,7 +7,5 @@ import { ProfileService } from '@features/profile/services/profile.service';
   styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent {
-
   constructor(public profileDataService: ProfileService) {}
-
 }

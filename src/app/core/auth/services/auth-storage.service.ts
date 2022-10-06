@@ -9,15 +9,16 @@ export type AuthData = {
 const AUTH_DATA_KEY = 'authData';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthStorageService {
-
-  private _authData$ = new BehaviorSubject<AuthData>(AuthStorageService.initFromLocalStorage())
+  private _authData$ = new BehaviorSubject<AuthData>(
+    AuthStorageService.initFromLocalStorage()
+  );
 
   public readonly authData$ = this._authData$.asObservable();
 
-  constructor() { }
+  constructor() {}
 
   private static initFromLocalStorage(): AuthData {
     const authItem = localStorage.getItem(AUTH_DATA_KEY);
@@ -35,7 +36,7 @@ export class AuthStorageService {
     const newAuthData = {
       ...this._authData$.getValue(),
       isLoggedIn: loginState,
-    }
+    };
     localStorage.setItem(AUTH_DATA_KEY, JSON.stringify(newAuthData));
     this._authData$.next(newAuthData);
   }
@@ -44,7 +45,7 @@ export class AuthStorageService {
     const newAuthData = {
       ...this._authData$.getValue(),
       isHuman: humanState,
-    }
+    };
     localStorage.setItem(AUTH_DATA_KEY, JSON.stringify(newAuthData));
     this._authData$.next(newAuthData);
   }
@@ -52,5 +53,4 @@ export class AuthStorageService {
   public getSnapshot(): AuthData {
     return this._authData$.getValue();
   }
-
 }

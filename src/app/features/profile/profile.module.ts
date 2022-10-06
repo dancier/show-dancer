@@ -57,7 +57,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSelectModule,
     MatAutocompleteModule,
     ImageCropperModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
-export class ProfileModule { }
+export class ProfileModule {}

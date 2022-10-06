@@ -19,7 +19,7 @@ export class AppInstanceStorageService {
   }
 
   isInitialPageRequest(): boolean {
-    return this.getAppIntanceId() == null
+    return this.getAppIntanceId() == null;
   }
 
   private setAppInstanceId(appInstanceId: string): string {

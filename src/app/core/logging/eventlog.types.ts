@@ -6,14 +6,14 @@ export type Topic =
   | 'test';
 
 export type Metadata = {
-  sourceTime: string,
-  appInstanceId: string
-}
+  sourceTime: string;
+  appInstanceId: string;
+};
 
 export type Event = {
-    topic: Topic,
-    metaData: Metadata,
-    payload: {
-      emailAddress?: string
-    }
-}
+  topic: Topic;
+  metaData: Metadata;
+  payload: {
+    emailAddress?: string;
+  };
+};

@@ -9,16 +9,11 @@ describe('LandingPageComponent', () => {
   let spectator: Spectator<LandingPageComponent>;
   const createComponent = createComponentFactory({
     component: LandingPageComponent,
-    declarations: [
-      MockComponents(LoginFormComponent)
-    ],
-    imports: [
-      MatCardModule,
-      MatIconModule,
-    ]
+    declarations: [MockComponents(LoginFormComponent)],
+    imports: [MatCardModule, MatIconModule],
   });
 
-  beforeEach(() => spectator = createComponent());
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

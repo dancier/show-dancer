@@ -10,14 +10,10 @@ describe('ResendVerificationLinkFormComponent', () => {
   let spectator: Spectator<ResendVerificationLinkFormComponent>;
   const createComponent = createComponentFactory({
     component: ResendVerificationLinkFormComponent,
-    imports: [
-      MatCardModule,
-      MatFormFieldModule,
-      MatInputModule
-    ]
+    imports: [MatCardModule, MatFormFieldModule, MatInputModule],
   });
 
-  beforeEach(() => spectator = createComponent());
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

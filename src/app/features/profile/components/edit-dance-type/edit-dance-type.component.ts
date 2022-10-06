@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
+import { FormGroup, FormGroupDirective, NonNullableFormBuilder, } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';
@@ -9,10 +9,9 @@ import { DanceLevel } from '../../types/profile.types';
 @Component({
   selector: 'app-edit-dance-type',
   templateUrl: './edit-dance-type.component.html',
-  styleUrls: ['./edit-dance-type.component.scss']
+  styleUrls: ['./edit-dance-type.component.scss'],
 })
 export class EditDanceTypeComponent implements OnInit {
-
   danceForm!: FormGroup<DanceForm>;
 
   danceLevels: Record<DanceLevel, string> = {
@@ -21,21 +20,22 @@ export class EditDanceTypeComponent implements OnInit {
     INTERMEDIATE: 'Fortgeschritten',
     ADVANCED: 'Experte',
     PRO: 'Professioneller Tänzer',
-  }
+  };
 
-  danceTypeAutocompletions: string[] = [
-    'Tango', 'Salsa', 'Standard'
-  ]
+  danceTypeAutocompletions: string[] = ['Tango', 'Salsa', 'Standard'];
 
   filteredDanceTypeAutocompletions$!: Observable<string[]>;
   // Preserve original property order
-  originalOrder = (a: KeyValue<DanceLevel,string>, b: KeyValue<DanceLevel,string>): number => {
+  originalOrder = (
+    a: KeyValue<DanceLevel, string>,
+    b: KeyValue<DanceLevel, string>
+  ): number => {
     return 0;
-  }
+  };
 
   constructor(
     private fb: NonNullableFormBuilder,
-    private formGroupDirective: FormGroupDirective,
+    private formGroupDirective: FormGroupDirective
   ) {}
 
   ngOnInit(): void {
@@ -47,16 +47,17 @@ export class EditDanceTypeComponent implements OnInit {
     if (!this.danceForm) {
       return;
     }
-    this.filteredDanceTypeAutocompletions$ = this.danceForm.controls.dance.valueChanges.pipe(
-      startWith(''),
-      map(formFieldValue => this.filterAutocompletions(formFieldValue)),
-    );
+    this.filteredDanceTypeAutocompletions$ =
+      this.danceForm.controls.dance.valueChanges.pipe(
+        startWith(''),
+        map((formFieldValue) => this.filterAutocompletions(formFieldValue))
+      );
   }
 
   private filterAutocompletions(formFieldValue: string): string[] {
     const filterValue = formFieldValue.toLowerCase();
-    return this.danceTypeAutocompletions.filter(option => option.toLowerCase().includes(filterValue));
+    return this.danceTypeAutocompletions.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
   }
-
 }
-

@@ -14,7 +14,7 @@ describe('ProfilePageComponent', () => {
     declarations: [MockComponents(DanceTypeComponent, PersonalDataComponent)],
   });
 
-  beforeEach(() => spectator = createComponent());
+  beforeEach(() => (spectator = createComponent()));
 
   it.skip('should create', () => {
     expect(spectator.component).toBeTruthy();

@@ -15,7 +15,9 @@ import { VerificationErrorComponent } from './components/verification-error/veri
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ResendVerificationLinkFormComponent } from './components/resend-verification-link-form/resend-verification-link-form.component';
+import {
+  ResendVerificationLinkFormComponent
+} from './components/resend-verification-link-form/resend-verification-link-form.component';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
@@ -24,7 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
     VerificationRequiredComponent,
     VerifyAccountComponent,
     VerificationErrorComponent,
-    ResendVerificationLinkFormComponent
+    ResendVerificationLinkFormComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,6 @@ import { MatIconModule } from '@angular/material/icon';
     SharedModule,
     MatCheckboxModule,
     MatIconModule,
-  ]
+  ],
 })
-export class RegistrationModule { }
+export class RegistrationModule {}

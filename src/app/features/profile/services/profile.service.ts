@@ -30,7 +30,7 @@ export class ProfileService {
   }
 
   updateProfile(): void {
-    this.profileHttpService.updateProfile$(this.profile).subscribe()
+    this.profileHttpService.updateProfile$(this.profile).subscribe();
   }
 
   getProfile(): Profile {
@@ -47,7 +47,7 @@ export class ProfileService {
     this.profile = {
       ...this.profile,
       ...personalData,
-    }
+    };
     console.debug('personalData', personalData);
     console.debug('profile', this.profile);
   }

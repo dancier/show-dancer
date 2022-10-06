@@ -8,54 +8,98 @@
       <mat-card-content>
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>E-Mail</mat-label>
-          <input data-test="email-field" matInput formControlName="email" type="email" placeholder="max.mustermann@beispiel.de" />
-          <mat-error data-test="email-error-empty" *ngIf="errorHandling('email', 'required')">
+          <input
+            data-test="email-field"
+            matInput
+            formControlName="email"
+            type="email"
+            placeholder="max.mustermann@beispiel.de"
+          />
+          <mat-error
+            data-test="email-error-empty"
+            *ngIf="errorHandling('email', 'required')"
+          >
             Bitte geben Sie Ihre E-Mail Adresse an.
           </mat-error>
-          <mat-error data-test="email-error-format" *ngIf="errorHandling('email', 'email')">
+          <mat-error
+            data-test="email-error-format"
+            *ngIf="errorHandling('email', 'email')"
+          >
             Bitte geben Sie eine gültige E-Mail Adresse an.
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Passwort</mat-label>
-          <input data-test="password-field" matInput formControlName="password" type="password" />
-          <mat-error data-test="password-field-empty" *ngIf="errorHandling('password', 'required')">
+          <input
+            data-test="password-field"
+            matInput
+            formControlName="password"
+            type="password"
+          />
+          <mat-error
+            data-test="password-field-empty"
+            *ngIf="errorHandling('password', 'required')"
+          >
             Bitte geben Sie ein Passwort ein.
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Passwort wiederholen</mat-label>
-          <input data-test="password-confirm-field" matInput formControlName="passwordConfirm" type="password" />
-          <mat-error data-test="password-confirm-field-empty" *ngIf="errorHandling('passwordConfirm', 'required')">
+          <input
+            data-test="password-confirm-field"
+            matInput
+            formControlName="passwordConfirm"
+            type="password"
+          />
+          <mat-error
+            data-test="password-confirm-field-empty"
+            *ngIf="errorHandling('passwordConfirm', 'required')"
+          >
             Bitte geben Sie ein Passwort ein.
           </mat-error>
-          <mat-error data-test="password-confirm-field-no-match" *ngIf="errorHandling('passwordConfirm', 'matching')">
+          <mat-error
+            data-test="password-confirm-field-no-match"
+            *ngIf="errorHandling('passwordConfirm', 'matching')"
+          >
             Die eingegebenen Passwörter stimmen nicht überein.
           </mat-error>
         </mat-form-field>
         <div class="acceptTerms">
-          <mat-checkbox formControlName="acceptTermsAndConditions"></mat-checkbox>
-          <div>Ich habe die <a routerLink="/terms-and-conditions">AGBs</a> und die <a routerLink="/cookie-guidelines">Cookie-Richtlinien</a> gelesen und akzeptiere sie.</div>
+          <mat-checkbox
+            formControlName="acceptTermsAndConditions"
+          ></mat-checkbox>
+          <div>
+            Ich habe die <a routerLink="/terms-and-conditions">AGBs</a> und die
+            <a routerLink="/cookie-guidelines">Cookie-Richtlinien</a> gelesen
+            und akzeptiere sie.
+          </div>
         </div>
-        <ng-container
-          *ngIf="loggedInAsHuman; then thankYouHuman; else captcha">
+        <ng-container *ngIf="loggedInAsHuman; then thankYouHuman; else captcha">
         </ng-container>
         <ng-template #thankYouHuman>
           <p>Vielen Dank!</p>
         </ng-template>
         <ng-template #captcha>
           <div class="captcha">
-            <re-captcha (resolved)="captchaResolved($event)" siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"></re-captcha>
+            <re-captcha
+              (resolved)="captchaResolved($event)"
+              siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"
+            ></re-captcha>
           </div>
         </ng-template>
-        <button data-test="confirm-registration" mat-stroked-button color="primary" class="btn-block full-width" [disabled]="!registrationForm.valid">Registrieren</button>
+        <button
+          data-test="confirm-registration"
+          mat-stroked-button
+          color="primary"
+          class="btn-block full-width"
+          [disabled]="!registrationForm.valid"
+        >
+          Registrieren
+        </button>
         <mat-error *ngIf="error">
-          <span>
-            {{error | errorMessage}}
-          </span>
+          <span> {{error | errorMessage}} </span>
         </mat-error>
       </mat-card-content>
     </form>
-
   </mat-card>
 </div>

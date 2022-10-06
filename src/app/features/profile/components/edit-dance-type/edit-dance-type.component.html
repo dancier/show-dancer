@@ -6,13 +6,18 @@
         <mat-label>Tanzart *</mat-label>
       </div>
       <div>
-        <input type="text"
-               placeholder="Tanzart"
-               formControlName="dance"
-               [matAutocomplete]="auto"
-        class="dance-type-input">
+        <input
+          type="text"
+          placeholder="Tanzart"
+          formControlName="dance"
+          [matAutocomplete]="auto"
+          class="dance-type-input"
+        />
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let danceType of filteredDanceTypeAutocompletions$ | async" [value]="danceType">
+          <mat-option
+            *ngFor="let danceType of filteredDanceTypeAutocompletions$ | async"
+            [value]="danceType"
+          >
             {{danceType}}
           </mat-option>
         </mat-autocomplete>
@@ -20,13 +25,16 @@
     </div>
 
     <div class="form-section" fxLayout="row">
-      <div class="form-section-label" style="margin-bottom: 20px;">
+      <div class="form-section-label" style="margin-bottom: 20px">
         <mat-icon class="form-icon">tune</mat-icon>
         <mat-label class="dance-level-label">Tanzlevel *</mat-label>
       </div>
       <mat-form-field appearance="fill" class="dance-level-value">
         <mat-select formControlName="level">
-          <mat-option *ngFor="let danceLevel of danceLevels | keyvalue:originalOrder" [value]="danceLevel.key">
+          <mat-option
+            *ngFor="let danceLevel of danceLevels | keyvalue:originalOrder"
+            [value]="danceLevel.key"
+          >
             {{danceLevel.value}}
           </mat-option>
         </mat-select>
@@ -38,10 +46,20 @@
         <mat-icon class="form-icon">people</mat-icon>
         <mat-label>DanceRole *</mat-label>
       </div>
-      <mat-radio-group formControlName="leading" aria-label="Select an option" fxLayout="column">
-        <mat-radio-button value="LEAD" class="role-button">Ich führe</mat-radio-button>
-        <mat-radio-button value="FOLLOW" class="role-button">Ich folge</mat-radio-button>
-        <mat-radio-button value="BOTH" class="role-button">Beides</mat-radio-button>
+      <mat-radio-group
+        formControlName="leading"
+        aria-label="Select an option"
+        fxLayout="column"
+      >
+        <mat-radio-button value="LEAD" class="role-button"
+          >Ich führe</mat-radio-button
+        >
+        <mat-radio-button value="FOLLOW" class="role-button"
+          >Ich folge</mat-radio-button
+        >
+        <mat-radio-button value="BOTH" class="role-button"
+          >Beides</mat-radio-button
+        >
       </mat-radio-group>
     </div>
   </form>

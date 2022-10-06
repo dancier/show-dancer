@@ -11,10 +11,9 @@ import { APIResponse } from '@shared/http/response.types';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent implements OnInit {
-
   contactForm!: FormGroup;
   contactResponse?: APIResponse<void>;
 
@@ -28,8 +27,8 @@ export class ContactComponent implements OnInit {
     public authStorageService: AuthStorageService,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private eventLogService: EventLogService,
-  ) { }
+    private eventLogService: EventLogService
+  ) {}
 
   ngOnInit(): void {
     this.initReactiveForm();
@@ -55,9 +54,9 @@ export class ContactComponent implements OnInit {
                 'contact_message_sent',
                 {
                   message: message,
-                  sender: email
+                  sender: email,
                 }
-              )
+              );
             }
           })
         )
@@ -82,5 +81,4 @@ export class ContactComponent implements OnInit {
         }
       });
   }
-
 }

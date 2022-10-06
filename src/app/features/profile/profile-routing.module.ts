@@ -10,7 +10,6 @@ import {
 } from '@features/profile/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
 import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-image/edit-profile-image.component';
 
-
 export const routes: Routes = [
   {
     path: '',
@@ -40,7 +39,7 @@ export const routes: Routes = [
       {
         path: 'profile-image',
         component: EditProfileImageComponent,
-        canActivate: [LoggedInGuard]
+        canActivate: [LoggedInGuard],
       },
       // Fallback when no prior routes are matched
       { path: '**', redirectTo: 'username', pathMatch: 'full' },
@@ -52,6 +51,6 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ProfileRoutingModule {}

@@ -19,13 +19,10 @@ describe('EnterUserNameComponent', () => {
       MatInputModule,
       ReactiveFormsModule,
     ],
-    providers: [
-      MockProvider(ProfileService),
-      MockProvider(ProfileHttpService),
-    ],
+    providers: [MockProvider(ProfileService), MockProvider(ProfileHttpService)],
   });
 
-  beforeEach(() => spectator = createComponent());
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

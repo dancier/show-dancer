@@ -37,12 +37,12 @@ export const routes: Routes = [
   },
   {
     path: 'beta-registration',
-    component: BetaRegistrationPageComponent
-  }
+    component: BetaRegistrationPageComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}
