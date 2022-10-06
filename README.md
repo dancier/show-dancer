@@ -11,9 +11,9 @@ Frontend for dancier.net. Built with Angular.
 
 2. Run `npm install` to install all dependencies.
 
-3. Run `npm run prepare` once to install git commit hooks on your machine (powered by [Husky](https://typicode.github.io/)).
+3. Run `npm run prepare` once to install git commit hooks on your machine (powered by [Husky](https://typicode.github.io/husky/)).
 
-[Husky](https://typicode.github.io/) will add these git hooks to your local machine:
+[Husky](https://typicode.github.io/husky/) will add these git hooks to your local machine:
 
 - Run [ESLint](https://eslint.org/) (with `--fix` option) before every commit.
   If the linting fails, the commit will be aborted.
