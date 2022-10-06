@@ -16,7 +16,8 @@
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "prettier"
       ],
       "rules": {
         "no-restricted-imports": ["error", {
@@ -31,8 +32,6 @@
             }
           ]
         }],
-        "quotes": [2, "single", { "avoidEscape": true }],
-        "object-curly-spacing": ["error", "always"],
         "no-console": [
           "warn",
           {
