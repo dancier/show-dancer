@@ -7,11 +7,19 @@ Frontend for dancier.net. Built with Angular.
 ### Prerequisites
 
 1. [Node.js](https://nodejs.org/) needs to be installed.
-We recommend using the latest LTS version.
+   We recommend using the latest LTS version.
 
 2. Run `npm install` to install all dependencies.
 
 3. Run `npm run prepare` once to install git commit hooks on your machine (powered by [Husky](https://typicode.github.io/)).
+
+[Husky](https://typicode.github.io/) will add these git hooks to your local machine:
+
+- Run [ESLint](https://eslint.org/) (with `--fix` option) before every commit.
+  If the linting fails, the commit will be aborted.
+- Run [Prettier](https://prettier.io/) on changed files before every commit.
+
+This helps to keep the codebase consistent and avoid bugs.
 
 ### Development server
 
