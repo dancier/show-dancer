@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, shareReplay, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse, HttpStatusCode, } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpStatusCode,
+} from '@angular/common/http';
 import { EnvironmentService } from '@core/common/environment.service';
 import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
 import { EventLogService } from '@core/logging/event-log.service';

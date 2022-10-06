@@ -1,13 +1,13 @@
 <form novalidate>
-  <mat-card-content fxLayout="column" class="login-form-container">
-    <mat-form-field fxFlex appearance="fill" class="full-width">
+  <mat-card-content class="login-form-container" fxLayout="column">
+    <mat-form-field appearance="fill" class="full-width" fxFlex>
       <mat-label>E-Mail</mat-label>
       <input
         data-test="email-field"
-        matInput
         formControlName="email"
-        type="email"
+        matInput
         placeholder="max.mustermann@beispiel.de"
+        type="email"
       />
       <mat-error data-test="email-error-empty">
         Bitte geben Sie Ihre E-Mail Adresse an.
@@ -18,9 +18,9 @@
     </mat-form-field>
     <!--TODO: add captcha-->
     <button
+      class="full-width background-color-500"
       data-test="submit-verification"
       mat-raised-button
-      class="full-width background-color-500"
     >
       Aktivierungslink senden
     </button>

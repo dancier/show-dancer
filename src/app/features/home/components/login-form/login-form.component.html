@@ -1,50 +1,50 @@
-<form [formGroup]="loginForm" (ngSubmit)="submitForm()" novalidate>
-  <mat-card-content fxLayout="column" class="login-form-container">
-    <mat-form-field fxFlex appearance="fill" class="full-width">
+<form (ngSubmit)="submitForm()" [formGroup]="loginForm" novalidate>
+  <mat-card-content class="login-form-container" fxLayout="column">
+    <mat-form-field appearance="fill" class="full-width" fxFlex>
       <mat-label>E-Mail</mat-label>
       <input
         data-test="email-field"
-        matInput
         formControlName="email"
-        type="email"
+        matInput
         placeholder="max.mustermann@beispiel.de"
+        type="email"
       />
       <mat-error
-        data-test="email-error-empty"
         *ngIf="errorHandling('email', 'required')"
+        data-test="email-error-empty"
       >
         Bitte geben Sie Ihre E-Mail Adresse an.
       </mat-error>
       <mat-error
-        data-test="email-error-format"
         *ngIf="errorHandling('email', 'email')"
+        data-test="email-error-format"
       >
         Bitte geben Sie eine gültige E-Mail Adresse an.
       </mat-error>
     </mat-form-field>
-    <mat-form-field fxFlex appearance="fill" class="full-width">
+    <mat-form-field appearance="fill" class="full-width" fxFlex>
       <mat-label>Passwort</mat-label>
       <input
-        data-test="password-field"
-        matInput
-        formControlName="password"
         [type]="hide ? 'password' : 'text'"
+        data-test="password-field"
+        formControlName="password"
+        matInput
       />
-      <mat-icon matSuffix (click)="hide = !hide"
+      <mat-icon (click)="hide = !hide" matSuffix
         >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon
       >
       <mat-error
-        data-test="password-field-empty"
         *ngIf="errorHandling('password', 'required')"
+        data-test="password-field-empty"
       >
         Bitte geben Sie ein Passwort ein.
       </mat-error>
     </mat-form-field>
     <button
+      [disabled]="!loginForm.valid"
+      class="full-width background-color-500"
       data-test="submit-login"
       mat-raised-button
-      class="full-width background-color-500"
-      [disabled]="!loginForm.valid"
     >
       Anmelden
     </button>

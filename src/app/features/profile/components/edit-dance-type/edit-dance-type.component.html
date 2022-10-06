@@ -1,4 +1,4 @@
-<mat-card-content fxLayout="column" class="card-content-container">
+<mat-card-content class="card-content-container" fxLayout="column">
   <form [formGroup]="danceForm">
     <div class="form-section" fxLayout="row">
       <div class="form-section-label">
@@ -7,11 +7,11 @@
       </div>
       <div>
         <input
-          type="text"
-          placeholder="Tanzart"
-          formControlName="dance"
           [matAutocomplete]="auto"
           class="dance-type-input"
+          formControlName="dance"
+          placeholder="Tanzart"
+          type="text"
         />
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option
@@ -47,19 +47,19 @@
         <mat-label>DanceRole *</mat-label>
       </div>
       <mat-radio-group
-        formControlName="leading"
         aria-label="Select an option"
+        formControlName="leading"
         fxLayout="column"
       >
-        <mat-radio-button value="LEAD" class="role-button"
-          >Ich führe</mat-radio-button
-        >
-        <mat-radio-button value="FOLLOW" class="role-button"
-          >Ich folge</mat-radio-button
-        >
-        <mat-radio-button value="BOTH" class="role-button"
-          >Beides</mat-radio-button
-        >
+        <mat-radio-button class="role-button" value="LEAD"
+          >Ich führe
+        </mat-radio-button>
+        <mat-radio-button class="role-button" value="FOLLOW"
+          >Ich folge
+        </mat-radio-button>
+        <mat-radio-button class="role-button" value="BOTH"
+          >Beides
+        </mat-radio-button>
       </mat-radio-group>
     </div>
   </form>

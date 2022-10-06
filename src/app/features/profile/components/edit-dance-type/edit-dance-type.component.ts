@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective, NonNullableFormBuilder, } from '@angular/forms';
+import {
+  FormGroup,
+  FormGroupDirective,
+  NonNullableFormBuilder,
+} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';
@@ -25,6 +29,12 @@ export class EditDanceTypeComponent implements OnInit {
   danceTypeAutocompletions: string[] = ['Tango', 'Salsa', 'Standard'];
 
   filteredDanceTypeAutocompletions$!: Observable<string[]>;
+
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private formGroupDirective: FormGroupDirective
+  ) {}
+
   // Preserve original property order
   originalOrder = (
     a: KeyValue<DanceLevel, string>,
@@ -32,11 +42,6 @@ export class EditDanceTypeComponent implements OnInit {
   ): number => {
     return 0;
   };
-
-  constructor(
-    private fb: NonNullableFormBuilder,
-    private formGroupDirective: FormGroupDirective
-  ) {}
 
   ngOnInit(): void {
     this.danceForm = this.formGroupDirective.form;

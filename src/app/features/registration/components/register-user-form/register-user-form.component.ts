@@ -1,5 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators, } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthenticationService } from '@core/auth/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -30,20 +34,6 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.formStatusSubscription?.unsubscribe();
-  }
-
-  private initReactiveForm(): void {
-    this.registrationForm = this.fb.group(
-      {
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required]],
-        passwordConfirm: ['', [Validators.required]],
-        acceptTermsAndConditions: [false, [Validators.requiredTrue]],
-      },
-      {
-        validators: [mustMatch('password', 'passwordConfirm')],
-      }
-    );
   }
 
   public errorHandling(controlName: string, error: string): boolean {
@@ -86,5 +76,19 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
           console.error('error while establishing human session');
         }
       });
+  }
+
+  private initReactiveForm(): void {
+    this.registrationForm = this.fb.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]],
+        passwordConfirm: ['', [Validators.required]],
+        acceptTermsAndConditions: [false, [Validators.requiredTrue]],
+      },
+      {
+        validators: [mustMatch('password', 'passwordConfirm')],
+      }
+    );
   }
 }

@@ -12,6 +12,13 @@ export class EventLogService {
     private appInstanceStorageService: AppInstanceStorageService
   ) {}
 
+  createAndPublishEvent(topic: Topic, payload: any = {}): void {
+    const appInstanceId = this.appInstanceStorageService.getAppIntanceId()!;
+    this.eventLogHttpService
+      .postEvent$(this.createEvent(appInstanceId, topic, payload))
+      .subscribe();
+  }
+
   private createEvent(
     appInstanceId: string,
     topic: Topic,
@@ -25,12 +32,5 @@ export class EventLogService {
       },
       payload,
     };
-  }
-
-  createAndPublishEvent(topic: Topic, payload: any = {}): void {
-    const appInstanceId = this.appInstanceStorageService.getAppIntanceId()!;
-    this.eventLogHttpService
-      .postEvent$(this.createEvent(appInstanceId, topic, payload))
-      .subscribe();
   }
 }

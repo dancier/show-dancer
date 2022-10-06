@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators, } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthenticationService } from '@core/auth/services/authentication.service';
 import { LoginRequest } from '@core/auth/authentication.types';
 import { Router } from '@angular/router';
@@ -25,13 +29,6 @@ export class LoginFormComponent implements OnInit {
     this.initReactiveForm();
   }
 
-  private initReactiveForm(): void {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-    });
-  }
-
   public errorHandling(control: string, error: string): boolean {
     return this.loginForm.controls[control].hasError(error);
   }
@@ -48,5 +45,12 @@ export class LoginFormComponent implements OnInit {
           }
         });
     }
+  }
+
+  private initReactiveForm(): void {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
   }
 }

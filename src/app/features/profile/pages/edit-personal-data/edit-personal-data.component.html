@@ -1,4 +1,4 @@
-<form [formGroup]="personalDataForm" (ngSubmit)="submitForm()" novalidate>
+<form (ngSubmit)="submitForm()" [formGroup]="personalDataForm" novalidate>
   <div class="profile-edit-page-outer-container background-color-accent-A200">
     <div
       class="profile-edit-page-inner-container container-radius"
@@ -12,9 +12,9 @@
       >
         <div
           class="description-section"
-          ngStyle.xs="margin-bottom: 16px"
-          ngStyle.gt-xs="max-width: 256px;  border-right: 1px solid #8c020b;"
           ngStyle.gt-sm="max-width: 300px;"
+          ngStyle.gt-xs="max-width: 256px;  border-right: 1px solid #8c020b;"
+          ngStyle.xs="margin-bottom: 16px"
         >
           <p>
             Damit passende Tanzpartner automatisch zu dir empfohlen werden,
@@ -23,11 +23,11 @@
           <p>Im Moment unterstützen wir nur Benutzer aus Deutschland.</p>
         </div>
         <div class="form-section-container">
-          <mat-card-content fxLayout="column" class="card-content-container">
+          <mat-card-content class="card-content-container" fxLayout="column">
             <div
+              [ngStyle]="{'margin-bottom': hasFocus('GENDER') ? '16px' : '0' }"
               class="form-section"
               fxLayout="row"
-              [ngStyle]="{'margin-bottom': hasFocus('GENDER') ? '16px' : '0' }"
             >
               <mat-icon class="form-icon">transgender</mat-icon>
               <mat-form-field appearance="fill" class="full-width">
@@ -37,10 +37,10 @@
                   wichtig.
                 </mat-hint>
                 <mat-select
+                  (blur)="unsetFocus('GENDER')"
+                  (focus)="setFocus('GENDER')"
                   data-test="gender-field"
                   formControlName="gender"
-                  (focus)="setFocus('GENDER')"
-                  (blur)="unsetFocus('GENDER')"
                 >
                   <mat-option
                     *ngFor="let gender of genderList"
@@ -52,50 +52,50 @@
               </mat-form-field>
             </div>
             <div
+              [ngStyle]="{'margin-bottom': hasFocus('BIRTHDAY') ? '16px' : '0' }"
               class="form-section"
               fxLayout="row"
-              [ngStyle]="{'margin-bottom': hasFocus('BIRTHDAY') ? '16px' : '0' }"
             >
               <mat-icon class="form-icon">cake</mat-icon>
               <mat-form-field appearance="fill" class="width-201">
                 <mat-label>Geburtsdatum:</mat-label>
                 <input
-                  [readonly]="true"
-                  matInput
-                  [matDatepicker]="picker"
-                  data-test="birthdate-field"
-                  formControlName="birthDate"
-                  (focus)="setFocus('BIRTHDAY')"
                   (blur)="unsetFocus('BIRTHDAY')"
                   (click)="picker.open()"
+                  (focus)="setFocus('BIRTHDAY')"
+                  [matDatepicker]="picker"
+                  [readonly]="true"
+                  data-test="birthdate-field"
+                  formControlName="birthDate"
+                  matInput
                 />
                 <mat-hint *ngIf="hasFocus('BIRTHDAY')"
                   >Später wird das Alter auf deinem Profil angezeigt, und das
                   Alter wird auch für die Empfehlung angewendet.
                 </mat-hint>
                 <mat-datepicker-toggle
-                  matSuffix
                   [for]="picker"
+                  matSuffix
                 ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
             <div
+              [ngStyle]="{'margin-bottom': hasFocus('HEIGHT') ? '16px' : '0' }"
               class="form-section"
               fxLayout="row"
-              [ngStyle]="{'margin-bottom': hasFocus('HEIGHT') ? '16px' : '0' }"
             >
               <mat-icon class="form-icon">accessibility</mat-icon>
               <mat-form-field appearance="fill" class="full-width">
                 <mat-label>Körpergröße:</mat-label>
                 <input
+                  (blur)="unsetFocus('HEIGHT')"
+                  (focus)="setFocus('HEIGHT')"
                   data-test="size-field"
                   formControlName="size"
                   matInput
-                  type="number"
                   placeholder="(Deine Körpergröße in CM)"
-                  (focus)="setFocus('HEIGHT')"
-                  (blur)="unsetFocus('HEIGHT')"
+                  type="number"
                 />
                 <span matSuffix>cm</span>
                 <mat-hint *ngIf="hasFocus('HEIGHT')"
@@ -105,21 +105,21 @@
               </mat-form-field>
             </div>
             <div
+              [ngStyle]="{'margin-bottom': hasFocus('ZIP') ? '16px' : '0' }"
               class="form-section"
               fxLayout="row"
-              [ngStyle]="{'margin-bottom': hasFocus('ZIP') ? '16px' : '0' }"
             >
               <mat-icon class="form-icon">place</mat-icon>
               <mat-form-field appearance="fill" class="full-width">
                 <mat-label>PLZ:</mat-label>
                 <input
-                  matInput
+                  (blur)="unsetFocus('ZIP')"
+                  (focus)="setFocus('ZIP')"
                   data-test="zipCode-field"
                   formControlName="zipCode"
-                  type="text"
+                  matInput
                   placeholder="(PLZ)"
-                  (focus)="setFocus('ZIP')"
-                  (blur)="unsetFocus('ZIP')"
+                  type="text"
                 />
                 <mat-hint *ngIf="hasFocus('ZIP')"
                   >Auf deinem Profil wird der Ort angezeigt. PLZ ist auch für
@@ -129,14 +129,14 @@
             </div>
 
             <div class="form-section" fxLayout="row">
-              <div fxLayout="row" class="city-land-container">
+              <div class="city-land-container" fxLayout="row">
                 <mat-icon class="form-icon">location_city</mat-icon>
                 <div>
                   <label>Stadt: </label>
                   <span>(wird ermittelt)</span>
                 </div>
               </div>
-              <div fxLayout="row" class="city-land-container">
+              <div class="city-land-container" fxLayout="row">
                 <mat-icon class="form-icon">map</mat-icon>
                 <div>
                   <label>Land: </label>
@@ -148,8 +148,8 @@
         </div>
       </div>
       <button
-        mat-raised-button
         class="font-color-primary-800 continue-button"
+        mat-raised-button
         type="submit"
       >
         Weiter

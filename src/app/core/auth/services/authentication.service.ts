@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, } from '@angular/common/http';
-import { LoginRequest, UserRegistration, } from '@core/auth/authentication.types';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
+import {
+  LoginRequest,
+  UserRegistration,
+} from '@core/auth/authentication.types';
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 import { EnvironmentService } from '../../common/environment.service';

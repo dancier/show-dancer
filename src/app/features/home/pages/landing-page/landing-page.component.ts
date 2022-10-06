@@ -19,17 +19,17 @@ export class LandingPageComponent implements OnInit {
     this.calculateLandingPageContentMinHeight();
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    this.windowHeight = window.innerHeight;
+    this.calculateLandingPageContentMinHeight();
+  }
+
   private calculateLandingPageContentMinHeight(): void {
     this.landingPageContentMinHeight =
       this.windowHeight -
       this.navigationHeight -
       this.footerHeight -
       this.textContentHeight;
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(): void {
-    this.windowHeight = window.innerHeight;
-    this.calculateLandingPageContentMinHeight();
   }
 }

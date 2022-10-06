@@ -22,6 +22,7 @@ export class EditProfileImageComponent implements OnDestroy {
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
   }
+
   imageCropped(event: ImageCroppedEvent): void {
     this.croppedImage = event.base64;
   }

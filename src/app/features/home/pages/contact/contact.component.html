@@ -8,22 +8,22 @@
 
   <p>Wir freuen uns auf deine Nachricht.</p>
 
-  <form [formGroup]="contactForm" (ngSubmit)="submitForm()" novalidate>
-    <mat-card-content fxLayout="column" class="card-content-container">
+  <form (ngSubmit)="submitForm()" [formGroup]="contactForm" novalidate>
+    <mat-card-content class="card-content-container" fxLayout="column">
       <ng-container *ngIf="authStorageService.authData$ | async as authData">
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>E-Mail</mat-label>
           <input
-            matInput
             formControlName="email"
-            type="email"
+            matInput
             placeholder="(Deine Mail-Adresse)"
+            type="email"
           />
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Schreibe uns deine Nachricht</mat-label>
-          <textarea rows="10" matInput formControlName="message"></textarea>
+          <textarea formControlName="message" matInput rows="10"></textarea>
         </mat-form-field>
 
         <ng-container *ngIf="!authData.isHuman || isCaptchaSolved">
@@ -42,9 +42,9 @@
         </mat-error>
 
         <button
-          mat-raised-button
-          class="font-color-primary-800"
           [disabled]="!contactForm.valid || !authData.isHuman"
+          class="font-color-primary-800"
+          mat-raised-button
         >
           Nachricht senden
         </button>

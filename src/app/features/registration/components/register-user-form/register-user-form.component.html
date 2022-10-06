@@ -4,26 +4,26 @@
       <mat-card-title data-test="title">Registrierung</mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" novalidate>
+    <form (ngSubmit)="submitForm()" [formGroup]="registrationForm" novalidate>
       <mat-card-content>
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>E-Mail</mat-label>
           <input
             data-test="email-field"
-            matInput
             formControlName="email"
-            type="email"
+            matInput
             placeholder="max.mustermann@beispiel.de"
+            type="email"
           />
           <mat-error
-            data-test="email-error-empty"
             *ngIf="errorHandling('email', 'required')"
+            data-test="email-error-empty"
           >
             Bitte geben Sie Ihre E-Mail Adresse an.
           </mat-error>
           <mat-error
-            data-test="email-error-format"
             *ngIf="errorHandling('email', 'email')"
+            data-test="email-error-format"
           >
             Bitte geben Sie eine gültige E-Mail Adresse an.
           </mat-error>
@@ -32,13 +32,13 @@
           <mat-label>Passwort</mat-label>
           <input
             data-test="password-field"
-            matInput
             formControlName="password"
+            matInput
             type="password"
           />
           <mat-error
-            data-test="password-field-empty"
             *ngIf="errorHandling('password', 'required')"
+            data-test="password-field-empty"
           >
             Bitte geben Sie ein Passwort ein.
           </mat-error>
@@ -47,19 +47,19 @@
           <mat-label>Passwort wiederholen</mat-label>
           <input
             data-test="password-confirm-field"
-            matInput
             formControlName="passwordConfirm"
+            matInput
             type="password"
           />
           <mat-error
-            data-test="password-confirm-field-empty"
             *ngIf="errorHandling('passwordConfirm', 'required')"
+            data-test="password-confirm-field-empty"
           >
             Bitte geben Sie ein Passwort ein.
           </mat-error>
           <mat-error
-            data-test="password-confirm-field-no-match"
             *ngIf="errorHandling('passwordConfirm', 'matching')"
+            data-test="password-confirm-field-no-match"
           >
             Die eingegebenen Passwörter stimmen nicht überein.
           </mat-error>
@@ -88,11 +88,11 @@
           </div>
         </ng-template>
         <button
+          [disabled]="!registrationForm.valid"
+          class="btn-block full-width"
+          color="primary"
           data-test="confirm-registration"
           mat-stroked-button
-          color="primary"
-          class="btn-block full-width"
-          [disabled]="!registrationForm.valid"
         >
           Registrieren
         </button>

@@ -5,9 +5,7 @@ import { LoggedInGuard } from '@core/auth/guards/logged-in.guard';
 import { EditPersonalDataComponent } from '@features/profile/pages/edit-personal-data/edit-personal-data.component';
 import { ProfilePageComponent } from '@features/profile/pages/profile-page/profile-page.component';
 import { EditAbleToDanceComponent } from '@features/profile/pages/edit-able-to-dance/edit-able-to-dance.component';
-import {
-  EditPartnerAbleToDanceComponent
-} from '@features/profile/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
+import { EditPartnerAbleToDanceComponent } from '@features/profile/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
 import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-image/edit-profile-image.component';
 
 export const routes: Routes = [

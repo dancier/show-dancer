@@ -34,13 +34,6 @@ export class ContactComponent implements OnInit {
     this.initReactiveForm();
   }
 
-  private initReactiveForm(): void {
-    this.contactForm = this.fb.group({
-      message: ['', [Validators.required]],
-      email: ['', [Validators.email]],
-    });
-  }
-
   submitForm(): void {
     if (this.contactForm.valid) {
       const { message, email } = this.contactForm.value;
@@ -80,5 +73,12 @@ export class ContactComponent implements OnInit {
           this.captchaError = true;
         }
       });
+  }
+
+  private initReactiveForm(): void {
+    this.contactForm = this.fb.group({
+      message: ['', [Validators.required]],
+      email: ['', [Validators.email]],
+    });
   }
 }

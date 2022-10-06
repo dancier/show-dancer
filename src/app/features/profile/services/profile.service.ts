@@ -21,6 +21,23 @@ export class ProfileService {
     });
   }
 
+  private static initProfile(): Profile {
+    return {
+      aboutMe: '',
+      size: 0,
+      gender: 'FEMALE',
+      dancerName: '',
+      birthDate: '',
+      ableTo: [],
+      wantsTo: [],
+      email: '',
+      zipCode: '',
+      city: '',
+      country: '',
+      profileImageHash: '',
+    };
+  }
+
   fetchProfileData(): void {
     this.profileHttpService.getProfile$().subscribe((response) => {
       if (response.isSuccess) {
@@ -63,22 +80,5 @@ export class ProfileService {
     console.debug('wantsTo', wantsTo);
     this.profile.wantsTo = wantsTo;
     console.debug('profile', this.profile);
-  }
-
-  private static initProfile(): Profile {
-    return {
-      aboutMe: '',
-      size: 0,
-      gender: 'FEMALE',
-      dancerName: '',
-      birthDate: '',
-      ableTo: [],
-      wantsTo: [],
-      email: '',
-      zipCode: '',
-      city: '',
-      country: '',
-      profileImageHash: '',
-    };
   }
 }

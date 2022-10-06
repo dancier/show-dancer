@@ -1,15 +1,15 @@
 <div class="landing-page-container" fxFlex>
   <div
+    [ngStyle]="{'minHeight': landingPageContentMinHeight + 'px' }"
     class="background-color-accent-50 landing-page-content"
     fxLayout="row"
     fxLayout.xs="column"
-    [ngStyle]="{'minHeight': landingPageContentMinHeight + 'px' }"
   >
-    <div fxFlex class="background-color-accent-50">
+    <div class="background-color-accent-50" fxFlex>
       <h2 class="font-color-primary-800">Start mit Deiner E-Mail</h2>
       <app-login-form></app-login-form>
     </div>
-    <div fxFlex class="background-color-accent-100">
+    <div class="background-color-accent-100" fxFlex>
       <h1 class="font-color-primary-800">Herzlichen Glückwunsch lieber Jan!</h1>
       <p>
         Schön dass Du bei uns im Team bist und uns nicht nur mit Deiner
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div fxLayout="row" fxLayout.xs="column" class="landing-page-info-area">
+  <div class="landing-page-info-area" fxLayout="row" fxLayout.xs="column">
     <div class="mat-card background-color-accent-900" fxFlex>
       <div class="card-title-container">
         <h2>

@@ -1,4 +1,8 @@
-import { createHttpFactory, HttpMethod, SpectatorHttp, } from '@ngneat/spectator/jest';
+import {
+  createHttpFactory,
+  HttpMethod,
+  SpectatorHttp,
+} from '@ngneat/spectator/jest';
 import { EventLogHttpService } from '@core/logging/event-log-http.service';
 import { Event } from '@core/logging/eventlog.types';
 import { EnvironmentService } from '../common/environment.service';

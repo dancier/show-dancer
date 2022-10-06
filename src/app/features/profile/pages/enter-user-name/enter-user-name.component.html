@@ -1,4 +1,4 @@
-<form [formGroup]="usernameForm" (ngSubmit)="submitForm()" novalidate>
+<form (ngSubmit)="submitForm()" [formGroup]="usernameForm" novalidate>
   <div class="profile-edit-page-outer-container background-color-accent-A200">
     <div class="profile-edit-page-inner-container container-radius">
       <div class="verification-confirmation">
@@ -16,26 +16,26 @@
           >Achtung: Der Benutzername ist nicht mehr änderbar in der
           Zukunft.</label
         >
-        <mat-card-content fxLayout="column" class="card-content-container">
+        <mat-card-content class="card-content-container" fxLayout="column">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Benutzername *</mat-label>
             <input
               data-test="username-field"
               formControlName="username"
               matInput
-              type="username"
               placeholder="(Wie nennen wir dich?)"
+              type="username"
             />
             <mat-error
-              data-test="username-field-empty"
               *ngIf="hasUsernameFieldError('required')"
+              data-test="username-field-empty"
             >
               Bitte gib einen Benutzernamen ein..
             </mat-error>
           </mat-form-field>
           <button
-            mat-raised-button
             class="font-color-primary-800"
+            mat-raised-button
             type="submit"
           >
             Weiter

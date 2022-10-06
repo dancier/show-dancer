@@ -3,7 +3,12 @@ import { Router } from '@angular/router';
 import { ProfileService } from '@features/profile/services/profile.service';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
-import { Dance, DanceLevel, DanceRole, DanceType, } from '@features/profile/types/profile.types';
+import {
+  Dance,
+  DanceLevel,
+  DanceRole,
+  DanceType,
+} from '@features/profile/types/profile.types';
 
 @Component({
   selector: 'app-edit-partner-able-to-dance',
@@ -24,6 +29,10 @@ export class EditPartnerAbleToDanceComponent implements OnInit {
     });
   }
 
+  get dancesFormArray(): FormArray<FormGroup<DanceForm>> {
+    return this.form.controls.dances;
+  }
+
   ngOnInit(): void {
     this.addDance();
   }
@@ -35,10 +44,6 @@ export class EditPartnerAbleToDanceComponent implements OnInit {
       level: new FormControl<DanceLevel>('BASIC', { nonNullable: true }),
     });
     this.form.controls.dances.push(danceForm);
-  }
-
-  get dancesFormArray(): FormArray<FormGroup<DanceForm>> {
-    return this.form.controls.dances;
   }
 
   removeDance(index: number): void {
