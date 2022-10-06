@@ -4,6 +4,15 @@ Frontend for dancier.net. Built with Angular.
 
 ## Development
 
+### Prerequisites
+
+1. [Node.js](https://nodejs.org/) needs to be installed.
+We recommend using the latest LTS version.
+
+2. Run `npm install` to install all dependencies.
+
+3. Run `npm run prepare` once to install git commit hooks on your machine (powered by [Husky](https://typicode.github.io/)).
+
 ### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -22,7 +31,7 @@ Run `ng test` to execute the unit tests via [Jest](https://jestjs.io/).
 
 ### Running e2e Cypress browser tests
 
-Run `npm run `cy:run` to execute the browser tests via [Cypress](https://www.cypress.io/).
+Run `npm run cy:run` to execute the browser tests via [Cypress](https://www.cypress.io/).
 This command will run in the CLI and run tests inside a headless browser.
 
 For a more interactive experience, run `npm run cy:open` to open the Cypress test runner.
