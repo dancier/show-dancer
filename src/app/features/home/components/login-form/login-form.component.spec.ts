@@ -16,7 +16,7 @@ describe('LoginFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginFormComponent ],
+      declarations: [LoginFormComponent],
       imports: [
         ReactiveFormsModule,
         HttpClientTestingModule,
@@ -25,10 +25,9 @@ describe('LoginFormComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -42,17 +41,23 @@ describe('LoginFormComponent', () => {
   });
 
   it('should display an email field', () => {
-    const emailField = fixture.nativeElement.querySelector('[data-test="email-field"]');
+    const emailField = fixture.nativeElement.querySelector(
+      '[data-test="email-field"]'
+    );
     expect(emailField).toBeTruthy();
   });
 
   it('should display a password field', () => {
-    const passwordField = fixture.nativeElement.querySelector('[data-test="password-field"]');
+    const passwordField = fixture.nativeElement.querySelector(
+      '[data-test="password-field"]'
+    );
     expect(passwordField).toBeTruthy();
   });
 
   it('should display a submit button', () => {
-    const submitButton = fixture.nativeElement.querySelector('[data-test="submit-login"]');
+    const submitButton = fixture.nativeElement.querySelector(
+      '[data-test="submit-login"]'
+    );
     expect(submitButton).toBeTruthy();
   });
 

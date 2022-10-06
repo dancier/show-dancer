@@ -4,6 +4,23 @@ Frontend for dancier.net. Built with Angular.
 
 ## Development
 
+### Prerequisites
+
+1. [Node.js](https://nodejs.org/) needs to be installed.
+   We recommend using the latest LTS version.
+
+2. Run `npm install` to install all dependencies.
+
+3. Run `npm run prepare` once to install git commit hooks on your machine (powered by [Husky](https://typicode.github.io/)).
+
+[Husky](https://typicode.github.io/) will add these git hooks to your local machine:
+
+- Run [ESLint](https://eslint.org/) (with `--fix` option) before every commit.
+  If the linting fails, the commit will be aborted.
+- Run [Prettier](https://prettier.io/) on changed files before every commit.
+
+This helps to keep the codebase consistent and avoid bugs.
+
 ### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -22,7 +39,7 @@ Run `ng test` to execute the unit tests via [Jest](https://jestjs.io/).
 
 ### Running e2e Cypress browser tests
 
-Run `npm run `cy:run` to execute the browser tests via [Cypress](https://www.cypress.io/).
+Run `npm run cy:run` to execute the browser tests via [Cypress](https://www.cypress.io/).
 This command will run in the CLI and run tests inside a headless browser.
 
 For a more interactive experience, run `npm run cy:open` to open the Cypress test runner.
@@ -34,4 +51,3 @@ Whenever we decide on a pattern we want to use during development,
 we add it to the list of development patterns.
 
 You can find the development patterns in the [docs/patterns.md](patterns.md) file.
-

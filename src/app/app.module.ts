@@ -44,9 +44,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     FlexModule,
     ExtendedModule,
   ],
-  providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
-  ],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'de-DE' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

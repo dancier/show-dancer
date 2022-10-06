@@ -4,9 +4,7 @@ import { EnterUserNameComponent } from '@features/profile/pages/enter-user-name/
 import { EditPersonalDataComponent } from '@features/profile/pages/edit-personal-data/edit-personal-data.component';
 import { ProfilePageComponent } from '@features/profile/pages/profile-page/profile-page.component';
 import { EditAbleToDanceComponent } from '@features/profile/pages/edit-able-to-dance/edit-able-to-dance.component';
-import {
-  EditPartnerAbleToDanceComponent
-} from '@features/profile/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
+import { EditPartnerAbleToDanceComponent } from '@features/profile/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
 import { EditDanceTypeComponent } from '@features/profile/components/edit-dance-type/edit-dance-type.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -57,7 +55,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSelectModule,
     MatAutocompleteModule,
     ImageCropperModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
-export class ProfileModule { }
+export class ProfileModule {}

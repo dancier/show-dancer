@@ -1,45 +1,46 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ],
+        "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "prettier"
       ],
       "rules": {
-        "no-restricted-imports": ["error", {
-          "paths": [{
-            "name": "@ngneat/spectator",
-            "message": "Please use @ngneat/spectator/jest instead of @ngneat/spectator."
-          }],
-          "patterns": [
-            {
-              "group": ["**/environment"],
-              "message": "Please import the EnvironmentService instead (see development patterns)."
-            }
-          ]
-        }],
-        "quotes": [2, "single", { "avoidEscape": true }],
-        "object-curly-spacing": ["error", "always"],
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "@ngneat/spectator",
+                "message": "Please use @ngneat/spectator/jest instead of @ngneat/spectator."
+              }
+            ],
+            "patterns": [
+              {
+                "group": ["**/environment"],
+                "message": "Please import the EnvironmentService instead (see development patterns)."
+              }
+            ]
+          }
+        ],
         "no-console": [
           "warn",
           {
-            "allow":  ["debug", "info", "warn", "error"]
+            "allow": ["debug", "info", "warn", "error"]
           }
         ],
-        "@typescript-eslint/explicit-function-return-type": ["error", {"allowExpressions": true}],
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          { "allowExpressions": true }
+        ],
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -59,12 +60,8 @@
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     }
   ]

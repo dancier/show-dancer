@@ -15,11 +15,11 @@
 
 // Set the Cypress theme according to the system theme
 // @ts-ignore
-import setLightTheme from 'cypress-light-theme'
+import setLightTheme from 'cypress-light-theme';
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
-setLightTheme()
+setLightTheme();
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

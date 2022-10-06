@@ -20,7 +20,7 @@ describe('EditPersonalDataComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditPersonalDataComponent ],
+      declarations: [EditPersonalDataComponent],
       imports: [
         MatCardModule,
         MatIconModule,
@@ -33,11 +33,8 @@ describe('EditPersonalDataComponent', () => {
         BrowserAnimationsModule,
         ReactiveFormsModule,
       ],
-      providers: [
-        MockProvider(ProfileService),
-      ],
-    })
-    .compileComponents();
+      providers: [MockProvider(ProfileService)],
+    }).compileComponents();
   });
 
   beforeEach(() => {

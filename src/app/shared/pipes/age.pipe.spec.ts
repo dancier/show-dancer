@@ -1,7 +1,6 @@
 import { AgePipe } from './age.pipe';
 
 describe('AgePipe', () => {
-
   let agePipe: AgePipe;
 
   // set fake system time
@@ -26,5 +25,4 @@ describe('AgePipe', () => {
   it('returns "unknown" when the birthdate is not parsable', () => {
     expect(agePipe.transform('not parsable as date')).toBe('unknown');
   });
-
 });

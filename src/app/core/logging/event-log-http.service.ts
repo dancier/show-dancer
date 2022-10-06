@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Event } from '@core/logging/eventlog.types';
 import { catchError, map, Observable, of } from 'rxjs';
@@ -19,14 +19,20 @@ export class EventLogHttpService {
   ) {}
 
   postEvent$(event: Event): Observable<APIResponse<void>> {
-    return this.http.post<void>(`${this.environment.getApiUrl()}/eventlog`, event, this.defaultOptions).pipe(
-      map(asSuccess),
-      catchError((error: HttpErrorResponse) => {
-        switch (error.status) {
-          default:
-            return of(asError('SERVER_ERROR'));
-        }
-      })
-    );
+    return this.http
+      .post<void>(
+        `${this.environment.getApiUrl()}/eventlog`,
+        event,
+        this.defaultOptions
+      )
+      .pipe(
+        map(asSuccess),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            default:
+              return of(asError('SERVER_ERROR'));
+          }
+        })
+      );
   }
 }

@@ -10,10 +10,9 @@ describe('ValidateAccountComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VerifyAccountComponent ],
-      imports: [ RouterTestingModule, HttpClientTestingModule ]
-    })
-    .compileComponents();
+      declarations: [VerifyAccountComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

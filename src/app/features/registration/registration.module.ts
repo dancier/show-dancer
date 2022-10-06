@@ -24,7 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
     VerificationRequiredComponent,
     VerifyAccountComponent,
     VerificationErrorComponent,
-    ResendVerificationLinkFormComponent
+    ResendVerificationLinkFormComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +41,6 @@ import { MatIconModule } from '@angular/material/icon';
     SharedModule,
     MatCheckboxModule,
     MatIconModule,
-  ]
+  ],
 })
-export class RegistrationModule { }
+export class RegistrationModule {}

@@ -1,8 +1,8 @@
 .header {
   position: fixed;
+  z-index: 999;
   top: 0;
   display: flex;
-  z-index: 999;
   justify-content: space-between;
   height: 64px;
 
@@ -11,35 +11,34 @@
     align-items: center;
 
     img {
-      height: 40px;
       margin-right: 8px;
+      height: 40px;
     }
   }
 
   .header-right {
-
     .nav-items {
       display: flex;
       align-items: center;
 
       .nav-icons {
-        margin-left: 14px;
         display: flex;
-        column-gap: 4px;
         justify-content: center;
         align-items: center;
+        margin-left: 14px;
+        column-gap: 4px;
 
         mat-icon {
-          font-size: 30px;
-          height: 30px;
           width: 30px;
+          height: 30px;
+          font-size: 30px;
         }
 
         a {
-          color: white;
           display: flex;
           justify-content: center;
           align-items: center;
+          color: white;
         }
       }
     }

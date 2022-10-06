@@ -2,12 +2,12 @@
   padding: 18px;
 }
 
-.landing-page-info-area h2, .landing-page-info-area p {
+.landing-page-info-area h2,
+.landing-page-info-area p {
   color: white;
 }
 
 .landing-page-info-area {
-
   align-self: flex-end;
 
   h2 {
@@ -21,8 +21,8 @@
 
   .card-title-container {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
   }
 }
 

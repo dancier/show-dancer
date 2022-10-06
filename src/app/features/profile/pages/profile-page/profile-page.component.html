@@ -1,31 +1,38 @@
 <div class="profile-page-outer-container background-color-900">
-    <div class="profile-title-container" ngStyle.gt-xs="border-radius: 16px">
-      <div class="profile-name-container">
-        <h1>{{profileDataService.profile.dancerName}}</h1>
-        <span class="age">{{profileDataService.profile.birthDate | age}}</span>
-        <span class="dance-key-words">Tango, Standard</span>
-      </div>
+  <div class="profile-title-container" ngStyle.gt-xs="border-radius: 16px">
+    <div class="profile-name-container">
+      <h1>{{profileDataService.profile.dancerName}}</h1>
+      <span class="age">{{profileDataService.profile.birthDate | age}}</span>
+      <span class="dance-key-words">Tango, Standard</span>
     </div>
-    <mat-tab-group class="dance-details" mat-align-tabs="center">
-      <mat-tab label="Ich tanze">
-        <div class="dance-types-container" fxLayout.xs="column">
-          <app-dance-type *ngFor="let preference of profileDataService.profile.ableTo" [danceTypeName]="(preference.dance!)"
-                          [danceLevel]="(preference.level!)"
-                          [role]="(preference.leading!)"></app-dance-type>
-        </div>
-      </mat-tab>
-      <mat-tab label="Ich suche">
-        <div class="dance-types-container" fxLayout.xs="column">
-          <app-dance-type *ngFor="let preference of profileDataService.profile.ableTo" [danceTypeName]="(preference.dance!)"
-                          [danceLevel]="(preference.level!)"
-                          [role]="(preference.leading!)"></app-dance-type>
-        </div>
-      </mat-tab>
-      <mat-tab label="Persönliche Daten">
-        <app-personal-data
-          [profile]="profileDataService.profile"
-          class="personal-data-container">
-        </app-personal-data>
-      </mat-tab>
-    </mat-tab-group>
+  </div>
+  <mat-tab-group class="dance-details" mat-align-tabs="center">
+    <mat-tab label="Ich tanze">
+      <div class="dance-types-container" fxLayout.xs="column">
+        <app-dance-type
+          *ngFor="let preference of profileDataService.profile.ableTo"
+          [danceLevel]="(preference.level!)"
+          [danceTypeName]="(preference.dance!)"
+          [role]="(preference.leading!)"
+        ></app-dance-type>
+      </div>
+    </mat-tab>
+    <mat-tab label="Ich suche">
+      <div class="dance-types-container" fxLayout.xs="column">
+        <app-dance-type
+          *ngFor="let preference of profileDataService.profile.ableTo"
+          [danceLevel]="(preference.level!)"
+          [danceTypeName]="(preference.dance!)"
+          [role]="(preference.leading!)"
+        ></app-dance-type>
+      </div>
+    </mat-tab>
+    <mat-tab label="Persönliche Daten">
+      <app-personal-data
+        [profile]="profileDataService.profile"
+        class="personal-data-container"
+      >
+      </app-personal-data>
+    </mat-tab>
+  </mat-tab-group>
 </div>

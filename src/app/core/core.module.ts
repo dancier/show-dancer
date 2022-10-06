@@ -4,29 +4,22 @@ import { throwIfAlreadyLoaded } from './module-import.guard';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppInstanceIdInterceptor } from '@core/logging/app-instance/app-instance-id.interceptor';
 
-
 /**
  * The Core Module should only be loaded once in the application.
  */
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-  ],
-  exports: [
-    HttpClientModule,
-  ],
+  imports: [CommonModule, HttpClientModule],
+  exports: [HttpClientModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppInstanceIdInterceptor,
-      multi: true
+      multi: true,
     },
-  ]
+  ],
 })
 export class CoreModule {
-
   /**
    * Instructs DI to try and inject an already loaded CoreModule.
    * If it finds any, it throws an error.

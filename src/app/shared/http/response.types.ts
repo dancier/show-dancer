@@ -6,8 +6,7 @@ export type APIError =
   | 'EMAIL_NOT_VALIDATED'
   | 'NOT_AVAILABLE'
   | 'NAME_ALREADY_EXISTS'
-  | 'NOT_A_HUMAN'
-;
+  | 'NOT_A_HUMAN';
 
 export type ResponseSuccessNoPayload = {
   isSuccess: true;
@@ -30,9 +29,9 @@ export const asError = (error: APIError): ResponseError => ({
   error,
 });
 
-export type AsSuccess = <T>(payload: T) => ResponseSuccess<T>
+export type AsSuccess = <T>(payload: T) => ResponseSuccess<T>;
 
-export const asSuccess: AsSuccess  = (payload) => ({
+export const asSuccess: AsSuccess = (payload) => ({
   isSuccess: true,
   payload,
 });
