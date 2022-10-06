@@ -1,2 +1,4 @@
-# Ignore all HTML files
-*.html
+# *.html
+.angular
+dist
+package-lock.json
