@@ -1,9 +1,9 @@
 .form-section {
-  margin: 8px 0;
-  background-color: white;
-  padding: 16px;
   display: flex;
   justify-content: space-between;
+  margin: 8px 0;
+  padding: 16px;
+  background-color: white;
 }
 
 .form-section-label {
@@ -24,9 +24,9 @@
 }
 
 .dance-type-input {
+  border: 0;
+  border-bottom: 1px solid #66666b;
+  min-width: 186px;
   padding: 16px 8px;
   background-color: #f2f2f2;
-  border: 0;
-  border-bottom: 1px solid #66666B;
-  min-width: 186px;
 }

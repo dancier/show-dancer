@@ -1,14 +1,14 @@
 .personal-data-section {
-  padding: 32px;
   margin: 8px 16px;
-  line-height: 1.8em;
   border: 1px solid #8c020b;
   border-radius: 8px;
+  padding: 32px;
   background-color: white;
+  line-height: 1.8em;
 
   h3 {
-    color: #8c020b;
     font-weight: bold;
+    color: #8c020b;
   }
 
   label {
@@ -19,5 +19,4 @@
 .personal-data-inner-container {
   display: flex;
   justify-content: center;
-
 }

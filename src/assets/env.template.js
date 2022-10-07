@@ -1,7 +1,7 @@
 // set environment variables in global window object
-(function(window) {
+(function (window) {
   window.env = {
     // environment variables
-    apiUrl: '${DANCIER_BACKEND_URL}'
+    apiUrl: '${DANCIER_BACKEND_URL}',
   };
 })(this);

@@ -1,26 +1,52 @@
-<mat-toolbar color="primary" class="header">
-
+<mat-toolbar class="header" color="primary">
   <div class="header-left">
-    <a href="/"><img src='assets/img/dancier-logo-with-text.png' alt='Dancier Logo' style="height: 40px;"></a>
+    <a href="/"
+      ><img
+        alt="Dancier Logo"
+        src="assets/img/dancier-logo-with-text.png"
+        style="height: 40px"
+    /></a>
   </div>
   <div class="header-right">
-    <div class="burger-menu" ngStyle.gt-xs="display:none" data-test="burger-menu-opener">
+    <div
+      class="burger-menu"
+      data-test="burger-menu-opener"
+      ngStyle.gt-xs="display:none"
+    >
       <mat-menu #menu="matMenu">
         <div data-test="burger-menu">
-          <ng-container *ngIf="authStorageService.authData$ | async as authData">
-            <button mat-menu-item *ngIf="!authData.isLoggedIn" routerLink="login">
+          <ng-container
+            *ngIf="authStorageService.authData$ | async as authData"
+          >
+            <button
+              *ngIf="!authData.isLoggedIn"
+              mat-menu-item
+              routerLink="login"
+            >
               <mat-icon>login</mat-icon>
               <span>Anmelden</span>
             </button>
-            <button mat-menu-item *ngIf="authData.isLoggedIn" routerLink="logout">
+            <button
+              *ngIf="authData.isLoggedIn"
+              mat-menu-item
+              routerLink="logout"
+            >
               <mat-icon>logout</mat-icon>
               <span>Abmelden</span>
             </button>
-            <button mat-menu-item *ngIf="!authData.isLoggedIn" routerLink="registration">
+            <button
+              *ngIf="!authData.isLoggedIn"
+              mat-menu-item
+              routerLink="registration"
+            >
               <mat-icon>note_add</mat-icon>
               <span>Registrieren</span>
             </button>
-            <button mat-menu-item *ngIf="authData.isLoggedIn" routerLink="profile">
+            <button
+              *ngIf="authData.isLoggedIn"
+              mat-menu-item
+              routerLink="profile"
+            >
               <mat-icon>account_box</mat-icon>
               <span>Profil</span>
             </button>
@@ -35,18 +61,28 @@
           </ng-container>
         </div>
       </mat-menu>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
-              ngStyle.gt-xs="display:none">
+      <button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+        mat-icon-button
+        ngStyle.gt-xs="display:none"
+      >
         <mat-icon>menu</mat-icon>
       </button>
     </div>
-    <div class="nav-items" ngStyle.xs="display:none" data-test="desktop-nav">
+    <div class="nav-items" data-test="desktop-nav" ngStyle.xs="display:none">
       <ng-container *ngIf="authStorageService.authData$ | async as authData">
-        <a mat-button routerLink="about-us" routerLinkActive="active"><span>Über Uns</span></a>
+        <a mat-button routerLink="about-us" routerLinkActive="active"
+          ><span>Über Uns</span></a
+        >
         <div class="separator"></div>
-        <a mat-button routerLink="contact" routerLinkActive="active"><span>Kontakt</span></a>
+        <a mat-button routerLink="contact" routerLinkActive="active"
+          ><span>Kontakt</span></a
+        >
         <div class="separator"></div>
-        <a mat-button routerLink="contribute" routerLinkActive="active"><span>Mitmachen</span></a>
+        <a mat-button routerLink="contribute" routerLinkActive="active"
+          ><span>Mitmachen</span></a
+        >
         <div class="separator"></div>
         <div *ngIf="authData.isLoggedIn" class="nav-icons">
           <a routerLink="profile">

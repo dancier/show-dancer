@@ -7,11 +7,10 @@ import { environment } from '../../../environments/environment';
  * This improves testing by using the dependency injection system to inject the environment.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EnvironmentService {
-
-  constructor() { }
+  constructor() {}
 
   public getProduction(): boolean {
     return environment.production;

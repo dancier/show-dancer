@@ -15,26 +15,23 @@
 .remove-button-container {
   display: flex;
   justify-content: center;
-  background-color: #e9b5bc;
   margin: 16px 16px 0 16px;
+  background-color: #e9b5bc;
 }
 
-
 .add-button {
-  background-color: #F5F5F5;
   padding: 16px 90px;
+  background-color: #f5f5f5;
 }
 
 .edit-dance-container {
-  border: 0 solid #66666B;
+  margin: 16px 0;
+  border: 0 solid #66666b;
   border-radius: 8px;
   padding: 16px;
   background-color: #f2f2f2;
-  margin: 16px 0;
-
 
   .dance-edit-button {
     margin: 16px;
   }
 }
-

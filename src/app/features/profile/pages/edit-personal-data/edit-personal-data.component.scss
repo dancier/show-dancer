@@ -1,24 +1,18 @@
-
-
-
-
 .mat-form-field-wrapper {
   padding: 0;
 }
-
 
 .continue-button {
   width: 100%;
 }
 
 .form-icon {
-  color: #ad061c;
   margin: 16px 16px 0;
+  color: #ad061c;
 }
 
-
 .form-text {
-  color: #66666B;
+  color: #66666b;
 }
 
 .description-section {
@@ -27,13 +21,13 @@
 
 .city-land-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin: 16px 0;
 
   label {
-    color: #00000099;
     margin-right: 8px;
+    color: #00000099;
   }
 
   .form-icon {

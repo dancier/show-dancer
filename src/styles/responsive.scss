@@ -68,7 +68,7 @@ $overlapping-lt: (
 }
 
 $allkeys: map_keys(
-    map_merge($breakpoints, map_merge($overlapping-gt, $overlapping-lt))
+  map_merge($breakpoints, map_merge($overlapping-gt, $overlapping-lt))
 );
 
 @each $key in $allkeys {
@@ -96,4 +96,3 @@ $allkeys: map_keys(
     }
   }
 }
-

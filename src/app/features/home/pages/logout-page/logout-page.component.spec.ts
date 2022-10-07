@@ -10,10 +10,9 @@ describe('LogoutPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LogoutPageComponent ],
-      imports: [ HttpClientTestingModule, RouterTestingModule ]
-    })
-    .compileComponents();
+      declarations: [LogoutPageComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

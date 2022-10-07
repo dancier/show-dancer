@@ -1,11 +1,11 @@
 .dance-type-container {
-  border: 1px solid #9c0413;
-  border-radius: 8px;
-  padding: 8px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin: 8px;
+  border: 1px solid #9c0413;
+  border-radius: 8px;
+  padding: 8px;
   background-color: #f2f2f2;
 
   .icon {
@@ -26,6 +26,7 @@
   label {
     font-weight: bold;
   }
+
   span {
     display: inline-block;
   }

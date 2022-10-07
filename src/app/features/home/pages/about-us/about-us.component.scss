@@ -1,16 +1,16 @@
 .image-cropper {
-  width: 100px;
-  height: 100px;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
+  width: 100px;
+  height: 100px;
 }
 
 img {
   display: inline;
   margin: 0 auto;
-  height: 100%;
   width: auto;
+  height: 100%;
 }
 
 .developers-container {
@@ -18,7 +18,7 @@ img {
   flex-wrap: wrap;
 }
 
-.developers-container >* {
+.developers-container > * {
   flex: 1 1 320px;
   margin: 16px;
 }

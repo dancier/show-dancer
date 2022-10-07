@@ -13,10 +13,15 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationComponent ],
-      imports: [ HttpClientTestingModule, MatMenuModule, MatToolbarModule, MatIconModule, MatFormFieldModule ]
-    })
-    .compileComponents();
+      declarations: [NavigationComponent],
+      imports: [
+        HttpClientTestingModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatFormFieldModule,
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

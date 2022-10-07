@@ -11,15 +11,10 @@ describe('EditPartnerAbleToDanceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditPartnerAbleToDanceComponent ],
-      providers: [
-        MockProvider(ProfileService),
-      ],
-      imports: [
-        ReactiveFormsModule,
-      ],
-    })
-    .compileComponents();
+      declarations: [EditPartnerAbleToDanceComponent],
+      providers: [MockProvider(ProfileService)],
+      imports: [ReactiveFormsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -32,4 +27,3 @@ describe('EditPartnerAbleToDanceComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

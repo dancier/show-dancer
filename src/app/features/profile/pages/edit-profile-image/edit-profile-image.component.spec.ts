@@ -11,10 +11,9 @@ describe('EditProfileImageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditProfileImageComponent ],
-      imports: [ HttpClientTestingModule, MatIconModule, ImageCropperModule ]
-    })
-    .compileComponents();
+      declarations: [EditProfileImageComponent],
+      imports: [HttpClientTestingModule, MatIconModule, ImageCropperModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
