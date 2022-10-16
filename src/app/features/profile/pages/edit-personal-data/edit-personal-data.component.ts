@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { ProfileService } from '@features/profile/services/profile.service';
 import { Gender, genderList } from '../../types/profile.types';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
@@ -51,15 +51,14 @@ export class EditPersonalDataComponent {
       .pipe(
         untilDestroyed(this),
         map((formValues) => formValues.zipCode),
+        distinctUntilChanged(),
         debounceTime(500),
         switchMap((zipCode) => {
           return this.profileDataService.getCity$(zipCode);
         })
       )
       .subscribe((city) => {
-        if (city) {
-          this.personalDataForm.patchValue({ city });
-        }
+        this.personalDataForm.patchValue({ city: city || '' });
       });
   }
 

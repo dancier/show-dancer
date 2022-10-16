@@ -71,9 +71,10 @@ export class ProfileHttpService {
   }
 
   getLocation$(zipCode: string): Observable<APIResponse<Location>> {
+    // there is only one country 'GER' at the moment
     return this.http
       .get<Location>(
-        `${this.locationApiUrl}/zipCode/germany/${zipCode}`,
+        `${this.locationApiUrl}/zipCode/GER/${zipCode}`,
         this.defaultOptions
       )
       .pipe(
