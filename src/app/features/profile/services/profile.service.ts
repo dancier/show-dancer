@@ -88,6 +88,7 @@ export class ProfileService {
     return this.profileHttpService.getLocation$(zipCode).pipe(
       map((response) => {
         if (response.isSuccess) {
+          console.log('response', response);
           this.profile.city = response.payload.city;
           return this.profile.city;
         }

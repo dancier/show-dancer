@@ -80,6 +80,8 @@ export class ProfileHttpService {
         map((payload) => asSuccess(payload)),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
+            case 404:
+              return of(asError('ZIP_CODE_NOT_FOUND'));
             default:
               return of(asError('SERVER_ERROR'));
           }

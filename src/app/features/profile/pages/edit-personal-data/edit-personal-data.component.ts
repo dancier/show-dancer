@@ -7,6 +7,9 @@ import {
 import { Router } from '@angular/router';
 import { ProfileService } from '@features/profile/services/profile.service';
 import { Gender, genderList } from '../../types/profile.types';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { debounceTime, switchMap } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
 
@@ -15,6 +18,7 @@ const germanDateFormat =
 const zipFormat = /\d{5}/g;
 const sizeFormat = /\d{3}/g;
 
+@UntilDestroy()
 @Component({
   selector: 'app-edit-personal-data',
   templateUrl: './edit-personal-data.component.html',
@@ -25,6 +29,7 @@ export class EditPersonalDataComponent {
     //TODO: birthDate is set as a date by the material datepicker, but the backend expects a string
     birthDate: ['', [Validators.required]],
     zipCode: ['', [Validators.required, Validators.pattern(zipFormat)]],
+    city: [''],
     gender: new FormControl<Gender>('NA', {
       validators: [Validators.required],
       nonNullable: true,
@@ -40,6 +45,23 @@ export class EditPersonalDataComponent {
     private fb: NonNullableFormBuilder,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.personalDataForm.valueChanges
+      .pipe(
+        untilDestroyed(this),
+        map((formValues) => formValues.zipCode),
+        debounceTime(500),
+        switchMap((zipCode) => {
+          return this.profileDataService.getCity$(zipCode);
+        })
+      )
+      .subscribe((city) => {
+        if (city) {
+          this.personalDataForm.patchValue({ city });
+        }
+      });
+  }
 
   hasFocus(field: Field): boolean {
     return field === this.fieldInFocus;

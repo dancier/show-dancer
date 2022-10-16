@@ -133,7 +133,9 @@
                 <mat-icon class="form-icon">location_city</mat-icon>
                 <div>
                   <label>Stadt: </label>
-                  <span>(wird ermittelt)</span>
+                  <span
+                    >{{personalDataForm.value.city || '(wird ermittelt)'}}</span
+                  >
                 </div>
               </div>
               <div class="city-land-container" fxLayout="row">
