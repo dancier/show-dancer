@@ -96,4 +96,9 @@ export class ProfileService {
       })
     );
   }
+
+  updateProfileImageHash(hash: string): void {
+    this.profile.profileImageHash = hash;
+    console.debug('profile', this.profile);
+  }
 }

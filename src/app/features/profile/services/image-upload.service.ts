@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '@core/common/environment.service';
 import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
+import { UploadedImageDao } from '../types/profile.types';
 
 @Injectable({
   providedIn: 'root',
@@ -29,12 +30,14 @@ export class ImageUploadService {
     });
   }
 
-  uploadImage$(croppedImage: string): Observable<APIResponse<void>> {
+  uploadImage$(
+    croppedImage: string
+  ): Observable<APIResponse<UploadedImageDao>> {
     const blobFromDataUrl = this.dataURItoBlob(croppedImage);
     const formData: FormData = new FormData();
     formData.append('file', blobFromDataUrl);
     return this.http
-      .post<void>(
+      .post<UploadedImageDao>(
         `${this.environment.getApiUrl()}/images`,
         formData,
         this.defaultOptions

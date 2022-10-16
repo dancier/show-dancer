@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProfileService } from '@features/profile/services/profile.service';
+import { EnvironmentService } from '@core/common/environment.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -7,5 +8,8 @@ import { ProfileService } from '@features/profile/services/profile.service';
   styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent {
-  constructor(public profileDataService: ProfileService) {}
+  constructor(
+    public profileService: ProfileService,
+    public environmentService: EnvironmentService
+  ) {}
 }

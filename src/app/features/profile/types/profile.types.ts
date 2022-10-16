@@ -81,3 +81,7 @@ export type Location = {
   latitude: number;
   city: string;
 };
+
+export type UploadedImageDao = {
+  hash: string;
+};

@@ -63,6 +63,6 @@ export class EditPartnerAbleToDanceComponent implements OnInit {
     this.profileDataService.setPartnerDances(dances);
     this.profileDataService.updateProfile();
     console.debug('profile', this.profileDataService.profile);
-    this.router.navigate(['profile']);
+    this.router.navigate(['profile/initial-setup/profile-image']);
   }
 }
