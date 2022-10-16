@@ -8,31 +8,21 @@ describe('Navigation', () => {
   const navbarPublicPages = [
     { name: 'Über Uns', pageId: 'page-about-us' },
     { name: 'Kontakt', pageId: 'page-contact' },
-    // { name: 'Mitmachen', pageId: 'page-contribute' },
+    { name: 'Mitmachen', pageId: 'page-contribute' },
   ];
 
-  describe('when on mobile', () => {
-    beforeEach(() => {
+  navbarPublicPages.forEach((page) => {
+    it(`can navigate to "${page.name}" page on desktop and mobile`, () => {
+      // desktop
+      getByTestId('desktop-nav').contains(page.name).click();
+      getByTestId(page.pageId).should('be.visible');
+
+      // mobile
       cy.viewport('iphone-8');
-    });
-
-    navbarPublicPages.forEach((page) => {
-      it(`can navigate to "${page.name}" page`, () => {
-        getByTestId('burger-menu-opener').click();
-        getByTestId('burger-menu').contains(page.name).click();
-
-        getByTestId(page.pageId).should('be.visible');
-      });
-    });
-  });
-
-  describe('when on desktop', () => {
-    navbarPublicPages.forEach((page) => {
-      it(`can navigate to "${page.name}" page`, () => {
-        getByTestId('desktop-nav').contains(page.name).click();
-
-        getByTestId(page.pageId).should('be.visible');
-      });
+      cy.visit('');
+      getByTestId('burger-menu-opener').click();
+      getByTestId('burger-menu').contains(page.name).click();
+      getByTestId(page.pageId).should('be.visible');
     });
   });
 });
