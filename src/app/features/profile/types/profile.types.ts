@@ -72,3 +72,12 @@ export type Profile = PersonalData & {
 export type NameAvailability = {
   available: boolean;
 };
+
+export type Location = {
+  id: string;
+  zipCode: string;
+  country: string;
+  longitude: number;
+  latitude: number;
+  city: string;
+};

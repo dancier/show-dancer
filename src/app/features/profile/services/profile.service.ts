@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 import { ProfileHttpService } from './profile-http.service';
 import { Dance, PersonalData, Profile } from '../types/profile.types';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -80,5 +82,17 @@ export class ProfileService {
     console.debug('wantsTo', wantsTo);
     this.profile.wantsTo = wantsTo;
     console.debug('profile', this.profile);
+  }
+
+  getCity$(zipCode = this.profile.zipCode): Observable<string | null> {
+    return this.profileHttpService.getLocation$(zipCode).pipe(
+      map((response) => {
+        if (response.isSuccess) {
+          this.profile.city = response.payload.city;
+          return this.profile.city;
+        }
+        return null;
+      })
+    );
   }
 }
