@@ -6,10 +6,17 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileService } from '@features/profile/services/profile.service';
-import { Gender, genderList } from '../../types/profile.types';
+import { Gender, genderList, PersonalData } from '../../types/profile.types';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { map } from 'rxjs/operators';
+import { format } from 'date-fns';
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
 
@@ -26,15 +33,17 @@ const sizeFormat = /\d{3}/g;
 })
 export class EditPersonalDataComponent {
   personalDataForm = this.fb.group({
-    //TODO: birthDate is set as a date by the material datepicker, but the backend expects a string
-    birthDate: ['', [Validators.required]],
+    birthDate: new FormControl<Date | null>(null, [Validators.required]),
     zipCode: ['', [Validators.required, Validators.pattern(zipFormat)]],
     city: [''],
     gender: new FormControl<Gender>('NA', {
       validators: [Validators.required],
       nonNullable: true,
     }),
-    size: [170, [Validators.required, Validators.pattern(sizeFormat)]],
+    size: new FormControl<number | null>(null, [
+      Validators.required,
+      Validators.pattern(sizeFormat),
+    ]),
   });
 
   fieldInFocus?: Field;
@@ -50,7 +59,9 @@ export class EditPersonalDataComponent {
     this.personalDataForm.valueChanges
       .pipe(
         untilDestroyed(this),
+        tap((value) => console.info(value)),
         map((formValues) => formValues.zipCode),
+        filter((zipCode) => zipCode?.length === 5),
         distinctUntilChanged(),
         debounceTime(500),
         switchMap((zipCode) => {
@@ -77,12 +88,12 @@ export class EditPersonalDataComponent {
   }
 
   submitForm(): void {
-    // eslint-disable-next-line no-console
-    console.log(this.personalDataForm.value.birthDate);
     if (this.personalDataForm.valid) {
-      this.profileDataService.setPersonalData(
-        this.personalDataForm.getRawValue()
-      );
+      const formValues = this.personalDataForm.getRawValue();
+      this.profileDataService.setPersonalData({
+        ...formValues,
+        birthDate: format(formValues.birthDate!, 'yyyy.MM.dd'),
+      } as PersonalData);
       this.router.navigate(['profile/initial-setup/dances-self']);
     }
   }
