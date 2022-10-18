@@ -8,7 +8,7 @@ describe('Navigation', () => {
   const navbarPublicPages = [
     { name: 'Über Uns', pageId: 'page-about-us' },
     { name: 'Kontakt', pageId: 'page-contact' },
-    { name: 'Mitmachen', pageId: 'page-contribute' },
+    // { name: 'Mitmachen', pageId: 'page-contribute' },
   ];
 
   navbarPublicPages.forEach((page) => {
