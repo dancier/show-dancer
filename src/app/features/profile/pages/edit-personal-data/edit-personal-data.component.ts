@@ -8,13 +8,7 @@ import { Router } from '@angular/router';
 import { ProfileService } from '@features/profile/services/profile.service';
 import { Gender, genderList, PersonalData } from '../../types/profile.types';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { format } from 'date-fns';
 
@@ -59,7 +53,6 @@ export class EditPersonalDataComponent {
     this.personalDataForm.valueChanges
       .pipe(
         untilDestroyed(this),
-        tap((value) => console.info(value)),
         map((formValues) => formValues.zipCode),
         filter((zipCode) => zipCode?.length === 5),
         distinctUntilChanged(),
