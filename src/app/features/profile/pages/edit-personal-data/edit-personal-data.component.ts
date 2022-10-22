@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   NonNullableFormBuilder,
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { ProfileService } from '@features/profile/services/profile.service';
 import { Gender, genderList, PersonalData } from '../../types/profile.types';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
+import { distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { format } from 'date-fns';
 
@@ -25,7 +25,7 @@ const sizeFormat = /\d{3}/g;
   templateUrl: './edit-personal-data.component.html',
   styleUrls: ['./edit-personal-data.component.scss'],
 })
-export class EditPersonalDataComponent {
+export class EditPersonalDataComponent implements OnInit {
   personalDataForm = this.fb.group({
     birthDate: new FormControl<Date | null>(null, [Validators.required]),
     zipCode: ['', [Validators.required, Validators.pattern(zipFormat)]],
@@ -56,7 +56,6 @@ export class EditPersonalDataComponent {
         map((formValues) => formValues.zipCode),
         filter((zipCode) => zipCode?.length === 5),
         distinctUntilChanged(),
-        debounceTime(500),
         switchMap((zipCode) => {
           return this.profileDataService.getCity$(zipCode);
         })

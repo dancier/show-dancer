@@ -31,7 +31,6 @@ export class EditProfileImageComponent {
   }
 
   upload(): void {
-    console.log('upload');
     this.imageUploadService
       .uploadImage$(this.croppedImage!)
       .subscribe((response) => {
