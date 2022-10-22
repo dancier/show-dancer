@@ -37,7 +37,6 @@ export const routes: Routes = [
       {
         path: 'profile-image',
         component: EditProfileImageComponent,
-        canActivate: [LoggedInGuard],
       },
       // Fallback when no prior routes are matched
       { path: '**', redirectTo: 'username', pathMatch: 'full' },

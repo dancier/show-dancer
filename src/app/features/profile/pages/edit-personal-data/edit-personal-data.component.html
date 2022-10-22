@@ -77,7 +77,7 @@
                   [for]="picker"
                   matSuffix
                 ></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <mat-datepicker #picker startView="multi-year"></mat-datepicker>
               </mat-form-field>
             </div>
             <div
@@ -133,7 +133,9 @@
                 <mat-icon class="form-icon">location_city</mat-icon>
                 <div>
                   <label>Stadt: </label>
-                  <span>(wird ermittelt)</span>
+                  <span
+                    >{{personalDataForm.value.city || '(wird ermittelt)'}}</span
+                  >
                 </div>
               </div>
               <div class="city-land-container" fxLayout="row">

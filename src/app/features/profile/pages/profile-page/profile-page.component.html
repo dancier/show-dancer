@@ -1,8 +1,15 @@
-<div class="profile-page-outer-container background-color-900">
-  <div class="profile-title-container" ngStyle.gt-xs="border-radius: 16px">
+<div
+  *ngIf="profileService.getProfile() as profile"
+  class="profile-page-outer-container background-color-900"
+>
+  <div
+    [style.background-image]="'url(' + environmentService.getApiUrl() + '/images/' + profile.profileImageHash + '.png)'"
+    class="profile-title-container"
+    ngStyle.gt-xs="border-radius: 16px"
+  >
     <div class="profile-name-container">
-      <h1>{{profileDataService.profile.dancerName}}</h1>
-      <span class="age">{{profileDataService.profile.birthDate | age}}</span>
+      <h1>{{profileService.profile.dancerName}}</h1>
+      <span class="age">{{profileService.profile.birthDate | age}}</span>
       <span class="dance-key-words">Tango, Standard</span>
     </div>
   </div>
@@ -10,7 +17,7 @@
     <mat-tab label="Ich tanze">
       <div class="dance-types-container" fxLayout.xs="column">
         <app-dance-type
-          *ngFor="let preference of profileDataService.profile.ableTo"
+          *ngFor="let preference of profileService.profile.ableTo"
           [danceLevel]="(preference.level!)"
           [danceTypeName]="(preference.dance!)"
           [role]="(preference.leading!)"
@@ -20,7 +27,7 @@
     <mat-tab label="Ich suche">
       <div class="dance-types-container" fxLayout.xs="column">
         <app-dance-type
-          *ngFor="let preference of profileDataService.profile.ableTo"
+          *ngFor="let preference of profileService.profile.wantsTo"
           [danceLevel]="(preference.level!)"
           [danceTypeName]="(preference.dance!)"
           [role]="(preference.leading!)"
@@ -29,7 +36,7 @@
     </mat-tab>
     <mat-tab label="Persönliche Daten">
       <app-personal-data
-        [profile]="profileDataService.profile"
+        [profile]="profileService.profile"
         class="personal-data-container"
       >
       </app-personal-data>

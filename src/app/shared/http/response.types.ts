@@ -6,7 +6,8 @@ export type APIError =
   | 'EMAIL_NOT_VALIDATED'
   | 'NOT_AVAILABLE'
   | 'NAME_ALREADY_EXISTS'
-  | 'NOT_A_HUMAN';
+  | 'NOT_A_HUMAN'
+  | 'ZIP_CODE_NOT_FOUND';
 
 export type ResponseSuccessNoPayload = {
   isSuccess: true;

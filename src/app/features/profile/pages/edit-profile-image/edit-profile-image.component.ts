@@ -1,23 +1,26 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
 import { ImageUploadService } from '@features/profile/services/image-upload.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ProfileService } from '../../services/profile.service';
+import { APIResponse } from '@shared/http/response.types';
+import { UploadedImageDao } from '../../types/profile.types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile-image',
   templateUrl: './edit-profile-image.component.html',
   styleUrls: ['./edit-profile-image.component.scss'],
 })
-export class EditProfileImageComponent implements OnDestroy {
+export class EditProfileImageComponent {
   croppedImage?: string | null | undefined;
   imageChangedEvent: any = '';
-  imageUploadSubscription: Subscription | undefined;
+  uploadResonse?: APIResponse<UploadedImageDao>;
 
-  constructor(private imageUploadService: ImageUploadService) {}
-
-  ngOnDestroy(): void {
-    this.imageUploadSubscription?.unsubscribe();
-  }
+  constructor(
+    private imageUploadService: ImageUploadService,
+    private profileService: ProfileService,
+    private router: Router
+  ) {}
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -28,8 +31,18 @@ export class EditProfileImageComponent implements OnDestroy {
   }
 
   upload(): void {
-    this.imageUploadSubscription = this.imageUploadService
+    this.imageUploadService
       .uploadImage$(this.croppedImage!)
-      .subscribe();
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.profileService.updateProfileImageHash(response.payload.hash);
+        }
+        this.uploadResonse = response;
+      });
+  }
+
+  nextStep(): void {
+    this.profileService.updateProfile();
+    this.router.navigate(['profile']);
   }
 }

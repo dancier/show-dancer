@@ -66,9 +66,10 @@
         Zurück
       </button>
       <button
+        (click)="nextStep()"
+        [disabled]="!uploadResonse?.isSuccess"
         class="font-color-primary-800 button-width-relative"
         mat-raised-button
-        routerLink="/profile"
       >
         Weiter
       </button>
