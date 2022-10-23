@@ -131,10 +131,18 @@ export class ProfileService {
     );
   }
 
-  isDancerProfileSufficient(): boolean {
+  isDancerProfileSufficient$(): Observable<boolean> {
     // TODO: actually check if the profile is sufficient
-    return (
-      this._profile.value !== null && this._profile.value.dancerName !== ''
+    return this.profile$.pipe(
+      map((profile) => {
+        let isProfileSufficient =
+          !!profile.dancerName &&
+          !!profile.birthDate &&
+          profile.wantsTo.length > 0 &&
+          profile.ableTo.length > 0 &&
+          !!profile.profileImageHash;
+        return isProfileSufficient;
+      })
     );
   }
 }
