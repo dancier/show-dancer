@@ -130,4 +130,11 @@ export class ProfileService {
       })
     );
   }
+
+  isDancerProfileSufficient(): boolean {
+    // TODO: actually check if the profile is sufficient
+    return (
+      this._profile.value !== null && this._profile.value.dancerName !== ''
+    );
+  }
 }
