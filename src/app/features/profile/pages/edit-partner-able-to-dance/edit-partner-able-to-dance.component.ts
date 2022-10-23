@@ -20,10 +20,7 @@ export class EditPartnerAbleToDanceComponent implements OnInit {
     dances: new FormArray<FormGroup<DanceForm>>([]),
   });
 
-  constructor(
-    public profileDataService: ProfileService,
-    private router: Router
-  ) {
+  constructor(public profileService: ProfileService, private router: Router) {
     this.form.valueChanges.subscribe((changes) => {
       console.info(changes);
     });
@@ -60,9 +57,7 @@ export class EditPartnerAbleToDanceComponent implements OnInit {
         leading: danceForm.leading,
         level: danceForm.level,
       }));
-    this.profileDataService.setPartnerDances(dances);
-    this.profileDataService.updateProfile();
-    console.debug('profile', this.profileDataService.profile);
+    this.profileService.setPartnerDances(dances);
     this.router.navigate(['profile/initial-setup/profile-image']);
   }
 }

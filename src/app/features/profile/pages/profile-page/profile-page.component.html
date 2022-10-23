@@ -1,5 +1,5 @@
 <div
-  *ngIf="profileService.getProfile() as profile"
+  *ngIf="profileService.profile$ | async as profile"
   class="profile-page-outer-container background-color-900"
 >
   <div
@@ -8,8 +8,8 @@
     ngStyle.gt-xs="border-radius: 16px"
   >
     <div class="profile-name-container">
-      <h1>{{profileService.profile.dancerName}}</h1>
-      <span class="age">{{profileService.profile.birthDate | age}}</span>
+      <h1>{{profile.dancerName}}</h1>
+      <span class="age">{{profile.birthDate | age}}</span>
       <span class="dance-key-words">Tango, Standard</span>
     </div>
   </div>
@@ -17,7 +17,7 @@
     <mat-tab label="Ich tanze">
       <div class="dance-types-container" fxLayout.xs="column">
         <app-dance-type
-          *ngFor="let preference of profileService.profile.ableTo"
+          *ngFor="let preference of profile.ableTo"
           [danceLevel]="(preference.level!)"
           [danceTypeName]="(preference.dance!)"
           [role]="(preference.leading!)"
@@ -27,7 +27,7 @@
     <mat-tab label="Ich suche">
       <div class="dance-types-container" fxLayout.xs="column">
         <app-dance-type
-          *ngFor="let preference of profileService.profile.wantsTo"
+          *ngFor="let preference of profile.wantsTo"
           [danceLevel]="(preference.level!)"
           [danceTypeName]="(preference.dance!)"
           [role]="(preference.leading!)"
@@ -35,10 +35,7 @@
       </div>
     </mat-tab>
     <mat-tab label="Persönliche Daten">
-      <app-personal-data
-        [profile]="profileService.profile"
-        class="personal-data-container"
-      >
+      <app-personal-data [profile]="profile" class="personal-data-container">
       </app-personal-data>
     </mat-tab>
   </mat-tab-group>

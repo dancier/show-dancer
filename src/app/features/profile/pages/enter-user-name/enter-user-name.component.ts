@@ -17,7 +17,7 @@ export class EnterUserNameComponent {
   error?: APIError;
 
   constructor(
-    public profileDataService: ProfileService,
+    public profileService: ProfileService,
     private profileHttpService: ProfileHttpService,
     private fb: NonNullableFormBuilder,
     private router: Router
@@ -34,7 +34,7 @@ export class EnterUserNameComponent {
         .checkNameAvailability$(username)
         .subscribe((response) => {
           if (response.isSuccess) {
-            this.profileDataService.setDancerName(username);
+            this.profileService.setDancerName(username);
             this.router.navigate(['profile/initial-setup/personal-info']);
           } else {
             this.error = response.error;

@@ -11,6 +11,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { format } from 'date-fns';
+import { isNonNull } from '@core/common/rxjs.utils';
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
 
@@ -44,7 +45,7 @@ export class EditPersonalDataComponent implements OnInit {
   genderList = genderList;
 
   constructor(
-    public profileDataService: ProfileService,
+    public profileService: ProfileService,
     private fb: NonNullableFormBuilder,
     private router: Router
   ) {}
@@ -54,10 +55,11 @@ export class EditPersonalDataComponent implements OnInit {
       .pipe(
         untilDestroyed(this),
         map((formValues) => formValues.zipCode),
-        filter((zipCode) => zipCode?.length === 5),
+        filter(isNonNull),
+        filter((zipCode) => zipCode.length === 5),
         distinctUntilChanged(),
         switchMap((zipCode) => {
-          return this.profileDataService.getCity$(zipCode);
+          return this.profileService.getCity$(zipCode);
         })
       )
       .subscribe((city) => {
@@ -82,7 +84,7 @@ export class EditPersonalDataComponent implements OnInit {
   submitForm(): void {
     if (this.personalDataForm.valid) {
       const formValues = this.personalDataForm.getRawValue();
-      this.profileDataService.setPersonalData({
+      this.profileService.setPersonalData({
         ...formValues,
         birthDate: format(formValues.birthDate!, 'yyyy.MM.dd'),
       } as PersonalData);
