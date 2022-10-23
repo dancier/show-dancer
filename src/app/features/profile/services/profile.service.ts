@@ -2,14 +2,20 @@ import { Injectable } from '@angular/core';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 import { ProfileHttpService } from './profile-http.service';
 import { Dance, PersonalData, Profile } from '../types/profile.types';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { isNonNull } from '@core/common/rxjs.utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
-  profile: Profile = ProfileService.initProfile();
+  // profile: Profile = ProfileService.initProfile();
+
+  private _profile = new BehaviorSubject<Profile | null>(null);
+  public readonly profile$: Observable<Profile> = this._profile
+    .asObservable()
+    .pipe(filter(isNonNull));
 
   constructor(
     private profileHttpService: ProfileHttpService,
@@ -23,81 +29,105 @@ export class ProfileService {
     });
   }
 
-  private static initProfile(): Profile {
-    return {
-      aboutMe: '',
-      size: 0,
-      gender: 'FEMALE',
-      dancerName: '',
-      birthDate: '',
-      ableTo: [],
-      wantsTo: [],
-      email: '',
-      zipCode: '',
-      city: '',
-      country: '',
-      profileImageHash: '',
-    };
-  }
+  // private static initProfile(): Profile {
+  //   return {
+  //     aboutMe: '',
+  //     size: 0,
+  //     gender: 'FEMALE',
+  //     dancerName: '',
+  //     birthDate: '',
+  //     ableTo: [],
+  //     wantsTo: [],
+  //     email: '',
+  //     zipCode: '',
+  //     city: '',
+  //     country: '',
+  //     profileImageHash: '',
+  //   };
+  // }
 
   fetchProfileData(): void {
     this.profileHttpService.getProfile$().subscribe((response) => {
       if (response.isSuccess) {
-        this.profile = response.payload;
+        this._profile.next(response.payload);
       }
     });
   }
 
-  updateProfile(): void {
-    this.profileHttpService.updateProfile$(this.profile).subscribe();
+  // updateProfile(): void {
+  //   this.profileHttpService.updateProfile$(this.profile).subscribe();
+  // }
+
+  updateProfile(profile: Profile): void {
+    this.profileHttpService.updateProfile$(profile).subscribe((response) => {
+      if (response.isSuccess) {
+        this._profile.next(profile);
+      }
+    });
   }
 
-  getProfile(): Profile {
-    return this.profile;
+  getProfile(): Profile | null {
+    return this._profile.value;
   }
 
   setDancerName(dancerName: string): void {
-    this.profile.dancerName = dancerName;
-    console.debug('dancerName', dancerName);
-    console.debug('profile', this.profile);
+    if (this._profile.value === null) {
+      return;
+    }
+    this.updateProfile({
+      ...this._profile.value,
+      dancerName,
+    });
   }
 
   setPersonalData(personalData: PersonalData): void {
-    this.profile = {
-      ...this.profile,
+    if (this._profile.value === null) {
+      return;
+    }
+    this.updateProfile({
+      ...this._profile.value,
       ...personalData,
-    };
-    console.debug('personalData', personalData);
-    console.debug('profile', this.profile);
+    });
   }
 
   setOwnDances(ableTo: Dance[]): void {
-    // eslint-disable-next-line no-console
-    console.debug('ableTo', ableTo);
-    this.profile.ableTo = ableTo;
-    console.debug('profile', this.profile);
+    if (this._profile.value === null) {
+      return;
+    }
+    this.updateProfile({
+      ...this._profile.value,
+      ableTo,
+    });
   }
 
   setPartnerDances(wantsTo: Dance[]): void {
-    console.debug('wantsTo', wantsTo);
-    this.profile.wantsTo = wantsTo;
-    console.debug('profile', this.profile);
+    if (this._profile.value === null) {
+      return;
+    }
+    this.updateProfile({
+      ...this._profile.value,
+      wantsTo,
+    });
   }
 
-  getCity$(zipCode = this.profile.zipCode): Observable<string | null> {
+  updateProfileImageHash(hash: string): void {
+    if (this._profile.value === null) {
+      return;
+    }
+    this.updateProfile({
+      ...this._profile.value,
+      profileImageHash: hash,
+    });
+  }
+
+  getCity$(zipCode: string): Observable<string | null> {
     return this.profileHttpService.getLocation$(zipCode).pipe(
       map((response) => {
         if (response.isSuccess) {
-          this.profile.city = response.payload.city;
-          return this.profile.city;
+          return response.payload.city;
         }
         return null;
       })
     );
-  }
-
-  updateProfileImageHash(hash: string): void {
-    this.profile.profileImageHash = hash;
-    console.debug('profile', this.profile);
   }
 }

@@ -42,7 +42,6 @@ export class EditProfileImageComponent {
   }
 
   nextStep(): void {
-    this.profileService.updateProfile();
     this.router.navigate(['profile']);
   }
 }
