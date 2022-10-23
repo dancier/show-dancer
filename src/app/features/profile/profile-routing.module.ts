@@ -8,12 +8,13 @@ import { EditAbleToDanceComponent } from '@features/profile/pages/edit-able-to-d
 import { EditPartnerAbleToDanceComponent } from '@features/profile/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
 import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-image/edit-profile-image.component';
 import { DancerProfileNotCreatedGuard } from './guards/dancer-profile-not-created.guard';
+import { DancerProfileSufficientGuard } from './guards/dancer-profile-sufficient.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: ProfilePageComponent,
-    canActivate: [LoggedInGuard],
+    canActivate: [LoggedInGuard, DancerProfileSufficientGuard],
   },
   {
     path: 'initial-setup',

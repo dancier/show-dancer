@@ -6,8 +6,9 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { ProfileService } from '../services/profile.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +24,14 @@ export class DancerProfileSufficientGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!this.profileService.isDancerProfileSufficient()) {
-      return this.router.createUrlTree(['profile', 'initial-setup']);
-    }
-    return true;
+    return this.profileService.isDancerProfileSufficient$().pipe(
+      take(1),
+      map((isSufficient) => {
+        if (!isSufficient) {
+          return this.router.createUrlTree(['profile', 'initial-setup']);
+        }
+        return true;
+      })
+    );
   }
 }

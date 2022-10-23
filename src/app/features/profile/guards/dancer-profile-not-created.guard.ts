@@ -32,11 +32,6 @@ export class DancerProfileNotCreatedGuard implements CanActivateChild {
     return this.profileService.profile$.pipe(
       take(1),
       map((profile) => {
-        console.log('profile', profile);
-        console.log(
-          'childRoute.routeConfig.path',
-          childRoute!.routeConfig!.path
-        );
         switch (childRoute!.routeConfig!.path) {
           case 'username':
             if (profile.dancerName) {
