@@ -5,13 +5,12 @@ import { Dance, PersonalData, Profile } from '../types/profile.types';
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { isNonNull } from '@core/common/rxjs.utils';
+import { APIResponse } from '@shared/http/response.types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
-  // profile: Profile = ProfileService.initProfile();
-
   private _profile = new BehaviorSubject<Profile | null>(null);
   public readonly profile$: Observable<Profile> = this._profile
     .asObservable()
@@ -29,23 +28,6 @@ export class ProfileService {
     });
   }
 
-  // private static initProfile(): Profile {
-  //   return {
-  //     aboutMe: '',
-  //     size: 0,
-  //     gender: 'FEMALE',
-  //     dancerName: '',
-  //     birthDate: '',
-  //     ableTo: [],
-  //     wantsTo: [],
-  //     email: '',
-  //     zipCode: '',
-  //     city: '',
-  //     country: '',
-  //     profileImageHash: '',
-  //   };
-  // }
-
   fetchProfileData(): void {
     this.profileHttpService.getProfile$().subscribe((response) => {
       if (response.isSuccess) {
@@ -54,15 +36,26 @@ export class ProfileService {
     });
   }
 
-  // updateProfile(): void {
-  //   this.profileHttpService.updateProfile$(this.profile).subscribe();
-  // }
-
-  updateProfile(profile: Profile): void {
-    this.profileHttpService.updateProfile$(profile).subscribe((response) => {
+  updateProfile(profile: Profile): Observable<APIResponse<void>> {
+    const request = this.profileHttpService.updateProfile$(profile);
+    request.subscribe((response) => {
       if (response.isSuccess) {
         this._profile.next(profile);
       }
+    });
+    return request;
+  }
+
+  patchAndUpdateProfile(
+    profile: Partial<Profile>
+  ): Observable<APIResponse<void>> {
+    if (this._profile.value === null) {
+      // the profile should be already fetched for all modifications
+      throw new Error("profile hasn't been fetched yet");
+    }
+    return this.updateProfile({
+      ...this._profile.value,
+      ...profile,
     });
   }
 
@@ -70,54 +63,24 @@ export class ProfileService {
     return this._profile.value;
   }
 
-  setDancerName(dancerName: string): void {
-    if (this._profile.value === null) {
-      return;
-    }
-    this.updateProfile({
-      ...this._profile.value,
-      dancerName,
-    });
+  setDancerName(dancerName: string): Observable<APIResponse<void>> {
+    return this.patchAndUpdateProfile({ dancerName });
   }
 
   setPersonalData(personalData: PersonalData): void {
-    if (this._profile.value === null) {
-      return;
-    }
-    this.updateProfile({
-      ...this._profile.value,
-      ...personalData,
-    });
+    this.patchAndUpdateProfile(personalData);
   }
 
   setOwnDances(ableTo: Dance[]): void {
-    if (this._profile.value === null) {
-      return;
-    }
-    this.updateProfile({
-      ...this._profile.value,
-      ableTo,
-    });
+    this.patchAndUpdateProfile({ ableTo });
   }
 
   setPartnerDances(wantsTo: Dance[]): void {
-    if (this._profile.value === null) {
-      return;
-    }
-    this.updateProfile({
-      ...this._profile.value,
-      wantsTo,
-    });
+    this.patchAndUpdateProfile({ wantsTo });
   }
 
   updateProfileImageHash(hash: string): void {
-    if (this._profile.value === null) {
-      return;
-    }
-    this.updateProfile({
-      ...this._profile.value,
-      profileImageHash: hash,
-    });
+    this.patchAndUpdateProfile({ profileImageHash: hash });
   }
 
   getCity$(zipCode: string): Observable<string | null> {
