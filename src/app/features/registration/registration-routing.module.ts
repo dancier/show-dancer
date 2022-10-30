@@ -4,11 +4,16 @@ import { RegisterUserFormComponent } from './components/register-user-form/regis
 import { VerificationErrorComponent } from '@features/registration/components/verification-error/verification-error.component';
 import { VerificationRequiredComponent } from '@features/registration/components/verification-required/verification-required.component';
 import { VerifyAccountComponent } from '@features/registration/components/verify-account/verify-account.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: RegisterUserFormComponent,
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
   },
   {
     path: 'verify-account',

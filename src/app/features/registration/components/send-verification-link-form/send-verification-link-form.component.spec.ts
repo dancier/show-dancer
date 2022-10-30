@@ -1,15 +1,17 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
-import { ResendVerificationLinkFormComponent } from '@features/registration/components/resend-verification-link-form/resend-verification-link-form.component';
-import { MatCardModule } from '@angular/material/card';
+import { SendVerificationLinkFormComponent } from '@features/registration/components/send-verification-link-form/send-verification-link-form.component';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 describe('ResendVerificationLinkFormComponent', () => {
-  let spectator: Spectator<ResendVerificationLinkFormComponent>;
+  let spectator: Spectator<SendVerificationLinkFormComponent>;
   const createComponent = createComponentFactory({
-    component: ResendVerificationLinkFormComponent,
+    component: SendVerificationLinkFormComponent,
     imports: [MatCardModule, MatFormFieldModule, MatInputModule],
   });
+  SendVerificationLinkFormComponent;
 
   beforeEach(() => (spectator = createComponent()));
 

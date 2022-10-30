@@ -1,4 +1,4 @@
-<form novalidate>
+<form novalidate (ngSubmit)="submitForm()">
   <mat-card-content class="login-form-container" fxLayout="column">
     <mat-form-field appearance="fill" class="full-width" fxFlex>
       <mat-label>E-Mail</mat-label>
@@ -22,7 +22,7 @@
       data-test="submit-verification"
       mat-raised-button
     >
-      Aktivierungslink senden
+      {{submitText}}
     </button>
   </mat-card-content>
 </form>
