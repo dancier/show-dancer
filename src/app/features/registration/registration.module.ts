@@ -18,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SendVerificationLinkFormComponent } from './components/send-verification-link-form/send-verification-link-form.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ResetPasswordEmailVerificationComponent } from './components/reset-password-email-verification/reset-password-email-verification.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     VerificationErrorComponent,
     SendVerificationLinkFormComponent,
     ResetPasswordComponent,
+    ResetPasswordEmailVerificationComponent,
   ],
   imports: [
     CommonModule,

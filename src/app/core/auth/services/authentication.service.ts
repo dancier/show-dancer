@@ -5,6 +5,8 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import {
+  EmailValidationRequest,
+  EmailValidationType,
   LoginRequest,
   UserRegistration,
 } from '@core/auth/authentication.types';
@@ -94,6 +96,28 @@ export class AuthenticationService {
           }
         }),
         shareReplay(1)
+      );
+  }
+
+  emailValidation(
+    emailValidationRequest: EmailValidationRequest
+  ): Observable<APIResponse<void>> {
+    return this.http
+      .post<void>(
+        `${this.baseUrl}/email-validations`,
+        emailValidationRequest,
+        this.defaultOptions
+      )
+      .pipe(
+        map(asSuccess),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            case 400:
+              return of(asError('VALIDATION_ERROR'));
+            default:
+              return of(asError('SERVER_ERROR'));
+          }
+        })
       );
   }
 
