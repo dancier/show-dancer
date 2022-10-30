@@ -64,6 +64,8 @@
                   (click)="picker.open()"
                   (focus)="setFocus('BIRTHDAY')"
                   [matDatepicker]="picker"
+                  [max]="maxDate"
+                  [min]="minDate"
                   [readonly]="true"
                   data-test="birthdate-field"
                   formControlName="birthDate"
@@ -78,6 +80,11 @@
                   matSuffix
                 ></mat-datepicker-toggle>
                 <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+                <mat-error
+                  *ngIf="personalDataForm.get('birthDate')?.hasError('required')"
+                >
+                  Bitte gib ein gültiges Geburtsdatum ein.
+                </mat-error>
               </mat-form-field>
             </div>
             <div

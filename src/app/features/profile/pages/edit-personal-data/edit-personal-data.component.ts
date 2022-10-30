@@ -45,13 +45,20 @@ export class EditPersonalDataComponent implements OnInit {
 
   fieldInFocus?: Field;
   genderList = genderList;
+  minDate: Date;
+  maxDate: Date;
   error?: APIError;
 
   constructor(
     public profileService: ProfileService,
     private fb: NonNullableFormBuilder,
     private router: Router
-  ) {}
+  ) {
+    // set min and max selectable date of birth relative to the current year
+    const currentYear = new Date().getFullYear();
+    this.minDate = new Date(currentYear - 110, 0, 1);
+    this.maxDate = new Date(currentYear - 10, 11, 31);
+  }
 
   ngOnInit(): void {
     this.personalDataForm.valueChanges
