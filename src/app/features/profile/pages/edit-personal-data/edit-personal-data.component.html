@@ -80,9 +80,7 @@
                   matSuffix
                 ></mat-datepicker-toggle>
                 <mat-datepicker #picker startView="multi-year"></mat-datepicker>
-                <mat-error
-                  *ngIf="personalDataForm.get('birthDate')?.hasError('required')"
-                >
+                <mat-error *ngIf="hasFieldError('birthDate', 'required')">
                   Bitte gib ein gültiges Geburtsdatum ein.
                 </mat-error>
               </mat-form-field>
@@ -109,6 +107,12 @@
                   >Wird angezeigt auf deinem Profil, und für die Empfehlung
                   wichtig.
                 </mat-hint>
+                <mat-error
+                  *ngIf="hasFieldError('size', 'required')
+                  || hasFieldError('size', 'pattern')"
+                >
+                  Bitte gib eine gültige Körpergröße ein.
+                </mat-error>
               </mat-form-field>
             </div>
             <div
@@ -132,6 +136,13 @@
                   >Auf deinem Profil wird der Ort angezeigt. PLZ ist auch für
                   die Empfehlung des Tanzpartners wichtig.
                 </mat-hint>
+                <mat-error
+                  *ngIf="hasFieldError('zipCode', 'required')
+                  || hasFieldError('zipCode', 'pattern')
+                  || hasFieldError('zipCode', 'cityLookup')"
+                >
+                  Bitte gib eine gültige PLZ ein.
+                </mat-error>
               </mat-form-field>
             </div>
 
