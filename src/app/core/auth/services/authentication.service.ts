@@ -5,9 +5,8 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import {
-  EmailValidationRequest,
-  EmailValidationType,
   LoginRequest,
+  PasswordChangeRequest,
   UserRegistration,
 } from '@core/auth/authentication.types';
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
@@ -99,13 +98,13 @@ export class AuthenticationService {
       );
   }
 
-  emailValidation(
-    emailValidationRequest: EmailValidationRequest
+  requestPasswordChange(
+    passwordChangeRequest: PasswordChangeRequest
   ): Observable<APIResponse<void>> {
     return this.http
       .post<void>(
-        `${this.baseUrl}/email-validations`,
-        emailValidationRequest,
+        `${this.baseUrl}/password-changes`,
+        passwordChangeRequest,
         this.defaultOptions
       )
       .pipe(

@@ -9,9 +9,6 @@ export type LoginRequest = {
   password: string;
 };
 
-export type EmailValidationRequest = {
+export type PasswordChangeRequest = {
   email: string;
-  type: EmailValidationType;
 };
-
-export type EmailValidationType = 'ACCOUNT_ACTIVATION' | 'PASSWORD_RESET';

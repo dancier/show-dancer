@@ -41,7 +41,7 @@ export class SendVerificationLinkFormComponent implements OnInit {
       const { email } = this.verificationForm.value;
 
       this.authenticationService
-        .emailValidation({ email: email, type: 'PASSWORD_RESET' })
+        .requestPasswordChange({ email })
         .subscribe((response) => {
           if (response.isSuccess) {
             this.router.navigate(['reset-password-verification'], {
