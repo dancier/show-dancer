@@ -149,6 +149,9 @@
           </mat-card-content>
         </div>
       </div>
+      <mat-error *ngIf="error">
+        <span> {{error | errorMessage}} </span>
+      </mat-error>
       <button
         class="font-color-primary-800 continue-button"
         mat-raised-button

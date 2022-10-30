@@ -12,6 +12,8 @@ import { distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { format } from 'date-fns';
 import { isNonNull } from '@core/common/rxjs.utils';
+import { APIError } from '@shared/http/response.types';
+import { de } from 'date-fns/locale';
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
 
@@ -43,6 +45,7 @@ export class EditPersonalDataComponent implements OnInit {
 
   fieldInFocus?: Field;
   genderList = genderList;
+  error?: APIError;
 
   constructor(
     public profileService: ProfileService,
@@ -84,11 +87,20 @@ export class EditPersonalDataComponent implements OnInit {
   submitForm(): void {
     if (this.personalDataForm.valid) {
       const formValues = this.personalDataForm.getRawValue();
-      this.profileService.setPersonalData({
-        ...formValues,
-        birthDate: format(formValues.birthDate!, 'yyyy.MM.dd'),
-      } as PersonalData);
-      this.router.navigate(['profile/initial-setup/dances-self']);
+      this.profileService
+        .setPersonalData({
+          ...formValues,
+          birthDate: format(formValues.birthDate!, 'yyyy-MM-dd', {
+            locale: de,
+          }),
+        } as PersonalData)
+        .subscribe((response) => {
+          if (response.isSuccess) {
+            this.router.navigate(['profile/initial-setup/dances-self']);
+          } else {
+            this.error = response.error;
+          }
+        });
     }
   }
 }

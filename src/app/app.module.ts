@@ -15,7 +15,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer/footer.component';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -44,7 +43,6 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     FlexModule,
     ExtendedModule,
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'de-DE' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

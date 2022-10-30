@@ -67,8 +67,8 @@ export class ProfileService {
     return this.patchAndUpdateProfile({ dancerName });
   }
 
-  setPersonalData(personalData: PersonalData): void {
-    this.patchAndUpdateProfile(personalData);
+  setPersonalData(personalData: PersonalData): Observable<APIResponse<void>> {
+    return this.patchAndUpdateProfile(personalData);
   }
 
   setOwnDances(ableTo: Dance[]): void {

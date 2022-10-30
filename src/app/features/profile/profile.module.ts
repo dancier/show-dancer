@@ -24,7 +24,9 @@ import { ProfileRoutingModule } from '@features/profile/profile-routing.module';
 import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-image/edit-profile-image.component';
 import { SharedModule } from '@shared/shared.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatDateFnsModule } from '@angular/material-date-fns-adapter';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { de } from 'date-fns/locale';
 
 @NgModule({
   declarations: [
@@ -49,13 +51,19 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatIconModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+    MatDateFnsModule,
     MatTabsModule,
     MatRadioModule,
     MatSelectModule,
     MatAutocompleteModule,
     ImageCropperModule,
     SharedModule,
+  ],
+  providers: [
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: de,
+    },
   ],
 })
 export class ProfileModule {}
