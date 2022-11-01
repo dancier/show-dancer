@@ -62,8 +62,6 @@ export class EditPartnerAbleToDanceComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log(this.form.value);
-    console.log(this.form.valid);
     if (this.form.valid) {
       // iterate over the values from the dances form array and map them to a Dance array
       const dances: Dance[] = this.dancesFormArray
