@@ -120,6 +120,29 @@ export class AuthenticationService {
       );
   }
 
+  changePassword(
+    validationCode: string,
+    password: string
+  ): Observable<APIResponse<void>> {
+    return this.http
+      .put<void>(
+        `${this.baseUrl}/password-changes/${validationCode}`,
+        { password },
+        this.defaultOptions
+      )
+      .pipe(
+        map(asSuccess),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            case 400:
+              return of(asError('VALIDATION_ERROR'));
+            default:
+              return of(asError('SERVER_ERROR'));
+          }
+        })
+      );
+  }
+
   verifyAccount(validationCode: string): Observable<APIResponse<void>> {
     return this.http
       .put<void>(

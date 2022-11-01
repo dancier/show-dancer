@@ -19,6 +19,7 @@ import { SendVerificationLinkFormComponent } from './components/send-verificatio
 import { MatIconModule } from '@angular/material/icon';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetPasswordEmailVerificationComponent } from './components/reset-password-email-verification/reset-password-email-verification.component';
+import { NewPasswordComponent } from './components/new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ResetPasswordEmailVerificationComponent } from './components/reset-pass
     SendVerificationLinkFormComponent,
     ResetPasswordComponent,
     ResetPasswordEmailVerificationComponent,
+    NewPasswordComponent,
   ],
   imports: [
     CommonModule,

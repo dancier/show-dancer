@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from '@core/auth/services/authentication.service';
+import { APIResponse } from '@shared/http/response.types';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-reset-password',
@@ -6,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent {
-  constructor() {}
+  constructor(private authenticationService: AuthenticationService) {}
 }

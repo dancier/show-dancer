@@ -6,7 +6,9 @@ import {
 } from '@angular/forms';
 import { AuthenticationService } from '@core/auth/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIError } from '@shared/http/response.types';
+import { APIError, APIResponse } from '@shared/http/response.types';
+import { LinkType } from '@features/registration/registration.types';
+import { EMPTY, empty, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-send-verification-link-form',
@@ -14,8 +16,12 @@ import { APIError } from '@shared/http/response.types';
   styleUrls: ['./send-verification-link-form.component.scss'],
 })
 export class SendVerificationLinkFormComponent implements OnInit {
-  @Input() submitText?: string;
+  @Input() linkType!: LinkType;
   submitButtonText?: string;
+  redirectUrl?: string;
+  onSubmit!:
+    | ((email: string) => Observable<APIResponse<void>>)
+    | ((email: string) => never);
   verificationForm!: UntypedFormGroup;
   error?: APIError;
 
@@ -28,6 +34,18 @@ export class SendVerificationLinkFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initReactiveForm();
+    this.submitButtonText =
+      this.linkType === 'PASSWORD_RESET'
+        ? 'Passwort zurücksetzen'
+        : 'Aktivierungslink senden';
+    this.redirectUrl =
+      this.linkType === 'PASSWORD_RESET'
+        ? 'reset-password-verification'
+        : 'verify-account';
+    this.onSubmit =
+      this.linkType === 'PASSWORD_RESET'
+        ? (email) => this.authenticationService.requestPasswordChange({ email })
+        : () => EMPTY;
   }
 
   private initReactiveForm(): void {
@@ -40,17 +58,15 @@ export class SendVerificationLinkFormComponent implements OnInit {
     if (this.verificationForm.valid) {
       const { email } = this.verificationForm.value;
 
-      this.authenticationService
-        .requestPasswordChange({ email })
-        .subscribe((response) => {
-          if (response.isSuccess) {
-            this.router.navigate(['reset-password-verification'], {
-              relativeTo: this.route.parent,
-            });
-          } else {
-            this.error = response.error;
-          }
-        });
+      this.onSubmit(email).subscribe((response) => {
+        if (response.isSuccess) {
+          this.router.navigate([this.redirectUrl], {
+            relativeTo: this.route.parent,
+          });
+        } else {
+          this.error = response.error;
+        }
+      });
     }
   }
 }
