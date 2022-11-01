@@ -3,7 +3,7 @@
 
 # Run ESLint on all files that have changed
 echo "Running ESLint on changed files..."
-npx eslint src --fix --cache
+npx eslint src --fix --cache --max-warnings 0
 echo "ESLint complete."
 
 # Run Prettier on all staged files
