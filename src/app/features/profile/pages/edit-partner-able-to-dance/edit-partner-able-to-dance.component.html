@@ -74,9 +74,13 @@
         (click)="submitForm()"
         class="font-color-primary-800 button-width-relative"
         mat-raised-button
+        type="submit"
       >
         Weiter
       </button>
     </div>
+    <mat-error *ngIf="apiError">
+      <span> {{apiError | errorMessage}} </span>
+    </mat-error>
   </div>
 </div>

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';
 import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
-import { DanceLevel } from '../../types/profile.types';
+import { DanceLevel, DanceRole } from '../../types/profile.types';
 
 @Component({
   selector: 'app-edit-dance-type',
@@ -26,6 +26,12 @@ export class EditDanceTypeComponent implements OnInit {
     PRO: 'Professioneller Tänzer',
   };
 
+  danceRoles: Record<DanceRole, string> = {
+    LEAD: 'Ich führe',
+    FOLLOW: 'Ich folge',
+    BOTH: 'Beides',
+  };
+
   danceTypeAutocompletions: string[] = ['Tango', 'Salsa', 'Standard'];
 
   filteredDanceTypeAutocompletions$!: Observable<string[]>;
@@ -37,8 +43,8 @@ export class EditDanceTypeComponent implements OnInit {
 
   // Preserve original property order
   originalOrder = (
-    a: KeyValue<DanceLevel, string>,
-    b: KeyValue<DanceLevel, string>
+    a: KeyValue<any, string>,
+    b: KeyValue<any, string>
   ): number => {
     return 0;
   };
@@ -46,6 +52,13 @@ export class EditDanceTypeComponent implements OnInit {
   ngOnInit(): void {
     this.danceForm = this.formGroupDirective.form;
     this.initDanceTypeAutocompletions();
+  }
+
+  hasFieldError(field: string, error: string): boolean {
+    if (this.danceForm.get(field) === null) {
+      throw new Error(`Field ${field} does not exist`);
+    }
+    return this.danceForm.get(field)!.hasError(error);
   }
 
   private initDanceTypeAutocompletions(): void {

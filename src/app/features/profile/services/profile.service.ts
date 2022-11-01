@@ -71,12 +71,12 @@ export class ProfileService {
     return this.patchAndUpdateProfile(personalData);
   }
 
-  setOwnDances(ableTo: Dance[]): void {
-    this.patchAndUpdateProfile({ ableTo });
+  setOwnDances(ableTo: Dance[]): Observable<APIResponse<void>> {
+    return this.patchAndUpdateProfile({ ableTo });
   }
 
-  setPartnerDances(wantsTo: Dance[]): void {
-    this.patchAndUpdateProfile({ wantsTo });
+  setPartnerDances(wantsTo: Dance[]): Observable<APIResponse<void>> {
+    return this.patchAndUpdateProfile({ wantsTo });
   }
 
   updateProfileImageHash(hash: string): void {

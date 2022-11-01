@@ -39,7 +39,7 @@ export const genderList: GenderDescription[] = [
   },
 ];
 
-export type DanceRole = 'LEADING' | 'FOLLOWING';
+export type DanceRole = 'LEAD' | 'FOLLOW' | 'BOTH';
 
 export type DanceType = string;
 
