@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 
-describe('ResendVerificationLinkFormComponent', () => {
+describe('SendVerificationLinkFormComponent', () => {
   let spectator: Spectator<SendVerificationLinkFormComponent>;
   const createComponent = createComponentFactory({
     component: SendVerificationLinkFormComponent,
