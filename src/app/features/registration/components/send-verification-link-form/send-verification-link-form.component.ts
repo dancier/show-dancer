@@ -1,14 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '@core/auth/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIError, APIResponse } from '@shared/http/response.types';
 import { LinkType } from '@features/registration/registration.types';
-import { EMPTY, empty, Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-send-verification-link-form',
@@ -22,18 +18,19 @@ export class SendVerificationLinkFormComponent implements OnInit {
   onSubmit!:
     | ((email: string) => Observable<APIResponse<void>>)
     | ((email: string) => never);
-  verificationForm!: UntypedFormGroup;
   error?: APIError;
+  verificationForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+  });
 
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: NonNullableFormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.initReactiveForm();
     this.submitButtonText =
       this.linkType === 'PASSWORD_RESET'
         ? 'Passwort zurücksetzen'
@@ -48,17 +45,11 @@ export class SendVerificationLinkFormComponent implements OnInit {
         : () => EMPTY;
   }
 
-  private initReactiveForm(): void {
-    this.verificationForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-    });
-  }
-
   submitForm(): void {
     if (this.verificationForm.valid) {
       const { email } = this.verificationForm.value;
 
-      this.onSubmit(email).subscribe((response) => {
+      this.onSubmit(email!).subscribe((response) => {
         if (response.isSuccess) {
           this.router.navigate([this.redirectUrl], {
             relativeTo: this.route.parent,
