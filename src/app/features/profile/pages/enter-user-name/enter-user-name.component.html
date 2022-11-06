@@ -30,9 +30,16 @@
               *ngIf="hasUsernameFieldError('required')"
               data-test="username-field-empty"
             >
-              Bitte gib einen Benutzernamen ein..
+              Bitte gib einen Benutzernamen ein.
+            </mat-error>
+            <mat-error
+              *ngIf="hasUsernameFieldError('minlength')"
+              data-test="username-field-empty"
+            >
+              Der Benutzername muss mindestens 3 Zeichen lang sein.
             </mat-error>
           </mat-form-field>
+          <br />
           <button
             class="font-color-primary-800"
             mat-raised-button

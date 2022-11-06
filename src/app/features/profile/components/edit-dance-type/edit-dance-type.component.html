@@ -1,15 +1,14 @@
 <mat-card-content class="card-content-container" fxLayout="column">
   <form [formGroup]="danceForm">
-    <div class="form-section" fxLayout="row">
-      <div class="form-section-label">
-        <mat-icon class="form-icon">audiotrack</mat-icon>
-        <mat-label>Tanzart *</mat-label>
-      </div>
-      <div>
+    <div class="full-width">
+      <mat-icon class="form-icon">audiotrack</mat-icon>
+      <mat-form-field appearance="fill">
+        <mat-label>Tanzart</mat-label>
         <input
           [matAutocomplete]="auto"
           class="dance-type-input"
           formControlName="dance"
+          matInput
           placeholder="Tanzart"
           type="text"
         />
@@ -21,15 +20,16 @@
             {{danceType}}
           </mat-option>
         </mat-autocomplete>
-      </div>
+        <mat-error *ngIf="hasFieldError('dance', 'required')">
+          Bitte wähle eine Tanzart aus.
+        </mat-error>
+      </mat-form-field>
     </div>
 
-    <div class="form-section" fxLayout="row">
-      <div class="form-section-label" style="margin-bottom: 20px">
-        <mat-icon class="form-icon">tune</mat-icon>
+    <div class="full-width">
+      <mat-icon class="form-icon">tune</mat-icon>
+      <mat-form-field appearance="fill">
         <mat-label class="dance-level-label">Tanzlevel *</mat-label>
-      </div>
-      <mat-form-field appearance="fill" class="dance-level-value">
         <mat-select formControlName="level">
           <mat-option
             *ngFor="let danceLevel of danceLevels | keyvalue:originalOrder"
@@ -38,29 +38,29 @@
             {{danceLevel.value}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="hasFieldError('level', 'required')">
+          Bitte wähle ein Tanzlevel aus.
+        </mat-error>
       </mat-form-field>
     </div>
 
-    <div class="form-section" fxLayout="row">
-      <div class="form-section-label">
-        <mat-icon class="form-icon">people</mat-icon>
-        <mat-label>DanceRole *</mat-label>
-      </div>
-      <mat-radio-group
-        aria-label="Select an option"
-        formControlName="leading"
-        fxLayout="column"
-      >
-        <mat-radio-button class="role-button" value="LEAD"
-          >Ich führe
-        </mat-radio-button>
-        <mat-radio-button class="role-button" value="FOLLOW"
-          >Ich folge
-        </mat-radio-button>
-        <mat-radio-button class="role-button" value="BOTH"
-          >Beides
-        </mat-radio-button>
-      </mat-radio-group>
+    <div class="full-width">
+      <mat-icon class="form-icon">people</mat-icon>
+      <mat-form-field appearance="fill">
+        <mat-label>Rolle</mat-label>
+
+        <mat-select formControlName="leading">
+          <mat-option
+            *ngFor="let danceRole of danceRoles | keyvalue:originalOrder"
+            [value]="danceRole.key"
+          >
+            {{danceRole.value}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasFieldError('leading', 'required')">
+          Bitte wähle eine Rolle aus.
+        </mat-error>
+      </mat-form-field>
     </div>
   </form>
 </mat-card-content>

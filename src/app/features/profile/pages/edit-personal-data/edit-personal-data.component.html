@@ -64,6 +64,8 @@
                   (click)="picker.open()"
                   (focus)="setFocus('BIRTHDAY')"
                   [matDatepicker]="picker"
+                  [max]="maxDate"
+                  [min]="minDate"
                   [readonly]="true"
                   data-test="birthdate-field"
                   formControlName="birthDate"
@@ -78,6 +80,9 @@
                   matSuffix
                 ></mat-datepicker-toggle>
                 <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+                <mat-error *ngIf="hasFieldError('birthDate', 'required')">
+                  Bitte gib ein gültiges Geburtsdatum ein.
+                </mat-error>
               </mat-form-field>
             </div>
             <div
@@ -102,6 +107,12 @@
                   >Wird angezeigt auf deinem Profil, und für die Empfehlung
                   wichtig.
                 </mat-hint>
+                <mat-error
+                  *ngIf="hasFieldError('size', 'required')
+                  || hasFieldError('size', 'pattern')"
+                >
+                  Bitte gib eine gültige Körpergröße ein.
+                </mat-error>
               </mat-form-field>
             </div>
             <div
@@ -125,6 +136,13 @@
                   >Auf deinem Profil wird der Ort angezeigt. PLZ ist auch für
                   die Empfehlung des Tanzpartners wichtig.
                 </mat-hint>
+                <mat-error
+                  *ngIf="hasFieldError('zipCode', 'required')
+                  || hasFieldError('zipCode', 'pattern')
+                  || hasFieldError('zipCode', 'cityLookup')"
+                >
+                  Bitte gib eine gültige Postleitzahl ein.
+                </mat-error>
               </mat-form-field>
             </div>
 
@@ -149,6 +167,9 @@
           </mat-card-content>
         </div>
       </div>
+      <mat-error *ngIf="error">
+        <span> {{error | errorMessage}} </span>
+      </mat-error>
       <button
         class="font-color-primary-800 continue-button"
         mat-raised-button

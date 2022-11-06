@@ -11,7 +11,7 @@ export const errorMessages: Record<APIError, string> = {
   NOT_AVAILABLE: 'Der Benutzername ist leider schon vergeben.',
   VALIDATION_ERROR: '',
   NAME_ALREADY_EXISTS:
-    'Es tut uns leid, der Benutzername ist bereits vergeben. Bitte wähle einen neuen Namen',
+    'Es tut uns leid, der Benutzername ist bereits vergeben. Bitte wähle einen neuen Namen.',
   NOT_A_HUMAN:
     'Bitte löse das Captcha, um zu beweisen, dass du ein Mensch bist.',
   ZIP_CODE_NOT_FOUND:

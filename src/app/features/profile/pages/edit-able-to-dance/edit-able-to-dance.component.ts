@@ -9,6 +9,7 @@ import {
   DanceRole,
   DanceType,
 } from '@features/profile/types/profile.types';
+import { APIError } from '@shared/http/response.types';
 
 @Component({
   selector: 'app-edit-able-to-dance',
@@ -19,6 +20,8 @@ export class EditAbleToDanceComponent implements OnInit {
   form = new FormGroup({
     dances: new FormArray<FormGroup<DanceForm>>([]),
   });
+
+  apiError?: APIError;
 
   constructor(public profileService: ProfileService, private router: Router) {
     this.form.valueChanges.subscribe((changes) => {
@@ -40,7 +43,7 @@ export class EditAbleToDanceComponent implements OnInit {
         nonNullable: true,
         validators: [Validators.required],
       }),
-      leading: new FormControl<DanceRole>('LEADING', {
+      leading: new FormControl<DanceRole>('LEAD', {
         nonNullable: true,
         validators: [Validators.required],
       }),
@@ -68,8 +71,16 @@ export class EditAbleToDanceComponent implements OnInit {
           leading: danceForm.leading,
           level: danceForm.level,
         }));
-      this.profileService.setOwnDances(dances);
-      this.router.navigate(['profile/initial-setup/dances-partner']);
+      this.profileService.setOwnDances(dances).subscribe((response) => {
+        if (response.isSuccess) {
+          this.router.navigate(['profile/initial-setup/dances-partner']);
+        } else {
+          this.apiError = response.error;
+        }
+      });
+    } else {
+      // display error messages for all invalid controls
+      this.form.markAllAsTouched();
     }
   }
 }

@@ -3,7 +3,14 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileHttpService } from '@features/profile/services/profile-http.service';
 import { ProfileService } from '@features/profile/services/profile.service';
-import { APIError } from '@shared/http/response.types';
+import {
+  APIError,
+  APIResponse,
+  asError,
+  ResponseError,
+} from '@shared/http/response.types';
+import { of, switchMap } from 'rxjs';
+import { NameAvailability } from '../../types/profile.types';
 
 @Component({
   selector: 'app-enter-user-name',
@@ -12,7 +19,7 @@ import { APIError } from '@shared/http/response.types';
 })
 export class EnterUserNameComponent {
   usernameForm = this.fb.group({
-    username: ['', [Validators.required]],
+    username: ['', [Validators.required, Validators.minLength(3)]],
   });
   error?: APIError;
 
@@ -32,9 +39,19 @@ export class EnterUserNameComponent {
       const username = this.usernameForm.value.username;
       this.profileHttpService
         .checkNameAvailability$(username)
-        .subscribe((response) => {
+        .pipe(
+          switchMap((response: APIResponse<NameAvailability>) => {
+            if (!response.isSuccess) {
+              return of(response as ResponseError);
+            }
+            if (!response.payload.available) {
+              return of(asError('NAME_ALREADY_EXISTS'));
+            }
+            return this.profileService.setDancerName(username);
+          })
+        )
+        .subscribe((response: APIResponse<void>) => {
           if (response.isSuccess) {
-            this.profileService.setDancerName(username);
             this.router.navigate(['profile/initial-setup/personal-info']);
           } else {
             this.error = response.error;
