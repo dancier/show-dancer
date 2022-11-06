@@ -15,6 +15,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer/footer.component';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
+import { ModernLayoutComponent } from './layout/modern-layout/modern-layout.component';
+import { NarrowPageComponent } from './layout/narrow-page/narrow-page.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { ExtendedModule, FlexModule } from '@angular/flex-layout';
     DefaultLayoutComponent,
     NavigationComponent,
     FooterComponent,
+    ModernLayoutComponent,
+    NarrowPageComponent,
   ],
   imports: [
     // Angular

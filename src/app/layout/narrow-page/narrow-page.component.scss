@@ -1,0 +1,11 @@
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  margin-bottom: 32px;
+
+  .page-content {
+    margin: 16px;
+    max-width: 550px;
+  }
+}

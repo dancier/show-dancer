@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.alert-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 16px;
+  font-family: Dosis;
+  font-size: 16px;
+
+  gap: 16px;
+
+  &.warning {
+    box-shadow: inset 8px 0 0px hsla(33, 100%, 45%, 0.12);
+    border-color: hsl(33, 100%, 45%);
+    color: hsl(33, 100%, 45%);
+  }
+}
