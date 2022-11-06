@@ -36,6 +36,16 @@ export class NewPasswordComponent {
     private router: Router
   ) {}
 
+  public errorHandling(controlName: string, error: string): boolean {
+    //@ts-ignore
+    const control = this.newPasswordForm.controls[controlName];
+    if (control === undefined) {
+      console.error('unknown control name', controlName);
+      return false;
+    }
+    return control.hasError(error);
+  }
+
   submitForm(): void {
     if (this.newPasswordForm.valid) {
       const { password } = this.newPasswordForm.value;
