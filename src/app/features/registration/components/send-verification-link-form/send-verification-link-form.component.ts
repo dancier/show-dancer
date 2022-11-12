@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { APIError, APIResponse } from '@shared/http/response.types';
 import { LinkType } from '@features/registration/registration.types';
 import { EMPTY, Observable } from 'rxjs';
+import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 
 @Component({
   selector: 'app-send-verification-link-form',
@@ -22,12 +23,15 @@ export class SendVerificationLinkFormComponent implements OnInit {
   verificationForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
   });
+  isCaptchaSolved = false;
+  captchaError = false;
 
   constructor(
     private fb: NonNullableFormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public authStorageService: AuthStorageService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +47,18 @@ export class SendVerificationLinkFormComponent implements OnInit {
       this.linkType === 'PASSWORD_RESET'
         ? (email) => this.authenticationService.requestPasswordChange({ email })
         : () => EMPTY;
+  }
+
+  captchaResolved(captchaToken: string): void {
+    this.authenticationService
+      .loginAsHuman(captchaToken)
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.isCaptchaSolved = true;
+        } else {
+          this.captchaError = true;
+        }
+      });
   }
 
   submitForm(): void {

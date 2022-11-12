@@ -170,7 +170,10 @@ export class AuthenticationService {
       .get<void>(`${this.baseUrl}/logout`, this.defaultOptions)
       .pipe(
         map(asSuccess),
-        tap((_) => this.authStorageService.setLoginState(false)),
+        tap((_) => {
+          this.authStorageService.setLoginState(false);
+          this.authStorageService.setHumanState(false);
+        }),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             default:

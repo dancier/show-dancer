@@ -11,7 +11,6 @@ describe('SendVerificationLinkFormComponent', () => {
     component: SendVerificationLinkFormComponent,
     imports: [MatCardModule, MatFormFieldModule, MatInputModule],
   });
-  SendVerificationLinkFormComponent;
 
   beforeEach(() => (spectator = createComponent()));
 
