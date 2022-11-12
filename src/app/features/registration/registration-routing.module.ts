@@ -7,6 +7,7 @@ import { VerifyAccountComponent } from '@features/registration/components/verify
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetPasswordEmailVerificationComponent } from './components/reset-password-email-verification/reset-password-email-verification.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
+import { PasswordChangedComponent } from './components/password-changed/password-changed.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
+  },
+  {
+    path: 'reset-password-success',
+    component: PasswordChangedComponent,
   },
   {
     path: 'reset-password/:code',
