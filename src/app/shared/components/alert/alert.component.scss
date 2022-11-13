@@ -18,4 +18,10 @@
     border-color: hsl(33, 100%, 45%);
     color: hsl(33, 100%, 45%);
   }
+
+  &.error {
+    box-shadow: inset 8px 0 0px hsla(0, 100%, 45%, 0.12);
+    border-color: hsl(0, 100%, 45%);
+    color: hsl(0, 100%, 45%);
+  }
 }

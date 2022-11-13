@@ -54,6 +54,7 @@ export type PersonalData = {
   gender: Gender;
   birthDate: string;
   zipCode: string;
+  city: string;
 };
 
 export type Profile = PersonalData & {
@@ -63,7 +64,6 @@ export type Profile = PersonalData & {
   ableTo: Dance[];
   wantsTo: Dance[];
   email: string;
-  city: string;
   country: string;
   profileImageHash: string;
   [key: string]: any;

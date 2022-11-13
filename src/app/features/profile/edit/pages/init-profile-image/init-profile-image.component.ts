@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { ImageUploadService } from '@features/profile/services/image-upload.service';
+import { ImageUploadService } from '../../../services/image-upload.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { ProfileService } from '../../services/profile.service';
+import { ProfileService } from '../../../services/profile.service';
 import { APIResponse } from '@shared/http/response.types';
-import { UploadedImageDao } from '../../types/profile.types';
+import { UploadedImageDao } from '../../../types/profile.types';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-edit-profile-image',
-  templateUrl: './edit-profile-image.component.html',
-  styleUrls: ['./edit-profile-image.component.scss'],
+  selector: 'app-init-profile-image',
+  templateUrl: './init-profile-image.component.html',
+  styleUrls: ['./init-profile-image.component.scss'],
 })
-export class EditProfileImageComponent {
+export class InitProfileImageComponent {
   croppedImage?: string | null | undefined;
   imageChangedEvent: any = '';
   uploadResonse?: APIResponse<UploadedImageDao>;

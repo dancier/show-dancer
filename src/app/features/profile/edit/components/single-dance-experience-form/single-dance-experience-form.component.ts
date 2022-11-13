@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormGroupDirective,
-  NonNullableFormBuilder,
-} from '@angular/forms';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';
-import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
-import { DanceLevel, DanceRole } from '../../types/profile.types';
+import { DanceForm } from '../../../view/dance-type/dance-form.type';
+import { DanceLevel, DanceRole } from '../../../types/profile.types';
 
 @Component({
-  selector: 'app-edit-dance-type',
-  templateUrl: './edit-dance-type.component.html',
-  styleUrls: ['./edit-dance-type.component.scss'],
+  selector: 'app-single-dance-experience-form',
+  templateUrl: './single-dance-experience-form.component.html',
+  styleUrls: ['./single-dance-experience-form.component.scss'],
 })
-export class EditDanceTypeComponent implements OnInit {
+export class SingleDanceExperienceFormComponent implements OnInit {
   danceForm!: FormGroup<DanceForm>;
 
   danceLevels: Record<DanceLevel, string> = {
@@ -36,10 +32,7 @@ export class EditDanceTypeComponent implements OnInit {
 
   filteredDanceTypeAutocompletions$!: Observable<string[]>;
 
-  constructor(
-    private fb: NonNullableFormBuilder,
-    private formGroupDirective: FormGroupDirective
-  ) {}
+  constructor(private formGroupDirective: FormGroupDirective) {}
 
   // Preserve original property order
   originalOrder = (

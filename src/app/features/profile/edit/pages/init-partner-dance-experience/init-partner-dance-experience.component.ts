@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfileService } from '@features/profile/services/profile.service';
+import { ProfileService } from '../../../services/profile.service';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DanceForm } from '@features/profile/components/dance-type/dance-form.type';
+import { DanceForm } from '../../../view/dance-type/dance-form.type';
 import {
   Dance,
   DanceLevel,
   DanceRole,
   DanceType,
-} from '@features/profile/types/profile.types';
+} from '../../../types/profile.types';
 import { APIError } from '@shared/http/response.types';
 
 @Component({
-  selector: 'app-edit-partner-able-to-dance',
-  templateUrl: './edit-partner-able-to-dance.component.html',
-  styleUrls: ['./edit-partner-able-to-dance.component.scss'],
+  selector: 'app-init-partner-dance-experience',
+  templateUrl: './init-partner-dance-experience.component.html',
+  styleUrls: ['./init-partner-dance-experience.component.scss'],
 })
-export class EditPartnerAbleToDanceComponent implements OnInit {
+export class InitPartnerDanceExperienceComponent implements OnInit {
   form = new FormGroup({
     dances: new FormArray<FormGroup<DanceForm>>([]),
   });

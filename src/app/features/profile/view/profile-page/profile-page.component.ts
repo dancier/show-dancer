@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProfileService } from '@features/profile/services/profile.service';
+import { ProfileService } from '../../services/profile.service';
 import { EnvironmentService } from '@core/common/environment.service';
 
 @Component({

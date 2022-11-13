@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileHttpService } from '@features/profile/services/profile-http.service';
-import { ProfileService } from '@features/profile/services/profile.service';
+import { ProfileHttpService } from '../../../services/profile-http.service';
+import { ProfileService } from '../../../services/profile.service';
 import {
   APIError,
   APIResponse,
@@ -10,18 +10,18 @@ import {
   ResponseError,
 } from '@shared/http/response.types';
 import { of, switchMap } from 'rxjs';
-import { NameAvailability } from '../../types/profile.types';
+import { NameAvailability } from '../../../types/profile.types';
 
 @Component({
-  selector: 'app-enter-user-name',
-  templateUrl: './enter-user-name.component.html',
-  styleUrls: ['./enter-user-name.component.scss'],
+  selector: 'app-init-user-name',
+  templateUrl: './init-user-name.component.html',
+  styleUrls: ['./init-user-name.component.scss'],
 })
-export class EnterUserNameComponent {
+export class InitUserNameComponent {
   usernameForm = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
   });
-  error?: APIError;
+  error?: APIError = 'NAME_ALREADY_EXISTS';
 
   constructor(
     public profileService: ProfileService,

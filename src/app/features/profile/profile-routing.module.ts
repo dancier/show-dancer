@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EnterUserNameComponent } from '@features/profile/pages/enter-user-name/enter-user-name.component';
+import { InitUserNameComponent } from './edit/pages/init-user-name/init-user-name.component';
 import { LoggedInGuard } from '@core/auth/guards/logged-in.guard';
-import { EditPersonalDataComponent } from '@features/profile/pages/edit-personal-data/edit-personal-data.component';
-import { ProfilePageComponent } from '@features/profile/pages/profile-page/profile-page.component';
-import { EditAbleToDanceComponent } from '@features/profile/pages/edit-able-to-dance/edit-able-to-dance.component';
-import { EditPartnerAbleToDanceComponent } from '@features/profile/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
-import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-image/edit-profile-image.component';
+import { InitPersonalDataComponent } from './edit/pages/init-personal-data/init-personal-data.component';
+import { ProfilePageComponent } from '@features/profile/view/profile-page/profile-page.component';
+import { InitDanceExperienceComponent } from './edit/pages/init-dance-experience/init-dance-experience.component';
+import { InitPartnerDanceExperienceComponent } from './edit/pages/init-partner-dance-experience/init-partner-dance-experience.component';
+import { InitProfileImageComponent } from './edit/pages/init-profile-image/init-profile-image.component';
 import { DancerProfileSufficientGuard } from './guards/dancer-profile-sufficient.guard';
 import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
 
@@ -24,23 +24,23 @@ export const routes: Routes = [
     children: [
       {
         path: 'username',
-        component: EnterUserNameComponent,
+        component: InitUserNameComponent,
       },
       {
         path: 'personal-info',
-        component: EditPersonalDataComponent,
+        component: InitPersonalDataComponent,
       },
       {
         path: 'dances-self',
-        component: EditAbleToDanceComponent,
+        component: InitDanceExperienceComponent,
       },
       {
         path: 'dances-partner',
-        component: EditPartnerAbleToDanceComponent,
+        component: InitPartnerDanceExperienceComponent,
       },
       {
         path: 'profile-image',
-        component: EditProfileImageComponent,
+        component: InitProfileImageComponent,
       },
       // Fallback when no prior routes are matched
       { path: '**', redirectTo: 'username', pathMatch: 'full' },

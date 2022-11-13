@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent {
-  @Input() alertType: 'warning' = 'warning';
+  @Input() alertType: 'warning' | 'error' = 'warning';
   @Input() icon = 'person';
 
   constructor() {}

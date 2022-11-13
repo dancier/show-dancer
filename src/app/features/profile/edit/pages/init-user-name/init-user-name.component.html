@@ -31,8 +31,11 @@
     Dein Benutzername kann später nicht mehr geändert werden.
   </app-alert>
 
-  <button mat-raised-button type="submit">Nächster Schritt</button>
-  <mat-error *ngIf="error">
+  <app-alert *ngIf="error" alertType="error" icon="error">
     <span> {{error | errorMessage}} </span>
-  </mat-error>
+  </app-alert>
+
+  <button class="big-button" color="primary" mat-flat-button type="submit">
+    Nächster Schritt
+  </button>
 </form>
