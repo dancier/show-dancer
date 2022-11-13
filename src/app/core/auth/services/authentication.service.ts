@@ -135,7 +135,7 @@ export class AuthenticationService {
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             case 400:
-              return of(asError('VALIDATION_ERROR'));
+              return of(asError('CODE_VALIDATION_ERROR'));
             default:
               return of(asError('SERVER_ERROR'));
           }
