@@ -9,7 +9,7 @@ export const errorMessages: Record<APIError, string> = {
   EMAIL_NOT_VALIDATED:
     'Die E-Mail Adresse wurde noch nicht verifiziert.\nBitte schaue in deinem E-Mail Postfach nach.',
   NOT_AVAILABLE: 'Der Benutzername ist leider schon vergeben.',
-  VALIDATION_ERROR: 'Bei der Validierung der Daten ist ein fehler aufgetreten',
+  VALIDATION_ERROR: 'Bei der Validierung der Daten ist ein Fehler aufgetreten',
   CODE_VALIDATION_ERROR:
     'Der von dir benutze Link ist nicht gültig, bitte fordere einen Neuen an.',
   NAME_ALREADY_EXISTS:
