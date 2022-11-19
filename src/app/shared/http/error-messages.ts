@@ -11,7 +11,7 @@ export const errorMessages: Record<APIError, string> = {
   NOT_AVAILABLE: 'Der Benutzername ist leider schon vergeben.',
   VALIDATION_ERROR: 'Bei der Validierung der Daten ist ein Fehler aufgetreten',
   CODE_VALIDATION_ERROR:
-    'Der von dir benutze Link ist nicht gültig, bitte fordere einen Neuen an.',
+    'Der von dir benutzte Link ist nicht gültig, bitte fordere einen neuen an.',
   NAME_ALREADY_EXISTS:
     'Es tut uns leid, der Benutzername ist bereits vergeben. Bitte wähle einen neuen Namen',
   NOT_A_HUMAN:
