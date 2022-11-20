@@ -1,57 +1,38 @@
 <form (ngSubmit)="submitForm()" [formGroup]="usernameForm" novalidate>
-  <div class="profile-edit-page-outer-container background-color-accent-A200">
-    <div class="profile-edit-page-inner-container container-radius">
-      <div class="verification-confirmation">
-        <h2 class="font-color-primary-800">Herzlichen Glückwunsch!</h2>
-        <h2>
-          Dein Konto is aktiviert! Vervollständig dein Profil in paar Schritten.
-        </h2>
-      </div>
-      <div class="profile-edit-form-container">
-        <h3>
-          Wie können wir dich nennen? Über den Benutzernamen können andere dich
-          finden.
-        </h3>
-        <label
-          >Achtung: Der Benutzername ist nicht mehr änderbar in der
-          Zukunft.</label
-        >
-        <mat-card-content class="card-content-container" fxLayout="column">
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Benutzername *</mat-label>
-            <input
-              data-test="username-field"
-              formControlName="username"
-              matInput
-              placeholder="(Wie nennen wir dich?)"
-              type="username"
-            />
-            <mat-error
-              *ngIf="hasUsernameFieldError('required')"
-              data-test="username-field-empty"
-            >
-              Bitte gib einen Benutzernamen ein.
-            </mat-error>
-            <mat-error
-              *ngIf="hasUsernameFieldError('minlength')"
-              data-test="username-field-empty"
-            >
-              Der Benutzername muss mindestens 3 Zeichen lang sein.
-            </mat-error>
-          </mat-form-field>
-          <br />
-          <button
-            class="font-color-primary-800"
-            mat-raised-button
-            type="submit"
-          >
-            Weiter
-          </button>
-          <mat-error *ngIf="error">
-            <span> {{error | errorMessage}} </span>
-          </mat-error>
-        </mat-card-content>
-      </div>
-    </div>
-  </div>
+  <h1>Willkommen bei Dancier!</h1>
+  <p class="no-margin">
+    Wie dürfen wir dich nennen? Gib deinen Benutzernamen unten ein.
+  </p>
+
+  <mat-form-field appearance="standard" class="full-width">
+    <mat-label>Benutzername</mat-label>
+    <input
+      data-test="username-field"
+      formControlName="username"
+      matInput
+      type="username"
+    />
+    <mat-hint>Wird öffentlich angezeigt.</mat-hint>
+    <mat-error
+      *ngIf="hasUsernameFieldError('required')"
+      data-test="username-field-empty"
+    >
+      Bitte gib einen Benutzernamen ein.
+    </mat-error>
+    <mat-error
+      *ngIf="hasUsernameFieldError('minlength')"
+      data-test="username-field-empty"
+    >
+      Gib mindestens 3 Zeichen ein.
+    </mat-error>
+  </mat-form-field>
+
+  <app-alert alertType="warning" icon="warning">
+    Dein Benutzername kann später nicht mehr geändert werden.
+  </app-alert>
+
+  <button mat-raised-button type="submit">Nächster Schritt</button>
+  <mat-error *ngIf="error">
+    <span> {{error | errorMessage}} </span>
+  </mat-error>
 </form>

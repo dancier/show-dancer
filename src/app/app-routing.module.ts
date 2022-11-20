@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
+import { ModernLayoutComponent } from './layout/modern-layout/modern-layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DefaultLayoutComponent,
+    component: ModernLayoutComponent,
     children: [
       {
         path: 'registration',

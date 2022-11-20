@@ -1,27 +1,35 @@
-.profile-edit-page-outer-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+// TODO: apply typography styles globally
+
+:host {
+  display: block;
+  font-family: Dosis;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-.profile-edit-page-inner-container {
-  max-width: 800px;
-  padding: 32px;
-  background-color: white;
+h1 {
+  margin-bottom: 32px;
 }
 
-.profile-edit-form-container {
-  h3 {
-    margin-top: 32px;
-  }
+p {
+  margin-bottom: 16px;
+  font-size: 20px;
+  line-height: 1.35;
 
-  label {
-    display: block;
-    margin-bottom: 16px;
+  &.no-margin {
+    margin-bottom: 0;
   }
+}
 
-  button {
-    margin-top: 32px;
-  }
+.mat-form-field {
+  margin-bottom: 24px;
+  width: 250px;
+}
+
+app-alert {
+  margin-bottom: 32px;
+}
+
+button {
+  float: right;
 }

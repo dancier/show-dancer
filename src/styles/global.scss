@@ -1,11 +1,84 @@
 @import 'responsive.scss';
 
+/* dosis-regular - latin */
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/dosis-v27-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+    url('../assets/fonts/dosis-v27-latin-regular.eot?#iefix')
+      format('embedded-opentype'),
+    /* IE6-IE8 */ url('../assets/fonts/dosis-v27-latin-regular.woff2')
+      format('woff2'),
+    /* Super Modern Browsers */
+      url('../assets/fonts/dosis-v27-latin-regular.woff') format('woff'),
+    /* Modern Browsers */ url('../assets/fonts/dosis-v27-latin-regular.ttf')
+      format('truetype'),
+    /* Safari, Android, iOS */
+      url('../assets/fonts/dosis-v27-latin-regular.svg#Dosis') format('svg'); /* Legacy iOS */
+}
+/* dosis-500 - latin */
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../assets/fonts/dosis-v27-latin-500.eot'); /* IE9 Compat Modes */
+  src: local(''),
+    url('../assets/fonts/dosis-v27-latin-500.eot?#iefix')
+      format('embedded-opentype'),
+    /* IE6-IE8 */ url('../assets/fonts/dosis-v27-latin-500.woff2')
+      format('woff2'),
+    /* Super Modern Browsers */ url('../assets/fonts/dosis-v27-latin-500.woff')
+      format('woff'),
+    /* Modern Browsers */ url('../assets/fonts/dosis-v27-latin-500.ttf')
+      format('truetype'),
+    /* Safari, Android, iOS */
+      url('../assets/fonts/dosis-v27-latin-500.svg#Dosis') format('svg'); /* Legacy iOS */
+}
+/* dosis-600 - latin */
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../assets/fonts/dosis-v27-latin-600.eot'); /* IE9 Compat Modes */
+  src: local(''),
+    url('../assets/fonts/dosis-v27-latin-600.eot?#iefix')
+      format('embedded-opentype'),
+    /* IE6-IE8 */ url('../assets/fonts/dosis-v27-latin-600.woff2')
+      format('woff2'),
+    /* Super Modern Browsers */ url('../assets/fonts/dosis-v27-latin-600.woff')
+      format('woff'),
+    /* Modern Browsers */ url('../assets/fonts/dosis-v27-latin-600.ttf')
+      format('truetype'),
+    /* Safari, Android, iOS */
+      url('../assets/fonts/dosis-v27-latin-600.svg#Dosis') format('svg'); /* Legacy iOS */
+}
+/* dosis-700 - latin */
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/dosis-v27-latin-700.eot'); /* IE9 Compat Modes */
+  src: local(''),
+    url('../assets/fonts/dosis-v27-latin-700.eot?#iefix')
+      format('embedded-opentype'),
+    /* IE6-IE8 */ url('../assets/fonts/dosis-v27-latin-700.woff2')
+      format('woff2'),
+    /* Super Modern Browsers */ url('../assets/fonts/dosis-v27-latin-700.woff')
+      format('woff'),
+    /* Modern Browsers */ url('../assets/fonts/dosis-v27-latin-700.ttf')
+      format('truetype'),
+    /* Safari, Android, iOS */
+      url('../assets/fonts/dosis-v27-latin-700.svg#Dosis') format('svg'); /* Legacy iOS */
+}
+
 html,
 body {
   background-color: map-get($dancier-palette-accent, A200);
 
   // Free image from pixabay.com christmas-decoration-holiday-xmas-2908901
-  //background-image: url("../assets/img/backgrounds/light-background.jpg");
+  //background-image: url("../../assets/img/backgrounds/light-background.jpg");
 
   scroll-behavior: smooth;
 
@@ -84,8 +157,8 @@ a {
 }
 
 .content-page-container {
-  background-color: white;
   width: min(100vw, 900px);
+  background-color: white;
 
   @include screen('xs') {
   }
@@ -150,8 +223,8 @@ a {
 }
 
 .profile-edit-page-inner-container {
-  background-color: white;
   height: 100%;
+  background-color: white;
 }
 
 .description-section {

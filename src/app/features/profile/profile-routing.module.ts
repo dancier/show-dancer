@@ -8,6 +8,7 @@ import { EditAbleToDanceComponent } from '@features/profile/pages/edit-able-to-d
 import { EditPartnerAbleToDanceComponent } from '@features/profile/pages/edit-partner-able-to-dance/edit-partner-able-to-dance.component';
 import { EditProfileImageComponent } from '@features/profile/pages/edit-profile-image/edit-profile-image.component';
 import { DancerProfileSufficientGuard } from './guards/dancer-profile-sufficient.guard';
+import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
   },
   {
     path: 'initial-setup',
+    component: NarrowPageComponent,
     canActivate: [LoggedInGuard],
     canActivateChild: [],
     children: [
