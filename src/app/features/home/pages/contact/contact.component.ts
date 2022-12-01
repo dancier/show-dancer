@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 import { AuthenticationService } from '@core/auth/services/authentication.service';
-import { Router } from '@angular/router';
 import { EventLogService } from '@core/logging/event-log.service';
 import { ContactService } from '../../services/contact.service';
 import { tap } from 'rxjs';
@@ -26,7 +25,6 @@ export class ContactComponent implements OnInit {
     private contactService: ContactService,
     public authStorageService: AuthStorageService,
     private authenticationService: AuthenticationService,
-    private router: Router,
     private eventLogService: EventLogService
   ) {}
 

@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import {
   LoginRequest,
+  PasswordChangeRequest,
   UserRegistration,
 } from '@core/auth/authentication.types';
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
@@ -97,6 +98,51 @@ export class AuthenticationService {
       );
   }
 
+  requestPasswordChange(
+    passwordChangeRequest: PasswordChangeRequest
+  ): Observable<APIResponse<void>> {
+    return this.http
+      .post<void>(
+        `${this.baseUrl}/password-changes`,
+        passwordChangeRequest,
+        this.defaultOptions
+      )
+      .pipe(
+        map(asSuccess),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            case 400:
+              return of(asError('VALIDATION_ERROR'));
+            default:
+              return of(asError('SERVER_ERROR'));
+          }
+        })
+      );
+  }
+
+  changePassword(
+    validationCode: string,
+    password: string
+  ): Observable<APIResponse<void>> {
+    return this.http
+      .put<void>(
+        `${this.baseUrl}/password-changes/${validationCode}`,
+        { password },
+        this.defaultOptions
+      )
+      .pipe(
+        map(asSuccess),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            case 400:
+              return of(asError('CODE_VALIDATION_ERROR'));
+            default:
+              return of(asError('SERVER_ERROR'));
+          }
+        })
+      );
+  }
+
   verifyAccount(validationCode: string): Observable<APIResponse<void>> {
     return this.http
       .put<void>(
@@ -124,7 +170,10 @@ export class AuthenticationService {
       .get<void>(`${this.baseUrl}/logout`, this.defaultOptions)
       .pipe(
         map(asSuccess),
-        tap((_) => this.authStorageService.setLoginState(false)),
+        tap((_) => {
+          this.authStorageService.setLoginState(false);
+          this.authStorageService.setHumanState(false);
+        }),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             default:
