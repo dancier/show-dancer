@@ -1,0 +1,41 @@
+<form novalidate (ngSubmit)="submitForm()" [formGroup]="verificationForm">
+  <ng-container *ngIf="authStorageService.authData$ | async as authData">
+    <mat-card-content class="login-form-container" fxLayout="column">
+      <mat-form-field appearance="fill" class="full-width" fxFlex>
+        <mat-label>E-Mail</mat-label>
+        <input
+          data-test="email-field"
+          formControlName="email"
+          matInput
+          placeholder="max.mustermann@beispiel.de"
+          type="email"
+        />
+        <mat-error data-test="email-error-empty">
+          Bitte geben Sie Ihre E-Mail Adresse an.
+        </mat-error>
+        <mat-error data-test="email-error-format">
+          Bitte geben Sie eine gültige E-Mail Adresse an.
+        </mat-error>
+      </mat-form-field>
+      <ng-container *ngIf="!authData.isHuman || isCaptchaSolved">
+        <div class="captcha">
+          <re-captcha
+            (resolved)="captchaResolved($event)"
+            siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"
+          ></re-captcha>
+        </div>
+      </ng-container>
+      <mat-error *ngIf="captchaError">
+        Es ist ein Fehler aufgetreten, bitte versuche es später erneut.
+      </mat-error>
+      <button
+        [disabled]="!verificationForm.valid"
+        class="full-width background-color-500"
+        data-test="submit-verification"
+        mat-raised-button
+      >
+        {{submitButtonText}}
+      </button>
+    </mat-card-content>
+  </ng-container>
+</form>
