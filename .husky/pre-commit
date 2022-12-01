@@ -7,6 +7,6 @@ npx eslint src --fix --cache --max-warnings 0
 echo "ESLint complete."
 
 # Run Prettier on all staged files
-echo "Running Prettier on staged files..."
-npx pretty-quick --staged
-echo "Prettier complete."
+# echo "Running Prettier on staged files..."
+# npx pretty-quick --staged
+# echo "Prettier complete."
