@@ -1,42 +1,47 @@
-<div
-  *ngIf="profileService.profile$ | async as profile"
-  class="profile-page-outer-container background-color-900"
->
-  <div
-    [style.background-image]="'url(' + environmentService.getApiUrl() + '/images/' + profile.profileImageHash + '.png)'"
-    class="profile-title-container"
-    ngStyle.gt-xs="border-radius: 16px"
-  >
-    <div class="profile-name-container">
-      <h1>{{profile.dancerName}}</h1>
-      <span class="age">{{profile.birthDate | age}}</span>
-      <span class="dance-key-words">Tango, Standard</span>
+<div *ngIf="profileService.profile$ | async as profile" class="profile">
+  <div class="profile-header">
+    <div class="profile-image">
+      <img
+        [src]="environmentService.getApiUrl() + '/images/' + profile.profileImageHash + '/150.png'"
+        alt="Profile Image"
+      />
+    </div>
+    <div class="profile-info">
+      <h1 class="profile-name">
+        {{profile.dancerName}}, {{profile.birthDate | age}}
+      </h1>
+      <div class="profile-location">
+        <!--  TODO: Location Icon -->
+        Dortmund
+      </div>
+      <div class="profile-header-info">
+        <div>{{profile.gender | displayGender}}</div>
+        <div>•</div>
+        <div>{{profile.size}}cm groß</div>
+      </div>
     </div>
   </div>
-  <mat-tab-group class="dance-details" mat-align-tabs="center">
-    <mat-tab label="Ich tanze">
-      <div class="dance-types-container" fxLayout.xs="column">
-        <app-dance-type
-          *ngFor="let preference of profile.ableTo"
-          [danceLevel]="(preference.level!)"
-          [danceTypeName]="(preference.dance!)"
-          [role]="(preference.leading!)"
-        ></app-dance-type>
+
+  <h2>Tanzerfahrung</h2>
+  <div class="dance-experience">
+    <div
+      *ngFor="let danceExperience of profile.ableTo"
+      class="dance-experience-item"
+    >
+      <div class="dance-title">{{danceExperience.dance}}</div>
+      <div class="dance-info">
+        {{danceExperience.level | displayDanceLevel}}, {{danceExperience.leading
+        | displayDanceRole}}
       </div>
-    </mat-tab>
-    <mat-tab label="Ich suche">
-      <div class="dance-types-container" fxLayout.xs="column">
-        <app-dance-type
-          *ngFor="let preference of profile.wantsTo"
-          [danceLevel]="(preference.level!)"
-          [danceTypeName]="(preference.dance!)"
-          [role]="(preference.leading!)"
-        ></app-dance-type>
-      </div>
-    </mat-tab>
-    <mat-tab label="Persönliche Daten">
-      <app-personal-data [profile]="profile" class="personal-data-container">
-      </app-personal-data>
-    </mat-tab>
-  </mat-tab-group>
+    </div>
+  </div>
+
+  <button
+    (click)="editProfile()"
+    class="big-button"
+    color="primary"
+    mat-flat-button
+  >
+    Profil bearbeiten
+  </button>
 </div>

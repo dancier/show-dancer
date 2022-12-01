@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { ProfileService } from '../../services/profile.service';
-import { EnvironmentService } from '@core/common/environment.service';
+import { Component } from "@angular/core";
+import { ProfileService } from "../../common/services/profile.service";
+import { EnvironmentService } from "@core/common/environment.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-profile-page',
@@ -10,6 +11,11 @@ import { EnvironmentService } from '@core/common/environment.service';
 export class ProfilePageComponent {
   constructor(
     public profileService: ProfileService,
-    public environmentService: EnvironmentService
+    public environmentService: EnvironmentService,
+    private router: Router
   ) {}
+
+  editProfile(): void {
+    this.router.navigate(['profile', 'edit']);
+  }
 }

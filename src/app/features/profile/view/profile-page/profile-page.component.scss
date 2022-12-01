@@ -1,55 +1,62 @@
-.profile-title-container {
+.profile-header {
   display: flex;
-  margin: 0 auto;
-  width: 400px;
-  height: 400px;
-  max-height: 375px;
-  background-image: url('src/assets/img/sample-profile-picture.jpeg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
 
-.personal-data-container {
-  display: flex;
-  justify-content: center;
-  background-color: #f2f2f2;
-}
-
-.dance-types-container {
-  display: flex;
-  justify-content: center;
-}
-
-.dance-details {
-  position: relative;
-  top: -30px;
-  flex: 1 0 100%;
-  border-radius: 30px 30px 0 0;
-  background-color: white;
-}
-
-.profile-name-container {
-  align-self: flex-end;
-  margin-bottom: 45px;
-  width: 100%;
-  padding: 12px 0 12px 30px;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
+  @media (min-width: 550px) {
+    flex-direction: row;
+    gap: 32px;
+  }
 
   h1 {
-    display: inline-block;
-    font-size: 2.3em;
-    font-weight: bolder;
+    margin-bottom: 0;
   }
 
-  .age {
-    display: inline-block;
-    margin-left: 16px;
-    font-size: 2em;
+  .profile-location {
+    font-weight: 500;
+    color: #666;
   }
 
-  .dance-key-words {
-    display: block;
-    font-size: 1.5em;
+  .profile-header-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+
+    font-weight: 500;
+    color: #666;
+  }
+
+  img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 400;
+  color: #b40720;
+}
+
+.dance-experience {
+  margin-top: 32px;
+  margin-bottom: 32px;
+
+  .dance-experience-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+
+    .dance-title {
+      font-size: 24px;
+    }
+
+    .dance-info {
+    }
   }
 }
