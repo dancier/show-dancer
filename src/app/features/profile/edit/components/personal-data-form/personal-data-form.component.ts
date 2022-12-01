@@ -1,13 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, FormGroupDirective, NonNullableFormBuilder, Validators } from "@angular/forms";
-import { Gender, genderList } from "../../../common/types/profile.types";
-import { CityLookupValidator } from "../../../common/validators/city-lookup.validator";
-import { ProfileService } from "../../../common/services/profile.service";
-import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { map } from "rxjs/operators";
-import { distinctUntilChanged, of, switchMap } from "rxjs";
-import { parse } from "date-fns";
-import { PersonalDataForm } from "./personal-data-form.types";
+import { Component, OnInit } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
+import { Gender, genderList } from '../../../common/types/profile.types';
+import { CityLookupValidator } from '../../../common/validators/city-lookup.validator';
+import { ProfileService } from '../../../common/services/profile.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { map } from 'rxjs/operators';
+import { distinctUntilChanged, of, switchMap } from 'rxjs';
+import { parse } from 'date-fns';
+import { PersonalDataForm } from './personal-data-form.types';
 
 const zipFormat = /\d{5}/g;
 

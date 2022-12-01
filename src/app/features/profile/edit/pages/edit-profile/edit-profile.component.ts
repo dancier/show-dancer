@@ -1,12 +1,12 @@
-import { Component } from "@angular/core";
-import { FormGroup, NonNullableFormBuilder } from "@angular/forms";
-import { APIError } from "@shared/http/response.types";
-import { ProfileService } from "../../../common/services/profile.service";
-import { Profile } from "../../../common/types/profile.types";
-import { Router } from "@angular/router";
-import { format } from "date-fns";
-import { PersonalDataForm } from "../../components/personal-data-form/personal-data-form.types";
-import { de } from "date-fns/locale";
+import { Component } from '@angular/core';
+import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
+import { APIError } from '@shared/http/response.types';
+import { ProfileService } from '../../../common/services/profile.service';
+import { Profile } from '../../../common/types/profile.types';
+import { Router } from '@angular/router';
+import { format } from 'date-fns';
+import { PersonalDataForm } from '../../components/personal-data-form/personal-data-form.types';
+import { de } from 'date-fns/locale';
 
 @Component({
   selector: 'app-edit-profile',

@@ -1,10 +1,10 @@
-import { Component } from "@angular/core";
-import { ImageUploadService } from "../../../common/services/image-upload.service";
-import { ImageCroppedEvent } from "ngx-image-cropper";
-import { ProfileService } from "../../../common/services/profile.service";
-import { APIResponse } from "@shared/http/response.types";
-import { UploadedImageDao } from "../../../common/types/profile.types";
-import { Router } from "@angular/router";
+import { Component } from '@angular/core';
+import { ImageUploadService } from '../../../common/services/image-upload.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ProfileService } from '../../../common/services/profile.service';
+import { APIResponse } from '@shared/http/response.types';
+import { UploadedImageDao } from '../../../common/types/profile.types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-init-profile-image',

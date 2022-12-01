@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { DanceRole } from "../../common/types/profile.types";
+import { Pipe, PipeTransform } from '@angular/core';
+import { DanceRole } from '../../common/types/profile.types';
 
 @Pipe({
   name: 'displayDanceRole',

@@ -1,8 +1,14 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
-import { Observable, take } from "rxjs";
-import { ProfileService } from "../services/profile.service";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateChild,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
+import { Observable, take } from 'rxjs';
+import { ProfileService } from '../services/profile.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',

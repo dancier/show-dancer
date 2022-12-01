@@ -1,8 +1,13 @@
-import { Injectable } from "@angular/core";
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
-import { Gender, PersonalData } from "../../common/types/profile.types";
-import { CityLookupValidator } from "../../common/validators/city-lookup.validator";
-import { ProfileService } from "../../common/services/profile.service";
+import { Injectable } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
+import { Gender, PersonalData } from '../../common/types/profile.types';
+import { CityLookupValidator } from '../../common/validators/city-lookup.validator';
+import { ProfileService } from '../../common/services/profile.service';
 
 const zipFormat = /\d{5}/g;
 const sizeFormat = /\d{3}/g;

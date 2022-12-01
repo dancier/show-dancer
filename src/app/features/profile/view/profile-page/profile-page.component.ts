@@ -1,7 +1,7 @@
-import { Component } from "@angular/core";
-import { ProfileService } from "../../common/services/profile.service";
-import { EnvironmentService } from "@core/common/environment.service";
-import { Router } from "@angular/router";
+import { Component } from '@angular/core';
+import { ProfileService } from '../../common/services/profile.service';
+import { EnvironmentService } from '@core/common/environment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',

@@ -1,8 +1,8 @@
-import { Component } from "@angular/core";
-import { APIError } from "@shared/http/response.types";
-import { FormGroup } from "@angular/forms";
-import { Dance } from "../../../common/types/profile.types";
-import { SimpleModelForm } from "@shared/types/forms.types";
+import { Component } from '@angular/core';
+import { APIError } from '@shared/http/response.types';
+import { FormGroup } from '@angular/forms';
+import { Dance } from '../../../common/types/profile.types';
+import { SimpleModelForm } from '@shared/types/forms.types';
 
 @Component({
   selector: 'app-dance-experience-form',
