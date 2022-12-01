@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormGroupDirective,
-  NonNullableFormBuilder,
-  Validators,
-} from '@angular/forms';
-import { Gender, genderList, PersonalData } from '../../../types/profile.types';
-import { CityLookupValidator } from '../../../validators/city-lookup.validator';
-import { ProfileService } from '../../../services/profile.service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { map } from 'rxjs/operators';
-import { distinctUntilChanged, of, switchMap } from 'rxjs';
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, FormGroupDirective, NonNullableFormBuilder, Validators } from "@angular/forms";
+import { Gender, genderList } from "../../../common/types/profile.types";
+import { CityLookupValidator } from "../../../common/validators/city-lookup.validator";
+import { ProfileService } from "../../../common/services/profile.service";
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+import { map } from "rxjs/operators";
+import { distinctUntilChanged, of, switchMap } from "rxjs";
+import { parse } from "date-fns";
+import { PersonalDataForm } from "./personal-data-form.types";
 
 const zipFormat = /\d{5}/g;
-const sizeFormat = /\d{3}/g;
 
 @UntilDestroy()
 @Component({
@@ -23,7 +18,7 @@ const sizeFormat = /\d{3}/g;
   styleUrls: ['./personal-data-form.component.scss'],
 })
 export class PersonalDataFormComponent implements OnInit {
-  personalDataForm!: FormGroup<Record<keyof PersonalData, FormControl<any>>>;
+  personalDataForm!: FormGroup<PersonalDataForm>;
 
   genderList = genderList;
   minDate: Date;
@@ -43,6 +38,7 @@ export class PersonalDataFormComponent implements OnInit {
   ngOnInit(): void {
     this.personalDataForm = this.formGroupDirective.form;
     // set floatLabel to always for this form group
+    // TODO: is this string or Date
     this.personalDataForm.addControl(
       'birthDate',
       new FormControl<Date | null>(null, [Validators.required])
@@ -72,9 +68,22 @@ export class PersonalDataFormComponent implements OnInit {
       'size',
       new FormControl<number | null>(null, [
         Validators.required,
-        Validators.pattern(sizeFormat),
+        Validators.min(80),
+        Validators.max(250),
       ])
     );
+
+    this.profileService.profile$
+      .pipe(untilDestroyed(this))
+      .subscribe((profile) => {
+        this.personalDataForm.patchValue({
+          birthDate: parse(profile?.birthDate, 'yyyy-MM-dd', new Date()),
+          zipCode: profile?.zipCode,
+          city: profile?.city,
+          gender: profile?.gender,
+          size: profile?.size,
+        });
+      });
 
     this.personalDataForm.valueChanges
       .pipe(

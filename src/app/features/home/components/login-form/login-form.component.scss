@@ -1,15 +1,15 @@
 .login-form-container {
   padding: 12px;
 
+  button {
+    margin-top: 18px;
+  }
+
   button:enabled {
     color: white;
   }
 
   button:disabled {
     color: #bf2c41;
-  }
-
-  button {
-    margin-top: 18px;
   }
 }

@@ -1,12 +1,8 @@
-import { isNonNull } from '@core/common/rxjs.utils';
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  ValidationErrors,
-} from '@angular/forms';
-import { ProfileService } from '../services/profile.service';
-import { distinctUntilChanged, filter, Observable, of, switchMap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { isNonNull } from "@core/common/rxjs.utils";
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from "@angular/forms";
+import { ProfileService } from "../services/profile.service";
+import { distinctUntilChanged, filter, Observable, of, switchMap } from "rxjs";
+import { map } from "rxjs/operators";
 
 export class CityLookupValidator {
   static createValidator(profileService: ProfileService): AsyncValidatorFn {

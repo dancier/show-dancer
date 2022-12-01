@@ -1,9 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, shareReplay } from 'rxjs';
-import { EnvironmentService } from '@core/common/environment.service';
-import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
-import { Location, NameAvailability, Profile } from '../types/profile.types';
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { catchError, map, Observable, of, shareReplay } from "rxjs";
+import { EnvironmentService } from "@core/common/environment.service";
+import { APIResponse, asError, asSuccess } from "@shared/http/response.types";
+import { Location, NameAvailability, Profile } from "../types/profile.types";
 
 @Injectable({
   providedIn: 'root',

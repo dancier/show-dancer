@@ -3,14 +3,14 @@
 
   <div class="form-info">
     <p>
-      Um dir passende Tanzparner vorschlagen zu können, benötigen wir noch ein
+      Um dir passende Tanzpartner vorschlagen zu können, benötigen wir noch ein
       paar Angaben von dir.
     </p>
     <p>Die Angaben erscheinen später in deinem Profil.</p>
   </div>
 
   <app-personal-data-form
-    [formGroup]="personalDataForm.controls.personalData"
+    [formGroup]="personalDataForm"
   ></app-personal-data-form>
 
   <mat-error *ngIf="error">

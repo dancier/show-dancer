@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { KeyValue } from '@angular/common';
-import { DanceForm } from '../../../view/dance-type/dance-form.type';
-import { DanceLevel, DanceRole } from '../../../types/profile.types';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormGroupDirective } from "@angular/forms";
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
+import { KeyValue } from "@angular/common";
+import { DanceForm } from "../dance-form.type";
+import { DanceLevel, DanceRole } from "../../../../common/types/profile.types";
 
 @Component({
-  selector: 'app-single-dance-experience-form',
-  templateUrl: './single-dance-experience-form.component.html',
-  styleUrls: ['./single-dance-experience-form.component.scss'],
+  selector: 'app-dance-experience-entry',
+  templateUrl: './dance-experience-entry.component.html',
+  styleUrls: ['./dance-experience-entry.component.scss'],
 })
-export class SingleDanceExperienceFormComponent implements OnInit {
+export class DanceExperienceEntryComponent implements OnInit {
   danceForm!: FormGroup<DanceForm>;
 
   danceLevels: Record<DanceLevel, string> = {

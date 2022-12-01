@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, Observable, of } from 'rxjs';
-import { EnvironmentService } from '@core/common/environment.service';
-import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
-import { UploadedImageDao } from '../types/profile.types';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { catchError, map, Observable, of } from "rxjs";
+import { EnvironmentService } from "@core/common/environment.service";
+import { APIResponse, asError, asSuccess } from "@shared/http/response.types";
+import { UploadedImageDao } from "../types/profile.types";
 
 @Injectable({
   providedIn: 'root',

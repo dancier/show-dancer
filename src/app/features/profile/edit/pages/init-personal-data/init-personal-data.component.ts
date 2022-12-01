@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ProfileService } from '../../../services/profile.service';
-import { PersonalData } from '../../../types/profile.types';
-import { UntilDestroy } from '@ngneat/until-destroy';
-import { APIError } from '@shared/http/response.types';
+import { Component } from "@angular/core";
+import { FormGroup, NonNullableFormBuilder } from "@angular/forms";
+import { Router } from "@angular/router";
+import { ProfileService } from "../../../common/services/profile.service";
+import { PersonalData } from "../../../common/types/profile.types";
+import { UntilDestroy } from "@ngneat/until-destroy";
+import { APIError } from "@shared/http/response.types";
+import { format } from "date-fns";
+import { de } from "date-fns/locale";
+import { PersonalDataForm } from "../../components/personal-data-form/personal-data-form.types";
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
 
@@ -19,10 +22,8 @@ const sizeFormat = /\d{3}/g;
   templateUrl: './init-personal-data.component.html',
   styleUrls: ['./init-personal-data.component.scss'],
 })
-export class InitPersonalDataComponent implements OnInit {
-  personalDataForm = this.fb.group({
-    personalData: new FormGroup({}),
-  });
+export class InitPersonalDataComponent {
+  personalDataForm = new FormGroup<Partial<PersonalDataForm>>({});
 
   error?: APIError;
 
@@ -34,15 +35,13 @@ export class InitPersonalDataComponent implements OnInit {
 
   submitForm(): void {
     if (this.personalDataForm.valid) {
-      const formValues = this.personalDataForm.getRawValue()
-        .personalData as PersonalData;
+      const formValues = this.personalDataForm.getRawValue();
       this.profileService
         .setPersonalData({
           ...formValues,
-          // TODO: fix this thing
-          // birthDate: format(formValues.birthDate!, 'yyyy-MM-dd', {
-          //   locale: de,
-          // }),
+          birthDate: format(formValues.birthDate!, 'yyyy-MM-dd', {
+            locale: de,
+          }),
         } as PersonalData)
         .subscribe((response) => {
           if (response.isSuccess) {

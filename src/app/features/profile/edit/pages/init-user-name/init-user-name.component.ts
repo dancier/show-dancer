@@ -1,16 +1,11 @@
-import { Component } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ProfileHttpService } from '../../../services/profile-http.service';
-import { ProfileService } from '../../../services/profile.service';
-import {
-  APIError,
-  APIResponse,
-  asError,
-  ResponseError,
-} from '@shared/http/response.types';
-import { of, switchMap } from 'rxjs';
-import { NameAvailability } from '../../../types/profile.types';
+import { Component } from "@angular/core";
+import { NonNullableFormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { ProfileHttpService } from "../../../common/services/profile-http.service";
+import { ProfileService } from "../../../common/services/profile.service";
+import { APIError, APIResponse, asError, ResponseError } from "@shared/http/response.types";
+import { of, switchMap } from "rxjs";
+import { NameAvailability } from "../../../common/types/profile.types";
 
 @Component({
   selector: 'app-init-user-name',

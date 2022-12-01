@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ProfileService } from '../../../services/profile.service';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DanceForm } from '../../../view/dance-type/dance-form.type';
-import {
-  Dance,
-  DanceLevel,
-  DanceRole,
-  DanceType,
-} from '../../../types/profile.types';
-import { APIError } from '@shared/http/response.types';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { ProfileService } from "../../../common/services/profile.service";
+import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
+import { DanceForm } from "../../components/dance-experience-form/dance-form.type";
+import { Dance, DanceLevel, DanceRole, DanceType } from "../../../common/types/profile.types";
+import { APIError } from "@shared/http/response.types";
 
 @Component({
   selector: 'app-init-partner-dance-experience',

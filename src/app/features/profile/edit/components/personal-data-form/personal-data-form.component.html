@@ -39,7 +39,8 @@
     <span matSuffix>cm</span>
     <mat-error
       *ngIf="hasFieldError('size', 'required')
-          || hasFieldError('size', 'pattern')"
+          || hasFieldError('size', 'min')
+          || hasFieldError('size', 'max')"
       align="end"
     >
       Bitte gib eine gültige Körpergröße ein.
@@ -68,122 +69,4 @@
     <mat-label>Stadt</mat-label>
     <input data-test="city-field" formControlName="city" matInput type="text" />
   </mat-form-field>
-
-  <!--  <div-->
-  <!--    class="profile-edit-form-container"-->
-  <!--    fxLayout.gt-xs="row"-->
-  <!--    fxLayout.xs="column"-->
-  <!--  >-->
-  <!--    <div-->
-  <!--      class="description-section"-->
-  <!--      ngStyle.gt-sm="max-width: 300px;"-->
-  <!--      ngStyle.gt-xs="max-width: 256px;  border-right: 1px solid #8c020b;"-->
-  <!--      ngStyle.xs="margin-bottom: 16px"-->
-  <!--    >-->
-  <!--      <p>-->
-  <!--        Damit passende Tanzpartner automatisch zu dir empfohlen werden, werden-->
-  <!--        noch einige Daten benötigt.-->
-  <!--      </p>-->
-  <!--      <p>Im Moment unterstützen wir nur Benutzer aus Deutschland.</p>-->
-  <!--    </div>-->
-  <!--    <div class="form-section-container">-->
-  <!--      <mat-card-content class="card-content-container" fxLayout="column">-->
-  <!--        <div class="form-section" fxLayout="row">-->
-  <!--          <mat-icon class="form-icon">transgender</mat-icon>-->
-  <!--          <mat-form-field appearance="fill" class="full-width">-->
-  <!--            <mat-label>Geschlecht:</mat-label>-->
-  <!--            <mat-select data-test="gender-field" formControlName="gender">-->
-  <!--              <mat-option-->
-  <!--                *ngFor="let gender of genderList"-->
-  <!--                [value]="gender.type"-->
-  <!--              >-->
-  <!--                {{gender.description}}-->
-  <!--              </mat-option>-->
-  <!--            </mat-select>-->
-  <!--          </mat-form-field>-->
-  <!--        </div>-->
-  <!--        <div class="form-section" fxLayout="row">-->
-  <!--          <mat-icon class="form-icon">cake</mat-icon>-->
-  <!--          <mat-form-field appearance="fill" class="width-201">-->
-  <!--            <mat-label>Geburtsdatum:</mat-label>-->
-  <!--            <input-->
-  <!--              (click)="picker.open()"-->
-  <!--              [matDatepicker]="picker"-->
-  <!--              [max]="maxDate"-->
-  <!--              [min]="minDate"-->
-  <!--              [readonly]="true"-->
-  <!--              data-test="birthdate-field"-->
-  <!--              formControlName="birthDate"-->
-  <!--              matInput-->
-  <!--            />-->
-  <!--            <mat-datepicker-toggle-->
-  <!--              [for]="picker"-->
-  <!--              matSuffix-->
-  <!--            ></mat-datepicker-toggle>-->
-  <!--            <mat-datepicker #picker startView="multi-year"></mat-datepicker>-->
-  <!--            <mat-error *ngIf="hasFieldError('birthDate', 'required')">-->
-  <!--              Bitte gib ein gültiges Geburtsdatum ein.-->
-  <!--            </mat-error>-->
-  <!--          </mat-form-field>-->
-  <!--        </div>-->
-  <!--        <div class="form-section" fxLayout="row">-->
-  <!--          <mat-icon class="form-icon">accessibility</mat-icon>-->
-  <!--          <mat-form-field appearance="fill" class="full-width">-->
-  <!--            <mat-label>Körpergröße:</mat-label>-->
-  <!--            <input-->
-  <!--              data-test="size-field"-->
-  <!--              formControlName="size"-->
-  <!--              matInput-->
-  <!--              placeholder="(Deine Körpergröße in CM)"-->
-  <!--              type="number"-->
-  <!--            />-->
-  <!--            <span matSuffix>cm</span>-->
-  <!--            <mat-error-->
-  <!--              *ngIf="hasFieldError('size', 'required')-->
-  <!--                  || hasFieldError('size', 'pattern')"-->
-  <!--            >-->
-  <!--              Bitte gib eine gültige Körpergröße ein.-->
-  <!--            </mat-error>-->
-  <!--          </mat-form-field>-->
-  <!--        </div>-->
-  <!--        <div class="form-section" fxLayout="row">-->
-  <!--          <mat-icon class="form-icon">place</mat-icon>-->
-  <!--          <mat-form-field appearance="fill" class="full-width">-->
-  <!--            <mat-label>PLZ:</mat-label>-->
-  <!--            <input-->
-  <!--              data-test="zipCode-field"-->
-  <!--              formControlName="zipCode"-->
-  <!--              matInput-->
-  <!--              placeholder="(PLZ)"-->
-  <!--              type="text"-->
-  <!--            />-->
-  <!--            <mat-error-->
-  <!--              *ngIf="hasFieldError('zipCode', 'required')-->
-  <!--                  || hasFieldError('zipCode', 'pattern')-->
-  <!--                  || hasFieldError('zipCode', 'cityLookup')"-->
-  <!--            >-->
-  <!--              Bitte gib eine gültige Postleitzahl ein.-->
-  <!--            </mat-error>-->
-  <!--          </mat-form-field>-->
-  <!--        </div>-->
-
-  <!--        <div class="form-section" fxLayout="row">-->
-  <!--          <div class="city-land-container" fxLayout="row">-->
-  <!--            <mat-icon class="form-icon">location_city</mat-icon>-->
-  <!--            <div>-->
-  <!--              <label>Stadt: </label>-->
-  <!--              <span>{{personalDataForm.value.city || '(wird ermittelt)'}}</span>-->
-  <!--            </div>-->
-  <!--          </div>-->
-  <!--          <div class="city-land-container" fxLayout="row">-->
-  <!--            <mat-icon class="form-icon">map</mat-icon>-->
-  <!--            <div>-->
-  <!--              <label>Land: </label>-->
-  <!--              <span>Deutschland</span>-->
-  <!--            </div>-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--      </mat-card-content>-->
-  <!--    </div>-->
-  <!--  </div>-->
 </ng-container>

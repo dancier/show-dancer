@@ -24,13 +24,13 @@
         margin-bottom: 6px;
       }
 
-      .acceptTerms,
+      .accept-terms,
       .captcha {
         margin-bottom: 16px;
       }
 
       // workaround to wrap the label of a checkbox, see: https://github.com/angular/components/issues/8416
-      .acceptTerms {
+      .accept-terms {
         display: flex;
         column-gap: 8px;
       }

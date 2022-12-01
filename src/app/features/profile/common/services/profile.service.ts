@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { AuthStorageService } from '@core/auth/services/auth-storage.service';
-import { ProfileHttpService } from './profile-http.service';
-import { Dance, PersonalData, Profile } from '../types/profile.types';
-import { BehaviorSubject, filter, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { isNonNull } from '@core/common/rxjs.utils';
-import { APIResponse } from '@shared/http/response.types';
+import { Injectable } from "@angular/core";
+import { AuthStorageService } from "@core/auth/services/auth-storage.service";
+import { ProfileHttpService } from "./profile-http.service";
+import { Dance, PersonalData, Profile } from "../types/profile.types";
+import { BehaviorSubject, filter, Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { isNonNull } from "@core/common/rxjs.utils";
+import { APIResponse } from "@shared/http/response.types";
 
 @Injectable({
   providedIn: 'root',
@@ -63,6 +63,10 @@ export class ProfileService {
     return this._profile.value;
   }
 
+  setProfile(profile: Partial<Profile>): Observable<APIResponse<void>> {
+    return this.patchAndUpdateProfile(profile);
+  }
+
   setDancerName(dancerName: string): Observable<APIResponse<void>> {
     return this.patchAndUpdateProfile({ dancerName });
   }
@@ -102,8 +106,7 @@ export class ProfileService {
           !!profile.dancerName &&
           !!profile.birthDate &&
           profile.wantsTo.length > 0 &&
-          profile.ableTo.length > 0 &&
-          !!profile.profileImageHash;
+          profile.ableTo.length > 0;
         return isProfileSufficient;
       })
     );
