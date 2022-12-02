@@ -2,7 +2,19 @@
 
 <p>Hier kannst du dein Profil bearbeiten.</p>
 
-<app-personal-data-form [formGroup]="profileForm"></app-personal-data-form>
+<app-personal-data-form
+  [formGroup]="profileForm.controls.personalData"
+></app-personal-data-form>
+
+<h2>Eigene Tanzerfahrung</h2>
+
+<app-dance-experience-form [formGroup]="profileForm.controls.ownDances">
+</app-dance-experience-form>
+
+<h2>Tanzerfahrung des Partners</h2>
+
+<app-dance-experience-form [formGroup]="profileForm.controls.partnerDances">
+</app-dance-experience-form>
 
 <mat-error *ngIf="error">
   <span> {{error | errorMessage}} </span>

@@ -4,7 +4,7 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "module": "CommonJs",
-    "types": ["jest"]
+    "types": ["jest", "jest/expect"]
   },
   "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }

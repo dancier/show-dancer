@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { KeyValue } from '@angular/common';
-import { DanceForm } from '../dance-form.type';
-import { DanceLevel, DanceRole } from '../../../../common/types/profile.types';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormGroupDirective } from "@angular/forms";
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
+import { KeyValue } from "@angular/common";
+import { DanceExperienceEntryForm } from "../dance-form.type";
+import { DanceLevel, DanceRole } from "../../../../common/types/profile.types";
 
 @Component({
   selector: 'app-dance-experience-entry',
@@ -12,7 +12,7 @@ import { DanceLevel, DanceRole } from '../../../../common/types/profile.types';
   styleUrls: ['./dance-experience-entry.component.scss'],
 })
 export class DanceExperienceEntryComponent implements OnInit {
-  danceForm!: FormGroup<DanceForm>;
+  danceForm!: FormGroup<DanceExperienceEntryForm>;
 
   danceLevels: Record<DanceLevel, string> = {
     NO_EXPERIENCE: 'Keine',
@@ -61,7 +61,7 @@ export class DanceExperienceEntryComponent implements OnInit {
     this.filteredDanceTypeAutocompletions$ =
       this.danceForm.controls.dance.valueChanges.pipe(
         startWith(''),
-        map((formFieldValue) => this.filterAutocompletions(formFieldValue))
+        map((formFieldValue) => this.filterAutocompletions(formFieldValue!))
       );
   }
 
