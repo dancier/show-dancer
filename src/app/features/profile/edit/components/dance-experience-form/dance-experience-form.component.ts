@@ -67,9 +67,13 @@ export class DanceExperienceFormComponent implements OnInit {
         })
       )
       .subscribe((dances) => {
-        if (this.danceExperiences.at(0).value.dance === '') {
-          this.removeDance(0);
+        // remove initial empty control when there is existing data
+        if (dances.length > 0) {
+          this.danceExperiences = new FormArray<
+            FormGroup<DanceExperienceEntryForm>
+          >([]);
         }
+        // add control and patch value for each dance
         dances.forEach((dance) => {
           this.addDance();
           this.danceExperiences
