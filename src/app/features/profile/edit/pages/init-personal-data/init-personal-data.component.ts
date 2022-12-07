@@ -1,13 +1,13 @@
-import { Component } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
-import { ProfileService } from "../../../common/services/profile.service";
-import { PersonalData } from "../../../common/types/profile.types";
-import { UntilDestroy } from "@ngneat/until-destroy";
-import { APIError } from "@shared/http/response.types";
-import { format } from "date-fns";
-import { de } from "date-fns/locale";
-import { PersonalDataForm } from "../../components/personal-data-form/personal-data-form.types";
+import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ProfileService } from '../../../common/services/profile.service';
+import { PersonalData } from '../../../common/types/profile.types';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { APIError } from '@shared/http/response.types';
+import { format } from 'date-fns';
+import { de } from 'date-fns/locale';
+import { PersonalDataForm } from '../../components/personal-data-form/personal-data-form.types';
 
 type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
 

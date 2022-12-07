@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormGroupDirective } from "@angular/forms";
-import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
-import { KeyValue } from "@angular/common";
-import { DanceExperienceEntryForm } from "../dance-form.type";
-import { DanceLevel, DanceRole } from "../../../../common/types/profile.types";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { KeyValue } from '@angular/common';
+import { DanceExperienceEntryForm } from '../dance-form.type';
+import { DanceLevel, DanceRole } from '../../../../common/types/profile.types';
 
 @Component({
   selector: 'app-dance-experience-entry',
