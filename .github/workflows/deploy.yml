@@ -34,14 +34,11 @@ jobs:
 
       - run: npm run test
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_HUB_USER }}
-          password: ${{ secrets.DOCKER_HUB_PASS }}
+      - name: Login to the Docker registry
+        run: docker login --username ${{ secrets.DOCKER_HUB_USER }} --password ${{ secrets.DOCKER_HUB_PASS }}
 
-      - name: Build and push docker image
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          tags: dancier/show-dancer:latest
+      - name: Build the Docker image
+        run: docker build -t dancier/show-dancer:$(git rev-parse --short "$GITHUB_SHA") -t dancier/show-dancer:latest .
+
+      - name: Publish the Docker image on hub.docker.com
+        run: docker push -a dancier/show-dancer
