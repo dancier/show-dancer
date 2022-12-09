@@ -1,64 +1,54 @@
 <ng-container [formGroup]="danceForm">
-  <div class="full-width">
-    <mat-icon class="form-icon">audiotrack</mat-icon>
-    <mat-form-field appearance="fill">
-      <mat-label>Tanzart</mat-label>
-      <input
-        [matAutocomplete]="auto"
-        class="dance-type-input"
-        formControlName="dance"
-        matInput
-        placeholder="Tanzart"
-        type="text"
-      />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let danceType of filteredDanceTypeAutocompletions$ | async"
-          [value]="danceType"
-        >
-          {{danceType}}
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error *ngIf="hasFieldError('dance', 'required')">
-        Bitte wähle eine Tanzart aus.
-      </mat-error>
-    </mat-form-field>
-  </div>
+  <mat-form-field floatLabel="always">
+    <mat-label>Ich tanze</mat-label>
+    <input
+      [matAutocomplete]="auto"
+      class="dance-type-input"
+      formControlName="dance"
+      matInput
+      type="text"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let danceType of filteredDanceTypeAutocompletions$ | async"
+        [value]="danceType"
+      >
+        {{danceType}}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="hasFieldError('dance', 'required')">
+      Bitte wähle eine Tanzart aus.
+    </mat-error>
+  </mat-form-field>
 
-  <div class="full-width">
-    <mat-icon class="form-icon">tune</mat-icon>
-    <mat-form-field appearance="fill">
-      <mat-label class="dance-level-label">Tanzlevel *</mat-label>
-      <mat-select formControlName="level">
-        <mat-option
-          *ngFor="let danceLevel of danceLevels | keyvalue:originalOrder"
-          [value]="danceLevel.key"
-        >
-          {{danceLevel.value}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="hasFieldError('level', 'required')">
-        Bitte wähle ein Tanzlevel aus.
-      </mat-error>
-    </mat-form-field>
-  </div>
+  <mat-form-field floatLabel="always">
+    <mat-label class="dance-level-label">Erfahrung</mat-label>
+    <mat-select formControlName="level">
+      <mat-option
+        *ngFor="let danceLevel of danceLevels | keyvalue:originalOrder"
+        [value]="danceLevel.key"
+      >
+        {{danceLevel.value}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasFieldError('level', 'required')">
+      Bitte wähle deine Erfahrung aus.
+    </mat-error>
+  </mat-form-field>
 
-  <div class="full-width">
-    <mat-icon class="form-icon">people</mat-icon>
-    <mat-form-field appearance="fill">
-      <mat-label>Rolle</mat-label>
+  <mat-form-field floatLabel="always">
+    <mat-label>Rolle</mat-label>
 
-      <mat-select formControlName="leading">
-        <mat-option
-          *ngFor="let danceRole of danceRoles | keyvalue:originalOrder"
-          [value]="danceRole.key"
-        >
-          {{danceRole.value}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="hasFieldError('leading', 'required')">
-        Bitte wähle eine Rolle aus.
-      </mat-error>
-    </mat-form-field>
-  </div>
+    <mat-select formControlName="leading">
+      <mat-option
+        *ngFor="let danceRole of danceRoles | keyvalue:originalOrder"
+        [value]="danceRole.key"
+      >
+        {{danceRole.value}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasFieldError('leading', 'required')">
+      Bitte wähle eine Rolle aus.
+    </mat-error>
+  </mat-form-field>
 </ng-container>

@@ -1,0 +1,13 @@
+.dance-experience-entry {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  max-width: 280px;
+
+  .entry-actions {
+    background-color: #eee;
+    padding: 8px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

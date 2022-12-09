@@ -1,9 +1,24 @@
 :host {
   display: block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 16px;
 }
 
-.full-width {
+mat-form-field {
+  display: block;
+  margin-bottom: 16px;
   width: 100%;
+  max-width: 280px;
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+mat-error {
+  text-align: end;
+}
+
+input,
+mat-select {
+  text-align: right;
 }
