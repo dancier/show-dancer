@@ -1,0 +1,28 @@
+<ng-container [formGroup]="form">
+  <h1>Deine Tanzerfahrung</h1>
+
+  <div class="form-info">
+    <p>
+      Gebe hier an in welchen Tänzen du schon Erfahrung sammeln konntest, damit
+      andere Tänzer auf dich aufmerksam werden.
+    </p>
+    <p>Die Angaben erscheinen später in deinem Profil.</p>
+  </div>
+
+  <app-dance-experience-form [formGroup]="form" danceFormType="own">
+  </app-dance-experience-form>
+
+  <mat-error *ngIf="apiError">
+    <span> {{apiError | errorMessage}} </span>
+  </mat-error>
+
+  <button
+    class="big-button btn-next"
+    color="primary"
+    mat-flat-button
+    type="submit"
+    (click)="submitForm()"
+  >
+    Nächster Schritt
+  </button>
+</ng-container>

@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "lint": "ng lint",
+    "lint:style": "stylelint \"src/**/*.{css,scss}\" --fix",
     "cy:run": "cypress run",
     "cy:open": "cypress open --e2e --browser chrome",
     "prepare": "is-ci || husky install"
@@ -62,6 +63,9 @@
     "ng-mocks": "^14.2.2",
     "prettier": "2.7.1",
     "pretty-quick": "^3.1.3",
+    "stylelint": "^14.15.0",
+    "stylelint-config-prettier-scss": "^0.0.1",
+    "stylelint-config-standard-scss": "^6.1.0",
     "ts-jest": "^28.0.8",
     "typescript": "~4.7.4"
   }

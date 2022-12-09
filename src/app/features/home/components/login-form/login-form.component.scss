@@ -1,6 +1,10 @@
 .login-form-container {
   padding: 12px;
 
+  button {
+    margin-top: 18px;
+  }
+
   button:enabled {
     color: white;
   }

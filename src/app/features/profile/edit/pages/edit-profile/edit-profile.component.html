@@ -1,0 +1,36 @@
+<h1>Profil bearbeiten</h1>
+
+<p>Hier kannst du dein Profil bearbeiten.</p>
+
+<app-personal-data-form
+  [formGroup]="profileForm.controls.personalData"
+></app-personal-data-form>
+
+<h2>Eigene Tanzerfahrung</h2>
+
+<app-dance-experience-form
+  [formGroup]="profileForm.controls.ownDances"
+  danceFormType="own"
+>
+</app-dance-experience-form>
+
+<h2>Tanzerfahrung des Partners</h2>
+
+<app-dance-experience-form
+  [formGroup]="profileForm.controls.partnerDances"
+  danceFormType="partner"
+>
+</app-dance-experience-form>
+
+<mat-error *ngIf="error">
+  <span> {{error | errorMessage}} </span>
+</mat-error>
+
+<button
+  (click)="saveProfile()"
+  class="big-button"
+  color="primary"
+  mat-flat-button
+>
+  Speichern
+</button>

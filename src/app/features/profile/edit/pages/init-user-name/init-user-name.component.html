@@ -1,0 +1,41 @@
+<form (ngSubmit)="submitForm()" [formGroup]="usernameForm" novalidate>
+  <h1>Willkommen bei Dancier!</h1>
+  <p class="no-margin">
+    Wie dürfen wir dich nennen? Gib deinen Benutzernamen unten ein.
+  </p>
+
+  <mat-form-field appearance="standard" class="full-width">
+    <mat-label>Benutzername</mat-label>
+    <input
+      data-test="username-field"
+      formControlName="username"
+      matInput
+      type="username"
+    />
+    <mat-hint>Wird öffentlich angezeigt.</mat-hint>
+    <mat-error
+      *ngIf="hasUsernameFieldError('required')"
+      data-test="username-field-empty"
+    >
+      Bitte gib einen Benutzernamen ein.
+    </mat-error>
+    <mat-error
+      *ngIf="hasUsernameFieldError('minlength')"
+      data-test="username-field-empty"
+    >
+      Gib mindestens 3 Zeichen ein.
+    </mat-error>
+  </mat-form-field>
+
+  <app-alert alertType="warning" icon="warning">
+    Dein Benutzername kann später nicht mehr geändert werden.
+  </app-alert>
+
+  <app-alert *ngIf="error" alertType="error" icon="error">
+    <span> {{error | errorMessage}} </span>
+  </app-alert>
+
+  <button class="big-button" color="primary" mat-flat-button type="submit">
+    Nächster Schritt
+  </button>
+</form>

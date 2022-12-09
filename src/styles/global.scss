@@ -1,8 +1,9 @@
-@import 'responsive.scss';
+@use 'sass:map';
+@import 'responsive';
 
 /* dosis-regular - latin */
 @font-face {
-  font-family: 'Dosis';
+  font-family: Dosis;
   font-style: normal;
   font-weight: 400;
   src: url('../assets/fonts/dosis-v27-latin-regular.eot'); /* IE9 Compat Modes */
@@ -18,9 +19,10 @@
     /* Safari, Android, iOS */
       url('../assets/fonts/dosis-v27-latin-regular.svg#Dosis') format('svg'); /* Legacy iOS */
 }
+
 /* dosis-500 - latin */
 @font-face {
-  font-family: 'Dosis';
+  font-family: Dosis;
   font-style: normal;
   font-weight: 500;
   src: url('../assets/fonts/dosis-v27-latin-500.eot'); /* IE9 Compat Modes */
@@ -36,9 +38,10 @@
     /* Safari, Android, iOS */
       url('../assets/fonts/dosis-v27-latin-500.svg#Dosis') format('svg'); /* Legacy iOS */
 }
+
 /* dosis-600 - latin */
 @font-face {
-  font-family: 'Dosis';
+  font-family: Dosis;
   font-style: normal;
   font-weight: 600;
   src: url('../assets/fonts/dosis-v27-latin-600.eot'); /* IE9 Compat Modes */
@@ -54,9 +57,10 @@
     /* Safari, Android, iOS */
       url('../assets/fonts/dosis-v27-latin-600.svg#Dosis') format('svg'); /* Legacy iOS */
 }
+
 /* dosis-700 - latin */
 @font-face {
-  font-family: 'Dosis';
+  font-family: Dosis;
   font-style: normal;
   font-weight: 700;
   src: url('../assets/fonts/dosis-v27-latin-700.eot'); /* IE9 Compat Modes */
@@ -75,12 +79,12 @@
 
 html,
 body {
-  background-color: map-get($dancier-palette-accent, A200);
+  // background-color: map.get($dancier-palette-accent, A200);
 
   // Free image from pixabay.com christmas-decoration-holiday-xmas-2908901
-  //background-image: url("../../assets/img/backgrounds/light-background.jpg");
+  // background-image: url("../../assets/img/backgrounds/light-background.jpg");
 
-  scroll-behavior: smooth;
+  // scroll-behavior: smooth;
 
   p {
     font-weight: 350;
@@ -89,7 +93,7 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Dosis, sans-serif;
 }
 
 a {
@@ -97,74 +101,68 @@ a {
 }
 
 .font-color-primary-800 {
-  color: map-get($dancier-palette-primary, 800);
+  color: map.get($dancier-palette-primary, 800);
 }
 
 .background-color-50 {
-  background-color: map-get($dancier-palette-primary, 50);
+  background-color: map.get($dancier-palette-primary, 50);
 }
 
 .background-color-100 {
-  background-color: map-get($dancier-palette-primary, 100);
+  background-color: map.get($dancier-palette-primary, 100);
 }
 
 .background-color-200 {
-  background-color: map-get($dancier-palette-primary, 200);
+  background-color: map.get($dancier-palette-primary, 200);
 }
 
 .background-color-300 {
-  background-color: map-get($dancier-palette-primary, 300);
+  background-color: map.get($dancier-palette-primary, 300);
 }
 
 .background-color-400 {
-  background-color: map-get($dancier-palette-primary, 400);
+  background-color: map.get($dancier-palette-primary, 400);
 }
 
 .background-color-500 {
-  background-color: map-get($dancier-palette-primary, 500);
+  background-color: map.get($dancier-palette-primary, 500);
 }
 
 .background-color-600 {
-  background-color: map-get($dancier-palette-primary, 600);
+  background-color: map.get($dancier-palette-primary, 600);
 }
 
 .background-color-900 {
-  background-color: map-get($dancier-palette-primary, 900);
+  background-color: map.get($dancier-palette-primary, 900);
 }
 
 .background-color-accent-50 {
-  background-color: map-get($dancier-palette-accent, 50);
+  background-color: map.get($dancier-palette-accent, 50);
 }
 
-.background-color-accent-A200 {
-  background-color: map-get($dancier-palette-accent, A200);
+.background-color-accent-200 {
+  background-color: map.get($dancier-palette-accent, a200);
 }
 
 .background-color-accent-100 {
-  background-color: map-get($dancier-palette-accent, 100);
+  background-color: map.get($dancier-palette-accent, 100);
 }
 
 .background-color-accent-400 {
-  background-color: map-get($dancier-palette-accent, 400);
+  background-color: map.get($dancier-palette-accent, 400);
 }
 
 .background-color-accent-800 {
-  background-color: map-get($dancier-palette-accent, 800);
+  background-color: map.get($dancier-palette-accent, 800);
 }
 
 .background-color-accent-900 {
-  background-color: map-get($dancier-palette-accent, 900);
+  background-color: map.get($dancier-palette-accent, 900);
 }
 
 .content-page-container {
   width: min(100vw, 900px);
   background-color: white;
-
-  @include screen('xs') {
-  }
-
-  @include screen('gt-xs') {
-  }
 }
 
 .content-inner-container {
@@ -173,7 +171,7 @@ a {
   }
 
   @include screen('gt-xs') {
-    margin: 16px 32px 0 32px;
+    margin: 16px 32px 0;
   }
 }
 
@@ -214,7 +212,7 @@ a {
   color: white;
 }
 
-/*For general profile editing*/
+/* For general profile editing */
 .profile-edit-page-outer-container {
   display: flex;
   justify-content: center;
@@ -238,4 +236,8 @@ a {
 
 .space-container {
   height: 32px;
+}
+
+.big-button {
+  padding: 2px 24px !important;
 }

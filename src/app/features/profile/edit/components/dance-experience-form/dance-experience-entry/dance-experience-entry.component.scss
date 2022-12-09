@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  padding: 16px;
+}
+
+mat-form-field {
+  display: block;
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 280px;
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+mat-error {
+  text-align: end;
+}
+
+input,
+mat-select {
+  text-align: right;
+}

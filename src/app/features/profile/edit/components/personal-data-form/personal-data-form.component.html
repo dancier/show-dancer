@@ -1,0 +1,72 @@
+<ng-container [formGroup]="personalDataForm">
+  <mat-form-field>
+    <mat-label>Geschlecht</mat-label>
+    <mat-select data-test="gender-field" formControlName="gender">
+      <mat-option *ngFor="let gender of genderList" [value]="gender.type">
+        {{gender.description}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field floatLabel="always">
+    <mat-label>Geburtsdatum</mat-label>
+    <input
+      (click)="picker.open()"
+      [matDatepicker]="picker"
+      [max]="maxDate"
+      [min]="minDate"
+      [readonly]="true"
+      data-test="birthdate-field"
+      formControlName="birthDate"
+      matInput
+    />
+    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+    <mat-hint align="end">Nur dein Alter wird öffentlich angezeigt.</mat-hint>
+    <mat-error *ngIf="hasFieldError('birthDate', 'required')">
+      Bitte gib ein gültiges Geburtsdatum ein.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field floatLabel="always">
+    <mat-label>Körpergröße</mat-label>
+    <input
+      data-test="size-field"
+      formControlName="size"
+      matInput
+      type="number"
+    />
+    <span matSuffix>cm</span>
+    <mat-error
+      *ngIf="hasFieldError('size', 'required')
+          || hasFieldError('size', 'min')
+          || hasFieldError('size', 'max')"
+      align="end"
+    >
+      Bitte gib eine gültige Körpergröße ein.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field floatLabel="always">
+    <mat-label>Postleitzahl</mat-label>
+    <input
+      data-test="zipCode-field"
+      formControlName="zipCode"
+      matInput
+      type="text"
+    />
+    <mat-hint align="end">Nur dein Wohnort wird öffentlich angezeigt.</mat-hint>
+    <mat-error
+      *ngIf="hasFieldError('zipCode', 'required')
+          || hasFieldError('zipCode', 'pattern')
+          || hasFieldError('zipCode', 'cityLookup')"
+    >
+      Bitte gib eine gültige Postleitzahl ein.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field floatLabel="always">
+    <mat-label>Stadt</mat-label>
+    <input data-test="city-field" formControlName="city" matInput type="text" />
+  </mat-form-field>
+</ng-container>
