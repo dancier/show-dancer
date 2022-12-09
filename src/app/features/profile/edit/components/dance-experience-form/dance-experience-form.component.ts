@@ -1,11 +1,22 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { FormArray, FormControl, FormGroup, FormGroupDirective, Validators } from "@angular/forms";
-import { DanceLevel, DanceRole, DanceType, Profile } from "../../../common/types/profile.types";
-import { ProfileService } from "../../../common/services/profile.service";
-import { Router } from "@angular/router";
-import { DanceExperienceEntryForm } from "./dance-form.type";
-import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { map } from "rxjs/operators";
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms';
+import {
+  DanceLevel,
+  DanceRole,
+  DanceType,
+  Profile,
+} from '../../../common/types/profile.types';
+import { ProfileService } from '../../../common/services/profile.service';
+import { Router } from '@angular/router';
+import { DanceExperienceEntryForm } from './dance-form.type';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { map } from 'rxjs/operators';
 
 @UntilDestroy()
 @Component({
