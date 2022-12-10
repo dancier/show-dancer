@@ -30,7 +30,7 @@ export class EditProfileComponent {
   });
   croppedImage?: string | null;
   imageChangedEvent: any = '';
-  uploadResonse?: APIResponse<UploadedImageDao>;
+  uploadResponse?: APIResponse<UploadedImageDao>;
   error?: APIError;
 
   constructor(
@@ -55,7 +55,7 @@ export class EditProfileComponent {
         if (response.isSuccess) {
           this.profileService.updateProfileImageHash(response.payload.hash);
         }
-        this.uploadResonse = response;
+        this.uploadResponse = response;
       });
   }
 
