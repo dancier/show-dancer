@@ -30,7 +30,12 @@ export class InitProfileImageComponent {
     this.croppedImage = event.base64;
   }
 
-  upload(): void {
+  uploadAndNext(): void {
+    this.uploadProfilePicture();
+    this.nextStep();
+  }
+
+  private uploadProfilePicture(): void {
     this.imageUploadService
       .uploadImage$(this.croppedImage!)
       .subscribe((response) => {

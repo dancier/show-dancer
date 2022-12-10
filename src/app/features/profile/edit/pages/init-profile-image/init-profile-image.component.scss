@@ -1,0 +1,17 @@
+.buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.image-cropper-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 100%;
+
+  image-cropper {
+    max-height: 200px;
+  }
+}

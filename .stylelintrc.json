@@ -4,6 +4,6 @@
     "stylelint-config-prettier-scss"
   ],
   "rules": {
-    "no-empty-source": false
+    "no-empty-source": null
   }
 }
