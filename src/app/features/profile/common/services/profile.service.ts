@@ -1,11 +1,12 @@
-import { Injectable } from "@angular/core";
-import { AuthStorageService } from "@core/auth/services/auth-storage.service";
-import { ProfileHttpService } from "./profile-http.service";
-import { Dance, PersonalData, Profile } from "../types/profile.types";
-import { BehaviorSubject, filter, Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { isNonNull } from "@core/common/rxjs.utils";
-import { APIResponse } from "@shared/http/response.types";
+import { Injectable } from '@angular/core';
+import { AuthStorageService } from '@core/auth/services/auth-storage.service';
+import { ProfileHttpService } from './profile-http.service';
+import { Dance, PersonalData, Profile } from '../types/profile.types';
+import { BehaviorSubject, filter, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { isNonNull } from '@core/common/rxjs.utils';
+import { APIResponse } from '@shared/http/response.types';
+import { EnvironmentService } from '@core/common/environment.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,8 @@ export class ProfileService {
 
   constructor(
     private profileHttpService: ProfileHttpService,
-    private authStorageService: AuthStorageService
+    private authStorageService: AuthStorageService,
+    private environmentService: EnvironmentService
   ) {
     // fetch profile data once the user is logged in
     this.authStorageService.authData$.subscribe((response) => {
@@ -110,5 +112,17 @@ export class ProfileService {
         return isProfileSufficient;
       })
     );
+  }
+
+  getProfileImageSrc(): string {
+    if (
+      this._profile.value === null ||
+      this._profile.value.profileImageHash === null
+    ) {
+      return 'assets/img/profile-placeholder.svg';
+    }
+    return `${this.environmentService.getApiUrl()}/images/${
+      this._profile.value.profileImageHash
+    }/150.png`;
   }
 }

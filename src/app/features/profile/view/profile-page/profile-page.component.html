@@ -1,10 +1,7 @@
 <div *ngIf="profileService.profile$ | async as profile" class="profile">
   <div class="profile-header">
     <div class="profile-image">
-      <img
-        [src]="environmentService.getApiUrl() + '/images/' + profile.profileImageHash + '/150.png'"
-        alt="Profile Image"
-      />
+      <img [src]="profileService.getProfileImageSrc()" alt="Profile Image" />
     </div>
     <div class="profile-info">
       <h1 class="profile-name">
