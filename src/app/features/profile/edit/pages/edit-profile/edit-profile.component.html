@@ -2,6 +2,43 @@
 
 <p>Hier kannst du dein Profil bearbeiten.</p>
 
+<h2>Profilbild</h2>
+
+<div class="edit-profile-image">
+  <div class="profile-image">
+    <img
+      [src]="croppedImage ? croppedImage : profileService.getProfileImageSrc()"
+      alt="Profile Image"
+    />
+  </div>
+
+  <button class="btn-upload" (click)="fileInput.click()" mat-stroked-button>
+    Neues Profilbild hochladen
+  </button>
+
+  <!-- Hidden input -->
+  <input
+    #fileInput
+    (change)="fileChangeEvent($event)"
+    accept="image/*"
+    hidden
+    type="file"
+  />
+
+  <div class="image-cropper-container" *ngIf="imageChangedEvent">
+    <image-cropper
+      (imageCropped)="imageCropped($event)"
+      [aspectRatio]="4 / 4"
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [roundCropper]="true"
+      format="png"
+    ></image-cropper>
+  </div>
+</div>
+
+<h2>Persönliche Infos</h2>
+
 <app-personal-data-form
   [formGroup]="profileForm.controls.personalData"
 ></app-personal-data-form>

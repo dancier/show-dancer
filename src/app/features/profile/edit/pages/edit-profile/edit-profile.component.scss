@@ -2,3 +2,30 @@ app-dance-experience-form {
   display: block;
   margin-bottom: 32px;
 }
+
+.edit-profile-image {
+  margin-bottom: 32px;
+
+  .profile-image {
+    margin-bottom: 16px;
+
+    img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .btn-upload {
+    margin-bottom: 16px;
+  }
+
+  .image-cropper-container {
+    display: flex;
+    width: 100%;
+
+    image-cropper {
+      max-height: 200px;
+    }
+  }
+}

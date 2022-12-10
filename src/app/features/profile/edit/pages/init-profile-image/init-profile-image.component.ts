@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class InitProfileImageComponent {
   croppedImage?: string | null | undefined;
   imageChangedEvent: any = '';
-  uploadResonse?: APIResponse<UploadedImageDao>;
+  uploadResponse?: APIResponse<UploadedImageDao>;
 
   constructor(
     private imageUploadService: ImageUploadService,
@@ -30,14 +30,19 @@ export class InitProfileImageComponent {
     this.croppedImage = event.base64;
   }
 
-  upload(): void {
+  uploadAndNext(): void {
+    this.uploadProfilePicture();
+    this.nextStep();
+  }
+
+  private uploadProfilePicture(): void {
     this.imageUploadService
       .uploadImage$(this.croppedImage!)
       .subscribe((response) => {
         if (response.isSuccess) {
           this.profileService.updateProfileImageHash(response.payload.hash);
         }
-        this.uploadResonse = response;
+        this.uploadResponse = response;
       });
   }
 
