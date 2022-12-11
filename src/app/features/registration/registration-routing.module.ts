@@ -8,6 +8,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ResetPasswordEmailVerificationComponent } from './components/reset-password-email-verification/reset-password-email-verification.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PasswordChangedComponent } from './components/password-changed/password-changed.component';
+import { ResendVerificationLinkComponent } from './components/resend-verification-link/resend-verification-link.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,10 @@ export const routes: Routes = [
     path: 'verify/error',
     component: VerificationErrorComponent,
   },
+  {
+    path: 'resend-verification-link',
+    component: ResendVerificationLinkComponent
+  }
 ];
 
 @NgModule({

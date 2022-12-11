@@ -12,3 +12,7 @@ export type LoginRequest = {
 export type PasswordChangeRequest = {
   email: string;
 };
+
+export type EmailValidationCodeRequest = {
+  email: string;
+};
