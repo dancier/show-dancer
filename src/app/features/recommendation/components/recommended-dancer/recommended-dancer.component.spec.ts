@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { RecommendedDancerComponent } from './recommended-dancer.component';
+import { RecommendedDancerComponent } from "./recommended-dancer.component";
 
 describe('RecommendedDancerComponent', () => {
   let component: RecommendedDancerComponent;
