@@ -1,1 +1,22 @@
-<p>chat-page works!</p>
+<div *ngIf="chatService.dancers$ | async as dancers">
+  <code></code>
+  <div class="chat-header">
+    <h1>Deine Chats</h1>
+  </div>
+  <mat-grid-list cols="2">
+    <mat-grid-tile>
+      <div *ngFor="let chat of chatService.chats$ | async">
+        <div style="cursor: pointer;" (click)="selectChat(chat.chatId)">
+          {{ chat | partner:ownId!:dancers | name }}, {{ chat
+          | partner:ownId!:dancers | city }}
+        </div>
+        <div>{{ chat.lastMessage.text }}</div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div *ngIf="selectedChat">
+        {{selectedChat}}
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -14,7 +14,7 @@ export type ChatMessage = {
   creationTimestamp: Date;
 };
 
-export type ChatType = 'group' | 'direct';
+export type ChatType = 'GROUP' | 'DIRECT';
 
 export type ChatList = {
   chats: Chat[];
@@ -30,14 +30,22 @@ export type Dancer = {
   id: DancerId;
   dancerName: string;
   city: string;
-  profileImageHash: string;
+  profileImageHash?: string;
 };
 
 export type DancerMap = {
   [key: DancerId]: Dancer;
 };
 
+export type MessagesByChatMap = {
+  [key: string]: ChatMessage[]
+}
+
 export type ChatsAndDancers = {
   chatList: Chat[],
   dancerMap: DancerMap
+}
+
+export type MessageResponse = {
+  messages: ChatMessage[]
 }

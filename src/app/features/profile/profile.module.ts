@@ -65,7 +65,7 @@ import { DisplayDanceRolePipe } from './view/pipes/display-dance-role.pipe';
     MatSelectModule,
     MatAutocompleteModule,
     ImageCropperModule,
-    SharedModule,
+    SharedModule
   ],
   providers: [
     {

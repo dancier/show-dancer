@@ -8,6 +8,7 @@ import {
   ChatsAndDancers,
   DancerMap,
   DancersRequest,
+  MessageResponse,
 } from '../types/chat.types';
 
 @Injectable({
@@ -47,12 +48,18 @@ export class ChatHttpService {
       .get<ChatList>(`${this.chatApiUrl}`, this.defaultOptions)
       .pipe(
         switchMap((chatList) => {
-          let dancerIds = new Set(chatList.chats.flatMap((chat) => chat.dancerIds))
+          let dancerIds = new Set(
+            chatList.chats.flatMap((chat) => chat.dancerIds)
+          );
           let request = {
-            dancerIds: Array.from(dancerIds.values())
-          }
+            dancerIds: Array.from(dancerIds.values()),
+          };
           return this.http
-            .post<DancerMap>(`${this.dancerApiUrl}`, request, this.defaultOptions)
+            .post<DancerMap>(
+              `${this.dancerApiUrl}`,
+              request,
+              this.defaultOptions
+            )
             .pipe(
               map((dancerMap) => ({ dancerMap, chatList: chatList.chats })),
               map(asSuccess),
@@ -63,6 +70,32 @@ export class ChatHttpService {
                 }
               })
             );
+        })
+      );
+  }
+
+  getMessages(
+    chatId: string,
+    lastMessageId: string | null | undefined
+  ): Observable<APIResponse<MessageResponse>> {
+    let params = {};
+    if (lastMessageId !== null && lastMessageId !== undefined) {
+      params = {
+        lastMessageId,
+      };
+    }
+    return this.http
+      .get<MessageResponse>(`${this.chatApiUrl}/${chatId}/messages`, {
+        params: params,
+        withCredentials: true,
+      })
+      .pipe(
+        map(asSuccess),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            default:
+              return of(asError('SERVER_ERROR'));
+          }
         })
       );
   }
