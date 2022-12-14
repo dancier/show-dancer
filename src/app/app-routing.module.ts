@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ModernLayoutComponent } from './layout/modern-layout/modern-layout.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { ModernLayoutComponent } from "./layout/modern-layout/modern-layout.component";
 
 const routes: Routes = [
   {
@@ -19,6 +19,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('@features/profile/profile.module').then(
             (m) => m.ProfileModule
+          ),
+      },
+      {
+        path: 'recommendations',
+        loadChildren: () =>
+          import('@features/recommendations/recommendations.module').then(
+            (m) => m.RecommendationsModule
           ),
       },
       {
