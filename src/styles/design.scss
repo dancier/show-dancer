@@ -15,25 +15,41 @@ $dancier-palette-grey: (
   @return map-get($dancier-palette-grey, $variant);
 }
 
+@mixin rounded($variant: 'sm') {
+  @if $variant == 'sm' {
+    border-radius: 0.25rem;
+  } @else if $variant == 'md' {
+    border-radius: 0.375rem;
+  } @else if $variant == 'lg' {
+    border-radius: 0.5rem;
+  } @else if $variant == 'xl' {
+    border-radius: 0.75rem;
+  } @else if $variant == 'full' {
+    border-radius: 50%;
+  } @else {
+    @error 'Invalid border radius variant: #{$variant}';
+  }
+}
+
 // shadows adopted from TailwindCSS
-@mixin shadow($size: 'md') {
-  @if $size == 'xs' {
+@mixin shadow($variant: 'md') {
+  @if $variant == 'xs' {
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
-  } @else if $size == 'sm' {
+  } @else if $variant == 'sm' {
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px -1px rgb(0 0 0 / 10%);
-  } @else if $size == 'md' {
+  } @else if $variant == 'md' {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
-  } @else if $size == 'lg' {
+  } @else if $variant == 'lg' {
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%),
       0 4px 6px -4px rgb(0 0 0 / 10%);
-  } @else if $size == 'xl' {
+  } @else if $variant == 'xl' {
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 10%),
       0 8px 10px -6px rgb(0 0 0 / 10%);
-  } @else if $size == 'inner' {
+  } @else if $variant == 'inner' {
     box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 5%);
-  } @else if $size == 'none' {
+  } @else if $variant == 'none' {
     box-shadow: none;
   } @else {
-    @error 'Invalid shadow size: #{$size}';
+    @error 'Invalid shadow variant: #{$variant}';
   }
 }
