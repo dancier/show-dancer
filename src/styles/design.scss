@@ -1,0 +1,39 @@
+$dancier-palette-grey: (
+  50: hsl(60deg 9% 98%),
+  100: hsl(60deg 5% 96%),
+  200: hsl(20deg 6% 90%),
+  300: hsl(24deg 6% 83%),
+  400: hsl(24deg 5% 64%),
+  500: hsl(25deg 5% 45%),
+  600: hsl(33deg 5% 32%),
+  700: hsl(30deg 6% 25%),
+  800: hsl(12deg 6% 15%),
+  900: hsl(24deg 10% 10%),
+);
+
+@function color-grey($variant: 500) {
+  @return map-get($dancier-palette-grey, $variant);
+}
+
+// shadows adopted from TailwindCSS
+@mixin shadow($size: 'md') {
+  @if $size == 'xs' {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+  } @else if $size == 'sm' {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px -1px rgb(0 0 0 / 10%);
+  } @else if $size == 'md' {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
+  } @else if $size == 'lg' {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%),
+      0 4px 6px -4px rgb(0 0 0 / 10%);
+  } @else if $size == 'xl' {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 10%),
+      0 8px 10px -6px rgb(0 0 0 / 10%);
+  } @else if $size == 'inner' {
+    box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 5%);
+  } @else if $size == 'none' {
+    box-shadow: none;
+  } @else {
+    @error 'Invalid shadow size: #{$size}';
+  }
+}
