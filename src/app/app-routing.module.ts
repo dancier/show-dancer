@@ -22,6 +22,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'recommendations',
+        loadChildren: () =>
+          import('@features/recommendations/recommendations.module').then(
+            (m) => m.RecommendationsModule
+          ),
+      },
+      {
         path: '',
         loadChildren: () =>
           import('@features/home/home.module').then((m) => m.HomeModule),
