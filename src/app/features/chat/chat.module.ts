@@ -6,11 +6,13 @@ import { PartnerNamePipe } from './common/pipes/partner-name.pipe';
 import { PartnerPipe } from './common/pipes/partner.pipe';
 import { PartnerCityPipe } from './common/pipes/partner-city.pipe';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MessagesForChatPipe } from './common/pipes/messages-for-chat.pipe';
 
 
 @NgModule({
   declarations: [
     ChatPageComponent,
+    MessagesForChatPipe,
     PartnerCityPipe,
     PartnerNamePipe,
     PartnerPipe

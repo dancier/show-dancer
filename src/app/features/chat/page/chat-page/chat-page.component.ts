@@ -11,7 +11,6 @@ import { ProfileService } from '@features/profile/common/services/profile.servic
 export class ChatPageComponent implements OnInit {
 
   ownId?: DancerId;
-  selectedChat?: string;
 
   constructor(
     public chatService: ChatService,
@@ -23,8 +22,7 @@ export class ChatPageComponent implements OnInit {
   }
 
   selectChat(chatId: string): void {
-    this.selectedChat = chatId;
-    this.chatService.fetchNewMessages(chatId)
+    this.chatService.changeCurrentChat(chatId);
   }
 
 }

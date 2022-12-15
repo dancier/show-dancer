@@ -1,17 +1,17 @@
 export type Chat = {
   chatId: string;
   dancerIds: DancerId[];
-  lastActivity: Date;
+  lastActivity: string;
   type: ChatType;
   lastMessage: ChatMessage;
 };
 
 export type ChatMessage = {
   text: string;
-  author: DancerId;
+  authorId: DancerId;
   id: string;
   readByDancers: DancerId[];
-  creationTimestamp: Date;
+  createdAt: string;
 };
 
 export type ChatType = 'GROUP' | 'DIRECT';

@@ -7,6 +7,7 @@ import {
   Chat,
   ChatMessage,
   DancerMap,
+  MessageResponse,
   MessagesByChatMap,
 } from '../types/chat.types';
 
@@ -16,16 +17,16 @@ import {
 export class ChatService {
   private _chats = new BehaviorSubject<Chat[] | null>(null);
   private _dancers = new BehaviorSubject<DancerMap | null>(null);
+  private _messagesByChat = new BehaviorSubject<MessagesByChatMap | null>(null);
   public readonly chats$: Observable<Chat[]> = this._chats
     .asObservable()
     .pipe(filter(isNonNull));
   public readonly dancers$: Observable<DancerMap> = this._dancers
     .asObservable()
     .pipe(filter(isNonNull));
-  private _messages = new BehaviorSubject<MessagesByChatMap | null>(null);
-  public readonly messages$: Observable<MessagesByChatMap> = this._messages
-    .asObservable()
-    .pipe(filter(isNonNull));
+  public readonly messagesByChat$: Observable<MessagesByChatMap> =
+    this._messagesByChat.asObservable().pipe(filter(isNonNull));
+  public selectedChat: Chat | null = null;
 
   constructor(
     private chatHttpService: ChatHttpService,
@@ -49,35 +50,46 @@ export class ChatService {
   }
 
   fetchNewMessages(chatId: string): void {
-    let messagesForChat = this.getSortedMessagesForChat(chatId);
-
-    let lastMessageId =
-      messagesForChat !== null ? messagesForChat.at(-1)?.id : null;
+    let lastMessageId = this.selectedChat?.lastMessage.id;
 
     this.chatHttpService
       .getMessages(chatId, lastMessageId)
       .subscribe((response) => {
         if (response.isSuccess) {
-          let existingMessagesForChat = this.getSortedMessagesForChat(chatId) || [];
-          let messagesForAllChats = this._messages.value
-          let messagesForChat = existingMessagesForChat
-            ?.concat(response.payload.messages)
-            .sort(
-              (a, b) =>
-                a.creationTimestamp.valueOf() - b.creationTimestamp.valueOf()
-            );
-              (messagesForAllChats || {})[chatId] = messagesForChat;
+          this.addMessagesToChat(response.payload, chatId);
         }
       });
   }
 
-  getSortedMessagesForChat(chatId: string): ChatMessage[] | null {
-    if (this._messages === null || this._messages.value === null) {
-      return null;
+  addMessagesToChat(messageResponse: MessageResponse, chatId: string): void {
+    let existingMessagesForChat = this.getExistingMessagesForChat(chatId);
+    let allMessagesForChat = existingMessagesForChat
+      .concat(messageResponse.messages)
+      .sort(
+        (a, b) =>
+          Date.parse(a.createdAt).valueOf() - Date.parse(b.createdAt).valueOf()
+      );
+    let updatedMessagesForAllChats = { ...this._messagesByChat.value };
+    updatedMessagesForAllChats[chatId] = allMessagesForChat;
+    this._messagesByChat.next(updatedMessagesForAllChats);
+  }
+
+  getExistingMessagesForChat(chatId: string): ChatMessage[] {
+    if (this._messagesByChat === null || this._messagesByChat.value === null) {
+      return [];
     }
-    let messagesForChat = this._messages.value[chatId];
-    return messagesForChat?.sort(
-      (a, b) => a.creationTimestamp.valueOf() - b.creationTimestamp.valueOf()
-    );
+    return this._messagesByChat.value[chatId];
+  }
+
+  setSelectedChat(chatId: string): void {
+    this.selectedChat =
+      this._chats.value !== null
+        ? this._chats.value.find((chat) => chat.chatId === chatId) || null
+        : null;
+  }
+
+  changeCurrentChat(chatId: string): void {
+    this.setSelectedChat(chatId);
+    this.fetchNewMessages(chatId);
   }
 }
