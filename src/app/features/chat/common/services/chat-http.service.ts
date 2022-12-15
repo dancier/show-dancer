@@ -29,20 +29,6 @@ export class ChatHttpService {
     this.dancerApiUrl = `${this.environment.getApiUrl()}/dancers`;
   }
 
-  getChatList$(): Observable<APIResponse<ChatList>> {
-    return this.http
-      .get<ChatList>(`${this.chatApiUrl}`, this.defaultOptions)
-      .pipe(
-        map(asSuccess),
-        catchError((error: HttpErrorResponse) => {
-          switch (error.status) {
-            default:
-              return of(asError('SERVER_ERROR'));
-          }
-        })
-      );
-  }
-
   getChatsAndDancers$(): Observable<APIResponse<ChatsAndDancers>> {
     return this.http
       .get<ChatList>(`${this.chatApiUrl}`, this.defaultOptions)
@@ -100,17 +86,4 @@ export class ChatHttpService {
       );
   }
 
-  getDancerList(request: DancersRequest): Observable<APIResponse<DancerMap>> {
-    return this.http
-      .post<DancerMap>(`${this.chatApiUrl}`, request, this.defaultOptions)
-      .pipe(
-        map(asSuccess),
-        catchError((error: HttpErrorResponse) => {
-          switch (error.status) {
-            default:
-              return of(asError('SERVER_ERROR'));
-          }
-        })
-      );
-  }
 }
