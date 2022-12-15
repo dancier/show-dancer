@@ -24,8 +24,13 @@ const routes: Routes = [
       {
         path: 'chat',
         loadChildren: () =>
-          import('@features/chat/chat.module').then(
-            (m) => m.ChatModule
+          import('@features/chat/chat.module').then((m) => m.ChatModule),
+      },
+      {
+        path: 'recommendations',
+        loadChildren: () =>
+          import('@features/recommendations/recommendations.module').then(
+            (m) => m.RecommendationsModule
           ),
       },
       {

@@ -21,6 +21,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ResetPasswordEmailVerificationComponent } from './components/reset-password-email-verification/reset-password-email-verification.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PasswordChangedComponent } from './components/password-changed/password-changed.component';
+import { ResendVerificationLinkComponent } from './components/resend-verification-link/resend-verification-link.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { PasswordChangedComponent } from './components/password-changed/password
     ResetPasswordEmailVerificationComponent,
     NewPasswordComponent,
     PasswordChangedComponent,
+    ResendVerificationLinkComponent,
   ],
   imports: [
     CommonModule,
