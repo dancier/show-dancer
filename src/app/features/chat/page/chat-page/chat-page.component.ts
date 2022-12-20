@@ -10,7 +10,7 @@ import { ProfileService } from '@features/profile/common/services/profile.servic
   styleUrls: ['./chat-page.component.scss'],
 })
 export class ChatPageComponent implements OnInit, OnDestroy {
-  ownId?: DancerId;
+  currentUser?: DancerId;
   addMessageForm: any;
 
   constructor(
@@ -23,7 +23,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     this.addMessageForm = this.fb.group({
       text: ['', [Validators.required]],
     });
-    this.ownId = this.profileService.getProfile()?.id;
+    this.currentUser = this.profileService.getProfile()?.id;
   }
 
   ngOnDestroy(): void {
