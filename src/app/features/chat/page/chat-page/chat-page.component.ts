@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ChatService } from '@features/chat/common/services/chat.service';
 import { DancerId } from '@features/chat/common/types/chat.types';
@@ -9,14 +9,14 @@ import { ProfileService } from '@features/profile/common/services/profile.servic
   templateUrl: './chat-page.component.html',
   styleUrls: ['./chat-page.component.scss'],
 })
-export class ChatPageComponent implements OnInit {
+export class ChatPageComponent implements OnInit, OnDestroy {
   ownId?: DancerId;
   addMessageForm: any;
 
   constructor(
     private fb: NonNullableFormBuilder,
     public chatService: ChatService,
-    public profileService: ProfileService,
+    public profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
@@ -26,8 +26,13 @@ export class ChatPageComponent implements OnInit {
     this.ownId = this.profileService.getProfile()?.id;
   }
 
+  ngOnDestroy(): void {
+    this.chatService.stopPollingForMessages();
+  }
+
   selectChat(chatId: string): void {
     this.chatService.changeCurrentChat(chatId);
+    this.chatService.pollForNewMessages();
   }
 
   submitForm(): void {

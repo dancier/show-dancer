@@ -15,6 +15,8 @@ import {
   providedIn: 'root',
 })
 export class ChatService {
+  private refresherIntervalMessagesId?: number;
+  private refresherIntervalChatsId?: number;
   private _chats = new BehaviorSubject<Chat[] | null>(null);
   private _dancers = new BehaviorSubject<DancerMap | null>(null);
   private _messagesByChat = new BehaviorSubject<MessagesByChatMap | null>(null);
@@ -34,8 +36,10 @@ export class ChatService {
   ) {
     // fetch chat data once the user is logged in
     this.authStorageService.authData$.subscribe((response) => {
-      if (response.isLoggedIn) {
-        this.fetchChatsAndDancers();
+      if (response.isLoggedIn === true) {
+        this.pollForChats();
+      } else {
+        this.stopPollingForChats();
       }
     });
   }
@@ -83,6 +87,32 @@ export class ChatService {
       });
   }
 
+  pollForNewMessages(): void {
+    clearInterval(this.refresherIntervalMessagesId);
+    this.fetchNewMessages();
+    this.refresherIntervalMessagesId = window.setInterval(
+      () => this.fetchNewMessages(),
+      1000
+    );
+  }
+
+  stopPollingForMessages(): void {
+    clearInterval(this.refresherIntervalMessagesId);
+  }
+
+  pollForChats(): void {
+    clearInterval(this.refresherIntervalChatsId);
+    this.fetchChatsAndDancers();
+    this.refresherIntervalChatsId = window.setInterval(
+      () => this.fetchChatsAndDancers(),
+      10000
+    );
+  }
+
+  stopPollingForChats(): void {
+    clearInterval(this.refresherIntervalChatsId);
+  }
+
   addMessagesToChat(messageResponse: MessageResponse, chatId: string): void {
     let existingMessagesForChat = this.getExistingMessagesForChat(chatId) || [];
     let allMessagesForChat = this.distinctAndSortedMessages(
@@ -109,7 +139,6 @@ export class ChatService {
 
   changeCurrentChat(chatId: string): void {
     this.setSelectedChat(chatId);
-    this.fetchNewMessages();
   }
 
   distinctAndSortedMessages(messages: ChatMessage[]): ChatMessage[] {

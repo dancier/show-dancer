@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EventLogService } from '@core/logging/event-log.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppInstanceStorageService } from '@core/logging/app-instance/app-instance-storage.service';
@@ -8,7 +8,7 @@ import { ChatService } from '@features/chat/common/services/chat.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private eventLogService: EventLogService,
     private route: ActivatedRoute,
@@ -19,6 +19,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.publishInitialPageRequestEvent();
     this.publishAdvertisementEvent();
+  }
+
+  ngOnDestroy(): void {
+    this.chatService.stopPollingForChats()
   }
 
   publishInitialPageRequestEvent(): void {
