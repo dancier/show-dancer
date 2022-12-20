@@ -10,7 +10,7 @@ import { ProfileService } from '@features/profile/common/services/profile.servic
 })
 export class ChatPageComponent implements OnInit {
 
-  ownId?: DancerId;
+  currentUser?: DancerId;
 
   constructor(
     public chatService: ChatService,
@@ -18,7 +18,7 @@ export class ChatPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ownId = this.profileService.getProfile()?.id
+    this.currentUser = this.profileService.getProfile()?.id
   }
 
   selectChat(chatId: string): void {

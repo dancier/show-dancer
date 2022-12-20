@@ -47,15 +47,15 @@ export class ChatHttpService {
               this.defaultOptions
             )
             .pipe(
-              map((dancerMap) => ({ dancerMap, chatList: chatList.chats })),
-              map(asSuccess),
-              catchError((error: HttpErrorResponse) => {
-                switch (error.status) {
-                  default:
-                    return of(asError('SERVER_ERROR'));
-                }
-              })
+              map((dancerMap) => ({ dancerMap, chatList: chatList.chats }))
             );
+        }),
+        map(asSuccess),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            default:
+              return of(asError('SERVER_ERROR'));
+          }
         })
       );
   }
@@ -85,5 +85,4 @@ export class ChatHttpService {
         })
       );
   }
-
 }
