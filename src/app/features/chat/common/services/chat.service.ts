@@ -40,6 +40,22 @@ export class ChatService {
     });
   }
 
+  createMessage(text: string): void {
+    this.chatHttpService
+      .createMessage$(this.selectedChat?.chatId!, { text })
+      .subscribe();
+  }
+
+  createAndFetchMessages(text: string): void {
+    this.chatHttpService
+      .createMessage$(this.selectedChat?.chatId!, { text })
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.fetchNewMessages();
+        }
+      });
+  }
+
   fetchChatsAndDancers(): void {
     this.chatHttpService.getChatsAndDancers$().subscribe((response) => {
       if (response.isSuccess) {
@@ -49,11 +65,17 @@ export class ChatService {
     });
   }
 
-  fetchNewMessages(chatId: string): void {
-    let lastMessageId = this.selectedChat?.lastMessage.id;
+  fetchNewMessages(): void {
+    let chatId = this.selectedChat?.chatId!;
+    let lastMessage =
+      !this._messagesByChat || !this._messagesByChat.value
+        ? null
+        : this.distinctAndSortedMessages(
+            this._messagesByChat.value[chatId]
+          ).slice(-1)[0];
 
     this.chatHttpService
-      .getMessages(chatId, lastMessageId)
+      .getMessages(chatId, lastMessage?.id)
       .subscribe((response) => {
         if (response.isSuccess) {
           this.addMessagesToChat(response.payload, chatId);
@@ -62,13 +84,10 @@ export class ChatService {
   }
 
   addMessagesToChat(messageResponse: MessageResponse, chatId: string): void {
-    let existingMessagesForChat = this.getExistingMessagesForChat(chatId);
-    let allMessagesForChat = existingMessagesForChat
-      .concat(messageResponse.messages)
-      .sort(
-        (a, b) =>
-          Date.parse(a.createdAt).valueOf() - Date.parse(b.createdAt).valueOf()
-      );
+    let existingMessagesForChat = this.getExistingMessagesForChat(chatId) || [];
+    let allMessagesForChat = this.distinctAndSortedMessages(
+      existingMessagesForChat.concat(messageResponse.messages)
+    );
     let updatedMessagesForAllChats = { ...this._messagesByChat.value };
     updatedMessagesForAllChats[chatId] = allMessagesForChat;
     this._messagesByChat.next(updatedMessagesForAllChats);
@@ -90,6 +109,24 @@ export class ChatService {
 
   changeCurrentChat(chatId: string): void {
     this.setSelectedChat(chatId);
-    this.fetchNewMessages(chatId);
+    this.fetchNewMessages();
+  }
+
+  distinctAndSortedMessages(messages: ChatMessage[]): ChatMessage[] {
+    if (!messages) {
+      return [];
+    }
+    const result = [];
+    const map = new Map();
+    for (const message of messages) {
+      if (!map.has(message.id)) {
+        map.set(message.id, true); // set any value to Map
+        result.push(message);
+      }
+    }
+    return result.sort(
+      (a, b) =>
+        Date.parse(a.createdAt).valueOf() - Date.parse(b.createdAt).valueOf()
+    );
   }
 }

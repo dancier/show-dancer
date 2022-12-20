@@ -49,3 +49,7 @@ export type ChatsAndDancers = {
 export type MessageResponse = {
   messages: ChatMessage[]
 }
+
+export type CreateMessageRequest = {
+  text: string
+}

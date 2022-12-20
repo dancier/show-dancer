@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ChatService } from '@features/chat/common/services/chat.service';
 import { DancerId } from '@features/chat/common/types/chat.types';
 import { ProfileService } from '@features/profile/common/services/profile.service';
@@ -6,23 +7,33 @@ import { ProfileService } from '@features/profile/common/services/profile.servic
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
-  styleUrls: ['./chat-page.component.scss']
+  styleUrls: ['./chat-page.component.scss'],
 })
 export class ChatPageComponent implements OnInit {
-
   ownId?: DancerId;
+  addMessageForm: any;
 
   constructor(
+    private fb: NonNullableFormBuilder,
     public chatService: ChatService,
-    public profileService: ProfileService
-  ) { }
+    public profileService: ProfileService,
+  ) {}
 
   ngOnInit(): void {
-    this.ownId = this.profileService.getProfile()?.id
+    this.addMessageForm = this.fb.group({
+      text: ['', [Validators.required]],
+    });
+    this.ownId = this.profileService.getProfile()?.id;
   }
 
   selectChat(chatId: string): void {
     this.chatService.changeCurrentChat(chatId);
   }
 
+  submitForm(): void {
+    if (this.addMessageForm.valid && this.addMessageForm.value.text) {
+      const text = this.addMessageForm.value.text;
+      this.chatService.createAndFetchMessages(text);
+    }
+  }
 }

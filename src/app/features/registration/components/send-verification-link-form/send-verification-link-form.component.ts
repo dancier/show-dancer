@@ -4,7 +4,7 @@ import { AuthenticationService } from '@core/auth/services/authentication.servic
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIError, APIResponse } from '@shared/http/response.types';
 import { LinkType } from '@features/registration/registration.types';
-import { EMPTY, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 
 @Component({

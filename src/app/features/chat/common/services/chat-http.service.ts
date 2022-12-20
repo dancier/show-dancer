@@ -6,8 +6,8 @@ import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
 import {
   ChatList,
   ChatsAndDancers,
+  CreateMessageRequest,
   DancerMap,
-  DancersRequest,
   MessageResponse,
 } from '../types/chat.types';
 
@@ -27,6 +27,20 @@ export class ChatHttpService {
   ) {
     this.chatApiUrl = `${this.environment.getApiUrl()}/chats`;
     this.dancerApiUrl = `${this.environment.getApiUrl()}/dancers`;
+  }
+
+  createMessage$(chatId: string, message: CreateMessageRequest): Observable<APIResponse<void>> {
+    return this.http
+      .post<void>(`${this.chatApiUrl}/${chatId}/messages`, message, this.defaultOptions)
+      .pipe(
+        map(asSuccess),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            default:
+              return of(asError('SERVER_ERROR'));
+          }
+        })
+      );
   }
 
   getChatsAndDancers$(): Observable<APIResponse<ChatsAndDancers>> {
