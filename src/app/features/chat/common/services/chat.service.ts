@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
-import { BehaviorSubject, filter, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  filter,
+  Observable,
+  tap,
+} from 'rxjs';
 import { isNonNull } from '@core/common/rxjs.utils';
 import { ChatHttpService } from './chat-http.service';
 import {
@@ -10,6 +15,7 @@ import {
   MessageResponse,
   MessagesByChatMap,
 } from '../types/chat.types';
+import { APIResponse } from '@shared/http/response.types';
 
 @Injectable({
   providedIn: 'root',
@@ -44,20 +50,23 @@ export class ChatService {
     });
   }
 
-  createMessage(text: string): void {
-    this.chatHttpService
+  createAndFetchMessages$(text: string): Observable<APIResponse<void>> {
+    return this.chatHttpService
       .createMessage$(this.selectedChat?.chatId!, { text })
-      .subscribe();
-  }
-
-  createAndFetchMessages(text: string): void {
-    this.chatHttpService
-      .createMessage$(this.selectedChat?.chatId!, { text })
-      .subscribe((response) => {
-        if (response.isSuccess) {
-          this.fetchNewMessages();
-        }
-      });
+      .pipe(
+        tap(() =>
+          this.chatHttpService
+            .getMessages$(this.selectedChat?.chatId!, this.getLastMessageId())
+            .subscribe((response) => {
+              if (response.isSuccess) {
+                this.addMessagesToChat(
+                  response.payload,
+                  this.selectedChat?.chatId!
+                );
+              }
+            })
+        )
+      );
   }
 
   fetchChatsAndDancers(): void {
@@ -70,19 +79,24 @@ export class ChatService {
   }
 
   fetchNewMessages(): void {
-    let chatId = this.selectedChat?.chatId!;
-    let lastMessage =
+    const lastMessageId = this.getLastMessageId();
+
+    this.chatHttpService
+      .getMessages$(this.selectedChat?.chatId!, lastMessageId)
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.addMessagesToChat(response.payload, this.selectedChat?.chatId!);
+        }
+      });
+  }
+
+  getLastMessageId(): string | undefined {
+    const chatId = this.selectedChat?.chatId!;
+    const lastMessage =
       !this._messagesByChat || !this._messagesByChat.value
         ? null
         : (this._messagesByChat.value[chatId] || []).slice(-1)[0];
-
-    this.chatHttpService
-      .getMessages(chatId, lastMessage?.id)
-      .subscribe((response) => {
-        if (response.isSuccess) {
-          this.addMessagesToChat(response.payload, chatId);
-        }
-      });
+    return lastMessage?.id;
   }
 
   pollForNewMessages(): void {

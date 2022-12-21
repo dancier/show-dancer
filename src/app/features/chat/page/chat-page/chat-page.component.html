@@ -18,12 +18,7 @@
       </div>
     </mat-grid-tile>
     <mat-grid-tile>
-      <app-chat-messages
-        *ngIf="chatService.selectedChat && chatService.messagesByChat$ | async as messagesByChat"
-        (messageCreated)="chatService.createAndFetchMessages($event)"
-        [selectedChat]="chatService.selectedChat!"
-        [messagesByChat]="messagesByChat"
-      >
+      <app-chat-messages>
       </app-chat-messages>
     </mat-grid-tile>
   </mat-grid-list>

@@ -10,7 +10,6 @@ import { ProfileService } from '@features/profile/common/services/profile.servic
   styleUrls: ['./chat-page.component.scss'],
 })
 export class ChatPageComponent implements OnDestroy {
-
   constructor(
     public chatService: ChatService,
     public profileService: ProfileService
@@ -24,5 +23,4 @@ export class ChatPageComponent implements OnDestroy {
     this.chatService.changeCurrentChat(chatId);
     this.chatService.pollForNewMessages();
   }
-
 }

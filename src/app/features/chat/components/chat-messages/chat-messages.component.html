@@ -1,5 +1,7 @@
-<div *ngIf="selectedChat && messagesByChat">
-  <div *ngFor="let message of messagesByChat[selectedChat!.chatId]">
+<div
+  *ngIf="chatService.selectedChat && chatService.messagesByChat$ | async as messagesByChat"
+>
+  <div *ngFor="let message of messagesByChat[chatService.selectedChat!.chatId]">
     {{message.text}}
   </div>
   <form (ngSubmit)="submitForm()" [formGroup]="addMessageForm" novalidate>

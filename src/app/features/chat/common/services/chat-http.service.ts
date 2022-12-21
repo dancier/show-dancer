@@ -87,7 +87,7 @@ export class ChatHttpService {
       );
   }
 
-  getMessages(
+  getMessages$(
     chatId: string,
     lastMessageId: string | null | undefined
   ): Observable<APIResponse<MessageResponse>> {
