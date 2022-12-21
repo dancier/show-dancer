@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Chat, DancerMap } from '@features/chat/common/types/chat.types';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss'],
+  selector: 'app-chat-list-entry',
+  templateUrl: './chat-list-entry.component.html',
+  styleUrls: ['./chat-list-entry.component.scss'],
 })
-export class ChatComponent implements OnInit {
+export class ChatListEntryComponent implements OnInit {
   @Input() chat?: Chat;
   @Input() currentUser?: string;
   @Input() dancers?: DancerMap;

@@ -7,41 +7,24 @@
     <mat-grid-tile>
       <div>
         <div *ngFor="let chat of chatService.chats$ | async">
-          <app-chat
-            [currentUser]="currentUser"
+          <app-chat-list-entry
+            *ngIf="profileService.profile$ | async as profile"
+            [currentUser]="profile.id"
             [chat]="chat"
             [dancers]="dancers"
             (click)="selectChat(chat.chatId)"
-          ></app-chat>
+          ></app-chat-list-entry>
         </div>
       </div>
     </mat-grid-tile>
     <mat-grid-tile>
-      <div
+      <app-chat-messages
         *ngIf="chatService.selectedChat && chatService.messagesByChat$ | async as messagesByChat"
+        (messageCreated)="chatService.createAndFetchMessages($event)"
+        [selectedChat]="chatService.selectedChat!"
+        [messagesByChat]="messagesByChat"
       >
-        <div
-          *ngFor="let message of messagesByChat[chatService.selectedChat!.chatId]"
-        >
-          {{message.text}}
-        </div>
-      </div>
-      <form *ngIf="chatService.selectedChat" (ngSubmit)="submitForm()" [formGroup]="addMessageForm" novalidate>
-
-        <mat-form-field appearance="standard" class="full-width">
-          <mat-label>Neue Nachricht</mat-label>
-          <input
-            data-test="text-field"
-            formControlName="text"
-            matInput
-            type="text"
-          />
-        </mat-form-field>
-
-        <button class="big-button" color="primary" mat-flat-button type="submit">
-          Senden
-        </button>
-      </form>
+      </app-chat-messages>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

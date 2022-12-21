@@ -7,13 +7,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ChatComponent } from './components/chat/chat.component';
+import { ChatListEntryComponent } from './components/chat/chat-list-entry.component';
+import { ChatMessagesComponent } from './components/chat-messages/chat-messages.component';
 
 
 @NgModule({
   declarations: [
     ChatPageComponent,
-    ChatComponent
+    ChatListEntryComponent,
+    ChatMessagesComponent
   ],
   imports: [
     CommonModule,

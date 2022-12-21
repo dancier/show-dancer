@@ -74,9 +74,7 @@ export class ChatService {
     let lastMessage =
       !this._messagesByChat || !this._messagesByChat.value
         ? null
-        : this.distinctAndSortedMessages(
-            this._messagesByChat.value[chatId]
-          ).slice(-1)[0];
+        : (this._messagesByChat.value[chatId] || []).slice(-1)[0];
 
     this.chatHttpService
       .getMessages(chatId, lastMessage?.id)
@@ -114,6 +112,9 @@ export class ChatService {
   }
 
   addMessagesToChat(messageResponse: MessageResponse, chatId: string): void {
+    if (messageResponse.messages.length === 0) {
+      return;
+    }
     let existingMessagesForChat = this.getExistingMessagesForChat(chatId) || [];
     let allMessagesForChat = this.distinctAndSortedMessages(
       existingMessagesForChat.concat(messageResponse.messages)

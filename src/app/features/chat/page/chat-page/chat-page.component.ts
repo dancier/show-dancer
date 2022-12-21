@@ -9,22 +9,12 @@ import { ProfileService } from '@features/profile/common/services/profile.servic
   templateUrl: './chat-page.component.html',
   styleUrls: ['./chat-page.component.scss'],
 })
-export class ChatPageComponent implements OnInit, OnDestroy {
-  currentUser?: DancerId;
-  addMessageForm: any;
+export class ChatPageComponent implements OnDestroy {
 
   constructor(
-    private fb: NonNullableFormBuilder,
     public chatService: ChatService,
     public profileService: ProfileService
   ) {}
-
-  ngOnInit(): void {
-    this.addMessageForm = this.fb.group({
-      text: ['', [Validators.required]],
-    });
-    this.currentUser = this.profileService.getProfile()?.id;
-  }
 
   ngOnDestroy(): void {
     this.chatService.stopPollingForMessages();
@@ -35,10 +25,4 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     this.chatService.pollForNewMessages();
   }
 
-  submitForm(): void {
-    if (this.addMessageForm.valid && this.addMessageForm.value.text) {
-      const text = this.addMessageForm.value.text;
-      this.chatService.createAndFetchMessages(text);
-    }
-  }
 }

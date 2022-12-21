@@ -29,9 +29,16 @@ export class ChatHttpService {
     this.dancerApiUrl = `${this.environment.getApiUrl()}/dancers`;
   }
 
-  createMessage$(chatId: string, message: CreateMessageRequest): Observable<APIResponse<void>> {
+  createMessage$(
+    chatId: string,
+    message: CreateMessageRequest
+  ): Observable<APIResponse<void>> {
     return this.http
-      .post<void>(`${this.chatApiUrl}/${chatId}/messages`, message, this.defaultOptions)
+      .post<void>(
+        `${this.chatApiUrl}/${chatId}/messages`,
+        message,
+        this.defaultOptions
+      )
       .pipe(
         map(asSuccess),
         catchError((error: HttpErrorResponse) => {
@@ -48,11 +55,17 @@ export class ChatHttpService {
       .get<ChatList>(`${this.chatApiUrl}`, this.defaultOptions)
       .pipe(
         switchMap((chatList) => {
-          let dancerIds = new Set(
-            chatList.chats.flatMap((chat) => chat.dancerIds)
-          );
+          const dancerIds = new Map();
+
+          chatList.chats
+            .flatMap((chat) => chat.dancerIds)
+            .forEach((dancerId) => {
+              if (!dancerIds.has(dancerId)) {
+                dancerIds.set(dancerId, true);
+              }
+            });
           let request = {
-            dancerIds: Array.from(dancerIds.values()),
+            dancerIds: Array.from(dancerIds.keys()),
           };
           return this.http
             .post<DancerMap>(
