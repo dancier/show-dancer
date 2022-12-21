@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
-import {
-  BehaviorSubject,
-  filter,
-  Observable,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject, filter, Observable, tap } from 'rxjs';
 import { isNonNull } from '@core/common/rxjs.utils';
 import { ChatHttpService } from './chat-http.service';
 import {
@@ -23,9 +18,9 @@ import { APIResponse } from '@shared/http/response.types';
 export class ChatService {
   private refresherIntervalMessagesId?: number;
   private refresherIntervalChatsId?: number;
-  private _chats = new BehaviorSubject<Chat[] | null>(null);
-  private _dancers = new BehaviorSubject<DancerMap | null>(null);
-  private _messagesByChat = new BehaviorSubject<MessagesByChatMap | null>(null);
+  private _chats = new BehaviorSubject<Chat[]>([]);
+  private _dancers = new BehaviorSubject<DancerMap>({});
+  private _messagesByChat = new BehaviorSubject<MessagesByChatMap>({});
   public readonly chats$: Observable<Chat[]> = this._chats
     .asObservable()
     .pipe(filter(isNonNull));
@@ -34,7 +29,7 @@ export class ChatService {
     .pipe(filter(isNonNull));
   public readonly messagesByChat$: Observable<MessagesByChatMap> =
     this._messagesByChat.asObservable().pipe(filter(isNonNull));
-  public selectedChat: Chat | null = null;
+  public selectedChatId: string | null = null;
 
   constructor(
     private chatHttpService: ChatHttpService,
@@ -42,7 +37,7 @@ export class ChatService {
   ) {
     // fetch chat data once the user is logged in
     this.authStorageService.authData$.subscribe((response) => {
-      if (response.isLoggedIn === true) {
+      if (response.isLoggedIn) {
         this.pollForChats();
       } else {
         this.stopPollingForChats();
@@ -52,17 +47,14 @@ export class ChatService {
 
   createAndFetchMessages$(text: string): Observable<APIResponse<void>> {
     return this.chatHttpService
-      .createMessage$(this.selectedChat?.chatId!, { text })
+      .createMessage$(this.selectedChatId!, { text })
       .pipe(
         tap(() =>
           this.chatHttpService
-            .getMessages$(this.selectedChat?.chatId!, this.getLastMessageId())
+            .getMessages$(this.selectedChatId!, this.getLastMessageId())
             .subscribe((response) => {
               if (response.isSuccess) {
-                this.addMessagesToChat(
-                  response.payload,
-                  this.selectedChat?.chatId!
-                );
+                this.addMessagesToChat(response.payload, this.selectedChatId!);
               }
             })
         )
@@ -82,20 +74,17 @@ export class ChatService {
     const lastMessageId = this.getLastMessageId();
 
     this.chatHttpService
-      .getMessages$(this.selectedChat?.chatId!, lastMessageId)
+      .getMessages$(this.selectedChatId!, lastMessageId)
       .subscribe((response) => {
         if (response.isSuccess) {
-          this.addMessagesToChat(response.payload, this.selectedChat?.chatId!);
+          this.addMessagesToChat(response.payload, this.selectedChatId!);
         }
       });
   }
 
   getLastMessageId(): string | undefined {
-    const chatId = this.selectedChat?.chatId!;
-    const lastMessage =
-      !this._messagesByChat || !this._messagesByChat.value
-        ? null
-        : (this._messagesByChat.value[chatId] || []).slice(-1)[0];
+    const chatId = this.selectedChatId!;
+    const lastMessage = (this._messagesByChat.value[chatId] || []).slice(-1)[0];
     return lastMessage?.id;
   }
 
@@ -139,21 +128,11 @@ export class ChatService {
   }
 
   getExistingMessagesForChat(chatId: string): ChatMessage[] {
-    if (this._messagesByChat === null || this._messagesByChat.value === null) {
-      return [];
-    }
     return this._messagesByChat.value[chatId];
   }
 
-  setSelectedChat(chatId: string): void {
-    this.selectedChat =
-      this._chats.value !== null
-        ? this._chats.value.find((chat) => chat.chatId === chatId) || null
-        : null;
-  }
-
-  changeCurrentChat(chatId: string): void {
-    this.setSelectedChat(chatId);
+  setSelectedChatId(chatId: string): void {
+    this.selectedChatId = chatId;
   }
 
   distinctAndSortedMessages(messages: ChatMessage[]): ChatMessage[] {

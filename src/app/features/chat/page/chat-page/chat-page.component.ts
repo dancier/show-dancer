@@ -1,7 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component, OnDestroy } from '@angular/core';
 import { ChatService } from '@features/chat/common/services/chat.service';
-import { DancerId } from '@features/chat/common/types/chat.types';
 import { ProfileService } from '@features/profile/common/services/profile.service';
 
 @Component({
@@ -20,7 +18,7 @@ export class ChatPageComponent implements OnDestroy {
   }
 
   selectChat(chatId: string): void {
-    this.chatService.changeCurrentChat(chatId);
+    this.chatService.setSelectedChatId(chatId);
     this.chatService.pollForNewMessages();
   }
 }
