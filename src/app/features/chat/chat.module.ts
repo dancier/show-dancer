@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChatListEntryComponent } from './components/chat/chat-list-entry.component';
 import { ChatMessagesComponent } from './components/chat-messages/chat-messages.component';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ChatMessagesComponent } from './components/chat-messages/chat-messages.
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class ChatModule { }

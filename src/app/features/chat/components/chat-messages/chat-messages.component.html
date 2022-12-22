@@ -18,5 +18,8 @@
     <button class="big-button" color="primary" mat-flat-button type="submit">
       Senden
     </button>
+    <mat-error *ngIf="error">
+      <span> {{error | errorMessage}} </span>
+    </mat-error>
   </form>
 </div>

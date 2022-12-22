@@ -5,6 +5,7 @@ import {
   Chat,
   MessagesByChatMap,
 } from '@features/chat/common/types/chat.types';
+import { APIError } from '@shared/http/response.types';
 
 @Component({
   selector: 'app-chat-messages',
@@ -13,6 +14,7 @@ import {
 })
 export class ChatMessagesComponent implements OnInit {
   addMessageForm: any;
+  error?: APIError;
 
   @Input() selectedChat?: Chat;
   @Input() messagesByChat?: MessagesByChatMap;
@@ -34,6 +36,8 @@ export class ChatMessagesComponent implements OnInit {
       this.chatService.createAndFetchMessages$(text).subscribe(response => {
         if (response.isSuccess) {
           this.addMessageForm.setValue({text: ''})
+        } else {
+          this.error = response.error
         }
       });
     }
