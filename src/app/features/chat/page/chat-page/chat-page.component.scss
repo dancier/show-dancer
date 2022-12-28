@@ -1,0 +1,22 @@
+.chat-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 400;
+  color: #b40720;
+}
