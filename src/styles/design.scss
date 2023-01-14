@@ -15,7 +15,7 @@ $dancier-palette-grey: (
   @return map-get($dancier-palette-grey, $variant);
 }
 
-@mixin rounded($variant: 'sm') {
+@mixin rounded($variant: 'md') {
   @if $variant == 'sm' {
     border-radius: 0.25rem;
   } @else if $variant == 'md' {

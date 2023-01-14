@@ -1,0 +1,13 @@
+@use '/src/styles/design' as *;
+
+:host {
+  display: block;
+  background-color: color-grey(100);
+}
+
+.recommended-dancers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 64px;
+  margin: 64px;
+}
