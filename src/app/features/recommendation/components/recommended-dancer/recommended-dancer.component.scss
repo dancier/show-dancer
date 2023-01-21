@@ -21,6 +21,10 @@
   }
 }
 
+.wrapper {
+  container-type: inline-size;
+}
+
 .dancer-image {
   img {
     width: 100%;
@@ -30,5 +34,54 @@
 }
 
 .dancer-info {
-  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+
+  .dancer-header {
+    font-weight: 300;
+    color: color-grey(900);
+  }
+
+  .dancer-subheader {
+    font-weight: 500;
+    color: color-grey(500);
+  }
+
+  @container //@container (min-width: 471px) {
+  //  padding: 24px 32px;
+  //  gap: 12px;
+  //
+  //  .dancer-header {
+  //    font-size: 2rem;
+  //  }
+  //
+  //  .dancer-subheader {
+  //    font-size: 1.5rem;
+  //  }
+  //}
+  //
+  //@container (max-width: 470px) {
+  //  padding: 16px 24px;
+  //  gap: 12px;
+  //
+  //  .dancer-header {
+  //    font-size: 1.75rem;
+  //  }
+  //
+  //  .dancer-subheader {
+  //    font-size: 1.5rem;
+  //  }
+  //}
+  //
+  //@container (max-width: 375px) {
+  //  padding: 12px 16px;
+  //  gap: 8px;
+  //
+  //  .dancer-header {
+  //    font-size: 1.5rem;
+  //  }
+  //  .dancer-subheader {
+  //    font-size: 1.25rem;
+  //  }
+  //};
 }

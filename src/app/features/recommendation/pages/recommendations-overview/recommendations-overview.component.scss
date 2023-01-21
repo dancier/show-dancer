@@ -8,6 +8,36 @@
 .recommended-dancers {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 64px;
-  margin: 64px;
+  grid-gap: 96px;
+  padding: 32px 128px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1250px) {
+    padding: 32px 64px;
+    grid-gap: 64px;
+  }
+
+  @media screen and (max-width: 1000px) {
+    grid-gap: 32px;
+    padding: 32px;
+  }
+
+  @media screen and (max-width: 850px) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 64px;
+    padding: 64px 64px;
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 32px;
+    padding: 32px 32px;
+  }
+
+  @media screen and (max-width: 470px) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 16px;
+    padding: 16px 16px;
+  }
 }
