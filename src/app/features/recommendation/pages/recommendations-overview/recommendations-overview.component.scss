@@ -1,4 +1,4 @@
-@use '/src/styles/design' as *;
+@use 'src/styles/design' as *;
 
 :host {
   display: block;
@@ -7,37 +7,34 @@
 
 .recommended-dancers {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 96px;
-  padding: 32px 128px;
-  max-width: 1200px;
+
+  --max-columns: 2;
+  --min-item-width: 320px;
+  --column-gap: 6%;
+
+  // prevents new columns after --max-columns has been reached
+  // see: https://css-tricks.com/an-auto-filling-css-grid-with-max-columns/
+  --gap-count: calc(var(--max-columns) - 1);
+  --total-gap-width: calc(var(--gap-count) * var(--column-gap));
+  --max-item-width: calc((100% - var(--total-gap-width)) / var(--max-columns));
+  --width-preventing-excessive-columns: max(
+    var(--min-item-width),
+    var(--max-item-width)
+  );
+
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--width-preventing-excessive-columns), 1fr)
+  );
+  column-gap: var(--column-gap);
+
+  padding: 48px clamp(12px, 6vw, 128px);
+  max-width: 1100px;
   margin: 0 auto;
+  row-gap: 48px;
 
-  @media screen and (max-width: 1250px) {
-    padding: 32px 64px;
-    grid-gap: 64px;
-  }
-
-  @media screen and (max-width: 1000px) {
-    grid-gap: 32px;
-    padding: 32px;
-  }
-
-  @media screen and (max-width: 850px) {
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 64px;
-    padding: 64px 64px;
-  }
-
-  @media screen and (max-width: 600px) {
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 32px;
-    padding: 32px 32px;
-  }
-
-  @media screen and (max-width: 470px) {
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 16px;
-    padding: 16px 16px;
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+    row-gap: 32px;
   }
 }
