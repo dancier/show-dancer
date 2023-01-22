@@ -31,5 +31,6 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "exclude": ["cypress", "mocha", "chai", "node_modules", "cypress.config.ts"]
 }

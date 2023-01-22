@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { RecommendedDancer } from "../../recommendation.types";
+import { Component, Input } from '@angular/core';
+import { RecommendedDancer } from '../../types/recommended-dancers.types';
 
 @Component({
   selector: 'app-recommended-dancer',
@@ -8,17 +8,20 @@ import { RecommendedDancer } from "../../recommendation.types";
 })
 export class RecommendedDancerComponent {
   // TODO: make input
-  dancer: RecommendedDancer = {
-    id: '1',
-    name: 'John Doe',
-    imageHash: 'QmVjYXVzZS1pbWFnZS1oYXNo',
-    about: 'I am a dancer',
-    age: 30,
-    zip: '12345',
-    city: 'Berlin',
-    dances: ['Salsa', 'Bachata'],
-    score: 0.5,
-  };
+  @Input()
+  dancer!: RecommendedDancer;
+
+  // dancer: RecommendedDancer = {
+  //   id: '1',
+  //   name: 'John Doe',
+  //   imageHash: 'QmVjYXVzZS1pbWFnZS1oYXNo',
+  //   about: 'I am a dancer',
+  //   age: 30,
+  //   zip: '12345',
+  //   city: 'Berlin',
+  //   dances: ['Salsa', 'Bachata'],
+  //   score: 0.5,
+  // };
 
   constructor() {}
 }
