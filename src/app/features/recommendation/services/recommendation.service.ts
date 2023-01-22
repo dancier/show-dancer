@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RecommendationsHttpService } from './recommendations-http.service';
+import { RecommendationHttpService } from './recommendation-http.service';
 import { RecommendedDancer } from '../types/recommended-dancers.types';
 import { map, Observable } from 'rxjs';
 import { RecommendationsDto } from '../types/recommendations.dto';
@@ -7,8 +7,8 @@ import { RecommendationsDto } from '../types/recommendations.dto';
 @Injectable({
   providedIn: 'root',
 })
-export class RecommendationsService {
-  constructor(private httpService: RecommendationsHttpService) {}
+export class RecommendationService {
+  constructor(private httpService: RecommendationHttpService) {}
 
   getRecommendations$(): Observable<RecommendedDancer[] | null> {
     return this.httpService.getRecommendations$().pipe(

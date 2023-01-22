@@ -1,7 +1,5 @@
 <div class="recommended-dancers">
-  <ng-container
-    *ngFor="let recommendedDancer of recommendationsService.getRecommendations$() | async"
-  >
+  <ng-container *ngFor="let recommendedDancer of recommendations$ | async">
     <app-recommended-dancer
       [dancer]="recommendedDancer"
     ></app-recommended-dancer>

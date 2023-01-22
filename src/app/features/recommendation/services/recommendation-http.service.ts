@@ -8,7 +8,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class RecommendationsHttpService {
+export class RecommendationHttpService {
   private readonly defaultOptions = {
     withCredentials: true,
   };
