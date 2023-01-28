@@ -1,6 +1,9 @@
 <div class="wrapper">
   <div class="dancer-image">
-    <img src="https://picsum.photos/id/64/800" alt="Profilbild des Tänzers" />
+    <img
+      [src]="imageService.getDancerImageSrcOrDefault(dancer.imageHash, 456)"
+      alt="Profilbild des Tänzers"
+    />
   </div>
   <div class="dancer-info">
     <div class="dancer-header">

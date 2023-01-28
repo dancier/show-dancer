@@ -26,10 +26,14 @@
 }
 
 .dancer-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   img {
+    flex-shrink: 0;
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 100%;
   }
 }
 

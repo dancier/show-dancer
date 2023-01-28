@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { isNonNull } from '@core/common/rxjs.utils';
 import { APIResponse } from '@shared/http/response.types';
 import { EnvironmentService } from '@core/common/environment.service';
+import { ImageService } from '@core/image/image.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,8 @@ export class ProfileService {
   constructor(
     private profileHttpService: ProfileHttpService,
     private authStorageService: AuthStorageService,
-    private environmentService: EnvironmentService
+    private environmentService: EnvironmentService,
+    private imageService: ImageService
   ) {
     // fetch profile data once the user is logged in
     this.authStorageService.authData$.subscribe((response) => {
@@ -115,14 +117,8 @@ export class ProfileService {
   }
 
   getProfileImageSrc(): string {
-    if (
-      this._profile.value === null ||
-      this._profile.value.profileImageHash === null
-    ) {
-      return 'assets/img/profile-placeholder.svg';
-    }
-    return `${this.environmentService.getApiUrl()}/images/${
-      this._profile.value.profileImageHash
-    }/150.png`;
+    const imageHash = this._profile.value?.profileImageHash ?? null;
+    const width = 150;
+    return this.imageService.getDancerImageSrcOrDefault(imageHash, width);
   }
 }

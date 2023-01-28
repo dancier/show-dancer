@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RecommendedDancer } from '../../types/recommended-dancers.types';
+import { ImageService } from '@core/image/image.service';
 
 @Component({
   selector: 'app-recommended-dancer',
@@ -23,5 +24,5 @@ export class RecommendedDancerComponent {
   //   score: 0.5,
   // };
 
-  constructor() {}
+  constructor(public imageService: ImageService) {}
 }
