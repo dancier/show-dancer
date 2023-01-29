@@ -2,7 +2,10 @@
 
 :host {
   display: block;
+  //flex-direction: column;
+  //align-items: center;
   background-color: color-grey(100);
+  padding: 48px 0;
 }
 
 .recommended-dancers {
@@ -36,5 +39,15 @@
   @media screen and (max-width: 500px) {
     grid-template-columns: 1fr;
     row-gap: 32px;
+  }
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0 32px 0;
+
+  .btn-lg {
+    margin: 0 auto;
   }
 }
