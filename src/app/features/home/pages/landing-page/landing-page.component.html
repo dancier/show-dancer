@@ -1,64 +1,19 @@
-<div class="landing-page-container" fxFlex>
-  <div
-    [ngStyle]="{'minHeight': landingPageContentMinHeight + 'px' }"
-    class="background-color-accent-50 landing-page-content"
-    fxLayout="row"
-    fxLayout.xs="column"
-  >
-    <div class="background-color-accent-50" fxFlex>
-      <h2 class="font-color-primary-800">Start mit Deiner E-Mail</h2>
-      <app-login-form></app-login-form>
-    </div>
-    <div class="background-color-accent-100" fxFlex>
-      <h1 class="font-color-primary-800">Herzlichen Glückwunsch lieber Jan!</h1>
-      <p>
-        Schön dass Du bei uns im Team bist und uns nicht nur mit Deiner
-        Kompetenz weiterbringst, sondern auch durch Deine ruhige besonnene Art
-        uns hilfst uns nicht zu verzetteln. Auf ein schönes neues Jahr mit Dir!
-      </p>
-      <p>Xiaofei und Marc und sicherlich auch der Rest</p>
-    </div>
-  </div>
 
-  <div class="landing-page-info-area" fxLayout="row" fxLayout.xs="column">
-    <div class="mat-card background-color-accent-900" fxFlex>
-      <div class="card-title-container">
-        <h2>
-          <mat-icon>money_off</mat-icon>
-          Ewig Kostenlos
-        </h2>
-      </div>
-      <p>
-        Für Tanzer ist unsere Sucheservice ewig kostenlos. Einschränkfrei nutzen
-        Sie alle Services, damit alle Tanzer mit machen können und für Sie die
-        besten Tanzpartner gefunden werden.
-      </p>
+<!-- Start Hero -->
+<div class="p-10 lg:p-20 bg-gradient-to-t lg:bg-gradient-to-l from-orange-300 to-red-400">
+  <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-20 lg:justify-around">
+    <div class="max-w-[50vh] w-full lg:basis-[50%] lg:max-w-[600px] flex-none">
+      <img class="w-full h-auto max-w-[100%] drop-shadow" src="assets/img/landing-page/header-dancers.svg" alt="Vector graphic of people dancing">
     </div>
-
-    <div class="mat-card background-color-accent-400" fxFlex>
-      <div class="card-title-container">
-        <h2>
-          <mat-icon>security</mat-icon>
-          Ihre Daten
-        </h2>
-      </div>
-      <p>
-        Keine private Daten, die für Tanzpartnersuche nicht notwendig sind,
-        werden verlangt.
-      </p>
-    </div>
-
-    <div class="mat-card background-color-accent-800" fxFlex>
-      <div class="card-title-container">
-        <h2>
-          <mat-icon>people</mat-icon>
-          Community
-        </h2>
-      </div>
-      <p>
-        Wir sind Tanzer und wir sind Programmierer, und wir sind begeistert
-        übers Tanzen und Prgrammieren!
-      </p>
+    <div class="lg:basis-[400px] shrink-0 grow-0 text-center lg:text-right">
+      <h1 class="text-7xl lg:text-9xl font-bold text-white my-4 drop-shadow">Dancier</h1>
+      <p class="text-red-900 font-bold text-3xl lg:text-4xl">Wir verbinden Tänzer</p>
+      <button class="my-12 bg-red-900 text-white font-bold py-3 px-8 rounded text-xl lg:text-2xl cursor-pointer" (click)="navigateToRegistration()">Jetzt registrieren</button>
     </div>
   </div>
 </div>
+<!-- End Hero -->
+<div style="height:400px;">
+<!-- TODO: Features-Element aus Figma -->
+</div>
+
