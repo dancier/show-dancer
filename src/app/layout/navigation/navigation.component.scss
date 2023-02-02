@@ -1,3 +1,6 @@
+@use '@angular/material' as mat;
+@include mat.core;
+
 .header {
   display: flex;
   justify-content: space-between;
