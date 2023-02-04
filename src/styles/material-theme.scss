@@ -1,5 +1,4 @@
 @use '@angular/material' as mat;
-@use '@angular/cdk';
 
 @import '@angular/material/theming';
 
@@ -85,6 +84,7 @@ $theme-typography: mat.define-typography-config(
   $body-2: mat.define-typography-level(18px, 1.35, 700),
 );
 @include mat.core($theme-typography);
+
 $theme: mat.define-light-theme(
   (
     color: (
@@ -96,4 +96,3 @@ $theme: mat.define-light-theme(
 );
 
 @include mat.all-component-themes($theme);
-//@include mat.all-component-typographies($theme-typography);
