@@ -37,6 +37,7 @@
             "allow": ["debug", "info", "warn", "error"]
           }
         ],
+        "prefer-const": "error",
         "@typescript-eslint/explicit-function-return-type": [
           "error",
           { "allowExpressions": true }

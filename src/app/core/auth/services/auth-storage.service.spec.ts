@@ -54,7 +54,7 @@ describe('AuthStorageService', () => {
   });
 
   it('defaults to no authorization upon creation', () => {
-    getItemSpy.mockImplementation((key: string) => {
+    getItemSpy.mockImplementation((_key: string) => {
       return null;
     });
 
@@ -69,7 +69,7 @@ describe('AuthStorageService', () => {
   });
 
   describe('when the login state is set', () => {
-    let listener = jest.fn();
+    const listener = jest.fn();
 
     beforeEach(() => {
       listener.mockClear();
@@ -98,7 +98,7 @@ describe('AuthStorageService', () => {
   });
 
   describe('when the human state is set', () => {
-    let listener = jest.fn();
+    const listener = jest.fn();
 
     beforeEach(() => {
       listener.mockClear();

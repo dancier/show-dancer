@@ -10,7 +10,7 @@ export class AppInstanceStorageService {
   constructor() {}
 
   initializeAppInstanceId(): string {
-    let appInstanceId = uuid();
+    const appInstanceId = uuid();
     return this.setAppInstanceId(appInstanceId);
   }
 
