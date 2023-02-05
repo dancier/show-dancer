@@ -8,9 +8,8 @@ describe('ResendVerificationLinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResendVerificationLinkComponent ]
-    })
-    .compileComponents();
+      declarations: [ResendVerificationLinkComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ResendVerificationLinkComponent);
     component = fixture.componentInstance;

@@ -11,12 +11,11 @@ import { ChatListEntryComponent } from './components/chat/chat-list-entry.compon
 import { ChatMessagesComponent } from './components/chat-messages/chat-messages.component';
 import { SharedModule } from '@shared/shared.module';
 
-
 @NgModule({
   declarations: [
     ChatPageComponent,
     ChatListEntryComponent,
-    ChatMessagesComponent
+    ChatMessagesComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +25,7 @@ import { SharedModule } from '@shared/shared.module';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
-export class ChatModule { }
+export class ChatModule {}

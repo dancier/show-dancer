@@ -46,7 +46,8 @@ export class SendVerificationLinkFormComponent implements OnInit {
     this.onSubmit =
       this.linkType === 'PASSWORD_RESET'
         ? (email) => this.authenticationService.requestPasswordChange({ email })
-        : (email) => this.authenticationService.requestEmailValidationCode({ email });
+        : (email) =>
+            this.authenticationService.requestEmailValidationCode({ email });
   }
 
   captchaResolved(captchaToken: string): void {

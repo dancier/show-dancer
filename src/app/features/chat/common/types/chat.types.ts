@@ -18,7 +18,7 @@ export type ChatType = 'GROUP' | 'DIRECT';
 
 export type ChatList = {
   chats: Chat[];
-}
+};
 
 export type DancersRequest = {
   dancerIds: DancerId[];
@@ -38,18 +38,18 @@ export type DancerMap = {
 };
 
 export type MessagesByChatMap = {
-  [key: string]: ChatMessage[]
-}
+  [key: string]: ChatMessage[];
+};
 
 export type ChatsAndDancers = {
-  chatList: Chat[],
-  dancerMap: DancerMap
-}
+  chatList: Chat[];
+  dancerMap: DancerMap;
+};
 
 export type MessageResponse = {
-  messages: ChatMessage[]
-}
+  messages: ChatMessage[];
+};
 
 export type CreateMessageRequest = {
-  text: string
-}
+  text: string;
+};

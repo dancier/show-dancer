@@ -33,11 +33,11 @@ export class ChatMessagesComponent implements OnInit {
   submitForm(): void {
     if (this.addMessageForm.valid && this.addMessageForm.value.text) {
       const text = this.addMessageForm.value.text;
-      this.chatService.createAndFetchMessages$(text).subscribe(response => {
+      this.chatService.createAndFetchMessages$(text).subscribe((response) => {
         if (response.isSuccess) {
-          this.addMessageForm.setValue({text: ''})
+          this.addMessageForm.setValue({ text: '' });
         } else {
-          this.error = response.error
+          this.error = response.error;
         }
       });
     }
