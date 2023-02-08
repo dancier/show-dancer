@@ -52,7 +52,7 @@ export class ChatHttpService {
 
   getChatsAndDancers$(): Observable<APIResponse<ChatsAndDancers>> {
     return this.http
-      .get<ChatList>(`${this.chatApiUrl}`, this.defaultOptions)
+      .get<ChatList>(this.chatApiUrl, this.defaultOptions)
       .pipe(
         switchMap((chatList) => {
           const dancerIds = new Map();
