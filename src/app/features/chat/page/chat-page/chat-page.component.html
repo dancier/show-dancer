@@ -1,4 +1,4 @@
-<div *ngIf="chatService.dancers$ | async as dancers">
+<div *ngIf="chatData$ | async as chatData">
   <code></code>
   <div class="chat-header">
     <h1>Deine Chats</h1>
@@ -6,12 +6,12 @@
   <mat-grid-list cols="2">
     <mat-grid-tile>
       <div>
-        <div *ngFor="let chat of chatService.chats$ | async">
+        <div *ngFor="let chat of chatData.chats">
           <app-chat-list-entry
-            *ngIf="profileService.profile$ | async as profile"
+            *ngIf="chatData.profile as profile"
             [currentUser]="profile.id"
             [chat]="chat"
-            [dancers]="dancers"
+            [dancers]="chatData.dancers"
             (click)="selectChat(chat.chatId)"
           ></app-chat-list-entry>
         </div>

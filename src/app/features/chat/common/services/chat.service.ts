@@ -61,7 +61,7 @@ export class ChatService {
       );
   }
 
-  fetchChatsAndDancers(): void {
+  private fetchChatsAndDancers(): void {
     this.chatHttpService.getChatsAndDancers$().subscribe((response) => {
       if (response.isSuccess) {
         this._chats.next(response.payload.chatList);
@@ -127,7 +127,7 @@ export class ChatService {
     this._messagesByChat.next(updatedMessagesForAllChats);
   }
 
-  getExistingMessagesForChat(chatId: string): ChatMessage[] {
+  private getExistingMessagesForChat(chatId: string): ChatMessage[] {
     return this._messagesByChat.value[chatId];
   }
 
@@ -135,15 +135,15 @@ export class ChatService {
     this.selectedChatId = chatId;
   }
 
-  distinctAndSortedMessages(messages: ChatMessage[]): ChatMessage[] {
+  private distinctAndSortedMessages(messages: ChatMessage[]): ChatMessage[] {
     if (!messages) {
       return [];
     }
     const result = [];
-    const map = new Map();
+    const mapOfMessageIds = new Map();
     for (const message of messages) {
-      if (!map.has(message.id)) {
-        map.set(message.id, true); // set any value to Map
+      if (!mapOfMessageIds.has(message.id)) {
+        mapOfMessageIds.set(message.id, true); // set any value to Map
         result.push(message);
       }
     }

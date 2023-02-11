@@ -1,3 +1,5 @@
+import { Profile } from "@features/profile/common/types/profile.types";
+
 export type Chat = {
   chatId: string;
   dancerIds: DancerId[];
@@ -53,3 +55,9 @@ export type MessageResponse = {
 export type CreateMessageRequest = {
   text: string;
 };
+
+export type ChatData ={
+  chats: Chat[],
+  dancers: DancerMap,
+  profile: Profile
+}
