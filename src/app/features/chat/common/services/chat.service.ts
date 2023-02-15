@@ -50,7 +50,7 @@ export class ChatService {
   }
 
   fetchNewMessages(chatId: string): void {
-    let lastMessageId = this.selectedChat?.lastMessage.id;
+    const lastMessageId = this.selectedChat?.lastMessage.id;
 
     this.chatHttpService
       .getMessages(chatId, lastMessageId)
@@ -62,14 +62,14 @@ export class ChatService {
   }
 
   addMessagesToChat(messageResponse: MessageResponse, chatId: string): void {
-    let existingMessagesForChat = this.getExistingMessagesForChat(chatId);
-    let allMessagesForChat = existingMessagesForChat
+    const existingMessagesForChat = this.getExistingMessagesForChat(chatId);
+    const allMessagesForChat = existingMessagesForChat
       .concat(messageResponse.messages)
       .sort(
         (a, b) =>
           Date.parse(a.createdAt).valueOf() - Date.parse(b.createdAt).valueOf()
       );
-    let updatedMessagesForAllChats = { ...this._messagesByChat.value };
+    const updatedMessagesForAllChats = { ...this._messagesByChat.value };
     updatedMessagesForAllChats[chatId] = allMessagesForChat;
     this._messagesByChat.next(updatedMessagesForAllChats);
   }

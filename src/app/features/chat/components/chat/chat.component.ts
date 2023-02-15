@@ -16,11 +16,11 @@ export class ChatComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    let partnerId = this.chat?.dancerIds.find((id) => id !== this.currentUser);
+    const partnerId = this.chat?.dancerIds.find((id) => id !== this.currentUser);
     if (partnerId === undefined) {
       this.title = 'Unbekannt';
     } else {
-      let partner = this.dancers && this.dancers[partnerId];
+      const partner = this.dancers && this.dancers[partnerId];
       this.title = `${partner?.dancerName}, ${partner?.city}`;
     }
   }
