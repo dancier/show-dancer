@@ -1,17 +1,15 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { InitUserNameComponent } from "./edit/pages/init-user-name/init-user-name.component";
-import { LoggedInGuard } from "@core/auth/guards/logged-in.guard";
-import { InitPersonalDataComponent } from "./edit/pages/init-personal-data/init-personal-data.component";
-import { ProfilePageComponent } from "@features/profile/view/profile-page/profile-page.component";
-import { InitDanceExperienceComponent } from "./edit/pages/init-dance-experience/init-dance-experience.component";
-import {
-  InitPartnerDanceExperienceComponent
-} from "./edit/pages/init-partner-dance-experience/init-partner-dance-experience.component";
-import { InitProfileImageComponent } from "./edit/pages/init-profile-image/init-profile-image.component";
-import { DancerProfileSufficientGuard } from "./common/guards/dancer-profile-sufficient.guard";
-import { NarrowPageComponent } from "../../layout/narrow-page/narrow-page.component";
-import { EditProfileComponent } from "./edit/pages/edit-profile/edit-profile.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { InitUserNameComponent } from './edit/pages/init-user-name/init-user-name.component';
+import { LoggedInGuard } from '@core/auth/guards/logged-in.guard';
+import { InitPersonalDataComponent } from './edit/pages/init-personal-data/init-personal-data.component';
+import { ProfilePageComponent } from '@features/profile/view/profile-page/profile-page.component';
+import { InitDanceExperienceComponent } from './edit/pages/init-dance-experience/init-dance-experience.component';
+import { InitPartnerDanceExperienceComponent } from './edit/pages/init-partner-dance-experience/init-partner-dance-experience.component';
+import { InitProfileImageComponent } from './edit/pages/init-profile-image/init-profile-image.component';
+import { DancerProfileSufficientGuard } from './common/guards/dancer-profile-sufficient.guard';
+import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
+import { EditProfileComponent } from './edit/pages/edit-profile/edit-profile.component';
 
 export const routes: Routes = [
   {
@@ -32,7 +30,7 @@ export const routes: Routes = [
   {
     path: 'initial-setup',
     component: NarrowPageComponent,
-    canActivate: [LoggedInGuard],
+    canActivate: [],
     canActivateChild: [],
     children: [
       {

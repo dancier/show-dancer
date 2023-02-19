@@ -21,7 +21,7 @@ export class InitUserNameComponent {
   usernameForm = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
   });
-  error?: APIError = 'NAME_ALREADY_EXISTS';
+  error?: APIError;
 
   constructor(
     public profileService: ProfileService,

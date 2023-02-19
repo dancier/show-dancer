@@ -24,7 +24,8 @@
       "@core/*": ["src/app/core/*"],
       "@shared/*": ["src/app/shared/*"],
       "@features/*": ["src/app/features/*"],
-      "@data/*": ["src/app/data/*"]
+      "@data/*": ["src/app/data/*"],
+      "@test-utils/*": ["src/app/test-utils/*"]
     }
   },
   "angularCompilerOptions": {
