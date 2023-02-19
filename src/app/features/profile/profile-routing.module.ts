@@ -30,7 +30,7 @@ export const routes: Routes = [
   {
     path: 'initial-setup',
     component: NarrowPageComponent,
-    canActivate: [],
+    canActivate: [LoggedInGuard],
     canActivateChild: [],
     children: [
       {
