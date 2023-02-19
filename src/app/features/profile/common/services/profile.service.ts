@@ -104,7 +104,7 @@ export class ProfileService {
     // TODO: actually check if the profile is sufficient
     return this.profile$.pipe(
       map((profile) => {
-        let isProfileSufficient =
+        const isProfileSufficient =
           !!profile.dancerName &&
           !!profile.birthDate &&
           profile.wantsTo.length > 0 &&
