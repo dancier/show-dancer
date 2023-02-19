@@ -1,0 +1,25 @@
+<div
+  *ngIf="chatService.selectedChatId && (chatService.messagesByChat$ | async) as messagesByChat"
+>
+  <div *ngFor="let message of messagesByChat[chatService.selectedChatId!]">
+    {{message.text}}
+  </div>
+  <form (ngSubmit)="submitForm()" [formGroup]="addMessageForm" novalidate>
+    <mat-form-field appearance="standard" class="full-width">
+      <mat-label>Neue Nachricht</mat-label>
+      <input
+        data-test="text-field"
+        formControlName="text"
+        matInput
+        type="text"
+      />
+    </mat-form-field>
+
+    <button class="big-button" color="primary" mat-flat-button type="submit">
+      Senden
+    </button>
+    <mat-error *ngIf="error">
+      <span> {{error | errorMessage}} </span>
+    </mat-error>
+  </form>
+</div>

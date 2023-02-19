@@ -4,8 +4,11 @@ import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { EnvironmentService } from '@core/common/environment.service';
 import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
 import {
+  Chat,
   ChatList,
   ChatsAndDancers,
+  CreateMessageRequest,
+  DancerId,
   DancerMap,
   MessageResponse,
 } from '../types/chat.types';
@@ -28,27 +31,17 @@ export class ChatHttpService {
     this.dancerApiUrl = `${this.environment.getApiUrl()}/dancers`;
   }
 
-  getChatsAndDancers$(): Observable<APIResponse<ChatsAndDancers>> {
+  createMessage$(
+    chatId: string,
+    message: CreateMessageRequest
+  ): Observable<APIResponse<void>> {
     return this.http
-      .get<ChatList>(`${this.chatApiUrl}`, this.defaultOptions)
+      .post<void>(
+        `${this.chatApiUrl}/${chatId}/messages`,
+        message,
+        this.defaultOptions
+      )
       .pipe(
-        switchMap((chatList) => {
-          const dancerIds = new Set(
-            chatList.chats.flatMap((chat) => chat.dancerIds)
-          );
-          const request = {
-            dancerIds: Array.from(dancerIds.values()),
-          };
-          return this.http
-            .post<DancerMap>(
-              `${this.dancerApiUrl}`,
-              request,
-              this.defaultOptions
-            )
-            .pipe(
-              map((dancerMap) => ({ dancerMap, chatList: chatList.chats }))
-            );
-        }),
         map(asSuccess),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
@@ -59,7 +52,35 @@ export class ChatHttpService {
       );
   }
 
-  getMessages(
+  getChatsAndDancers$(): Observable<APIResponse<ChatsAndDancers>> {
+    return this.http.get<ChatList>(this.chatApiUrl, this.defaultOptions).pipe(
+      map((chatList) => {
+        const dancerIds = this.getAllDancerIds(chatList.chats);
+        return {
+          chatList,
+          dancerIds,
+        };
+      }),
+      switchMap(({ chatList, dancerIds }) => {
+        const request = {
+          dancerIds: dancerIds,
+        };
+
+        return this.http
+          .post<DancerMap>(`${this.dancerApiUrl}`, request, this.defaultOptions)
+          .pipe(map((dancerMap) => ({ dancerMap, chatList: chatList.chats })));
+      }),
+      map((value) => asSuccess(value)),
+      catchError((error: HttpErrorResponse) => {
+        switch (error.status) {
+          default:
+            return of(asError('SERVER_ERROR'));
+        }
+      })
+    );
+  }
+
+  getMessages$(
     chatId: string,
     lastMessageId: string | null | undefined
   ): Observable<APIResponse<MessageResponse>> {
@@ -83,5 +104,17 @@ export class ChatHttpService {
           }
         })
       );
+  }
+
+  private getAllDancerIds(chats: Chat[]): DancerId[] {
+    const dancerIds = new Map();
+    chats
+      .flatMap((chat) => chat.dancerIds)
+      .forEach((dancerId) => {
+        if (!dancerIds.has(dancerId)) {
+          dancerIds.set(dancerId, true);
+        }
+      });
+    return Array.from(dancerIds.keys());
   }
 }
