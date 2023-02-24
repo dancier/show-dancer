@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
+import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { RegistrationRoutingModule } from '@features/registration/registration-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { VerificationRequiredComponent } from './components/verification-required/verification-required.component';
@@ -13,7 +13,7 @@ import { VerifyAccountComponent } from './components/verify-account/verify-accou
 import { VerificationErrorComponent } from './components/verification-error/verification-error.component';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SendVerificationLinkFormComponent } from './components/send-verification-link-form/send-verification-link-form.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';

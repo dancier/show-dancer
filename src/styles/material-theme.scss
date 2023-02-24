@@ -75,13 +75,13 @@ $theme-accent: mat.define-palette($dancier-palette-accent);
 $theme-warn: mat.define-palette($dancier-palette-primary);
 
 // Typography
-$theme-typography: mat.define-legacy-typography-config(
+$theme-typography: mat.define-typography-config(
   $font-family: 'Dosis',
-  $input: mat.define-typography-level(18px, 1.35, 400),
+  $body-1: mat.define-typography-level(18px, 1.35, 400),
   $button: mat.define-typography-level(18px, 1.35, 400),
   $caption: mat.define-typography-level(13px, 1.35, 400),
-  $body-1: mat.define-typography-level(18px, 1.35, 400),
-  $body-2: mat.define-typography-level(18px, 1.35, 700),
+  $body-2: mat.define-typography-level(18px, 1.35, 400),
+  $subtitle-2: mat.define-typography-level(18px, 1.35, 700),
 );
 // TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
 //  The following line adds:
@@ -91,8 +91,8 @@ $theme-typography: mat.define-legacy-typography-config(
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy($theme-typography);`
-@include mat.all-legacy-component-typographies($theme-typography);
-@include mat.legacy-core();
+@include mat.all-component-typographies($theme-typography);
+@include mat.core();
 
 $theme: mat.define-light-theme(
   (
@@ -104,4 +104,4 @@ $theme: mat.define-light-theme(
   )
 );
 
-@include mat.all-legacy-component-themes($theme);
+@include mat.all-component-themes($theme);
