@@ -118,11 +118,11 @@ export class ChatService {
     if (messageResponse.messages.length === 0) {
       return;
     }
-    let existingMessagesForChat = this.getExistingMessagesForChat(chatId) || [];
-    let allMessagesForChat = this.distinctAndSortedMessages(
+    const existingMessagesForChat = this.getExistingMessagesForChat(chatId) || [];
+    const allMessagesForChat = this.distinctAndSortedMessages(
       existingMessagesForChat.concat(messageResponse.messages)
     );
-    let updatedMessagesForAllChats = { ...this._messagesByChat.value };
+    const updatedMessagesForAllChats = { ...this._messagesByChat.value };
     updatedMessagesForAllChats[chatId] = allMessagesForChat;
     this._messagesByChat.next(updatedMessagesForAllChats);
   }
