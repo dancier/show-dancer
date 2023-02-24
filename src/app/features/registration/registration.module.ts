@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegistrationRoutingModule } from '@features/registration/registration-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { VerificationRequiredComponent } from './components/verification-required/verification-required.component';
@@ -43,7 +42,6 @@ import { ResendVerificationLinkComponent } from './components/resend-verificatio
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    FlexLayoutModule,
     RecaptchaModule,
     RecaptchaFormsModule,
     ReactiveFormsModule,
