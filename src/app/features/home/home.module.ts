@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
@@ -36,8 +35,6 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    FlexModule,
-    ExtendedModule,
     MatIconModule,
     MatButtonModule,
     SharedModule,
