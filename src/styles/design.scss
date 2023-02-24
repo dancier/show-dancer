@@ -37,3 +37,11 @@ $dancier-palette-grey: (
     @error 'Invalid shadow size: #{$size}';
   }
 }
+
+// Tailwind CSS customizations
+
+@layer components {
+  .page-header {
+    @apply my-6 text-2xl;
+  }
+}
