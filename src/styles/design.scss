@@ -40,6 +40,12 @@ $dancier-palette-grey: (
 
 // Tailwind CSS customizations
 
+@layer base {
+  a {
+    @apply text-red-600 underline;
+  }
+}
+
 @layer components {
   .page-header {
     @apply my-6 text-2xl;

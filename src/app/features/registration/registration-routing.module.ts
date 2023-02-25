@@ -9,44 +9,51 @@ import { ResetPasswordEmailVerificationComponent } from './components/reset-pass
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PasswordChangedComponent } from './components/password-changed/password-changed.component';
 import { ResendVerificationLinkComponent } from './components/resend-verification-link/resend-verification-link.component';
+import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: RegisterUserFormComponent,
+    component: NarrowPageComponent,
+    children: [
+      {
+        path: '',
+        component: RegisterUserFormComponent,
+      },
+      {
+        path: 'reset-password',
+        component: ResetPasswordComponent,
+      },
+      {
+        path: 'reset-password-success',
+        component: PasswordChangedComponent,
+      },
+      {
+        path: 'reset-password/:code',
+        component: NewPasswordComponent,
+      },
+      {
+        path: 'reset-password-verification',
+        component: ResetPasswordEmailVerificationComponent,
+      },
+      {
+        path: 'verify-account',
+        component: VerificationRequiredComponent,
+      },
+      {
+        path: 'verify-account/:code',
+        component: VerifyAccountComponent,
+      },
+      {
+        path: 'verify/error',
+        component: VerificationErrorComponent,
+      },
+      {
+        path: 'resend-verification-link',
+        component: ResendVerificationLinkComponent,
+      },
+    ],
   },
-  {
-    path: 'reset-password',
-    component: ResetPasswordComponent,
-  },
-  {
-    path: 'reset-password-success',
-    component: PasswordChangedComponent,
-  },
-  {
-    path: 'reset-password/:code',
-    component: NewPasswordComponent,
-  },
-  {
-    path: 'reset-password-verification',
-    component: ResetPasswordEmailVerificationComponent,
-  },
-  {
-    path: 'verify-account',
-    component: VerificationRequiredComponent,
-  },
-  {
-    path: 'verify-account/:code',
-    component: VerifyAccountComponent,
-  },
-  {
-    path: 'verify/error',
-    component: VerificationErrorComponent,
-  },
-  {
-    path: 'resend-verification-link',
-    component: ResendVerificationLinkComponent
-  }
 ];
 
 @NgModule({
