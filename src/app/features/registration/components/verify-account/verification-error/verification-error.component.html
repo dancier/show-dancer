@@ -1,13 +1,11 @@
-<div class="content-page-outer-container">
-  <div class="content-page-inner-container content-page-inner-container-narrow">
-    <h2>Der Link ist leider ungültig.</h2>
-    <p>
-      Der Link ist entweder abgelaufen oder ungültig. Bitte gib deine
-      Mail-Adresse nochmal ein um einen neuen Aktivierungslink zu erhalten.
-    </p>
+<h2 class="page-header">Der Link ist leider ungültig.</h2>
 
-    <app-send-verification-link-form
-      [linkType]="'ACCOUNT_ACTIVATION'"
-    ></app-send-verification-link-form>
-  </div>
-</div>
+<p>
+  Der Link ist entweder abgelaufen oder ungültig. Bitte gib deine Mail-Adresse
+  nochmal ein um einen neuen Aktivierungslink zu erhalten.
+</p>
+
+<app-send-verification-link-form
+  class="my-4"
+  [linkType]="'ACCOUNT_ACTIVATION'"
+></app-send-verification-link-form>

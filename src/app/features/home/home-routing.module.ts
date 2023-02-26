@@ -7,6 +7,7 @@ import { TermsAndConditionsComponent } from '@features/home/pages/terms-and-cond
 import { AboutUsComponent } from '@features/home/pages/about-us/about-us.component';
 import { BetaRegistrationPageComponent } from '@features/home/pages/beta-registration-page/beta-registration-page.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
 
 export const routes: Routes = [
   {
@@ -15,7 +16,13 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginPageComponent,
+    component: NarrowPageComponent,
+    children: [
+      {
+        path: '',
+        component: LoginPageComponent,
+      },
+    ],
   },
   {
     path: 'logout',
