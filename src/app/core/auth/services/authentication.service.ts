@@ -121,7 +121,6 @@ export class AuthenticationService {
       );
   }
 
-
   requestEmailValidationCode(
     emailValidationCodeRequest: EmailValidationCodeRequest
   ): Observable<APIResponse<void>> {

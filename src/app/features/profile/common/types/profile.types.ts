@@ -55,6 +55,7 @@ export type PersonalData = {
   birthDate: string;
   zipCode: string;
   city: string;
+  country: string;
 };
 
 export type Profile = PersonalData & {

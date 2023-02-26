@@ -45,8 +45,8 @@ export const routes: Routes = [
   },
   {
     path: 'resend-verification-link',
-    component: ResendVerificationLinkComponent
-  }
+    component: ResendVerificationLinkComponent,
+  },
 ];
 
 @NgModule({

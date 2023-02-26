@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RecommendationService } from '../../services/recommendation.service';
 
 @Component({
   selector: 'app-recommendations-overview',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./recommendations-overview.component.scss'],
 })
 export class RecommendationsOverviewComponent {
-  constructor() {}
+  recommendations$ = this.recommendationsService.getRecommendations$();
+
+  constructor(public recommendationsService: RecommendationService) {}
 }
