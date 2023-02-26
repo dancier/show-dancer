@@ -3,7 +3,7 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '@core/auth/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIError, APIResponse } from '@shared/http/response.types';
-import { LinkType } from '@features/registration/registration.types';
+import { LinkType } from '../../../registration.types';
 import { Observable } from 'rxjs';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 
