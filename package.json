@@ -52,7 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
     "autoprefixer": "^10.4.13",
-    "cypress": "^10.9.0",
+    "cypress": "^12.3.0",
     "cypress-light-theme": "^1.0.0",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",

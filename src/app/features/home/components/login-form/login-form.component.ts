@@ -49,7 +49,7 @@ export class LoginFormComponent implements OnInit {
 
   resendLink(): void {
     this.authService
-      .requestEmailValidationCode({email: this.loginForm.value.email})
+      .requestEmailValidationCode({ email: this.loginForm.value.email })
       .subscribe((response) => {
         if (response.isSuccess) {
           this.router.navigate(['registration/resend-verification-link']);

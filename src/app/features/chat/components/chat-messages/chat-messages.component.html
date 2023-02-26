@@ -1,8 +1,11 @@
 <div
-  *ngIf="chatService.selectedChatId && (chatService.messagesByChat$ | async) as messagesByChat"
+  *ngIf="
+    chatService.selectedChatId &&
+    (chatService.messagesByChat$ | async) as messagesByChat
+  "
 >
   <div *ngFor="let message of messagesByChat[chatService.selectedChatId!]">
-    {{message.text}}
+    {{ message.text }}
   </div>
   <form (ngSubmit)="submitForm()" [formGroup]="addMessageForm" novalidate>
     <mat-form-field class="full-width">
@@ -19,7 +22,7 @@
       Senden
     </button>
     <mat-error *ngIf="error">
-      <span> {{error | errorMessage}} </span>
+      <span> {{ error | errorMessage }} </span>
     </mat-error>
   </form>
 </div>

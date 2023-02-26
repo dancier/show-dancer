@@ -4,7 +4,15 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "module": "CommonJs",
-    "types": ["jest", "jest/expect"]
+    "types": ["jest"],
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true
   },
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
+  "files": ["src/polyfills.ts"],
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts",
+    "../node_modules/@types/jest"
+  ],
+  "exclude": ["cypress", "mocha", "chai", "node_modules", "cypress.config.ts"]
 }

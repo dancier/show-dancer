@@ -5,6 +5,7 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -16,14 +17,16 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2022",
-    "module": "es2022",
-    "lib": ["es2022", "dom"],
+    "useDefineForClassFields": false,
+    "target": "es2020",
+    "module": "es2020",
+    "lib": ["es2020", "dom"],
     "paths": {
       "@core/*": ["src/app/core/*"],
       "@shared/*": ["src/app/shared/*"],
       "@features/*": ["src/app/features/*"],
-      "@data/*": ["src/app/data/*"]
+      "@data/*": ["src/app/data/*"],
+      "@test-utils/*": ["src/app/test-utils/*"]
     }
   },
   "angularCompilerOptions": {
@@ -32,5 +35,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "exclude": ["cypress.config.ts", "cypress", "node_modules"]
+  "exclude": ["cypress", "mocha", "chai", "node_modules", "cypress.config.ts"]
 }

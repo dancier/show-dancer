@@ -29,8 +29,8 @@ const routes: Routes = [
       {
         path: 'recommendations',
         loadChildren: () =>
-          import('@features/recommendations/recommendations.module').then(
-            (m) => m.RecommendationsModule
+          import('@features/recommendation/recommendation.module').then(
+            (m) => m.RecommendationModule
           ),
       },
       {

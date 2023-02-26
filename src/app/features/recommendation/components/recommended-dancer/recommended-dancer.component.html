@@ -1,0 +1,15 @@
+<div class="wrapper">
+  <div class="dancer-image">
+    <img
+      [src]="imageService.getDancerImageSrcOrDefault(dancer.imageHash, 456)"
+      alt="Profilbild des Tänzers"
+    />
+  </div>
+  <div class="dancer-info">
+    <div class="dancer-header">
+      <span class="username">{{ dancer.name }}</span
+      >, {{ dancer.age }}
+    </div>
+    <div class="dancer-subheader">{{ dancer.city }}</div>
+  </div>
+</div>

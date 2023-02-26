@@ -7,7 +7,7 @@
   <mat-form-field class="full-width">
     <mat-label>Benutzername</mat-label>
     <input
-      data-test="username-field"
+      data-testid="username-field"
       formControlName="username"
       matInput
       type="username"
@@ -15,13 +15,13 @@
     <mat-hint>Wird öffentlich angezeigt.</mat-hint>
     <mat-error
       *ngIf="hasUsernameFieldError('required')"
-      data-test="username-field-empty"
+      data-testid="username-field-empty"
     >
       Bitte gib einen Benutzernamen ein.
     </mat-error>
     <mat-error
       *ngIf="hasUsernameFieldError('minlength')"
-      data-test="username-field-empty"
+      data-testid="username-field-empty"
     >
       Gib mindestens 3 Zeichen ein.
     </mat-error>
@@ -31,11 +31,22 @@
     Dein Benutzername kann später nicht mehr geändert werden.
   </app-alert>
 
-  <app-alert *ngIf="error" alertType="error" icon="error">
-    <span> {{error | errorMessage}} </span>
+  <app-alert
+    *ngIf="error"
+    alertType="error"
+    icon="error"
+    data-testid="username-error"
+  >
+    <span> {{ error | errorMessage }} </span>
   </app-alert>
 
-  <button class="big-button" color="primary" mat-flat-button type="submit">
+  <button
+    class="big-button"
+    color="primary"
+    mat-flat-button
+    type="submit"
+    data-testid="submit-button"
+  >
     Nächster Schritt
   </button>
 </form>

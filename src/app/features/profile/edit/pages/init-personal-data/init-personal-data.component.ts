@@ -35,6 +35,7 @@ export class InitPersonalDataComponent {
       this.profileService
         .setPersonalData({
           ...formValues,
+          country: 'GER',
           birthDate: format(formValues.birthDate!, 'yyyy-MM-dd', {
             locale: de,
           }),

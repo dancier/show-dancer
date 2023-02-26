@@ -16,7 +16,9 @@ export class ChatListEntryComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    const partnerId = this.chat?.dancerIds.find((id) => id !== this.currentUser);
+    const partnerId = this.chat?.dancerIds.find(
+      (id) => id !== this.currentUser
+    );
     if (partnerId === undefined) {
       this.title = 'Unbekannt';
     } else {

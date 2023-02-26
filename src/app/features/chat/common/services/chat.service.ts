@@ -118,7 +118,8 @@ export class ChatService {
     if (messageResponse.messages.length === 0) {
       return;
     }
-    const existingMessagesForChat = this.getExistingMessagesForChat(chatId) || [];
+    const existingMessagesForChat =
+      this.getExistingMessagesForChat(chatId) || [];
     const allMessagesForChat = this.distinctAndSortedMessages(
       existingMessagesForChat.concat(messageResponse.messages)
     );
