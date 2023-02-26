@@ -22,6 +22,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'chat',
+        loadChildren: () =>
+          import('@features/chat/chat.module').then((m) => m.ChatModule),
+      },
+      {
         path: 'recommendations',
         loadChildren: () =>
           import('@features/recommendation/recommendation.module').then(

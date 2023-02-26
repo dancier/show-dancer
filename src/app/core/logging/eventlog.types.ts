@@ -3,6 +3,7 @@ export type Topic =
   | 'page_request_via_advertisement'
   | 'contact_message_sent'
   | 'human_session_created'
+  | 'navigated_to_page'
   | 'test';
 
 export type Metadata = {

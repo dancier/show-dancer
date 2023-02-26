@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EventLogService } from '@core/logging/event-log.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppInstanceStorageService } from '@core/logging/app-instance/app-instance-storage.service';

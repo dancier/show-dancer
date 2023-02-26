@@ -5,6 +5,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import {
+  EmailValidationCodeRequest,
   LoginRequest,
   PasswordChangeRequest,
   UserRegistration,
@@ -105,6 +106,28 @@ export class AuthenticationService {
       .post<void>(
         `${this.baseUrl}/password-changes`,
         passwordChangeRequest,
+        this.defaultOptions
+      )
+      .pipe(
+        map(asSuccess),
+        catchError((error: HttpErrorResponse) => {
+          switch (error.status) {
+            case 400:
+              return of(asError('VALIDATION_ERROR'));
+            default:
+              return of(asError('SERVER_ERROR'));
+          }
+        })
+      );
+  }
+
+  requestEmailValidationCode(
+    emailValidationCodeRequest: EmailValidationCodeRequest
+  ): Observable<APIResponse<void>> {
+    return this.http
+      .post<void>(
+        `${this.baseUrl}/email-validations`,
+        emailValidationCodeRequest,
         this.defaultOptions
       )
       .pipe(

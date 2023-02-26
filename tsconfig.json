@@ -17,6 +17,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "useDefineForClassFields": false,
     "target": "es2020",
     "module": "es2020",
     "lib": ["es2020", "dom"],
@@ -24,7 +25,8 @@
       "@core/*": ["src/app/core/*"],
       "@shared/*": ["src/app/shared/*"],
       "@features/*": ["src/app/features/*"],
-      "@data/*": ["src/app/data/*"]
+      "@data/*": ["src/app/data/*"],
+      "@test-utils/*": ["src/app/test-utils/*"]
     }
   },
   "angularCompilerOptions": {

@@ -1,0 +1,24 @@
+<div *ngIf="chatData$ | async as chatData">
+  <code></code>
+  <div class="chat-header">
+    <h1>Deine Chats</h1>
+  </div>
+  <mat-grid-list cols="2">
+    <mat-grid-tile>
+      <div>
+        <div *ngFor="let chat of chatData.chats">
+          <app-chat-list-entry
+            *ngIf="chatData.profile as profile"
+            [currentUser]="profile.id"
+            [chat]="chat"
+            [dancers]="chatData.dancers"
+            (click)="selectChat(chat.chatId)"
+          ></app-chat-list-entry>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <app-chat-messages> </app-chat-messages>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

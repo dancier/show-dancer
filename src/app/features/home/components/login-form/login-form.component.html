@@ -30,9 +30,9 @@
         formControlName="password"
         matInput
       />
-      <mat-icon (click)="hide = !hide" matSuffix
-        >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon
-      >
+      <mat-icon (click)="hide = !hide" matSuffix>{{
+        hide ? 'visibility_off' : 'visibility'
+      }}</mat-icon>
       <mat-error
         *ngIf="errorHandling('password', 'required')"
         data-test="password-field-empty"
@@ -49,8 +49,20 @@
       Anmelden
     </button>
     <mat-error *ngIf="error">
-      <span> {{error | errorMessage}} </span>
+      <span> {{ error | errorMessage }} </span>
     </mat-error>
-    <a href="registration/reset-password">Passwort vergessen?</a>
+    <ng-container
+      *ngIf="
+        error === 'EMAIL_NOT_VALIDATED';
+        then emailNotValidatedLink;
+        else passwordResetLink
+      "
+    ></ng-container>
+    <ng-template #emailNotValidatedLink>
+      <a [routerLink]="" (click)="resendLink()">Keine E-Mail erhalten?</a>
+    </ng-template>
+    <ng-template #passwordResetLink>
+      <a href="registration/reset-password">Passwort vergessen?</a>
+    </ng-template>
   </mat-card-content>
 </form>
