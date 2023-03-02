@@ -1,10 +1,8 @@
 <form (ngSubmit)="submitForm()" [formGroup]="usernameForm" novalidate>
-  <h1>Willkommen bei Dancier!</h1>
-  <p class="no-margin">
-    Wie dürfen wir dich nennen? Gib deinen Benutzernamen unten ein.
-  </p>
+  <h1 class="page-header">Willkommen bei Dancier!</h1>
+  <p>Wie dürfen wir dich nennen? Gib deinen Benutzernamen unten ein.</p>
 
-  <mat-form-field class="full-width">
+  <mat-form-field class="w-full">
     <mat-label>Benutzername</mat-label>
     <input
       data-testid="username-field"

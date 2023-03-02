@@ -1,8 +1,8 @@
 <form (ngSubmit)="submitForm()" [formGroup]="personalDataForm">
-  <h1>Persönliche Daten</h1>
+  <h1 class="page-header">Persönliche Daten</h1>
 
   <div class="form-info">
-    <p>
+    <p class="mb-2">
       Um dir passende Tanzpartner vorschlagen zu können, benötigen wir noch ein
       paar Angaben von dir.
     </p>
@@ -14,7 +14,7 @@
   ></app-personal-data-form>
 
   <mat-error *ngIf="error">
-    <span> {{error | errorMessage}} </span>
+    <span> {{ error | errorMessage }} </span>
   </mat-error>
 
   <button class="big-button" color="primary" mat-flat-button type="submit">

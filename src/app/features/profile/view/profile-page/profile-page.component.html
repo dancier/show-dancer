@@ -4,17 +4,17 @@
       <img [src]="profileService.getProfileImageSrc()" alt="Profile Image" />
     </div>
     <div class="profile-info">
-      <h1 class="profile-name">
-        {{profile.dancerName}}, {{profile.birthDate | age}}
+      <h1 class="text-2xl">
+        {{ profile.dancerName }}, {{ profile.birthDate | age }}
       </h1>
-      <div class="profile-location">
+      <div class="profile-location text-lg">
         <!--  TODO: Location Icon -->
         Dortmund
       </div>
-      <div class="profile-header-info">
-        <div>{{profile.gender | displayGender}}</div>
+      <div class="profile-header-info text-lg">
+        <div>{{ profile.gender | displayGender }}</div>
         <div>•</div>
-        <div>{{profile.size}}cm groß</div>
+        <div>{{ profile.size }}cm groß</div>
       </div>
     </div>
   </div>
@@ -25,10 +25,10 @@
       *ngFor="let danceExperience of profile.ableTo"
       class="dance-experience-item"
     >
-      <div class="dance-title">{{danceExperience.dance}}</div>
+      <div class="dance-title">{{ danceExperience.dance }}</div>
       <div class="dance-info">
-        {{danceExperience.level | displayDanceLevel}}, {{danceExperience.leading
-        | displayDanceRole}}
+        {{ danceExperience.level | displayDanceLevel }},
+        {{ danceExperience.leading | displayDanceRole }}
       </div>
     </div>
   </div>

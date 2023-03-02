@@ -3,7 +3,7 @@
     <mat-label>Geschlecht</mat-label>
     <mat-select data-test="gender-field" formControlName="gender">
       <mat-option *ngFor="let gender of genderList" [value]="gender.type">
-        {{gender.description}}
+        {{ gender.description }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -36,11 +36,13 @@
       matInput
       type="number"
     />
-    <span matSuffix>cm</span>
+    <span matTextSuffix>cm</span>
     <mat-error
-      *ngIf="hasFieldError('size', 'required')
-          || hasFieldError('size', 'min')
-          || hasFieldError('size', 'max')"
+      *ngIf="
+        hasFieldError('size', 'required') ||
+        hasFieldError('size', 'min') ||
+        hasFieldError('size', 'max')
+      "
       align="end"
     >
       Bitte gib eine gültige Körpergröße ein.
@@ -57,9 +59,11 @@
     />
     <mat-hint align="end">Nur dein Wohnort wird öffentlich angezeigt.</mat-hint>
     <mat-error
-      *ngIf="hasFieldError('zipCode', 'required')
-          || hasFieldError('zipCode', 'pattern')
-          || hasFieldError('zipCode', 'cityLookup')"
+      *ngIf="
+        hasFieldError('zipCode', 'required') ||
+        hasFieldError('zipCode', 'pattern') ||
+        hasFieldError('zipCode', 'cityLookup')
+      "
     >
       Bitte gib eine gültige Postleitzahl ein.
     </mat-error>

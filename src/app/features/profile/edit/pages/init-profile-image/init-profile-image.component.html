@@ -1,7 +1,7 @@
 <div>
-  <h1>Profilbild hochladen</h1>
+  <h1 class="page-header">Profilbild hochladen</h1>
 
-  <div class="form-info">
+  <div class="form-info mb-4">
     <p>
       Erhöhe deine Chancen einen Tanzpartner zu finden, indem du ein Profilbild
       hochlädst.
@@ -25,16 +25,18 @@
     type="file"
   />
 
-  <div class="image-cropper-container" *ngIf="imageChangedEvent">
-    <image-cropper
-      (imageCropped)="imageCropped($event)"
-      [aspectRatio]="4 / 4"
-      [imageChangedEvent]="imageChangedEvent"
-      [maintainAspectRatio]="true"
-      [roundCropper]="true"
-      format="png"
-    ></image-cropper>
-  </div>
+  <ng-container *ngIf="imageChangedEvent">
+    <p class="mt-4 mb-2">Bitte schneide das Bild hier zu:</p>
+    <div class="image-cropper-container">
+      <image-cropper
+        (imageCropped)="imageCropped($event)"
+        [aspectRatio]="4 / 4"
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        format="png"
+      ></image-cropper>
+    </div>
+  </ng-container>
 
   <div class="buttons">
     <button class="btn-skip big-button" mat-button (click)="nextStep()">
