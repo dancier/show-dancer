@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RecommendedDancer } from '../../types/recommended-dancers.types';
 import { ImageService } from '@core/image/image.service';
 import { EventLogService } from '@core/logging/event-log.service';
@@ -10,7 +10,7 @@ import { AuthStorageService } from '@core/auth/services/auth-storage.service';
   templateUrl: './recommended-dancer.component.html',
   styleUrls: ['./recommended-dancer.component.scss'],
 })
-export class RecommendedDancerComponent {
+export class RecommendedDancerComponent implements OnInit {
   @Input()
   dancer!: RecommendedDancer;
 
