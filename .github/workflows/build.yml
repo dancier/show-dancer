@@ -1,4 +1,4 @@
-name: deploy
+name: build
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
 
     env:
