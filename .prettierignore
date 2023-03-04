@@ -1,4 +1,8 @@
-# *.html
+# Build directories
+**/build
+**/dist
+**/coverage
 .angular
-dist
-package-lock.json
+
+# Github Workflows
+.github/workflows
