@@ -1,6 +1,6 @@
-# ShowDancer
+# Dancier Website
 
-Frontend for dancier.net. Built with Angular.
+This repository houses the Angular frontend for the [dancier.net](https://dancier.net/) website.
 
 ## Development
 
@@ -10,16 +10,6 @@ Frontend for dancier.net. Built with Angular.
    We recommend using the latest LTS version.
 
 2. Run `npm install` to install all dependencies.
-
-3. Run `npm run prepare` once to install git commit hooks on your machine (powered by [Husky](https://typicode.github.io/husky/)).
-
-[Husky](https://typicode.github.io/husky/) will add these git hooks to your local machine:
-
-- Run [ESLint](https://eslint.org/) (with `--fix` option) before every commit.
-  If the linting fails, the commit will be aborted.
-- Run [Prettier](https://prettier.io/) on changed files before every commit.
-
-This helps to keep the codebase consistent and avoid bugs.
 
 ### Development server
 
@@ -45,9 +35,17 @@ This command will run in the CLI and run tests inside a headless browser.
 For a more interactive experience, run `npm run cy:open` to open the Cypress test runner.
 It allows you to time travel through tests, see the state of the application at any point in time, and more.
 
+### Keeping the codebase consistent
+
+We use [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) to keep the codebase consistent and avoid bugs.
+
+These tools are configured to run automatically before every commit. This is done by two tools, [Husky](https://typicode.github.io/husky/) which configures the precommit hook and [lint-staged](https://github.com/okonet/lint-staged#readme) which runs scripts on the staged files.
+
+You can find the configuration for lint-staged in the [package.json](package.json) file.
+
 ### Development patterns
 
 Whenever we decide on a pattern we want to use during development,
 we add it to the list of development patterns.
 
-You can find the development patterns in the [docs/patterns.md](patterns.md) file.
+You can find the development patterns in the [docs/patterns.md](docs/patterns.md) file.
