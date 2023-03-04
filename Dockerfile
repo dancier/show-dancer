@@ -4,6 +4,8 @@
 
 # Name the node stage "builder"
 FROM node:lts AS builder
+# Prevent Husky from installing git hooks during build
+ENV HUSKY 0
 # Set working directory
 WORKDIR /app
 # Copy all files from current directory to working dir in image

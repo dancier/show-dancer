@@ -7,6 +7,7 @@ import { TermsAndConditionsComponent } from '@features/home/pages/terms-and-cond
 import { AboutUsComponent } from '@features/home/pages/about-us/about-us.component';
 import { BetaRegistrationPageComponent } from '@features/home/pages/beta-registration-page/beta-registration-page.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
 
 export const routes: Routes = [
   {
@@ -14,28 +15,34 @@ export const routes: Routes = [
     component: LandingPageComponent,
   },
   {
-    path: 'login',
-    component: LoginPageComponent,
-  },
-  {
-    path: 'logout',
-    component: LogoutPageComponent,
-  },
-  {
-    path: 'terms-and-conditions',
-    component: TermsAndConditionsComponent,
-  },
-  {
-    path: 'about-us',
-    component: AboutUsComponent,
-  },
-  {
-    path: 'contact',
-    component: ContactComponent,
-  },
-  {
-    path: 'beta-registration',
-    component: BetaRegistrationPageComponent,
+    path: '',
+    component: NarrowPageComponent,
+    children: [
+      {
+        path: 'about-us',
+        component: AboutUsComponent,
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+      },
+      {
+        path: 'logout',
+        component: LogoutPageComponent,
+      },
+      {
+        path: 'terms-and-conditions',
+        component: TermsAndConditionsComponent,
+      },
+      {
+        path: 'beta-registration',
+        component: BetaRegistrationPageComponent,
+      },
+      {
+        path: 'login',
+        component: LoginPageComponent,
+      },
+    ],
   },
 ];
 

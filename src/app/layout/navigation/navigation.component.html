@@ -8,11 +8,7 @@
     /></a>
   </div>
   <div class="header-right">
-    <div
-      class="burger-menu"
-      data-test="burger-menu-opener"
-      ngStyle.gt-xs="display:none"
-    >
+    <div class="burger-menu block sm:hidden" data-test="burger-menu-opener">
       <mat-menu #menu="matMenu">
         <div data-test="burger-menu">
           <ng-container
@@ -69,12 +65,11 @@
         [matMenuTriggerFor]="menu"
         aria-label="Example icon-button with a menu"
         mat-icon-button
-        ngStyle.gt-xs="display:none"
       >
         <mat-icon>menu</mat-icon>
       </button>
     </div>
-    <div class="nav-items" data-test="desktop-nav" ngStyle.xs="display:none">
+    <div class="nav-items hidden gap-2 sm:flex" data-test="desktop-nav">
       <ng-container *ngIf="authStorageService.authData$ | async as authData">
         <a mat-button routerLink="about-us" routerLinkActive="active"
           ><span>Über Uns</span></a

@@ -14,7 +14,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer/footer.component';
-import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { ModernLayoutComponent } from './layout/modern-layout/modern-layout.component';
 import { NarrowPageComponent } from './layout/narrow-page/narrow-page.component';
 
@@ -44,8 +43,6 @@ import { NarrowPageComponent } from './layout/narrow-page/narrow-page.component'
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    FlexModule,
-    ExtendedModule,
   ],
   bootstrap: [AppComponent],
 })

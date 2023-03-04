@@ -1,12 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Run ESLint on all files that have changed
-echo "Running ESLint on changed files..."
-npx eslint src --fix --cache --max-warnings 0
-echo "ESLint complete."
-
-# Run Prettier on all staged files
-echo "Running Prettier on staged files..."
-npx pretty-quick --staged
-echo "Prettier complete."
+# See lint-staged config in package.json to see which actions are performed before every commit
+npx lint-staged

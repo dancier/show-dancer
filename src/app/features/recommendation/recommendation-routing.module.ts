@@ -1,6 +1,6 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { RecommendationsOverviewComponent } from "./pages/recommendations-overview/recommendations-overview.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { RecommendationsOverviewComponent } from './pages/recommendations-overview/recommendations-overview.component';
 
 export const routes: Routes = [
   {

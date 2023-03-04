@@ -3,9 +3,9 @@
 :host {
   display: block;
   border: 1px solid color-grey(200);
+  background-color: color-grey(100);
   @include rounded('md');
 
-  background-color: white;
   @include shadow('sm');
 
   position: relative;

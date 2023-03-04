@@ -60,11 +60,12 @@ $dancier-palette-grey: (
   line-height: 1.15;
   margin: 0;
   text-transform: none;
-  -webkit-appearance: button;
+  appearance: button;
 
   /* custom style */
   border: 1px solid color-grey(600);
   @include rounded('sm');
+
   padding: 8px 16px;
   font-size: 2rem;
   color: color-grey(600);

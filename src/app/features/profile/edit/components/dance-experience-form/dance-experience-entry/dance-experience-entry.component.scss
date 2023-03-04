@@ -18,6 +18,7 @@ mat-error {
   text-align: end;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
 input,
 mat-select {
   text-align: right;

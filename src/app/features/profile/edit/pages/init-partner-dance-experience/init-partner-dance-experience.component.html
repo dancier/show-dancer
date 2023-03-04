@@ -1,8 +1,8 @@
 <ng-container [formGroup]="form">
-  <h1>Tanzerfahrung des Partners</h1>
+  <h1 class="page-header">Tanzerfahrung des Partners</h1>
 
-  <div class="form-info">
-    <p>Welche Erfahrungen soll dein Tanzpartner mitbringen?</p>
+  <div class="form-info mb-4">
+    <p class="mb-2">Welche Erfahrungen soll dein Tanzpartner mitbringen?</p>
     <p>Wir werden dir darauf basierend potentielle Tanzpartner vorschlagen.</p>
   </div>
 
@@ -10,7 +10,7 @@
   </app-dance-experience-form>
 
   <mat-error *ngIf="apiError">
-    <span> {{apiError | errorMessage}} </span>
+    <span> {{ apiError | errorMessage }} </span>
   </mat-error>
 
   <button

@@ -1,8 +1,8 @@
-<h1>Profil bearbeiten</h1>
+<h1 class="page-header mb-2">Profil bearbeiten</h1>
 
-<p>Hier kannst du dein Profil bearbeiten.</p>
+<p class="mb-4">Hier kannst du dein Profil bearbeiten.</p>
 
-<h2>Profilbild</h2>
+<h2 class="my-4 text-2xl">Profilbild</h2>
 
 <div class="edit-profile-image">
   <div class="profile-image">
@@ -31,19 +31,19 @@
       [aspectRatio]="4 / 4"
       [imageChangedEvent]="imageChangedEvent"
       [maintainAspectRatio]="true"
-      [roundCropper]="true"
+      [roundCropper]="false"
       format="png"
     ></image-cropper>
   </div>
 </div>
 
-<h2>Persönliche Infos</h2>
+<h2 class="my-4 text-2xl">Persönliche Infos</h2>
 
 <app-personal-data-form
   [formGroup]="profileForm.controls.personalData"
 ></app-personal-data-form>
 
-<h2>Eigene Tanzerfahrung</h2>
+<h2 class="my-4 text-2xl">Eigene Tanzerfahrung</h2>
 
 <app-dance-experience-form
   [formGroup]="profileForm.controls.ownDances"
@@ -51,7 +51,7 @@
 >
 </app-dance-experience-form>
 
-<h2>Tanzerfahrung des Partners</h2>
+<h2 class="my-4 text-2xl">Tanzerfahrung des Partners</h2>
 
 <app-dance-experience-form
   [formGroup]="profileForm.controls.partnerDances"
@@ -60,7 +60,7 @@
 </app-dance-experience-form>
 
 <mat-error *ngIf="error">
-  <span> {{error | errorMessage}} </span>
+  <span> {{ error | errorMessage }} </span>
 </mat-error>
 
 <button

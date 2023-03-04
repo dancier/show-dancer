@@ -1,6 +1,7 @@
 <form (ngSubmit)="submitForm()" [formGroup]="loginForm" novalidate>
-  <mat-card-content class="login-form-container" fxLayout="column">
-    <mat-form-field appearance="fill" class="full-width" fxFlex>
+  <div class="login-form-container flex flex-col">
+    <h1 class="page-header">Anmelden</h1>
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>E-Mail</mat-label>
       <input
         data-test="email-field"
@@ -22,7 +23,7 @@
         Bitte geben Sie eine gültige E-Mail Adresse an.
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="full-width" fxFlex>
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Passwort</mat-label>
       <input
         [type]="hide ? 'password' : 'text'"
@@ -42,13 +43,14 @@
     </mat-form-field>
     <button
       [disabled]="!loginForm.valid"
-      class="full-width background-color-500"
+      class="full-width"
       data-test="submit-login"
       mat-raised-button
+      color="primary"
     >
       Anmelden
     </button>
-    <mat-error *ngIf="error">
+    <mat-error *ngIf="error" class="my-2">
       <span> {{ error | errorMessage }} </span>
     </mat-error>
     <ng-container
@@ -59,10 +61,12 @@
       "
     ></ng-container>
     <ng-template #emailNotValidatedLink>
-      <a [routerLink]="" (click)="resendLink()">Keine E-Mail erhalten?</a>
+      <a class="my-4" [routerLink]="" (click)="resendLink()"
+        >Keine E-Mail erhalten?</a
+      >
     </ng-template>
     <ng-template #passwordResetLink>
-      <a href="registration/reset-password">Passwort vergessen?</a>
+      <a class="my-4" href="registration/reset-password">Passwort vergessen?</a>
     </ng-template>
-  </mat-card-content>
+  </div>
 </form>

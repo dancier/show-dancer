@@ -1,5 +1,5 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
-import { SendVerificationLinkFormComponent } from '@features/registration/components/send-verification-link-form/send-verification-link-form.component';
+import { SendVerificationLinkFormComponent } from './send-verification-link-form.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
