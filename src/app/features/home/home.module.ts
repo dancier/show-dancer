@@ -16,6 +16,7 @@ import { BetaRegistrationPageComponent } from './pages/beta-registration-page/be
 import { SharedModule } from '@shared/shared.module';
 import { ContactComponent } from './pages/contact/contact.component';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { LogoutPageComponent } from './pages/logout-page/logout-page.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
     AboutUsComponent,
     BetaRegistrationPageComponent,
     ContactComponent,
+    LogoutPageComponent,
   ],
   imports: [
     FormsModule,

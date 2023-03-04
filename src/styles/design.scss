@@ -60,11 +60,12 @@ $dancier-palette-grey: (
   line-height: 1.15;
   margin: 0;
   text-transform: none;
-  -webkit-appearance: button;
+  appearance: button;
 
   /* custom style */
   border: 1px solid color-grey(600);
   @include rounded('sm');
+
   padding: 8px 16px;
   font-size: 2rem;
   color: color-grey(600);
@@ -75,22 +76,5 @@ $dancier-palette-grey: (
     border: 1px solid color-grey(800);
     color: color-grey(800);
     cursor: pointer;
-  }
-}
-
-// Tailwind CSS customizations
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  a {
-    @apply text-red-600 underline;
-  }
-}
-
-@layer components {
-  .page-header {
-    @apply my-6 text-3xl;
   }
 }

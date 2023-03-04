@@ -1,16 +1,16 @@
-<div class="content-inner-container" data-test="page-contact">
+<div data-test="page-contact">
   <ng-container
     *ngIf="!contactResponse || !contactResponse.isSuccess; else success"
   >
-    <h1>Kontaktiere uns</h1>
-    <p>
+    <h1 class="page-header">Kontaktiere uns</h1>
+    <p class="mb-2">
       Du kannst das untenstehende Textfeld nutzen, um uns Wünsche, Anregungen,
       Fragen und mehr zukommen zu lassen.
     </p>
-    <p>Wir freuen uns auf deine Nachricht.</p>
+    <p class="mb-2">Wir freuen uns auf deine Nachricht.</p>
 
     <form (ngSubmit)="submitForm()" [formGroup]="contactForm" novalidate>
-      <mat-card-content class="card-content-container" fxLayout="column">
+      <mat-card-content class="card-content-container flex flex-col">
         <ng-container *ngIf="authStorageService.authData$ | async as authData">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>E-Mail</mat-label>
@@ -39,12 +39,14 @@
             Es ist ein Fehler aufgetreten, bitte versuche es später erneut.
           </mat-error>
           <mat-error *ngIf="contactResponse && !contactResponse.isSuccess">
-            <span> {{ contactResponse.error | errorMessage }} </span>
+            <span>
+              {{ contactResponse.error | errorMessage }}
+            </span>
           </mat-error>
 
           <button
             [disabled]="!contactForm.valid || !authData.isHuman"
-            class="font-color-primary-800"
+            color="primary"
             mat-raised-button
           >
             Nachricht senden
@@ -55,7 +57,7 @@
   </ng-container>
 
   <ng-template #success>
-    <h1>Vielen Dank!</h1>
+    <h1 class="page-header">Vielen Dank!</h1>
     <p>
       Wir haben deine Nachricht erhalten und werden uns schnellstmöglich bei dir
       melden.

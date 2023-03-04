@@ -1,0 +1,16 @@
+// Tailwind CSS customizations
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  a {
+    @apply text-red-600 underline;
+  }
+}
+
+@layer components {
+  .page-header {
+    @apply my-6 text-3xl;
+  }
+}

@@ -15,34 +15,34 @@ export const routes: Routes = [
     component: LandingPageComponent,
   },
   {
-    path: 'login',
+    path: '',
     component: NarrowPageComponent,
     children: [
       {
-        path: '',
+        path: 'about-us',
+        component: AboutUsComponent,
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+      },
+      {
+        path: 'logout',
+        component: LogoutPageComponent,
+      },
+      {
+        path: 'terms-and-conditions',
+        component: TermsAndConditionsComponent,
+      },
+      {
+        path: 'beta-registration',
+        component: BetaRegistrationPageComponent,
+      },
+      {
+        path: 'login',
         component: LoginPageComponent,
       },
     ],
-  },
-  {
-    path: 'logout',
-    component: LogoutPageComponent,
-  },
-  {
-    path: 'terms-and-conditions',
-    component: TermsAndConditionsComponent,
-  },
-  {
-    path: 'about-us',
-    component: AboutUsComponent,
-  },
-  {
-    path: 'contact',
-    component: ContactComponent,
-  },
-  {
-    path: 'beta-registration',
-    component: BetaRegistrationPageComponent,
   },
 ];
 

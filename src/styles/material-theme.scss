@@ -84,7 +84,7 @@ $theme-typography: mat.define-typography-config(
   $subtitle-2: mat.define-typography-level(18px, 1.35, 700),
 );
 
-@include mat.core();
+@include mat.core;
 
 $theme: mat.define-light-theme(
   (

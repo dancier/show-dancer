@@ -1,8 +1,9 @@
 /* Import all other style files here... */
 @import './material-theme';
 @import './global';
+@import './design';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import './design';
+@import './tailwind';

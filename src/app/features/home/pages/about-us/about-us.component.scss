@@ -12,13 +12,3 @@ img {
   width: auto;
   height: 100%;
 }
-
-.developers-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.developers-container > * {
-  flex: 1 1 320px;
-  margin: 16px;
-}
