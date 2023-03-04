@@ -1,0 +1,11 @@
+# Build directories
+**/build
+**/dist
+**/coverage
+.angular
+
+# JS/TS files not containing code to be compiles (e.g. config files)
+cypress.config.ts
+jest.config.js
+setup-jest.ts
+tailwind.config.js

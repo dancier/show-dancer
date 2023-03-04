@@ -9,13 +9,6 @@ import { format } from 'date-fns';
 import { de } from 'date-fns/locale';
 import { PersonalDataForm } from '../../components/personal-data-form/personal-data-form.types';
 
-type Field = 'BIRTHDAY' | 'GENDER' | 'HEIGHT' | 'ZIP';
-
-const germanDateFormat =
-  /^(0[1-9]|[12][0-9]|3[01])[- //](0[1-9]|1[012])[- //](19|20)\d\d$/g;
-const zipFormat = /\d{5}/g;
-const sizeFormat = /\d{3}/g;
-
 @UntilDestroy()
 @Component({
   selector: 'app-init-personal-data',
