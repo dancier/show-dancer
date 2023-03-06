@@ -11,9 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     # Runs in container with chrome, firefox and edge browsers
     container: cypress/browsers:node16.16.0-chrome105-ff99-edge
-    env:
-      # prevents Husky from installing git hooks
-      HUSKY: 0
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,6 +21,9 @@ jobs:
         with:
           browser: chrome
           config: baseUrl=https://test.dancier.net/
+        env:
+          # prevents Husky from installing git hooks
+          HUSKY: 0
 
       # after the test run completes, store videos and any screenshots
       # NOTE: screenshots will be generated only if E2E test failed
