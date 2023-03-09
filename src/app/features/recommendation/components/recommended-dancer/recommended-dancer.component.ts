@@ -2,8 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RecommendedDancer } from '../../types/recommended-dancers.types';
 import { ImageService } from '@core/image/image.service';
 import { EventLogService } from '@core/logging/event-log.service';
-import { AuthenticationService } from '@core/auth/services/authentication.service';
-import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 
 @Component({
   selector: 'app-recommended-dancer',

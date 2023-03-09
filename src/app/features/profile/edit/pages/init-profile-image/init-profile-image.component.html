@@ -9,9 +9,9 @@
   </div>
 
   <button
-    (click)="fileInput.click()"
-    [color]="croppedImage ? undefined : 'primary'"
     mat-flat-button
+    [color]="croppedImage ? undefined : 'primary'"
+    (click)="fileInput.click()"
   >
     Wähle ein Bild
   </button>
@@ -19,21 +19,21 @@
   <!-- Hidden input -->
   <input
     #fileInput
-    (change)="fileChangeEvent($event)"
     accept="image/*"
     hidden
     type="file"
+    (change)="fileChangeEvent($event)"
   />
 
   <ng-container *ngIf="imageChangedEvent">
     <p class="mt-4 mb-2">Bitte schneide das Bild hier zu:</p>
     <div class="image-cropper-container">
       <image-cropper
-        (imageCropped)="imageCropped($event)"
+        format="png"
         [aspectRatio]="4 / 4"
         [imageChangedEvent]="imageChangedEvent"
         [maintainAspectRatio]="true"
-        format="png"
+        (imageCropped)="imageCropped($event)"
       ></image-cropper>
     </div>
   </ng-container>

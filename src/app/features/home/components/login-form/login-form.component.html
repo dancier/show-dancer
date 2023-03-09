@@ -1,4 +1,4 @@
-<form (ngSubmit)="submitForm()" [formGroup]="loginForm" novalidate>
+<form novalidate [formGroup]="loginForm" (ngSubmit)="submitForm()">
   <div class="login-form-container flex flex-col">
     <h1 class="page-header">Anmelden</h1>
     <mat-form-field appearance="fill" class="full-width">
@@ -26,12 +26,12 @@
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Passwort</mat-label>
       <input
-        [type]="hide ? 'password' : 'text'"
         data-test="password-field"
         formControlName="password"
         matInput
+        [type]="hide ? 'password' : 'text'"
       />
-      <mat-icon (click)="hide = !hide" matSuffix>{{
+      <mat-icon matSuffix (click)="hide = !hide">{{
         hide ? 'visibility_off' : 'visibility'
       }}</mat-icon>
       <mat-error
@@ -42,11 +42,11 @@
       </mat-error>
     </mat-form-field>
     <button
-      [disabled]="!loginForm.valid"
       class="full-width"
       data-test="submit-login"
       mat-raised-button
       color="primary"
+      [disabled]="!loginForm.valid"
     >
       Anmelden
     </button>

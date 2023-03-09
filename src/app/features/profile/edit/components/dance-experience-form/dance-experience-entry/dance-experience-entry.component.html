@@ -2,18 +2,18 @@
   <mat-form-field floatLabel="always">
     <mat-label>Ich tanze</mat-label>
     <input
-      [matAutocomplete]="auto"
       class="dance-type-input"
       formControlName="dance"
       matInput
       type="text"
+      [matAutocomplete]="auto"
     />
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option
         *ngFor="let danceType of filteredDanceTypeAutocompletions$ | async"
         [value]="danceType"
       >
-        {{danceType}}
+        {{ danceType }}
       </mat-option>
     </mat-autocomplete>
     <mat-error *ngIf="hasFieldError('dance', 'required')">
@@ -25,10 +25,10 @@
     <mat-label class="dance-level-label">Erfahrung</mat-label>
     <mat-select formControlName="level">
       <mat-option
-        *ngFor="let danceLevel of danceLevels | keyvalue:originalOrder"
+        *ngFor="let danceLevel of danceLevels | keyvalue : originalOrder"
         [value]="danceLevel.key"
       >
-        {{danceLevel.value}}
+        {{ danceLevel.value }}
       </mat-option>
     </mat-select>
     <mat-error *ngIf="hasFieldError('level', 'required')">
@@ -41,12 +41,13 @@
 
     <mat-select formControlName="leading">
       <mat-option
-        *ngFor="let danceRole of danceRoles | keyvalue:originalOrder"
+        *ngFor="let danceRole of danceRoles | keyvalue : originalOrder"
         [value]="danceRole.key"
       >
-        {{danceRole.value}}
+        {{ danceRole.value }}
       </mat-option>
     </mat-select>
+    <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
     <mat-error *ngIf="hasFieldError('leading', 'required')">
       Bitte wähle eine Rolle aus.
     </mat-error>

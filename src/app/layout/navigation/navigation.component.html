@@ -62,14 +62,15 @@
         </div>
       </mat-menu>
       <button
-        [matMenuTriggerFor]="menu"
         aria-label="Example icon-button with a menu"
         mat-icon-button
+        [matMenuTriggerFor]="menu"
       >
         <mat-icon>menu</mat-icon>
       </button>
     </div>
     <div class="nav-items hidden gap-2 sm:flex" data-test="desktop-nav">
+      <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
       <ng-container *ngIf="authStorageService.authData$ | async as authData">
         <a mat-button routerLink="about-us" routerLinkActive="active"
           ><span>Über Uns</span></a
@@ -87,11 +88,13 @@
           ><span>Mitmachen</span></a
         >
         <div class="separator"></div>
+        <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
         <div *ngIf="authData.isLoggedIn" class="nav-icons">
           <a routerLink="profile">
             <mat-icon>account_box</mat-icon>
           </a>
         </div>
+        <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
         <ng-container *ngIf="!authData.isLoggedIn">
           <a mat-button routerLink="login" routerLinkActive="active">
             Anmelden
@@ -100,6 +103,7 @@
             Registrieren
           </a>
         </ng-container>
+        <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
         <ng-container *ngIf="authData.isLoggedIn">
           <a mat-button routerLink="logout" routerLinkActive="active">
             Abmelden
