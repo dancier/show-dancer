@@ -28,7 +28,7 @@ export type DancersRequest = {
 
 export type DancerId = string;
 
-export type Dancer = {
+export type ChatParticipant = {
   id: DancerId;
   dancerName: string;
   city: string;
@@ -36,7 +36,7 @@ export type Dancer = {
 };
 
 export type DancerMap = {
-  [key: DancerId]: Dancer;
+  [key: DancerId]: ChatParticipant;
 };
 
 export type MessagesByChatMap = {

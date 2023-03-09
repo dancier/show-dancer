@@ -10,7 +10,10 @@ export class ImageService {
 
   constructor(private environmentService: EnvironmentService) {}
 
-  getDancerImageSrcOrDefault(imageHash: string | null, width: number): string {
+  getDancerImageSrcOrDefault(
+    imageHash: string | undefined | null,
+    width: number
+  ): string {
     if (!imageHash) {
       return this.getDefaultDancerImage();
     }
