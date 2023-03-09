@@ -36,8 +36,8 @@ export class DanceExperienceEntryComponent implements OnInit {
 
   // Preserve original property order
   originalOrder = (
-    a: KeyValue<any, string>,
-    b: KeyValue<any, string>
+    _a: KeyValue<any, string>,
+    _b: KeyValue<any, string>
   ): number => {
     return 0;
   };
