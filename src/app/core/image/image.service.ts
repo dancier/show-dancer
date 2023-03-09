@@ -12,8 +12,12 @@ export class ImageService {
 
   getDancerImageSrcOrDefault(imageHash: string | null, width: number): string {
     if (!imageHash) {
-      return this.defaultImage;
+      return this.getDefaultDancerImage();
     }
     return `${this.imageBaseUrl}/${imageHash}/${width}.png`;
+  }
+
+  getDefaultDancerImage(): string {
+    return this.defaultImage;
   }
 }
