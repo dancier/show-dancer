@@ -9,7 +9,7 @@
     </p>
     <p class="mb-2">Wir freuen uns auf deine Nachricht.</p>
 
-    <form (ngSubmit)="submitForm()" [formGroup]="contactForm" novalidate>
+    <form novalidate [formGroup]="contactForm" (ngSubmit)="submitForm()">
       <mat-card-content class="card-content-container flex flex-col">
         <ng-container *ngIf="authStorageService.authData$ | async as authData">
           <mat-form-field appearance="fill" class="full-width">
@@ -30,8 +30,8 @@
           <ng-container *ngIf="!authData.isHuman || isCaptchaSolved">
             <div class="captcha">
               <re-captcha
-                (resolved)="captchaResolved($event)"
                 siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"
+                (resolved)="captchaResolved($event)"
               ></re-captcha>
             </div>
           </ng-container>
@@ -45,9 +45,9 @@
           </mat-error>
 
           <button
-            [disabled]="!contactForm.valid || !authData.isHuman"
             color="primary"
             mat-raised-button
+            [disabled]="!contactForm.valid || !authData.isHuman"
           >
             Nachricht senden
           </button>

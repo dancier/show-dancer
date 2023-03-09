@@ -9,7 +9,7 @@
     <p>Die Angaben erscheinen später in deinem Profil.</p>
   </div>
 
-  <app-dance-experience-form [formGroup]="form" danceFormType="own">
+  <app-dance-experience-form danceFormType="own" [formGroup]="form">
   </app-dance-experience-form>
 
   <mat-error *ngIf="apiError">

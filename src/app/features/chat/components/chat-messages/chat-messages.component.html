@@ -7,7 +7,7 @@
   <div *ngFor="let message of messagesByChat[chatService.selectedChatId!]">
     {{ message.text }}
   </div>
-  <form (ngSubmit)="submitForm()" [formGroup]="addMessageForm" novalidate>
+  <form novalidate [formGroup]="addMessageForm" (ngSubmit)="submitForm()">
     <mat-form-field class="full-width">
       <mat-label>Neue Nachricht</mat-label>
       <input

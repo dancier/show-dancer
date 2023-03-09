@@ -1,7 +1,7 @@
 <div *ngIf="profileService.profile$ | async as profile" class="profile">
   <div class="profile-header">
     <div class="profile-image">
-      <img [src]="profileService.getProfileImageSrc()" alt="Profile Image" />
+      <img alt="Profile Image" [src]="profileService.getProfileImageSrc()" />
     </div>
     <div class="profile-info">
       <h1 class="text-2xl">
@@ -34,10 +34,10 @@
   </div>
 
   <button
-    (click)="editProfile()"
     class="big-button"
     color="primary"
     mat-flat-button
+    (click)="editProfile()"
   >
     Profil bearbeiten
   </button>
