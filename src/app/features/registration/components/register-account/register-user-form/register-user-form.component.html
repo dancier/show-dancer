@@ -1,5 +1,5 @@
 <h1 class="page-header" data-test="title">Registrierung</h1>
-<form (ngSubmit)="submitForm()" [formGroup]="registrationForm" novalidate>
+<form novalidate [formGroup]="registrationForm" (ngSubmit)="submitForm()">
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>E-Mail</mat-label>
     <input
@@ -66,6 +66,7 @@
       akzeptiere sie.
     </div>
   </div>
+  <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
   <ng-container *ngIf="loggedInAsHuman; then thankYouHuman; else captcha">
   </ng-container>
   <ng-template #thankYouHuman>
@@ -74,20 +75,21 @@
   <ng-template #captcha>
     <div class="captcha mb-4">
       <re-captcha
-        (resolved)="captchaResolved($event)"
         siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"
+        (resolved)="captchaResolved($event)"
       ></re-captcha>
     </div>
   </ng-template>
   <button
-    [disabled]="!registrationForm.valid"
     class="btn-block full-width"
     color="primary"
     data-test="confirm-registration"
     mat-raised-button
+    [disabled]="!registrationForm.valid"
   >
     Registrieren
   </button>
+  <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
   <mat-error *ngIf="error">
     <span> {{ error | errorMessage }} </span>
   </mat-error>

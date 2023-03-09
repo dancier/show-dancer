@@ -6,7 +6,7 @@
     <p>Wir werden dir darauf basierend potentielle Tanzpartner vorschlagen.</p>
   </div>
 
-  <app-dance-experience-form [formGroup]="form" danceFormType="partner">
+  <app-dance-experience-form danceFormType="partner" [formGroup]="form">
   </app-dance-experience-form>
 
   <mat-error *ngIf="apiError">

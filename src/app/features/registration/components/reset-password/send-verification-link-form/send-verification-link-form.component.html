@@ -1,4 +1,4 @@
-<form novalidate (ngSubmit)="submitForm()" [formGroup]="verificationForm">
+<form novalidate [formGroup]="verificationForm" (ngSubmit)="submitForm()">
   <ng-container *ngIf="authStorageService.authData$ | async as authData">
     <mat-card-content class="login-form-container flex flex-col">
       <mat-form-field appearance="fill" class="full-width">
@@ -20,8 +20,8 @@
       <ng-container *ngIf="!authData.isHuman || isCaptchaSolved">
         <div class="captcha">
           <re-captcha
-            (resolved)="captchaResolved($event)"
             siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"
+            (resolved)="captchaResolved($event)"
           ></re-captcha>
         </div>
       </ng-container>
@@ -29,11 +29,11 @@
         Es ist ein Fehler aufgetreten, bitte versuche es später erneut.
       </mat-error>
       <button
-        [disabled]="!verificationForm.valid"
         class="full-width background-color-500"
         data-test="submit-verification"
         color="primary"
         mat-raised-button
+        [disabled]="!verificationForm.valid"
       >
         {{ submitButtonText }}
       </button>

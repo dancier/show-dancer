@@ -7,32 +7,32 @@
 <div class="edit-profile-image">
   <div class="profile-image">
     <img
-      [src]="croppedImage ? croppedImage : profileService.getProfileImageSrc()"
       alt="Profile Image"
+      [src]="croppedImage ? croppedImage : profileService.getProfileImageSrc()"
     />
   </div>
 
-  <button class="btn-upload" (click)="fileInput.click()" mat-stroked-button>
+  <button class="btn-upload" mat-stroked-button (click)="fileInput.click()">
     Neues Profilbild hochladen
   </button>
 
   <!-- Hidden input -->
   <input
     #fileInput
-    (change)="fileChangeEvent($event)"
     accept="image/*"
     hidden
     type="file"
+    (change)="fileChangeEvent($event)"
   />
 
-  <div class="image-cropper-container" *ngIf="imageChangedEvent">
+  <div *ngIf="imageChangedEvent" class="image-cropper-container">
     <image-cropper
-      (imageCropped)="imageCropped($event)"
+      format="png"
       [aspectRatio]="4 / 4"
       [imageChangedEvent]="imageChangedEvent"
       [maintainAspectRatio]="true"
       [roundCropper]="false"
-      format="png"
+      (imageCropped)="imageCropped($event)"
     ></image-cropper>
   </div>
 </div>
@@ -46,16 +46,16 @@
 <h2 class="my-4 text-2xl">Eigene Tanzerfahrung</h2>
 
 <app-dance-experience-form
-  [formGroup]="profileForm.controls.ownDances"
   danceFormType="own"
+  [formGroup]="profileForm.controls.ownDances"
 >
 </app-dance-experience-form>
 
 <h2 class="my-4 text-2xl">Tanzerfahrung des Partners</h2>
 
 <app-dance-experience-form
-  [formGroup]="profileForm.controls.partnerDances"
   danceFormType="partner"
+  [formGroup]="profileForm.controls.partnerDances"
 >
 </app-dance-experience-form>
 
@@ -64,10 +64,10 @@
 </mat-error>
 
 <button
-  (click)="saveProfile()"
   class="big-button"
   color="primary"
   mat-flat-button
+  (click)="saveProfile()"
 >
   Speichern
 </button>
