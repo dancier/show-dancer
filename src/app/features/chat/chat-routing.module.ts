@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChatPageComponent } from './page/chat-page/chat-page.component';
-import { ChatConversationListEntryComponent } from './components/chat-conversation-list/chat-conversation-list-entry/chat-conversation-list-entry.component';
+import { ChatConversationListComponent } from './components/chat-conversation-list/chat-conversation-list.component';
 
 export const routes: Routes = [
   {
@@ -10,7 +10,7 @@ export const routes: Routes = [
   },
   {
     path: 'test',
-    component: ChatConversationListEntryComponent,
+    component: ChatConversationListComponent,
   },
 ];
 

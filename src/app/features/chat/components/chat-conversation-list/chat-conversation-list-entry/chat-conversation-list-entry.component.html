@@ -1,27 +1,26 @@
-<div class="m-10 w-[400px] border">
-  <div
-    *ngIf="participant"
-    class="flex cursor-pointer items-center gap-6 px-6 py-4 hover:bg-gray-50"
-    tabindex="0"
-    [ngClass]="{ 'bg-gray-100': true }"
-  >
-    <div class="h-20 w-20 overflow-hidden rounded-full object-cover">
-      <img
-        class=""
-        [src]="
-          imageService.getDancerImageSrcOrDefault(
-            participant!.profileImageHash,
-            80
-          )
-        "
-        alt="Profile Image of {{ participant!.dancerName }}"
-      />
-    </div>
-    <div class="flex flex-col gap-1">
-      <div class="text-2xl">{{ participant!.dancerName }}</div>
-      <div class="text-lg text-gray-600">
-        {{ participant!.city }}
-      </div>
+<div
+  *ngIf="participant"
+  class="flex cursor-pointer items-center gap-6 px-6 py-4 hover:bg-gray-50 active:bg-gray-50"
+  tabindex="0"
+  [ngClass]="{ 'bg-gray-100': isSelected }"
+  (click)="selectConversation()"
+>
+  <div class="h-20 w-20 overflow-hidden rounded-full object-cover">
+    <img
+      class=""
+      [src]="
+        imageService.getDancerImageSrcOrDefault(
+          participant!.profileImageHash,
+          80
+        )
+      "
+      [attr.alt]="'Profile Image of ' + participant!.dancerName"
+    />
+  </div>
+  <div class="flex flex-col gap-1">
+    <div class="text-2xl">{{ participant!.dancerName }}</div>
+    <div class="text-lg text-gray-600">
+      {{ participant!.city }}
     </div>
   </div>
 </div>
