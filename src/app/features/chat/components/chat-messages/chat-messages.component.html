@@ -1,28 +1,41 @@
-<div
-  *ngIf="
-    chatService.selectedChatId &&
-    (chatService.messagesByChat$ | async) as messagesByChat
-  "
->
-  <div *ngFor="let message of messagesByChat[chatService.selectedChatId!]">
-    {{ message.text }}
-  </div>
-  <form novalidate [formGroup]="addMessageForm" (ngSubmit)="submitForm()">
-    <mat-form-field class="full-width">
-      <mat-label>Neue Nachricht</mat-label>
-      <input
-        data-test="text-field"
-        formControlName="text"
-        matInput
-        type="text"
-      />
-    </mat-form-field>
+<!--<div-->
+<!--  *ngIf="-->
+<!--    chatService.selectedChatId &&-->
+<!--    (chatService.messagesByChat$ | async) as messagesByChat-->
+<!--  "-->
+<!--&gt;-->
+<!--  <div *ngFor="let message of messagesByChat[chatService.selectedChatId!]">-->
+<!--    {{ message.text }}-->
+<!--  </div>-->
+<!--  <form novalidate [formGroup]="addMessageForm" (ngSubmit)="submitForm()">-->
+<!--    <mat-form-field class="full-width">-->
+<!--      <mat-label>Neue Nachricht</mat-label>-->
+<!--      <input-->
+<!--        data-test="text-field"-->
+<!--        formControlName="text"-->
+<!--        matInput-->
+<!--        type="text"-->
+<!--      />-->
+<!--    </mat-form-field>-->
 
-    <button class="big-button" color="primary" mat-flat-button type="submit">
-      Senden
-    </button>
-    <mat-error *ngIf="error">
-      <span> {{ error | errorMessage }} </span>
-    </mat-error>
-  </form>
+<!--    <button class="big-button" color="primary" mat-flat-button type="submit">-->
+<!--      Senden-->
+<!--    </button>-->
+<!--    <mat-error *ngIf="error">-->
+<!--      <span> {{ error | errorMessage }} </span>-->
+<!--    </mat-error>-->
+<!--  </form>-->
+<!--</div>-->
+
+<div class="m-10 flex flex-col gap-6">
+  <app-chat-message
+    *ngFor="let message of messages"
+    class="max-w-[80%]"
+    [message]="message"
+    [isOwnMessage]="message.authorId !== participant"
+    [ngClass]="{
+      'self-start': message.authorId === participant,
+      'self-end': message.authorId !== participant
+    }"
+  ></app-chat-message>
 </div>

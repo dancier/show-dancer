@@ -8,7 +8,7 @@ import {
 import { ChatParticipant, DancerId } from '../../common/types/chat.types';
 
 @Component({
-  selector: 'app-chat-conversations-list',
+  selector: 'app-chat-conversation-list',
   templateUrl: './chat-conversation-list.component.html',
   styleUrls: ['./chat-conversation-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

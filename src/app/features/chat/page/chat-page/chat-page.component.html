@@ -1,8 +1,20 @@
-<div *ngIf="chatData$ | async as chatData">
+<div class="m-10">
   <h1 class="page-header">Deine Chats</h1>
 
-  <div class="flex">
-    <app-chat-conversations-list></app-chat-conversations-list>
+  <div class="flex border">
+    <app-chat-conversation-list
+      [conversations]="conversations"
+      [selectedConversation]="selectedConversation"
+      (conversationSelected)="selectConversation($event)"
+    >
+    </app-chat-conversation-list>
+    <div class="flex min-h-[600px] w-full flex-col bg-gray-100">
+      <app-chat-messages
+        class="grow"
+        [messages]="selectedConversationMessages"
+      ></app-chat-messages>
+      <app-chat-message-composer class="flex-none"></app-chat-message-composer>
+    </div>
   </div>
 
   <!--  <mat-grid-list cols="2">-->

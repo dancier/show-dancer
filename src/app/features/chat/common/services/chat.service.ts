@@ -45,6 +45,10 @@ export class ChatService {
     });
   }
 
+  //
+  // TODO: use interval instead of setTimeout
+  // https://www.learnrxjs.io/learn-rxjs/operators/creation/interval
+
   createAndFetchMessages$(text: string): Observable<APIResponse<void>> {
     return this.chatHttpService
       .createMessage$(this.selectedChatId!, { text })

@@ -6,6 +6,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChatListEntryComponent } from './components/chat/chat-list-entry.component';
 import { ChatMessagesComponent } from './components/chat-messages/chat-messages.component';
@@ -13,6 +14,8 @@ import { SharedModule } from '@shared/shared.module';
 import { ChatConversationListComponent } from './components/chat-conversation-list/chat-conversation-list.component';
 import { ChatConversationComponent } from './components/chat-conversation/chat-conversation.component';
 import { ChatConversationListEntryComponent } from './components/chat-conversation-list/chat-conversation-list-entry/chat-conversation-list-entry.component';
+import { ChatMessageComposerComponent } from './components/chat-message-composer/chat-message-composer.component';
+import { ChatMessageComponent } from './components/chat-messages/chat-message/chat-message.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,8 @@ import { ChatConversationListEntryComponent } from './components/chat-conversati
     ChatConversationListComponent,
     ChatConversationComponent,
     ChatConversationListEntryComponent,
+    ChatMessageComposerComponent,
+    ChatMessageComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +35,7 @@ import { ChatConversationListEntryComponent } from './components/chat-conversati
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     ReactiveFormsModule,
     SharedModule,
   ],
