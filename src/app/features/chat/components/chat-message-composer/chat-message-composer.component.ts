@@ -1,4 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -12,6 +16,7 @@ type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
   selector: 'app-chat-message-composer',
   templateUrl: './chat-message-composer.component.html',
   styleUrls: ['./chat-message-composer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   // needed to remove the bottom margin from mat-form-field
   encapsulation: ViewEncapsulation.None,
 })
