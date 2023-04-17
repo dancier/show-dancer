@@ -1,11 +1,8 @@
 {
-  "/api": {
-    "changeOrigin": false,
-    "target": "http://localhost:8080",
+  "/api/authentication/loginAsHuman": {
+    "target": "https://dancer.dancier.net/authentication/loginAsHuman",
     "secure": false,
-    "logLevel": "debug",
-    "pathRewrite": {
-      "^/api": ""
-    }
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

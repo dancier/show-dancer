@@ -13,7 +13,7 @@ export class NavigationComponent implements OnDestroy {
     private chatService: ChatService // needs to be initialized from the start
   ) {}
 
-  ngOnDestroy(): void {
-    this.chatService.stopPollingForChats();
-  }
+  // ngOnDestroy(): void {
+  //   // this.chatService.stopPollingForChats();
+  // }
 }

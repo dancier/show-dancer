@@ -3,9 +3,9 @@ import { Profile } from '@features/profile/common/types/profile.types';
 export type Chat = {
   chatId: string;
   dancerIds: DancerId[];
-  lastActivity: string;
+  lastActivity: string | null;
   type: ChatType;
-  lastMessage: ChatMessage;
+  lastMessage: ChatMessage | null;
 };
 
 export type ChatMessage = {

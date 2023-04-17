@@ -17,27 +17,31 @@ import { ChatConversationListEntryComponent } from './components/chat-conversati
 import { ChatMessageComposerComponent } from './components/chat-message-composer/chat-message-composer.component';
 import { ChatMessageComponent } from './components/chat-messages/chat-message/chat-message.component';
 
+export const moduleDeclarations = [
+  ChatPageComponent,
+  ChatListEntryComponent,
+  ChatMessagesComponent,
+  ChatConversationListComponent,
+  ChatConversationComponent,
+  ChatConversationListEntryComponent,
+  ChatMessageComposerComponent,
+  ChatMessageComponent,
+];
+
+export const moduleImports = [
+  CommonModule,
+  ChatRoutingModule,
+  MatGridListModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatIconModule,
+  ReactiveFormsModule,
+  SharedModule,
+];
+
 @NgModule({
-  declarations: [
-    ChatPageComponent,
-    ChatListEntryComponent,
-    ChatMessagesComponent,
-    ChatConversationListComponent,
-    ChatConversationComponent,
-    ChatConversationListEntryComponent,
-    ChatMessageComposerComponent,
-    ChatMessageComponent,
-  ],
-  imports: [
-    CommonModule,
-    ChatRoutingModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    SharedModule,
-  ],
+  declarations: moduleDeclarations,
+  imports: moduleImports,
 })
 export class ChatModule {}

@@ -17,7 +17,8 @@ OnPush Change Detection only updates a component when:
 OnPush Change Detection has two benefits:
 
 1. It improves performance by only updating the components that need to be updated.
-2. It facilitates good development practices (use of immutable data structures, building smaller components, etc.)
+2. It facilitates good development practices
+   (use of immutable data structures, preferring reactive/declarative programming, building smaller components, etc.)
 
 Lern more about the benefits of OnPush in [this video](https://www.youtube.com/watch?v=tWy8zaWvkvk).
 
