@@ -13,7 +13,7 @@ import { EnvironmentService } from '@core/common/environment.service';
 import { MockService } from 'ng-mocks';
 import { moduleDeclarations, moduleImports } from './chat.module';
 import { flushRequests, MockedRequest } from '@test-utils/http-utils';
-import { Chat } from './common/types/chat.types';
+import { ChatDto, DancerMapDto } from './common/types/chat.types';
 
 type TestMessage = {
   from: string;
@@ -26,21 +26,35 @@ type TestChat = {
 };
 
 function getMockedRequestsForChats(...chats: TestChat[]): MockedRequest[] {
-  const completeChats: Chat[] = chats.map((chat, index) => ({
+  const completeChats: ChatDto[] = chats.map((chat, index) => ({
     chatId: index.toString(),
     dancerIds: [chat.partner],
     lastActivity: null,
     type: 'DIRECT',
     lastMessage: null,
   }));
+  const dancersInfo: DancerMapDto = chats.reduce((acc, chat) => {
+    acc[chat.partner] = {
+      id: chat.partner,
+      dancerName: chat.partner,
+      city: 'TestCity',
+      profileImageHash: 'someHash',
+    };
+    return acc;
+  }, {} as DancerMapDto);
 
   return [
     {
       method: 'GET',
-      url: 'http://test.de/chat',
+      url: 'http://test.de/chats',
       body: {
         chats: completeChats,
       },
+    },
+    {
+      method: 'POST',
+      url: 'http://test.de/dancers',
+      body: dancersInfo,
     },
   ];
 }

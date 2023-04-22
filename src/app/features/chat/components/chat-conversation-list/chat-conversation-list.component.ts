@@ -1,11 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
-import { ChatParticipant, DancerId } from '../../common/types/chat.types';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DancerId } from '../../common/types/chat.types';
+import { ChatStore } from '../../common/services/chat.store';
 
 @Component({
   selector: 'app-chat-conversation-list',
@@ -14,16 +9,11 @@ import { ChatParticipant, DancerId } from '../../common/types/chat.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatConversationListComponent {
-  @Input()
-  conversations?: ChatParticipant[];
+  constructor(public chatStore: ChatStore) {}
 
-  @Input()
   selectedConversation: DancerId = '1000';
 
-  @Output()
-  conversationSelected = new EventEmitter<DancerId>();
-
-  selectConversation(conversationId: DancerId): void {
-    this.conversationSelected.emit(conversationId);
+  selectConversation(_conversationId: DancerId): void {
+    // TODO: select conversation in store
   }
 }

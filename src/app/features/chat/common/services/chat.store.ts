@@ -1,60 +1,87 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import {
-  Chat,
-  ChatMessage,
-  ChatParticipant,
-  DancerId,
-} from '../types/chat.types';
+  ComponentStore,
+  OnStateInit,
+  tapResponse,
+} from '@ngrx/component-store';
+import { Conversation, ChatMessage, DancerId } from '../types/chat.types';
 import { switchMap } from 'rxjs';
 import { ChatService } from './chat.service';
+import { ProfileService } from '../../../profile/common/services/profile.service';
 
 export type ChatState = {
-  conversations: ChatParticipant[];
+  conversationsFetchState: 'init' | 'loading' | 'complete' | 'error';
+  conversations: Conversation[];
   selectedConversation: DancerId;
-  selectedConversationMessages?: ChatMessage[];
+  messagesFetchState: 'init' | 'loading' | 'complete';
+  messages: ChatMessage[];
 };
 
 const defaultState: ChatState = {
+  conversationsFetchState: 'init',
   conversations: [],
   selectedConversation: '',
-  selectedConversationMessages: [],
+  messagesFetchState: 'init',
+  messages: [],
 };
 
 @Injectable()
-export class ChatStore extends ComponentStore<ChatState> {
-  constructor(private chatService: ChatService) {
+export class ChatStore
+  extends ComponentStore<ChatState>
+  implements OnStateInit
+{
+  constructor(
+    private chatService: ChatService,
+    private profileService: ProfileService
+  ) {
     super(defaultState);
   }
 
   ngrxOnStateInit(): void {
     // TODO: also repeatedly fetch conversations
+    this.patchState({ conversationsFetchState: 'loading' });
     this.fetchConversations();
   }
 
   readonly conversations$ = this.select((state) => state.conversations);
+  readonly selectedConversation$ = this.select(
+    (state) => state.selectedConversation
+  );
+  readonly selectedConversationMessages$ = this.select(
+    (state) => state.messages
+  );
+  readonly viewModel$ = this.select({
+    conversations: this.conversations$,
+    selectedConversation: this.selectedConversation$,
+    selectedConversationMessages: this.selectedConversationMessages$,
+  });
 
   readonly fetchConversations = this.effect<void>((trigger$) =>
     trigger$.pipe(
       switchMap(() =>
-        this.chatService.fetchAllChats$().pipe(
+        this.chatService.getConversations$().pipe(
           tapResponse(
             (conversations) => this.setConversations(conversations),
-            (error) => console.error(error)
+            (error) => {
+              this.patchState({ conversationsFetchState: 'error' });
+              // eslint-disable-next-line no-console
+              console.error(error);
+            }
           )
         )
       )
     )
   );
 
-  readonly setConversations = this.updater((state, chats: Chat[]) => ({
-    ...state,
-    conversations: chats.map((chat) => ({
-      id: chat.chatId,
-      // TODO: fetch dancer name from dancer service
-      dancerName: chat.dancerIds[0],
-      city: 'TODO',
-      profileImageHash: 'TODO',
-    })),
-  }));
+  readonly setConversations = this.updater(
+    (state, conversations: Conversation[]) => {
+      // eslint-disable-next-line no-console
+      console.log('setConversations', conversations);
+      return {
+        ...state,
+        conversationsFetchState: 'complete',
+        conversations,
+      };
+    }
+  );
 }

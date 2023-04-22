@@ -1,6 +1,11 @@
 import { Profile } from '@features/profile/common/types/profile.types';
 
-export type Chat = {
+export type Conversation = {
+  chatId: string;
+  participants: ChatParticipant[];
+};
+
+export type ChatDto = {
   chatId: string;
   dancerIds: DancerId[];
   lastActivity: string | null;
@@ -19,7 +24,7 @@ export type ChatMessage = {
 export type ChatType = 'GROUP' | 'DIRECT';
 
 export type ChatList = {
-  chats: Chat[];
+  chats: ChatDto[];
 };
 
 export type DancersRequest = {
@@ -35,7 +40,7 @@ export type ChatParticipant = {
   profileImageHash?: string;
 };
 
-export type DancerMap = {
+export type DancerMapDto = {
   [key: DancerId]: ChatParticipant;
 };
 
@@ -44,8 +49,8 @@ export type MessagesByChatMap = {
 };
 
 export type ChatsAndDancers = {
-  chatList: Chat[];
-  dancerMap: DancerMap;
+  chatList: ChatDto[];
+  dancerMap: DancerMapDto;
 };
 
 export type MessageResponse = {
@@ -57,7 +62,7 @@ export type CreateMessageRequest = {
 };
 
 export type ChatData = {
-  chats: Chat[];
-  dancers: DancerMap;
+  chats: ChatDto[];
+  dancers: DancerMapDto;
   profile: Profile;
 };

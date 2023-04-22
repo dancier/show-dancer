@@ -4,12 +4,12 @@ import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { EnvironmentService } from '@core/common/environment.service';
 import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
 import {
-  Chat,
+  ChatDto,
   ChatList,
   ChatsAndDancers,
   CreateMessageRequest,
   DancerId,
-  DancerMap,
+  DancerMapDto,
   MessageResponse,
 } from '../types/chat.types';
 
@@ -67,7 +67,11 @@ export class ChatHttpService {
         };
 
         return this.http
-          .post<DancerMap>(`${this.dancerApiUrl}`, request, this.defaultOptions)
+          .post<DancerMapDto>(
+            `${this.dancerApiUrl}`,
+            request,
+            this.defaultOptions
+          )
           .pipe(map((dancerMap) => ({ dancerMap, chatList: chatList.chats })));
       }),
       map((value) => asSuccess(value)),
@@ -106,7 +110,7 @@ export class ChatHttpService {
       );
   }
 
-  private getAllDancerIds(chats: Chat[]): DancerId[] {
+  private getAllDancerIds(chats: ChatDto[]): DancerId[] {
     const dancerIds = new Map();
     chats
       .flatMap((chat) => chat.dancerIds)

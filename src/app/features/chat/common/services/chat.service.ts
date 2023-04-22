@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 import { HttpClient } from '@angular/common/http';
 import { EnvironmentService } from '@core/common/environment.service';
-import { Chat } from '../types/chat.types';
-import { map, Observable } from 'rxjs';
+import { Conversation, ChatDto, DancerMapDto } from '../types/chat.types';
+import { combineLatest, map, Observable, shareReplay, switchMap } from 'rxjs';
 
 type FetchChatsDto = {
-  chats: Chat[];
+  chats: ChatDto[];
 };
 
 @Injectable({
@@ -51,13 +51,51 @@ export class ChatService {
     // });
   }
 
-  fetchAllChats$(): Observable<Chat[]> {
+  getConversations$(): Observable<Conversation[]> {
+    const chats$ = this.fetchAllChats$();
+    const dancersInfo$ = this.fetchDancersInfo$(chats$);
+    return combineLatest([chats$, dancersInfo$]).pipe(
+      map(([chats, dancersInfo]) => {
+        return chats.map((chat) => ({
+          chatId: chat.chatId,
+          participants: chat.dancerIds.map((dancerId) => ({
+            ...dancersInfo[dancerId],
+          })),
+        }));
+      })
+    );
+  }
+
+  // const conversations = combineLatest([ fetchDancersByIds$, getDancersInfo$(fetchDancersByIds$) ]).pipe(
+
+  fetchDancersInfo$(chats: Observable<ChatDto[]>): Observable<DancerMapDto> {
+    return chats.pipe(
+      switchMap((chats) => {
+        const dancerIds = chats.flatMap((chat) => chat.dancerIds);
+        return this.fetchDancersByIds$(dancerIds);
+      })
+    );
+  }
+
+  fetchDancersByIds$(dancerIds: string[]): Observable<DancerMapDto> {
+    const requestBody = {
+      dancerIds,
+    };
+    return this.http
+      .post<DancerMapDto>(`${this.dancerApiUrl}`, requestBody, {
+        ...this.defaultOptions,
+      })
+      .pipe(shareReplay(1));
+  }
+
+  fetchAllChats$(): Observable<ChatDto[]> {
     return this.http
       .get<FetchChatsDto>(this.chatApiUrl, this.defaultOptions)
       .pipe(
         map((response) => {
           return response.chats;
-        })
+        }),
+        shareReplay(1)
       );
   }
 

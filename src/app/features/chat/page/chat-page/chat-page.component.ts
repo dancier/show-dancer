@@ -24,9 +24,7 @@ export class ChatPageComponent {
     this.selectedConversation = dancerId;
   }
 
-  constructor(private chatStore: ChatStore) {
-    this.conversations = chatStore.conversations$;
-  }
+  constructor(private chatStore: ChatStore) {}
 
   // chatData$!: Observable<ChatData>;
   //

@@ -1,9 +1,5 @@
-<div>
-  <app-chat-conversation-list-entry
-    *ngFor="let conversation of conversations"
-    [participant]="conversation"
-    [isSelected]="conversation.id === selectedConversation"
-    (conversationSelected)="selectConversation(conversation.id)"
-  >
-  </app-chat-conversation-list-entry>
-</div>
+<app-chat-conversation-list-entry
+  *ngFor="let conversation of chatStore.conversations$ | async"
+  [conversation]="conversation"
+>
+</app-chat-conversation-list-entry>
