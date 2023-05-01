@@ -20,6 +20,7 @@ import { MockService } from 'ng-mocks';
 import { moduleDeclarations, moduleImports } from './chat.module';
 import { flushRequests, MockedRequest } from '@test-utils/http-utils';
 import { ChatDto, ChatMessage, DancerMapDto } from './common/types/chat.types';
+import { RouterTestingModule } from '@angular/router/testing';
 
 type TestMessage = {
   from: string;
@@ -102,7 +103,7 @@ describe('Chat Feature', () => {
         }),
       },
     ],
-    imports: [...moduleImports, HttpClientTestingModule],
+    imports: [...moduleImports, HttpClientTestingModule, RouterTestingModule],
   });
 
   beforeEach(async () => {
