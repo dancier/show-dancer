@@ -1,5 +1,6 @@
 import {
-  byTestId,
+  byRole,
+  byText,
   createComponentFactory,
   Spectator,
 } from '@ngneat/spectator/jest';
@@ -7,13 +8,18 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import {
+  discardPeriodicTasks,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { ChatPageComponent } from './page/chat-page/chat-page.component';
 import { EnvironmentService } from '@core/common/environment.service';
 import { MockService } from 'ng-mocks';
 import { moduleDeclarations, moduleImports } from './chat.module';
 import { flushRequests, MockedRequest } from '@test-utils/http-utils';
-import { ChatDto, DancerMapDto } from './common/types/chat.types';
+import { ChatDto, ChatMessage, DancerMapDto } from './common/types/chat.types';
 
 type TestMessage = {
   from: string;
@@ -22,7 +28,6 @@ type TestMessage = {
 
 type TestChat = {
   partner: string;
-  messages: TestMessage[];
 };
 
 function getMockedRequestsForChats(...chats: TestChat[]): MockedRequest[] {
@@ -55,6 +60,29 @@ function getMockedRequestsForChats(...chats: TestChat[]): MockedRequest[] {
       method: 'POST',
       url: 'http://test.de/dancers',
       body: dancersInfo,
+    },
+  ];
+}
+
+function getMockedRequestsForMessages(
+  chatId: string,
+  ...messages: TestMessage[]
+): MockedRequest[] {
+  const chatMessages: ChatMessage[] = messages.map((message, index) => ({
+    id: index.toString(),
+    authorId: message.from,
+    from: message.from,
+    text: message.text,
+    createdAt: new Date().toISOString(),
+    readByDancers: [],
+  }));
+  return [
+    {
+      method: 'GET',
+      url: `http://test.de/chats/${chatId}/messages`,
+      body: {
+        messages: chatMessages,
+      },
     },
   ];
 }
@@ -117,24 +145,113 @@ describe('Chat Feature', () => {
 
   it('displays a list of previous chats', () => {
     const mockedRequests = getMockedRequestsForChats(
-      {
-        partner: 'TestDancer1',
-        messages: [{ from: 'TestDancer1', text: 'Hello 1' }],
-      },
-      {
-        partner: 'TestDancer2',
-        messages: [{ from: 'TestDancer2', text: 'Hello 2' }],
-      }
+      { partner: 'Dancer1' },
+      { partner: 'Dancer2' }
     );
 
     flushRequests(httpMock, mockedRequests);
     spectator.detectChanges();
-    expect(spectator.queryAll(byTestId('chat-list-entry')).length).toBe(2);
   });
 
-  xit('displays previous chat messages when a chat is selected', () => {});
+  it('displays previous chat messages when a chat is selected', () => {
+    // setup mock requests
+    const mockedChatRequests = getMockedRequestsForChats(
+      { partner: 'Dancer1' },
+      { partner: 'Dancer2' }
+    );
+    const mockedMessageRequests = getMockedRequestsForMessages('0', {
+      from: 'Dancer1',
+      text: 'Hello World',
+    });
+    flushRequests(httpMock, mockedChatRequests);
+    spectator.detectChanges();
 
-  xit('displays new messages as they arrive', () => {});
+    // user selects chat with Dancer 1
+    const chatWithDancer1 = byText('Dancer1');
+    expect(spectator.query(chatWithDancer1)).toBeTruthy();
+    spectator.click(chatWithDancer1);
+    flushRequests(httpMock, mockedMessageRequests);
+    spectator.detectChanges();
 
-  xit('allows the user to send a message', () => {});
+    // check if messages are displayed
+    expect(spectator.query(byText('Hello World'))).toBeTruthy();
+  });
+
+  xit('displays new messages as they arrive in selected chat', fakeAsync(() => {
+    // setup mock requests
+    const mockedChatRequests = getMockedRequestsForChats(
+      { partner: 'Dancer1' },
+      { partner: 'Dancer2' }
+    );
+    const mockedMessageRequests = getMockedRequestsForMessages('0', {
+      from: 'Dancer1',
+      text: 'Foo',
+    });
+    flushRequests(httpMock, mockedChatRequests);
+    spectator.detectChanges();
+
+    // user selects chat with Dancer 1
+    const chatWithDancer1 = byText('Dancer1');
+    expect(spectator.query(chatWithDancer1)).toBeTruthy();
+    spectator.click(chatWithDancer1);
+    flushRequests(httpMock, mockedMessageRequests);
+    spectator.detectChanges();
+
+    // check that first message is displayed
+    expect(spectator.query(byText('Foo'))).toBeTruthy();
+
+    // new message arrives
+    const newMessageRequests = getMockedRequestsForMessages('0', {
+      from: 'Dancer1',
+      text: 'Bar',
+    });
+    flushRequests(httpMock, newMessageRequests);
+    tick(10_000);
+    spectator.detectChanges();
+
+    // check that the new message is displayed
+    expect(spectator.query(byText('Foo'))).toBeTruthy();
+    expect(spectator.query(byText('Bar'))).toBeTruthy();
+    discardPeriodicTasks();
+  }));
+
+  it('allows the user to send a message', () => {
+    // setup mock requests
+    const mockedChatRequests = getMockedRequestsForChats(
+      { partner: 'Dancer1' },
+      { partner: 'Dancer2' }
+    );
+    const mockedMessageRequests = getMockedRequestsForMessages('0');
+    flushRequests(httpMock, mockedChatRequests);
+    spectator.detectChanges();
+
+    // user selects chat with Dancer 1
+    const chatWithDancer1 = byText('Dancer1');
+    expect(spectator.query(chatWithDancer1)).toBeTruthy();
+    spectator.click(chatWithDancer1);
+    flushRequests(httpMock, mockedMessageRequests);
+    spectator.detectChanges();
+
+    // user types a message and clicks on send
+    spectator.typeInElement('Hello World', byRole('textbox'));
+    spectator.click(byRole('button'));
+    // TODO: refactors
+    flushRequests(httpMock, [
+      {
+        method: 'POST',
+        url: 'http://test.de/chats/0/messages',
+        body: {},
+      },
+    ]);
+    spectator.detectChanges();
+    const newMessagesRequests = getMockedRequestsForMessages('0', {
+      from: 'Dancer1',
+      text: 'Hello World',
+    });
+    flushRequests(httpMock, newMessagesRequests);
+    spectator.detectChanges();
+
+    // check that the message is displayed
+    expect(spectator.query(byText('Hello World'))).toBeTruthy();
+  });
 });

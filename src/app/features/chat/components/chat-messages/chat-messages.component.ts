@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ChatMessage, DancerId } from '../../common/types/chat.types';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChatStore } from '../../common/services/chat.store';
 // import { NonNullableFormBuilder, Validators } from '@angular/forms';
 // import { ChatService } from '@features/chat/common/services/chat.service';
 // import {
@@ -15,36 +15,22 @@ import { ChatMessage, DancerId } from '../../common/types/chat.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatMessagesComponent {
+  // TODO: logic to differentiate between own messages and partner messages
+  participant = '1';
+
+  messages = this.chatStore.selectedConversationMessages$;
+
+  constructor(public chatStore: ChatStore) {}
+
   // addMessageForm: any;
   // error?: APIError;
   //
   // @Input() selectedChat?: Chat;
-  @Input()
-  participant: DancerId = '1';
+  // @Input()
+  // participant: DancerId = '1';
 
-  @Input() messages?: ChatMessage[] = [
-    {
-      text: 'Hallo, wie gehts?',
-      authorId: '1',
-      id: '1',
-      readByDancers: [],
-      createdAt: '2021-01-01T00:45:48.000Z',
-    },
-    {
-      text: 'Gut, danke der Nachfrage. Ich habe heute schon viel geschafft. Da waren einige Projekte, die ich erledigen musste. Puh, war das viel arbeit. Und du?',
-      authorId: '2',
-      id: '2',
-      readByDancers: [],
-      createdAt: '2021-01-01T01:13:29.000Z',
-    },
-    {
-      text: 'Naja, ich muss dir sagen, bei mir läuft es schlecht. Leider hab ich mich von meiner Freundin getrennt :(',
-      authorId: '1',
-      id: '3',
-      readByDancers: [],
-      createdAt: '2021-01-01T01:16:32.000Z',
-    },
-  ];
+  // @Input() messages?: ChatMessage[] = [
+  // ];
   //
   // constructor(
   //   private fb: NonNullableFormBuilder,

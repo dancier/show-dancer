@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { Gender, genderList } from '../../../common/types/profile.types';
 import { CityLookupValidator } from '../../../common/validators/city-lookup.validator';
-import { ProfileService } from '../../../common/services/profile.service';
+import { ProfileService } from '@core/profile/profile.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { map } from 'rxjs/operators';
 import { distinctUntilChanged, of, switchMap } from 'rxjs';

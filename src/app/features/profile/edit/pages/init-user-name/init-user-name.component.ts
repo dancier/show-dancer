@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileHttpService } from '../../../common/services/profile-http.service';
-import { ProfileService } from '../../../common/services/profile.service';
+import { ProfileHttpService } from '@core/profile/profile-http.service';
+import { ProfileService } from '@core/profile/profile.service';
 import {
   APIError,
   APIResponse,

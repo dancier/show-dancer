@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AuthStorageService } from '@core/auth/services/auth-storage.service';
+import { AuthStorageService } from '../auth/services/auth-storage.service';
 import { ProfileHttpService } from './profile-http.service';
-import { Dance, PersonalData, Profile } from '../types/profile.types';
+import {
+  Dance,
+  PersonalData,
+  Profile,
+} from '@features/profile/common/types/profile.types';
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { isNonNull } from '@core/common/rxjs.utils';
+import { isNonNull } from '../common/rxjs.utils';
 import { APIResponse } from '@shared/http/response.types';
-import { EnvironmentService } from '@core/common/environment.service';
-import { ImageService } from '@core/image/image.service';
+import { EnvironmentService } from '../common/environment.service';
+import { ImageService } from '../image/image.service';
 
 @Injectable({
   providedIn: 'root',

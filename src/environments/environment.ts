@@ -6,7 +6,7 @@ import { Environment } from './utils/environment.type';
 
 export const environment: Environment = {
   production: false,
-  apiUrl: '/api',
+  apiUrl: 'http://localho.st:8010/proxy',
   removeTestAttributes: false,
 };
 

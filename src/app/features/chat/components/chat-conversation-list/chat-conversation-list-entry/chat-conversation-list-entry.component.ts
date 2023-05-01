@@ -10,20 +10,22 @@ import {
 } from '../../../common/types/chat.types';
 import { ImageService } from '@core/image/image.service';
 import { ChatStore } from '../../../common/services/chat.store';
-import { ProfileService } from '../../../../profile/common/services/profile.service';
+import { ProfileService } from '@core/profile/profile.service';
 
 @Component({
   selector: 'app-chat-conversation-list-entry',
   templateUrl: './chat-conversation-list-entry.component.html',
   styleUrls: ['./chat-conversation-list-entry.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { role: 'listitem' },
 })
 export class ChatConversationListEntryComponent implements OnInit {
   // @Input()
   // participant?: ChatParticipant;
   //
   // @Input()
-  // isSelected = false;
+  isSelected = false;
   //
   // @Output()
   // conversationSelected = new EventEmitter<void>();
@@ -55,6 +57,9 @@ export class ChatConversationListEntryComponent implements OnInit {
   }
 
   selectConversation(): void {
-    // TODO: call the chat store to select the conversation
+    if (!this.conversation) {
+      return;
+    }
+    this.chatStore.selectConversation(this.conversation.chatId);
   }
 }

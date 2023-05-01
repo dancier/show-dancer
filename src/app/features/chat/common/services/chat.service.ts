@@ -2,11 +2,27 @@ import { Injectable } from '@angular/core';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 import { HttpClient } from '@angular/common/http';
 import { EnvironmentService } from '@core/common/environment.service';
-import { Conversation, ChatDto, DancerMapDto } from '../types/chat.types';
+import {
+  Conversation,
+  ChatDto,
+  DancerMapDto,
+  MessageResponse,
+  ChatMessage,
+} from '../types/chat.types';
 import { combineLatest, map, Observable, shareReplay, switchMap } from 'rxjs';
+import { Router } from '@angular/router';
+import { ProfileService } from '@core/profile/profile.service';
 
 type FetchChatsDto = {
   chats: ChatDto[];
+};
+
+export type CreateChatResponse = {
+  chatId: string;
+  dancerIds: string[];
+  lastActivity: null;
+  type: 'DIRECT';
+  lastMessage: null;
 };
 
 @Injectable({
@@ -37,7 +53,9 @@ export class ChatService {
   constructor(
     private http: HttpClient,
     private environment: EnvironmentService,
-    private authStorageService: AuthStorageService
+    private authStorageService: AuthStorageService,
+    private profileService: ProfileService,
+    private router: Router
   ) {
     this.chatApiUrl = `${this.environment.getApiUrl()}/chats`;
     this.dancerApiUrl = `${this.environment.getApiUrl()}/dancers`;
@@ -88,6 +106,7 @@ export class ChatService {
       .pipe(shareReplay(1));
   }
 
+  // TODO: error handling
   fetchAllChats$(): Observable<ChatDto[]> {
     return this.http
       .get<FetchChatsDto>(this.chatApiUrl, this.defaultOptions)
@@ -97,6 +116,29 @@ export class ChatService {
         }),
         shareReplay(1)
       );
+  }
+
+  // TODO: error handling
+  fetchMessagesForChat(chatId: string): Observable<ChatMessage[]> {
+    return this.http
+      .get<MessageResponse>(
+        `${this.chatApiUrl}/${chatId}/messages`,
+        this.defaultOptions
+      )
+      .pipe(
+        map((response) => {
+          return response.messages;
+        }),
+        shareReplay(1)
+      );
+  }
+
+  sendMessage$(chatId: string, message: string): Observable<void> {
+    return this.http.post<void>(
+      `${this.chatApiUrl}/${chatId}/messages`,
+      { text: message },
+      this.defaultOptions
+    );
   }
 
   // //
@@ -211,4 +253,21 @@ export class ChatService {
   //       Date.parse(a.createdAt).valueOf() - Date.parse(b.createdAt).valueOf()
   //   );
   // }
+
+  // TODO: should this service handle routing? Is there a better solution?
+  openChatWith(id: string): void {
+    this.router.navigate(['chat', id]);
+  }
+
+  createChat$(participantId: string): Observable<CreateChatResponse> {
+    const body = {
+      dancerIds: [this.profileService.getProfile()?.id, participantId],
+    };
+
+    return this.http.post<CreateChatResponse>(
+      `${this.chatApiUrl}`,
+      body,
+      this.defaultOptions
+    );
+  }
 }

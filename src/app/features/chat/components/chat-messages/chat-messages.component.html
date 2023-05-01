@@ -27,7 +27,10 @@
 <!--  </form>-->
 <!--</div>-->
 
-<div class="m-10 flex flex-col gap-6">
+<div
+  *ngIf="this.chatStore.selectedConversationMessages$ | async as messages"
+  class="m-10 flex flex-col gap-6"
+>
   <app-chat-message
     *ngFor="let message of messages"
     class="max-w-[80%]"

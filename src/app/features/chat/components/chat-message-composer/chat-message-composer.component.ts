@@ -9,6 +9,7 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
+import { ChatStore } from '../../common/services/chat.store';
 
 type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
 
@@ -23,7 +24,10 @@ type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
 export class ChatMessageComposerComponent {
   form: MessageComposerForm;
 
-  constructor(private fb: NonNullableFormBuilder) {
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private chatStore: ChatStore
+  ) {
     this.form = this.fb.group({
       message: this.fb.control('', [Validators.required]),
     });
@@ -32,6 +36,7 @@ export class ChatMessageComposerComponent {
   postMessage(): void {
     if (this.form.valid) {
       console.log('posting message', this.form.value.message);
+      this.chatStore.sendMessage(this.form.value.message!.toString());
       this.form.reset();
     } else {
       console.log('invalid form');

@@ -1,19 +1,21 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   ChatMessage,
   ChatParticipant,
   DancerId,
 } from '@features/chat/common/types/chat.types';
 import { ChatStore } from '../../common/services/chat.store';
+import { provideComponentStore } from '@ngrx/component-store';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
   styleUrls: ['./chat-page.component.scss'],
-  providers: [ChatStore],
+  providers: [provideComponentStore(ChatStore)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChatPageComponent {
+export class ChatPageComponent implements OnInit {
   conversations!: ChatParticipant[];
 
   selectedConversation!: DancerId;
@@ -24,7 +26,13 @@ export class ChatPageComponent {
     this.selectedConversation = dancerId;
   }
 
-  constructor(private chatStore: ChatStore) {}
+  constructor(private chatStore: ChatStore, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.chatStore.openConversation(params['participantId']);
+    });
+  }
 
   // chatData$!: Observable<ChatData>;
   //

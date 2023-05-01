@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DancerId } from '../../common/types/chat.types';
 import { ChatStore } from '../../common/services/chat.store';
 
 @Component({
@@ -7,13 +6,9 @@ import { ChatStore } from '../../common/services/chat.store';
   templateUrl: './chat-conversation-list.component.html',
   styleUrls: ['./chat-conversation-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { role: 'list' },
 })
 export class ChatConversationListComponent {
   constructor(public chatStore: ChatStore) {}
-
-  selectedConversation: DancerId = '1000';
-
-  selectConversation(_conversationId: DancerId): void {
-    // TODO: select conversation in store
-  }
 }
