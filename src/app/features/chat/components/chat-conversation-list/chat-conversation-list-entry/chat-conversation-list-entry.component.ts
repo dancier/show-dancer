@@ -11,6 +11,7 @@ import {
 import { ImageService } from '@core/image/image.service';
 import { ChatStore } from '../../../common/services/chat.store';
 import { ProfileService } from '@core/profile/profile.service';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-chat-conversation-list-entry',
@@ -25,7 +26,7 @@ export class ChatConversationListEntryComponent implements OnInit {
   // participant?: ChatParticipant;
   //
   // @Input()
-  isSelected = false;
+  isSelected$?: Observable<boolean>;
   //
   // @Output()
   // conversationSelected = new EventEmitter<void>();
@@ -53,6 +54,11 @@ export class ChatConversationListEntryComponent implements OnInit {
     }
     this.participant = this.conversation.participants.find(
       (participant) => participant.id !== this.ownProfileId
+    );
+    this.isSelected$ = this.chatStore.selectedConversation$.pipe(
+      map((conversation) => {
+        return conversation?.chatId === this.conversation?.chatId;
+      })
     );
   }
 

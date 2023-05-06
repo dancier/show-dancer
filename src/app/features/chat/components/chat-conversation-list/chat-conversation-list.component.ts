@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChatStore } from '../../common/services/chat.store';
+import { Conversation } from '../../common/types/chat.types';
 
 @Component({
   selector: 'app-chat-conversation-list',
@@ -11,4 +12,8 @@ import { ChatStore } from '../../common/services/chat.store';
 })
 export class ChatConversationListComponent {
   constructor(public chatStore: ChatStore) {}
+
+  trackByConversationId(index: number, conversation: Conversation): string {
+    return conversation.chatId;
+  }
 }

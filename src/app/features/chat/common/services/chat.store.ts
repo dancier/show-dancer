@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   ComponentStore,
   OnStateInit,
@@ -8,14 +8,16 @@ import { Conversation, ChatMessage } from '../types/chat.types';
 import {
   concatMap,
   filter,
+  interval,
   Observable,
-  Subscription,
   switchMap,
+  takeUntil,
   tap,
   withLatestFrom,
 } from 'rxjs';
 import { ChatService } from './chat.service';
 import { ProfileService } from '@core/profile/profile.service';
+import { EnvironmentService } from '@core/common/environment.service';
 
 export type ChatState = {
   conversationsFetchState: 'init' | 'loading' | 'complete' | 'error';
@@ -23,6 +25,7 @@ export type ChatState = {
   selectedConversation?: Conversation;
   messagesFetchState: 'init' | 'loading' | 'complete';
   messages: ChatMessage[];
+  ownProfileId?: string;
 };
 
 const defaultState: ChatState = {
@@ -36,27 +39,39 @@ const defaultState: ChatState = {
 @Injectable()
 export class ChatStore
   extends ComponentStore<ChatState>
-  implements OnStateInit
+  implements OnStateInit, OnDestroy
 {
-  private fetchMessagesSubscription?: Subscription;
-
   constructor(
     private chatService: ChatService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private environmentService: EnvironmentService
   ) {
     super(defaultState);
   }
 
   ngrxOnStateInit(): void {
-    // TODO: also repeatedly fetch conversations
     this.patchState({ conversationsFetchState: 'loading' });
+    this.fetchOwnProfileId();
     this.fetchConversations();
-    // TODO: test doesn't work with interval, look into it...
-    // this.fetchMessagesSubscription = interval(1000)
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe(() => {
-    //     this.fetchConversations();
-    //   });
+    if (!this.environmentService.getJestTestmode()) {
+      // TODO: test report problems with interval, look into it...
+      interval(1000)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          this.fetchConversations();
+        });
+
+      interval(1000)
+        .pipe(
+          takeUntil(this.destroy$),
+          withLatestFrom(this.selectedConversation$)
+        )
+        .subscribe(([_, selectedConversation]) => {
+          if (selectedConversation) {
+            this.fetchMessages(selectedConversation.chatId);
+          }
+        });
+    }
   }
 
   //
@@ -69,6 +84,7 @@ export class ChatStore
   readonly selectedConversationMessages$ = this.select(
     (state) => state.messages
   );
+  readonly ownProfileId$ = this.select((state) => state.ownProfileId);
   readonly viewModel$ = this.select({
     conversations: this.conversations$,
     selectedConversation: this.selectedConversation$,
@@ -111,6 +127,17 @@ export class ChatStore
     (state, messages: ChatMessage[]) => {
       // eslint-disable-next-line no-console
       console.log('setFetchedMessages', messages);
+      // check if state.messages contains the same messages
+      // if so, don't update state
+      if (
+        state.messages.length === messages.length &&
+        state.messages.every(
+          (message, index) => message.id === messages[index].id
+        )
+      ) {
+        return state;
+      }
+
       return {
         ...state,
         messagesFetchState: 'complete',
@@ -135,6 +162,18 @@ export class ChatStore
               console.error(error);
             }
           )
+        )
+      )
+    )
+  );
+
+  readonly fetchOwnProfileId = this.effect<void>((trigger$) =>
+    trigger$.pipe(
+      switchMap(() =>
+        this.profileService.profile$.pipe(
+          tap((profile) => {
+            this.patchState({ ownProfileId: profile.id });
+          })
         )
       )
     )

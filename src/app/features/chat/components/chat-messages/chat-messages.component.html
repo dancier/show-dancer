@@ -28,17 +28,20 @@
 <!--</div>-->
 
 <div
-  *ngIf="this.chatStore.selectedConversationMessages$ | async as messages"
+  *ngIf="{
+    messages: this.messages | async,
+    ownUserId: this.ownUserId | async
+  } as vm"
   class="m-10 flex flex-col gap-6"
 >
   <app-chat-message
-    *ngFor="let message of messages"
+    *ngFor="let message of vm.messages"
     class="max-w-[80%]"
     [message]="message"
-    [isOwnMessage]="message.authorId !== participant"
+    [isOwnMessage]="message.authorId === vm.ownUserId"
     [ngClass]="{
-      'self-start': message.authorId === participant,
-      'self-end': message.authorId !== participant
+      'self-start': message.authorId !== vm.ownUserId,
+      'self-end': message.authorId === vm.ownUserId
     }"
   ></app-chat-message>
 </div>

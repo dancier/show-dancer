@@ -16,7 +16,7 @@ import { ChatStore } from '../../common/services/chat.store';
 })
 export class ChatMessagesComponent {
   // TODO: logic to differentiate between own messages and partner messages
-  participant = '1';
+  ownUserId = this.chatStore.ownProfileId$;
 
   messages = this.chatStore.selectedConversationMessages$;
 

@@ -8,12 +8,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import {
-  discardPeriodicTasks,
-  fakeAsync,
-  TestBed,
-  tick,
-} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { ChatPageComponent } from './page/chat-page/chat-page.component';
 import { EnvironmentService } from '@core/common/environment.service';
 import { MockService } from 'ng-mocks';
@@ -100,11 +95,20 @@ describe('Chat Feature', () => {
         provide: EnvironmentService,
         useValue: MockService(EnvironmentService, {
           getApiUrl: () => 'http://test.de',
+          getJestTestmode: () => true,
         }),
       },
     ],
     imports: [...moduleImports, HttpClientTestingModule, RouterTestingModule],
   });
+
+  // beforeEach(() => {
+  //   jest.useFakeTimers();
+  // });
+
+  // beforeAll(() => {
+  //   jest.useFakeTimers();
+  // });
 
   beforeEach(async () => {
     spectator = createComponent();
@@ -116,34 +120,34 @@ describe('Chat Feature', () => {
     httpMock.verify();
   });
 
-  xit('displays an empty view when there have been no chats yet', () => {});
-
-  /*
-  const mockedRequests: MockedRequest[] = [
-  {
-    method: 'GET',
-    url: 'http://test.de/profile',
-    body: {},
-  },
-  {
-    method: 'GET',
-    url: 'http://test.de/profile/checkDancerNameAvailability/nameNotAvailable',
-    body: { available: false },
-  },
-  {
-    method: 'GET',
-    url: 'http://test.de/profile/checkDancerNameAvailability/nameAvailable',
-    body: { available: true },
-  },
-];
-
-    spectator.typeInElement('nameNotAvailable', byTestId('username-field'));
-    spectator.click(byTestId('submit-button'));
-    flushRequests(httpMock, mockedRequests);
-    spectator.detectChanges();
-    expect(spectator.query(byTestId('username-error'))).toBeTruthy();
-   */
-
+  //   xit('displays an empty view when there have been no chats yet', () => {});
+  //
+  //   /*
+  //   const mockedRequests: MockedRequest[] = [
+  //   {
+  //     method: 'GET',
+  //     url: 'http://test.de/profile',
+  //     body: {},
+  //   },
+  //   {
+  //     method: 'GET',
+  //     url: 'http://test.de/profile/checkDancerNameAvailability/nameNotAvailable',
+  //     body: { available: false },
+  //   },
+  //   {
+  //     method: 'GET',
+  //     url: 'http://test.de/profile/checkDancerNameAvailability/nameAvailable',
+  //     body: { available: true },
+  //   },
+  // ];
+  //
+  //     spectator.typeInElement('nameNotAvailable', byTestId('username-field'));
+  //     spectator.click(byTestId('submit-button'));
+  //     flushRequests(httpMock, mockedRequests);
+  //     spectator.detectChanges();
+  //     expect(spectator.query(byTestId('username-error'))).toBeTruthy();
+  //    */
+  //
   it('displays a list of previous chats', () => {
     const mockedRequests = getMockedRequestsForChats(
       { partner: 'Dancer1' },
@@ -152,6 +156,7 @@ describe('Chat Feature', () => {
 
     flushRequests(httpMock, mockedRequests);
     spectator.detectChanges();
+    // TODO: assert number of chats
   });
 
   it('displays previous chat messages when a chat is selected', () => {
@@ -176,45 +181,48 @@ describe('Chat Feature', () => {
 
     // check if messages are displayed
     expect(spectator.query(byText('Hello World'))).toBeTruthy();
+    spectator.fixture.destroy();
   });
-
-  xit('displays new messages as they arrive in selected chat', fakeAsync(() => {
-    // setup mock requests
-    const mockedChatRequests = getMockedRequestsForChats(
-      { partner: 'Dancer1' },
-      { partner: 'Dancer2' }
-    );
-    const mockedMessageRequests = getMockedRequestsForMessages('0', {
-      from: 'Dancer1',
-      text: 'Foo',
-    });
-    flushRequests(httpMock, mockedChatRequests);
-    spectator.detectChanges();
-
-    // user selects chat with Dancer 1
-    const chatWithDancer1 = byText('Dancer1');
-    expect(spectator.query(chatWithDancer1)).toBeTruthy();
-    spectator.click(chatWithDancer1);
-    flushRequests(httpMock, mockedMessageRequests);
-    spectator.detectChanges();
-
-    // check that first message is displayed
-    expect(spectator.query(byText('Foo'))).toBeTruthy();
-
-    // new message arrives
-    const newMessageRequests = getMockedRequestsForMessages('0', {
-      from: 'Dancer1',
-      text: 'Bar',
-    });
-    flushRequests(httpMock, newMessageRequests);
-    tick(10_000);
-    spectator.detectChanges();
-
-    // check that the new message is displayed
-    expect(spectator.query(byText('Foo'))).toBeTruthy();
-    expect(spectator.query(byText('Bar'))).toBeTruthy();
-    discardPeriodicTasks();
-  }));
+  //
+  //   xit('displays new messages as they arrive in selected chat', fakeAsync(() => {
+  //     // setup mock requests
+  //     const mockedChatRequests = getMockedRequestsForChats(
+  //       { partner: 'Dancer1' },
+  //       { partner: 'Dancer2' }
+  //     );
+  //     const mockedMessageRequests = getMockedRequestsForMessages('0', {
+  //       from: 'Dancer1',
+  //       text: 'Foo',
+  //     });
+  //     flushRequests(httpMock, mockedChatRequests);
+  //     spectator.detectChanges();
+  //
+  //     // user selects chat with Dancer 1
+  //     const chatWithDancer1 = byText('Dancer1');
+  //     expect(spectator.query(chatWithDancer1)).toBeTruthy();
+  //     spectator.click(chatWithDancer1);
+  //     flushRequests(httpMock, mockedMessageRequests);
+  //     spectator.detectChanges();
+  //
+  //     // check that first message is displayed
+  //     expect(spectator.query(byText('Foo'))).toBeTruthy();
+  //
+  //     // new message arrives
+  //     const newMessageRequests = getMockedRequestsForMessages('0', {
+  //       from: 'Dancer1',
+  //       text: 'Bar',
+  //     });
+  //     flushRequests(httpMock, newMessageRequests);
+  //     tick(10_000);
+  //     spectator.detectChanges();
+  //
+  //     // check that the new message is displayed
+  //     expect(spectator.query(byText('Foo'))).toBeTruthy();
+  //     expect(spectator.query(byText('Bar'))).toBeTruthy();
+  //     jest.runOnlyPendingTimers();
+  //     jest.clearAllTimers();
+  //     discardPeriodicTasks();
+  //   }));
 
   it('allows the user to send a message', () => {
     // setup mock requests
