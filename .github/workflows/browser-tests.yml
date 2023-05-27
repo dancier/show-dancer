@@ -10,30 +10,31 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     # Runs in container with chrome, firefox and edge browsers
-    container: cypress/browsers:node16.16.0-chrome105-ff99-edge
+    container: cypress/browsers:node-18.16.0-chrome-113.0.5672.92-1-ff-113.0-edge-113.0.1774.35-1
+    env:
+      # prevents Husky from installing git hooks
+      HUSKY: 0
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # Installs NPM dependencies, caches them correctly and runs all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v4.2.0
+        uses: cypress-io/github-action@v5
         with:
           browser: chrome
           config: baseUrl=https://test.dancier.net/
-        env:
-          # prevents Husky from installing git hooks
-          HUSKY: 0
 
       # after the test run completes, store videos and any screenshots
       # NOTE: screenshots will be generated only if E2E test failed
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
       # Test run video was always captured, so this action uses "always()" condition
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: cypress-videos
