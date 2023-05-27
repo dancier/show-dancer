@@ -1,0 +1,11 @@
+{
+  "messages": [
+    {
+      "id": "718a42d8-e0d9-4c78-9ce5-6c8e22865181",
+      "authorId": "4ba6b097-9e1a-4d2f-86a0-de55da4c3ae1",
+      "text": "Hello World.",
+      "readByDancers": null,
+      "createdAt": "2023-04-04T19:34:06.435Z"
+    }
+  ]
+}

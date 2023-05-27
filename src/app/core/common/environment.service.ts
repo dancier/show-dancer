@@ -12,6 +12,11 @@ import { environment } from '../../../environments/environment';
 export class EnvironmentService {
   constructor() {}
 
+  public getJestTestmode(): boolean {
+    // can be overwritten in tests
+    return false;
+  }
+
   public getProduction(): boolean {
     return environment.production;
   }

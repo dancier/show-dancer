@@ -1,36 +1,59 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ChatService } from '@features/chat/common/services/chat.service';
-import { ChatData } from '@features/chat/common/types/chat.types';
-import { ProfileService } from '@features/profile/common/services/profile.service';
-import { combineLatest, map, Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChatMessage,
+  ChatParticipant,
+  DancerId,
+} from '@features/chat/common/types/chat.types';
+import { ChatStore } from '../../common/services/chat.store';
+import { provideComponentStore } from '@ngrx/component-store';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
   styleUrls: ['./chat-page.component.scss'],
+  providers: [provideComponentStore(ChatStore)],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChatPageComponent implements OnDestroy, OnInit {
-  chatData$!: Observable<ChatData>;
+export class ChatPageComponent implements OnInit {
+  conversations!: ChatParticipant[];
 
-  constructor(
-    public chatService: ChatService,
-    public profileService: ProfileService
-  ) {}
+  selectedConversation!: DancerId;
+
+  selectedConversationMessages?: ChatMessage[];
+
+  selectConversation(dancerId: DancerId): void {
+    this.selectedConversation = dancerId;
+  }
+
+  constructor(private chatStore: ChatStore, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.chatData$ = combineLatest([
-      this.chatService.chats$,
-      this.chatService.dancers$,
-      this.profileService.profile$,
-    ]).pipe(map(([chats, dancers, profile]) => ({ chats, dancers, profile })));
+    this.route.params.subscribe((params) => {
+      this.chatStore.openConversation(params['participantId']);
+    });
   }
 
-  ngOnDestroy(): void {
-    this.chatService.stopPollingForMessages();
-  }
-
-  selectChat(chatId: string): void {
-    this.chatService.setSelectedChatId(chatId);
-    this.chatService.pollForNewMessages();
-  }
+  // chatData$!: Observable<ChatData>;
+  //
+  // constructor(
+  //   public chatService: ChatService,
+  //   public profileService: ProfileService
+  // ) {}
+  // ngOnInit(): void {
+  //   this.chatData$ = combineLatest([
+  //     this.chatService.chats$,
+  //     this.chatService.dancers$,
+  //     this.profileService.profile$,
+  //   ]).pipe(map(([chats, dancers, profile]) => ({ chats, dancers, profile })));
+  // }
+  //
+  // ngOnDestroy(): void {
+  //   this.chatService.stopPollingForMessages();
+  // }
+  //
+  // selectChat(chatId: string): void {
+  //   this.chatService.setSelectedChatId(chatId);
+  //   this.chatService.pollForNewMessages();
+  // }
 }

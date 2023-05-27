@@ -6,12 +6,12 @@ import { Environment } from './utils/environment.type';
 
 export const environment: Environment = {
   production: false,
-  apiUrl: 'http://localhost:4200/api',
+  apiUrl: 'https://test-dancer.dancier.net',
   removeTestAttributes: false,
 };
 
 /*
- * For easier debugging in development mode, you can import the following file
+ * For easier debugsging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *
  * This import should be commented out in production mode because it will have a negative impact

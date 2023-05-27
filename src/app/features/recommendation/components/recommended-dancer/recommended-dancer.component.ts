@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RecommendedDancer } from '../../types/recommended-dancers.types';
 import { ImageService } from '@core/image/image.service';
 import { EventLogService } from '@core/logging/event-log.service';
+import { ChatService } from '../../../chat/common/services/chat.service';
 
 @Component({
   selector: 'app-recommended-dancer',
@@ -16,7 +17,8 @@ export class RecommendedDancerComponent implements OnInit {
 
   constructor(
     public imageService: ImageService,
-    private readonly eventLogService: EventLogService
+    private readonly eventLogService: EventLogService,
+    private chatService: ChatService
   ) {}
 
   ngOnInit(): void {
@@ -34,5 +36,10 @@ export class RecommendedDancerComponent implements OnInit {
       errorEventMessage: $event.message,
     });
     this.imgSrc = this.imageService.getDefaultDancerImage();
+  }
+
+  openChat(): void {
+    console.log('open chat with', this.dancer);
+    this.chatService.openChatWith(this.dancer.id);
   }
 }

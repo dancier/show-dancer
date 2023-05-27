@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Chat, DancerMap } from '@features/chat/common/types/chat.types';
+import { ChatDto, DancerMapDto } from '@features/chat/common/types/chat.types';
 
 @Component({
   selector: 'app-chat-list-entry',
@@ -7,9 +7,9 @@ import { Chat, DancerMap } from '@features/chat/common/types/chat.types';
   styleUrls: ['./chat-list-entry.component.scss'],
 })
 export class ChatListEntryComponent implements OnInit {
-  @Input() chat?: Chat;
+  @Input() chat?: ChatDto;
   @Input() currentUser?: string;
-  @Input() dancers?: DancerMap;
+  @Input() dancers?: DancerMapDto;
 
   title?: string;
 

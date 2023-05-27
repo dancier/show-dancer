@@ -4,6 +4,10 @@ import { ChatPageComponent } from './page/chat-page/chat-page.component';
 
 export const routes: Routes = [
   {
+    path: ':participantId',
+    component: ChatPageComponent,
+  },
+  {
     path: '',
     component: ChatPageComponent,
   },

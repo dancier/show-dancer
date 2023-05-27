@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { APIError, APIResponse } from '@shared/http/response.types';
-import { ProfileService } from '../../../common/services/profile.service';
+import { ProfileService } from '@core/profile/profile.service';
 import { Profile, UploadedImageDao } from '../../../common/types/profile.types';
 import { Router } from '@angular/router';
 import { format } from 'date-fns';

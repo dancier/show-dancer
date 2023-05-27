@@ -4,7 +4,7 @@ import {
   AsyncValidatorFn,
   ValidationErrors,
 } from '@angular/forms';
-import { ProfileService } from '../services/profile.service';
+import { ProfileService } from '@core/profile/profile.service';
 import { distinctUntilChanged, filter, Observable, of, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 
