@@ -55,9 +55,9 @@ export class ChatConversationListEntryComponent implements OnInit {
     this.participant = this.conversation.participants.find(
       (participant) => participant.id !== this.ownProfileId
     );
-    this.isSelected$ = this.chatStore.selectedConversation$.pipe(
-      map((conversation) => {
-        return conversation?.chatId === this.conversation?.chatId;
+    this.isSelected$ = this.chatStore.selectedConversationId$.pipe(
+      map((conversationId) => {
+        return conversationId === this.conversation?.chatId;
       })
     );
   }
