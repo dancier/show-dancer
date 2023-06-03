@@ -35,11 +35,8 @@ export class ChatMessageComposerComponent {
 
   postMessage(): void {
     if (this.form.valid) {
-      console.log('posting message', this.form.value.message);
       this.chatStore.sendMessage(this.form.value.message!.toString());
       this.form.reset();
-    } else {
-      console.log('invalid form');
     }
   }
 }

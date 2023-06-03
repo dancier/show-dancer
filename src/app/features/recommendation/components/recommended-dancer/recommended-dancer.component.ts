@@ -39,7 +39,6 @@ export class RecommendedDancerComponent implements OnInit {
   }
 
   openChat(): void {
-    console.log('open chat with', this.dancer);
     this.chatService.openChatWith(this.dancer.id);
   }
 }
