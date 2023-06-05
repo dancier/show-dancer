@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
 <mat-toolbar class="header" color="primary">
   <div class="header-left">
     <a href="/"
@@ -23,20 +24,20 @@
               <span>Anmelden</span>
             </button>
             <button
-              *ngIf="authData.isLoggedIn"
-              mat-menu-item
-              routerLink="logout"
-            >
-              <mat-icon>logout</mat-icon>
-              <span>Abmelden</span>
-            </button>
-            <button
               *ngIf="!authData.isLoggedIn"
               mat-menu-item
               routerLink="registration"
             >
               <mat-icon>note_add</mat-icon>
               <span>Registrieren</span>
+            </button>
+            <button
+              *ngIf="authData.isLoggedIn"
+              mat-menu-item
+              routerLink="recommendations"
+            >
+              <mat-icon>home</mat-icon>
+              <span>Übersicht</span>
             </button>
             <button
               *ngIf="authData.isLoggedIn"
@@ -58,6 +59,14 @@
               <mat-icon>chat</mat-icon>
               <span>Chats</span>
             </button>
+            <button
+              *ngIf="authData.isLoggedIn"
+              mat-menu-item
+              routerLink="logout"
+            >
+              <mat-icon>logout</mat-icon>
+              <span>Abmelden</span>
+            </button>
           </ng-container>
         </div>
       </mat-menu>
@@ -70,40 +79,43 @@
       </button>
     </div>
     <div class="nav-items hidden gap-2 sm:flex" data-test="desktop-nav">
-      <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
       <ng-container *ngIf="authStorageService.authData$ | async as authData">
-        <a mat-button routerLink="about-us" routerLinkActive="active"
-          ><span>Über Uns</span></a
-        >
-        <div class="separator"></div>
-        <a mat-button routerLink="contact" routerLinkActive="active"
-          ><span>Kontakt</span></a
-        >
-        <div class="separator"></div>
-        <a mat-button routerLink="chat" routerLinkActive="active"
-          ><span>Chats</span></a
-        >
-        <div class="separator"></div>
-        <a mat-button routerLink="contribute" routerLinkActive="active"
-          ><span>Mitmachen</span></a
-        >
-        <div class="separator"></div>
-        <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
-        <div *ngIf="authData.isLoggedIn" class="nav-icons">
-          <a routerLink="profile">
-            <mat-icon>account_box</mat-icon>
-          </a>
-        </div>
-        <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
+        <ng-container *ngIf="authData.isLoggedIn">
+          <a mat-button routerLink="recommendations" routerLinkActive="active"
+            ><span>Übersicht</span></a
+          >
+          <div class="separator"></div>
+          <a mat-button routerLink="chat" routerLinkActive="active"
+            ><span>Chats</span></a
+          >
+          <div class="separator"></div>
+          <a mat-button routerLink="profile"><span>Profil</span></a>
+          <div class="separator"></div>
+        </ng-container>
+        <!--        TODO: popup menu "about us" or "danicer" that contains subpages like these, or move to footer -->
+        <!--        <a mat-button routerLink="about-us" routerLinkActive="active"-->
+        <!--          ><span>Über Uns</span></a-->
+        <!--        >-->
+        <!--        <div class="separator"></div>-->
+        <!--        <a mat-button routerLink="contact" routerLinkActive="active"-->
+        <!--          ><span>Kontakt</span></a-->
+        <!--        >-->
+        <!--        <div class="separator"></div>-->
+
+        <!--        <div class="separator"></div>-->
+        <!--        <a mat-button routerLink="contribute" routerLinkActive="active"-->
+        <!--          ><span>Mitmachen</span></a-->
+        <!--        >-->
+
         <ng-container *ngIf="!authData.isLoggedIn">
           <a mat-button routerLink="login" routerLinkActive="active">
             Anmelden
           </a>
+          <div class="separator"></div>
           <a mat-button routerLink="registration" routerLinkActive="active">
             Registrieren
           </a>
         </ng-container>
-        <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
         <ng-container *ngIf="authData.isLoggedIn">
           <a mat-button routerLink="logout" routerLinkActive="active">
             Abmelden
