@@ -34,6 +34,7 @@ export class DancerProfileNotCreatedGuard implements CanActivateChild {
       map((profile) => {
         switch (childRoute!.routeConfig!.path) {
           case 'username':
+          case '':
             if (profile.dancerName) {
               return this.router.createUrlTree([baseUrlPath, 'personal-info']);
             }

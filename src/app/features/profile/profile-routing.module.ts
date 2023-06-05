@@ -10,6 +10,7 @@ import { InitProfileImageComponent } from './edit/pages/init-profile-image/init-
 import { DancerProfileSufficientGuard } from './common/guards/dancer-profile-sufficient.guard';
 import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
 import { EditProfileComponent } from './edit/pages/edit-profile/edit-profile.component';
+import { DancerProfileNotCreatedGuard } from './common/guards/dancer-profile-not-created.guard';
 
 export const routes: Routes = [
   {
@@ -31,7 +32,7 @@ export const routes: Routes = [
     path: 'initial-setup',
     component: NarrowPageComponent,
     canActivate: [LoggedInGuard],
-    canActivateChild: [],
+    canActivateChild: [DancerProfileNotCreatedGuard],
     children: [
       {
         path: 'username',
