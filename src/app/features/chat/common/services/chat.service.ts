@@ -262,6 +262,7 @@ export class ChatService {
   createChat$(participantId: string): Observable<CreateChatResponse> {
     const body = {
       dancerIds: [this.profileService.getProfile()?.id, participantId],
+      type: 'DIRECT',
     };
 
     return this.http.post<CreateChatResponse>(

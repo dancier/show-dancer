@@ -22,7 +22,7 @@ import { EnvironmentService } from '@core/common/environment.service';
 export type ChatState = {
   conversationsFetchState: 'init' | 'loading' | 'complete' | 'error';
   conversations: Conversation[];
-  selectedConversation?: Conversation;
+  selectedConversationId?: string;
   messagesFetchState: 'init' | 'loading' | 'complete';
   messages: ChatMessage[];
   ownProfileId?: string;
@@ -31,7 +31,7 @@ export type ChatState = {
 const defaultState: ChatState = {
   conversationsFetchState: 'init',
   conversations: [],
-  selectedConversation: undefined,
+  selectedConversationId: undefined,
   messagesFetchState: 'init',
   messages: [],
 };
@@ -64,11 +64,11 @@ export class ChatStore
       interval(1000)
         .pipe(
           takeUntil(this.destroy$),
-          withLatestFrom(this.selectedConversation$)
+          withLatestFrom(this.selectedConversationId$)
         )
-        .subscribe(([_, selectedConversation]) => {
-          if (selectedConversation) {
-            this.fetchMessages(selectedConversation.chatId);
+        .subscribe(([_, selectedConversationId]) => {
+          if (selectedConversationId) {
+            this.fetchMessages(selectedConversationId);
           }
         });
     }
@@ -78,16 +78,19 @@ export class ChatStore
   // selectors
   //
   readonly conversations$ = this.select((state) => state.conversations);
-  readonly selectedConversation$ = this.select(
-    (state) => state.selectedConversation
+  readonly selectedConversationId$ = this.select(
+    (state) => state.selectedConversationId
   );
   readonly selectedConversationMessages$ = this.select(
     (state) => state.messages
   );
   readonly ownProfileId$ = this.select((state) => state.ownProfileId);
+  readonly initialFetchCompleted$ = this.select(
+    (state) => state.conversationsFetchState === 'complete'
+  );
   readonly viewModel$ = this.select({
     conversations: this.conversations$,
-    selectedConversation: this.selectedConversation$,
+    selectedConversationId: this.selectedConversationId$,
     selectedConversationMessages: this.selectedConversationMessages$,
   });
 
@@ -108,17 +111,9 @@ export class ChatStore
   );
 
   readonly setSelectedConversation = this.updater((state, chatId: string) => {
-    const selectedConversation = state.conversations.find(
-      (conversation) => conversation.chatId === chatId
-    );
-    if (!selectedConversation) {
-      return state;
-    }
-    // eslint-disable-next-line no-console
-    console.log('setSelectedConversation', selectedConversation);
     return {
       ...state,
-      selectedConversation,
+      selectedConversationId: chatId,
       messagesFetchState: 'loading',
     };
   });
@@ -204,20 +199,18 @@ export class ChatStore
 
   readonly sendMessage = this.effect((message$: Observable<string>) =>
     message$.pipe(
-      withLatestFrom(this.selectedConversation$),
-      filter(([, selectedConversation]) => !!selectedConversation),
-      concatMap(([message, selectedConversation]) =>
-        this.chatService
-          .sendMessage$(selectedConversation!.chatId, message)
-          .pipe(
-            tapResponse(
-              () => this.fetchMessages(selectedConversation!.chatId),
-              (error) => {
-                // eslint-disable-next-line no-console
-                console.error(error);
-              }
-            )
+      withLatestFrom(this.selectedConversationId$),
+      filter(([, selectedConversationId]) => !!selectedConversationId),
+      concatMap(([message, selectedConversationId]) =>
+        this.chatService.sendMessage$(selectedConversationId!, message).pipe(
+          tapResponse(
+            () => this.fetchMessages(selectedConversationId!),
+            (error) => {
+              // eslint-disable-next-line no-console
+              console.error(error);
+            }
           )
+        )
       )
     )
   );
