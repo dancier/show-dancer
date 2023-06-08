@@ -1,9 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import {
-  ChatMessage,
-  ChatParticipant,
-  DancerId,
-} from '@features/chat/common/types/chat.types';
+
 import { ChatStore } from '../../common/services/chat.store';
 import { provideComponentStore } from '@ngrx/component-store';
 import { ActivatedRoute } from '@angular/router';
@@ -17,17 +13,9 @@ import { filter, withLatestFrom } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatPageComponent implements OnInit {
-  conversations!: ChatParticipant[];
+  // conversations!: ChatParticipant[];
 
-  selectedConversation!: DancerId;
-
-  selectedConversationMessages?: ChatMessage[];
-
-  selectConversation(dancerId: DancerId): void {
-    this.selectedConversation = dancerId;
-  }
-
-  constructor(private chatStore: ChatStore, private route: ActivatedRoute) {}
+  constructor(public chatStore: ChatStore, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.chatStore.initialFetchCompleted$
