@@ -99,7 +99,20 @@ describe('Chat Feature', () => {
         }),
       },
     ],
-    imports: [...moduleImports, HttpClientTestingModule, RouterTestingModule],
+    imports: [
+      ...moduleImports,
+      HttpClientTestingModule,
+      RouterTestingModule.withRoutes([
+        {
+          path: 'chat',
+          component: ChatPageComponent,
+        },
+        {
+          path: 'chat/:participantId',
+          component: ChatPageComponent,
+        },
+      ]),
+    ],
   });
 
   // beforeEach(() => {

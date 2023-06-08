@@ -88,6 +88,11 @@ export class ChatStore
   readonly initialFetchCompleted$ = this.select(
     (state) => state.conversationsFetchState === 'complete'
   );
+  readonly hasNoConversations$ = this.select(
+    (state) =>
+      state.messagesFetchState === 'complete' &&
+      state.conversations.length === 0
+  );
   readonly viewModel$ = this.select({
     conversations: this.conversations$,
     selectedConversationId: this.selectedConversationId$,

@@ -12,6 +12,7 @@ import { ImageService } from '@core/image/image.service';
 import { ChatStore } from '../../../common/services/chat.store';
 import { ProfileService } from '@core/profile/profile.service';
 import { map, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-conversation-list-entry',
@@ -22,14 +23,7 @@ import { map, Observable } from 'rxjs';
   host: { role: 'listitem' },
 })
 export class ChatConversationListEntryComponent implements OnInit {
-  // @Input()
-  // participant?: ChatParticipant;
-  //
-  // @Input()
   isSelected$?: Observable<boolean>;
-  //
-  // @Output()
-  // conversationSelected = new EventEmitter<void>();
 
   @Input()
   conversation?: Conversation;
@@ -41,7 +35,8 @@ export class ChatConversationListEntryComponent implements OnInit {
   constructor(
     public imageService: ImageService,
     public chatStore: ChatStore,
-    public profileService: ProfileService
+    public profileService: ProfileService,
+    public router: Router
   ) {
     this.profileService.profile$.subscribe((profile) => {
       this.ownProfileId = profile.id;
@@ -67,5 +62,8 @@ export class ChatConversationListEntryComponent implements OnInit {
       return;
     }
     this.chatStore.selectConversation(this.conversation.chatId);
+    this.router.navigate(['/chat', this.participant?.id], {
+      replaceUrl: true,
+    });
   }
 }
