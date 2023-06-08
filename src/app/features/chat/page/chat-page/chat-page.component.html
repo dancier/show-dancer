@@ -1,30 +1,39 @@
 <div class="m-10">
   <h1 class="page-header">Deine Chats</h1>
 
-  <div class="flex border">
-    <app-chat-conversation-list></app-chat-conversation-list>
-    <div class="flex min-h-[600px] w-full flex-col bg-gray-100">
-      <app-chat-messages class="grow"></app-chat-messages>
-      <app-chat-message-composer class="flex-none"></app-chat-message-composer>
+  <ng-container
+    *ngIf="
+      (chatStore.hasNoConversations$ | async) === false;
+      else noConversations
+    "
+  >
+    <div class="flex h-[600px] border">
+      <app-chat-conversation-list
+        class="flex-none overflow-y-auto"
+      ></app-chat-conversation-list>
+      <div class="flex w-full flex-col bg-gray-100">
+        <app-chat-messages class="grow"></app-chat-messages>
+        <app-chat-message-composer
+          class="flex-none"
+        ></app-chat-message-composer>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #noConversations>
+  <div class="">
+    <h1 class="font-bold">Du hast noch keine Chats</h1>
+    <p class="text-gray-500">
+      Schau dir die Profile anderer Nutzer an und schreibe ihnen eine Nachricht.
+    </p>
+    <!--    Button zu der Empfehlungsseite -->
+    <div class="my-4">
+      <a
+        class="rounded bg-blue-500 py-2 px-4 font-bold text-white no-underline hover:bg-blue-700"
+        routerLink="/recommendations"
+        >Zurück zur Übersicht</a
+      >
     </div>
   </div>
-
-  <!--  <mat-grid-list cols="2">-->
-  <!--    <mat-grid-tile>-->
-  <!--      <div>-->
-  <!--        <div *ngFor="let chat of chatData.chats">-->
-  <!--          <app-chat-list-entry-->
-  <!--            *ngIf="chatData.profile as profile"-->
-  <!--            [currentUser]="profile.id"-->
-  <!--            [chat]="chat"-->
-  <!--            [dancers]="chatData.dancers"-->
-  <!--            (click)="selectChat(chat.chatId)"-->
-  <!--          ></app-chat-list-entry>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </mat-grid-tile>-->
-  <!--    <mat-grid-tile>-->
-  <!--      <app-chat-messages> </app-chat-messages>-->
-  <!--    </mat-grid-tile>-->
-  <!--  </mat-grid-list>-->
-</div>
+</ng-template>
