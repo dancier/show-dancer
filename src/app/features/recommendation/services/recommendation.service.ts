@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { RecommendationHttpService } from './recommendation-http.service';
 import { RecommendedDancer } from '../types/recommended-dancers.types';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 import { RecommendationsDto } from '../types/recommendations.dto';
+import { APIResponse } from '@shared/http/response.types';
 
 @Injectable({
   providedIn: 'root',
@@ -10,15 +11,18 @@ import { RecommendationsDto } from '../types/recommendations.dto';
 export class RecommendationService {
   constructor(private httpService: RecommendationHttpService) {}
 
-  getRecommendations$(): Observable<RecommendedDancer[] | null> {
+  getRecommendations$(): Observable<APIResponse<RecommendedDancer[]>> {
     return this.httpService.getRecommendations$().pipe(
       map((response) => {
         if (response.isSuccess) {
-          return this.mapDtoToRecommendedDancers(response.payload);
-        } else {
-          return null;
+          return {
+            ...response,
+            payload: this.mapDtoToRecommendedDancers(response.payload),
+          };
         }
-      })
+        return response;
+      }),
+      shareReplay(1)
     );
   }
 

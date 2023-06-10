@@ -2,19 +2,21 @@
   <h1 class="page-header">Diese Tänzer könnten für Sie interessant sein</h1>
 
   <ng-container
-    *ngIf="recommendations$ | async as recommendations; else loading"
+    *ngIf="recommendationsResponse$ | async as response; else loading"
   >
-    <div class="recommended-dancers">
-      <ng-container *ngFor="let recommendedDancer of recommendations">
-        <app-recommended-dancer
-          [dancer]="recommendedDancer"
-        ></app-recommended-dancer>
-      </ng-container>
-    </div>
+    <ng-container *ngIf="response.isSuccess; else error">
+      <div class="recommended-dancers">
+        <ng-container *ngFor="let recommendedDancer of response.payload">
+          <app-recommended-dancer
+            [dancer]="recommendedDancer"
+          ></app-recommended-dancer>
+        </ng-container>
+      </div>
 
-    <div class="load-more">
-      <button class="btn-lg btn-secondary">Weitere anzeigen</button>
-    </div>
+      <div class="load-more">
+        <button class="btn-lg btn-secondary">Weitere anzeigen</button>
+      </div>
+    </ng-container>
   </ng-container>
 
   <ng-template #loading>
@@ -34,5 +36,13 @@
         </div>
       </div>
     </div>
+  </ng-template>
+
+  <ng-template #error>
+    <app-alert alertType="error" icon="error">
+      <p>
+        Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.
+      </p>
+    </app-alert>
   </ng-template>
 </div>
