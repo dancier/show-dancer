@@ -85,6 +85,9 @@ export class ChatStore
     (state) => state.messages
   );
   readonly ownProfileId$ = this.select((state) => state.ownProfileId);
+  readonly conversationsFetchState$ = this.select(
+    (state) => state.conversationsFetchState
+  );
   readonly initialFetchCompleted$ = this.select(
     (state) => state.conversationsFetchState === 'complete'
   );
