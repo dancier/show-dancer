@@ -28,27 +28,4 @@ export class ChatPageComponent implements OnInit {
         this.chatStore.openConversation(params['participantId']);
       });
   }
-
-  // chatData$!: Observable<ChatData>;
-  //
-  // constructor(
-  //   public chatService: ChatService,
-  //   public profileService: ProfileService
-  // ) {}
-  // ngOnInit(): void {
-  //   this.chatData$ = combineLatest([
-  //     this.chatService.chats$,
-  //     this.chatService.dancers$,
-  //     this.profileService.profile$,
-  //   ]).pipe(map(([chats, dancers, profile]) => ({ chats, dancers, profile })));
-  // }
-  //
-  // ngOnDestroy(): void {
-  //   this.chatService.stopPollingForMessages();
-  // }
-  //
-  // selectChat(chatId: string): void {
-  //   this.chatService.setSelectedChatId(chatId);
-  //   this.chatService.pollForNewMessages();
-  // }
 }

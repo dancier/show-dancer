@@ -7,7 +7,7 @@ import { RecommendationService } from '../../services/recommendation.service';
   styleUrls: ['./recommendations-overview.component.scss'],
 })
 export class RecommendationsOverviewComponent {
-  recommendations$ = this.recommendationsService.getRecommendations$();
+  recommendationsResponse$ = this.recommendationsService.getRecommendations$();
 
   constructor(public recommendationsService: RecommendationService) {}
 }
