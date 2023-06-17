@@ -18,6 +18,8 @@ import { ModernLayoutComponent } from './layout/modern-layout/modern-layout.comp
 import { NarrowPageComponent } from './layout/narrow-page/narrow-page.component';
 import { LoggedInNavigationComponent } from './layout/navigation/logged-in-navigation/logged-in-navigation.component';
 import { LoggedOutNavigationComponent } from './layout/navigation/logged-out-navigation/logged-out-navigation.component';
+import { MobileMenuButtonComponent } from './layout/navigation/mobile-menu/mobile-menu-button.component';
+import { MobileMenuComponent } from './layout/navigation/mobile-menu/mobile-menu.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { LoggedOutNavigationComponent } from './layout/navigation/logged-out-nav
     NarrowPageComponent,
     LoggedInNavigationComponent,
     LoggedOutNavigationComponent,
+    MobileMenuButtonComponent,
+    MobileMenuComponent,
   ],
   imports: [
     // Angular

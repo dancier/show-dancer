@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 // TODO: Move to types file
 export type MenuItem = {
@@ -10,7 +10,7 @@ export type MenuItem = {
 @Component({
   selector: 'app-logged-in-navigation',
   templateUrl: './logged-in-navigation.component.html',
-  styleUrls: ['./logged-in-navigation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoggedInNavigationComponent {
   mobileMenuOpen = false;

@@ -1,96 +1,26 @@
 <nav class="bg-rose-700">
-  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl px-2 sm:px-8 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
-        <button
-          type="button"
-          class="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
+      <div class="absolute left-2">
+        <a href="/"
+          ><img
+            alt="Dancier Logo"
+            src="assets/img/dancier-logo-with-text.png"
+            style="height: 40px"
+        /></a>
+      </div>
+      <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
+        <app-mobile-menu-button
+          [menuOpen]="mobileMenuOpen"
           (click)="toggleMobileMenu()"
         >
-          <span class="sr-only">Open main menu</span>
-          <!--
-            Icon when menu is closed.
-
-            Menu open: "hidden", Menu closed: "block"
-          -->
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-            [ngClass]="{ hidden: mobileMenuOpen, block: !mobileMenuOpen }"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
-          <!--
-            Icon when menu is open.
-
-            Menu open: "block", Menu closed: "hidden"
-          -->
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-            [ngClass]="{ hidden: !mobileMenuOpen, block: mobileMenuOpen }"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+        </app-mobile-menu-button>
       </div>
     </div>
   </div>
 
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="sm:hidden" [ngClass]="{ hidden: !mobileMenuOpen }">
-    <div class="space-y-1 px-2 pb-3 pt-2 text-gray-300">
-      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-      <ng-container *ngFor="let item of menuItems">
-        <a
-          href="#"
-          class="block rounded-md px-3 py-2 text-base font-medium text-white no-underline"
-          aria-current="page"
-          routerLinkActive="bg-rose-900"
-          [routerLink]="item.route"
-          >{{ item.name }}</a
-        >
-        <ng-container *ngIf="item.children">
-          <a
-            *ngFor="let childItem of item.children"
-            href="#"
-            class="ml-6 block rounded-md px-3 py-2 text-base font-medium text-white no-underline"
-            aria-current="page"
-            routerLinkActive="bg-rose-900"
-            [routerLink]="childItem.route"
-            >{{ childItem.name }}</a
-          >
-        </ng-container>
-      </ng-container>
-      <!--      <a-->
-      <!--        href="#"-->
-      <!--        class="block rounded-md px-3 py-2 text-base font-medium no-underline hover:bg-gray-700 hover:text-white"-->
-      <!--        >Nachrichten</a-->
-      <!--      >-->
-      <!--      <a-->
-      <!--        href="#"-->
-      <!--        class="block rounded-md px-3 py-2 text-base font-medium no-underline hover:bg-gray-700 hover:text-white"-->
-      <!--        >Über Uns</a-->
-      <!--      >-->
-    </div>
-  </div>
+  <app-mobile-menu *ngIf="mobileMenuOpen" [menuItems]="menuItems">
+  </app-mobile-menu>
+  <!--  <div class="sm:hidden" [ngClass]="{ hidden: !mobileMenuOpen }"></div>-->
 </nav>
