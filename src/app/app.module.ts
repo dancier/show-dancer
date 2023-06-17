@@ -16,6 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer/footer.component';
 import { ModernLayoutComponent } from './layout/modern-layout/modern-layout.component';
 import { NarrowPageComponent } from './layout/narrow-page/narrow-page.component';
+import { LoggedInNavigationComponent } from './layout/navigation/logged-in-navigation/logged-in-navigation.component';
+import { LoggedOutNavigationComponent } from './layout/navigation/logged-out-navigation/logged-out-navigation.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { NarrowPageComponent } from './layout/narrow-page/narrow-page.component'
     FooterComponent,
     ModernLayoutComponent,
     NarrowPageComponent,
+    LoggedInNavigationComponent,
+    LoggedOutNavigationComponent,
   ],
   imports: [
     // Angular
