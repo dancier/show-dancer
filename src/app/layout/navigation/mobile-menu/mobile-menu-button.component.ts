@@ -50,10 +50,4 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class MobileMenuButtonComponent {
   @Input() menuOpen = false;
-
-  // @Output() menuToggled = new EventEmitter<void>();
-  //
-  // toggleMobileMenu(): void {
-  //   this.menuToggled.emit();
-  // }
 }

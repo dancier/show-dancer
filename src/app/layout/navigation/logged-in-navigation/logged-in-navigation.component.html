@@ -1,26 +1,38 @@
 <nav class="bg-rose-700">
-  <div class="mx-auto max-w-7xl px-2 sm:px-8 lg:px-8">
+  <div class="mx-auto max-w-7xl px-2 md:px-4">
     <div class="relative flex h-16 items-center justify-between">
-      <div class="absolute left-2">
+      <div class="flex items-center">
         <a href="/"
           ><img
             alt="Dancier Logo"
             src="assets/img/dancier-logo-with-text.png"
             style="height: 40px"
         /></a>
+
+        <app-desktop-menu
+          class="hidden md:block"
+          [menuItems]="menuItems"
+        ></app-desktop-menu>
       </div>
-      <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
+
+      <div class="inset-y-0 flex items-center">
         <app-mobile-menu-button
+          class="md:hidden"
           [menuOpen]="mobileMenuOpen"
           (click)="toggleMobileMenu()"
         >
         </app-mobile-menu-button>
+        <app-profile-menu-button
+          class="hidden md:block"
+        ></app-profile-menu-button>
       </div>
     </div>
   </div>
 
-  <!-- Mobile menu, show/hide based on menu state. -->
-  <app-mobile-menu *ngIf="mobileMenuOpen" [menuItems]="menuItems">
+  <app-mobile-menu
+    *ngIf="mobileMenuOpen"
+    class="md:hidden"
+    [menuItems]="menuItems"
+  >
   </app-mobile-menu>
-  <!--  <div class="sm:hidden" [ngClass]="{ hidden: !mobileMenuOpen }"></div>-->
 </nav>

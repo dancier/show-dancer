@@ -17,7 +17,7 @@ export class LoggedInNavigationComponent {
 
   menuItems: MenuItem[] = [
     { name: 'Übersicht', route: '/recommendations' },
-    { name: 'Nachrichten', route: '/chats' },
+    { name: 'Nachrichten', route: '/chat' },
     {
       name: 'Über Uns',
       route: '/about-us',

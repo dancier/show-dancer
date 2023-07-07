@@ -120,9 +120,19 @@ export class ProfileService {
     );
   }
 
-  getProfileImageSrc(): string {
-    const imageHash = this._profile.value?.profileImageHash ?? null;
+  getProfileImageSrc(): Observable<string> {
     const width = 150;
-    return this.imageService.getDancerImageSrcOrDefault(imageHash, width);
+    return this.profile$.pipe(
+      map((profile) => {
+        if (profile.profileImageHash) {
+          return this.imageService.getDancerImageSrcOrDefault(
+            profile.profileImageHash,
+            width
+          );
+        } else {
+          return this.imageService.getDancerImageSrcOrDefault(null, width);
+        }
+      })
+    );
   }
 }
