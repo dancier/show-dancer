@@ -108,8 +108,9 @@
     }
   },
   "cli": {
-    "defaultCollection": "@ngneat/spectator",
-    "schematicCollections": ["@angular-eslint/schematics"]
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "schematics": {
     "@angular-eslint/schematics:application": {

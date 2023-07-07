@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivateChild,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, take } from 'rxjs';
 import { ProfileService } from '@core/profile/profile.service';
 import { map } from 'rxjs/operators';
@@ -13,7 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class DancerProfileNotCreatedGuard implements CanActivateChild {
+export class DancerProfileNotCreatedGuard  {
   constructor(private profileService: ProfileService, private router: Router) {}
 
   canActivateChild(
