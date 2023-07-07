@@ -9,7 +9,10 @@
         "@schematics/angular:component": {
           "style": "none",
           "skipTests": true,
-          "changeDetection": "OnPush"
+          "inlineTemplate": true,
+          "changeDetection": "OnPush",
+          "standalone": true,
+          "flat": true
         },
         "@schematics/angular:application": {
           "strict": true
