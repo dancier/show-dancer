@@ -8,7 +8,11 @@
   <div class="profile-image">
     <img
       alt="Profile Image"
-      [src]="croppedImage ? croppedImage : profileService.getProfileImageSrc()"
+      [src]="
+        croppedImage
+          ? croppedImage
+          : (profileService.getProfileImageSrc() | async)
+      "
     />
   </div>
 

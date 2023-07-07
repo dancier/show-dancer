@@ -1,7 +1,10 @@
 <div *ngIf="profileService.profile$ | async as profile" class="profile">
   <div class="profile-header">
     <div class="profile-image">
-      <img alt="Profile Image" [src]="profileService.getProfileImageSrc()" />
+      <img
+        alt="Profile Image"
+        [src]="profileService.getProfileImageSrc() | async"
+      />
     </div>
     <div class="profile-info">
       <h1 class="text-2xl">

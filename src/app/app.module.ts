@@ -16,6 +16,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer/footer.component';
 import { ModernLayoutComponent } from './layout/modern-layout/modern-layout.component';
 import { NarrowPageComponent } from './layout/narrow-page/narrow-page.component';
+import { LoggedInNavigationComponent } from './layout/navigation/logged-in-navigation/logged-in-navigation.component';
+import { LoggedOutNavigationComponent } from './layout/navigation/logged-out-navigation/logged-out-navigation.component';
+import { MobileMenuButtonComponent } from './layout/navigation/mobile-menu/mobile-menu-button.component';
+import { MobileMenuComponent } from './layout/navigation/mobile-menu/mobile-menu.component';
+import { DesktopMenuBarComponent } from './layout/navigation/desktop-menu/desktop-menu-bar.component';
+import { ProfileMenuButtonComponent } from './layout/navigation/desktop-menu/profile-menu-button.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +31,12 @@ import { NarrowPageComponent } from './layout/narrow-page/narrow-page.component'
     FooterComponent,
     ModernLayoutComponent,
     NarrowPageComponent,
+    LoggedInNavigationComponent,
+    LoggedOutNavigationComponent,
+    MobileMenuButtonComponent,
+    MobileMenuComponent,
+    DesktopMenuBarComponent,
+    ProfileMenuButtonComponent,
   ],
   imports: [
     // Angular
