@@ -1,4 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MobileMenuComponent } from '../mobile-menu/mobile-menu.component';
+import { NgIf } from '@angular/common';
+import { ProfileMenuButtonComponent } from '../desktop-menu/profile-menu-button.component';
+import { MobileMenuButtonComponent } from '../mobile-menu/mobile-menu-button.component';
+import { DesktopMenuBarComponent } from '../desktop-menu/desktop-menu-bar.component';
 
 // TODO: Move to types file
 export type MenuItem = {
@@ -11,6 +16,14 @@ export type MenuItem = {
   selector: 'app-logged-in-navigation',
   templateUrl: './logged-in-navigation.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    DesktopMenuBarComponent,
+    MobileMenuButtonComponent,
+    ProfileMenuButtonComponent,
+    NgIf,
+    MobileMenuComponent,
+  ],
 })
 export class LoggedInNavigationComponent {
   mobileMenuOpen = false;

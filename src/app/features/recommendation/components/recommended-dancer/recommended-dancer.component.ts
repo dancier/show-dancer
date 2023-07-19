@@ -8,6 +8,7 @@ import { ChatService } from '../../../chat/common/services/chat.service';
   selector: 'app-recommended-dancer',
   templateUrl: './recommended-dancer.component.html',
   styleUrls: ['./recommended-dancer.component.scss'],
+  standalone: true,
 })
 export class RecommendedDancerComponent implements OnInit {
   @Input()

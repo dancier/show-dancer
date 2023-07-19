@@ -17,8 +17,7 @@ describe('Recommendation Feature', () => {
     let spectator: SpectatorRouting<RecommendationsOverviewComponent>;
     const createComponent = createRoutingFactory({
       component: RecommendationsOverviewComponent,
-      declarations: [RecommendedDancerComponent],
-      imports: [HttpClientTestingModule],
+      imports: [RecommendedDancerComponent, HttpClientTestingModule],
       providers: [RecommendationService, RecommendationHttpService],
       stubsEnabled: false,
       routes: [

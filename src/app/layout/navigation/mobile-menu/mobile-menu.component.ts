@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component';
+import { RouterLinkActive, RouterLink } from '@angular/router';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-mobile-menu',
@@ -29,6 +31,8 @@ import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component
       </ng-container>
     </div>
   `,
+  standalone: true,
+  imports: [NgFor, RouterLinkActive, RouterLink, NgIf],
 })
 export class MobileMenuComponent {
   @Input() menuItems: MenuItem[] = [];

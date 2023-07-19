@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { APIError, APIResponse } from '@shared/http/response.types';
 import { ProfileService } from '@core/profile/profile.service';
 import { Profile, UploadedImageDao } from '../../../common/types/profile.types';
@@ -9,7 +13,13 @@ import { PersonalDataForm } from '../../components/personal-data-form/personal-d
 import { de } from 'date-fns/locale';
 import { DanceExperienceForm } from '../../components/dance-experience-form/dance-form.type';
 import { ImageUploadService } from '../../../common/services/image-upload.service';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
+import { ErrorMessagePipe } from '@shared/http/error-message.pipe';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DanceExperienceFormComponent } from '../../components/dance-experience-form/dance-experience-form.component';
+import { PersonalDataFormComponent } from '../../components/personal-data-form/personal-data-form.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 type EditProfileForm = {
   personalData: FormGroup<Partial<PersonalDataForm>>;
@@ -21,6 +31,18 @@ type EditProfileForm = {
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    NgIf,
+    ImageCropperModule,
+    PersonalDataFormComponent,
+    ReactiveFormsModule,
+    DanceExperienceFormComponent,
+    MatFormFieldModule,
+    AsyncPipe,
+    ErrorMessagePipe,
+  ],
 })
 export class EditProfileComponent {
   profileForm = new FormGroup<EditProfileForm>({

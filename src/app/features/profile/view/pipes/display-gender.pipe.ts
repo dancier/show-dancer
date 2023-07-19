@@ -3,6 +3,7 @@ import { Gender } from '../../common/types/profile.types';
 
 @Pipe({
   name: 'displayGender',
+  standalone: true,
 })
 export class DisplayGenderPipe implements PipeTransform {
   transform(gender: Gender): string {

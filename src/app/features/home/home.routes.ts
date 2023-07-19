@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { LandingPageComponent } from '@features/home/pages/landing-page/landing-page.component';
 import { LogoutPageComponent } from '@features/home/pages/logout-page/logout-page.component';
 import { LoginPageComponent } from '@features/home/pages/login-page/login-page.component';
@@ -9,7 +8,7 @@ import { BetaRegistrationPageComponent } from '@features/home/pages/beta-registr
 import { ContactComponent } from './pages/contact/contact.component';
 import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
 
-export const routes: Routes = [
+export const HOME_ROUTES: Routes = [
   {
     path: '',
     component: LandingPageComponent,
@@ -45,9 +44,3 @@ export const routes: Routes = [
     ],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class HomeRoutingModule {}

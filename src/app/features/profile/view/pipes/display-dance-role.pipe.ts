@@ -3,6 +3,7 @@ import { DanceRole } from '../../common/types/profile.types';
 
 @Pipe({
   name: 'displayDanceRole',
+  standalone: true,
 })
 export class DisplayDanceRolePipe implements PipeTransform {
   transform(role: DanceRole): string {

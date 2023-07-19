@@ -8,8 +8,13 @@ import {
   FormGroup,
   NonNullableFormBuilder,
   Validators,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { ChatStore } from '../../common/services/chat.store';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
 
@@ -20,6 +25,14 @@ type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
   changeDetection: ChangeDetectionStrategy.OnPush,
   // needed to remove the bottom margin from mat-form-field
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
 })
 export class ChatMessageComposerComponent {
   form: MessageComposerForm;

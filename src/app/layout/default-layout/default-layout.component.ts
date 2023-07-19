@@ -1,9 +1,14 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { FooterComponent } from '../footer/footer/footer.component';
+import { RouterOutlet } from '@angular/router';
+import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
   selector: 'app-default-layout',
   templateUrl: './default-layout.component.html',
   styleUrls: ['./default-layout.component.scss'],
+  standalone: true,
+  imports: [NavigationComponent, RouterOutlet, FooterComponent],
 })
 export class DefaultLayoutComponent implements OnInit {
   windowHeight: number = 0;

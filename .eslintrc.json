@@ -4,6 +4,7 @@
     "projects/**/*"
   ],
   "plugins": [
+    "@typescript-eslint",
     "unused-imports"
   ],
   "overrides": [

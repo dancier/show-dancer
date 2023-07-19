@@ -5,5 +5,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './logged-out-navigation.component.html',
   styleUrls: ['./logged-out-navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class LoggedOutNavigationComponent {}

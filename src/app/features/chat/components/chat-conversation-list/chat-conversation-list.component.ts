@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChatStore } from '../../common/services/chat.store';
 import { Conversation } from '../../common/types/chat.types';
+import { ChatConversationListEntryComponent } from './chat-conversation-list-entry/chat-conversation-list-entry.component';
+import { NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-chat-conversation-list',
@@ -9,6 +11,8 @@ import { Conversation } from '../../common/types/chat.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { role: 'list' },
+  standalone: true,
+  imports: [NgFor, ChatConversationListEntryComponent, AsyncPipe],
 })
 export class ChatConversationListComponent {
   constructor(public chatStore: ChatStore) {}

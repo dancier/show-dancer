@@ -5,6 +5,7 @@ import { ChatDto, DancerMapDto } from '@features/chat/common/types/chat.types';
   selector: 'app-chat-list-entry',
   templateUrl: './chat-list-entry.component.html',
   styleUrls: ['./chat-list-entry.component.scss'],
+  standalone: true,
 })
 export class ChatListEntryComponent implements OnInit {
   @Input() chat?: ChatDto;

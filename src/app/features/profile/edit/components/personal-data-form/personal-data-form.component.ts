@@ -5,6 +5,7 @@ import {
   FormGroupDirective,
   NonNullableFormBuilder,
   Validators,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { Gender, genderList } from '../../../common/types/profile.types';
 import { CityLookupValidator } from '../../../common/validators/city-lookup.validator';
@@ -14,6 +15,14 @@ import { map } from 'rxjs/operators';
 import { distinctUntilChanged, of, switchMap } from 'rxjs';
 import { parse } from 'date-fns';
 import { PersonalDataForm } from './personal-data-form.types';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
+import { NgFor, NgIf } from '@angular/common';
+import { DataTestDirective } from '@shared/directives/data-test.directive';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDateFnsModule } from '@angular/material-date-fns-adapter';
 
 const zipFormat = /\d{5}/g;
 
@@ -22,6 +31,19 @@ const zipFormat = /\d{5}/g;
   selector: 'app-personal-data-form',
   templateUrl: './personal-data-form.component.html',
   styleUrls: ['./personal-data-form.component.scss'],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    DataTestDirective,
+    NgFor,
+    MatOptionModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatDateFnsModule,
+    NgIf,
+  ],
 })
 export class PersonalDataFormComponent implements OnInit {
   personalDataForm!: FormGroup<PersonalDataForm>;

@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-chat-conversation',
   templateUrl: './chat-conversation.component.html',
   styleUrls: ['./chat-conversation.component.scss'],
+  standalone: true,
 })
 export class ChatConversationComponent {}

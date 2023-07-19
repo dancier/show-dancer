@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProfileService } from '@core/profile/profile.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile-menu-button',
@@ -20,6 +21,8 @@ import { ProfileService } from '@core/profile/profile.service';
       />
     </button>
   `,
+  standalone: true,
+  imports: [AsyncPipe],
 })
 export class ProfileMenuButtonComponent {
   public profileService = inject(ProfileService);

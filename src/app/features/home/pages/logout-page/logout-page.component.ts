@@ -8,6 +8,7 @@ import { AuthStorageService } from '@core/auth/services/auth-storage.service';
   selector: 'app-logout-page',
   templateUrl: './logout-page.component.html',
   styleUrls: ['./logout-page.component.scss'],
+  standalone: true,
 })
 export class LogoutPageComponent implements OnInit, OnDestroy {
   logoutSubscription: Subscription | undefined;

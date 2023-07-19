@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChatStore } from '../../common/services/chat.store';
+import { ChatMessageComponent } from './chat-message/chat-message.component';
+import { NgIf, NgFor, NgClass, AsyncPipe } from '@angular/common';
 // import { NonNullableFormBuilder, Validators } from '@angular/forms';
 // import { ChatService } from '@features/chat/common/services/chat.service';
 // import {
@@ -13,6 +15,8 @@ import { ChatStore } from '../../common/services/chat.store';
   templateUrl: './chat-messages.component.html',
   styleUrls: ['./chat-messages.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, NgFor, ChatMessageComponent, NgClass, AsyncPipe],
 })
 export class ChatMessagesComponent {
   // TODO: logic to differentiate between own messages and partner messages

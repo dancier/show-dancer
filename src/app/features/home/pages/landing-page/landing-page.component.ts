@@ -5,6 +5,7 @@ import { EventLogService } from '@core/logging/event-log.service';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
+  standalone: true,
 })
 export class LandingPageComponent {
   constructor(private router: Router, private eventService: EventLogService) {}

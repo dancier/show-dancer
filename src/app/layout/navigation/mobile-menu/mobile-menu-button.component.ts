@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-mobile-menu-button',
@@ -47,6 +48,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       </svg>
     </button>
   `,
+  standalone: true,
+  imports: [NgClass],
 })
 export class MobileMenuButtonComponent {
   @Input() menuOpen = false;

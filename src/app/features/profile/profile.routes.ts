@@ -1,5 +1,8 @@
-import { NgModule } from '@angular/core';
-import {mapToCanActivate, mapToCanActivateChild, RouterModule, Routes} from '@angular/router';
+import {
+  mapToCanActivate,
+  mapToCanActivateChild,
+  Routes,
+} from '@angular/router';
 import { InitUserNameComponent } from './edit/pages/init-user-name/init-user-name.component';
 import { LoggedInGuard } from '@core/auth/guards/logged-in.guard';
 import { InitPersonalDataComponent } from './edit/pages/init-personal-data/init-personal-data.component';
@@ -12,11 +15,14 @@ import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.compon
 import { EditProfileComponent } from './edit/pages/edit-profile/edit-profile.component';
 import { DancerProfileNotCreatedGuard } from './common/guards/dancer-profile-not-created.guard';
 
-export const routes: Routes = [
+export const PROFILE_ROUTES: Routes = [
   {
     path: '',
     component: NarrowPageComponent,
-    canActivate: mapToCanActivate([LoggedInGuard, DancerProfileSufficientGuard]),
+    canActivate: mapToCanActivate([
+      LoggedInGuard,
+      DancerProfileSufficientGuard,
+    ]),
     children: [
       {
         path: '',
@@ -61,9 +67,3 @@ export const routes: Routes = [
   // Fallback when no prior routes are matched
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class ProfileRoutingModule {}

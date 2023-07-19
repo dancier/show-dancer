@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component';
+import { RouterLinkActive, RouterLink } from '@angular/router';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-desktop-menu',
@@ -19,6 +21,8 @@ import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component
       </div>
     </div>
   `,
+  standalone: true,
+  imports: [NgFor, RouterLinkActive, RouterLink],
 })
 export class DesktopMenuBarComponent {
   @Input() menuItems: MenuItem[] = [];

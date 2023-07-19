@@ -13,7 +13,11 @@
       >, {{ dancer.age }}
     </div>
     <div class="dancer-subheader">{{ dancer.city }}</div>
-    <div class="rounded bg-rose-700 p-2 text-white" (click)="openChat()">
+    <div
+      tabindex="0"
+      class="rounded bg-rose-700 p-2 text-white"
+      (click)="openChat()"
+    >
       Chat öffnen
     </div>
   </div>
