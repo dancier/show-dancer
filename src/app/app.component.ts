@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { EventLogService } from '@core/logging/event-log.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { AppInstanceStorageService } from '@core/logging/app-instance/app-instance-storage.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    standalone: true,
+    imports: [RouterOutlet],
 })
 export class AppComponent implements OnInit {
   constructor(
