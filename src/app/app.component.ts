@@ -4,10 +4,10 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { AppInstanceStorageService } from '@core/logging/app-instance/app-instance-storage.service';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    standalone: true,
-    imports: [RouterOutlet],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  standalone: true,
+  imports: [RouterOutlet],
 })
 export class AppComponent implements OnInit {
   constructor(

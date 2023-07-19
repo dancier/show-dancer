@@ -12,18 +12,18 @@ import { NgIf } from '@angular/common';
 import { DanceExperienceFormComponent } from '../../components/dance-experience-form/dance-experience-form.component';
 
 @Component({
-    selector: 'app-init-partner-dance-experience',
-    templateUrl: './init-partner-dance-experience.component.html',
-    styleUrls: ['./init-partner-dance-experience.component.scss'],
-    standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        DanceExperienceFormComponent,
-        NgIf,
-        MatFormFieldModule,
-        MatButtonModule,
-        ErrorMessagePipe,
-    ],
+  selector: 'app-init-partner-dance-experience',
+  templateUrl: './init-partner-dance-experience.component.html',
+  styleUrls: ['./init-partner-dance-experience.component.scss'],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    DanceExperienceFormComponent,
+    NgIf,
+    MatFormFieldModule,
+    MatButtonModule,
+    ErrorMessagePipe,
+  ],
 })
 export class InitPartnerDanceExperienceComponent {
   form = new FormGroup<Partial<DanceExperienceForm>>({});

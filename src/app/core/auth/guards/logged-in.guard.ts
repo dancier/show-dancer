@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoggedInGuard  {
+export class LoggedInGuard {
   constructor(
     private authStorageService: AuthStorageService,
     private router: Router

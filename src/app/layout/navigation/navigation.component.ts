@@ -6,16 +6,16 @@ import { LoggedInNavigationComponent } from './logged-in-navigation/logged-in-na
 import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-navigation',
-    templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.scss'],
-    standalone: true,
-    imports: [
-        NgIf,
-        LoggedInNavigationComponent,
-        LoggedOutNavigationComponent,
-        AsyncPipe,
-    ],
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    LoggedInNavigationComponent,
+    LoggedOutNavigationComponent,
+    AsyncPipe,
+  ],
 })
 export class NavigationComponent {
   constructor(

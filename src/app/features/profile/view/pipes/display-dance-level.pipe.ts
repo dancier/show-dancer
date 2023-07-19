@@ -2,8 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { DanceLevel } from '../../common/types/profile.types';
 
 @Pipe({
-    name: 'displayDanceLevel',
-    standalone: true,
+  name: 'displayDanceLevel',
+  standalone: true,
 })
 export class DisplayDanceLevelPipe implements PipeTransform {
   transform(level: DanceLevel): string {

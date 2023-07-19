@@ -4,9 +4,9 @@ import { RouterLinkActive, RouterLink } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-mobile-menu',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
+  selector: 'app-mobile-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
     <div class="space-y-1 px-2 pb-3 pt-2">
       <ng-container *ngFor="let item of menuItems">
         <a
@@ -31,13 +31,8 @@ import { NgFor, NgIf } from '@angular/common';
       </ng-container>
     </div>
   `,
-    standalone: true,
-    imports: [
-        NgFor,
-        RouterLinkActive,
-        RouterLink,
-        NgIf,
-    ],
+  standalone: true,
+  imports: [NgFor, RouterLinkActive, RouterLink, NgIf],
 })
 export class MobileMenuComponent {
   @Input() menuItems: MenuItem[] = [];

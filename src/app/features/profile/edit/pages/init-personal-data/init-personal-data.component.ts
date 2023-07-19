@@ -16,18 +16,18 @@ import { PersonalDataFormComponent } from '../../components/personal-data-form/p
 
 @UntilDestroy()
 @Component({
-    selector: 'app-init-personal-data',
-    templateUrl: './init-personal-data.component.html',
-    styleUrls: ['./init-personal-data.component.scss'],
-    standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        PersonalDataFormComponent,
-        NgIf,
-        MatFormFieldModule,
-        MatButtonModule,
-        ErrorMessagePipe,
-    ],
+  selector: 'app-init-personal-data',
+  templateUrl: './init-personal-data.component.html',
+  styleUrls: ['./init-personal-data.component.scss'],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    PersonalDataFormComponent,
+    NgIf,
+    MatFormFieldModule,
+    MatButtonModule,
+    ErrorMessagePipe,
+  ],
 })
 export class InitPersonalDataComponent {
   personalDataForm = new FormGroup<Partial<PersonalDataForm>>({});

@@ -10,20 +10,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-profile-page',
-    templateUrl: './profile-page.component.html',
-    styleUrls: ['./profile-page.component.scss'],
-    standalone: true,
-    imports: [
-        NgIf,
-        NgFor,
-        MatButtonModule,
-        AsyncPipe,
-        AgePipe,
-        DisplayGenderPipe,
-        DisplayDanceLevelPipe,
-        DisplayDanceRolePipe,
-    ],
+  selector: 'app-profile-page',
+  templateUrl: './profile-page.component.html',
+  styleUrls: ['./profile-page.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    MatButtonModule,
+    AsyncPipe,
+    AgePipe,
+    DisplayGenderPipe,
+    DisplayDanceLevelPipe,
+    DisplayDanceRolePipe,
+  ],
 })
 export class ProfilePageComponent {
   constructor(

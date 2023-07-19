@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 
 @Component({
-    selector: 'app-verify-account',
-    templateUrl: './verify-account.component.html',
-    styleUrls: ['./verify-account.component.scss'],
-    standalone: true,
+  selector: 'app-verify-account',
+  templateUrl: './verify-account.component.html',
+  styleUrls: ['./verify-account.component.scss'],
+  standalone: true,
 })
 export class VerifyAccountComponent implements OnInit, OnDestroy {
   verifySubscription: Subscription | undefined;

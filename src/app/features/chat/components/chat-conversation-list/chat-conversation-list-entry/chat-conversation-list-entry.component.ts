@@ -16,18 +16,14 @@ import { Router } from '@angular/router';
 import { NgIf, NgClass, AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-chat-conversation-list-entry',
-    templateUrl: './chat-conversation-list-entry.component.html',
-    styleUrls: ['./chat-conversation-list-entry.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-    host: { role: 'listitem' },
-    standalone: true,
-    imports: [
-        NgIf,
-        NgClass,
-        AsyncPipe,
-    ],
+  selector: 'app-chat-conversation-list-entry',
+  templateUrl: './chat-conversation-list-entry.component.html',
+  styleUrls: ['./chat-conversation-list-entry.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { role: 'listitem' },
+  standalone: true,
+  imports: [NgIf, NgClass, AsyncPipe],
 })
 export class ChatConversationListEntryComponent implements OnInit {
   isSelected$?: Observable<boolean>;

@@ -1,8 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormGroupDirective,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { KeyValue, NgFor, NgIf, AsyncPipe, KeyValuePipe } from '@angular/common';
+import {
+  KeyValue,
+  NgFor,
+  NgIf,
+  AsyncPipe,
+  KeyValuePipe,
+} from '@angular/common';
 import { DanceExperienceEntryForm } from '../dance-form.type';
 import { DanceLevel, DanceRole } from '../../../../common/types/profile.types';
 import { MatSelectModule } from '@angular/material/select';
@@ -12,22 +22,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
-    selector: 'app-dance-experience-entry',
-    templateUrl: './dance-experience-entry.component.html',
-    styleUrls: ['./dance-experience-entry.component.scss'],
-    standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatAutocompleteModule,
-        NgFor,
-        MatOptionModule,
-        NgIf,
-        MatSelectModule,
-        AsyncPipe,
-        KeyValuePipe,
-    ],
+  selector: 'app-dance-experience-entry',
+  templateUrl: './dance-experience-entry.component.html',
+  styleUrls: ['./dance-experience-entry.component.scss'],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    NgFor,
+    MatOptionModule,
+    NgIf,
+    MatSelectModule,
+    AsyncPipe,
+    KeyValuePipe,
+  ],
 })
 export class DanceExperienceEntryComponent implements OnInit {
   danceForm!: FormGroup<DanceExperienceEntryForm>;

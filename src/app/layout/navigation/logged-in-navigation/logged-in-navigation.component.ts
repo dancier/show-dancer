@@ -13,17 +13,17 @@ export type MenuItem = {
 };
 
 @Component({
-    selector: 'app-logged-in-navigation',
-    templateUrl: './logged-in-navigation.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        DesktopMenuBarComponent,
-        MobileMenuButtonComponent,
-        ProfileMenuButtonComponent,
-        NgIf,
-        MobileMenuComponent,
-    ],
+  selector: 'app-logged-in-navigation',
+  templateUrl: './logged-in-navigation.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    DesktopMenuBarComponent,
+    MobileMenuButtonComponent,
+    ProfileMenuButtonComponent,
+    NgIf,
+    MobileMenuComponent,
+  ],
 })
 export class LoggedInNavigationComponent {
   mobileMenuOpen = false;

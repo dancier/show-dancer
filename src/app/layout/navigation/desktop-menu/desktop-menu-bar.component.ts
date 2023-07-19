@@ -4,9 +4,9 @@ import { RouterLinkActive, RouterLink } from '@angular/router';
 import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-desktop-menu',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
+  selector: 'app-desktop-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
     <div class="hidden md:block">
       <div class="ml-10 flex items-baseline space-x-4">
         <a
@@ -21,12 +21,8 @@ import { NgFor } from '@angular/common';
       </div>
     </div>
   `,
-    standalone: true,
-    imports: [
-        NgFor,
-        RouterLinkActive,
-        RouterLink,
-    ],
+  standalone: true,
+  imports: [NgFor, RouterLinkActive, RouterLink],
 })
 export class DesktopMenuBarComponent {
   @Input() menuItems: MenuItem[] = [];

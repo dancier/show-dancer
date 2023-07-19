@@ -5,18 +5,14 @@ import { ChatConversationListEntryComponent } from './chat-conversation-list-ent
 import { NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-chat-conversation-list',
-    templateUrl: './chat-conversation-list.component.html',
-    styleUrls: ['./chat-conversation-list.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-    host: { role: 'list' },
-    standalone: true,
-    imports: [
-        NgFor,
-        ChatConversationListEntryComponent,
-        AsyncPipe,
-    ],
+  selector: 'app-chat-conversation-list',
+  templateUrl: './chat-conversation-list.component.html',
+  styleUrls: ['./chat-conversation-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: { role: 'list' },
+  standalone: true,
+  imports: [NgFor, ChatConversationListEntryComponent, AsyncPipe],
 })
 export class ChatConversationListComponent {
   constructor(public chatStore: ChatStore) {}

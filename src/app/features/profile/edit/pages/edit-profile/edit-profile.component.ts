@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { APIError, APIResponse } from '@shared/http/response.types';
 import { ProfileService } from '@core/profile/profile.service';
 import { Profile, UploadedImageDao } from '../../../common/types/profile.types';
@@ -24,21 +28,21 @@ type EditProfileForm = {
 };
 
 @Component({
-    selector: 'app-edit-profile',
-    templateUrl: './edit-profile.component.html',
-    styleUrls: ['./edit-profile.component.scss'],
-    standalone: true,
-    imports: [
-        MatButtonModule,
-        NgIf,
-        ImageCropperModule,
-        PersonalDataFormComponent,
-        ReactiveFormsModule,
-        DanceExperienceFormComponent,
-        MatFormFieldModule,
-        AsyncPipe,
-        ErrorMessagePipe,
-    ],
+  selector: 'app-edit-profile',
+  templateUrl: './edit-profile.component.html',
+  styleUrls: ['./edit-profile.component.scss'],
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    NgIf,
+    ImageCropperModule,
+    PersonalDataFormComponent,
+    ReactiveFormsModule,
+    DanceExperienceFormComponent,
+    MatFormFieldModule,
+    AsyncPipe,
+    ErrorMessagePipe,
+  ],
 })
 export class EditProfileComponent {
   profileForm = new FormGroup<EditProfileForm>({

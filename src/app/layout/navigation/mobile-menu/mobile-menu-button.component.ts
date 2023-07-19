@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
-    selector: 'app-mobile-menu-button',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
+  selector: 'app-mobile-menu-button',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
     <button
       type="button"
       class="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -48,8 +48,8 @@ import { NgClass } from '@angular/common';
       </svg>
     </button>
   `,
-    standalone: true,
-    imports: [NgClass],
+  standalone: true,
+  imports: [NgClass],
 })
 export class MobileMenuButtonComponent {
   @Input() menuOpen = false;

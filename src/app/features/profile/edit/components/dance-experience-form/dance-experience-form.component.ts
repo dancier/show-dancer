@@ -1,5 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, FormGroupDirective, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import {
   DanceLevel,
   DanceRole,
@@ -17,17 +24,17 @@ import { NgFor, NgIf } from '@angular/common';
 
 @UntilDestroy()
 @Component({
-    selector: 'app-dance-experience-form',
-    templateUrl: './dance-experience-form.component.html',
-    styleUrls: ['./dance-experience-form.component.scss'],
-    standalone: true,
-    imports: [
-        NgFor,
-        DanceExperienceEntryComponent,
-        ReactiveFormsModule,
-        NgIf,
-        MatButtonModule,
-    ],
+  selector: 'app-dance-experience-form',
+  templateUrl: './dance-experience-form.component.html',
+  styleUrls: ['./dance-experience-form.component.scss'],
+  standalone: true,
+  imports: [
+    NgFor,
+    DanceExperienceEntryComponent,
+    ReactiveFormsModule,
+    NgIf,
+    MatButtonModule,
+  ],
 })
 export class DanceExperienceFormComponent implements OnInit {
   danceExperiences = new FormArray<FormGroup<DanceExperienceEntryForm>>([]);
