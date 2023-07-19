@@ -89,7 +89,6 @@ describe('Chat Feature', () => {
 
   const createComponent = createComponentFactory({
     component: ChatPageComponent,
-    declarations: moduleDeclarations,
     providers: [
       {
         provide: EnvironmentService,
@@ -101,6 +100,7 @@ describe('Chat Feature', () => {
     ],
     imports: [
       ...moduleImports,
+      ...moduleDeclarations,
       HttpClientTestingModule,
       RouterTestingModule.withRoutes([
         {

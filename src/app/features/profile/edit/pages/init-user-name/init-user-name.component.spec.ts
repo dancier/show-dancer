@@ -12,7 +12,6 @@ import {
   Spectator,
 } from '@ngneat/spectator/jest';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '@shared/shared.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -47,11 +46,10 @@ describe('Setting up username', () => {
 
   const createComponent = createRoutingFactory({
     component: InitUserNameComponent,
-    declarations: [InitPersonalDataComponent],
     imports: [
+      InitPersonalDataComponent,
       HttpClientTestingModule,
       ReactiveFormsModule,
-      SharedModule,
       MatFormFieldModule,
       MatInputModule,
       MatButtonModule,

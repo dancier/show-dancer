@@ -18,6 +18,7 @@ describe('RegisterUserFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        RegisterUserFormComponent,
         ReactiveFormsModule,
         HttpClientModule,
         RouterTestingModule.withRoutes([]),
@@ -28,7 +29,6 @@ describe('RegisterUserFormComponent', () => {
         MatInputModule,
         BrowserAnimationsModule,
       ],
-      declarations: [RegisterUserFormComponent],
     }).compileComponents();
   });
 
