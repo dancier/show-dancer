@@ -77,6 +77,7 @@ describe('AuthStorageService', () => {
       service.authData$.subscribe(listener);
 
       service.setLoginState(true);
+      service.setHumanState(false);
     });
 
     it('sets the state in local storage', () => {
@@ -104,7 +105,7 @@ describe('AuthStorageService', () => {
       listener.mockClear();
       service = TestBed.inject(AuthStorageService);
       service.authData$.subscribe(listener);
-
+      service.setLoginState(false);
       service.setHumanState(true);
     });
 

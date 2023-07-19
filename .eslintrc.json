@@ -1,12 +1,20 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
-  "plugins": ["unused-imports"],
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "plugins": [
+    "unused-imports"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["tsconfig.json"],
+        "project": [
+          "tsconfig.json"
+        ],
         "createDefaultProgram": true
       },
       "extends": [
@@ -19,7 +27,12 @@
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": [
           "error",
-          { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+          }
         ],
         "no-restricted-imports": [
           "error",
@@ -32,7 +45,9 @@
             ],
             "patterns": [
               {
-                "group": ["**/environment"],
+                "group": [
+                  "**/environment"
+                ],
                 "message": "Please import the EnvironmentService instead (see development patterns)."
               }
             ]
@@ -41,13 +56,20 @@
         "no-console": [
           "warn",
           {
-            "allow": ["debug", "info", "warn", "error"]
+            "allow": [
+              "debug",
+              "info",
+              "warn",
+              "error"
+            ]
           }
         ],
         "prefer-const": "error",
         "@typescript-eslint/explicit-function-return-type": [
           "error",
-          { "allowExpressions": true }
+          {
+            "allowExpressions": true
+          }
         ],
         "@angular-eslint/directive-selector": [
           "error",
@@ -69,21 +91,25 @@
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {
-        "@angular-eslint/template/accessibility-elements-content": "error",
-        "@angular-eslint/template/accessibility-interactive-supports-focus": "error",
-        "@angular-eslint/template/accessibility-label-has-associated-control": "error",
-        "@angular-eslint/template/accessibility-role-has-required-aria": "error",
-        "@angular-eslint/template/accessibility-valid-aria": "error",
         "@angular-eslint/template/attributes-order": "warn",
         "@angular-eslint/template/banana-in-box": "error",
         "@angular-eslint/template/conditional-complexity": "error",
         "@angular-eslint/template/cyclomatic-complexity": "error",
         "@angular-eslint/template/no-interpolation-in-attributes": "error",
         "@angular-eslint/template/no-negated-async": "error",
-        "@angular-eslint/template/no-positive-tabindex": "error"
+        "@angular-eslint/template/no-positive-tabindex": "error",
+        "@angular-eslint/template/elements-content": "error",
+        "@angular-eslint/template/interactive-supports-focus": "error",
+        "@angular-eslint/template/label-has-associated-control": "error",
+        "@angular-eslint/template/role-has-required-aria": "error",
+        "@angular-eslint/template/valid-aria": "error"
       }
     }
   ]

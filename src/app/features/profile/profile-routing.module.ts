@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {mapToCanActivate, mapToCanActivateChild, RouterModule, Routes} from '@angular/router';
 import { InitUserNameComponent } from './edit/pages/init-user-name/init-user-name.component';
 import { LoggedInGuard } from '@core/auth/guards/logged-in.guard';
 import { InitPersonalDataComponent } from './edit/pages/init-personal-data/init-personal-data.component';
@@ -16,7 +16,7 @@ export const routes: Routes = [
   {
     path: '',
     component: NarrowPageComponent,
-    canActivate: [LoggedInGuard, DancerProfileSufficientGuard],
+    canActivate: mapToCanActivate([LoggedInGuard, DancerProfileSufficientGuard]),
     children: [
       {
         path: '',
@@ -31,8 +31,8 @@ export const routes: Routes = [
   {
     path: 'initial-setup',
     component: NarrowPageComponent,
-    canActivate: [LoggedInGuard],
-    canActivateChild: [DancerProfileNotCreatedGuard],
+    canActivate: mapToCanActivate([LoggedInGuard]),
+    canActivateChild: mapToCanActivateChild([DancerProfileNotCreatedGuard]),
     children: [
       {
         path: 'username',

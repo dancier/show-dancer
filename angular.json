@@ -9,7 +9,10 @@
         "@schematics/angular:component": {
           "style": "none",
           "skipTests": true,
-          "changeDetection": "OnPush"
+          "inlineTemplate": true,
+          "changeDetection": "OnPush",
+          "standalone": true,
+          "flat": true
         },
         "@schematics/angular:application": {
           "strict": true
@@ -108,8 +111,9 @@
     }
   },
   "cli": {
-    "defaultCollection": "@ngneat/spectator",
-    "schematicCollections": ["@angular-eslint/schematics"]
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "schematics": {
     "@angular-eslint/schematics:application": {
