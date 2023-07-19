@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component';
+import { RouterLinkActive, RouterLink } from '@angular/router';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-desktop-menu',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'app-desktop-menu',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <div class="hidden md:block">
       <div class="ml-10 flex items-baseline space-x-4">
         <a
@@ -19,6 +21,12 @@ import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component
       </div>
     </div>
   `,
+    standalone: true,
+    imports: [
+        NgFor,
+        RouterLinkActive,
+        RouterLink,
+    ],
 })
 export class DesktopMenuBarComponent {
   @Input() menuItems: MenuItem[] = [];

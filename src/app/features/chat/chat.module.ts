@@ -41,7 +41,6 @@ export const moduleImports = [
 ];
 
 @NgModule({
-  declarations: moduleDeclarations,
-  imports: moduleImports,
+    imports: [...moduleImports, ...moduleDeclarations],
 })
 export class ChatModule {}

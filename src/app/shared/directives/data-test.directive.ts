@@ -2,8 +2,9 @@ import { Directive, ElementRef, Renderer2 } from '@angular/core';
 import { EnvironmentService } from '@core/common/environment.service';
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[data-test]',
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[data-test]',
+    standalone: true,
 })
 export class DataTestDirective {
   constructor(

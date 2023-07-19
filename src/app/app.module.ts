@@ -24,38 +24,33 @@ import { DesktopMenuBarComponent } from './layout/navigation/desktop-menu/deskto
 import { ProfileMenuButtonComponent } from './layout/navigation/desktop-menu/profile-menu-button.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DefaultLayoutComponent,
-    NavigationComponent,
-    FooterComponent,
-    ModernLayoutComponent,
-    NarrowPageComponent,
-    LoggedInNavigationComponent,
-    LoggedOutNavigationComponent,
-    MobileMenuButtonComponent,
-    MobileMenuComponent,
-    DesktopMenuBarComponent,
-    ProfileMenuButtonComponent,
-  ],
-  imports: [
-    // Angular
-    BrowserModule,
-    BrowserAnimationsModule,
-
-    // Core & Shared
-    CoreModule,
-    SharedModule,
-
-    // App
-    AppRoutingModule,
-
-    // Material UI
-    MatToolbarModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-  ],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        // Angular
+        BrowserModule,
+        BrowserAnimationsModule,
+        // Core & Shared
+        CoreModule,
+        SharedModule,
+        // App
+        AppRoutingModule,
+        // Material UI
+        MatToolbarModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatIconModule,
+        DefaultLayoutComponent,
+        NavigationComponent,
+        FooterComponent,
+        ModernLayoutComponent,
+        NarrowPageComponent,
+        LoggedInNavigationComponent,
+        LoggedOutNavigationComponent,
+        MobileMenuButtonComponent,
+        MobileMenuComponent,
+        DesktopMenuBarComponent,
+        ProfileMenuButtonComponent,
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

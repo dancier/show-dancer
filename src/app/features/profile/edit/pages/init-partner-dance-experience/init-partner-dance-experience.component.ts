@@ -1,15 +1,29 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from '@core/profile/profile.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DanceExperienceForm } from '../../components/dance-experience-form/dance-form.type';
 import { Dance } from '../../../common/types/profile.types';
 import { APIError } from '@shared/http/response.types';
+import { ErrorMessagePipe } from '@shared/http/error-message.pipe';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgIf } from '@angular/common';
+import { DanceExperienceFormComponent } from '../../components/dance-experience-form/dance-experience-form.component';
 
 @Component({
-  selector: 'app-init-partner-dance-experience',
-  templateUrl: './init-partner-dance-experience.component.html',
-  styleUrls: ['./init-partner-dance-experience.component.scss'],
+    selector: 'app-init-partner-dance-experience',
+    templateUrl: './init-partner-dance-experience.component.html',
+    styleUrls: ['./init-partner-dance-experience.component.scss'],
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        DanceExperienceFormComponent,
+        NgIf,
+        MatFormFieldModule,
+        MatButtonModule,
+        ErrorMessagePipe,
+    ],
 })
 export class InitPartnerDanceExperienceComponent {
   form = new FormGroup<Partial<DanceExperienceForm>>({});

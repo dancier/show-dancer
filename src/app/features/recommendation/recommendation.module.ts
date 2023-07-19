@@ -6,7 +6,6 @@ import { RecommendationsOverviewComponent } from './pages/recommendations-overvi
 import { RecommendedDancerComponent } from './components/recommended-dancer/recommended-dancer.component';
 
 @NgModule({
-  declarations: [RecommendationsOverviewComponent, RecommendedDancerComponent],
-  imports: [CommonModule, SharedModule, RecommendationRoutingModule],
+    imports: [CommonModule, SharedModule, RecommendationRoutingModule, RecommendationsOverviewComponent, RecommendedDancerComponent],
 })
 export class RecommendationModule {}

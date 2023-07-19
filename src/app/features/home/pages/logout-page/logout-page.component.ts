@@ -5,9 +5,10 @@ import { Subscription } from 'rxjs';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 
 @Component({
-  selector: 'app-logout-page',
-  templateUrl: './logout-page.component.html',
-  styleUrls: ['./logout-page.component.scss'],
+    selector: 'app-logout-page',
+    templateUrl: './logout-page.component.html',
+    styleUrls: ['./logout-page.component.scss'],
+    standalone: true,
 })
 export class LogoutPageComponent implements OnInit, OnDestroy {
   logoutSubscription: Subscription | undefined;

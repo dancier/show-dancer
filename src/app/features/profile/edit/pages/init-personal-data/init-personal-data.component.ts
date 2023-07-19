@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileService } from '@core/profile/profile.service';
 import { PersonalData } from '../../../common/types/profile.types';
@@ -8,12 +8,26 @@ import { APIError } from '@shared/http/response.types';
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale';
 import { PersonalDataForm } from '../../components/personal-data-form/personal-data-form.types';
+import { ErrorMessagePipe } from '@shared/http/error-message.pipe';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgIf } from '@angular/common';
+import { PersonalDataFormComponent } from '../../components/personal-data-form/personal-data-form.component';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-init-personal-data',
-  templateUrl: './init-personal-data.component.html',
-  styleUrls: ['./init-personal-data.component.scss'],
+    selector: 'app-init-personal-data',
+    templateUrl: './init-personal-data.component.html',
+    styleUrls: ['./init-personal-data.component.scss'],
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        PersonalDataFormComponent,
+        NgIf,
+        MatFormFieldModule,
+        MatButtonModule,
+        ErrorMessagePipe,
+    ],
 })
 export class InitPersonalDataComponent {
   personalDataForm = new FormGroup<Partial<PersonalDataForm>>({});

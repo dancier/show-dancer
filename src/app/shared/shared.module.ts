@@ -7,8 +7,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [DataTestDirective, ErrorMessagePipe, AgePipe, AlertComponent],
-  imports: [CommonModule, MatIconModule],
-  exports: [DataTestDirective, ErrorMessagePipe, AgePipe, AlertComponent],
+    imports: [CommonModule, MatIconModule, DataTestDirective, ErrorMessagePipe, AgePipe, AlertComponent],
+    exports: [DataTestDirective, ErrorMessagePipe, AgePipe, AlertComponent],
 })
 export class SharedModule {}

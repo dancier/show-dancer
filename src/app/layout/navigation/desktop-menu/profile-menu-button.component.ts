@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProfileService } from '@core/profile/profile.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-profile-menu-button',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'app-profile-menu-button',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <button
       type="button"
       class="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -20,6 +21,8 @@ import { ProfileService } from '@core/profile/profile.service';
       />
     </button>
   `,
+    standalone: true,
+    imports: [AsyncPipe],
 })
 export class ProfileMenuButtonComponent {
   public profileService = inject(ProfileService);
