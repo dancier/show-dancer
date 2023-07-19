@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, NonNullableFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  NonNullableFormBuilder,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@core/auth/services/authentication.service';
 import { APIError } from '@shared/http/response.types';
@@ -10,22 +15,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DataTestDirective } from '../../../../../shared/directives/data-test.directive';
+import { DataTestDirective } from '@shared/directives/data-test.directive';
 
 @Component({
-    selector: 'app-new-password',
-    templateUrl: './new-password.component.html',
-    styleUrls: ['./new-password.component.scss'],
-    standalone: true,
-    imports: [
-        DataTestDirective,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        NgIf,
-        MatButtonModule,
-        ErrorMessagePipe,
-    ],
+  selector: 'app-new-password',
+  templateUrl: './new-password.component.html',
+  styleUrls: ['./new-password.component.scss'],
+  standalone: true,
+  imports: [
+    DataTestDirective,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgIf,
+    MatButtonModule,
+    ErrorMessagePipe,
+  ],
 })
 export class NewPasswordComponent {
   newPasswordForm = this.fb.group(

@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app/app-routing.module';
 import { CoreModule } from '@core/core.module';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { de } from 'date-fns/locale';
 
 if (environment.production) {
   enableProdMode();
@@ -36,6 +38,10 @@ bootstrapApplication(AppComponent, {
     {
       provide: LOCALE_ID,
       useValue: 'de-DE',
+    },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: de,
     },
   ],
 }).catch((err) => console.error(err));

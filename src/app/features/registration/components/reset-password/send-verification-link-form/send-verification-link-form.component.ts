@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  NonNullableFormBuilder,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { AuthenticationService } from '@core/auth/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIError, APIResponse } from '@shared/http/response.types';
@@ -8,28 +12,28 @@ import { Observable } from 'rxjs';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 import { MatButtonModule } from '@angular/material/button';
 import { RecaptchaModule } from 'ng-recaptcha';
-import { DataTestDirective } from '../../../../../shared/directives/data-test.directive';
+import { DataTestDirective } from '@shared/directives/data-test.directive';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-send-verification-link-form',
-    templateUrl: './send-verification-link-form.component.html',
-    styleUrls: ['./send-verification-link-form.component.scss'],
-    standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        NgIf,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        DataTestDirective,
-        RecaptchaModule,
-        MatButtonModule,
-        AsyncPipe,
-    ],
+  selector: 'app-send-verification-link-form',
+  templateUrl: './send-verification-link-form.component.html',
+  styleUrls: ['./send-verification-link-form.component.scss'],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    NgIf,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    DataTestDirective,
+    RecaptchaModule,
+    MatButtonModule,
+    AsyncPipe,
+  ],
 })
 export class SendVerificationLinkFormComponent implements OnInit {
   @Input() linkType!: LinkType;

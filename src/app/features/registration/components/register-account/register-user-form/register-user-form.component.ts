@@ -1,5 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { AuthenticationService } from '@core/auth/services/authentication.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -12,25 +17,25 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DataTestDirective } from '../../../../../shared/directives/data-test.directive';
+import { DataTestDirective } from '@shared/directives/data-test.directive';
 
 @Component({
-    selector: 'app-register-user-form',
-    templateUrl: './register-user-form.component.html',
-    styleUrls: ['./register-user-form.component.scss'],
-    standalone: true,
-    imports: [
-        DataTestDirective,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        NgIf,
-        MatCheckboxModule,
-        RouterLink,
-        RecaptchaModule,
-        MatButtonModule,
-        ErrorMessagePipe,
-    ],
+  selector: 'app-register-user-form',
+  templateUrl: './register-user-form.component.html',
+  styleUrls: ['./register-user-form.component.scss'],
+  standalone: true,
+  imports: [
+    DataTestDirective,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgIf,
+    MatCheckboxModule,
+    RouterLink,
+    RecaptchaModule,
+    MatButtonModule,
+    ErrorMessagePipe,
+  ],
 })
 export class RegisterUserFormComponent implements OnInit, OnDestroy {
   registrationForm!: UntypedFormGroup;

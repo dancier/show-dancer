@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { AuthStorageService } from '@core/auth/services/auth-storage.service';
 import { AuthenticationService } from '@core/auth/services/authentication.service';
 import { EventLogService } from '@core/logging/event-log.service';
@@ -13,25 +18,25 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { NgIf, AsyncPipe } from '@angular/common';
-import { DataTestDirective } from '../../../../shared/directives/data-test.directive';
+import { DataTestDirective } from '@shared/directives/data-test.directive';
 
 @Component({
-    selector: 'app-contact',
-    templateUrl: './contact.component.html',
-    styleUrls: ['./contact.component.scss'],
-    standalone: true,
-    imports: [
-        DataTestDirective,
-        NgIf,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        RecaptchaModule,
-        MatButtonModule,
-        AsyncPipe,
-        ErrorMessagePipe,
-    ],
+  selector: 'app-contact',
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.scss'],
+  standalone: true,
+  imports: [
+    DataTestDirective,
+    NgIf,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    RecaptchaModule,
+    MatButtonModule,
+    AsyncPipe,
+    ErrorMessagePipe,
+  ],
 })
 export class ContactComponent implements OnInit {
   contactForm!: FormGroup;
