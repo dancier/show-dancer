@@ -20,7 +20,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileRoutingModule } from '@features/profile/profile-routing.module';
 import { InitProfileImageComponent } from './edit/pages/init-profile-image/init-profile-image.component';
-import { SharedModule } from '@shared/shared.module';
+
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDateFnsModule } from '@angular/material-date-fns-adapter';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -34,37 +34,36 @@ import { DisplayDanceRolePipe } from './view/pipes/display-dance-role.pipe';
 
 @NgModule({
     imports: [
-        ProfileRoutingModule,
-        CommonModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatGridListModule,
-        MatIconModule,
-        MatButtonModule,
-        MatDatepickerModule,
-        MatDateFnsModule,
-        MatTabsModule,
-        MatRadioModule,
-        MatSelectModule,
-        MatAutocompleteModule,
-        ImageCropperModule,
-        SharedModule,
-        InitUserNameComponent,
-        InitPersonalDataComponent,
-        ProfilePageComponent,
-        InitDanceExperienceComponent,
-        InitPartnerDanceExperienceComponent,
-        DanceExperienceEntryComponent,
-        InitProfileImageComponent,
-        PersonalDataFormComponent,
-        EditProfileComponent,
-        DanceExperienceFormComponent,
-        DisplayGenderPipe,
-        DisplayDanceLevelPipe,
-        DisplayDanceRolePipe,
-    ],
+    ProfileRoutingModule,
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatGridListModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatDateFnsModule,
+    MatTabsModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    ImageCropperModule,
+    InitUserNameComponent,
+    InitPersonalDataComponent,
+    ProfilePageComponent,
+    InitDanceExperienceComponent,
+    InitPartnerDanceExperienceComponent,
+    DanceExperienceEntryComponent,
+    InitProfileImageComponent,
+    PersonalDataFormComponent,
+    EditProfileComponent,
+    DanceExperienceFormComponent,
+    DisplayGenderPipe,
+    DisplayDanceLevelPipe,
+    DisplayDanceRolePipe,
+],
     providers: [
         {
             provide: MAT_DATE_LOCALE,

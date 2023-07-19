@@ -13,34 +13,33 @@ import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { MatButtonModule } from '@angular/material/button';
 import { BetaRegistrationPageComponent } from './pages/beta-registration-page/beta-registration-page.component';
-import { SharedModule } from '@shared/shared.module';
+
 import { ContactComponent } from './pages/contact/contact.component';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { LogoutPageComponent } from './pages/logout-page/logout-page.component';
 
 @NgModule({
     imports: [
-        FormsModule,
-        CommonModule,
-        HomeRoutingModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatIconModule,
-        MatButtonModule,
-        SharedModule,
-        RecaptchaModule,
-        RecaptchaFormsModule,
-        LandingPageComponent,
-        LoginFormComponent,
-        LoginPageComponent,
-        TermsAndConditionsComponent,
-        AboutUsComponent,
-        BetaRegistrationPageComponent,
-        ContactComponent,
-        LogoutPageComponent,
-    ],
+    FormsModule,
+    CommonModule,
+    HomeRoutingModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    LandingPageComponent,
+    LoginFormComponent,
+    LoginPageComponent,
+    TermsAndConditionsComponent,
+    AboutUsComponent,
+    BetaRegistrationPageComponent,
+    ContactComponent,
+    LogoutPageComponent,
+],
     exports: [LoginFormComponent],
 })
 export class HomeModule {}

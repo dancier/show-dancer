@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { CoreModule } from '@core/core.module';
-import { SharedModule } from '@shared/shared.module';
+
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,31 +26,30 @@ import { ProfileMenuButtonComponent } from './layout/navigation/desktop-menu/pro
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        // Angular
-        BrowserModule,
-        BrowserAnimationsModule,
-        // Core & Shared
-        CoreModule,
-        SharedModule,
-        // App
-        AppRoutingModule,
-        // Material UI
-        MatToolbarModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatIconModule,
-        DefaultLayoutComponent,
-        NavigationComponent,
-        FooterComponent,
-        ModernLayoutComponent,
-        NarrowPageComponent,
-        LoggedInNavigationComponent,
-        LoggedOutNavigationComponent,
-        MobileMenuButtonComponent,
-        MobileMenuComponent,
-        DesktopMenuBarComponent,
-        ProfileMenuButtonComponent,
-    ],
+    // Angular
+    BrowserModule,
+    BrowserAnimationsModule,
+    // Core & Shared
+    CoreModule,
+    // App
+    AppRoutingModule,
+    // Material UI
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    DefaultLayoutComponent,
+    NavigationComponent,
+    FooterComponent,
+    ModernLayoutComponent,
+    NarrowPageComponent,
+    LoggedInNavigationComponent,
+    LoggedOutNavigationComponent,
+    MobileMenuButtonComponent,
+    MobileMenuComponent,
+    DesktopMenuBarComponent,
+    ProfileMenuButtonComponent,
+],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

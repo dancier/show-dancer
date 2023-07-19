@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RegistrationRoutingModule } from '@features/registration/registration-routing.module';
-import { SharedModule } from '@shared/shared.module';
+
 import { VerificationRequiredComponent } from './components/register-account/verification-required/verification-required.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
 import { VerificationErrorComponent } from './components/verify-account/verification-error/verification-error.component';
@@ -24,29 +24,28 @@ import { ResendVerificationLinkComponent } from './components/verify-account/res
 
 @NgModule({
     imports: [
-        CommonModule,
-        MatCardModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        RecaptchaModule,
-        RecaptchaFormsModule,
-        ReactiveFormsModule,
-        RegistrationRoutingModule,
-        SharedModule,
-        MatCheckboxModule,
-        MatIconModule,
-        RegisterUserFormComponent,
-        VerificationRequiredComponent,
-        VerifyAccountComponent,
-        VerificationErrorComponent,
-        SendVerificationLinkFormComponent,
-        ResetPasswordComponent,
-        ResetPasswordEmailVerificationComponent,
-        NewPasswordComponent,
-        PasswordChangedComponent,
-        ResendVerificationLinkComponent,
-    ],
+    CommonModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    ReactiveFormsModule,
+    RegistrationRoutingModule,
+    MatCheckboxModule,
+    MatIconModule,
+    RegisterUserFormComponent,
+    VerificationRequiredComponent,
+    VerifyAccountComponent,
+    VerificationErrorComponent,
+    SendVerificationLinkFormComponent,
+    ResetPasswordComponent,
+    ResetPasswordEmailVerificationComponent,
+    NewPasswordComponent,
+    PasswordChangedComponent,
+    ResendVerificationLinkComponent,
+],
 })
 export class RegistrationModule {}

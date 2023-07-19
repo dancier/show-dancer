@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChatListEntryComponent } from './components/chat/chat-list-entry.component';
 import { ChatMessagesComponent } from './components/chat-messages/chat-messages.component';
-import { SharedModule } from '@shared/shared.module';
+
 import { ChatConversationListComponent } from './components/chat-conversation-list/chat-conversation-list.component';
 import { ChatConversationComponent } from './components/chat-conversation/chat-conversation.component';
 import { ChatConversationListEntryComponent } from './components/chat-conversation-list/chat-conversation-list-entry/chat-conversation-list-entry.component';
@@ -29,15 +29,14 @@ export const moduleDeclarations = [
 ];
 
 export const moduleImports = [
-  CommonModule,
-  ChatRoutingModule,
-  MatGridListModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatButtonModule,
-  MatIconModule,
-  ReactiveFormsModule,
-  SharedModule,
+    CommonModule,
+    ChatRoutingModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    ReactiveFormsModule,
 ];
 
 @NgModule({
