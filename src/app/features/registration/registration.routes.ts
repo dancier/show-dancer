@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { RegisterUserFormComponent } from './components/register-account/register-user-form/register-user-form.component';
 import { VerificationErrorComponent } from '@features/registration/components/verify-account/verification-error/verification-error.component';
 import { VerificationRequiredComponent } from '@features/registration/components/register-account/verification-required/verification-required.component';
@@ -11,7 +10,7 @@ import { PasswordChangedComponent } from './components/reset-password/new-passwo
 import { ResendVerificationLinkComponent } from './components/verify-account/resend-verification-link/resend-verification-link.component';
 import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
 
-export const routes: Routes = [
+export const REGISTRATION_ROUTES: Routes = [
   {
     path: '',
     component: NarrowPageComponent,
@@ -55,9 +54,3 @@ export const routes: Routes = [
     ],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class RegistrationRoutingModule {}

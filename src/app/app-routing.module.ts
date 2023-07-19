@@ -10,33 +10,33 @@ const routes: Routes = [
       {
         path: 'registration',
         loadChildren: () =>
-          import('@features/registration/registration.module').then(
-            (m) => m.RegistrationModule
+          import('@features/registration/registration.routes').then(
+            (m) => m.REGISTRATION_ROUTES
           ),
       },
       {
         path: 'profile',
         loadChildren: () =>
-          import('@features/profile/profile.module').then(
-            (m) => m.ProfileModule
+          import('@features/profile/profile.routes').then(
+            (m) => m.PROFILE_ROUTES
           ),
       },
       {
         path: 'chat',
         loadChildren: () =>
-          import('@features/chat/chat.module').then((m) => m.ChatModule),
+          import('@features/chat/chat.routes').then((m) => m.CHAT_ROUTES),
       },
       {
         path: 'recommendations',
         loadChildren: () =>
-          import('@features/recommendation/recommendation.module').then(
-            (m) => m.RecommendationModule
+          import('@features/recommendation/recommendation.routes').then(
+            (m) => m.RECOMMENDATION_ROUTES
           ),
       },
       {
         path: '',
         loadChildren: () =>
-          import('@features/home/home.module').then((m) => m.HomeModule),
+          import('@features/home/home.routes').then((m) => m.HOME_ROUTES),
       },
       // Fallback when no prior routes are matched
       { path: '**', redirectTo: '/', pathMatch: 'full' },
