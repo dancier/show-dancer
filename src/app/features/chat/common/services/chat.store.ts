@@ -16,8 +16,8 @@ import {
   withLatestFrom,
 } from 'rxjs';
 import { ChatService } from './chat.service';
-import { ProfileService } from '@core/profile/profile.service';
-import { EnvironmentService } from '@core/common/environment.service';
+import { ProfileService } from '@shared/profile/profile.service';
+import { EnvironmentService } from '@shared/common/environment.service';
 
 export type ChatState = {
   conversationsFetchState: 'init' | 'loading' | 'complete' | 'error';

@@ -1,22 +1,35 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChatStore } from '../../common/services/chat.store';
-import { ChatMessageComponent } from './chat-message/chat-message.component';
+import { ChatSingleMessageComponent } from './chat-single-message.component';
 import { NgIf, NgFor, NgClass, AsyncPipe } from '@angular/common';
-// import { NonNullableFormBuilder, Validators } from '@angular/forms';
-// import { ChatService } from '@features/chat/common/services/chat.service';
-// import {
-//   Chat,
-//   MessagesByChatMap,
-// } from '@features/chat/common/types/chat.types';
-// import { APIError } from '@shared/http/response.types';
 
 @Component({
   selector: 'app-chat-messages',
-  templateUrl: './chat-messages.component.html',
-  styleUrls: ['./chat-messages.component.scss'],
+  template: `
+    <div
+      *ngIf="{
+        messages: this.messages | async,
+        ownUserId: this.ownUserId | async
+      } as vm"
+      class="flex h-[500px] flex-col-reverse overflow-auto p-10"
+    >
+      <div class="flex flex-col gap-8">
+        <app-chat-single-message
+          *ngFor="let message of vm.messages"
+          class="max-w-[80%]"
+          [message]="message"
+          [isOwnMessage]="message.authorId === vm.ownUserId"
+          [ngClass]="{
+            'self-start': message.authorId !== vm.ownUserId,
+            'self-end': message.authorId === vm.ownUserId
+          }"
+        ></app-chat-single-message>
+      </div>
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, NgFor, ChatMessageComponent, NgClass, AsyncPipe],
+  imports: [NgIf, NgFor, ChatSingleMessageComponent, NgClass, AsyncPipe],
 })
 export class ChatMessagesComponent {
   // TODO: logic to differentiate between own messages and partner messages
@@ -25,38 +38,4 @@ export class ChatMessagesComponent {
   messages = this.chatStore.selectedConversationMessages$;
 
   constructor(public chatStore: ChatStore) {}
-
-  // addMessageForm: any;
-  // error?: APIError;
-  //
-  // @Input() selectedChat?: Chat;
-  // @Input()
-  // participant: DancerId = '1';
-
-  // @Input() messages?: ChatMessage[] = [
-  // ];
-  //
-  // constructor(
-  //   private fb: NonNullableFormBuilder,
-  //   public chatService: ChatService
-  // ) {}
-  //
-  // ngOnInit(): void {
-  //   this.addMessageForm = this.fb.group({
-  //     text: ['', [Validators.required]],
-  //   });
-  // }
-  //
-  // submitForm(): void {
-  //   if (this.addMessageForm.valid && this.addMessageForm.value.text) {
-  //     const text = this.addMessageForm.value.text;
-  //     this.chatService.createAndFetchMessages$(text).subscribe((response) => {
-  //       if (response.isSuccess) {
-  //         this.addMessageForm.setValue({ text: '' });
-  //       } else {
-  //         this.error = response.error;
-  //       }
-  //     });
-  //   }
-  // }
 }

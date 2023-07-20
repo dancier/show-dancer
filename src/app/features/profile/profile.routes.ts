@@ -4,7 +4,7 @@ import {
   Routes,
 } from '@angular/router';
 import { InitUserNameComponent } from './edit/pages/init-user-name/init-user-name.component';
-import { LoggedInGuard } from '@core/auth/guards/logged-in.guard';
+import { LoggedInGuard } from '@shared/auth/guards/logged-in.guard';
 import { InitPersonalDataComponent } from './edit/pages/init-personal-data/init-personal-data.component';
 import { ProfilePageComponent } from '@features/profile/view/profile-page/profile-page.component';
 import { InitDanceExperienceComponent } from './edit/pages/init-dance-experience/init-dance-experience.component';

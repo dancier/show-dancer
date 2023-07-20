@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { ProfileService } from '@core/profile/profile.service';
-import { EnvironmentService } from '@core/common/environment.service';
+import { ProfileService } from '@shared/profile/profile.service';
+import { EnvironmentService } from '@shared/common/environment.service';
 import { Router } from '@angular/router';
 import { DisplayDanceRolePipe } from '../pipes/display-dance-role.pipe';
 import { DisplayDanceLevelPipe } from '../pipes/display-dance-level.pipe';
 import { DisplayGenderPipe } from '../pipes/display-gender.pipe';
-import { AgePipe } from '@shared/pipes/age.pipe';
+import { AgePipe } from '@shared/common/pipes/age.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 

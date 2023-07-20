@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ImageUploadService } from '../../../common/services/image-upload.service';
 import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileService } from '@shared/profile/profile.service';
 import { APIResponse } from '@shared/http/response.types';
 import { UploadedImageDao } from '../../../common/types/profile.types';
 import { Router } from '@angular/router';

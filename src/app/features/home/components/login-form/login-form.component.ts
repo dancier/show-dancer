@@ -5,22 +5,21 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { AuthenticationService } from '@core/auth/services/authentication.service';
-import { LoginRequest } from '@core/auth/authentication.types';
+import { AuthenticationService } from '@shared/auth/services/authentication.service';
+import { LoginRequest } from '@shared/auth/authentication.types';
 import { Router, RouterLink } from '@angular/router';
 import { APIError } from '@shared/http/response.types';
 import { ErrorMessagePipe } from '@shared/http/error-message.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
-import { DataTestDirective } from '@shared/directives/data-test.directive';
+import { DataTestDirective } from '@shared/common/directives/data-test.directive';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss'],
   standalone: true,
   imports: [
     ReactiveFormsModule,

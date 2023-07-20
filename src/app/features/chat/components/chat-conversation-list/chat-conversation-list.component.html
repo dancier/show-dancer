@@ -1,8 +1,0 @@
-<app-chat-conversation-list-entry
-  *ngFor="
-    let conversation of chatStore.conversations$ | async;
-    trackBy: trackByConversationId
-  "
-  [conversation]="conversation"
->
-</app-chat-conversation-list-entry>

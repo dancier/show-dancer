@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { LandingPageComponent } from '@features/home/pages/landing-page/landing-page.component';
-import { LogoutPageComponent } from '@features/home/pages/logout-page/logout-page.component';
-import { LoginPageComponent } from '@features/home/pages/login-page/login-page.component';
-import { TermsAndConditionsComponent } from '@features/home/pages/terms-and-conditions/terms-and-conditions.component';
-import { AboutUsComponent } from '@features/home/pages/about-us/about-us.component';
-import { BetaRegistrationPageComponent } from '@features/home/pages/beta-registration-page/beta-registration-page.component';
+import { LandingPageComponent } from './pages/landing-page.component';
+import { LogoutPageComponent } from './pages/logout-page.component';
+import { LoginPageComponent } from './pages/login-page.component';
+import { TermsAndConditionsComponent } from './pages/terms-and-conditions.component';
+import { AboutUsComponent } from './pages/about-us.component';
+import { BetaRegistrationPageComponent } from './pages/beta-registration-page.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
 

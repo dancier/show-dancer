@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Gender, PersonalData } from '../../common/types/profile.types';
 import { CityLookupValidator } from '../../common/validators/city-lookup.validator';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileService } from '@shared/profile/profile.service';
 
 const zipFormat = /\d{5}/g;
 const sizeFormat = /\d{3}/g;

@@ -10,18 +10,16 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ChatPageComponent } from './page/chat-page/chat-page.component';
-import { EnvironmentService } from '@core/common/environment.service';
+import { EnvironmentService } from '@shared/common/environment.service';
 import { MockService } from 'ng-mocks';
 import { flushRequests, MockedRequest } from '@test-utils/http-utils';
 import { ChatDto, ChatMessage, DancerMapDto } from './common/types/chat.types';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ChatListEntryComponent } from './components/chat/chat-list-entry.component';
 import { ChatMessagesComponent } from './components/chat-messages/chat-messages.component';
-import { ChatConversationListComponent } from './components/chat-conversation-list/chat-conversation-list.component';
-import { ChatConversationComponent } from './components/chat-conversation/chat-conversation.component';
-import { ChatConversationListEntryComponent } from './components/chat-conversation-list/chat-conversation-list-entry/chat-conversation-list-entry.component';
-import { ChatMessageComposerComponent } from './components/chat-message-composer/chat-message-composer.component';
-import { ChatMessageComponent } from './components/chat-messages/chat-message/chat-message.component';
+import { ChatConversationListComponent } from './components/conversation-list/chat-conversation-list.component';
+import { ChatConversationListEntryComponent } from './components/conversation-list/chat-conversation-list-entry.component';
+import { ChatMessageComposerComponent } from './components/message-composer/chat-message-composer.component';
+import { ChatSingleMessageComponent } from './components/chat-messages/chat-single-message.component';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,13 +30,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 export const moduleDeclarations = [
   ChatPageComponent,
-  ChatListEntryComponent,
   ChatMessagesComponent,
   ChatConversationListComponent,
-  ChatConversationComponent,
   ChatConversationListEntryComponent,
   ChatMessageComposerComponent,
-  ChatMessageComponent,
+  ChatSingleMessageComponent,
 ];
 
 export const moduleImports = [

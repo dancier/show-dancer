@@ -1,10 +1,10 @@
-import { isNonNull } from '@core/common/rxjs.utils';
+import { isNonNull } from '@shared/common/rxjs.utils';
 import {
   AbstractControl,
   AsyncValidatorFn,
   ValidationErrors,
 } from '@angular/forms';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileService } from '@shared/profile/profile.service';
 import { distinctUntilChanged, filter, Observable, of, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 

@@ -1,6 +1,6 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { Dance } from '../../../common/types/profile.types';
-import { ModelForm } from '@shared/types/forms.types';
+import { ModelForm } from '@shared/common/types/forms.types';
 
 export type DanceExperienceEntryForm = ModelForm<Dance, {}>;
 

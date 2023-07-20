@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { EventLogService } from '@core/logging/event-log.service';
+import { EventLogService } from '@shared/logging/event-log.service';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { AppInstanceStorageService } from '@core/logging/app-instance/app-instance-storage.service';
+import { AppInstanceStorageService } from '@shared/logging/app-instance/app-instance-storage.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `<router-outlet></router-outlet>`,
   standalone: true,
   imports: [RouterOutlet],
 })

@@ -6,16 +6,16 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '@core/auth/services/authentication.service';
+import { AuthenticationService } from '@shared/auth/services/authentication.service';
 import { APIError } from '@shared/http/response.types';
-import { mustMatch } from '@shared/validators/mustMatch';
+import { mustMatch } from '@shared/common/validators/mustMatch';
 import { switchMap } from 'rxjs';
 import { ErrorMessagePipe } from '@shared/http/error-message.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DataTestDirective } from '@shared/directives/data-test.directive';
+import { DataTestDirective } from '@shared/common/directives/data-test.directive';
 
 @Component({
   selector: 'app-new-password',

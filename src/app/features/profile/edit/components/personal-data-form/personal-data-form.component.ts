@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { Gender, genderList } from '../../../common/types/profile.types';
 import { CityLookupValidator } from '../../../common/validators/city-lookup.validator';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileService } from '@shared/profile/profile.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { map } from 'rxjs/operators';
 import { distinctUntilChanged, of, switchMap } from 'rxjs';
@@ -19,7 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { NgFor, NgIf } from '@angular/common';
-import { DataTestDirective } from '@shared/directives/data-test.directive';
+import { DataTestDirective } from '@shared/common/directives/data-test.directive';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDateFnsModule } from '@angular/material-date-fns-adapter';
