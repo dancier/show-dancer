@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MockProvider } from 'ng-mocks';
-import { AuthenticationService } from '@core/auth/services/authentication.service';
+import { AuthenticationService } from '@shared/auth/services/authentication.service';
 import { ActivatedRoute } from '@angular/router';
 
 describe('SendVerificationLinkFormComponent', () => {

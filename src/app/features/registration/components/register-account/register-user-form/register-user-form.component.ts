@@ -5,10 +5,10 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { AuthenticationService } from '@core/auth/services/authentication.service';
+import { AuthenticationService } from '@shared/auth/services/authentication.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { mustMatch } from '@shared/validators/mustMatch';
+import { mustMatch } from '@shared/common/validators/mustMatch';
 import { APIError } from '@shared/http/response.types';
 import { ErrorMessagePipe } from '@shared/http/error-message.pipe';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +17,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DataTestDirective } from '@shared/directives/data-test.directive';
+import { DataTestDirective } from '@shared/common/directives/data-test.directive';
 
 @Component({
   selector: 'app-register-user-form',

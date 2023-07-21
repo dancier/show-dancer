@@ -6,7 +6,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable, take } from 'rxjs';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileService } from '@shared/profile/profile.service';
 import { map } from 'rxjs/operators';
 
 @Injectable({

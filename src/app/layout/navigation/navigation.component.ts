@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthStorageService } from '@core/auth/services/auth-storage.service';
+import { AuthStorageService } from '@shared/auth/services/auth-storage.service';
 import { ChatService } from '@features/chat/common/services/chat.service';
 import { LoggedOutNavigationComponent } from './logged-out-navigation/logged-out-navigation.component';
 import { LoggedInNavigationComponent } from './logged-in-navigation/logged-in-navigation.component';

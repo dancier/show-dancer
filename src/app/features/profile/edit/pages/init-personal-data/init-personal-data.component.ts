@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileService } from '@shared/profile/profile.service';
 import { PersonalData } from '../../../common/types/profile.types';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { APIError } from '@shared/http/response.types';

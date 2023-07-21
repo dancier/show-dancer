@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AuthStorageService } from '@core/auth/services/auth-storage.service';
+import { AuthStorageService } from '@shared/auth/services/auth-storage.service';
 import { HttpClient } from '@angular/common/http';
-import { EnvironmentService } from '@core/common/environment.service';
+import { EnvironmentService } from '@shared/common/environment.service';
 import {
   Conversation,
   ChatDto,
@@ -11,7 +11,7 @@ import {
 } from '../types/chat.types';
 import { combineLatest, map, Observable, shareReplay, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileService } from '@shared/profile/profile.service';
 
 type FetchChatsDto = {
   chats: ChatDto[];

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileService } from '@shared/profile/profile.service';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DanceExperienceForm } from '../../components/dance-experience-form/dance-form.type';
 import { Dance } from '../../../common/types/profile.types';

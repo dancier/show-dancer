@@ -6,9 +6,9 @@ import {
   HttpErrorResponse,
   HttpStatusCode,
 } from '@angular/common/http';
-import { EnvironmentService } from '@core/common/environment.service';
+import { EnvironmentService } from '@shared/common/environment.service';
 import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
-import { EventLogService } from '@core/logging/event-log.service';
+import { EventLogService } from '@shared/logging/event-log.service';
 
 @Injectable({
   providedIn: 'root',

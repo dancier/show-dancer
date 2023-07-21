@@ -5,9 +5,9 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { AuthStorageService } from '@core/auth/services/auth-storage.service';
-import { AuthenticationService } from '@core/auth/services/authentication.service';
-import { EventLogService } from '@core/logging/event-log.service';
+import { AuthStorageService } from '@shared/auth/services/auth-storage.service';
+import { AuthenticationService } from '@shared/auth/services/authentication.service';
+import { EventLogService } from '@shared/logging/event-log.service';
 import { ContactService } from '../../services/contact.service';
 import { tap } from 'rxjs';
 import { APIResponse } from '@shared/http/response.types';
@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { NgIf, AsyncPipe } from '@angular/common';
-import { DataTestDirective } from '@shared/directives/data-test.directive';
+import { DataTestDirective } from '@shared/common/directives/data-test.directive';
 
 @Component({
   selector: 'app-contact',

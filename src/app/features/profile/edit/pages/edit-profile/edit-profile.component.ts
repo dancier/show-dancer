@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { APIError, APIResponse } from '@shared/http/response.types';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileService } from '@shared/profile/profile.service';
 import { Profile, UploadedImageDao } from '../../../common/types/profile.types';
 import { Router } from '@angular/router';
 import { format } from 'date-fns';

@@ -4,7 +4,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { EnvironmentService } from '@core/common/environment.service';
+import { EnvironmentService } from '@shared/common/environment.service';
 import { MockProvider, MockService } from 'ng-mocks';
 import {
   byTestId,
@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthStorageService } from '@core/auth/services/auth-storage.service';
+import { AuthStorageService } from '@shared/auth/services/auth-storage.service';
 import { of } from 'rxjs';
 import { Location } from '@angular/common';
 import { InitPersonalDataComponent } from '../init-personal-data/init-personal-data.component';

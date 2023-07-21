@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RecommendedDancer } from '../../types/recommended-dancers.types';
-import { ImageService } from '@core/image/image.service';
-import { EventLogService } from '@core/logging/event-log.service';
+import { ImageService } from '@shared/image/image.service';
+import { EventLogService } from '@shared/logging/event-log.service';
 import { ChatService } from '../../../chat/common/services/chat.service';
 
 @Component({

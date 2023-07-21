@@ -13,7 +13,7 @@ import {
   DanceType,
   Profile,
 } from '../../../common/types/profile.types';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileService } from '@shared/profile/profile.service';
 import { Router } from '@angular/router';
 import { DanceExperienceEntryForm } from './dance-form.type';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';

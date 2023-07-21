@@ -5,8 +5,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileHttpService } from '@core/profile/profile-http.service';
-import { ProfileService } from '@core/profile/profile.service';
+import { ProfileHttpService } from '@shared/profile/profile-http.service';
+import { ProfileService } from '@shared/profile/profile.service';
 import {
   APIError,
   APIResponse,
@@ -17,7 +17,7 @@ import { of, switchMap } from 'rxjs';
 import { NameAvailability } from '../../../common/types/profile.types';
 import { ErrorMessagePipe } from '@shared/http/error-message.pipe';
 import { MatButtonModule } from '@angular/material/button';
-import { AlertComponent } from '@shared/components/alert/alert.component';
+import { AlertComponent } from '@shared/common/components/alert/alert.component';
 import { NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
