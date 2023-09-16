@@ -29,6 +29,9 @@ export class ChatHttpService {
   ) {
     this.chatApiUrl = `${this.environment.getApiUrl()}/chats`;
     this.dancerApiUrl = `${this.environment.getApiUrl()}/dancers`;
+    console.log('ChatHttpService created');
+    console.log('chatApiUrl', this.chatApiUrl);
+    console.log('dancerApiUrl', this.dancerApiUrl);
   }
 
   createMessage$(
@@ -50,6 +53,52 @@ export class ChatHttpService {
           }
         })
       );
+  }
+
+  getChats$(): Observable<ChatDto[]> {
+    return (
+      this.http
+        // .get<ChatList>('/chats', this.defaultOptions)
+        .get<ChatList>(this.chatApiUrl, this.defaultOptions)
+        .pipe(map((chatList) => chatList.chats))
+    );
+  }
+
+  getDancers$(dancerIds: string[]): Observable<DancerMapDto> {
+    const request = {
+      dancerIds: dancerIds,
+    };
+
+    return this.http.post<DancerMapDto>(
+      `${this.dancerApiUrl}`,
+      request,
+      this.defaultOptions
+    );
+  }
+
+  getChatsAndDancersEasy$(): Observable<ChatsAndDancers> {
+    return this.http.get<ChatList>(this.chatApiUrl, this.defaultOptions).pipe(
+      map((chatList) => {
+        const dancerIds = this.getAllDancerIds(chatList.chats);
+        return {
+          chatList,
+          dancerIds,
+        };
+      }),
+      switchMap(({ chatList, dancerIds }) => {
+        const request = {
+          dancerIds: dancerIds,
+        };
+
+        return this.http
+          .post<DancerMapDto>(
+            `${this.dancerApiUrl}`,
+            request,
+            this.defaultOptions
+          )
+          .pipe(map((dancerMap) => ({ dancerMap, chatList: chatList.chats })));
+      })
+    );
   }
 
   getChatsAndDancers$(): Observable<APIResponse<ChatsAndDancers>> {

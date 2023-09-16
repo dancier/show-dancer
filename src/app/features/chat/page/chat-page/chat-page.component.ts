@@ -1,21 +1,30 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { ChatStore } from '../../common/services/chat.store';
-import { provideComponentStore } from '@ngrx/component-store';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { filter, withLatestFrom } from 'rxjs';
 import { AlertComponent } from '@shared/common/components/alert/alert.component';
 import { ChatMessageComposerComponent } from '../../components/message-composer/chat-message-composer.component';
 import { ChatMessagesComponent } from '../../components/chat-messages/chat-messages.component';
 import { ChatConversationListComponent } from '../../components/conversation-list/chat-conversation-list.component';
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { ChatStateSignalsService } from '../../common/services/chat-state-signals.service';
 
 @Component({
   selector: 'app-chat-page',
-  templateUrl: './chat-page.component.html',
+  // templateUrl: './chat-page.component.html',
+  template: `
+    Num: {{ service.conversations() }}
+    <ul>
+      <li
+        *ngFor="let conversation of service.conversations()"
+        data-testid="chat-list-entry"
+      >
+        {{ conversation.participants[0].dancerName }}
+      </li>
+    </ul>
+  `,
   styleUrls: ['./chat-page.component.scss'],
-  providers: [provideComponentStore(ChatStore)],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [],
+  changeDetection: ChangeDetectionStrategy.Default,
   standalone: true,
   imports: [
     NgIf,
@@ -28,20 +37,11 @@ import { NgIf, NgFor, AsyncPipe } from '@angular/common';
     AsyncPipe,
   ],
 })
-export class ChatPageComponent implements OnInit {
-  // conversations!: ChatParticipant[];
+export class ChatPageComponent {
+  numOfConversations = 0;
 
-  constructor(public chatStore: ChatStore, private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    this.chatStore.initialFetchCompleted$
-      .pipe(
-        filter((completed) => completed),
-        withLatestFrom(this.route.params),
-        filter(([_, params]) => !!params['participantId'])
-      )
-      .subscribe(([_, params]) => {
-        this.chatStore.openConversation(params['participantId']);
-      });
-  }
+  constructor(
+    public service: ChatStateSignalsService,
+    private route: ActivatedRoute
+  ) {}
 }

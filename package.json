@@ -8,6 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "lint": "ng lint",
+    "test:components": "cypress run --component",
+    "test:components:watch": "cypress open --component --browser=chrome",
     "cy:run": "cypress run",
     "cy:open": "cypress open --e2e --browser chrome",
     "prepare": "husky install"
@@ -52,7 +54,7 @@
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
     "autoprefixer": "^10.4.13",
-    "cypress": "^12.3.0",
+    "cypress": "^12.17.2",
     "cypress-light-theme": "^1.0.0",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",

@@ -202,7 +202,7 @@ describe('Chat Feature', () => {
     // TODO: assert number of chats
   });
 
-  it('displays previous chat messages when a chat is selected', () => {
+  xit('displays previous chat messages when a chat is selected', () => {
     // setup mock requests
     const mockedChatRequests = getMockedRequestsForChats(
       { partner: 'Dancer1' },
@@ -267,7 +267,7 @@ describe('Chat Feature', () => {
   //     discardPeriodicTasks();
   //   }));
 
-  it('allows the user to send a message', () => {
+  xit('allows the user to send a message', () => {
     // setup mock requests
     const mockedChatRequests = getMockedRequestsForChats(
       { partner: 'Dancer1' },

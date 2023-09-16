@@ -36,6 +36,10 @@ const defaultState: ChatState = {
   messages: [],
 };
 
+// export const IntervalSchedulerToken = new InjectionToken<SchedulerLike>(
+//   'IntervalScheduler'
+// );
+
 @Injectable()
 export class ChatStore
   extends ComponentStore<ChatState>
@@ -45,7 +49,8 @@ export class ChatStore
     private chatService: ChatService,
     private profileService: ProfileService,
     private environmentService: EnvironmentService
-  ) {
+  ) // @Inject(IntervalSchedulerToken) private scheduler: SchedulerLike
+  {
     super(defaultState);
   }
 

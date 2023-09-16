@@ -14,5 +14,4 @@
     "src/**/*.d.ts",
     "../node_modules/@types/jest"
   ],
-  "exclude": ["cypress", "mocha", "chai", "node_modules", "cypress.config.ts"]
 }

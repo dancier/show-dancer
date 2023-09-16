@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChatStore } from '../../common/services/chat.store';
 import { ChatSingleMessageComponent } from './chat-single-message.component';
-import { NgIf, NgFor, NgClass, AsyncPipe } from '@angular/common';
+import { NgIf, NgFor, NgClass, AsyncPipe, JsonPipe } from '@angular/common';
+import { ChatMessage } from '../../common/types/chat.types';
 
 @Component({
   selector: 'app-chat-messages',
@@ -13,6 +14,7 @@ import { NgIf, NgFor, NgClass, AsyncPipe } from '@angular/common';
       } as vm"
       class="flex h-[500px] flex-col-reverse overflow-auto p-10"
     >
+      Messages: {{ messagesIterative | json }}
       <div class="flex flex-col gap-8">
         <app-chat-single-message
           *ngFor="let message of vm.messages"
@@ -29,7 +31,14 @@ import { NgIf, NgFor, NgClass, AsyncPipe } from '@angular/common';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, NgFor, ChatSingleMessageComponent, NgClass, AsyncPipe],
+  imports: [
+    NgIf,
+    NgFor,
+    ChatSingleMessageComponent,
+    NgClass,
+    AsyncPipe,
+    JsonPipe,
+  ],
 })
 export class ChatMessagesComponent {
   // TODO: logic to differentiate between own messages and partner messages
@@ -37,5 +46,12 @@ export class ChatMessagesComponent {
 
   messages = this.chatStore.selectedConversationMessages$;
 
-  constructor(public chatStore: ChatStore) {}
+  messagesIterative: ChatMessage[] = [];
+
+  constructor(public chatStore: ChatStore) {
+    this.messages.subscribe((messages) => {
+      console.log('new messages arrived', messages);
+      this.messagesIterative = messages;
+    });
+  }
 }
