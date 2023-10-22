@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MountConfig } from 'cypress/angular';
 import { CommonModule } from '@angular/common';
 import { ChatPageDemoComponent } from './page/chat-page/chat-page-demo.component';
+import { chats, profilePictures } from '@cypress-support/mock-backend';
+import { ChatPageComponent } from './page/chat-page/chat-page.component';
 
 // const timerMock = new TimerMockService();
 
@@ -19,7 +21,7 @@ const demoMountConfig: MountConfig<ChatPageDemoComponent> = {
   ],
 };
 
-const defaultMountConfig: MountConfig<ChatPageDemoComponent> = {
+const defaultMountConfig: MountConfig<ChatPageComponent> = {
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -27,11 +29,11 @@ const defaultMountConfig: MountConfig<ChatPageDemoComponent> = {
     RouterTestingModule.withRoutes([
       {
         path: 'chat',
-        component: ChatPageDemoComponent,
+        component: ChatPageComponent,
       },
       {
         path: 'chat/:participantId',
-        component: ChatPageDemoComponent,
+        component: ChatPageComponent,
       },
     ]),
   ],
@@ -55,50 +57,55 @@ const defaultMountConfig: MountConfig<ChatPageDemoComponent> = {
 
 describe('The chat page', () => {
   beforeEach(() => {
+    cy.window().then((window) => {
+      window['testRunnerEnvironment'] = true;
+    });
     cy.viewport(400, 400);
   });
 
-  it('mounts', () => {
-    cy.intercept('GET', '/chats', {
-      chats: [
-        {
-          chatId: 'chatId',
-          dancerIds: ['dancerId1', 'dancerId2'],
-          lastActivity: null,
-          type: 'DIRECT',
-          lastMessage: null,
-        },
-        {
-          chatId: 'chatId2',
-          dancerIds: ['dancerId1', 'dancerId2'],
-          lastActivity: null,
-          type: 'DIRECT',
-          lastMessage: null,
-        },
-      ],
-    }).as('chats');
-    cy.mount(ChatPageDemoComponent, demoMountConfig).then(() => {
-      // cy.window().then((window) => {
-      //   // timerMock.emit(0);
-      //   // @ts-ignore
-      //   const serviceFromAngularScope: ChatServiceDemoService =
-      //     // @ts-ignore
-      //     window['demoService'];
-      //   console.log('serviceFromAngularScope', serviceFromAngularScope);
-      //   serviceFromAngularScope.valueSubject.next(0);
-      // });
-    });
-    // click on button
-    // cy.get('[data-testid="emit-btn"]').click();
-    cy.window().then((window) => {
-      // @ts-ignore
-      window['emitChats']();
-    });
-    cy.wait('@chats');
-
-    // should containt text 'chat-page-demo works!'
-    cy.contains('Value from Demo: 2').should('be.visible');
-  });
+  // xit('mounts', () => {
+  //   cy.intercept('GET', '/chats', {
+  //     chats: [
+  //       {
+  //         chatId: 'chatId',
+  //         dancerIds: ['dancerId1', 'dancerId2'],
+  //         lastActivity: null,
+  //         type: 'DIRECT',
+  //         lastMessage: null,
+  //       },
+  //       {
+  //         chatId: 'chatId2',
+  //         dancerIds: ['dancerId1', 'dancerId2'],
+  //         lastActivity: null,
+  //         type: 'DIRECT',
+  //         lastMessage: null,
+  //       },
+  //     ],
+  //   }).as('chats');
+  //   cy.window().then((window) => {
+  //     window['testRunnerEnvironment'] = true;
+  //   });
+  //   cy.mount(ChatPageDemoComponent, demoMountConfig).then(() => {
+  //     // cy.window().then((window) => {
+  //     //   // timerMock.emit(0);
+  //     //   // @ts-ignore
+  //     //   const serviceFromAngularScope: ChatServiceDemoService =
+  //     //     // @ts-ignore
+  //     //     window['demoService'];
+  //     //   console.log('serviceFromAngularScope', serviceFromAngularScope);
+  //     //   serviceFromAngularScope.valueSubject.next(0);
+  //     // });
+  //   });
+  //   // click on button
+  //   // cy.get('[data-testid="emit-btn"]').click();
+  //   cy.window().then((window) => {
+  //     window['emitTimer']('fetch-chats');
+  //   });
+  //   cy.wait('@chats');
+  //
+  //   // should containt text 'chat-page-demo works!'
+  //   cy.contains('Value from Demo: 2').should('be.visible');
+  // });
 
   // xit('displays a list of previous chats', () => {
   //   // cy.clock();
@@ -235,35 +242,35 @@ describe('The chat page', () => {
   //     });
   // });
 
-  // xit('displays previous chat messages when a chat is selected', () => {
-  //   cy.mockBackend(
-  //     profilePictures(),
-  //     chats([
-  //       {
-  //         partner: 'Adam Ant',
-  //         messages: [
-  //           {
-  //             sentByMe: true,
-  //             text: 'Hello, how are you?',
-  //           },
-  //           {
-  //             sentByMe: false,
-  //             text: 'I am fine, thanks.',
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         partner: 'Bobby Brown',
-  //         messages: [],
-  //       },
-  //     ])
-  //   );
-  //
-  //   cy.mount(ChatPageComponent, defaultMountConfig);
-  //   cy.contains('Adam Ant').click();
-  //   cy.contains('Hello, how are you?').should('be.visible');
-  //   cy.contains('I am fine, thanks.').should('be.visible');
-  // });
+  it('displays previous chat messages when a chat is selected', () => {
+    cy.mockBackend(
+      profilePictures(),
+      chats([
+        {
+          partner: 'Adam Ant',
+          messages: [
+            {
+              sentByMe: true,
+              text: 'Hello, how are you?',
+            },
+            {
+              sentByMe: false,
+              text: 'I am fine, thanks.',
+            },
+          ],
+        },
+        {
+          partner: 'Bobby Brown',
+          messages: [],
+        },
+      ])
+    );
+
+    cy.mount(ChatPageComponent, defaultMountConfig);
+    cy.contains('Adam Ant').click();
+    cy.contains('Hello, how are you?').should('be.visible');
+    cy.contains('I am fine, thanks.').should('be.visible');
+  });
   //
   // xit('displays new messages when they arrive', () => {
   //   cy.clock();

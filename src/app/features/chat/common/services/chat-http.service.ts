@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { EnvironmentService } from '@shared/common/environment.service';
 import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
@@ -11,7 +11,10 @@ import {
   DancerId,
   DancerMapDto,
   MessageResponse,
+  MessageResponseWithChatId,
 } from '../types/chat.types';
+import { CreateChatResponse } from './chat.service';
+import { ProfileService } from '@shared/profile/profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +25,8 @@ export class ChatHttpService {
   };
   private readonly chatApiUrl: string;
   private readonly dancerApiUrl: string;
+
+  private profileService = inject(ProfileService);
 
   constructor(
     private http: HttpClient,
@@ -135,8 +140,8 @@ export class ChatHttpService {
 
   getMessages$(
     chatId: string,
-    lastMessageId: string | null | undefined
-  ): Observable<APIResponse<MessageResponse>> {
+    lastMessageId: string | null | undefined = null
+  ): Observable<MessageResponseWithChatId> {
     let params = {};
     if (lastMessageId !== null && lastMessageId !== undefined) {
       params = {
@@ -149,13 +154,10 @@ export class ChatHttpService {
         withCredentials: true,
       })
       .pipe(
-        map(asSuccess),
-        catchError((error: HttpErrorResponse) => {
-          switch (error.status) {
-            default:
-              return of(asError('SERVER_ERROR'));
-          }
-        })
+        map((messageResponse) => ({
+          chatId,
+          ...messageResponse,
+        }))
       );
   }
 
@@ -169,5 +171,18 @@ export class ChatHttpService {
         }
       });
     return Array.from(dancerIds.keys());
+  }
+
+  createChat$(participantId: string): Observable<CreateChatResponse> {
+    const body = {
+      dancerIds: [this.profileService.getProfile()?.id, participantId],
+      type: 'DIRECT',
+    };
+
+    return this.http.post<CreateChatResponse>(
+      `${this.chatApiUrl}`,
+      body,
+      this.defaultOptions
+    );
   }
 }

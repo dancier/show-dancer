@@ -19,6 +19,8 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { AppInstanceIdInterceptor } from '@shared/logging/app-instance/app-instance-id.interceptor';
+import { defaultStoreProvider } from '@state-adapt/angular';
+import { DancierBackendMockedService } from '@shared/common/dancier-backend-mocked.service';
 
 export const APP_CONFIG: ApplicationConfig = {
   providers: [
@@ -31,6 +33,8 @@ export const APP_CONFIG: ApplicationConfig = {
       MatMenuModule,
       MatIconModule
     ),
+    defaultStoreProvider,
+    DancierBackendMockedService,
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
     {

@@ -25,6 +25,10 @@ export class EnvironmentService {
     return environment.apiUrl;
   }
 
+  public isMockBackendEnabled(): boolean {
+    return environment.mockBackend;
+  }
+
   public shouldRemoveTestAttributes(): boolean {
     return environment.removeTestAttributes;
   }

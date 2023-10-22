@@ -35,8 +35,8 @@ export type DancerId = string;
 
 export type ChatParticipant = {
   id: DancerId;
-  dancerName: string;
-  city: string;
+  dancerName?: string;
+  city?: string;
   profileImageHash?: string;
 };
 
@@ -55,6 +55,10 @@ export type ChatsAndDancers = {
 
 export type MessageResponse = {
   messages: ChatMessage[];
+};
+
+export type MessageResponseWithChatId = MessageResponse & {
+  chatId: string;
 };
 
 export type CreateMessageRequest = {

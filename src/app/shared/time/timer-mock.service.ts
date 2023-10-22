@@ -34,6 +34,7 @@ export class TimerMockService extends TimerService {
   }
 
   emit(value: number): void {
+    this.zone.run(() => {});
     // this.shouldEmit = true;
     console.log('fake timer emit', value);
     // this.source$.next(value);
@@ -41,8 +42,8 @@ export class TimerMockService extends TimerService {
 
   override interval(_period: number): Observable<number> {
     console.log('using fake interval');
-    return this.value$;
+    // return this.value$;
     // return this.source$.asObservable();
-    // return of(0).pipe();
+    return of(0).pipe();
   }
 }

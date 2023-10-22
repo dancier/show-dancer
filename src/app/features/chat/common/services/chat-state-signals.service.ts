@@ -50,7 +50,7 @@ export class ChatStateSignalsService {
   // TEST ONLY WORKS WHEN DISABLING THE NEXT LINE
   // chatFetchTimer$ = interval(1000);
   // chatFetchTimer$ = new Subject<void>();
-  chatFetchTimer$ = inject(TimerService).interval(1000);
+  chatFetchTimer$ = inject(TimerService).interval('chat', 1000);
 
   // TODO: implement fetching messages (keep them in map for each chat?)
   // messagesFetchTimer$ = interval(1000);

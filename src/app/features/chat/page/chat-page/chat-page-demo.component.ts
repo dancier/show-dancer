@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { ChatDto } from '../../common/types/chat.types';
 import { ChatServiceDemoService } from './chat-service-demo.service';
-import any = jasmine.any;
 
 @Component({
   selector: 'app-chat-page-demo',
@@ -40,13 +39,8 @@ export class ChatPageDemoComponent {
 
   constructor(private zone: NgZone) {
     // @ts-ignore
-    window['demoService'] = this.demoService2;
+    // window['demoService'] = this.demoService2;
     // @ts-ignore
-    window['emitChats'] = () => {
-      this.zone.run(() => {
-        this.demoService2.valueSubject.next(0);
-      });
-    };
   }
 
   handleClick(_e: Event): void {
