@@ -23,10 +23,10 @@ import { ChatStateService } from '../chat-page-new/chat-state.service';
               class="flex-none overflow-y-auto"
             ></app-chat-conversation-list>
             <div class="flex w-full flex-col bg-gray-100">
-              <app-chat-messages class="grow"></app-chat-messages>
-              <app-chat-message-composer
-                class="flex-none"
-              ></app-chat-message-composer>
+              <!--              <app-chat-messages class="grow"></app-chat-messages>-->
+              <!--              <app-chat-message-composer-->
+              <!--                class="flex-none"-->
+              <!--              ></app-chat-message-composer>-->
             </div>
           </div>
         </ng-container>

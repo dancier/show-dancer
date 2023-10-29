@@ -4,28 +4,32 @@ import {
   computed,
   inject,
   Input,
-  OnInit,
   Signal,
 } from '@angular/core';
 import { NgIf, NgClass, AsyncPipe } from '@angular/common';
-import { ChatStateService } from '../../page/chat-page-new/chat-state.service';
+import {
+  ChatStateService,
+  SingleChatState,
+} from '../../page/chat-page-new/chat-state.service';
 import { ImageService } from '@shared/image/image.service';
-import { ChatParticipant, Conversation } from '../../common/types/chat.types';
+import { ChatParticipant } from '../../common/types/chat.types';
 import { ProfileService } from '@shared/profile/profile.service';
 import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { startWith } from 'rxjs/operators';
+import { Profile } from '../../../profile/common/types/profile.types';
 
 @Component({
   selector: 'app-chat-conversation-list-entry',
   template: `
     <ng-container>
       <div
-        *ngIf="conversation && participant()"
+        *ngIf="conversation() && participant()"
         class="flex cursor-pointer items-center gap-6 px-6 py-4 hover:bg-gray-50 active:bg-gray-50"
         tabindex="0"
         data-testid="chat-list-entry"
         [ngClass]="{ 'bg-gray-100': isSelected() }"
-        (click)="chatState.selectChat$.next(conversation!.chatId)"
+        (click)="chatState.selectChat$.next(conversation()!.id)"
       >
         <div class="h-20 w-20 overflow-hidden rounded-full object-cover">
           <img
@@ -54,27 +58,51 @@ import { toSignal } from '@angular/core/rxjs-interop';
   standalone: true,
   imports: [NgIf, NgClass, AsyncPipe],
 })
-export class ChatConversationListEntryComponent implements OnInit {
+export class ChatConversationListEntryComponent {
   chatState = inject(ChatStateService);
   ownProfileId: Signal<string | undefined> = toSignal(
-    inject(ProfileService).profile$.pipe(map((profile) => profile.id))
+    inject(ProfileService).profile$.pipe(
+      startWith({
+        id: 'dancerId1',
+      } as Profile),
+      map((profile) => profile.id)
+    )
   );
   imageService = inject(ImageService);
 
   @Input({ required: true })
-  conversation?: Conversation;
+  conversationId?: string;
 
-  isSelected = computed(
-    () => this.chatState.activeChatId() === this.conversation?.chatId
-  );
+  conversation: Signal<SingleChatState | undefined> = computed(() => {
+    return this.chatState
+      .chats()
+      .find((chat) => chat.id === this.conversationId);
+  });
 
-  participant: Signal<ChatParticipant | undefined> = computed(() =>
-    this.ownProfileId()
-      ? this.conversation?.participants.find(
+  isSelected = computed(() => {
+    const isSelected =
+      this.chatState.activeChatId() === this.conversation()?.id;
+    console.log(isSelected);
+    return isSelected;
+  });
+
+  participant: Signal<ChatParticipant | undefined> = computed(() => {
+    const participant = this.ownProfileId()
+      ? this.conversation()?.participants.find(
           (participant) => participant.id !== this.ownProfileId()
         )
-      : undefined
-  );
+      : undefined;
+    //console.log('chatState', this.chatState.chats());
+    //console.log('conversation', this.conversation());
+    //console.log('participant', participant);
+    return participant;
+  });
+
+  // constructor() {
+  //   effect(() => {
+  //     console.log(this.participant());
+  //   });
+  // }
 
   // isSelected$?: Observable<boolean>;
   //
