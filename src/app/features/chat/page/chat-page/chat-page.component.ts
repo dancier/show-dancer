@@ -7,6 +7,7 @@ import { ChatMessagesComponent } from '../../components/chat-messages/chat-messa
 import { ChatConversationListComponent } from '../../components/conversation-list/chat-conversation-list.component';
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 import { ChatStateService } from '../chat-page-new/chat-state.service';
+import { ChatConversationHeaderComponent } from '../../components/chat-conversation-header.component';
 
 @Component({
   selector: 'app-chat-page',
@@ -20,13 +21,22 @@ import { ChatStateService } from '../chat-page-new/chat-state.service';
         >
           <div class="flex h-[600px] border">
             <app-chat-conversation-list
-              class="flex-none overflow-y-auto"
+              class="overflow-y-auto max-sm:flex-1 sm:flex-none"
+              [class.max-sm:hidden]="chatState.activeChatId() !== null"
             ></app-chat-conversation-list>
-            <div class="flex w-full flex-col bg-gray-100">
-              <!--              <app-chat-messages class="grow"></app-chat-messages>-->
-              <!--              <app-chat-message-composer-->
-              <!--                class="flex-none"-->
-              <!--              ></app-chat-message-composer>-->
+            <div
+              class="flex w-full flex-col bg-gray-100"
+              [class.max-sm:hidden]="chatState.activeChatId() === null"
+            >
+              <!--              TODO: für mobile oben einen header ins element legen -->
+              <!--              TODO: allgemein das ding mit dem chat state nutzbar machen  -->
+              <app-chat-conversation-header
+                class="sm:hidden"
+              ></app-chat-conversation-header>
+              <!--                            <app-chat-messages class="grow"></app-chat-messages>-->
+              <!--                            <app-chat-message-composer-->
+              <!--                              class="flex-none"-->
+              <!--                            ></app-chat-message-composer>-->
             </div>
           </div>
         </ng-container>
@@ -88,6 +98,7 @@ import { ChatStateService } from '../chat-page-new/chat-state.service';
     AlertComponent,
     NgFor,
     AsyncPipe,
+    ChatConversationHeaderComponent,
   ],
 })
 export class ChatPageComponent {

@@ -51,7 +51,7 @@ export class ChatStateService {
 
   // actually selected chat that must exist (doesn't create new chat)
   // TODO: have selection only change route and have store react to new route params
-  selectChat$ = new Source<string>('[Chat] selectChat');
+  selectChat$ = new Source<string | null>('[Chat] selectChat');
 
   createChat$ = new Source<string>('[Chat] createNewChat');
 
@@ -172,6 +172,9 @@ export class ChatStateService {
   });
   activeChatId = toSignal(this.chatStore.activeChatId$, { requireSync: true });
   messagesForActiveChat = toSignal(this.chatStore.messagesForActiveChat$, {
+    requireSync: true,
+  });
+  activeChatParticipants = toSignal(this.chatStore.activeChatParticipants$, {
     requireSync: true,
   });
 

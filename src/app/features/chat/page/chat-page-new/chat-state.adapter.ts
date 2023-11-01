@@ -54,7 +54,7 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
     ...state,
   }),
 
-  selectChat: (state, chatId: string) => ({
+  selectChat: (state, chatId: string | null) => ({
     ...state,
     activeChatId: chatId,
   }),
@@ -116,5 +116,11 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
       [],
     openChatWithParticipantId: (state) => state.openChatWithParticipantId,
     chatCreated: (state) => state.chatCreated,
+    activeChatParticipants: (state) => {
+      const activeChat = state.chats.find(
+        (chat) => chat.id === state.activeChatId
+      );
+      return activeChat?.participants ?? [];
+    },
   },
 });
