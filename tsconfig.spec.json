@@ -13,5 +13,5 @@
     "src/**/*.spec.ts",
     "src/**/*.d.ts",
     "../node_modules/@types/jest"
-  ],
+  ]
 }

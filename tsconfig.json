@@ -27,7 +27,7 @@
       "@features/*": ["src/app/features/*"],
       "@data/*": ["src/app/data/*"],
       "@test-utils/*": ["src/app/test-utils/*"],
-      "@cypress-support/*": ["cypress/support/*"],
+      "@cypress-support/*": ["cypress/support/*"]
     }
   },
   "angularCompilerOptions": {
@@ -35,5 +35,5 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  },
+  }
 }
