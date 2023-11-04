@@ -5,21 +5,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MountConfig } from 'cypress/angular';
 import { CommonModule } from '@angular/common';
-import { ChatPageDemoComponent } from './page/chat-page/chat-page-demo.component';
 import { chats, profilePictures } from '@cypress-support/mock-backend';
 import { ChatPageComponent } from './page/chat-page/chat-page.component';
 
 // const timerMock = new TimerMockService();
 
-const demoMountConfig: MountConfig<ChatPageDemoComponent> = {
-  imports: [CommonModule, HttpClientModule],
-  providers: [
-    // {
-    //   provide: TimerService,
-    //   useValue: timerMock,
-    // },
-  ],
-};
+// const demoMountConfig: MountConfig<ChatPageDemoComponent> = {
+//   imports: [CommonModule, HttpClientModule],
+//   providers: [
+//     // {
+//     //   provide: TimerService,
+//     //   useValue: timerMock,
+//     // },
+//   ],
+// };
 
 const defaultMountConfig: MountConfig<ChatPageComponent> = {
   imports: [

@@ -44,7 +44,6 @@ export class ChatPageDemoComponent {
   }
 
   handleClick(_e: Event): void {
-    console.log('handleClick');
     this.demoService2.valueSubject.next(2);
   }
 }

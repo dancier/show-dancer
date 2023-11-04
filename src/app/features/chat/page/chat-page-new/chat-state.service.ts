@@ -4,15 +4,7 @@ import { ChatHttpService } from '../../common/services/chat-http.service';
 import { getRequestSources, Source, toSource } from '@state-adapt/rxjs';
 import { ChatMessage, ChatParticipant } from '../../common/types/chat.types';
 import { toSignal } from '@angular/core/rxjs-interop';
-import {
-  distinct,
-  filter,
-  map,
-  merge,
-  switchMap,
-  tap,
-  withLatestFrom,
-} from 'rxjs';
+import { distinct, filter, map, merge, switchMap, withLatestFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { chatStateAdapter } from './chat-state.adapter';
 import { TimerService } from '@shared/time/timer.service';
@@ -115,16 +107,13 @@ export class ChatStateService {
 
       const openedChatAfterFetchSource = store.chatsFetchState$.pipe(
         filter((state) => state === 'loaded'),
-        tap(() => console.log('loaded chats')),
         switchMap(() => store.openChatWithParticipantId$),
-        tap((v) => console.log('open chat with participant', v)),
         filter((participantId) => participantId !== null),
         withLatestFrom(store.chats$),
         map(([participantId, chats]) => {
           const existingChat = chats.find((chat) =>
             chat.participants.find((p) => p.id === participantId)
           );
-          console.log('existing chat', existingChat);
           if (existingChat) {
             this.selectChat$.next(existingChat.id);
             return true;

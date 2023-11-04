@@ -34,7 +34,6 @@ export function chats(
     cy.intercept('GET', 'chats/**/messages', (req) => {
       // context: the url is something like https://test.de/chats/1/messages
       const chatId = decodeURIComponent(req.url.split('/')[4]);
-      console.log('chatId', chatId);
       const conversation = conversations.find((c) => c.partner === chatId);
       req.reply({
         body: {

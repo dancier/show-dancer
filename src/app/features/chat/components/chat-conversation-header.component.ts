@@ -51,14 +51,10 @@ export class ChatConversationHeaderComponent {
           .activeChatParticipants()
           .find((participant) => participant.id !== this.ownProfileId())
       : undefined;
-    //console.log('chatState', this.chatState.chats());
-    //console.log('conversation', this.conversation());
-    //console.log('participant', participant);
     return participant;
   });
 
   returnToConversationList(): void {
-    console.log('returnToConversationList');
     this.chatState.selectChat$.next(null);
   }
 }

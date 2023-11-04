@@ -34,9 +34,6 @@ export class ChatHttpService {
   ) {
     this.chatApiUrl = `${this.environment.getApiUrl()}/chats`;
     this.dancerApiUrl = `${this.environment.getApiUrl()}/dancers`;
-    console.log('ChatHttpService created');
-    console.log('chatApiUrl', this.chatApiUrl);
-    console.log('dancerApiUrl', this.dancerApiUrl);
   }
 
   createMessage$(

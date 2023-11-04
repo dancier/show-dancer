@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  private enableMockedBackend() {
+  private enableMockedBackend(): void {
     if (this.environment.isMockBackendEnabled()) {
       this.dancierMockBackend.mirageJsServer();
     }

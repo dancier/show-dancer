@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { TimerService } from './timer.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 
 /**
@@ -33,15 +33,15 @@ export class TimerMockService extends TimerService {
     this.value$ = toObservable(this.value);
   }
 
-  emit(value: number): void {
+  emit(_value: number): void {
     this.zone.run(() => {});
     // this.shouldEmit = true;
-    console.log('fake timer emit', value);
+    // console.log('fake timer emit', value);
     // this.source$.next(value);
   }
 
-  override interval(_period: number): Observable<number> {
-    console.log('using fake interval');
+  override interval(_name: string, _period: number): Observable<number> {
+    // console.log('using fake interval');
     // return this.value$;
     // return this.source$.asObservable();
     return of(0).pipe();

@@ -6,9 +6,6 @@ export class MockedBackend {
 
   public initMock(): void {
     cy.intercept('GET', '/chats', (req) => {
-      console.log('req', req);
-      console.log('this.mockedChats', this.mockedChats);
-
       req.reply({
         body: {
           chats: this.mockedChats.map((conversation, _) => ({
@@ -24,9 +21,6 @@ export class MockedBackend {
 
     // intercept dancers request
     cy.intercept('POST', '/dancers', (req) => {
-      console.log('req', req);
-      console.log('this.mockedChats', this.mockedChats);
-
       const dancerBody: DancerMapDto = {
         ...this.mockedChats.reduce((acc, chat) => {
           acc[chat.partner] = {

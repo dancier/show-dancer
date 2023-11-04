@@ -1,6 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { ChatHttpService } from '../../common/services/chat-http.service';
-import { catchError, NEVER, shareReplay, Subject, switchMap, tap } from 'rxjs';
+import { catchError, NEVER, shareReplay, Subject, switchMap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChatDto } from '../../common/types/chat.types';
 import { TimerService } from '@shared/time/timer.service';
@@ -35,20 +35,15 @@ export class ChatServiceDemoService {
 
   fetchedConversations$ = this.chatFetchTimer$.pipe(
     // startWith(-1),
-    tap((v) => console.log('fetching chats', v)),
     switchMap(() => this.apiService.getChats$()),
-    tap((v) => console.log('fetched chats', v)),
     catchError((_err: HttpErrorResponse) => {
-      // this.error$.next(err);
       return NEVER;
     }),
     shareReplay(1)
   );
 
   constructor() {
-    console.log('ChatServiceDemoService created');
     this.fetchedConversations$.subscribe((value) => {
-      console.log('fetchedConversations$ value', value);
       // this.chats = value;
       this.chatState.update(() => ({
         chats: value,

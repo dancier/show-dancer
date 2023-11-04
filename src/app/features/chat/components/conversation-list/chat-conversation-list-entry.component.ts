@@ -82,7 +82,6 @@ export class ChatConversationListEntryComponent {
   isSelected = computed(() => {
     const isSelected =
       this.chatState.activeChatId() === this.conversation()?.id;
-    console.log(isSelected);
     return isSelected;
   });
 
@@ -92,9 +91,6 @@ export class ChatConversationListEntryComponent {
           (participant) => participant.id !== this.ownProfileId()
         )
       : undefined;
-    //console.log('chatState', this.chatState.chats());
-    //console.log('conversation', this.conversation());
-    //console.log('participant', participant);
     return participant;
   });
 
