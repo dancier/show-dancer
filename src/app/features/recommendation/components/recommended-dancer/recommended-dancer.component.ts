@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RecommendedDancer } from '../../types/recommended-dancers.types';
 import { ImageService } from '@shared/image/image.service';
 import { EventLogService } from '@shared/logging/event-log.service';
-import { ChatService } from '../../../chat/common/services/chat.service';
 
 @Component({
   selector: 'app-recommended-dancer',
@@ -18,8 +17,7 @@ export class RecommendedDancerComponent implements OnInit {
 
   constructor(
     public imageService: ImageService,
-    private readonly eventLogService: EventLogService,
-    private chatService: ChatService
+    private readonly eventLogService: EventLogService // private chatService: ChatService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +38,7 @@ export class RecommendedDancerComponent implements OnInit {
   }
 
   openChat(): void {
-    this.chatService.openChatWith(this.dancer.id);
+    // TODO: open chat with this dancer (new chat state or just do navigation?)
+    // this.chatService.openChatWith(this.dancer.id);
   }
 }

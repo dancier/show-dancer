@@ -70,3 +70,11 @@ export type ChatData = {
   dancers: DancerMapDto;
   profile: Profile;
 };
+
+export type CreateChatResponse = {
+  chatId: string;
+  dancerIds: string[];
+  lastActivity: null;
+  type: 'DIRECT';
+  lastMessage: null;
+};

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Server } from 'miragejs';
 import {
+  CreateChatResponse,
   DancerMapDto,
   MessageResponseWithChatId,
 } from '@features/chat/common/types/chat.types';
-import { CreateChatResponse } from '@features/chat/common/services/chat.service';
 
 const chats = [
   {
@@ -106,6 +106,19 @@ export class DancierBackendMockedService {
         // response for create chat
         this.post('/chats', () => {
           return createChatResponse;
+        });
+
+        this.post('/chats/:chatId/messages', (schema, request) => {
+          const requestBody = JSON.parse(request.requestBody);
+          const message = requestBody.text;
+          chatMessages.messages.push({
+            id: 'messageId' + chatMessages.messages.length + 1,
+            authorId: 'dancerId1',
+            text: message,
+            createdAt: '2021-01-01T00:00:00.000Z',
+            readByDancers: [],
+          });
+          return chatMessages;
         });
       },
     });

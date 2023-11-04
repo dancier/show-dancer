@@ -7,13 +7,13 @@ import {
   ChatDto,
   ChatList,
   ChatsAndDancers,
+  CreateChatResponse,
   CreateMessageRequest,
   DancerId,
   DancerMapDto,
   MessageResponse,
   MessageResponseWithChatId,
 } from '../types/chat.types';
-import { CreateChatResponse } from './chat.service';
 import { ProfileService } from '@shared/profile/profile.service';
 
 @Injectable({
@@ -182,6 +182,14 @@ export class ChatHttpService {
     return this.http.post<CreateChatResponse>(
       `${this.chatApiUrl}`,
       body,
+      this.defaultOptions
+    );
+  }
+
+  sendMessage$(chatId: string, message: string): Observable<void> {
+    return this.http.post<void>(
+      `${this.chatApiUrl}/${chatId}/messages`,
+      { text: message },
       this.defaultOptions
     );
   }

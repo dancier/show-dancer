@@ -25,7 +25,7 @@ import { Profile } from '../../../profile/common/types/profile.types';
     <ng-container>
       <div
         *ngIf="conversation() && participant()"
-        class="flex cursor-pointer items-center gap-6 px-6 py-4 hover:bg-gray-50 active:bg-gray-50"
+        class="flex cursor-pointer items-center gap-6 px-6 py-4 hover:bg-gray-100 active:bg-gray-100"
         tabindex="0"
         data-testid="chat-list-entry"
         [ngClass]="{ 'bg-gray-100': isSelected() }"

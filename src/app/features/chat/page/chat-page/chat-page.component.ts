@@ -21,22 +21,20 @@ import { ChatConversationHeaderComponent } from '../../components/chat-conversat
         >
           <div class="flex h-[600px] border">
             <app-chat-conversation-list
-              class="overflow-y-auto max-sm:flex-1 sm:flex-none"
-              [class.max-sm:hidden]="chatState.activeChatId() !== null"
+              class="min-w-[300px] overflow-y-auto max-md:flex-1 md:flex-none"
+              [class.max-md:hidden]="chatState.activeChatId() !== null"
             ></app-chat-conversation-list>
             <div
               class="flex w-full flex-col bg-gray-100"
-              [class.max-sm:hidden]="chatState.activeChatId() === null"
+              [class.max-md:hidden]="chatState.activeChatId() === null"
             >
               <!--              TODO: für mobile oben einen header ins element legen -->
               <!--              TODO: allgemein das ding mit dem chat state nutzbar machen  -->
-              <app-chat-conversation-header
-                class="sm:hidden"
-              ></app-chat-conversation-header>
-              <!--                            <app-chat-messages class="grow"></app-chat-messages>-->
-              <!--                            <app-chat-message-composer-->
-              <!--                              class="flex-none"-->
-              <!--                            ></app-chat-message-composer>-->
+              <app-chat-conversation-header></app-chat-conversation-header>
+              <app-chat-messages class="grow"></app-chat-messages>
+              <app-chat-message-composer
+                class="flex-none"
+              ></app-chat-message-composer>
             </div>
           </div>
         </ng-container>

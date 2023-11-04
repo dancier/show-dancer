@@ -2,11 +2,11 @@ import { ChatAdaptState } from './chat-state.service';
 import { createAdapter } from '@state-adapt/core';
 import {
   ChatDto,
+  CreateChatResponse,
   DancerMapDto,
   MessageResponseWithChatId,
 } from '../../common/types/chat.types';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CreateChatResponse } from '../../common/services/chat.service';
 
 export const chatStateAdapter = createAdapter<ChatAdaptState>()({
   chatsFetched: (state, chatsDto: ChatDto[]) => ({
@@ -64,6 +64,7 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
     { messages, chatId }: MessageResponseWithChatId
   ) => ({
     ...state,
+    newMessageSent: false,
     chats: state.chats.map((chat) => {
       // only add new messages to active chat
       if (chat.id !== chatId) return chat;
@@ -101,10 +102,21 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
     ...state,
   }),
 
+  messageSent: (state) => ({
+    ...state,
+    newMessageSent: true,
+  }),
+
+  // TODO: error handling
+  messageSentError: (state, _error: HttpErrorResponse) => ({
+    ...state,
+  }),
+
   selectors: {
     chats: (state) => state.chats,
     chatsFetchState: (state) => state.chatsFetchState,
     chatsFetchError: (state) => state.chatsFetchError,
+
     participantsWithNoDetails: (state) =>
       state.chats
         .map((chat) => chat.participants)
@@ -122,5 +134,6 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
       );
       return activeChat?.participants ?? [];
     },
+    newMessageSent: (state) => state.newMessageSent,
   },
 });

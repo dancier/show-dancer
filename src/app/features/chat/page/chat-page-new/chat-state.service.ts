@@ -32,6 +32,7 @@ export type ChatAdaptState = {
   activeChatId: string | null;
   openChatWithParticipantId: string | null;
   chatCreated: boolean;
+  newMessageSent: boolean;
 };
 
 @Injectable({
@@ -55,6 +56,8 @@ export class ChatStateService {
 
   createChat$ = new Source<string>('[Chat] createNewChat');
 
+  sendMessage$ = new Source<string>('[Chat] sendMessage');
+
   // Adapters
   //
   private readonly initialState: ChatAdaptState = {
@@ -64,6 +67,7 @@ export class ChatStateService {
     activeChatId: null,
     openChatWithParticipantId: null,
     chatCreated: false,
+    newMessageSent: false,
   };
 
   private chatStore = adapt(
@@ -100,7 +104,8 @@ export class ChatStateService {
         '[Chat] fetchMessages',
         merge(
           timerService.interval('chatMessagesFetchTrigger', 5000),
-          store.activeChatId$.pipe(distinct())
+          store.activeChatId$.pipe(distinct()),
+          store.newMessageSent$.pipe(filter((hasSent) => !!hasSent))
         ).pipe(
           switchMap(() => store.activeChatId$),
           filter((chatId) => chatId !== null),
@@ -140,6 +145,16 @@ export class ChatStateService {
         )
       );
 
+      const sendMessageSource = getRequestSources(
+        '[Chat] sendMessage',
+        this.sendMessage$.pipe(
+          withLatestFrom(store.activeChatId$),
+          switchMap(([message, chatId]) =>
+            chatHttpService.sendMessage$(chatId!, message.payload)
+          )
+        )
+      );
+
       return {
         chatsFetched: fetchChatsSources.success$,
         chatsFetchedError: fetchChatsSources.error$,
@@ -152,6 +167,8 @@ export class ChatStateService {
         openedChatAfterFetch: openedChatAfterFetchSource,
         chatCreated: createChatSource.success$,
         chatCreatedError: createChatSource.error$,
+        messageSent: sendMessageSource.success$,
+        messageSentError: sendMessageSource.error$,
       };
     }
   );

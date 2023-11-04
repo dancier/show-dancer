@@ -19,9 +19,16 @@ import { map } from 'rxjs';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div>
-      <h1>Chat mit {{ participant()?.dancerName }}</h1>
-      <button (click)="returnToConversationList()">Zurück zur Übersicht</button>
+    <div class="bg-white md:hidden">
+      <button
+        class="w-full border px-6 py-2 text-left text-lg text-red-600"
+        (click)="returnToConversationList()"
+      >
+        &larr; Zurück zur Übersicht
+      </button>
+      <h1 *ngIf="participant()" class="px-6 py-4 text-2xl">
+        Chat mit {{ participant()?.dancerName }}
+      </h1>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -10,11 +11,11 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ChatStore } from '../../common/services/chat.store';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ChatStateService } from '../../page/chat-page-new/chat-state.service';
 
 type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
 
@@ -56,20 +57,25 @@ type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
   ],
 })
 export class ChatMessageComposerComponent {
-  form: MessageComposerForm;
+  fb = inject(NonNullableFormBuilder);
+  chatState = inject(ChatStateService);
 
-  constructor(
-    private fb: NonNullableFormBuilder,
-    private chatStore: ChatStore
-  ) {
-    this.form = this.fb.group({
-      message: this.fb.control('', [Validators.required]),
-    });
-  }
+  form: MessageComposerForm = this.fb.group({
+    message: this.fb.control('', [Validators.required]),
+  });
+
+  // constructor(
+  //   private fb: NonNullableFormBuilder,
+  //   private chatStore: ChatStore
+  // ) {
+  //   this.form = this.fb.group({
+  //     message: this.fb.control('', [Validators.required]),
+  //   });
+  // }
 
   postMessage(): void {
     if (this.form.valid) {
-      this.chatStore.sendMessage(this.form.value.message!.toString());
+      this.chatState.sendMessage$.next(this.form.value.message!.toString());
       this.form.reset();
     }
   }
