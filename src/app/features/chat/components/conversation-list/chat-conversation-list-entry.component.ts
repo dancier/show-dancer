@@ -6,7 +6,7 @@ import {
   Input,
   Signal,
 } from '@angular/core';
-import { NgIf, NgClass, AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import {
   ChatStateService,
   SingleChatState,
@@ -40,7 +40,8 @@ import { Profile } from '../../../profile/common/types/profile.types';
                 80
               )
             "
-            [attr.alt]="'Profile Image of ' + participant()!.dancerName"
+            [attr.alt]="'Profile Image of' + participant()!.dancerName"
+            (error)="handleMissingImage($event)"
           />
         </div>
         <div class="flex flex-col gap-1">
@@ -80,19 +81,21 @@ export class ChatConversationListEntryComponent {
   });
 
   isSelected = computed(() => {
-    const isSelected =
-      this.chatState.activeChatId() === this.conversation()?.id;
-    return isSelected;
+    return this.chatState.activeChatId() === this.conversation()?.id;
   });
 
   participant: Signal<ChatParticipant | undefined> = computed(() => {
-    const participant = this.ownProfileId()
+    return this.ownProfileId()
       ? this.conversation()?.participants.find(
           (participant) => participant.id !== this.ownProfileId()
         )
       : undefined;
-    return participant;
   });
+
+  handleMissingImage($event: ErrorEvent): void {
+    ($event.target as HTMLImageElement).src =
+      this.imageService.getDefaultDancerImage();
+  }
 
   // constructor() {
   //   effect(() => {
