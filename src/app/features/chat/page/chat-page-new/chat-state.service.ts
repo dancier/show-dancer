@@ -36,7 +36,7 @@ export class ChatStateService {
 
   // either we have a chat open with that DancerId or we create a new one
   // TODO: logic can possibly be simplified when we do this only after the initial fetch
-  openChatWith$ = this.activatedRoute.params.pipe(
+  openChatWith$ = this.activatedRoute.queryParams.pipe(
     filter((params) => !!params['participantId']),
     map((params) => params['participantId']),
     toSource('[Chat] rememberToOpenChatWithParticipant')
