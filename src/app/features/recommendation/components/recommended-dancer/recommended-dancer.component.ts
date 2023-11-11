@@ -1,11 +1,37 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { RecommendedDancer } from '../../types/recommended-dancers.types';
 import { ImageService } from '@shared/image/image.service';
 import { EventLogService } from '@shared/logging/event-log.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recommended-dancer',
-  templateUrl: './recommended-dancer.component.html',
+  template: `
+    <div class="wrapper">
+      <div class="dancer-image">
+        <img
+          class="rounded-t-lg"
+          alt="Profilbild des Tänzers"
+          [src]="imgSrc"
+          (error)="handleMissingImage($event)"
+        />
+      </div>
+      <div class="dancer-info">
+        <div class="dancer-header">
+          <span class="username">{{ dancer.name }}</span
+          >, {{ dancer.age }}
+        </div>
+        <div class="dancer-subheader">{{ dancer.city }}</div>
+        <div
+          tabindex="0"
+          class="rounded bg-rose-700 p-2 text-white"
+          (click)="openChat()"
+        >
+          Chat öffnen
+        </div>
+      </div>
+    </div>
+  `,
   styleUrls: ['./recommended-dancer.component.scss'],
   standalone: true,
 })
@@ -13,12 +39,11 @@ export class RecommendedDancerComponent implements OnInit {
   @Input()
   dancer!: RecommendedDancer;
 
-  imgSrc: string | undefined;
+  imageService = inject(ImageService);
+  eventLogService = inject(EventLogService);
+  router = inject(Router);
 
-  constructor(
-    public imageService: ImageService,
-    private readonly eventLogService: EventLogService // private chatService: ChatService
-  ) {}
+  imgSrc: string | undefined;
 
   ngOnInit(): void {
     this.imgSrc = this.imageService.getDancerImageSrcOrDefault(
@@ -38,7 +63,8 @@ export class RecommendedDancerComponent implements OnInit {
   }
 
   openChat(): void {
-    // TODO: open chat with this dancer (new chat state or just do navigation?)
-    // this.chatService.openChatWith(this.dancer.id);
+    this.router.navigate(['chat'], {
+      queryParams: { participantId: this.dancer.id },
+    });
   }
 }
