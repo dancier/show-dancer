@@ -135,4 +135,8 @@ export class ProfileService {
       })
     );
   }
+
+  getDefaultProfileImage(): string {
+    return this.imageService.getDefaultDancerImage();
+  }
 }

@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.publishInitialPageRequestEvent();
     this.publishAdvertisementEvent();
-    this.enableMockedBackend();
+    //this.enableMockedBackend();
   }
 
   publishInitialPageRequestEvent(): void {

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProfileService } from '@shared/profile/profile.service';
 import { AsyncPipe } from '@angular/common';
+import { handleAutoChangeDetectionStatus } from '@angular/cdk/testing';
 
 @Component({
   selector: 'app-profile-menu-button',
@@ -18,6 +19,7 @@ import { AsyncPipe } from '@angular/common';
         class="h-10 w-10 rounded-full border border-gray-50"
         alt=""
         [src]="profileService.getProfileImageSrc() | async"
+        (error)="handleMissingProfileImage($event)"
       />
     </button>
   `,
@@ -26,4 +28,11 @@ import { AsyncPipe } from '@angular/common';
 })
 export class ProfileMenuButtonComponent {
   public profileService = inject(ProfileService);
+  protected readonly handleAutoChangeDetectionStatus =
+    handleAutoChangeDetectionStatus;
+
+  handleMissingProfileImage($event: ErrorEvent): void {
+    ($event.target as HTMLImageElement).src =
+      this.profileService.getDefaultProfileImage();
+  }
 }
