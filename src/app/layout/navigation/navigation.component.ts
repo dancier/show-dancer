@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthStorageService } from '@shared/auth/services/auth-storage.service';
-import { ChatService } from '@features/chat/common/services/chat.service';
 import { LoggedOutNavigationComponent } from './logged-out-navigation/logged-out-navigation.component';
 import { LoggedInNavigationComponent } from './logged-in-navigation/logged-in-navigation.component';
 import { NgIf, AsyncPipe } from '@angular/common';
@@ -19,8 +18,7 @@ import { NgIf, AsyncPipe } from '@angular/common';
 })
 export class NavigationComponent {
   constructor(
-    public authStorageService: AuthStorageService,
-    private chatService: ChatService // needs to be initialized from the start
+    public authStorageService: AuthStorageService // private chatState: ChatStateService // needs to be initialized from the start
   ) {}
 
   // ngOnDestroy(): void {

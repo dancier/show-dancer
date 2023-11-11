@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { EnvironmentService } from '@shared/common/environment.service';
 import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
@@ -7,11 +7,14 @@ import {
   ChatDto,
   ChatList,
   ChatsAndDancers,
+  CreateChatResponse,
   CreateMessageRequest,
   DancerId,
   DancerMapDto,
   MessageResponse,
+  MessageResponseWithChatId,
 } from '../types/chat.types';
+import { ProfileService } from '@shared/profile/profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +25,8 @@ export class ChatHttpService {
   };
   private readonly chatApiUrl: string;
   private readonly dancerApiUrl: string;
+
+  private profileService = inject(ProfileService);
 
   constructor(
     private http: HttpClient,
@@ -50,6 +55,52 @@ export class ChatHttpService {
           }
         })
       );
+  }
+
+  getChats$(): Observable<ChatDto[]> {
+    return (
+      this.http
+        // .get<ChatList>('/chats', this.defaultOptions)
+        .get<ChatList>(this.chatApiUrl, this.defaultOptions)
+        .pipe(map((chatList) => chatList.chats))
+    );
+  }
+
+  getDancers$(dancerIds: string[]): Observable<DancerMapDto> {
+    const request = {
+      dancerIds: dancerIds,
+    };
+
+    return this.http.post<DancerMapDto>(
+      `${this.dancerApiUrl}`,
+      request,
+      this.defaultOptions
+    );
+  }
+
+  getChatsAndDancersEasy$(): Observable<ChatsAndDancers> {
+    return this.http.get<ChatList>(this.chatApiUrl, this.defaultOptions).pipe(
+      map((chatList) => {
+        const dancerIds = this.getAllDancerIds(chatList.chats);
+        return {
+          chatList,
+          dancerIds,
+        };
+      }),
+      switchMap(({ chatList, dancerIds }) => {
+        const request = {
+          dancerIds: dancerIds,
+        };
+
+        return this.http
+          .post<DancerMapDto>(
+            `${this.dancerApiUrl}`,
+            request,
+            this.defaultOptions
+          )
+          .pipe(map((dancerMap) => ({ dancerMap, chatList: chatList.chats })));
+      })
+    );
   }
 
   getChatsAndDancers$(): Observable<APIResponse<ChatsAndDancers>> {
@@ -86,8 +137,8 @@ export class ChatHttpService {
 
   getMessages$(
     chatId: string,
-    lastMessageId: string | null | undefined
-  ): Observable<APIResponse<MessageResponse>> {
+    lastMessageId: string | null | undefined = null
+  ): Observable<MessageResponseWithChatId> {
     let params = {};
     if (lastMessageId !== null && lastMessageId !== undefined) {
       params = {
@@ -100,13 +151,10 @@ export class ChatHttpService {
         withCredentials: true,
       })
       .pipe(
-        map(asSuccess),
-        catchError((error: HttpErrorResponse) => {
-          switch (error.status) {
-            default:
-              return of(asError('SERVER_ERROR'));
-          }
-        })
+        map((messageResponse) => ({
+          chatId,
+          ...messageResponse,
+        }))
       );
   }
 
@@ -120,5 +168,26 @@ export class ChatHttpService {
         }
       });
     return Array.from(dancerIds.keys());
+  }
+
+  createChat$(participantId: string): Observable<CreateChatResponse> {
+    const body = {
+      dancerIds: [this.profileService.getProfile()?.id, participantId],
+      type: 'DIRECT',
+    };
+
+    return this.http.post<CreateChatResponse>(
+      `${this.chatApiUrl}`,
+      body,
+      this.defaultOptions
+    );
+  }
+
+  sendMessage$(chatId: string, message: string): Observable<void> {
+    return this.http.post<void>(
+      `${this.chatApiUrl}/${chatId}/messages`,
+      { text: message },
+      this.defaultOptions
+    );
   }
 }

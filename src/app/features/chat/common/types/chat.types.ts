@@ -35,8 +35,8 @@ export type DancerId = string;
 
 export type ChatParticipant = {
   id: DancerId;
-  dancerName: string;
-  city: string;
+  dancerName?: string;
+  city?: string;
   profileImageHash?: string;
 };
 
@@ -57,6 +57,10 @@ export type MessageResponse = {
   messages: ChatMessage[];
 };
 
+export type MessageResponseWithChatId = MessageResponse & {
+  chatId: string;
+};
+
 export type CreateMessageRequest = {
   text: string;
 };
@@ -65,4 +69,12 @@ export type ChatData = {
   chats: ChatDto[];
   dancers: DancerMapDto;
   profile: Profile;
+};
+
+export type CreateChatResponse = {
+  chatId: string;
+  dancerIds: string[];
+  lastActivity: null;
+  type: 'DIRECT';
+  lastMessage: null;
 };

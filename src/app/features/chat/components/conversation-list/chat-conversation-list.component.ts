@@ -1,18 +1,20 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ChatStore } from '../../common/services/chat.store';
-import { Conversation } from '../../common/types/chat.types';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ChatConversationListEntryComponent } from './chat-conversation-list-entry.component';
 import { NgFor, AsyncPipe } from '@angular/common';
+import {
+  ChatStateService,
+  SingleChatState,
+} from '../../page/chat-page-new/chat-state.service';
 
 @Component({
   selector: 'app-chat-conversation-list',
   template: `
     <app-chat-conversation-list-entry
       *ngFor="
-        let conversation of chatStore.conversations$ | async;
+        let conversation of chatState.chats();
         trackBy: trackByConversationId
       "
-      [conversation]="conversation"
+      [conversationId]="conversation.id"
     >
     </app-chat-conversation-list-entry>
   `,
@@ -23,9 +25,12 @@ import { NgFor, AsyncPipe } from '@angular/common';
   imports: [NgFor, ChatConversationListEntryComponent, AsyncPipe],
 })
 export class ChatConversationListComponent {
-  constructor(public chatStore: ChatStore) {}
-
-  trackByConversationId(index: number, conversation: Conversation): string {
-    return conversation.chatId;
+  chatState = inject(ChatStateService);
+  // constructor(public chatStore: ChatStore) {}
+  //
+  // source = interval(1000);
+  //
+  trackByConversationId(index: number, conversation: SingleChatState): string {
+    return conversation.id;
   }
 }

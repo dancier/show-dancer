@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EventLogService } from '@shared/logging/event-log.service';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { AppInstanceStorageService } from '@shared/logging/app-instance/app-instance-storage.service';
+import { DancierBackendMockedService } from '@shared/common/dancier-backend-mocked.service';
+import { EnvironmentService } from '@shared/common/environment.service';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +12,16 @@ import { AppInstanceStorageService } from '@shared/logging/app-instance/app-inst
   imports: [RouterOutlet],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private eventLogService: EventLogService,
-    private route: ActivatedRoute,
-    private appInstanceStorageService: AppInstanceStorageService
-  ) {}
+  private eventLogService = inject(EventLogService);
+  private route = inject(ActivatedRoute);
+  private appInstanceStorageService = inject(AppInstanceStorageService);
+  private environment = inject(EnvironmentService);
+  private dancierMockBackend = inject(DancierBackendMockedService);
 
   ngOnInit(): void {
     this.publishInitialPageRequestEvent();
     this.publishAdvertisementEvent();
+    this.enableMockedBackend();
   }
 
   publishInitialPageRequestEvent(): void {
@@ -41,5 +44,11 @@ export class AppComponent implements OnInit {
         );
       }
     });
+  }
+
+  private enableMockedBackend(): void {
+    if (this.environment.isMockBackendEnabled()) {
+      this.dancierMockBackend.mirageJsServer();
+    }
   }
 }

@@ -6,6 +6,9 @@ export type Environment = {
   // the URL of the backend API
   apiUrl: string;
 
+  // whether to use the mock backend
+  mockBackend: boolean;
+
   // whether to remove the data-test attributes from the DOM
   removeTestAttributes: boolean;
 };

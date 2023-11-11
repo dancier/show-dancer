@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { ModernLayoutComponent } from './layout/modern-layout/modern-layout.component';
+import { ExampleComponent } from '@features/example/example.component';
 
 export const ROUTES: Routes = [
   {
@@ -31,6 +32,10 @@ export const ROUTES: Routes = [
           import('@features/recommendation/recommendation.routes').then(
             (m) => m.RECOMMENDATION_ROUTES
           ),
+      },
+      {
+        path: 'example',
+        component: ExampleComponent,
       },
       {
         path: '',

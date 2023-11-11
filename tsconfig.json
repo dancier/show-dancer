@@ -26,7 +26,8 @@
       "@shared/*": ["src/app/shared/*"],
       "@features/*": ["src/app/features/*"],
       "@data/*": ["src/app/data/*"],
-      "@test-utils/*": ["src/app/test-utils/*"]
+      "@test-utils/*": ["src/app/test-utils/*"],
+      "@cypress-support/*": ["cypress/support/*"]
     }
   },
   "angularCompilerOptions": {
@@ -34,6 +35,5 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  },
-  "exclude": ["cypress", "mocha", "chai", "node_modules", "cypress.config.ts"]
+  }
 }
