@@ -21,6 +21,16 @@ import {
 import { AppInstanceIdInterceptor } from '@shared/logging/app-instance/app-instance-id.interceptor';
 import { defaultStoreProvider } from '@state-adapt/angular';
 import { DancierBackendMockedService } from '@shared/common/dancier-backend-mocked.service';
+import { AuthInterceptor } from '@shared/auth/interceptors/auth.interceptor';
+
+const httpInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AppInstanceIdInterceptor,
+    multi: true,
+  },
+];
 
 export const APP_CONFIG: ApplicationConfig = {
   providers: [
@@ -37,11 +47,7 @@ export const APP_CONFIG: ApplicationConfig = {
     DancierBackendMockedService,
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AppInstanceIdInterceptor,
-      multi: true,
-    },
+    httpInterceptorProviders,
     provideRouter(
       ROUTES,
       withInMemoryScrolling({

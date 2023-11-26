@@ -7,6 +7,7 @@ import { AboutUsComponent } from './pages/about-us.component';
 import { BetaRegistrationPageComponent } from './pages/beta-registration-page.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
+import { loggedOutGuard } from '@shared/auth/guards/logged-in.guard';
 
 export const HOME_ROUTES: Routes = [
   {
@@ -39,6 +40,7 @@ export const HOME_ROUTES: Routes = [
       },
       {
         path: 'login',
+        canActivate: [loggedOutGuard],
         component: LoginPageComponent,
       },
     ],

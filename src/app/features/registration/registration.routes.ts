@@ -9,6 +9,7 @@ import { NewPasswordComponent } from './components/reset-password/new-password/n
 import { PasswordChangedComponent } from './components/reset-password/new-password/password-changed/password-changed.component';
 import { ResendVerificationLinkComponent } from './components/verify-account/resend-verification-link/resend-verification-link.component';
 import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
+import { loggedOutGuard } from '@shared/auth/guards/logged-in.guard';
 
 export const REGISTRATION_ROUTES: Routes = [
   {
@@ -17,10 +18,12 @@ export const REGISTRATION_ROUTES: Routes = [
     children: [
       {
         path: '',
+        canActivate: [loggedOutGuard],
         component: RegisterUserFormComponent,
       },
       {
         path: 'reset-password',
+        canActivate: [loggedOutGuard],
         component: ResetPasswordComponent,
       },
       {
@@ -29,14 +32,17 @@ export const REGISTRATION_ROUTES: Routes = [
       },
       {
         path: 'reset-password/:code',
+        canActivate: [loggedOutGuard],
         component: NewPasswordComponent,
       },
       {
         path: 'reset-password-verification',
+        canActivate: [loggedOutGuard],
         component: ResetPasswordEmailVerificationComponent,
       },
       {
         path: 'verify-account',
+        canActivate: [loggedOutGuard],
         component: VerificationRequiredComponent,
       },
       {

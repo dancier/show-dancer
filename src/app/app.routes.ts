@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { ModernLayoutComponent } from './layout/modern-layout/modern-layout.component';
 import { ExampleComponent } from '@features/example/example.component';
+import { loggedInGuard } from '@shared/auth/guards/logged-in.guard';
 
 export const ROUTES: Routes = [
   {
@@ -16,6 +17,7 @@ export const ROUTES: Routes = [
       },
       {
         path: 'profile',
+        canActivate: [loggedInGuard],
         loadChildren: () =>
           import('@features/profile/profile.routes').then(
             (m) => m.PROFILE_ROUTES
@@ -23,11 +25,13 @@ export const ROUTES: Routes = [
       },
       {
         path: 'chat',
+        canActivate: [loggedInGuard],
         loadChildren: () =>
           import('@features/chat/chat.routes').then((m) => m.CHAT_ROUTES),
       },
       {
         path: 'recommendations',
+        canActivate: [loggedInGuard],
         loadChildren: () =>
           import('@features/recommendation/recommendation.routes').then(
             (m) => m.RECOMMENDATION_ROUTES

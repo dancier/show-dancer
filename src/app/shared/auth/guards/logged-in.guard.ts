@@ -1,34 +1,27 @@
-import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
-import { Observable } from 'rxjs';
+import { inject } from '@angular/core';
 import { AuthStorageService } from '../services/auth-storage.service';
+import { CanActivateFn, Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class LoggedInGuard {
-  constructor(
-    private authStorageService: AuthStorageService,
-    private router: Router
-  ) {}
+export const loggedInGuard: CanActivateFn = () => {
+  const authStorageService = inject(AuthStorageService);
+  const router = inject(Router);
 
-  canActivate(
-    _route: ActivatedRouteSnapshot,
-    _state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    if (this.authStorageService.getSnapshot().isLoggedIn) {
-      return true;
-    } else {
-      return this.router.createUrlTree(['/login']);
-    }
+  if (authStorageService.getSnapshot().isLoggedIn) {
+    console.log('logged in');
+    return true;
+  } else {
+    console.log('not logged in');
+    return router.createUrlTree(['/login']);
   }
-}
+};
+
+export const loggedOutGuard: CanActivateFn = () => {
+  const authStorageService = inject(AuthStorageService);
+  const router = inject(Router);
+
+  if (authStorageService.getSnapshot().isLoggedIn) {
+    return router.createUrlTree(['/recommendations']);
+  } else {
+    return true;
+  }
+};
