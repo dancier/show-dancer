@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+} from '@angular/core';
 import { MobileMenuComponent } from '../ui/mobile-menu/mobile-menu.component';
 import { NgIf } from '@angular/common';
 import { ProfileMenuButtonComponent } from '../ui/profile-menu-button.component';
@@ -6,6 +11,9 @@ import { MobileMenuButtonComponent } from '../ui/mobile-menu/mobile-menu-button.
 import { DesktopMenuBarComponent } from '../ui/desktop-menu-bar.component';
 import { Router } from '@angular/router';
 import { ProfileMenuComponent } from '../ui/profile-menu.component';
+import { delay, of } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ClickOutsideDirective } from '@shared/common/directives/click-outside.directive';
 
 // TODO: Move to types file
 export type MenuItem = {
@@ -26,10 +34,12 @@ export type MenuItem = {
     NgIf,
     MobileMenuComponent,
     ProfileMenuComponent,
+    ClickOutsideDirective,
   ],
 })
 export class LoggedInNavigationComponent {
   router = inject(Router);
+  changeDetectorRef = inject(ChangeDetectorRef);
 
   mobileMenuOpen = false;
   profilePopupOpen = false;
@@ -39,7 +49,6 @@ export class LoggedInNavigationComponent {
     { name: 'Nachrichten', route: '/chat' },
     { name: 'Über Uns', route: '/about-us' },
     { name: 'Kontakt', route: '/contact' },
-    { name: 'Logout', route: '/logout' },
   ];
 
   profileMenuItems: MenuItem[] = [
@@ -48,21 +57,28 @@ export class LoggedInNavigationComponent {
     { name: 'Logout', route: '/logout' },
   ];
 
-  constructor() {}
+  constructor() {
+    this.router.events.pipe(takeUntilDestroyed()).subscribe(() => {
+      this.mobileMenuOpen = false;
+      this.profilePopupOpen = false;
+      this.changeDetectorRef.detectChanges();
+    });
+  }
 
   toggleMobileMenu(): void {
     this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 
-  onProfileButtonClicked(): void {
-    this.profilePopupOpen = !this.profilePopupOpen;
+  openProfileMenu(): void {
+    of(void 0)
+      .pipe(delay(100))
+      .subscribe(() => {
+        this.profilePopupOpen = true;
+        this.changeDetectorRef.detectChanges();
+      });
   }
 
-  /**
-   * TODO: have profile menu bar hide on navigation and when clicking outside of it
-   * How would I do it?
-   * - Have a service that keeps track of the state of the profile menu bar
-   * - Have a directive that listens to clicks outside of the profile menu bar
-   * - Have a directive that listens to navigation events
-   */
+  closeProfileMenu(): void {
+    this.profilePopupOpen = false;
+  }
 }

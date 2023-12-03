@@ -1,5 +1,5 @@
 <nav class="bg-rose-700">
-  <div class="mx-auto max-w-7xl px-2 md:px-4">
+  <div class="relative mx-auto max-w-7xl px-2 md:px-4">
     <div class="relative flex h-16 items-center justify-between">
       <div class="flex items-center">
         <a href="/"
@@ -24,23 +24,20 @@
         </app-mobile-menu-button>
         <app-profile-menu-button
           class="hidden md:block"
-          (profileButtonClicked)="onProfileButtonClicked()"
+          (profileButtonClicked)="
+            profilePopupOpen ? closeProfileMenu() : openProfileMenu()
+          "
         ></app-profile-menu-button>
       </div>
     </div>
+    <app-profile-menu
+      *ngIf="profilePopupOpen"
+      class="hidden md:block"
+      [menuItems]="profileMenuItems"
+      (clickOutside)="closeProfileMenu()"
+    >
+    </app-profile-menu>
   </div>
 
-  <app-mobile-menu
-    *ngIf="mobileMenuOpen"
-    class="md:hidden"
-    [menuItems]="menuItems"
-  >
-  </app-mobile-menu>
-
-  <app-profile-menu
-    *ngIf="profilePopupOpen"
-    class="hidden md:block"
-    [menuItems]="profileMenuItems"
-  >
-  </app-profile-menu>
+  <div></div>
 </nav>
