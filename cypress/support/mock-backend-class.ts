@@ -1,5 +1,5 @@
 import { TestChatConversation } from './mock-backend';
-import { DancerMapDto } from '@features/chat/common/types/chat.types';
+import { DancerMapDto } from '../../src/app/chat/common/types/chat.types';
 
 export class MockedBackend {
   mockedChats: TestChatConversation[] = [];

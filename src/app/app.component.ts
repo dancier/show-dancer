@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { EventLogService } from '@shared/logging/event-log.service';
+import { EventLogService } from '@shared/data-access/log/event-log.service';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { AppInstanceStorageService } from '@shared/logging/app-instance/app-instance-storage.service';
-import { DancierBackendMockedService } from '@shared/common/dancier-backend-mocked.service';
-import { EnvironmentService } from '@shared/common/environment.service';
+import { AppInstanceStorageService } from '@shared/data-access/log/app-instance-storage.service';
+import { DancierBackendMockedService } from '@shared/data-access/dancier-backend-mocked.service';
+import { EnvironmentService } from '@shared/data-access/environment.service';
 
 @Component({
   selector: 'app-root',

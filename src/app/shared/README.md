@@ -1,10 +1,9 @@
-# Shared Module
+# Shared Folder
 
-The shared module contains general purpose classes and resources which are used in more than one dynamically loaded
-module. By always loading with the application the shared components are ready whenever a module requests them.
+The shared folder contains all the components, services and other utilities that are used throughout the application by multiple features.
 
-Classes and resources inside the shared module shouldn't be application specific, otherwise they belong in the core
-module.
+## Subfolders
 
-For more information read the shared module section
-in [angular-folder-structure](https://angular-folder-structure.readthedocs.io/en/latest/shared.html).
+- `data-access`: for things like services and state management
+- `ui`: for general purpose components
+- `utils`: for helpers and utilities

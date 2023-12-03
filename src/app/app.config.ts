@@ -18,10 +18,10 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { AppInstanceIdInterceptor } from '@shared/logging/app-instance/app-instance-id.interceptor';
+import { AppInstanceIdInterceptor } from '@shared/util/logging/app-instance-id.interceptor';
 import { defaultStoreProvider } from '@state-adapt/angular';
-import { DancierBackendMockedService } from '@shared/common/dancier-backend-mocked.service';
-import { AuthInterceptor } from '@shared/auth/interceptors/auth.interceptor';
+import { DancierBackendMockedService } from '@shared/data-access/dancier-backend-mocked.service';
+import { AuthInterceptor } from '@shared/util/auth/auth.interceptor';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
