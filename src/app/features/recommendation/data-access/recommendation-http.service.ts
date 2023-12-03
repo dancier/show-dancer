@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EnvironmentService } from '@shared/common/environment.service';
-import { RecommendationsDto } from '../types/recommendations.dto';
+import { RecommendationsDto } from './types/recommendations.dto';
 import { APIResponse, asError, asSuccess } from '@shared/http/response.types';
 import { catchError, map, Observable, of } from 'rxjs';
 

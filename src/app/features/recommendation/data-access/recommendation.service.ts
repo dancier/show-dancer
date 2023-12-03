@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { RecommendationHttpService } from './recommendation-http.service';
-import { RecommendedDancer } from '../types/recommended-dancers.types';
+import { RecommendedDancer } from './types/recommended-dancers.types';
 import { map, Observable, shareReplay } from 'rxjs';
-import { RecommendationsDto } from '../types/recommendations.dto';
+import { RecommendationsDto } from './types/recommendations.dto';
 import { APIResponse } from '@shared/http/response.types';
 
 @Injectable({

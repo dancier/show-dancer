@@ -1,29 +1,29 @@
 /** Integration Tests for Recommendation Feature */
 import { createRoutingFactory, SpectatorRouting } from '@ngneat/spectator/jest';
-import { RecommendationsOverviewComponent } from './pages/recommendations-overview/recommendations-overview.component';
+import { RecommendationsComponent } from './recommendations.component';
 import { Location } from '@angular/common';
-import { RecommendedDancerComponent } from './components/recommended-dancer/recommended-dancer.component';
+import { RecommendedDancerComponent } from './ui/recommended-dancer.component';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { RecommendationService } from './services/recommendation.service';
-import { RecommendationHttpService } from './services/recommendation-http.service';
+import { RecommendationService } from './data-access/recommendation.service';
+import { RecommendationHttpService } from './data-access/recommendation-http.service';
 
-import recommendationsJson from './fixtures/recommendations.json';
+import recommendationsJson from './utils/fixtures/recommendations.json';
 
 describe('Recommendation Feature', () => {
   describe('when the user is on the recommendation page', () => {
-    let spectator: SpectatorRouting<RecommendationsOverviewComponent>;
+    let spectator: SpectatorRouting<RecommendationsComponent>;
     const createComponent = createRoutingFactory({
-      component: RecommendationsOverviewComponent,
+      component: RecommendationsComponent,
       imports: [RecommendedDancerComponent, HttpClientTestingModule],
       providers: [RecommendationService, RecommendationHttpService],
       stubsEnabled: false,
       routes: [
         {
           path: '',
-          component: RecommendationsOverviewComponent,
+          component: RecommendationsComponent,
         },
       ],
     });
