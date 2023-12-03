@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  Output,
+} from '@angular/core';
 import { ProfileService } from '@shared/profile/profile.service';
 import { AsyncPipe } from '@angular/common';
 import { handleAutoChangeDetectionStatus } from '@angular/cdk/testing';
@@ -13,6 +19,7 @@ import { handleAutoChangeDetectionStatus } from '@angular/cdk/testing';
       id="user-menu-button"
       aria-expanded="false"
       aria-haspopup="true"
+      (click)="profileButtonClicked.emit()"
     >
       <span class="sr-only">Open user menu</span>
       <img
@@ -27,6 +34,9 @@ import { handleAutoChangeDetectionStatus } from '@angular/cdk/testing';
   imports: [AsyncPipe],
 })
 export class ProfileMenuButtonComponent {
+  @Output()
+  profileButtonClicked = new EventEmitter<void>();
+
   public profileService = inject(ProfileService);
   protected readonly handleAutoChangeDetectionStatus =
     handleAutoChangeDetectionStatus;

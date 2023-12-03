@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component';
-import { RouterLinkActive, RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { NgFor } from '@angular/common';
         <a
           *ngFor="let item of menuItems"
           href="#"
-          class="rounded-md px-3 py-2 text-sm font-medium text-white no-underline"
+          class="text-md rounded-md px-3 py-2 font-medium text-white no-underline"
           aria-current="page"
           routerLinkActive="bg-rose-900"
           [routerLink]="item.route"

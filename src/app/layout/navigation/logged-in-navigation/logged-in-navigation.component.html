@@ -24,6 +24,7 @@
         </app-mobile-menu-button>
         <app-profile-menu-button
           class="hidden md:block"
+          (profileButtonClicked)="onProfileButtonClicked()"
         ></app-profile-menu-button>
       </div>
     </div>
@@ -35,4 +36,11 @@
     [menuItems]="menuItems"
   >
   </app-mobile-menu>
+
+  <app-profile-menu
+    *ngIf="profilePopupOpen"
+    class="hidden md:block"
+    [menuItems]="profileMenuItems"
+  >
+  </app-profile-menu>
 </nav>

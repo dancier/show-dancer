@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component';
-import { RouterLinkActive, RouterLink } from '@angular/router';
+import { MenuItem } from '../../logged-in-navigation/logged-in-navigation.component';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({
