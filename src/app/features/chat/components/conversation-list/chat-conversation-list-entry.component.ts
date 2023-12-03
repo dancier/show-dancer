@@ -17,7 +17,7 @@ import { ProfileService } from '@shared/profile/profile.service';
 import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs/operators';
-import { Profile } from '../../../profile/common/types/profile.types';
+import { Profile } from '../../../profile/data-access/types/profile.types';
 
 @Component({
   selector: 'app-chat-conversation-list-entry',

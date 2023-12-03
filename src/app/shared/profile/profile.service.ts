@@ -5,7 +5,7 @@ import {
   Dance,
   PersonalData,
   Profile,
-} from '@features/profile/common/types/profile.types';
+} from '@features/profile/data-access/types/profile.types';
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { isNonNull } from '../common/rxjs.utils';

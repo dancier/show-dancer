@@ -11,7 +11,7 @@ import { ChatParticipant } from '../common/types/chat.types';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProfileService } from '@shared/profile/profile.service';
 import { startWith } from 'rxjs/operators';
-import { Profile } from '../../profile/common/types/profile.types';
+import { Profile } from '../../profile/data-access/types/profile.types';
 import { map } from 'rxjs';
 
 @Component({

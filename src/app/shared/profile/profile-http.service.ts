@@ -7,7 +7,7 @@ import {
   Location,
   NameAvailability,
   Profile,
-} from '@features/profile/common/types/profile.types';
+} from '@features/profile/data-access/types/profile.types';
 
 @Injectable({
   providedIn: 'root',

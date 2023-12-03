@@ -5,13 +5,13 @@ import {
   Signal,
 } from '@angular/core';
 import { ChatSingleMessageComponent } from './chat-single-message.component';
-import { NgIf, NgFor, NgClass, AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { ChatMessage } from '../../common/types/chat.types';
 import { ChatStateService } from '../../page/chat-page-new/chat-state.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProfileService } from '@shared/profile/profile.service';
 import { startWith } from 'rxjs/operators';
-import { Profile } from '../../../profile/common/types/profile.types';
+import { Profile } from '../../../profile/data-access/types/profile.types';
 import { map } from 'rxjs';
 
 @Component({

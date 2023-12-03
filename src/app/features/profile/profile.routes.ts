@@ -3,16 +3,16 @@ import {
   mapToCanActivateChild,
   Routes,
 } from '@angular/router';
-import { InitUserNameComponent } from './edit/pages/init-user-name/init-user-name.component';
-import { InitPersonalDataComponent } from './edit/pages/init-personal-data/init-personal-data.component';
-import { ProfilePageComponent } from '@features/profile/view/profile-page/profile-page.component';
-import { InitDanceExperienceComponent } from './edit/pages/init-dance-experience/init-dance-experience.component';
-import { InitPartnerDanceExperienceComponent } from './edit/pages/init-partner-dance-experience/init-partner-dance-experience.component';
-import { InitProfileImageComponent } from './edit/pages/init-profile-image/init-profile-image.component';
-import { DancerProfileSufficientGuard } from './common/guards/dancer-profile-sufficient.guard';
+import { InitUserNameComponent } from './feature/initial-setup/init-user-name/init-user-name.component';
+import { InitPersonalDataComponent } from './feature/initial-setup/init-personal-data/init-personal-data.component';
+import { ProfilePageComponent } from './feature/profile-page/profile-page.component';
+import { InitDanceExperienceComponent } from './feature/initial-setup/init-dance-experience/init-dance-experience.component';
+import { InitPartnerDanceExperienceComponent } from './feature/initial-setup/init-partner-dance-experience/init-partner-dance-experience.component';
+import { InitProfileImageComponent } from './feature/initial-setup/init-profile-image/init-profile-image.component';
+import { DancerProfileSufficientGuard } from './util/dancer-profile-sufficient.guard';
 import { NarrowPageComponent } from '../../layout/narrow-page/narrow-page.component';
-import { EditProfileComponent } from './edit/pages/edit-profile/edit-profile.component';
-import { DancerProfileNotCreatedGuard } from './common/guards/dancer-profile-not-created.guard';
+import { EditProfileComponent } from './feature/edit-profile/edit-profile.component';
+import { DancerProfileNotCreatedGuard } from './util/dancer-profile-not-created.guard';
 import { loggedInGuard } from '@shared/auth/guards/logged-in.guard';
 
 export const PROFILE_ROUTES: Routes = [

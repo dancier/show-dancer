@@ -1,4 +1,4 @@
-import { Profile } from '@features/profile/common/types/profile.types';
+import { Profile } from '../../../profile/data-access/types/profile.types';
 
 export type Conversation = {
   chatId: string;
