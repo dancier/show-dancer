@@ -3,8 +3,11 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+  template: `
+    <nav class="bg-rose-700">
+      <div class="relative mx-auto max-w-7xl px-2 md:px-4"></div>
+    </nav>
+  `,
   standalone: true,
   imports: [RouterLink],
 })

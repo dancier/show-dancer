@@ -7,10 +7,8 @@ export const loggedInGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (authStorageService.getSnapshot().isLoggedIn) {
-    console.log('logged in');
     return true;
   } else {
-    console.log('not logged in');
     return router.createUrlTree(['/login']);
   }
 };

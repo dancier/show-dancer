@@ -12,7 +12,7 @@ import { NgFor } from '@angular/common';
         <a
           *ngFor="let item of menuItems"
           href="#"
-          class="text-md rounded-md px-3 py-2 font-medium text-white no-underline"
+          class="text-md rounded-md px-3 py-2 font-medium text-white no-underline transition-all duration-200 ease-in-out hover:text-gray-300"
           aria-current="page"
           routerLinkActive="bg-rose-900"
           [routerLink]="item.route"

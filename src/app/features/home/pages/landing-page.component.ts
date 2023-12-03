@@ -6,13 +6,13 @@ import { EventLogService } from '@shared/logging/event-log.service';
   selector: 'app-landing-page',
   template: `
     <header
-      class="bg-gradient-to-t from-orange-300 to-red-400 p-10 lg:bg-gradient-to-l lg:p-20"
+      class="bg-gradient-to-t from-orange-300 to-red-400 py-12 lg:bg-gradient-to-l lg:py-16"
     >
       <div
-        class="mx-auto flex max-w-[1600px] flex-col items-center gap-4 lg:flex-row lg:justify-around lg:gap-20"
+        class="mx-auto flex max-w-[1200px] flex-col items-center gap-4 px-4 md:px-8 lg:flex-row lg:justify-between lg:gap-20"
       >
         <div
-          class="w-full max-w-[50vh] flex-none lg:max-w-[600px] lg:basis-[50%]"
+          class="w-full max-w-[300px] flex-none lg:max-w-[500px] lg:basis-[50%]"
         >
           <img
             class="h-auto w-full max-w-[100%] drop-shadow"
@@ -36,7 +36,7 @@ import { EventLogService } from '@shared/logging/event-log.service';
             Wir verbinden Tänzer
           </div>
           <button
-            class="my-12 cursor-pointer rounded bg-red-900 py-3 px-8 text-xl font-bold text-white lg:text-2xl"
+            class="mt-12 cursor-pointer rounded bg-red-900 py-3 px-8 text-xl font-bold text-white transition-all duration-200 ease-in-out hover:bg-white hover:text-red-900 lg:text-2xl"
             (click)="navigateToRegistration()"
           >
             Jetzt registrieren
@@ -45,8 +45,8 @@ import { EventLogService } from '@shared/logging/event-log.service';
       </div>
     </header>
 
-    <main>
-      <section class="p-12 sm:p-24">
+    <main class="mx-auto max-w-[1200px] px-4 md:px-8">
+      <section class="py-12 sm:py-24">
         <div
           role="heading"
           aria-level="2"

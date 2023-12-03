@@ -1,5 +1,5 @@
 <nav class="bg-rose-700">
-  <div class="relative mx-auto max-w-7xl px-2 md:px-4">
+  <div class="relative mx-auto max-w-[1200px] px-4 md:px-8">
     <div class="relative flex h-16 items-center justify-between">
       <div class="flex items-center">
         <a href="/"
@@ -39,5 +39,9 @@
     </app-profile-menu>
   </div>
 
-  <div></div>
+  <app-mobile-menu
+    *ngIf="mobileMenuOpen"
+    [menuItems]="menuItems.concat(profileMenuItems)"
+  >
+  </app-mobile-menu>
 </nav>
