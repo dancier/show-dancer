@@ -7,7 +7,7 @@ import {
 import { AuthenticationService } from '@shared/data-access/auth/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIError, APIResponse } from '@shared/util/http/response.types';
-import { LinkType } from '../../../registration.types';
+import { LinkType } from '../../util/registration.types';
 import { Observable } from 'rxjs';
 import { AuthStorageService } from '@shared/data-access/auth/auth-storage.service';
 import { MatButtonModule } from '@angular/material/button';

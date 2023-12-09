@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SendVerificationLinkFormComponent } from './send-verification-link-form/send-verification-link-form.component';
+import { SendVerificationLinkFormComponent } from '../../ui/send-verification-link-form/send-verification-link-form.component';
 import { DataTestDirective } from '@shared/util/data-test.directive';
 
 @Component({

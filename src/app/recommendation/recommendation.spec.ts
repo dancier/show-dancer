@@ -10,7 +10,7 @@ import {
 import { RecommendationService } from './data-access/recommendation.service';
 import { RecommendationHttpService } from './data-access/recommendation-http.service';
 
-import recommendationsJson from './utils/fixtures/recommendations.json';
+import recommendationsJson from './util/fixtures/recommendations.json';
 
 describe('Recommendation Feature', () => {
   describe('when the user is on the recommendation page', () => {

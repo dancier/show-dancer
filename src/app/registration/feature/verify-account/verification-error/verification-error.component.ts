@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SendVerificationLinkFormComponent } from '../../reset-password/send-verification-link-form/send-verification-link-form.component';
+import { SendVerificationLinkFormComponent } from '../../../ui/send-verification-link-form/send-verification-link-form.component';
 
 @Component({
   selector: 'app-verification-error',
