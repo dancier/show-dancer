@@ -8,14 +8,14 @@ import {
   FormControl,
   FormGroup,
   NonNullableFormBuilder,
-  Validators,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ChatStateService } from '../../page/chat-page-new/chat-state.service';
+import { ChatStateService } from '../../feature/chat-page-new/chat-state.service';
 
 type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
 

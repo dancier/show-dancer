@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MountConfig } from 'cypress/angular';
 import { CommonModule } from '@angular/common';
 import { chats, profilePictures } from '@cypress-support/mock-backend';
-import { ChatPageComponent } from './page/chat-page/chat-page.component';
+import { ChatPageComponent } from './feature/chat-page/chat-page.component';
 
 // const timerMock = new TimerMockService();
 

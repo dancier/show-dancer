@@ -4,7 +4,7 @@ import {
   CreateChatResponse,
   DancerMapDto,
   MessageResponseWithChatId,
-} from '../../chat/common/types/chat.types';
+} from '../../chat/data-access/chat.types';
 
 const chats = [
   {

@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 import { ChatSingleMessageComponent } from './chat-single-message.component';
 import { AsyncPipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { ChatMessage } from '../../common/types/chat.types';
-import { ChatStateService } from '../../page/chat-page-new/chat-state.service';
+import { ChatMessage } from '../../data-access/chat.types';
+import { ChatStateService } from '../../feature/chat-page-new/chat-state.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProfileService } from '@shared/data-access/profile/profile.service';
 import { startWith } from 'rxjs/operators';

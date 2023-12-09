@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ChatConversationListEntryComponent } from './chat-conversation-list-entry.component';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgFor } from '@angular/common';
 import {
   ChatStateService,
   SingleChatState,
-} from '../../page/chat-page-new/chat-state.service';
+} from '../../feature/chat-page-new/chat-state.service';
 
 @Component({
   selector: 'app-chat-conversation-list',

@@ -10,9 +10,9 @@ import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import {
   ChatStateService,
   SingleChatState,
-} from '../../page/chat-page-new/chat-state.service';
+} from '../../feature/chat-page-new/chat-state.service';
 import { ImageService } from '@shared/data-access/image.service';
-import { ChatParticipant } from '../../common/types/chat.types';
+import { ChatParticipant } from '../../data-access/chat.types';
 import { ProfileService } from '@shared/data-access/profile/profile.service';
 import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';

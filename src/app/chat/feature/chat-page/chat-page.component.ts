@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from '@shared/ui/alert/alert.component';
-import { ChatMessageComposerComponent } from '../../components/message-composer/chat-message-composer.component';
-import { ChatMessagesComponent } from '../../components/chat-messages/chat-messages.component';
-import { ChatConversationListComponent } from '../../components/conversation-list/chat-conversation-list.component';
+import { ChatMessageComposerComponent } from '../../ui/message-composer/chat-message-composer.component';
+import { ChatMessagesComponent } from '../../ui/chat-messages/chat-messages.component';
+import { ChatConversationListComponent } from '../../ui/conversation-list/chat-conversation-list.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ChatStateService } from '../chat-page-new/chat-state.service';
-import { ChatConversationHeaderComponent } from '../../components/chat-conversation-header.component';
+import { ChatConversationHeaderComponent } from '../../ui/chat-conversation-header.component';
 
 @Component({
   selector: 'app-chat-page',

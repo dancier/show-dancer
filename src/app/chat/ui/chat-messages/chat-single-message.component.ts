@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ChatMessage } from '../../common/types/chat.types';
-import { NgIf, NgClass } from '@angular/common';
+import { ChatMessage } from '../../data-access/chat.types';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-chat-single-message',

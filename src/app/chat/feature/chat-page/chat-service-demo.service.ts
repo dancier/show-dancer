@@ -1,8 +1,8 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { ChatHttpService } from '../../common/services/chat-http.service';
+import { ChatHttpService } from '../../data-access/chat-http.service';
 import { catchError, NEVER, shareReplay, Subject, switchMap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChatDto } from '../../common/types/chat.types';
+import { ChatDto } from '../../data-access/chat.types';
 import { TimerService } from '@shared/util/time/timer.service';
 
 export type DemoChatState = {

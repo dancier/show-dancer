@@ -4,7 +4,7 @@ import {
   inject,
   NgZone,
 } from '@angular/core';
-import { ChatDto } from '../../common/types/chat.types';
+import { ChatDto } from '../../data-access/chat.types';
 import { ChatServiceDemoService } from './chat-service-demo.service';
 
 @Component({

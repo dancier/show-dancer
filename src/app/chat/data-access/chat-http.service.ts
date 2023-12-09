@@ -17,7 +17,7 @@ import {
   DancerMapDto,
   MessageResponse,
   MessageResponseWithChatId,
-} from '../types/chat.types';
+} from './chat.types';
 import { ProfileService } from '@shared/data-access/profile/profile.service';
 
 @Injectable({
