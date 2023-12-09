@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { LandingPageComponent } from './pages/landing-page.component';
-import { LogoutPageComponent } from './pages/logout-page.component';
-import { LoginPageComponent } from './pages/login-page.component';
-import { TermsAndConditionsComponent } from './pages/terms-and-conditions.component';
-import { AboutUsComponent } from './pages/about-us.component';
-import { BetaRegistrationPageComponent } from './pages/beta-registration-page.component';
-import { ContactComponent } from './pages/contact/contact.component';
+import { LandingPageComponent } from './feature/landing-page.component';
+import { LogoutPageComponent } from './feature/logout-page.component';
+import { LoginPageComponent } from './feature/login-page.component';
+import { TermsAndConditionsComponent } from './feature/terms-and-conditions.component';
+import { AboutUsComponent } from './feature/about-us.component';
+import { BetaRegistrationPageComponent } from './feature/beta-registration-page.component';
+import { ContactComponent } from './feature/contact/contact.component';
 import { NarrowPageComponent } from '@shared/ui/layout/narrow-page/narrow-page.component';
 import { loggedOutGuard } from '@shared/util/auth/logged-in.guard';
 
