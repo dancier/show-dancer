@@ -15,7 +15,7 @@
     "cy:open": "cypress open --e2e --browser chrome",
     "prepare": "husky install",
     "postinstall": "npm run copy:icons",
-    "copy:icons": "node ./tools/copy-folder.js ./node_modules/bootstrap-icons/icons ./src/assets/icons"
+    "copy:icons": "node tools/copy-file.js ./node_modules/bootstrap-icons/bootstrap-icons.svg ./src/assets/icons"
   },
   "private": true,
   "dependencies": {

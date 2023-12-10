@@ -120,8 +120,7 @@ export class ProfileService {
     );
   }
 
-  getProfileImageSrc(): Observable<string> {
-    const width = 150;
+  getProfileImageSrc(width = 150): Observable<string> {
     return this.profile$.pipe(
       map((profile) => {
         if (profile.profileImageHash) {
