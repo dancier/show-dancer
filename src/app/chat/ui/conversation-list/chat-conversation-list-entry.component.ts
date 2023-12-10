@@ -10,7 +10,7 @@ import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import {
   ChatStateService,
   SingleChatState,
-} from '../../feature/chat-page-new/chat-state.service';
+} from '../../data-access/chat-state.service';
 import { ImageService } from '@shared/data-access/image.service';
 import { ChatParticipant } from '../../data-access/chat.types';
 import { ProfileService } from '@shared/data-access/profile/profile.service';

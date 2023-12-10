@@ -6,7 +6,7 @@ import { ChatMessageComposerComponent } from '../../ui/message-composer/chat-mes
 import { ChatMessagesComponent } from '../../ui/chat-messages/chat-messages.component';
 import { ChatConversationListComponent } from '../../ui/conversation-list/chat-conversation-list.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { ChatStateService } from '../chat-page-new/chat-state.service';
+import { ChatStateService } from '../../data-access/chat-state.service';
 import { ChatConversationHeaderComponent } from '../../ui/chat-conversation-header.component';
 
 @Component({

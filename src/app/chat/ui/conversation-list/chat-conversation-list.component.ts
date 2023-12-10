@@ -4,7 +4,7 @@ import { AsyncPipe, NgFor } from '@angular/common';
 import {
   ChatStateService,
   SingleChatState,
-} from '../../feature/chat-page-new/chat-state.service';
+} from '../../data-access/chat-state.service';
 
 @Component({
   selector: 'app-chat-conversation-list',

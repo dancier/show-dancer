@@ -1,8 +1,8 @@
 import { inject, Injectable, Signal } from '@angular/core';
 import { adapt } from '@state-adapt/angular';
-import { ChatHttpService } from '../../data-access/chat-http.service';
+import { ChatHttpService } from './chat-http.service';
 import { getRequestSources, Source, toSource } from '@state-adapt/rxjs';
-import { ChatMessage, ChatParticipant } from '../../data-access/chat.types';
+import { ChatMessage, ChatParticipant } from './chat.types';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { distinct, filter, map, merge, switchMap, withLatestFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';

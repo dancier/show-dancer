@@ -5,7 +5,7 @@ import {
   CreateChatResponse,
   DancerMapDto,
   MessageResponseWithChatId,
-} from '../../data-access/chat.types';
+} from './chat.types';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export const chatStateAdapter = createAdapter<ChatAdaptState>()({

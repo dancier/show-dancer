@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ChatStateService } from '../../feature/chat-page-new/chat-state.service';
+import { ChatStateService } from '../../data-access/chat-state.service';
 
 type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
 

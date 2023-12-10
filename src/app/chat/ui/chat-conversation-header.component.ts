@@ -6,7 +6,7 @@ import {
   Signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChatStateService } from '../feature/chat-page-new/chat-state.service';
+import { ChatStateService } from '../data-access/chat-state.service';
 import { ChatParticipant } from '../data-access/chat.types';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProfileService } from '@shared/data-access/profile/profile.service';
