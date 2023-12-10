@@ -8,7 +8,7 @@ export const environment: Environment = {
   production: false,
   apiUrl: 'https://test-dancer.dancier.net',
   // apiUrl: '/api',
-  mockBackend: true,
+  mockBackend: false,
   removeTestAttributes: false,
 };
 

@@ -1,4 +1,4 @@
-import { DancerMapDto } from '@features/chat/common/types/chat.types';
+import { DancerMapDto } from '../../src/app/chat/data-access/chat.types';
 
 export type MockBackendFunction = Function;
 
