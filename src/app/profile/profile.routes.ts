@@ -5,7 +5,6 @@ import {
 } from '@angular/router';
 import { InitUserNameComponent } from './feature/initial-setup/init-user-name/init-user-name.component';
 import { InitPersonalDataComponent } from './feature/initial-setup/init-personal-data/init-personal-data.component';
-import { ProfilePageComponent } from './feature/profile-page/profile-page.component';
 import { InitDanceExperienceComponent } from './feature/initial-setup/init-dance-experience/init-dance-experience.component';
 import { InitPartnerDanceExperienceComponent } from './feature/initial-setup/init-partner-dance-experience/init-partner-dance-experience.component';
 import { InitProfileImageComponent } from './feature/initial-setup/init-profile-image/init-profile-image.component';
@@ -19,6 +18,14 @@ import { ProfileNewComponent } from './feature/profile-new.component';
 export const PROFILE_ROUTES: Routes = [
   {
     path: '',
+    component: ProfileNewComponent,
+    canActivate: [
+      loggedInGuard,
+      ...mapToCanActivate([DancerProfileSufficientGuard]),
+    ],
+  },
+  {
+    path: 'edit',
     component: NarrowPageComponent,
     canActivate: [
       loggedInGuard,
@@ -27,17 +34,9 @@ export const PROFILE_ROUTES: Routes = [
     children: [
       {
         path: '',
-        component: ProfilePageComponent,
-      },
-      {
-        path: 'edit',
         component: EditProfileComponent,
       },
     ],
-  },
-  {
-    path: 'new',
-    component: ProfileNewComponent,
   },
   {
     path: 'initial-setup',

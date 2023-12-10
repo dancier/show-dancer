@@ -4,17 +4,25 @@ import { ProfileService } from '@shared/data-access/profile/profile.service';
 import { DisplayDanceLevelPipe } from '../util/pipes/display-dance-level.pipe';
 import { DisplayDanceRolePipe } from '../util/pipes/display-dance-role.pipe';
 import { AgePipe } from '@shared/util/age.pipe';
+import { DisplayGenderPipe } from '../util/pipes/display-gender.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-new',
   standalone: true,
-  imports: [CommonModule, DisplayDanceLevelPipe, DisplayDanceRolePipe, AgePipe],
+  imports: [
+    CommonModule,
+    DisplayDanceLevelPipe,
+    DisplayDanceRolePipe,
+    AgePipe,
+    DisplayGenderPipe,
+  ],
   template: `
     <ng-container *ngIf="profileService.profile$ | async as profile">
       <div class="my-12 mx-auto flex max-w-[1200px] gap-10 px-10 lg:px-10">
         <div class="lg:px-16">
           <img
-            class="rounded-full"
+            class="w-[250px] rounded-full"
             alt="Profile Image"
             [src]="profileService.getProfileImageSrc(250) | async"
           />
@@ -27,14 +35,27 @@ import { AgePipe } from '@shared/util/age.pipe';
 
           <button
             class="mb-4 flex items-center gap-2 rounded-full border border-red-800 fill-red-800 px-3 py-1 text-red-800 transition-colors hover:bg-red-800 hover:fill-white hover:text-white"
+            (click)="editProfile()"
           >
             <div class="grow-0">
               <svg class="h-6 w-6">
-                <use href="assets/icons/bootstrap-icons.svg#chat-dots" />
+                <use href="assets/icons/bootstrap-icons.svg#pencil" />
               </svg>
             </div>
-            <div class="grow-0">Jetzt chatten</div>
+            <div class="grow-0">Profil bearbeiten</div>
           </button>
+
+          <!--            TODO: gleiche Komponente zur "Detailansicht" von Empfehlungen -->
+          <!--          <button-->
+          <!--            class="mb-4 flex items-center gap-2 rounded-full border border-red-800 fill-red-800 px-3 py-1 text-red-800 transition-colors hover:bg-red-800 hover:fill-white hover:text-white"-->
+          <!--          >-->
+          <!--            <div class="grow-0">-->
+          <!--              <svg class="h-6 w-6">-->
+          <!--                <use href="assets/icons/bootstrap-icons.svg#chat-dots" />-->
+          <!--              </svg>-->
+          <!--            </div>-->
+          <!--            <div class="grow-0">Jetzt chatten</div>-->
+          <!--          </button>-->
 
           <div
             class="flex items-center gap-x-7 gap-y-4 border-t border-b px-2 py-4"
@@ -82,7 +103,7 @@ import { AgePipe } from '@shared/util/age.pipe';
             </div>
             <div class="grow">
               <div class="mb-0.5 text-sm text-gray-500">Geschlecht</div>
-              <div class="text-2xl">{{ profile.gender }}</div>
+              <div class="text-2xl">{{ profile.gender | displayGender }}</div>
             </div>
           </div>
 
@@ -100,8 +121,9 @@ import { AgePipe } from '@shared/util/age.pipe';
             <div class="grow">
               <div class="mb-0.5 text-sm text-gray-500">Tanzerfahrung</div>
               <div class="text-2xl">
-                {{ danceExperience.level | displayDanceLevel }},
-                {{ danceExperience.leading | displayDanceRole }}
+                {{ danceExperience.dance }}
+                ({{ danceExperience.level | displayDanceLevel }},
+                {{ danceExperience.leading | displayDanceRole }})
               </div>
             </div>
           </div>
@@ -113,13 +135,9 @@ import { AgePipe } from '@shared/util/age.pipe';
 })
 export class ProfileNewComponent {
   profileService = inject(ProfileService);
-}
+  router = inject(Router);
 
-/**
- * Icons:
- * Wohnort: buildings
- * Alter: calendar3
- * Körpergröße: arrows-vertical
- * Geschlecht: gender-ambiguous
- * Tanzerfahrung / Tanz: music-note-beamed
- */
+  editProfile(): void {
+    this.router.navigate(['profile', 'edit']);
+  }
+}
