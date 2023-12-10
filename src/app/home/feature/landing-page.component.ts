@@ -6,10 +6,10 @@ import { EventLogService } from '@shared/data-access/log/event-log.service';
   selector: 'app-landing-page',
   template: `
     <header
-      class="bg-gradient-to-t from-orange-300 to-red-400 py-12 lg:bg-gradient-to-l lg:py-16"
+      class="bg-gradient-to-t from-orange-300 to-red-400 py-12 font-playful tracking-wide lg:bg-gradient-to-l lg:py-16"
     >
       <div
-        class="mx-auto flex max-w-[1200px] flex-col items-center gap-4 px-4 md:px-8 lg:flex-row lg:justify-between lg:gap-20"
+        class="mx-auto flex max-w-[1200px] flex-col items-center gap-4 px-4 md:px-10 lg:flex-row lg:justify-between lg:gap-20"
       >
         <div
           class="w-full max-w-[300px] flex-none lg:max-w-[500px] lg:basis-[50%]"
@@ -45,12 +45,12 @@ import { EventLogService } from '@shared/data-access/log/event-log.service';
       </div>
     </header>
 
-    <main class="mx-auto max-w-[1200px] px-4 md:px-8">
+    <main class="mx-auto max-w-[1200px] px-4 md:px-10">
       <section class="py-12 sm:py-24">
         <div
           role="heading"
           aria-level="2"
-          class="my-5 text-center text-3xl font-bold sm:text-5xl"
+          class="my-5 text-center font-playful text-3xl font-bold tracking-wide sm:text-5xl"
         >
           Finde Tanzpartner die zu dir passen
         </div>

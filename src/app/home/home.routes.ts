@@ -8,6 +8,7 @@ import { BetaRegistrationPageComponent } from './feature/beta-registration-page.
 import { ContactComponent } from './feature/contact/contact.component';
 import { NarrowPageComponent } from '@shared/ui/layout/narrow-page/narrow-page.component';
 import { loggedOutGuard } from '@shared/util/auth/logged-in.guard';
+import { ImprintComponent } from './feature/imprint.component';
 
 export const HOME_ROUTES: Routes = [
   {
@@ -42,6 +43,10 @@ export const HOME_ROUTES: Routes = [
         path: 'login',
         canActivate: [loggedOutGuard],
         component: LoginPageComponent,
+      },
+      {
+        path: 'imprint',
+        component: ImprintComponent,
       },
     ],
   },

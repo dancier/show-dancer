@@ -77,28 +77,28 @@
       url('../assets/fonts/dosis-v27-latin-700.svg#Dosis') format('svg'); /* Legacy iOS */
 }
 
-html,
-body {
-  // background-color: map.get($dancier-palette-accent, A200);
+//html,
+//body {
+//  // background-color: map.get($dancier-palette-accent, A200);
+//
+//  // Free image from pixabay.com christmas-decoration-holiday-xmas-2908901
+//  // background-image: url("../../assets/img/backgrounds/light-background.jpg");
+//
+//  // scroll-behavior: smooth;
+//
+//  //p {
+//  //  font-weight: 350;
+//  //}
+//}
 
-  // Free image from pixabay.com christmas-decoration-holiday-xmas-2908901
-  // background-image: url("../../assets/img/backgrounds/light-background.jpg");
+//body {
+//  margin: 0;
+//  font-family: Dosis, sans-serif;
+//}
 
-  // scroll-behavior: smooth;
-
-  p {
-    font-weight: 350;
-  }
-}
-
-body {
-  margin: 0;
-  font-family: Dosis, sans-serif;
-}
-
-a {
-  text-decoration: none;
-}
+//a {
+//  text-decoration: none;
+//}
 
 .font-color-primary-800 {
   color: map.get($dancier-palette-primary, 800);

@@ -3,11 +3,11 @@
     *ngIf="!contactResponse || !contactResponse.isSuccess; else success"
   >
     <h1 class="page-header">Kontaktiere uns</h1>
-    <p class="mb-2">
+    <p>
       Du kannst das untenstehende Textfeld nutzen, um uns Wünsche, Anregungen,
       Fragen und mehr zukommen zu lassen.
     </p>
-    <p class="mb-2">Wir freuen uns auf deine Nachricht.</p>
+    <p>Wir freuen uns auf deine Nachricht.</p>
 
     <form novalidate [formGroup]="contactForm" (ngSubmit)="submitForm()">
       <mat-card-content class="card-content-container flex flex-col">
