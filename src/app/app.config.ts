@@ -21,10 +21,20 @@ import {
 import { AppInstanceIdInterceptor } from '@shared/util/logging/app-instance-id.interceptor';
 import { defaultStoreProvider } from '@state-adapt/angular';
 import { DancierBackendMockedService } from '@shared/data-access/dancier-backend-mocked.service';
-import { AuthInterceptor } from '@shared/util/auth/auth.interceptor';
+import { UnauthorizedInterceptor } from '@shared/util/auth/unauthorized.interceptor';
+import { AuthWithCredentialsInterceptor } from '@shared/util/auth/auth-with-credentials.interceptor';
 
 const httpInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: UnauthorizedInterceptor,
+    multi: true,
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthWithCredentialsInterceptor,
+    multi: true,
+  },
   {
     provide: HTTP_INTERCEPTORS,
     useClass: AppInstanceIdInterceptor,
