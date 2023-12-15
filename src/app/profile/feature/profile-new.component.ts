@@ -34,7 +34,7 @@ import { Router } from '@angular/router';
           </h1>
 
           <button
-            class="mb-4 flex items-center gap-2 rounded-full border border-red-800 fill-red-800 px-3 py-1 text-red-800 transition-colors hover:bg-red-800 hover:fill-white hover:text-white"
+            class="mb-4 flex items-center gap-2 rounded border border-red-800 fill-red-800 px-3 py-1 text-red-800 transition-colors hover:bg-red-50"
             (click)="editProfile()"
           >
             <div class="grow-0">
