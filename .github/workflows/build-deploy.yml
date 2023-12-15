@@ -46,4 +46,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: ${{ DEPLOY_FRONTEND_CMD }}
+          script: ${{ secrets.DEPLOY_FRONTEND_CMD }}
