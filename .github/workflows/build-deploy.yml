@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: What the hell is in bootstrap-icons
+        run: ls ./node_modules/bootstrap-icons
+
+      - name: What the hell is in node_modules
+        run: ls ./node_modules/bootstrap-icons
+
       - name: Run postinstall
         run: npm run postinstall
 
