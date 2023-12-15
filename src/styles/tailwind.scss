@@ -5,12 +5,21 @@
 
 @layer base {
   a {
-    @apply text-red-600 underline;
+    @apply no-underline;
+  }
+  p {
+    @apply mb-3;
   }
 }
 
 @layer components {
   .page-header {
-    @apply my-6 text-3xl;
+    @apply mb-6 font-playful text-4xl font-medium tracking-wide;
+  }
+  .sub-header {
+    @apply mt-6 mb-4 font-playful text-2xl font-semibold tracking-wide;
+  }
+  .text-link {
+    @apply text-red-600 underline;
   }
 }

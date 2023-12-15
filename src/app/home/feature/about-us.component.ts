@@ -14,7 +14,7 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
               src="../../../assets/img/about-us/marc-profile.jpg"
             />
           </div>
-          <h3 class="my-2 text-xl">Marc Gorzala</h3>
+          <h2 class="sub-header">Marc Gorzala</h2>
           <p>
             Also, ich tanze seit ca 7 Jahren Tango. Wie ich sagen würde, recht
             leidenschaftlich. Am Anfang hat mir eine Seite, ich glaube sie hieß
