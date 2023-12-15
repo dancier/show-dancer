@@ -1,0 +1,49 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      # prevents Husky from installing git hooks
+      HUSKY: 0
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Login to the docker registry
+        run: docker login --username ${{ secrets.DOCKER_HUB_USER }} --password ${{ secrets.DOCKER_HUB_PASS }}
+
+      - name: Build the docker image
+        run: docker build -t dancier/show-dancer:$(git rev-parse --short "$GITHUB_SHA") -t dancier/show-dancer:latest .
+
+      - name: Publish the docker image on hub.docker.com
+        run: docker push -a dancier/show-dancer
+
+      - name: Deploy the docker image to the test server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: ${{ DEPLOY_FRONTEND_CMD }}

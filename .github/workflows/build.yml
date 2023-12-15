@@ -1,8 +1,6 @@
 name: build
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches: [master]
 
@@ -32,12 +30,3 @@ jobs:
 
       - name: Run tests
         run: npm run test
-
-      - name: Login to the Docker registry
-        run: docker login --username ${{ secrets.DOCKER_HUB_USER }} --password ${{ secrets.DOCKER_HUB_PASS }}
-
-      - name: Build the Docker image
-        run: docker build -t dancier/show-dancer:$(git rev-parse --short "$GITHUB_SHA") -t dancier/show-dancer:latest .
-
-      - name: Publish the Docker image on hub.docker.com
-        run: docker push -a dancier/show-dancer
