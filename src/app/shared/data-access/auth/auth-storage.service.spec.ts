@@ -39,6 +39,7 @@ describe('AuthStorageService', () => {
     const expectedAuthData: AuthData = {
       isLoggedIn: true,
       isHuman: true,
+      jwt: '123',
     };
     getItemSpy.mockImplementation((key: string) => {
       if (key === 'authData') {
@@ -63,6 +64,7 @@ describe('AuthStorageService', () => {
     const expectedAuthData: AuthData = {
       isLoggedIn: false,
       isHuman: false,
+      jwt: '',
     };
     const actualAuthData = service.getSnapshot();
     expect(actualAuthData).toEqual(expectedAuthData);
@@ -84,6 +86,7 @@ describe('AuthStorageService', () => {
       expect(setItemSpy).toHaveBeenCalledWith(
         'authData',
         JSON.stringify({
+          jwt: '',
           isLoggedIn: true,
           isHuman: false,
         })
@@ -94,6 +97,7 @@ describe('AuthStorageService', () => {
       expect(listener).toHaveBeenCalledWith({
         isLoggedIn: true,
         isHuman: false,
+        jwt: '',
       });
     });
   });
@@ -113,6 +117,7 @@ describe('AuthStorageService', () => {
       expect(setItemSpy).toHaveBeenCalledWith(
         'authData',
         JSON.stringify({
+          jwt: '',
           isLoggedIn: false,
           isHuman: true,
         })
@@ -121,6 +126,7 @@ describe('AuthStorageService', () => {
 
     it('informs subscribers about the change', () => {
       expect(listener).toHaveBeenCalledWith({
+        jwt: '',
         isLoggedIn: false,
         isHuman: true,
       });

@@ -22,7 +22,7 @@ import { AppInstanceIdInterceptor } from '@shared/util/logging/app-instance-id.i
 import { defaultStoreProvider } from '@state-adapt/angular';
 import { DancierBackendMockedService } from '@shared/data-access/dancier-backend-mocked.service';
 import { UnauthorizedInterceptor } from '@shared/util/auth/unauthorized.interceptor';
-import { AuthWithCredentialsInterceptor } from '@shared/util/auth/auth-with-credentials.interceptor';
+import { WithCredentialsInterceptor } from '@shared/util/auth/with-credentials-interceptor.service';
 
 const httpInterceptorProviders = [
   {
@@ -32,7 +32,7 @@ const httpInterceptorProviders = [
   },
   {
     provide: HTTP_INTERCEPTORS,
-    useClass: AuthWithCredentialsInterceptor,
+    useClass: WithCredentialsInterceptor,
     multi: true,
   },
   {

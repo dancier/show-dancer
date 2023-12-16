@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ImageUploadService } from '../../../data-access/image-upload.service';
 import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
-import { ProfileService } from '@shared/data-access/profile/profile.service';
+import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 import { APIResponse } from '@shared/util/http/response.types';
 import { UploadedImageDao } from '../../../data-access/types/profile.types';
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class InitProfileImageComponent {
 
   constructor(
     private imageUploadService: ImageUploadService,
-    private profileService: ProfileService,
+    private profileService: ProfileOldService,
     private router: Router
   ) {}
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfileService } from '@shared/data-access/profile/profile.service';
+import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DanceExperienceForm } from '../../../ui/dance-experience-form/dance-form.type';
 import { Dance } from '../../../data-access/types/profile.types';
@@ -30,7 +30,10 @@ export class InitPartnerDanceExperienceComponent {
 
   apiError?: APIError;
 
-  constructor(public profileService: ProfileService, private router: Router) {}
+  constructor(
+    public profileService: ProfileOldService,
+    private router: Router
+  ) {}
 
   submitForm(): void {
     if (this.form.valid && this.form.value.dances) {

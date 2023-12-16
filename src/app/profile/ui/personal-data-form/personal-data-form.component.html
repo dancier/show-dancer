@@ -1,5 +1,13 @@
 <ng-container [formGroup]="personalDataForm">
   <mat-form-field>
+    <mat-label>Über mich</mat-label>
+    <textarea matInput formControlName="aboutMe" maxlength="300"></textarea>
+    <mat-hint align="end"
+      >{{ personalDataForm.get('aboutMe')?.value?.length }} / 300</mat-hint
+    >
+  </mat-form-field>
+
+  <mat-form-field>
     <mat-label>Geschlecht</mat-label>
     <mat-select data-test="gender-field" formControlName="gender">
       <mat-option *ngFor="let gender of genderList" [value]="gender.type">

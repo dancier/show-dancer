@@ -18,7 +18,7 @@ import {
   MessageResponse,
   MessageResponseWithChatId,
 } from './chat.types';
-import { ProfileService } from '@shared/data-access/profile/profile.service';
+import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class ChatHttpService {
   private readonly chatApiUrl: string;
   private readonly dancerApiUrl: string;
 
-  private profileService = inject(ProfileService);
+  private profileService = inject(ProfileOldService);
 
   constructor(
     private http: HttpClient,
@@ -66,7 +66,7 @@ export class ChatHttpService {
       this.http
         // .get<ChatList>('/chats', this.defaultOptions)
         .get<ChatList>(this.chatApiUrl, this.defaultOptions)
-        .pipe(map((chatList) => chatList.chats))
+        .pipe(map((chatList) => chatList.chats || []))
     );
   }
 

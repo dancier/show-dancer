@@ -6,14 +6,17 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable, take } from 'rxjs';
-import { ProfileService } from '@shared/data-access/profile/profile.service';
+import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DancerProfileSufficientGuard {
-  constructor(private profileService: ProfileService, private router: Router) {}
+  constructor(
+    private profileService: ProfileOldService,
+    private router: Router
+  ) {}
 
   canActivate(
     _route: ActivatedRouteSnapshot,

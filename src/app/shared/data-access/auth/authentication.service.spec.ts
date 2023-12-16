@@ -119,7 +119,10 @@ describe('AuthenticationService', () => {
           status: 200,
           statusText: 'OK',
         });
-      expect(authStorageService.setLoginState).toHaveBeenCalledWith(true);
+      expect(authStorageService.setLoginState).toHaveBeenCalledWith(
+        true,
+        undefined
+      );
     });
 
     it("doesn't set the login state in the auth storage service when login fails", () => {

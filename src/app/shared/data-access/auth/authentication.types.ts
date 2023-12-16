@@ -16,3 +16,8 @@ export type PasswordChangeRequest = {
 export type EmailValidationCodeRequest = {
   email: string;
 };
+
+export type LoginResponse = {
+  accessToken: string;
+  tokenType: string;
+};

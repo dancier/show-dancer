@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileHttpService } from '@shared/data-access/profile/profile-http.service';
-import { ProfileService } from '@shared/data-access/profile/profile.service';
+import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 import {
   APIError,
   APIResponse,
@@ -44,7 +44,7 @@ export class InitUserNameComponent {
   error?: APIError;
 
   constructor(
-    public profileService: ProfileService,
+    public profileService: ProfileOldService,
     private profileHttpService: ProfileHttpService,
     private fb: NonNullableFormBuilder,
     private router: Router
