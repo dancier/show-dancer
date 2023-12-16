@@ -5,12 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class AgePipe implements PipeTransform {
-  transform(birthdate?: string): number | string {
+  transform(birthdate?: string): string {
     return birthdate ? calculateAge(birthdate) : 'unknown';
   }
 }
 
-function calculateAge(birthdate: string): number | string {
+function calculateAge(birthdate: string): string {
   const birthdateAsDate = new Date(birthdate);
   if (birthdateAsDate.toString() === 'Invalid Date') {
     console.error('Error on parsing birthdate', birthdate);
@@ -26,5 +26,5 @@ function calculateAge(birthdate: string): number | string {
   ) {
     age--;
   }
-  return age;
+  return age.toString();
 }

@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { APIError, APIResponse } from '@shared/util/http/response.types';
-import { ProfileService } from '@shared/data-access/profile/profile.service';
+import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 import {
   Profile,
   UploadedImageDao,
@@ -23,6 +23,7 @@ import { DanceExperienceFormComponent } from '../../ui/dance-experience-form/dan
 import { PersonalDataFormComponent } from '../../ui/personal-data-form/personal-data-form.component';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { ImageService } from '@shared/data-access/image.service';
 
 type EditProfileForm = {
   personalData: FormGroup<Partial<PersonalDataForm>>;
@@ -60,8 +61,9 @@ export class EditProfileComponent {
 
   constructor(
     private fb: NonNullableFormBuilder,
-    public profileService: ProfileService,
+    public profileService: ProfileOldService,
     private imageUploadService: ImageUploadService,
+    private imageService: ImageService,
     private router: Router
   ) {}
 
@@ -88,6 +90,7 @@ export class EditProfileComponent {
     if (this.profileForm.valid) {
       const formValues = this.profileForm.getRawValue();
       const profile: Partial<Profile> = {
+        aboutMe: formValues.personalData!.aboutMe!,
         size: formValues.personalData!.size!,
         birthDate: format(formValues.personalData!.birthDate!, 'yyyy-MM-dd', {
           locale: de,
@@ -122,5 +125,10 @@ export class EditProfileComponent {
       // display error messages for all invalid controls
       this.profileForm.markAllAsTouched();
     }
+  }
+
+  handleMissingImage($event: ErrorEvent): void {
+    ($event.target as HTMLImageElement).src =
+      this.imageService.getDefaultDancerImage();
   }
 }

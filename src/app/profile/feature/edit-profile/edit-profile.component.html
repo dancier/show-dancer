@@ -13,6 +13,7 @@
           ? croppedImage
           : (profileService.getProfileImageSrc() | async)
       "
+      (error)="handleMissingImage($event)"
     />
   </div>
 

@@ -17,8 +17,12 @@ export class EnvironmentService {
     return false;
   }
 
-  public getProduction(): boolean {
+  public isProduction(): boolean {
     return environment.production;
+  }
+
+  public isLocalDevelopment(): boolean {
+    return !environment.production;
   }
 
   public getApiUrl(): string {

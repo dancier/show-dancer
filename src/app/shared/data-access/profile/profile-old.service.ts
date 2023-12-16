@@ -16,7 +16,7 @@ import { ImageService } from '../image.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileService {
+export class ProfileOldService {
   private _profile = new BehaviorSubject<Profile | null>(null);
   public readonly profile$: Observable<Profile> = this._profile
     .asObservable()

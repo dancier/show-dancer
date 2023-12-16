@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { Gender, genderList } from '../../data-access/types/profile.types';
 import { CityLookupValidator } from '../../util/city-lookup.validator';
-import { ProfileService } from '@shared/data-access/profile/profile.service';
+import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { map } from 'rxjs/operators';
 import { distinctUntilChanged, of, switchMap } from 'rxjs';
@@ -55,7 +55,7 @@ export class PersonalDataFormComponent implements OnInit {
   constructor(
     private formGroupDirective: FormGroupDirective,
     private fb: NonNullableFormBuilder,
-    private profileService: ProfileService
+    private profileService: ProfileOldService
   ) {
     // set min and max selectable date of birth relative to the current year
     const currentYear = new Date().getFullYear();
@@ -65,6 +65,13 @@ export class PersonalDataFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.personalDataForm = this.formGroupDirective.form;
+    this.personalDataForm.addControl(
+      'aboutMe',
+      new FormControl<string>('', {
+        validators: [Validators.maxLength(500)],
+        nonNullable: true,
+      })
+    );
     this.personalDataForm.addControl(
       'birthDate',
       new FormControl<Date | null>(null, [Validators.required])
@@ -103,6 +110,7 @@ export class PersonalDataFormComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((profile) => {
         this.personalDataForm.patchValue({
+          aboutMe: profile?.aboutMe,
           birthDate: parse(profile?.birthDate, 'yyyy-MM-dd', new Date()),
           zipCode: profile?.zipCode,
           city: profile?.city,
@@ -136,3 +144,9 @@ export class PersonalDataFormComponent implements OnInit {
     return this.personalDataForm.get(field)!.hasError(error);
   }
 }
+
+/*
+Hallo, ich bin der Dominik. Ich spiele gerne Karten und mache auch sonst allerlei Sachen. Manchmal trinke ich Kaffee, aber nur am Wochenende, meistens trinke ich Tee, damit das klar ist. Jojo, das ist töfte, oder?
+
+Bla blub, es ist cool ich zu sein. Nein wirklich, es ist super. Jemand anderes zu sein wäre auch langweilig.
+ */

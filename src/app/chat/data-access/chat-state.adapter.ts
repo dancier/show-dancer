@@ -9,27 +9,25 @@ import {
 import { HttpErrorResponse } from '@angular/common/http';
 
 export const chatStateAdapter = createAdapter<ChatAdaptState>()({
-  chatsFetched: (state, chatsDto: ChatDto[]) => ({
-    ...state,
-    chatsFetchState: 'loaded',
-    chatCreated: false,
-    chats: [
-      // only add new chats (chat id not in state yet)
-      ...state.chats,
-      ...chatsDto
-        .filter(
-          (chatDto) =>
-            !state.chats.find((stateChat) => stateChat.id === chatDto.chatId)
-        )
-        .map((chatDto) => ({
-          id: chatDto.chatId,
-          participants: chatDto.dancerIds.map((dancerId) => ({
-            id: dancerId,
-          })),
-          messages: [],
-        })),
-    ],
-  }),
+  chatsFetched: (state, chatsDto: ChatDto[]) => {
+    const newChats = chatsDto
+      .filter(
+        (chatDto) =>
+          !state.chats.find((stateChat) => stateChat.id === chatDto.chatId)
+      )
+      .map((chatDto) => ({
+        id: chatDto.chatId,
+        participants: chatDto.dancerIds.map((dancerId) => ({ id: dancerId })),
+        messages: [],
+      }));
+
+    return {
+      ...state,
+      chatsFetchState: 'loaded',
+      chatCreated: false,
+      chats: [...state.chats, ...newChats],
+    };
+  },
 
   chatsFetchedError: (state, chatsFetchError: HttpErrorResponse) => ({
     ...state,

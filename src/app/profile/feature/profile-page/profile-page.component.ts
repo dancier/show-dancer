@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProfileService } from '@shared/data-access/profile/profile.service';
+import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 import { EnvironmentService } from '@shared/data-access/environment.service';
 import { Router } from '@angular/router';
 import { DisplayDanceRolePipe } from '../../util/pipes/display-dance-role.pipe';
@@ -27,7 +27,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 })
 export class ProfilePageComponent {
   constructor(
-    public profileService: ProfileService,
+    public profileService: ProfileOldService,
     public environmentService: EnvironmentService,
     private router: Router
   ) {}

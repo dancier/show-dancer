@@ -16,7 +16,7 @@
 //   withLatestFrom,
 // } from 'rxjs';
 // import { ChatService } from './chat.service';
-// import { ProfileService } from '@shared/profile/profile.service';
+// import { ProfileOldService } from '@shared/profile/profile.service';
 // import { EnvironmentService } from '@shared/common/environment.service';
 //
 // export type ChatState = {
@@ -47,7 +47,7 @@
 // {
 //   constructor(
 //     private chatService: ChatService,
-//     private profileService: ProfileService,
+//     private profileService: ProfileOldService,
 //     private environmentService: EnvironmentService // @Inject(IntervalSchedulerToken) private scheduler: SchedulerLike
 //   ) {
 //     super(defaultState);

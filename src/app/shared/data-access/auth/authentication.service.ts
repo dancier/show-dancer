@@ -7,6 +7,7 @@ import {
 import {
   EmailValidationCodeRequest,
   LoginRequest,
+  LoginResponse,
   PasswordChangeRequest,
   UserRegistration,
 } from './authentication.types';
@@ -58,12 +59,21 @@ export class AuthenticationService {
       );
   }
 
-  login(loginRequest: LoginRequest): Observable<APIResponse<void>> {
+  login(loginRequest: LoginRequest): Observable<APIResponse<LoginResponse>> {
     return this.http
-      .post<void>(`${this.baseUrl}/login`, loginRequest, this.defaultOptions)
+      .post<LoginResponse>(
+        `${this.baseUrl}/login`,
+        loginRequest,
+        this.defaultOptions
+      )
       .pipe(
         map(asSuccess),
-        tap((_) => this.authStorageService.setLoginState(true)),
+        tap((response) =>
+          this.authStorageService.setLoginState(
+            true,
+            response.payload.accessToken
+          )
+        ),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             case 401:

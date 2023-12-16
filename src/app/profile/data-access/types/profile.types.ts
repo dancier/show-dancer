@@ -50,6 +50,7 @@ export type Dance = {
 };
 
 export type PersonalData = {
+  aboutMe: string;
   size: number;
   gender: Gender;
   birthDate: string;
@@ -60,7 +61,6 @@ export type PersonalData = {
 
 export type Profile = PersonalData & {
   id?: string;
-  aboutMe: string;
   dancerName: string;
   ableTo: Dance[];
   wantsTo: Dance[];

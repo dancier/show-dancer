@@ -5,7 +5,7 @@ import {
   inject,
   Output,
 } from '@angular/core';
-import { ProfileService } from '../../../../data-access/profile/profile.service';
+import { ProfileOldService } from '../../../../data-access/profile/profile-old.service';
 import { AsyncPipe } from '@angular/common';
 import { handleAutoChangeDetectionStatus } from '@angular/cdk/testing';
 
@@ -37,7 +37,7 @@ export class ProfileMenuButtonComponent {
   @Output()
   profileButtonClicked = new EventEmitter<void>();
 
-  public profileService = inject(ProfileService);
+  public profileService = inject(ProfileOldService);
   protected readonly handleAutoChangeDetectionStatus =
     handleAutoChangeDetectionStatus;
 

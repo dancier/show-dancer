@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 export type AuthData = {
   isLoggedIn: boolean;
   isHuman: boolean;
+  jwt: string;
 };
 
 const AUTH_DATA_KEY = 'authData';
@@ -26,16 +27,18 @@ export class AuthStorageService {
       return JSON.parse(authItem);
     } else {
       return {
+        jwt: '',
         isLoggedIn: false,
         isHuman: false,
       };
     }
   }
 
-  public setLoginState(loginState: boolean): void {
+  public setLoginState(loginState: boolean, jwt?: string): void {
     const newAuthData = {
       ...this._authData$.getValue(),
       isLoggedIn: loginState,
+      jwt: jwt || '',
     };
     localStorage.setItem(AUTH_DATA_KEY, JSON.stringify(newAuthData));
     this._authData$.next(newAuthData);

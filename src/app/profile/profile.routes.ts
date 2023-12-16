@@ -17,7 +17,13 @@ import { ProfileNewComponent } from './feature/profile-new.component';
 
 export const PROFILE_ROUTES: Routes = [
   {
+    path: 'view/:participantId',
+    pathMatch: 'full',
+    component: ProfileNewComponent,
+  },
+  {
     path: '',
+    pathMatch: 'full',
     component: ProfileNewComponent,
     canActivate: [
       loggedInGuard,

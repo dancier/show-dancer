@@ -13,7 +13,7 @@ import {
 } from '../../data-access/chat-state.service';
 import { ImageService } from '@shared/data-access/image.service';
 import { ChatParticipant } from '../../data-access/chat.types';
-import { ProfileService } from '@shared/data-access/profile/profile.service';
+import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs/operators';
@@ -62,7 +62,7 @@ import { Profile } from '../../../profile/data-access/types/profile.types';
 export class ChatConversationListEntryComponent {
   chatState = inject(ChatStateService);
   ownProfileId: Signal<string | undefined> = toSignal(
-    inject(ProfileService).profile$.pipe(
+    inject(ProfileOldService).profile$.pipe(
       startWith({
         id: 'dancerId1',
       } as Profile),
@@ -115,7 +115,7 @@ export class ChatConversationListEntryComponent {
   // constructor(
   //   public imageService: ImageService,
   //   public chatStore: ChatStore,
-  //   public profileService: ProfileService,
+  //   public profileService: ProfileOldService,
   //   public router: Router
   // ) {
   //   this.profileService.profile$.subscribe((profile) => {
