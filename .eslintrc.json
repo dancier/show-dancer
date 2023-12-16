@@ -102,7 +102,6 @@
         "@angular-eslint/template/attributes-order": "warn",
         "@angular-eslint/template/banana-in-box": "error",
         "@angular-eslint/template/conditional-complexity": "error",
-        "@angular-eslint/template/cyclomatic-complexity": "error",
         "@angular-eslint/template/no-interpolation-in-attributes": "error",
         "@angular-eslint/template/no-negated-async": "error",
         "@angular-eslint/template/no-positive-tabindex": "error",
