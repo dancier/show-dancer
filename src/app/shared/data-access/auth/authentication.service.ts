@@ -71,7 +71,7 @@ export class AuthenticationService {
         tap((response) =>
           this.authStorageService.setLoginState(
             true,
-            response.payload.accessToken
+            response.payload?.accessToken
           )
         ),
         catchError((error: HttpErrorResponse) => {

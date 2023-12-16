@@ -62,7 +62,11 @@ describe('Setting up username', () => {
         }),
       },
       MockProvider(AuthStorageService, {
-        authData$: of({ isLoggedIn: true, isHuman: true }),
+        authData$: of({
+          isLoggedIn: true,
+          isHuman: true,
+          jwt: 'token',
+        }),
       }),
     ],
     stubsEnabled: false,
