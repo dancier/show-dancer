@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { AuthenticationService } from '@shared/data-access/auth/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { APIError, APIResponse } from '@shared/util/http/response.types';
+import { APIError, OldAPIResponse } from '@shared/util/http/response.types';
 import { LinkType } from '../../util/registration.types';
 import { Observable } from 'rxjs';
 import { AuthStorageService } from '@shared/data-access/auth/auth-storage.service';
@@ -40,7 +40,7 @@ export class SendVerificationLinkFormComponent implements OnInit {
   submitButtonText?: string;
   redirectUrl?: string;
   onSubmit!:
-    | ((email: string) => Observable<APIResponse<void>>)
+    | ((email: string) => Observable<OldAPIResponse<void>>)
     | ((email: string) => never);
   error?: APIError;
   verificationForm = this.fb.group({

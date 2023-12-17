@@ -3,9 +3,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '@shared/data-access/environment.service';
 import {
-  APIResponse,
   asError,
   asSuccess,
+  OldAPIResponse,
 } from '@shared/util/http/response.types';
 import { UploadedImageDao } from './types/profile.types';
 
@@ -36,7 +36,7 @@ export class ImageUploadService {
 
   uploadImage$(
     croppedImage: string
-  ): Observable<APIResponse<UploadedImageDao>> {
+  ): Observable<OldAPIResponse<UploadedImageDao>> {
     const blobFromDataUrl = this.dataURItoBlob(croppedImage);
     const formData: FormData = new FormData();
     formData.append('file', blobFromDataUrl);

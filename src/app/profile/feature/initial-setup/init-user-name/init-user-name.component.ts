@@ -9,8 +9,8 @@ import { ProfileHttpService } from '@shared/data-access/profile/profile-http.ser
 import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 import {
   APIError,
-  APIResponse,
   asError,
+  OldAPIResponse,
   ResponseError,
 } from '@shared/util/http/response.types';
 import { of, switchMap } from 'rxjs';
@@ -60,7 +60,7 @@ export class InitUserNameComponent {
       this.profileHttpService
         .checkNameAvailability$(username)
         .pipe(
-          switchMap((response: APIResponse<NameAvailability>) => {
+          switchMap((response: OldAPIResponse<NameAvailability>) => {
             if (!response.isSuccess) {
               return of(response as ResponseError);
             }
@@ -70,7 +70,7 @@ export class InitUserNameComponent {
             return this.profileService.setDancerName(username);
           })
         )
-        .subscribe((response: APIResponse<void>) => {
+        .subscribe((response: OldAPIResponse<void>) => {
           if (response.isSuccess) {
             this.router.navigate(['profile/initial-setup/personal-info']);
           } else {

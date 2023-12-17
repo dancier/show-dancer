@@ -19,6 +19,7 @@ import { PublicProfileComponent } from './feature/public-profile.component';
 export const PROFILE_ROUTES: Routes = [
   {
     path: 'view/:participantId',
+    // add guard: only open if not the own profile...
     pathMatch: 'full',
     component: PublicProfileComponent,
   },

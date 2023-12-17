@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, shareReplay } from 'rxjs';
 import { EnvironmentService } from '../environment.service';
 import {
-  APIResponse,
   asError,
   asSuccess,
+  OldAPIResponse,
 } from '../../util/http/response.types';
 import {
   Location,
@@ -31,7 +31,7 @@ export class ProfileHttpService {
     this.locationApiUrl = `${this.environment.getApiUrl()}/location`;
   }
 
-  getProfile$(): Observable<APIResponse<Profile>> {
+  getProfile$(): Observable<OldAPIResponse<Profile>> {
     return this.http
       .get<Profile>(`${this.profileApiUrl}`, this.defaultOptions)
       .pipe(
@@ -45,7 +45,7 @@ export class ProfileHttpService {
       );
   }
 
-  updateProfile$(profile: Profile): Observable<APIResponse<void>> {
+  updateProfile$(profile: Profile): Observable<OldAPIResponse<void>> {
     return this.http
       .put<void>(`${this.profileApiUrl}`, profile, this.defaultOptions)
       .pipe(
@@ -62,7 +62,7 @@ export class ProfileHttpService {
 
   checkNameAvailability$(
     dancerName: string
-  ): Observable<APIResponse<NameAvailability>> {
+  ): Observable<OldAPIResponse<NameAvailability>> {
     return this.http
       .get<NameAvailability>(
         `${this.profileApiUrl}/checkDancerNameAvailability/${dancerName}`,
@@ -79,7 +79,7 @@ export class ProfileHttpService {
       );
   }
 
-  getLocation$(zipCode: string): Observable<APIResponse<Location>> {
+  getLocation$(zipCode: string): Observable<OldAPIResponse<Location>> {
     // there is only one country 'GER' at the moment
     return this.http
       .get<Location>(

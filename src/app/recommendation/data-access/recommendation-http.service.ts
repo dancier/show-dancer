@@ -3,9 +3,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EnvironmentService } from '@shared/data-access/environment.service';
 import { RecommendationsDto } from './types/recommendations.dto';
 import {
-  APIResponse,
   asError,
   asSuccess,
+  OldAPIResponse,
 } from '@shared/util/http/response.types';
 import { catchError, map, Observable, of } from 'rxjs';
 
@@ -28,7 +28,7 @@ export class RecommendationHttpService {
     this.recommendationsApiUrl = `${this.environment.getApiUrl()}/recommendations`;
   }
 
-  getRecommendations$(): Observable<APIResponse<RecommendationsDto>> {
+  getRecommendations$(): Observable<OldAPIResponse<RecommendationsDto>> {
     return this.http
       .get<RecommendationsDto>(this.recommendationsApiUrl, this.defaultOptions)
       .pipe(

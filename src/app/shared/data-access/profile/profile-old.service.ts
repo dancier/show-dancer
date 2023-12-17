@@ -9,7 +9,7 @@ import {
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { isNonNull } from '../../util/rxjs.utils';
-import { APIResponse } from '../../util/http/response.types';
+import { OldAPIResponse } from '../../util/http/response.types';
 import { EnvironmentService } from '../environment.service';
 import { ImageService } from '../image.service';
 
@@ -44,7 +44,7 @@ export class ProfileOldService {
     });
   }
 
-  updateProfile(profile: Profile): Observable<APIResponse<void>> {
+  updateProfile(profile: Profile): Observable<OldAPIResponse<void>> {
     const request = this.profileHttpService.updateProfile$(profile);
     request.subscribe((response) => {
       if (response.isSuccess) {
@@ -56,7 +56,7 @@ export class ProfileOldService {
 
   patchAndUpdateProfile(
     profile: Partial<Profile>
-  ): Observable<APIResponse<void>> {
+  ): Observable<OldAPIResponse<void>> {
     if (this._profile.value === null) {
       // the profile should be already fetched for all modifications
       throw new Error("profile hasn't been fetched yet");
@@ -71,23 +71,25 @@ export class ProfileOldService {
     return this._profile.value;
   }
 
-  setProfile(profile: Partial<Profile>): Observable<APIResponse<void>> {
+  setProfile(profile: Partial<Profile>): Observable<OldAPIResponse<void>> {
     return this.patchAndUpdateProfile(profile);
   }
 
-  setDancerName(dancerName: string): Observable<APIResponse<void>> {
+  setDancerName(dancerName: string): Observable<OldAPIResponse<void>> {
     return this.patchAndUpdateProfile({ dancerName });
   }
 
-  setPersonalData(personalData: PersonalData): Observable<APIResponse<void>> {
+  setPersonalData(
+    personalData: PersonalData
+  ): Observable<OldAPIResponse<void>> {
     return this.patchAndUpdateProfile(personalData);
   }
 
-  setOwnDances(ableTo: Dance[]): Observable<APIResponse<void>> {
+  setOwnDances(ableTo: Dance[]): Observable<OldAPIResponse<void>> {
     return this.patchAndUpdateProfile({ ableTo });
   }
 
-  setPartnerDances(wantsTo: Dance[]): Observable<APIResponse<void>> {
+  setPartnerDances(wantsTo: Dance[]): Observable<OldAPIResponse<void>> {
     return this.patchAndUpdateProfile({ wantsTo });
   }
 

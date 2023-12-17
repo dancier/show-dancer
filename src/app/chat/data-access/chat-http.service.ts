@@ -3,9 +3,9 @@ import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { EnvironmentService } from '@shared/data-access/environment.service';
 import {
-  APIResponse,
   asError,
   asSuccess,
+  OldAPIResponse,
 } from '@shared/util/http/response.types';
 import {
   ChatDto,
@@ -43,7 +43,7 @@ export class ChatHttpService {
   createMessage$(
     chatId: string,
     message: CreateMessageRequest
-  ): Observable<APIResponse<void>> {
+  ): Observable<OldAPIResponse<void>> {
     return this.http
       .post<void>(
         `${this.chatApiUrl}/${chatId}/messages`,
@@ -107,7 +107,7 @@ export class ChatHttpService {
     );
   }
 
-  getChatsAndDancers$(): Observable<APIResponse<ChatsAndDancers>> {
+  getChatsAndDancers$(): Observable<OldAPIResponse<ChatsAndDancers>> {
     return this.http.get<ChatList>(this.chatApiUrl, this.defaultOptions).pipe(
       map((chatList) => {
         const dancerIds = this.getAllDancerIds(chatList.chats);

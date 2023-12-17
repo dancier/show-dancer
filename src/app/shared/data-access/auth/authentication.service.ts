@@ -15,9 +15,9 @@ import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { AuthStorageService } from './auth-storage.service';
 import { EnvironmentService } from '../environment.service';
 import {
-  APIResponse,
   asError,
   asSuccess,
+  OldAPIResponse,
 } from '../../util/http/response.types';
 
 @Injectable({
@@ -38,7 +38,9 @@ export class AuthenticationService {
     this.baseUrl = `${this.environment.getApiUrl()}/authentication`;
   }
 
-  register(userRegistration: UserRegistration): Observable<APIResponse<void>> {
+  register(
+    userRegistration: UserRegistration
+  ): Observable<OldAPIResponse<void>> {
     return this.http
       .post<void>(
         `${this.baseUrl}/registrations`,
@@ -59,7 +61,7 @@ export class AuthenticationService {
       );
   }
 
-  login(loginRequest: LoginRequest): Observable<APIResponse<LoginResponse>> {
+  login(loginRequest: LoginRequest): Observable<OldAPIResponse<LoginResponse>> {
     return this.http
       .post<LoginResponse>(
         `${this.baseUrl}/login`,
@@ -88,7 +90,7 @@ export class AuthenticationService {
       );
   }
 
-  loginAsHuman(captchaToken: string): Observable<APIResponse<void>> {
+  loginAsHuman(captchaToken: string): Observable<OldAPIResponse<void>> {
     const httpOptions = {
       headers: new HttpHeaders({
         'X-Captcha-Token': captchaToken,
@@ -115,7 +117,7 @@ export class AuthenticationService {
 
   requestPasswordChange(
     passwordChangeRequest: PasswordChangeRequest
-  ): Observable<APIResponse<void>> {
+  ): Observable<OldAPIResponse<void>> {
     return this.http
       .post<void>(
         `${this.baseUrl}/password-changes`,
@@ -137,7 +139,7 @@ export class AuthenticationService {
 
   requestEmailValidationCode(
     emailValidationCodeRequest: EmailValidationCodeRequest
-  ): Observable<APIResponse<void>> {
+  ): Observable<OldAPIResponse<void>> {
     return this.http
       .post<void>(
         `${this.baseUrl}/email-validations`,
@@ -160,7 +162,7 @@ export class AuthenticationService {
   changePassword(
     validationCode: string,
     password: string
-  ): Observable<APIResponse<void>> {
+  ): Observable<OldAPIResponse<void>> {
     return this.http
       .put<void>(
         `${this.baseUrl}/password-changes/${validationCode}`,
@@ -180,7 +182,7 @@ export class AuthenticationService {
       );
   }
 
-  verifyAccount(validationCode: string): Observable<APIResponse<void>> {
+  verifyAccount(validationCode: string): Observable<OldAPIResponse<void>> {
     return this.http
       .put<void>(
         `${this.baseUrl}/email-validations/${validationCode}`,
@@ -202,7 +204,7 @@ export class AuthenticationService {
       );
   }
 
-  logout(): Observable<APIResponse<void>> {
+  logout(): Observable<OldAPIResponse<void>> {
     return this.http
       .get<void>(`${this.baseUrl}/logout`, this.defaultOptions)
       .pipe(

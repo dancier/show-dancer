@@ -4,7 +4,7 @@ import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { APIError, APIResponse } from '@shared/util/http/response.types';
+import { APIError, OldAPIResponse } from '@shared/util/http/response.types';
 import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
 import {
   Profile,
@@ -56,7 +56,7 @@ export class EditProfileComponent {
   });
   croppedImage?: string | null;
   imageChangedEvent: any = '';
-  uploadResponse?: APIResponse<UploadedImageDao>;
+  uploadResponse?: OldAPIResponse<UploadedImageDao>;
   error?: APIError;
 
   constructor(
