@@ -11,7 +11,7 @@
 // } from '../../common/types/chat.types';
 // import { combineLatest, map, Observable, shareReplay, switchMap } from 'rxjs';
 // import { Router } from '@angular/router';
-// import { ProfileOldService } from '@shared/profile/profile.service';
+// import { OwnProfileService } from '@shared/profile/profile.service';
 //
 // type FetchChatsDto = {
 //   chats: ChatDto[];
@@ -47,7 +47,7 @@
 //     private http: HttpClient,
 //     private environment: EnvironmentService,
 //     private authStorageService: AuthStorageService,
-//     private profileService: ProfileOldService,
+//     private profileService: OwnProfileService,
 //     private router: Router
 //   ) {
 //     this.chatApiUrl = `${this.environment.getApiUrl()}/chats`;

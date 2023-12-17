@@ -9,7 +9,7 @@ import { AsyncPipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { ChatMessage } from '../../data-access/chat.types';
 import { ChatStateService } from '../../data-access/chat-state.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
+import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { startWith } from 'rxjs/operators';
 import { Profile } from '../../../profile/data-access/types/profile.types';
 import { map } from 'rxjs';
@@ -50,7 +50,7 @@ import { map } from 'rxjs';
 export class ChatMessagesComponent {
   chatState = inject(ChatStateService);
   ownUserId: Signal<string | undefined> = toSignal(
-    inject(ProfileOldService).profile$.pipe(
+    inject(OwnProfileService).profile$.pipe(
       startWith({
         id: 'dancerId1',
       } as Profile),

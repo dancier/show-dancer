@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
+import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { DisplayDanceLevelPipe } from '../util/pipes/display-dance-level.pipe';
 import { DisplayDanceRolePipe } from '../util/pipes/display-dance-role.pipe';
 import { AgePipe } from '@shared/util/age.pipe';
@@ -108,7 +108,7 @@ import { ImageService } from '@shared/data-access/image.service';
 })
 export class OwnProfileComponent {
   imageService = inject(ImageService);
-  profileService = inject(ProfileOldService);
+  profileService = inject(OwnProfileService);
   router = inject(Router);
 
   editProfile(): void {

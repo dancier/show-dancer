@@ -10,15 +10,12 @@ import { ImageService } from '@shared/data-access/image.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileService {
+export class PublicProfileService {
   private readonly http = inject(HttpClient);
   private readonly imageService = inject(ImageService);
   private readonly profileApiUrl = `${inject(
     EnvironmentService
   ).getApiUrl()}/profile`;
-
-  // public getOwnProfile(): void {}
-  //
 
   public getPublicProfile(
     dancerId: string

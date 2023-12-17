@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
+import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { PersonalData } from '../../../data-access/types/profile.types';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { APIError } from '@shared/util/http/response.types';
@@ -35,7 +35,7 @@ export class InitPersonalDataComponent {
   error?: APIError;
 
   constructor(
-    public profileService: ProfileOldService,
+    public profileService: OwnProfileService,
     private router: Router
   ) {}
 
