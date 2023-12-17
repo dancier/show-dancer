@@ -1,35 +1,42 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProfileService } from '../data-access/profile.service';
+import { AgePipe } from '@shared/util/age.pipe';
 import { DisplayDanceLevelPipe } from '../util/pipes/display-dance-level.pipe';
 import { DisplayDanceRolePipe } from '../util/pipes/display-dance-role.pipe';
-import { AgePipe } from '@shared/util/age.pipe';
 import { DisplayGenderPipe } from '../util/pipes/display-gender.pipe';
-import { Router } from '@angular/router';
 import { ProfileDataEntryComponent } from '../ui/profile-data-entry.component';
-import { ImageService } from '@shared/data-access/image.service';
 
 @Component({
-  selector: 'app-profile-new',
+  selector: 'app-public-profile',
   standalone: true,
   imports: [
     CommonModule,
+    AgePipe,
     DisplayDanceLevelPipe,
     DisplayDanceRolePipe,
-    AgePipe,
     DisplayGenderPipe,
     ProfileDataEntryComponent,
   ],
   template: `
-    <ng-container *ngIf="profileService.profile$ | async as profile">
+    <!--      TODO: loading and error view -->
+    <ng-container *ngIf="profileResponse$ | async as profileResponse">
       <div
+        *ngIf="
+          profileResponse.fetchStatus === 'success' &&
+          profileResponse.payload as profile
+        "
         class="my-12 mx-auto flex max-w-[1200px] flex-col gap-10 px-4 md:flex-row md:px-10 lg:px-10"
       >
         <div class="mx-auto lg:px-16">
+          <!--            TODO: use pipe-->
           <img
             class="relative h-[250px] w-[250px] max-w-none rounded-full"
             alt="Profile Image"
-            [src]="profileService.getProfileImageSrc(250) | async"
+            [src]="
+              profileService.getProfileImageSrc(profile.profileImageHash, 250)
+            "
             (error)="handleMissingImage($event)"
           />
         </div>
@@ -41,14 +48,14 @@ import { ImageService } from '@shared/data-access/image.service';
 
           <button
             class="mb-4 flex items-center gap-2 rounded border border-red-800 fill-red-800 px-3 py-1 text-red-800 transition-colors hover:bg-red-50"
-            (click)="editProfile()"
+            (click)="openChat(profile.id)"
           >
             <div class="grow-0">
               <svg class="h-6 w-6">
-                <use href="assets/icons/bootstrap-icons.svg#pencil" />
+                <use href="assets/icons/bootstrap-icons.svg#chat-dots" />
               </svg>
             </div>
-            <div class="grow-0">Profil bearbeiten</div>
+            <div class="grow-0">Nachricht schreiben</div>
           </button>
 
           <app-profile-data-entry
@@ -67,10 +74,10 @@ import { ImageService } from '@shared/data-access/image.service';
           ></app-profile-data-entry>
 
           <app-profile-data-entry
-            *ngIf="profile.birthDate"
+            *ngIf="profile.age"
             icon="calendar3"
             label="Alter"
-            [value]="profile.birthDate | age"
+            [value]="profile.age.toString()"
           ></app-profile-data-entry>
 
           <app-profile-data-entry
@@ -106,17 +113,23 @@ import { ImageService } from '@shared/data-access/image.service';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileNewComponent {
-  imageService = inject(ImageService);
-  profileService = inject(ProfileOldService);
-  router = inject(Router);
+export class PublicProfileComponent {
+  private readonly activeRoute = inject(ActivatedRoute);
+  public readonly profileService = inject(ProfileService);
+  private readonly router = inject(Router);
 
-  editProfile(): void {
-    this.router.navigate(['profile', 'edit']);
-  }
+  public readonly profileResponse$ = this.profileService.getPublicProfile(
+    this.activeRoute.snapshot.params['participantId']
+  );
 
   handleMissingImage($event: ErrorEvent): void {
     ($event.target as HTMLImageElement).src =
-      this.imageService.getDefaultDancerImage();
+      this.profileService.getDefaultProfileImage();
+  }
+
+  openChat(dancerId: string): void {
+    this.router.navigate(['chat'], {
+      queryParams: { participantId: dancerId },
+    });
   }
 }

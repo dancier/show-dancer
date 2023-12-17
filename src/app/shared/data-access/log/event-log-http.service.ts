@@ -4,9 +4,9 @@ import { Event } from './eventlog.types';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '../environment.service';
 import {
-  APIResponse,
   asError,
   asSuccess,
+  OldAPIResponse,
 } from '../../util/http/response.types';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class EventLogHttpService {
     private http: HttpClient
   ) {}
 
-  postEvent$(event: Event): Observable<APIResponse<void>> {
+  postEvent$(event: Event): Observable<OldAPIResponse<void>> {
     return this.http
       .post<void>(
         `${this.environment.getApiUrl()}/eventlog`,

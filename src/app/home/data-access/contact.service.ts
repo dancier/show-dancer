@@ -8,9 +8,9 @@ import {
 } from '@angular/common/http';
 import { EnvironmentService } from '@shared/data-access/environment.service';
 import {
-  APIResponse,
   asError,
   asSuccess,
+  OldAPIResponse,
 } from '@shared/util/http/response.types';
 import { EventLogService } from '@shared/data-access/log/event-log.service';
 
@@ -28,7 +28,10 @@ export class ContactService {
     private eventLogService: EventLogService
   ) {}
 
-  sendMessage(message: string, sender: string): Observable<APIResponse<void>> {
+  sendMessage(
+    message: string,
+    sender: string
+  ): Observable<OldAPIResponse<void>> {
     const apiUrlContact = `${this.environment.getApiUrl()}/contacts`;
     const payload = {
       sender,

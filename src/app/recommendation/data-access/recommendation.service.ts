@@ -3,7 +3,7 @@ import { RecommendationHttpService } from './recommendation-http.service';
 import { RecommendedDancer } from './types/recommended-dancers.types';
 import { map, Observable, shareReplay } from 'rxjs';
 import { RecommendationsDto } from './types/recommendations.dto';
-import { APIResponse } from '@shared/util/http/response.types';
+import { OldAPIResponse } from '@shared/util/http/response.types';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ import { APIResponse } from '@shared/util/http/response.types';
 export class RecommendationService {
   constructor(private httpService: RecommendationHttpService) {}
 
-  getRecommendations$(): Observable<APIResponse<RecommendedDancer[]>> {
+  getRecommendations$(): Observable<OldAPIResponse<RecommendedDancer[]>> {
     return this.httpService.getRecommendations$().pipe(
       map((response) => {
         if (response.isSuccess) {

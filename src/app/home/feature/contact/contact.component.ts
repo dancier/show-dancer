@@ -10,7 +10,7 @@ import { AuthenticationService } from '@shared/data-access/auth/authentication.s
 import { EventLogService } from '@shared/data-access/log/event-log.service';
 import { ContactService } from '../../data-access/contact.service';
 import { tap } from 'rxjs';
-import { APIResponse } from '@shared/util/http/response.types';
+import { OldAPIResponse } from '@shared/util/http/response.types';
 import { ErrorMessagePipe } from '@shared/util/http/error-message.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { RecaptchaModule } from 'ng-recaptcha';
@@ -40,7 +40,7 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
 })
 export class ContactComponent implements OnInit {
   contactForm!: FormGroup;
-  contactResponse?: APIResponse<void>;
+  contactResponse?: OldAPIResponse<void>;
 
   // TODO: refactor, we should solve this in a reactive way (e.g. subscribe in the template)
   isCaptchaSolved = false;

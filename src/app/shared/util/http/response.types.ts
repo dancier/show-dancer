@@ -24,7 +24,7 @@ export type ResponseError = {
   error: APIError;
 };
 
-export type APIResponse<T> = ResponseError | ResponseSuccess<T>;
+export type OldAPIResponse<T> = ResponseError | ResponseSuccess<T>;
 
 export const asError = (error: APIError): ResponseError => ({
   isSuccess: false,
@@ -37,3 +37,22 @@ export const asSuccess: AsSuccess = (payload) => ({
   isSuccess: true,
   payload,
 });
+
+export type ApiResponse<T> =
+  | ApiResponseSuccess<T>
+  | ApiResponseError
+  | ApiResponseLoading;
+
+export type ApiResponseLoading = {
+  fetchStatus: 'loading';
+};
+
+export type ApiResponseSuccess<T> = {
+  fetchStatus: 'success';
+  payload: T;
+};
+
+export type ApiResponseError = {
+  fetchStatus: 'error';
+  httpStatusCode: number;
+};
