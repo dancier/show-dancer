@@ -22,7 +22,9 @@ export class WithCredentialsInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     let modifiedRequest;
     if (this.environment.isLocalDevelopment()) {
-      modifiedRequest = this.addJwtAuthorization(request);
+      // enable to use the jwt token instead during local development
+      // modifiedRequest = this.addJwtAuthorization(request);
+      modifiedRequest = this.addCredentialsCookie(request);
     } else {
       modifiedRequest = this.addCredentialsCookie(request);
     }
