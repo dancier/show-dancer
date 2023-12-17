@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ChatStateService } from '../data-access/chat-state.service';
 import { ChatParticipant } from '../data-access/chat.types';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
+import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { startWith } from 'rxjs/operators';
 import { Profile } from '../../profile/data-access/types/profile.types';
 import { map } from 'rxjs';
@@ -37,7 +37,7 @@ export class ChatConversationHeaderComponent {
   private chatState = inject(ChatStateService);
 
   ownProfileId: Signal<string | undefined> = toSignal(
-    inject(ProfileOldService).profile$.pipe(
+    inject(OwnProfileService).profile$.pipe(
       startWith({
         id: 'dancerId1',
       } as Profile),

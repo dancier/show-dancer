@@ -18,7 +18,7 @@ import {
   MessageResponse,
   MessageResponseWithChatId,
 } from './chat.types';
-import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
+import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class ChatHttpService {
   private readonly chatApiUrl: string;
   private readonly dancerApiUrl: string;
 
-  private profileService = inject(ProfileOldService);
+  private profileService = inject(OwnProfileService);
 
   constructor(
     private http: HttpClient,

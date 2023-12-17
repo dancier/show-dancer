@@ -4,12 +4,12 @@ import {
   AsyncValidatorFn,
   ValidationErrors,
 } from '@angular/forms';
-import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
+import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { distinctUntilChanged, filter, Observable, of, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export class CityLookupValidator {
-  static createValidator(profileService: ProfileOldService): AsyncValidatorFn {
+  static createValidator(profileService: OwnProfileService): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return of(control.value).pipe(
         filter(isNonNull),

@@ -13,7 +13,7 @@ import {
   DanceType,
   Profile,
 } from '../../data-access/types/profile.types';
-import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
+import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { Router } from '@angular/router';
 import { DanceExperienceEntryForm } from './dance-form.type';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -42,7 +42,7 @@ export class DanceExperienceFormComponent implements OnInit {
   @Input() danceFormType: 'own' | 'partner' = 'own';
 
   constructor(
-    public profileService: ProfileOldService,
+    public profileService: OwnProfileService,
     private router: Router,
     private formGroupDirective: FormGroupDirective
   ) {}

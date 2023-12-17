@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { Gender, genderList } from '../../data-access/types/profile.types';
 import { CityLookupValidator } from '../../util/city-lookup.validator';
-import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
+import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { map } from 'rxjs/operators';
 import { distinctUntilChanged, of, switchMap } from 'rxjs';
@@ -55,7 +55,7 @@ export class PersonalDataFormComponent implements OnInit {
   constructor(
     private formGroupDirective: FormGroupDirective,
     private fb: NonNullableFormBuilder,
-    private profileService: ProfileOldService
+    private profileService: OwnProfileService
   ) {
     // set min and max selectable date of birth relative to the current year
     const currentYear = new Date().getFullYear();

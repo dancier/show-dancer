@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { APIError, OldAPIResponse } from '@shared/util/http/response.types';
-import { ProfileOldService } from '@shared/data-access/profile/profile-old.service';
+import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import {
   Profile,
   UploadedImageDao,
@@ -61,7 +61,7 @@ export class EditProfileComponent {
 
   constructor(
     private fb: NonNullableFormBuilder,
-    public profileService: ProfileOldService,
+    public profileService: OwnProfileService,
     private imageUploadService: ImageUploadService,
     private imageService: ImageService,
     private router: Router

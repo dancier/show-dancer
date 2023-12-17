@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProfileService } from '../data-access/profile.service';
+import { PublicProfileService } from '../data-access/public-profile.service';
 import { AgePipe } from '@shared/util/age.pipe';
 import { DisplayDanceLevelPipe } from '../util/pipes/display-dance-level.pipe';
 import { DisplayDanceRolePipe } from '../util/pipes/display-dance-role.pipe';
@@ -147,7 +147,7 @@ import { AlertComponent } from '@shared/ui/alert/alert.component';
 })
 export class PublicProfileComponent {
   private readonly activeRoute = inject(ActivatedRoute);
-  public readonly profileService = inject(ProfileService);
+  public readonly profileService = inject(PublicProfileService);
   private readonly router = inject(Router);
 
   public readonly profileResponse$ = this.profileService.getPublicProfile(
