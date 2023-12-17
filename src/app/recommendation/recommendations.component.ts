@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RecommendationService } from './data-access/recommendation.service';
 import { AlertComponent } from '@shared/ui/alert/alert.component';
 import { RecommendedDancerComponent } from './ui/recommended-dancer.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recommendations',
@@ -18,6 +19,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
             <ng-container *ngFor="let recommendedDancer of response.payload">
               <app-recommended-dancer
                 [dancer]="recommendedDancer"
+                (click)="openPublicProfile(recommendedDancer.id)"
               ></app-recommended-dancer>
             </ng-container>
           </div>
@@ -61,7 +63,13 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
   imports: [NgIf, NgFor, RecommendedDancerComponent, AlertComponent, AsyncPipe],
 })
 export class RecommendationsComponent {
+  recommendationsService = inject(RecommendationService);
+  router = inject(Router);
   recommendationsResponse$ = this.recommendationsService.getRecommendations$();
 
-  constructor(public recommendationsService: RecommendationService) {}
+  constructor() {}
+
+  openPublicProfile(dancerId: string): void {
+    this.router.navigate(['profile', 'view', dancerId]);
+  }
 }

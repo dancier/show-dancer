@@ -13,18 +13,19 @@ import { NarrowPageComponent } from '@shared/ui/layout/narrow-page/narrow-page.c
 import { EditProfileComponent } from './feature/edit-profile/edit-profile.component';
 import { DancerProfileNotCreatedGuard } from './util/dancer-profile-not-created.guard';
 import { loggedInGuard } from '@shared/util/auth/logged-in.guard';
-import { ProfileNewComponent } from './feature/profile-new.component';
+import { OwnProfileComponent } from './feature/own-profile.component';
+import { PublicProfileComponent } from './feature/public-profile.component';
 
 export const PROFILE_ROUTES: Routes = [
   {
     path: 'view/:participantId',
     pathMatch: 'full',
-    component: ProfileNewComponent,
+    component: PublicProfileComponent,
   },
   {
     path: '',
     pathMatch: 'full',
-    component: ProfileNewComponent,
+    component: OwnProfileComponent,
     canActivate: [
       loggedInGuard,
       ...mapToCanActivate([DancerProfileSufficientGuard]),

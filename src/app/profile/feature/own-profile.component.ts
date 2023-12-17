@@ -10,7 +10,7 @@ import { ProfileDataEntryComponent } from '../ui/profile-data-entry.component';
 import { ImageService } from '@shared/data-access/image.service';
 
 @Component({
-  selector: 'app-profile-new',
+  selector: 'app-own-profile',
   standalone: true,
   imports: [
     CommonModule,
@@ -106,7 +106,7 @@ import { ImageService } from '@shared/data-access/image.service';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileNewComponent {
+export class OwnProfileComponent {
   imageService = inject(ImageService);
   profileService = inject(ProfileOldService);
   router = inject(Router);
