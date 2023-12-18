@@ -7,9 +7,9 @@ export type Conversation = {
 
 export type ChatDto = {
   chatId: string;
-  dancerIds: DancerId[];
+  participantIds: DancerId[];
   lastActivity: string | null;
-  type: ChatType;
+  createdAt: string;
   lastMessage: ChatMessage | null;
 };
 
@@ -53,11 +53,10 @@ export type ChatsAndDancers = {
   dancerMap: DancerMapDto;
 };
 
-export type MessageResponse = {
-  messages: ChatMessage[];
-};
+export type MessageResponse = ChatMessage[];
 
-export type MessageResponseWithChatId = MessageResponse & {
+export type MessagesWithChatId = {
+  messages: ChatMessage[];
   chatId: string;
 };
 

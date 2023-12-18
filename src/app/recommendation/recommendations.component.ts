@@ -4,6 +4,7 @@ import { AlertComponent } from '@shared/ui/alert/alert.component';
 import { RecommendedDancerComponent } from './ui/recommended-dancer.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import { BehaviorSubject, filter, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-recommendations',
@@ -11,9 +12,7 @@ import { Router } from '@angular/router';
     <div>
       <h1 class="page-header">Diese Tänzer könnten für Sie interessant sein</h1>
 
-      <ng-container
-        *ngIf="recommendationsResponse$ | async as response; else loading"
-      >
+      <ng-container *ngIf="visibleDancers$ | async as response; else loading">
         <ng-container *ngIf="response.isSuccess; else error">
           <div class="recommended-dancers">
             <ng-container *ngFor="let recommendedDancer of response.payload">
@@ -25,7 +24,9 @@ import { Router } from '@angular/router';
           </div>
 
           <div class="load-more">
-            <button class="btn-lg btn-secondary">Weitere anzeigen</button>
+            <button class="btn-lg btn-secondary" (click)="showMoreDancers()">
+              Weitere anzeigen
+            </button>
           </div>
         </ng-container>
       </ng-container>
@@ -67,9 +68,32 @@ export class RecommendationsComponent {
   router = inject(Router);
   recommendationsResponse$ = this.recommendationsService.getRecommendations$();
 
+  maxDancers = new BehaviorSubject<number>(10);
+  visibleDancers$ = this.maxDancers.asObservable().pipe(
+    switchMap(() => this.recommendationsResponse$),
+    filter((response) => response.isSuccess),
+    map((response) => {
+      if (response.isSuccess) {
+        const numOfDancers = Math.min(
+          this.maxDancers.getValue(),
+          response.payload.length
+        );
+        return {
+          ...response,
+          payload: response.payload.slice(0, numOfDancers),
+        };
+      }
+      return response;
+    })
+  );
+
   constructor() {}
 
   openPublicProfile(dancerId: string): void {
     this.router.navigate(['profile', 'view', dancerId]);
+  }
+
+  showMoreDancers(): void {
+    this.maxDancers.next(this.maxDancers.getValue() + 10);
   }
 }

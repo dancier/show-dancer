@@ -11,8 +11,9 @@ import { OldAPIResponse } from '@shared/util/http/response.types';
 export class RecommendationService {
   constructor(private httpService: RecommendationHttpService) {}
 
-  getRecommendations$(): Observable<OldAPIResponse<RecommendedDancer[]>> {
-    return this.httpService.getRecommendations$().pipe(
+  private readonly recommendations$ = this.httpService
+    .getRecommendations$()
+    .pipe(
       map((response) => {
         if (response.isSuccess) {
           return {
@@ -24,6 +25,9 @@ export class RecommendationService {
       }),
       shareReplay(1)
     );
+
+  getRecommendations$(): Observable<OldAPIResponse<RecommendedDancer[]>> {
+    return this.recommendations$;
   }
 
   private mapDtoToRecommendedDancers(

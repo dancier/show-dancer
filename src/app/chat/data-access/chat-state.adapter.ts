@@ -4,7 +4,7 @@ import {
   ChatDto,
   CreateChatResponse,
   DancerMapDto,
-  MessageResponseWithChatId,
+  MessagesWithChatId,
 } from './chat.types';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -17,7 +17,9 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
       )
       .map((chatDto) => ({
         id: chatDto.chatId,
-        participants: chatDto.dancerIds.map((dancerId) => ({ id: dancerId })),
+        participants: chatDto.participantIds.map((dancerId) => ({
+          id: dancerId,
+        })),
         messages: [],
       }));
 
@@ -57,10 +59,7 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
     activeChatId: chatId,
   }),
 
-  chatMessagesFetched: (
-    state,
-    { messages, chatId }: MessageResponseWithChatId
-  ) => ({
+  chatMessagesFetched: (state, { messages, chatId }: MessagesWithChatId) => ({
     ...state,
     newMessageSent: false,
     chats: state.chats.map((chat) => {

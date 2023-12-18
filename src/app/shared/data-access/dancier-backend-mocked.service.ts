@@ -3,7 +3,7 @@ import { Server } from 'miragejs';
 import {
   CreateChatResponse,
   DancerMapDto,
-  MessageResponseWithChatId,
+  MessagesWithChatId,
 } from '../../chat/data-access/chat.types';
 
 const chats = [
@@ -50,7 +50,7 @@ const dancerMap: DancerMapDto = {
   },
 };
 
-const chatMessages: MessageResponseWithChatId = {
+const chatMessages: MessagesWithChatId = {
   chatId: 'chatId',
   messages: [
     {
