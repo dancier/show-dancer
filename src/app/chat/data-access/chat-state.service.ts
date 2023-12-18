@@ -10,6 +10,7 @@ import { chatStateAdapter } from './chat-state.adapter';
 import { TimerService } from '@shared/util/time/timer.service';
 import { startWith } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { AuthStorageService } from '@shared/data-access/auth/auth-storage.service';
 
 export type SingleChatState = {
   id: string;
@@ -27,13 +28,15 @@ export type ChatAdaptState = {
   newMessageSent: boolean;
 };
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ChatStateService {
   private readonly storePath = 'chat';
   private activatedRoute = inject(ActivatedRoute);
+  private authStorageService = inject(AuthStorageService);
 
+  private userLoggedOut$ = this.authStorageService.hasLoggedOut$.pipe(
+    toSource('[Chat] userLoggedOut')
+  );
   // either we have a chat open with that DancerId or we create a new one
   // TODO: logic can possibly be simplified when we do this only after the initial fetch
   openChatWith$ = this.activatedRoute.queryParams.pipe(
@@ -71,7 +74,7 @@ export class ChatStateService {
       const fetchChatsSources = getRequestSources(
         '[Chat] fetchChats',
         merge(
-          timerService.interval('chatFetchTrigger', 5000),
+          timerService.interval('chatFetchTrigger', 20000),
           store.chatCreated$.pipe(filter((hasCreated) => !!hasCreated))
         ).pipe(
           startWith(-1),
@@ -158,6 +161,7 @@ export class ChatStateService {
         chatCreatedError: createChatSource.error$,
         messageSent: sendMessageSource.success$,
         messageSentError: sendMessageSource.error$,
+        reset: this.userLoggedOut$,
       };
     }
   );
