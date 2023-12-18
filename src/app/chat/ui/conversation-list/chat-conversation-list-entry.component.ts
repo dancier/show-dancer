@@ -25,19 +25,22 @@ import { Profile } from '../../../profile/data-access/types/profile.types';
     <ng-container>
       <div
         *ngIf="conversation() && participant()"
-        class="flex cursor-pointer items-center gap-6 px-6 py-4 hover:bg-gray-100 active:bg-gray-100"
+        class="active:bg-gray-150 mx-2 my-0.5 flex cursor-pointer items-center gap-6 rounded border border-white px-4 py-3 hover:bg-gray-100"
         tabindex="0"
         data-testid="chat-list-entry"
-        [ngClass]="{ 'bg-gray-100': isSelected() }"
+        [ngClass]="{
+          'bg-gray-100': isSelected(),
+          'border-gray-300': isSelected()
+        }"
         (click)="chatState.selectChat$.next(conversation()!.id)"
       >
-        <div class="h-20 w-20 overflow-hidden rounded-full object-cover">
+        <div class="h-16 w-16 overflow-hidden rounded-full object-cover">
           <img
             class=""
             [src]="
               imageService.getDancerImageSrcOrDefault(
                 participant()!.profileImageHash,
-                80
+                64
               )
             "
             [attr.alt]="'Profile Image of' + participant()!.dancerName"

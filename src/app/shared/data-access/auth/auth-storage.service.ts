@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, distinct, filter } from 'rxjs';
 
 export type AuthData = {
   isLoggedIn: boolean;
@@ -18,6 +18,11 @@ export class AuthStorageService {
   );
 
   public readonly authData$ = this._authData$.asObservable();
+
+  public readonly hasLoggedOut$ = this.authData$.pipe(
+    distinct((authData) => authData.isLoggedIn),
+    filter((authData) => !authData.isLoggedIn)
+  );
 
   constructor() {}
 

@@ -10,7 +10,7 @@ import { NgClass, NgIf } from '@angular/common';
       class="rounded-3xl px-6 py-3 drop-shadow"
       [ngClass]="{
         'rounded-br-none bg-green-100': isOwnMessage,
-        'rounded-tl-none bg-white': !isOwnMessage
+        'rounded-bl-none bg-white': !isOwnMessage
       }"
     >
       {{ message.text }}

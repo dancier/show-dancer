@@ -22,7 +22,11 @@ type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
 @Component({
   selector: 'app-chat-message-composer',
   template: `
-    <form class="flex px-6 py-4" [formGroup]="form" (ngSubmit)="postMessage()">
+    <form
+      class="flex border-t bg-gray-50 px-6 py-4"
+      [formGroup]="form"
+      (ngSubmit)="postMessage()"
+    >
       <mat-form-field appearance="outline" class="w-full">
         <input
           matInput

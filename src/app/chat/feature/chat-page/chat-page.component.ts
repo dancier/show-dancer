@@ -8,11 +8,12 @@ import { ChatConversationListComponent } from '../../ui/conversation-list/chat-c
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ChatStateService } from '../../data-access/chat-state.service';
 import { ChatConversationHeaderComponent } from '../../ui/chat-conversation-header.component';
+import { interval, take } from 'rxjs';
 
 @Component({
   selector: 'app-chat-page',
   template: `<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
-    <div class="m-10">
+    <div class="mx-auto my-12 max-w-[1200px] px-4 md:px-10">
       <h1 class="page-header">Deine Chats</h1>
 
       <ng-container *ngIf="chatState.chatsFetchState() === 'loaded'">
@@ -21,7 +22,7 @@ import { ChatConversationHeaderComponent } from '../../ui/chat-conversation-head
         >
           <div class="flex h-[600px] border">
             <app-chat-conversation-list
-              class="min-w-[300px] overflow-y-auto max-md:flex-1 md:flex-none"
+              class="min-w-[300px] overflow-y-auto border-r border-gray-300 py-2 max-md:flex-1 md:flex-none"
               [class.max-md:hidden]="chatState.activeChatId() !== null"
             ></app-chat-conversation-list>
             <div
@@ -66,7 +67,12 @@ import { ChatConversationHeaderComponent } from '../../ui/chat-conversation-head
         </app-alert>
       </ng-container>
 
-      <ng-container *ngIf="chatState.chatsFetchState() === 'loading'">
+      <ng-container
+        *ngIf="
+          (delayLoading$ | async) === 0 &&
+          chatState.chatsFetchState() === 'loading'
+        "
+      >
         <div class="flex rounded border bg-gray-100">
           <div class="w-[300px] flex-col">
             <div *ngFor="let _ of [].constructor(4)" class="flex items-center">
@@ -84,7 +90,7 @@ import { ChatConversationHeaderComponent } from '../../ui/chat-conversation-head
       </ng-container>
     </div>`,
   styleUrls: ['./chat-page.component.scss'],
-  providers: [],
+  providers: [ChatStateService],
   changeDetection: ChangeDetectionStrategy.Default,
   standalone: true,
   imports: [
@@ -101,4 +107,5 @@ import { ChatConversationHeaderComponent } from '../../ui/chat-conversation-head
 })
 export class ChatPageComponent {
   chatState = inject(ChatStateService);
+  delayLoading$ = interval(100).pipe(take(1));
 }

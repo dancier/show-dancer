@@ -19,7 +19,7 @@ import { map } from 'rxjs';
   template: `
     <div
       *ngIf="ownUserId()"
-      class="flex h-[500px] flex-col-reverse overflow-auto p-10"
+      class="flex h-[500px] flex-col-reverse overflow-auto p-8"
     >
       <!--      Messages: {{ messagesIterative | json }}-->
       <div class="flex flex-col gap-8">
@@ -33,6 +33,13 @@ import { map } from 'rxjs';
             'self-end': message.authorId === ownUserId()
           }"
         ></app-chat-single-message>
+        <div
+          *ngIf="activeChatMessages().length === 0"
+          class="self-center rounded border border-gray-400 px-8 py-4 text-center text-gray-500"
+        >
+          <p>Noch gibt es hier nichts zu sehen</p>
+          <p class="mb-0">Schreibe jetzt deine erste Nachricht</p>
+        </div>
       </div>
     </div>
   `,
