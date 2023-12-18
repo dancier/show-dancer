@@ -16,7 +16,7 @@ import {
   DancerId,
   DancerMapDto,
   MessageResponse,
-  MessageResponseWithChatId,
+  MessagesWithChatId,
 } from './chat.types';
 import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 
@@ -62,12 +62,7 @@ export class ChatHttpService {
   }
 
   getChats$(): Observable<ChatDto[]> {
-    return (
-      this.http
-        // .get<ChatList>('/chats', this.defaultOptions)
-        .get<ChatList>(this.chatApiUrl, this.defaultOptions)
-        .pipe(map((chatList) => chatList.chats || []))
-    );
+    return this.http.get<ChatDto[]>(this.chatApiUrl, this.defaultOptions);
   }
 
   getDancers$(dancerIds: string[]): Observable<DancerMapDto> {
@@ -142,7 +137,7 @@ export class ChatHttpService {
   getMessages$(
     chatId: string,
     lastMessageId: string | null | undefined = null
-  ): Observable<MessageResponseWithChatId> {
+  ): Observable<MessagesWithChatId> {
     let params = {};
     if (lastMessageId !== null && lastMessageId !== undefined) {
       params = {
@@ -157,7 +152,7 @@ export class ChatHttpService {
       .pipe(
         map((messageResponse) => ({
           chatId,
-          ...messageResponse,
+          messages: messageResponse,
         }))
       );
   }
@@ -165,7 +160,7 @@ export class ChatHttpService {
   private getAllDancerIds(chats: ChatDto[]): DancerId[] {
     const dancerIds = new Map();
     chats
-      .flatMap((chat) => chat.dancerIds)
+      .flatMap((chat) => chat.participantIds)
       .forEach((dancerId) => {
         if (!dancerIds.has(dancerId)) {
           dancerIds.set(dancerId, true);
@@ -176,8 +171,7 @@ export class ChatHttpService {
 
   createChat$(participantId: string): Observable<CreateChatResponse> {
     const body = {
-      dancerIds: [this.profileService.getProfile()?.id, participantId],
-      type: 'DIRECT',
+      participantIds: [this.profileService.getProfile()?.id, participantId],
     };
 
     return this.http.post<CreateChatResponse>(
