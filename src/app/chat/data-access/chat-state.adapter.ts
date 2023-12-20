@@ -1,16 +1,12 @@
 import { ChatAdaptState } from './chat-state.service';
 import { createAdapter } from '@state-adapt/core';
-import {
-  ChatDto,
-  CreateChatResponse,
-  DancerMapDto,
-  MessagesWithChatId,
-} from './chat.types';
+import { ChatDto, DancerMapDto, MessagesWithChatId } from './chat.types';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export const chatStateAdapter = createAdapter<ChatAdaptState>()({
   chatsFetched: (state, chatsDto: ChatDto[]) => {
     const newChats = chatsDto
+      .reverse() // latest created chat first
       .filter(
         (chatDto) =>
           !state.chats.find((stateChat) => stateChat.id === chatDto.chatId)
@@ -87,10 +83,10 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
     openChatWithParticipantId: null,
   }),
 
-  chatCreated: (state, chat: CreateChatResponse) => ({
+  chatCreated: (state, chatId: string) => ({
     // select new chat
     ...state,
-    activeChatId: chat.chatId,
+    activeChatId: chatId,
     chatCreated: true,
   }),
 
@@ -120,6 +116,7 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
         .flat()
         .filter((participant) => participant.dancerName === undefined),
     activeChatId: (state) => state.activeChatId,
+    hasActiveChat: (state) => state.activeChatId !== null,
     messagesForActiveChat: (state) =>
       state.chats.find((chat) => chat.id === state.activeChatId)?.messages ??
       [],
