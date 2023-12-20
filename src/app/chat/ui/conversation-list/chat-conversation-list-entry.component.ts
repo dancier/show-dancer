@@ -34,7 +34,9 @@ import { Profile } from '../../../profile/data-access/types/profile.types';
         }"
         (click)="chatState.selectChat$.next(conversation()!.id)"
       >
-        <div class="h-16 w-16 overflow-hidden rounded-full object-cover">
+        <div
+          class="h-16 w-16 shrink-0 overflow-hidden rounded-full object-cover"
+        >
           <img
             class=""
             [src]="
@@ -48,8 +50,10 @@ import { Profile } from '../../../profile/data-access/types/profile.types';
           />
         </div>
         <div class="flex flex-col gap-0">
-          <div class="text-2xl">{{ participant()!.dancerName }}</div>
-          <div class="text-lg text-gray-600">
+          <div class="truncate text-2xl">
+            {{ participant()!.dancerName }}
+          </div>
+          <div class="truncate text-lg text-gray-600">
             {{ participant()!.city }}
           </div>
         </div>

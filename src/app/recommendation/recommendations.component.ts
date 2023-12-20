@@ -86,9 +86,9 @@ import { BehaviorSubject, filter, map, switchMap } from 'rxjs';
       <ng-template #error>
         <h1 class="page-header">Fehler bei der Abfrage der Empfehlungen</h1>
         <app-alert alertType="error" icon="error">
-          <p>
+          <span>
             Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.
-          </p>
+          </span>
         </app-alert>
       </ng-template>
     </div>

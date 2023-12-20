@@ -17,9 +17,10 @@ import { map } from 'rxjs';
 @Component({
   selector: 'app-chat-messages',
   template: `
+    <!--    <div class="relative">-->
     <div
       *ngIf="ownUserId()"
-      class="flex h-[500px] flex-col-reverse overflow-auto p-8"
+      class="flex h-[452px] flex-col-reverse overflow-auto p-8"
     >
       <div class="flex flex-col gap-8">
         <app-chat-single-message
@@ -41,6 +42,7 @@ import { map } from 'rxjs';
         </div>
       </div>
     </div>
+    <!--    </div>-->
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,

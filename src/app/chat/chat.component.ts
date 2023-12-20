@@ -27,7 +27,7 @@ import { interval, take } from 'rxjs';
         >
           <div class="flex h-[600px] border">
             <app-chat-conversation-list
-              class="min-w-[300px] overflow-y-auto border-r border-gray-300 py-2 max-md:flex-1 md:flex-none"
+              class="min-w-[300px] overflow-y-auto overflow-x-hidden border-r border-gray-300 py-2 max-md:flex-1 md:w-[300px] md:flex-none"
               [class.max-md:hidden]="chatState.activeChatId() !== null"
             ></app-chat-conversation-list>
             <div
@@ -73,9 +73,9 @@ import { interval, take } from 'rxjs';
 
       <ng-container *ngIf="chatState.chatsFetchState() === 'error'">
         <app-alert alertType="error" icon="error">
-          <p>
+          <span>
             Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.
-          </p>
+          </span>
         </app-alert>
       </ng-container>
 
