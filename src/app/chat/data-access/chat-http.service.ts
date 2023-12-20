@@ -11,7 +11,6 @@ import {
   ChatDto,
   ChatList,
   ChatsAndDancers,
-  CreateChatResponse,
   CreateMessageRequest,
   DancerId,
   DancerMapDto,
@@ -169,16 +168,15 @@ export class ChatHttpService {
     return Array.from(dancerIds.keys());
   }
 
-  createChat$(participantId: string): Observable<CreateChatResponse> {
+  /** returns the chat id */
+  createChat$(participantId: string): Observable<string> {
     const body = {
       participantIds: [this.profileService.getProfile()?.id, participantId],
     };
 
-    return this.http.post<CreateChatResponse>(
-      `${this.chatApiUrl}`,
-      body,
-      this.defaultOptions
-    );
+    return this.http
+      .post<{ id: string }>(`${this.chatApiUrl}`, body)
+      .pipe(map((res) => res.id));
   }
 
   sendMessage$(chatId: string, message: string): Observable<void> {

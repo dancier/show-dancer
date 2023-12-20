@@ -1,10 +1,3 @@
-import { Profile } from '../../profile/data-access/types/profile.types';
-
-export type Conversation = {
-  chatId: string;
-  participants: ChatParticipant[];
-};
-
 export type ChatDto = {
   chatId: string;
   participantIds: DancerId[];
@@ -20,8 +13,6 @@ export type ChatMessage = {
   readByDancers: DancerId[];
   createdAt: string;
 };
-
-export type ChatType = 'GROUP' | 'DIRECT';
 
 export type ChatList = {
   chats: ChatDto[];
@@ -62,12 +53,6 @@ export type MessagesWithChatId = {
 
 export type CreateMessageRequest = {
   text: string;
-};
-
-export type ChatData = {
-  chats: ChatDto[];
-  dancers: DancerMapDto;
-  profile: Profile;
 };
 
 export type CreateChatResponse = {

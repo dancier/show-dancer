@@ -34,7 +34,9 @@ import { Profile } from '../../../profile/data-access/types/profile.types';
         }"
         (click)="chatState.selectChat$.next(conversation()!.id)"
       >
-        <div class="h-16 w-16 overflow-hidden rounded-full object-cover">
+        <div
+          class="h-16 w-16 shrink-0 overflow-hidden rounded-full object-cover"
+        >
           <img
             class=""
             [src]="
@@ -47,9 +49,11 @@ import { Profile } from '../../../profile/data-access/types/profile.types';
             (error)="handleMissingImage($event)"
           />
         </div>
-        <div class="flex flex-col gap-1">
-          <div class="text-2xl">{{ participant()!.dancerName }}</div>
-          <div class="text-lg text-gray-600">
+        <div class="flex flex-col gap-0">
+          <div class="truncate text-2xl">
+            {{ participant()!.dancerName }}
+          </div>
+          <div class="truncate text-lg text-gray-600">
             {{ participant()!.city }}
           </div>
         </div>
@@ -99,54 +103,4 @@ export class ChatConversationListEntryComponent {
     ($event.target as HTMLImageElement).src =
       this.imageService.getDefaultDancerImage();
   }
-
-  // constructor() {
-  //   effect(() => {
-  //     console.log(this.participant());
-  //   });
-  // }
-
-  // isSelected$?: Observable<boolean>;
-  //
-  // @Input()
-  // conversation?: Conversation;
-  //
-  // participant?: ChatParticipant;
-  //
-  // ownProfileId?: string;
-  //
-  // constructor(
-  //   public imageService: ImageService,
-  //   public chatStore: ChatStore,
-  //   public profileService: OwnProfileService,
-  //   public router: Router
-  // ) {
-  //   this.profileService.profile$.subscribe((profile) => {
-  //     this.ownProfileId = profile.id;
-  //   });
-  // }
-  //
-  // ngOnInit(): void {
-  //   if (!this.conversation) {
-  //     return;
-  //   }
-  //   this.participant = this.conversation.participants.find(
-  //     (participant) => participant.id !== this.ownProfileId
-  //   );
-  //   this.isSelected$ = this.chatStore.selectedConversationId$.pipe(
-  //     map((conversationId) => {
-  //       return conversationId === this.conversation?.chatId;
-  //     })
-  //   );
-  // }
-  //
-  // selectConversation(): void {
-  //   if (!this.conversation) {
-  //     return;
-  //   }
-  //   this.chatStore.selectConversation(this.conversation.chatId);
-  //   this.router.navigate(['/chat', this.participant?.id], {
-  //     replaceUrl: true,
-  //   });
-  // }
 }

@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MountConfig } from 'cypress/angular';
 import { CommonModule } from '@angular/common';
 import { chats, profilePictures } from '@cypress-support/mock-backend';
-import { ChatPageComponent } from './feature/chat-page/chat-page.component';
+import { ChatComponent } from './chat.component';
 
 // const timerMock = new TimerMockService();
 
@@ -20,7 +20,7 @@ import { ChatPageComponent } from './feature/chat-page/chat-page.component';
 //   ],
 // };
 
-const defaultMountConfig: MountConfig<ChatPageComponent> = {
+const defaultMountConfig: MountConfig<ChatComponent> = {
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -28,11 +28,11 @@ const defaultMountConfig: MountConfig<ChatPageComponent> = {
     RouterTestingModule.withRoutes([
       {
         path: 'chat',
-        component: ChatPageComponent,
+        component: ChatComponent,
       },
       {
         path: 'chat/:participantId',
-        component: ChatPageComponent,
+        component: ChatComponent,
       },
     ]),
   ],
@@ -265,7 +265,7 @@ describe('The chat page', () => {
       ])
     );
 
-    cy.mount(ChatPageComponent, defaultMountConfig);
+    cy.mount(ChatComponent, defaultMountConfig);
     cy.contains('Adam Ant').click();
     cy.contains('Hello, how are you?').should('be.visible');
     cy.contains('I am fine, thanks.').should('be.visible');

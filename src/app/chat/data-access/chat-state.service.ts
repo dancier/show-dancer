@@ -187,6 +187,9 @@ export class ChatStateService {
   activeChatParticipants = toSignal(this.chatStore.activeChatParticipants$, {
     requireSync: true,
   });
+  hasActiveChat = toSignal(this.chatStore.hasActiveChat$, {
+    requireSync: true,
+  });
 
   constructor() {}
 }

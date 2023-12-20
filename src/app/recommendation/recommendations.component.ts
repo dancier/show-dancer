@@ -10,28 +10,61 @@ import { BehaviorSubject, filter, map, switchMap } from 'rxjs';
   selector: 'app-recommendations',
   template: `
     <div>
-      <h1 class="page-header">Diese Tänzer könnten für Sie interessant sein</h1>
-
       <ng-container *ngIf="visibleDancers$ | async as response; else loading">
         <ng-container *ngIf="response.isSuccess; else error">
-          <div class="recommended-dancers">
-            <ng-container *ngFor="let recommendedDancer of response.payload">
-              <app-recommended-dancer
-                [dancer]="recommendedDancer"
-                (click)="openPublicProfile(recommendedDancer.id)"
-              ></app-recommended-dancer>
-            </ng-container>
-          </div>
+          <ng-container *ngIf="response.payload.length > 0; else noDancers">
+            <h1 class="page-header">
+              Diese Tänzer könnten für Sie interessant sein
+            </h1>
+            <div class="recommended-dancers">
+              <ng-container *ngFor="let recommendedDancer of response.payload">
+                <app-recommended-dancer
+                  [dancer]="recommendedDancer"
+                  (click)="openPublicProfile(recommendedDancer.id)"
+                ></app-recommended-dancer>
+              </ng-container>
+            </div>
 
-          <div class="load-more">
-            <button class="btn-lg btn-secondary" (click)="showMoreDancers()">
-              Weitere anzeigen
-            </button>
-          </div>
+            <div
+              *ngIf="
+                ((actualAmountOfDancers$ | async) || 0) >
+                response.payload.length
+              "
+              class="load-more"
+            >
+              <button class="btn-lg btn-secondary" (click)="showMoreDancers()">
+                Weitere anzeigen
+              </button>
+            </div>
+          </ng-container>
         </ng-container>
       </ng-container>
 
+      <ng-template #noDancers>
+        <div class="mx-auto max-w-[550px] px-4 text-center md:px-10">
+          <h1 class="page-header mb-16 ">Keine Empfehlungen verfügbar</h1>
+          <div class="mb-12">
+            <img src="assets/img/no-recommendations.svg" />
+          </div>
+          <p class="mb-6 text-2xl">
+            Leider haben wir noch keine Tanzpartner, die wir dir hier empfehlen
+            können.
+          </p>
+          <p>
+            Sobald wir neue Empfehlungen für dich haben, wirst du von uns
+            <b>per Mail benachrichtigt.</b>
+          </p>
+          <p>
+            Neue Empfehlungen werden regelmäßig aktualisiert, z.B. wenn sich
+            neue Tanzpartner aus deiner Umgebung bei uns registrieren.
+          </p>
+        </div>
+      </ng-template>
+
       <ng-template #loading>
+        <h1 class="page-header">
+          Diese Tänzer könnten für Sie interessant sein
+        </h1>
         <div class="recommended-dancers">
           <div class="rounded border bg-gray-100">
             <div class="h-80 animate-pulse rounded-t bg-gray-400"></div>
@@ -51,10 +84,11 @@ import { BehaviorSubject, filter, map, switchMap } from 'rxjs';
       </ng-template>
 
       <ng-template #error>
+        <h1 class="page-header">Fehler bei der Abfrage der Empfehlungen</h1>
         <app-alert alertType="error" icon="error">
-          <p>
+          <span>
             Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.
-          </p>
+          </span>
         </app-alert>
       </ng-template>
     </div>
@@ -67,6 +101,14 @@ export class RecommendationsComponent {
   recommendationsService = inject(RecommendationService);
   router = inject(Router);
   recommendationsResponse$ = this.recommendationsService.getRecommendations$();
+  actualAmountOfDancers$ = this.recommendationsResponse$.pipe(
+    map((response) => {
+      if (response.isSuccess) {
+        return response.payload.length;
+      }
+      return 0;
+    })
+  );
 
   maxDancers = new BehaviorSubject<number>(10);
   visibleDancers$ = this.maxDancers.asObservable().pipe(

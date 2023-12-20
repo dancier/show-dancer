@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { ChatPageComponent } from './feature/chat-page/chat-page.component';
+import { ChatComponent } from './chat.component';
 
 export const CHAT_ROUTES: Routes = [
   {
     path: ':participantId',
-    component: ChatPageComponent,
+    component: ChatComponent,
   },
   {
     path: '',
-    component: ChatPageComponent,
+    component: ChatComponent,
   },
 ];

@@ -1,13 +1,18 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Signal,
+} from '@angular/core';
 
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from '@shared/ui/alert/alert.component';
-import { ChatMessageComposerComponent } from '../../ui/message-composer/chat-message-composer.component';
-import { ChatMessagesComponent } from '../../ui/chat-messages/chat-messages.component';
-import { ChatConversationListComponent } from '../../ui/conversation-list/chat-conversation-list.component';
+import { ChatMessageComposerComponent } from './ui/message-composer/chat-message-composer.component';
+import { ChatMessagesComponent } from './ui/chat-messages/chat-messages.component';
+import { ChatConversationListComponent } from './ui/conversation-list/chat-conversation-list.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { ChatStateService } from '../../data-access/chat-state.service';
-import { ChatConversationHeaderComponent } from '../../ui/chat-conversation-header.component';
+import { ChatStateService } from './data-access/chat-state.service';
+import { ChatConversationHeaderComponent } from './ui/chat-conversation-header.component';
 import { interval, take } from 'rxjs';
 
 @Component({
@@ -22,20 +27,27 @@ import { interval, take } from 'rxjs';
         >
           <div class="flex h-[600px] border">
             <app-chat-conversation-list
-              class="min-w-[300px] overflow-y-auto border-r border-gray-300 py-2 max-md:flex-1 md:flex-none"
+              class="min-w-[300px] overflow-y-auto overflow-x-hidden border-r border-gray-300 py-2 max-md:flex-1 md:w-[300px] md:flex-none"
               [class.max-md:hidden]="chatState.activeChatId() !== null"
             ></app-chat-conversation-list>
             <div
               class="flex w-full flex-col bg-gray-100"
               [class.max-md:hidden]="chatState.activeChatId() === null"
             >
-              <!--              TODO: für mobile oben einen header ins element legen -->
-              <!--              TODO: allgemein das ding mit dem chat state nutzbar machen  -->
               <app-chat-conversation-header></app-chat-conversation-header>
-              <app-chat-messages class="grow"></app-chat-messages>
-              <app-chat-message-composer
-                class="flex-none"
-              ></app-chat-message-composer>
+              <ng-container *ngIf="hasActiveChat(); else noActiveChat">
+                <app-chat-messages class="grow"></app-chat-messages>
+                <app-chat-message-composer
+                  class="flex-none"
+                ></app-chat-message-composer>
+              </ng-container>
+              <ng-template #noActiveChat>
+                <div class="flex h-full flex-col items-center justify-center">
+                  <p class="font-lg text-gray-500">
+                    Wähle einen Chat aus der Liste aus.
+                  </p>
+                </div>
+              </ng-template>
             </div>
           </div>
         </ng-container>
@@ -61,9 +73,9 @@ import { interval, take } from 'rxjs';
 
       <ng-container *ngIf="chatState.chatsFetchState() === 'error'">
         <app-alert alertType="error" icon="error">
-          <p>
+          <span>
             Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.
-          </p>
+          </span>
         </app-alert>
       </ng-container>
 
@@ -89,7 +101,7 @@ import { interval, take } from 'rxjs';
         </div>
       </ng-container>
     </div>`,
-  styleUrls: ['./chat-page.component.scss'],
+  styleUrls: ['./chat.component.scss'],
   providers: [ChatStateService],
   changeDetection: ChangeDetectionStrategy.Default,
   standalone: true,
@@ -105,7 +117,8 @@ import { interval, take } from 'rxjs';
     ChatConversationHeaderComponent,
   ],
 })
-export class ChatPageComponent {
+export class ChatComponent {
   chatState = inject(ChatStateService);
   delayLoading$ = interval(100).pipe(take(1));
+  hasActiveChat: Signal<boolean> = this.chatState.hasActiveChat;
 }

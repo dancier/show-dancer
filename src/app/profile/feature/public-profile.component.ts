@@ -134,10 +134,10 @@ import { AlertComponent } from '@shared/ui/alert/alert.component';
 
         <ng-container *ngIf="profileResponse.fetchStatus === 'error'">
           <app-alert alertType="error" icon="error" class="mx-auto">
-            <p>
+            <span>
               Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später
               erneut.
-            </p>
+            </span>
           </app-alert>
         </ng-container>
       </div>
