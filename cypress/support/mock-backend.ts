@@ -20,15 +20,13 @@ export function chats(
 ): MockBackendFunction {
   return () => {
     cy.intercept('GET', '/chats', {
-      body: {
-        chats: conversations.map((conversation, _) => ({
-          chatId: conversation.partner,
-          dancerIds: [conversation.partner, 'ownId'],
-          lastActivity: null,
-          type: 'DIRECT',
-          lastMessage: null,
-        })),
-      },
+      body: conversations.map((conversation, _) => ({
+        chatId: conversation.partner,
+        dancerIds: [conversation.partner, 'ownId'],
+        lastActivity: null,
+        type: 'DIRECT',
+        lastMessage: null,
+      })),
     }).as('getChats');
 
     cy.intercept('GET', 'chats/**/messages', (req) => {

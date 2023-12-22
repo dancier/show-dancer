@@ -5,7 +5,7 @@ import {
   inject,
 } from '@angular/core';
 import { MobileMenuComponent } from '../ui/mobile-menu/mobile-menu.component';
-import { NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { ProfileMenuButtonComponent } from '../ui/profile-menu-button.component';
 import { MobileMenuButtonComponent } from '../ui/mobile-menu/mobile-menu-button.component';
 import { DesktopMenuBarComponent } from '../ui/desktop-menu-bar.component';
@@ -35,6 +35,7 @@ export type MenuItem = {
     MobileMenuComponent,
     ProfileMenuComponent,
     ClickOutsideDirective,
+    AsyncPipe,
   ],
 })
 export class LoggedInNavigationComponent {

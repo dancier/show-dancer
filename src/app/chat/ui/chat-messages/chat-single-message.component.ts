@@ -7,13 +7,31 @@ import { NgClass, NgIf } from '@angular/common';
   template: `
     <div
       *ngIf="message"
-      class="rounded-3xl px-6 py-3 drop-shadow"
+      class="relative rounded-3xl px-6 py-3 drop-shadow"
       [ngClass]="{
-        'rounded-br-none bg-green-100': isOwnMessage,
+        'rounded-br-none bg-green-50': isOwnMessage,
         'rounded-bl-none bg-white': !isOwnMessage
       }"
     >
-      {{ message.text }}
+      <div>{{ message.text }}</div>
+      <div
+        class="absolute bottom-0.5"
+        [ngClass]="{
+          'fill-green-500': isRead,
+          'fill-gray-500': !isRead,
+          'left-1.5': !isOwnMessage,
+          'right-1.5': isOwnMessage
+        }"
+      >
+        <svg class="h-4 w-4">
+          <use
+            [attr.href]="
+              'assets/icons/bootstrap-icons.svg#' +
+              (isRead ? 'check2-all' : 'check2')
+            "
+          />
+        </svg>
+      </div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,9 +39,12 @@ import { NgClass, NgIf } from '@angular/common';
   imports: [NgIf, NgClass],
 })
 export class ChatSingleMessageComponent {
-  @Input()
-  message?: ChatMessage;
+  @Input({ required: true })
+  message!: ChatMessage;
 
-  @Input()
+  @Input({ required: true })
   isOwnMessage = false;
+
+  @Input({ required: true })
+  isRead = false;
 }

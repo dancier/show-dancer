@@ -1,21 +1,31 @@
 import { inject, Injectable, Signal } from '@angular/core';
 import { adapt } from '@state-adapt/angular';
-import { ChatHttpService } from './chat-http.service';
+import { ChatHttpService } from '@shared/data-access/chat/chat-http.service';
 import { getRequestSources, Source, toSource } from '@state-adapt/rxjs';
 import { ChatMessage, ChatParticipant } from './chat.types';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { distinct, filter, map, merge, switchMap, withLatestFrom } from 'rxjs';
+import {
+  distinct,
+  filter,
+  map,
+  merge,
+  of,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { chatStateAdapter } from './chat-state.adapter';
 import { TimerService } from '@shared/util/time/timer.service';
 import { startWith } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { AuthStorageService } from '@shared/data-access/auth/auth-storage.service';
+import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 
 export type SingleChatState = {
   id: string;
   participants: ChatParticipant[];
   messages: ChatMessage[];
+  lastMessage: ChatMessage | null;
 };
 
 export type ChatAdaptState = {
@@ -33,6 +43,7 @@ export class ChatStateService {
   private readonly storePath = 'chat';
   private activatedRoute = inject(ActivatedRoute);
   private authStorageService = inject(AuthStorageService);
+  private profileService = inject(OwnProfileService);
 
   private userLoggedOut$ = this.authStorageService.hasLoggedOut$.pipe(
     toSource('[Chat] userLoggedOut')
@@ -74,7 +85,7 @@ export class ChatStateService {
       const fetchChatsSources = getRequestSources(
         '[Chat] fetchChats',
         merge(
-          timerService.interval('chatFetchTrigger', 20000),
+          timerService.interval('chatFetchTrigger', 10000),
           store.chatCreated$.pipe(filter((hasCreated) => !!hasCreated))
         ).pipe(
           startWith(-1),
@@ -99,8 +110,7 @@ export class ChatStateService {
         '[Chat] fetchMessages',
         merge(
           timerService.interval('chatMessagesFetchTrigger', 5000),
-          store.activeChatId$.pipe(distinct()),
-          store.newMessageSent$.pipe(filter((hasSent) => !!hasSent))
+          store.activeChatId$.pipe(distinct())
         ).pipe(
           switchMap(() => store.activeChatId$),
           filter((chatId) => chatId !== null),
@@ -147,6 +157,34 @@ export class ChatStateService {
         )
       );
 
+      const setMessagesAsReadSource = store.activeChatId$.pipe(
+        filter((chatId) => chatId !== null),
+        filter(() => this.profileService.getProfile()?.id !== undefined),
+        distinct(),
+        switchMap((chatId) =>
+          store.chats$.pipe(
+            map((chats) => chats.find((chat) => chat.id === chatId)),
+            filter((chat) => chat !== undefined),
+            map((chat) => ({
+              chatId: chat!.id,
+              unreadMessages: chat!.messages.filter(
+                (message) =>
+                  !message.readByParticipants?.includes(
+                    this.profileService.getProfile()!.id!
+                  )
+              ),
+            }))
+          )
+        ),
+        switchMap(({ chatId, unreadMessages }) => {
+          for (const message of unreadMessages) {
+            chatHttpService.setMessageAsRead(message.id).subscribe();
+          }
+          return of(chatId);
+        }),
+        toSource('[Chat] setMessagesAsRead')
+      );
+
       return {
         chatsFetched: fetchChatsSources.success$,
         chatsFetchedError: fetchChatsSources.error$,
@@ -161,6 +199,7 @@ export class ChatStateService {
         chatCreatedError: createChatSource.error$,
         messageSent: sendMessageSource.success$,
         messageSentError: sendMessageSource.error$,
+        setMessagesAsRead: setMessagesAsReadSource,
         reset: this.userLoggedOut$,
       };
     }

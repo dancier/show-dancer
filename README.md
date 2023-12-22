@@ -13,11 +13,9 @@ This repository houses the Angular frontend for the [dancier.net](https://dancie
 
 ### Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run start` for a dev server. Navigate to `https://localhost:4200/` (you may need to accept unsafe SSL connections in your browser if asked). The app will automatically reload if you change any of the source files.
 
-The local dev server is configured to use the proxy configuration found in proxy.conf.json.
-The URL for the local backend is defined here.
-With this configuration, [CORS problems during local development can be avoided](https://levelup.gitconnected.com/fixing-cors-errors-with-angular-cli-proxy-e5e0ef143f85).
+With this configuration, you are working against the backend running on our backend server at https://test-dancer.dancier.net, which is why the dev server must also be started serving SSL content (otherwise your browser will not send requests to our backend).
 
 ### Build
 

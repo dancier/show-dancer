@@ -16,8 +16,6 @@ import { ChatParticipant } from '../../data-access/chat.types';
 import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { startWith } from 'rxjs/operators';
-import { Profile } from '../../../profile/data-access/types/profile.types';
 
 @Component({
   selector: 'app-chat-conversation-list-entry',
@@ -30,7 +28,7 @@ import { Profile } from '../../../profile/data-access/types/profile.types';
         data-testid="chat-list-entry"
         [ngClass]="{
           'bg-gray-100': isSelected(),
-          'border-gray-300': isSelected()
+          'border-gray-300': isSelected(),
         }"
         (click)="chatState.selectChat$.next(conversation()!.id)"
       >
@@ -49,7 +47,10 @@ import { Profile } from '../../../profile/data-access/types/profile.types';
             (error)="handleMissingImage($event)"
           />
         </div>
-        <div class="flex flex-col gap-0">
+        <div
+          class="flex grow flex-col gap-0"
+          [ngClass]="{ 'font-bold': hasUnreadMessages() }"
+        >
           <div class="truncate text-2xl">
             {{ participant()!.dancerName }}
           </div>
@@ -57,6 +58,10 @@ import { Profile } from '../../../profile/data-access/types/profile.types';
             {{ participant()!.city }}
           </div>
         </div>
+        <div
+          *ngIf="hasUnreadMessages()"
+          class="h-2 w-2 grow-0 rounded-full bg-teal-500 fill-teal-500"
+        ></div>
       </div>
     </ng-container>
   `,
@@ -69,12 +74,7 @@ import { Profile } from '../../../profile/data-access/types/profile.types';
 export class ChatConversationListEntryComponent {
   chatState = inject(ChatStateService);
   ownProfileId: Signal<string | undefined> = toSignal(
-    inject(OwnProfileService).profile$.pipe(
-      startWith({
-        id: 'dancerId1',
-      } as Profile),
-      map((profile) => profile.id)
-    )
+    inject(OwnProfileService).profile$.pipe(map((profile) => profile.id))
   );
   imageService = inject(ImageService);
 
@@ -97,6 +97,15 @@ export class ChatConversationListEntryComponent {
           (participant) => participant.id !== this.ownProfileId()
         )
       : undefined;
+  });
+
+  hasUnreadMessages: Signal<boolean> = computed(() => {
+    if (!this.conversation()?.lastMessage || !this.ownProfileId()) {
+      return false;
+    }
+    return !this.conversation()!.lastMessage!.readByParticipants?.includes(
+      this.ownProfileId()!
+    );
   });
 
   handleMissingImage($event: ErrorEvent): void {
