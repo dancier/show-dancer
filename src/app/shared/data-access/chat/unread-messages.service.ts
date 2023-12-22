@@ -24,7 +24,6 @@ export class UnreadMessagesService {
     .pipe(
       filter(() => !this.location.path().includes('chat')),
       filter(() => this.profileService.getProfile()?.id !== null),
-      tap((v) => console.log('not in chat', v)),
       switchMap(() => {
         return toApiResponse(this.chatHttp.getChats$());
       }),
@@ -44,9 +43,6 @@ export class UnreadMessagesService {
       }),
       startWith(0),
       shareReplay(1),
-      tap((v) =>
-        console.log('unreadChatsCount', v, this.profileService.getProfile()?.id)
-      )
     );
 
   public unreadChatsCount: Signal<number> = toSignal(this.unreadChatsCount$, {
