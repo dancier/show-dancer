@@ -1,7 +1,7 @@
 import { inject, Injectable, Signal } from '@angular/core';
 import { ChatHttpService } from './chat-http.service';
 import { TimerService } from '../../util/time/timer.service';
-import { filter, NEVER, of, shareReplay, tap } from 'rxjs';
+import { filter, NEVER, of, shareReplay } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
