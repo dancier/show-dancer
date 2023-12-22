@@ -25,7 +25,7 @@ import { interval, take } from 'rxjs';
         <ng-container
           *ngIf="chatState.chats().length > 0; else noConversations"
         >
-          <div class="flex h-[600px] border">
+          <div class="flex h-[610px] border">
             <app-chat-conversation-list
               class="min-w-[300px] overflow-y-auto overflow-x-hidden border-r border-gray-300 py-2 max-md:flex-1 md:w-[300px] md:flex-none"
               [class.max-md:hidden]="chatState.activeChatId() !== null"

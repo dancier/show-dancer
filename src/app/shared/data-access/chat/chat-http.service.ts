@@ -1,12 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
-import { EnvironmentService } from '@shared/data-access/environment.service';
+import { EnvironmentService } from '../environment.service';
 import {
   asError,
   asSuccess,
   OldAPIResponse,
-} from '@shared/util/http/response.types';
+} from '../../util/http/response.types';
 import {
   ChatDto,
   ChatList,
@@ -16,8 +16,8 @@ import {
   DancerMapDto,
   MessageResponse,
   MessagesWithChatId,
-} from './chat.types';
-import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
+} from '../../../chat/data-access/chat.types';
+import { OwnProfileService } from '../profile/own-profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +28,7 @@ export class ChatHttpService {
   };
   private readonly chatApiUrl: string;
   private readonly dancerApiUrl: string;
+  private readonly messagesApiUrl: string;
 
   private profileService = inject(OwnProfileService);
 
@@ -37,6 +38,7 @@ export class ChatHttpService {
   ) {
     this.chatApiUrl = `${this.environment.getApiUrl()}/chats`;
     this.dancerApiUrl = `${this.environment.getApiUrl()}/dancers`;
+    this.messagesApiUrl = `${this.environment.getApiUrl()}/messages`;
   }
 
   createMessage$(
@@ -185,5 +187,11 @@ export class ChatHttpService {
       { text: message },
       this.defaultOptions
     );
+  }
+
+  setMessageAsRead(messageId: string): Observable<void> {
+    return this.http.put<void>(`${this.messagesApiUrl}/${messageId}`, {
+      read: true,
+    });
   }
 }

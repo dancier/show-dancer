@@ -10,7 +10,7 @@ export type ChatMessage = {
   text: string;
   authorId: DancerId;
   id: string;
-  readByDancers: DancerId[];
+  readByParticipants: DancerId[] | null;
   createdAt: string;
 };
 

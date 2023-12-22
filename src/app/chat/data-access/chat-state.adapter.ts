@@ -1,29 +1,48 @@
-import { ChatAdaptState } from './chat-state.service';
+import { ChatAdaptState, SingleChatState } from './chat-state.service';
 import { createAdapter } from '@state-adapt/core';
-import { ChatDto, DancerMapDto, MessagesWithChatId } from './chat.types';
+import {
+  ChatDto,
+  ChatMessage,
+  DancerMapDto,
+  MessagesWithChatId,
+} from './chat.types';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export const chatStateAdapter = createAdapter<ChatAdaptState>()({
   chatsFetched: (state, chatsDto: ChatDto[]) => {
-    const newChats = chatsDto
+    const chatsFromDto = chatsDto
       .reverse() // latest created chat first
-      .filter(
-        (chatDto) =>
-          !state.chats.find((stateChat) => stateChat.id === chatDto.chatId)
-      )
+      // .filter(
+      //   (chatDto) =>
+      //     !state.chats.find((stateChat) => stateChat.id === chatDto.chatId)
+      // )
       .map((chatDto) => ({
         id: chatDto.chatId,
         participants: chatDto.participantIds.map((dancerId) => ({
           id: dancerId,
         })),
         messages: [],
+        lastMessage: chatDto.lastMessage,
       }));
 
     return {
       ...state,
       chatsFetchState: 'loaded',
       chatCreated: false,
-      chats: [...state.chats, ...newChats],
+      chats: [
+        ...state.chats.map((chat) => {
+          const newChat = chatsFromDto.find(
+            (newChat) => newChat.id === chat.id
+          );
+          if (!newChat) {
+            return chat;
+          }
+          return updateChat(chat, newChat);
+        }),
+        ...chatsFromDto.filter(
+          (newChat) => !state.chats.find((chat) => chat.id === newChat.id)
+        ),
+      ],
     };
   },
 
@@ -64,7 +83,11 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
       return {
         ...chat,
         messages: [
-          ...chat.messages,
+          ...chat.messages.map((message) => {
+            const updatedMessage = messages.find((m) => m.id === message.id);
+            if (!updatedMessage) return message;
+            return updateMessage(message, updatedMessage);
+          }),
           ...messages.filter(
             (message) => !chat.messages.find((m) => m.id === message.id)
           ),
@@ -105,6 +128,10 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
     ...state,
   }),
 
+  setMessagesAsRead: (state, _chatId: string) => ({
+    ...state,
+  }),
+
   selectors: {
     chats: (state) => state.chats,
     chatsFetchState: (state) => state.chatsFetchState,
@@ -131,3 +158,46 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
     newMessageSent: (state) => state.newMessageSent,
   },
 });
+
+function updateMessage(
+  oldMessage: ChatMessage,
+  newMessage: ChatMessage
+): ChatMessage {
+  // for each property in newMessage, update oldMessage, only if they are different
+  Object.keys(newMessage).forEach((key: string) => {
+    const keyOfMessage = key as keyof ChatMessage;
+    if (newMessage[keyOfMessage] !== oldMessage[keyOfMessage]) {
+      const newValue = newMessage[keyOfMessage];
+      oldMessage[keyOfMessage] = newValue as any;
+    }
+  });
+  return oldMessage;
+}
+
+function updateChat(
+  oldChat: SingleChatState,
+  newChat: SingleChatState
+): SingleChatState {
+  // for each property in newChat, update oldChat, only if they are different
+  if (
+    JSON.stringify(oldChat.lastMessage) === JSON.stringify(newChat.lastMessage)
+  ) {
+    oldChat.lastMessage = newChat.lastMessage;
+  }
+  return oldChat;
+
+  // Object.keys(newChat).forEach((key: string) => {
+  //   const keyOfChat = key as keyof SingleChatState;
+  //   if (keyOfChat !== 'messages' && newChat[keyOfChat] !== oldChat[keyOfChat]) {
+  //     console.log(
+  //       'updating',
+  //       keyOfChat,
+  //       newChat[keyOfChat],
+  //       oldChat[keyOfChat]
+  //     );
+  //     const newValue = newChat[keyOfChat];
+  //     oldChat[keyOfChat] = newValue as any;
+  //   }
+  // });
+  return oldChat;
+}

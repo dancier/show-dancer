@@ -28,6 +28,7 @@ import { map } from 'rxjs';
           class="max-w-[80%]"
           [message]="message"
           [isOwnMessage]="message.authorId === ownUserId()"
+          [isRead]="message.readByParticipants?.includes(ownUserId()!) || false"
           [ngClass]="{
             'self-start': message.authorId !== ownUserId(),
             'self-end': message.authorId === ownUserId()

@@ -58,14 +58,14 @@ const chatMessages: MessagesWithChatId = {
       authorId: 'dancerId1',
       text: 'Message 1',
       createdAt: '2021-01-01T00:00:00.000Z',
-      readByDancers: [],
+      readByParticipants: [],
     },
     {
       id: 'messageId2',
       authorId: 'dancerId2',
       text: 'Message 2',
       createdAt: '2021-01-01T00:00:00.000Z',
-      readByDancers: [],
+      readByParticipants: [],
     },
   ],
 };
@@ -116,7 +116,7 @@ export class DancierBackendMockedService {
             authorId: 'dancerId1',
             text: message,
             createdAt: '2021-01-01T00:00:00.000Z',
-            readByDancers: [],
+            readByParticipants: [],
           });
           return chatMessages;
         });
