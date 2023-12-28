@@ -30,10 +30,10 @@ export class RecommendationService {
               };
             }
             return response;
-          }),
-          shareReplay(1)
+          })
         )
-      )
+      ),
+      shareReplay(1)
     );
 
   getRecommendations$(): Observable<OldAPIResponse<RecommendedDancer[]>> {
