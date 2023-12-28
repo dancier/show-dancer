@@ -20,8 +20,9 @@ export class UnreadMessagesService {
   constructor() {}
 
   private unreadChatsCount$ = this.timerService
-    .interval('fetchUnreadChats', 5000)
+    .interval('fetchUnreadChats', 60_000)
     .pipe(
+      startWith(-1),
       filter(() => !this.location.path().includes('chat')),
       filter(() => this.profileService.getProfile()?.id !== null),
       switchMap(() => {
@@ -42,7 +43,7 @@ export class UnreadMessagesService {
         return NEVER;
       }),
       startWith(0),
-      shareReplay(1),
+      shareReplay(1)
     );
 
   public unreadChatsCount: Signal<number> = toSignal(this.unreadChatsCount$, {
