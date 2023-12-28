@@ -46,7 +46,7 @@ export class LoggedInNavigationComponent {
   profilePopupOpen = false;
 
   menuItems: MenuItem[] = [
-    { name: 'Übersicht', route: '/recommendations' },
+    { name: 'Empfehlungen', route: '/recommendations' },
     { name: 'Nachrichten', route: '/chat' },
     { name: 'Über Uns', route: '/about-us' },
     { name: 'Kontakt', route: '/contact' },
@@ -54,7 +54,6 @@ export class LoggedInNavigationComponent {
 
   profileMenuItems: MenuItem[] = [
     { name: 'Dein Profil', route: '/profile' },
-    { name: 'Profil bearbeiten', route: '/profile/edit' },
     { name: 'Logout', route: '/logout' },
   ];
 
