@@ -128,8 +128,23 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
     ...state,
   }),
 
-  setMessagesAsRead: (state, _chatId: string) => ({
+  setMessagesAsRead: (state, { chatId, profileId }) => ({
     ...state,
+    chats: state.chats.map((chat) => {
+      if (chat.id !== chatId) return chat;
+      return {
+        ...chat,
+        lastMessage: chat.lastMessage
+          ? {
+              ...(chat.lastMessage || {}),
+              readByParticipants: [
+                ...(chat.lastMessage?.readByParticipants || []),
+                profileId,
+              ],
+            }
+          : null,
+      };
+    }),
   }),
 
   selectors: {
@@ -186,18 +201,5 @@ function updateChat(
   }
   return oldChat;
 
-  // Object.keys(newChat).forEach((key: string) => {
-  //   const keyOfChat = key as keyof SingleChatState;
-  //   if (keyOfChat !== 'messages' && newChat[keyOfChat] !== oldChat[keyOfChat]) {
-  //     console.log(
-  //       'updating',
-  //       keyOfChat,
-  //       newChat[keyOfChat],
-  //       oldChat[keyOfChat]
-  //     );
-  //     const newValue = newChat[keyOfChat];
-  //     oldChat[keyOfChat] = newValue as any;
-  //   }
-  // });
   return oldChat;
 }

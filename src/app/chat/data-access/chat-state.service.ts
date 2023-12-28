@@ -76,16 +76,17 @@ export class ChatStateService {
     newMessageSent: false,
   };
 
-  private chatStore = adapt(
-    [this.storePath, this.initialState, chatStateAdapter],
-    (store) => {
+  private chatStore = adapt(this.initialState, {
+    path: this.storePath,
+    adapter: chatStateAdapter,
+    sources: (store) => {
       const timerService = inject(TimerService);
       const chatHttpService = inject(ChatHttpService);
 
       const fetchChatsSources = getRequestSources(
         '[Chat] fetchChats',
         merge(
-          timerService.interval('chatFetchTrigger', 10000),
+          timerService.interval('chatFetchTrigger', 20000),
           store.chatCreated$.pipe(filter((hasCreated) => !!hasCreated))
         ).pipe(
           startWith(-1),
@@ -180,7 +181,10 @@ export class ChatStateService {
           for (const message of unreadMessages) {
             chatHttpService.setMessageAsRead(message.id).subscribe();
           }
-          return of(chatId);
+          return of({
+            chatId: chatId,
+            profileId: this.profileService.getProfile()!.id!,
+          });
         }),
         toSource('[Chat] setMessagesAsRead')
       );
@@ -202,8 +206,8 @@ export class ChatStateService {
         setMessagesAsRead: setMessagesAsReadSource,
         reset: this.userLoggedOut$,
       };
-    }
-  );
+    },
+  });
 
   // Selectors
   // public signals for components to consume
