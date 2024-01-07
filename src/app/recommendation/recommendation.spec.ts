@@ -11,6 +11,9 @@ import { RecommendationService } from './data-access/recommendation.service';
 import { RecommendationHttpService } from './data-access/recommendation-http.service';
 
 import recommendationsJson from './util/fixtures/recommendations.json';
+import { MockProvider } from 'ng-mocks';
+import { TimerService } from '@shared/util/time/timer.service';
+import { of } from 'rxjs';
 
 describe('Recommendation Feature', () => {
   describe('when the user is on the recommendation page', () => {
@@ -18,7 +21,13 @@ describe('Recommendation Feature', () => {
     const createComponent = createRoutingFactory({
       component: RecommendationsComponent,
       imports: [RecommendedDancerComponent, HttpClientTestingModule],
-      providers: [RecommendationService, RecommendationHttpService],
+      providers: [
+        RecommendationService,
+        RecommendationHttpService,
+        MockProvider(TimerService, {
+          interval: () => of(0),
+        }),
+      ],
       stubsEnabled: false,
       routes: [
         {
@@ -47,7 +56,7 @@ describe('Recommendation Feature', () => {
       }
     });
 
-    it('shows a list of 4 recommendations', async () => {
+    it('shows a list of 4 recommendations', () => {
       expect(spectator.queryAll('app-recommended-dancer')).toHaveLength(4);
     });
   });
