@@ -183,10 +183,11 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
       const activeChat = state.chats.find(
         (chat) => chat.id === state.activeChatId
       );
-      if (!activeChat) return [];
+      if (!activeChat || !state.ownProfileId) return [];
       return activeChat.messages.filter(
         (message) =>
-          message.readByParticipants && message.readByParticipants.length < 2
+          message.readByParticipants &&
+          !message.readByParticipants.includes(state.ownProfileId!)
       );
     },
   },
