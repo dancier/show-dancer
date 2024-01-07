@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ChatMessage } from '../../data-access/chat.types';
-import { NgClass, NgIf } from '@angular/common';
+import { DatePipe, NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-chat-single-message',
@@ -33,10 +33,13 @@ import { NgClass, NgIf } from '@angular/common';
         </svg>
       </div>
     </div>
+    <div class="pt-1 text-right text-xs text-gray-500">
+      {{ message.createdAt | date : 'short' }}
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, NgClass],
+  imports: [NgIf, NgClass, DatePipe],
 })
 export class ChatSingleMessageComponent {
   @Input({ required: true })
