@@ -1,0 +1,21 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "module": "CommonJs",
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true
+  },
+  "files": [
+    "polyfills.ts"
+  ],
+  "include": [
+    "**/*.spec.ts",
+  ],
+  "exclude": [
+    // This is to prevent global types clashing between jest and cypress
+    // See: https://github.com/cypress-io/cypress/issues/22059#issuecomment-1148921141
+    "../cypress.config.ts",
+  ]
+}
