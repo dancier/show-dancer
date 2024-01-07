@@ -153,7 +153,10 @@ export class ChatHttpService {
       .pipe(
         map((messageResponse) => ({
           chatId,
-          messages: messageResponse,
+          messages: messageResponse.map((message) => ({
+            ...message,
+            createdAt: new Date(message.createdAt),
+          })),
         }))
       );
   }

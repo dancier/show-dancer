@@ -74,27 +74,30 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
     activeChatId: chatId,
   }),
 
-  chatMessagesFetched: (state, { messages, chatId }: MessagesWithChatId) => ({
-    ...state,
-    newMessageSent: false,
-    chats: state.chats.map((chat) => {
-      // only add new messages to active chat
-      if (chat.id !== chatId) return chat;
-      return {
-        ...chat,
-        messages: [
-          ...chat.messages.map((message) => {
-            const updatedMessage = messages.find((m) => m.id === message.id);
-            if (!updatedMessage) return message;
-            return updateMessage(message, updatedMessage);
-          }),
-          ...messages.filter(
-            (message) => !chat.messages.find((m) => m.id === message.id)
-          ),
-        ],
-      };
-    }),
-  }),
+  chatMessagesFetched: (state, { messages, chatId }: MessagesWithChatId) => {
+    messages.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+    return {
+      ...state,
+      newMessageSent: false,
+      chats: state.chats.map((chat) => {
+        // only add new messages to active chat
+        if (chat.id !== chatId) return chat;
+        return {
+          ...chat,
+          messages: [
+            ...chat.messages.map((message) => {
+              const updatedMessage = messages.find((m) => m.id === message.id);
+              if (!updatedMessage) return message;
+              return updateMessage(message, updatedMessage);
+            }),
+            ...messages.filter(
+              (message) => !chat.messages.find((m) => m.id === message.id)
+            ),
+          ],
+        };
+      }),
+    };
+  },
 
   openChatWith: (state, dancerId: string) => ({
     ...state,
@@ -136,15 +139,20 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
         ...chat,
         lastMessage: chat.lastMessage
           ? {
-              ...(chat.lastMessage || {}),
+              ...chat.lastMessage,
               readByParticipants: [
-                ...(chat.lastMessage?.readByParticipants || []),
+                ...(chat.lastMessage.readByParticipants || []),
                 profileId,
               ],
             }
           : null,
       };
     }),
+  }),
+
+  profileIdChanged: (state, profileId: string | undefined) => ({
+    ...state,
+    ownProfileId: profileId,
   }),
 
   selectors: {
@@ -171,6 +179,16 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
       return activeChat?.participants ?? [];
     },
     newMessageSent: (state) => state.newMessageSent,
+    activeChatUnreadMessages: (state) => {
+      const activeChat = state.chats.find(
+        (chat) => chat.id === state.activeChatId
+      );
+      if (!activeChat) return [];
+      return activeChat.messages.filter(
+        (message) =>
+          message.readByParticipants && message.readByParticipants.length < 2
+      );
+    },
   },
 });
 
@@ -195,11 +213,9 @@ function updateChat(
 ): SingleChatState {
   // for each property in newChat, update oldChat, only if they are different
   if (
-    JSON.stringify(oldChat.lastMessage) === JSON.stringify(newChat.lastMessage)
+    JSON.stringify(oldChat.lastMessage) !== JSON.stringify(newChat.lastMessage)
   ) {
     oldChat.lastMessage = newChat.lastMessage;
   }
-  return oldChat;
-
   return oldChat;
 }

@@ -5,12 +5,14 @@ import { getRequestSources, Source, toSource } from '@state-adapt/rxjs';
 import { ChatMessage, ChatParticipant } from './chat.types';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
-  distinct,
+  debounceTime,
+  distinctUntilChanged,
   filter,
   map,
   merge,
   of,
   switchMap,
+  throttleTime,
   withLatestFrom,
 } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -36,6 +38,7 @@ export type ChatAdaptState = {
   openChatWithParticipantId: string | null;
   chatCreated: boolean;
   newMessageSent: boolean;
+  ownProfileId: string | undefined;
 };
 
 @Injectable()
@@ -64,6 +67,11 @@ export class ChatStateService {
 
   sendMessage$ = new Source<string>('[Chat] sendMessage');
 
+  profileIdChanged$ = this.profileService.profile$.pipe(
+    map((profile) => profile?.id),
+    toSource('[Chat] profileChanged')
+  );
+
   // Adapters
   //
   private readonly initialState: ChatAdaptState = {
@@ -74,6 +82,7 @@ export class ChatStateService {
     openChatWithParticipantId: null,
     chatCreated: false,
     newMessageSent: false,
+    ownProfileId: undefined,
   };
 
   private chatStore = adapt(this.initialState, {
@@ -98,6 +107,7 @@ export class ChatStateService {
         '[Chat] fetchParticipantDetails',
         store.participantsWithNoDetails$.pipe(
           filter((participants) => participants.length > 0),
+          debounceTime(250),
           map((participants: ChatParticipant[]) =>
             participants.map((p) => p.id)
           ),
@@ -111,7 +121,8 @@ export class ChatStateService {
         '[Chat] fetchMessages',
         merge(
           timerService.interval('chatMessagesFetchTrigger', 5000),
-          store.activeChatId$.pipe(distinct())
+          store.activeChatId$.pipe(distinctUntilChanged()),
+          store.newMessageSent$.pipe(filter((hasSent) => !!hasSent))
         ).pipe(
           switchMap(() => store.activeChatId$),
           filter((chatId) => chatId !== null),
@@ -158,26 +169,17 @@ export class ChatStateService {
         )
       );
 
-      const setMessagesAsReadSource = store.activeChatId$.pipe(
-        filter((chatId) => chatId !== null),
-        filter(() => this.profileService.getProfile()?.id !== undefined),
-        distinct(),
-        switchMap((chatId) =>
-          store.chats$.pipe(
-            map((chats) => chats.find((chat) => chat.id === chatId)),
-            filter((chat) => chat !== undefined),
-            map((chat) => ({
-              chatId: chat!.id,
-              unreadMessages: chat!.messages.filter(
-                (message) =>
-                  !message.readByParticipants?.includes(
-                    this.profileService.getProfile()!.id!
-                  )
-              ),
-            }))
-          )
-        ),
-        switchMap(({ chatId, unreadMessages }) => {
+      const distinctUnreadMessages = store.activeChatUnreadMessages$.pipe(
+        distinctUntilChanged<ChatMessage[]>(
+          (curr, prev) => JSON.stringify(curr) === JSON.stringify(prev)
+        )
+      );
+
+      const setMessagesAsReadSource = distinctUnreadMessages.pipe(
+        filter((messages) => messages.length > 0),
+        withLatestFrom(store.activeChatId$),
+        throttleTime(250),
+        switchMap(([unreadMessages, chatId]) => {
           for (const message of unreadMessages) {
             chatHttpService.setMessageAsRead(message.id).subscribe();
           }
@@ -204,6 +206,7 @@ export class ChatStateService {
         messageSent: sendMessageSource.success$,
         messageSentError: sendMessageSource.error$,
         setMessagesAsRead: setMessagesAsReadSource,
+        profileIdChanged: this.profileIdChanged$,
         reset: this.userLoggedOut$,
       };
     },
