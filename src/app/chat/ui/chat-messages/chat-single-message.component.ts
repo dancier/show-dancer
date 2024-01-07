@@ -17,8 +17,8 @@ import { DatePipe, NgClass, NgIf } from '@angular/common';
       <div
         class="absolute bottom-0.5"
         [ngClass]="{
-          'fill-green-500': isRead,
-          'fill-gray-500': !isRead,
+          'fill-green-500': !isOwnMessage || isRead,
+          'fill-gray-500': isOwnMessage && !isRead,
           'left-1.5': !isOwnMessage,
           'right-1.5': isOwnMessage
         }"
@@ -27,7 +27,7 @@ import { DatePipe, NgClass, NgIf } from '@angular/common';
           <use
             [attr.href]="
               'assets/icons/bootstrap-icons.svg#' +
-              (isRead ? 'check2-all' : 'check2')
+              (!isOwnMessage || isRead ? 'check2-all' : 'check2')
             "
           />
         </svg>
