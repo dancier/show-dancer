@@ -5,8 +5,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthStorageService } from '@shared/data-access/auth/auth-storage.service';
-import { AuthenticationService } from '@shared/data-access/auth/authentication.service';
+import { AuthService } from '@shared/data-access/auth/auth.service';
+import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { EventLogService } from '@shared/data-access/log/event-log.service';
 import { ContactService } from '../../data-access/contact.service';
 import { tap } from 'rxjs';
@@ -49,8 +49,8 @@ export class ContactComponent implements OnInit {
   constructor(
     private fb: NonNullableFormBuilder,
     private contactService: ContactService,
-    public authStorageService: AuthStorageService,
-    private authenticationService: AuthenticationService,
+    public authStorageService: AuthService,
+    private authenticationService: AuthHttpService,
     private eventLogService: EventLogService
   ) {}
 

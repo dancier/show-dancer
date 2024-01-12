@@ -4,12 +4,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthenticationService } from '@shared/data-access/auth/authentication.service';
+import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIError, OldAPIResponse } from '@shared/util/http/response.types';
 import { LinkType } from '../../util/registration.types';
 import { Observable } from 'rxjs';
-import { AuthStorageService } from '@shared/data-access/auth/auth-storage.service';
+import { AuthService } from '@shared/data-access/auth/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { DataTestDirective } from '@shared/util/data-test.directive';
@@ -51,10 +51,10 @@ export class SendVerificationLinkFormComponent implements OnInit {
 
   constructor(
     private fb: NonNullableFormBuilder,
-    private authenticationService: AuthenticationService,
+    private authenticationService: AuthHttpService,
     private router: Router,
     private route: ActivatedRoute,
-    public authStorageService: AuthStorageService
+    public authStorageService: AuthService
   ) {}
 
   ngOnInit(): void {

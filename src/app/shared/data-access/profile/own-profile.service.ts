@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthStorageService } from '../auth/auth-storage.service';
+import { AuthService } from '../auth/auth.service';
 import { ProfileHttpService } from './profile-http.service';
 import {
   Dance,
@@ -24,7 +24,7 @@ export class OwnProfileService {
 
   constructor(
     private profileHttpService: ProfileHttpService,
-    private authStorageService: AuthStorageService,
+    private authStorageService: AuthService,
     private environmentService: EnvironmentService,
     private imageService: ImageService
   ) {

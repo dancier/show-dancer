@@ -5,7 +5,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { AuthenticationService } from '@shared/data-access/auth/authentication.service';
+import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { LoginRequest } from '@shared/data-access/auth/authentication.types';
 import { Router, RouterLink } from '@angular/router';
 import { APIError } from '@shared/util/http/response.types';
@@ -40,7 +40,7 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     private fb: UntypedFormBuilder,
-    private authService: AuthenticationService,
+    private authService: AuthHttpService,
     private router: Router
   ) {}
 

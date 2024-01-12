@@ -1,21 +1,21 @@
-import { AuthenticationService } from './authentication.service';
+import { AuthHttpService } from './auth-http.service';
 import {
   createHttpFactory,
   HttpMethod,
   SpectatorHttp,
 } from '@ngneat/spectator/jest';
-import { AuthStorageService } from './auth-storage.service';
+import { AuthService } from './auth.service';
 import { EnvironmentService } from '../environment.service';
 import { LoginRequest, UserRegistration } from './authentication.types';
 import { MockService } from 'ng-mocks';
 import { TestRequest } from '@angular/common/http/testing';
 import { APIError } from '../../util/http/response.types';
 
-describe('AuthenticationService', () => {
-  let spectator: SpectatorHttp<AuthenticationService>;
+describe('AuthHttpService', () => {
+  let spectator: SpectatorHttp<AuthHttpService>;
   const createHttp = createHttpFactory({
-    service: AuthenticationService,
-    mocks: [AuthStorageService],
+    service: AuthHttpService,
+    mocks: [AuthService],
   });
 
   beforeEach(() => {
@@ -110,7 +110,7 @@ describe('AuthenticationService', () => {
     );
 
     it('sets the login state in the auth storage service', () => {
-      const authStorageService = spectator.inject(AuthStorageService);
+      const authStorageService = spectator.inject(AuthService);
       spectator.service.login(loginRequest).subscribe();
 
       spectator
@@ -126,7 +126,7 @@ describe('AuthenticationService', () => {
     });
 
     it("doesn't set the login state in the auth storage service when login fails", () => {
-      const authStorageService = spectator.inject(AuthStorageService);
+      const authStorageService = spectator.inject(AuthService);
       spectator.service.login(loginRequest).subscribe();
 
       spectator
@@ -189,7 +189,7 @@ describe('AuthenticationService', () => {
     });
 
     it('sets the human state in the auth storage service', () => {
-      const authStorageService = spectator.inject(AuthStorageService);
+      const authStorageService = spectator.inject(AuthService);
       spectator.service.loginAsHuman(captchaToken).subscribe();
 
       spectator
@@ -205,7 +205,7 @@ describe('AuthenticationService', () => {
     });
 
     it("doesn't set the human state in the auth storage service when human login fails", () => {
-      const authStorageService = spectator.inject(AuthStorageService);
+      const authStorageService = spectator.inject(AuthService);
       spectator.service.loginAsHuman(captchaToken).subscribe();
 
       spectator

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthenticationService } from '@shared/data-access/auth/authentication.service';
+import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 
@@ -15,7 +15,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthenticationService
+    private authService: AuthHttpService
   ) {}
 
   ngOnInit(): void {

@@ -6,12 +6,12 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthStorageService } from '../../data-access/auth/auth-storage.service';
+import { AuthService } from '../../data-access/auth/auth.service';
 import { EnvironmentService } from '../../data-access/environment.service';
 
 @Injectable()
 export class WithCredentialsInterceptor implements HttpInterceptor {
-  private authStorage = inject(AuthStorageService);
+  private authStorage = inject(AuthService);
   private environment = inject(EnvironmentService);
 
   constructor() {}

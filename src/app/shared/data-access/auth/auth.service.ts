@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, distinct, filter } from 'rxjs';
+import { Injectable, Signal } from '@angular/core';
+import { BehaviorSubject, distinct, filter, map } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 export type AuthData = {
   isLoggedIn: boolean;
@@ -12,12 +13,17 @@ const AUTH_DATA_KEY = 'authData';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthStorageService {
+export class AuthService {
   private _authData$ = new BehaviorSubject<AuthData>(
-    AuthStorageService.initFromLocalStorage()
+    AuthService.initFromLocalStorage()
   );
 
   public readonly authData$ = this._authData$.asObservable();
+
+  public isLoggedIn: Signal<boolean> = toSignal(
+    this.authData$.pipe(map((data) => data.isLoggedIn)),
+    { initialValue: false }
+  );
 
   public readonly hasLoggedOut$ = this.authData$.pipe(
     distinct((authData) => authData.isLoggedIn),

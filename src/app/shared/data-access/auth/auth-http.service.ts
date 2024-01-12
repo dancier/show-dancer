@@ -12,7 +12,7 @@ import {
   UserRegistration,
 } from './authentication.types';
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
-import { AuthStorageService } from './auth-storage.service';
+import { AuthService } from './auth.service';
 import { EnvironmentService } from '../environment.service';
 import {
   asError,
@@ -23,7 +23,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService {
+export class AuthHttpService {
   private defaultOptions = {
     withCredentials: true,
   };
@@ -32,7 +32,7 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
-    private authStorageService: AuthStorageService,
+    private authStorageService: AuthService,
     private environment: EnvironmentService
   ) {
     this.baseUrl = `${this.environment.getApiUrl()}/authentication`;

@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
-import { AuthStorageService } from '../../data-access/auth/auth-storage.service';
+import { AuthService } from '../../data-access/auth/auth.service';
 import { CanActivateFn, Router } from '@angular/router';
 
 export const loggedInGuard: CanActivateFn = () => {
-  const authStorageService = inject(AuthStorageService);
+  const authStorageService = inject(AuthService);
   const router = inject(Router);
 
   if (authStorageService.getSnapshot().isLoggedIn) {
@@ -14,7 +14,7 @@ export const loggedInGuard: CanActivateFn = () => {
 };
 
 export const loggedOutGuard: CanActivateFn = () => {
-  const authStorageService = inject(AuthStorageService);
+  const authStorageService = inject(AuthService);
   const router = inject(Router);
 
   if (authStorageService.getSnapshot().isLoggedIn) {

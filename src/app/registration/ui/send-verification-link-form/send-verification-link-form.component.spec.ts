@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MockProvider } from 'ng-mocks';
-import { AuthenticationService } from '@shared/data-access/auth/authentication.service';
+import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { ActivatedRoute } from '@angular/router';
 
 describe('SendVerificationLinkFormComponent', () => {
@@ -20,8 +20,8 @@ describe('SendVerificationLinkFormComponent', () => {
       ReactiveFormsModule,
     ],
     providers: [
-      MockProvider(AuthenticationService),
-      MockProvider(AuthenticationService),
+      MockProvider(AuthHttpService),
+      MockProvider(AuthHttpService),
       MockProvider(ActivatedRoute),
     ],
   });

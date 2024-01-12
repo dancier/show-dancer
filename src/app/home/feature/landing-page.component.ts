@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventLogService } from '@shared/data-access/log/event-log.service';
+import { AuthService } from '@shared/data-access/auth/auth.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-landing-page',
@@ -36,6 +38,7 @@ import { EventLogService } from '@shared/data-access/log/event-log.service';
             Wir verbinden Tänzer
           </div>
           <button
+            *ngIf="!isLoggedIn()"
             class="mt-12 cursor-pointer rounded bg-red-900 py-3 px-8 text-xl font-bold text-white transition-all duration-200 ease-in-out hover:bg-white hover:text-red-900 lg:text-2xl"
             (click)="navigateToRegistration()"
           >
@@ -94,9 +97,12 @@ import { EventLogService } from '@shared/data-access/log/event-log.service';
     </main>
   `,
   standalone: true,
+  imports: [NgIf],
 })
 export class LandingPageComponent {
-  constructor(private router: Router, private eventService: EventLogService) {}
+  private router = inject(Router);
+  private eventService = inject(EventLogService);
+  public isLoggedIn = inject(AuthService).isLoggedIn;
 
   navigateToRegistration(): void {
     this.eventService.createAndPublishEvent('navigated_to_page', {

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@shared/data-access/auth/authentication.service';
+import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { Subscription } from 'rxjs';
-import { AuthStorageService } from '@shared/data-access/auth/auth-storage.service';
+import { AuthService } from '@shared/data-access/auth/auth.service';
 
 @Component({
   selector: 'app-logout-page',
@@ -13,8 +13,8 @@ export class LogoutPageComponent implements OnInit, OnDestroy {
   logoutSubscription: Subscription | undefined;
 
   constructor(
-    private authService: AuthenticationService,
-    private authStorageService: AuthStorageService,
+    private authService: AuthHttpService,
+    private authStorageService: AuthService,
     private router: Router
   ) {}
 

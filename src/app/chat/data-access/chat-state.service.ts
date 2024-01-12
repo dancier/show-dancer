@@ -20,7 +20,7 @@ import { chatStateAdapter } from './chat-state.adapter';
 import { TimerService } from '@shared/util/time/timer.service';
 import { startWith } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { AuthStorageService } from '@shared/data-access/auth/auth-storage.service';
+import { AuthService } from '@shared/data-access/auth/auth.service';
 import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 
 export type SingleChatState = {
@@ -45,7 +45,7 @@ export type ChatAdaptState = {
 export class ChatStateService {
   private readonly storePath = 'chat';
   private activatedRoute = inject(ActivatedRoute);
-  private authStorageService = inject(AuthStorageService);
+  private authStorageService = inject(AuthService);
   private profileService = inject(OwnProfileService);
 
   private userLoggedOut$ = this.authStorageService.hasLoggedOut$.pipe(
