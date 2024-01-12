@@ -21,5 +21,33 @@ import './commands';
 
 setLightTheme();
 
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(): Chainable<void>;
+      setupRequestMocking(): Chainable<void>;
+    }
+  }
+}
+
+Cypress.Commands.add('login', () => {
+  window.localStorage.setItem(
+    'authData',
+    JSON.stringify({
+      jwt: '',
+      isLoggedIn: true,
+      isHuman: true,
+    })
+  );
+
+  cy.intercept('GET', '/profile', {
+    fixture: 'chat/get-profile/full-profile.json',
+  });
+});
+
+Cypress.Commands.add('setupRequestMocking', () => {
+  cy.intercept('POST', '/eventlog', {});
+});
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

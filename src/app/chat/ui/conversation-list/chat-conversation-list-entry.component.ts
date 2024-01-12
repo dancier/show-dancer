@@ -25,7 +25,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
         *ngIf="conversation() && participant()"
         class="active:bg-gray-150 mx-2 my-0.5 flex cursor-pointer items-center gap-6 rounded border border-white px-4 py-3 hover:bg-gray-100"
         tabindex="0"
-        data-testid="chat-list-entry"
+        [attr.data-testid]="
+          isSelected() ? 'chat-list-selected-entry' : 'chat-list-entry'
+        "
         [ngClass]="{
           'bg-gray-100': isSelected(),
           'border-gray-300': isSelected(),
