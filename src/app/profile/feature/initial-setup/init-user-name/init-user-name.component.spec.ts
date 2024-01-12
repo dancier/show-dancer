@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthStorageService } from '@shared/data-access/auth/auth-storage.service';
+import { AuthService } from '@shared/data-access/auth/auth.service';
 import { of } from 'rxjs';
 import { Location } from '@angular/common';
 import { InitPersonalDataComponent } from '../init-personal-data/init-personal-data.component';
@@ -61,7 +61,7 @@ describe('Setting up username', () => {
           getApiUrl: () => 'http://test.de',
         }),
       },
-      MockProvider(AuthStorageService, {
+      MockProvider(AuthService, {
         authData$: of({
           isLoggedIn: true,
           isHuman: true,

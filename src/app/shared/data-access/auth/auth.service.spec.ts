@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthData, AuthStorageService } from './auth-storage.service';
+import { AuthData, AuthService } from './auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('AuthStorageService', () => {
-  let service: AuthStorageService | undefined;
+describe('AuthService', () => {
+  let service: AuthService | undefined;
   let setItemSpy: jest.SpyInstance;
   let getItemSpy: jest.SpyInstance;
 
@@ -31,7 +31,7 @@ describe('AuthStorageService', () => {
   });
 
   it('is created', () => {
-    service = TestBed.inject(AuthStorageService);
+    service = TestBed.inject(AuthService);
     expect(service).toBeTruthy();
   });
 
@@ -48,7 +48,7 @@ describe('AuthStorageService', () => {
       return null;
     });
 
-    service = TestBed.inject(AuthStorageService);
+    service = TestBed.inject(AuthService);
 
     const actualAuthData = service.getSnapshot();
     expect(actualAuthData).toEqual(expectedAuthData);
@@ -59,7 +59,7 @@ describe('AuthStorageService', () => {
       return null;
     });
 
-    service = TestBed.inject(AuthStorageService);
+    service = TestBed.inject(AuthService);
 
     const expectedAuthData: AuthData = {
       isLoggedIn: false,
@@ -75,7 +75,7 @@ describe('AuthStorageService', () => {
 
     beforeEach(() => {
       listener.mockClear();
-      service = TestBed.inject(AuthStorageService);
+      service = TestBed.inject(AuthService);
       service.authData$.subscribe(listener);
 
       service.setLoginState(true);
@@ -107,7 +107,7 @@ describe('AuthStorageService', () => {
 
     beforeEach(() => {
       listener.mockClear();
-      service = TestBed.inject(AuthStorageService);
+      service = TestBed.inject(AuthService);
       service.authData$.subscribe(listener);
       service.setLoginState(false);
       service.setHumanState(true);

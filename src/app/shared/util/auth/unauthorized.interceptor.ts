@@ -8,12 +8,12 @@ import {
   HttpStatusCode,
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { AuthStorageService } from '../../data-access/auth/auth-storage.service';
+import { AuthService } from '../../data-access/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class UnauthorizedInterceptor implements HttpInterceptor {
-  authStorageService = inject(AuthStorageService);
+  authStorageService = inject(AuthService);
   router = inject(Router);
 
   constructor() {}
@@ -36,7 +36,10 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse, _: Observable<any>) => {
-        if (error.status === HttpStatusCode.Unauthorized) {
+        if (
+          error.status === HttpStatusCode.Unauthorized ||
+          error.status === HttpStatusCode.Forbidden
+        ) {
           this.resetLoginState();
           this.redirectToLoginPage();
         }

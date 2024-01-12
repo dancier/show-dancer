@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '@shared/data-access/auth/authentication.service';
+import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { APIError } from '@shared/util/http/response.types';
 import { mustMatch } from '@shared/util/mustMatch.validator';
 import { switchMap } from 'rxjs';
@@ -48,7 +48,7 @@ export class NewPasswordComponent {
 
   constructor(
     private fb: NonNullableFormBuilder,
-    private authenticationService: AuthenticationService,
+    private authenticationService: AuthHttpService,
     private route: ActivatedRoute,
     private router: Router
   ) {}

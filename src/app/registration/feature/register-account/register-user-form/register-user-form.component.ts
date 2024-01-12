@@ -5,7 +5,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { AuthenticationService } from '@shared/data-access/auth/authentication.service';
+import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { mustMatch } from '@shared/util/mustMatch.validator';
@@ -45,7 +45,7 @@ export class RegisterUserFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: UntypedFormBuilder,
-    private authenticationService: AuthenticationService,
+    private authenticationService: AuthHttpService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
