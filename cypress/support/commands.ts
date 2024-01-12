@@ -35,3 +35,17 @@
 //     }
 //   }
 // }
+
+// declare global {
+//   namespace Cypress {
+//     interface Chainable {
+//       login(): Chainable<void>
+//     }
+//   }
+// }
+//
+// Cypress.Commands.add('loginLocalStorage', () => {
+//     window.localStorage.setItem('jwt', resp.body.user.token)
+// });
+
+import '@testing-library/cypress/add-commands';

@@ -1,0 +1,27 @@
+{
+  "id": "0",
+  "size": 110,
+  "gender": "MALE",
+  "dancerName": "1001-test",
+  "birthDate": "1981-02-01",
+  "ableTo": [
+    {
+      "dance": "Standard",
+      "level": "BASIC",
+      "leading": "LEAD"
+    }
+  ],
+  "wantsTo": [
+    {
+      "dance": "Standard",
+      "level": "NO_EXPERIENCE",
+      "leading": "FOLLOW"
+    }
+  ],
+  "email": "1001-test@dancier.net",
+  "zipCode": "89188",
+  "city": "Merklingen",
+  "country": "GER",
+  "profileImageHash": "9e82d8b082863e4707d17810c760175e9f93a9a254d2521d3b26d063fe0a7750",
+  "aboutMe": "Hallo, ich bin der Dominik. Ich spiele gerne Karten und mache auch sonst allerlei Sachen. Manchmal trinke ich Kaffee, aber nur am Wochenende, meistens trinke ich Tee, damit das klar ist. Jojo, das ist töfte, oder?\n\nBla blub, es ist cool ich zu sein. Nein wirklich, es ist super. Jemand anderes zu sen"
+}
