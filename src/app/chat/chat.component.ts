@@ -55,17 +55,20 @@ import { interval, take } from 'rxjs';
 
       <ng-template #noConversations>
         <div class="">
-          <h1 class="font-bold">Du hast noch keine Chats</h1>
+          <h1 class="mb-4 font-bold">Du hast noch keine Chats</h1>
           <p class="text-gray-500">
-            Schau dir die Profile anderer Nutzer an und schreibe ihnen eine
-            Nachricht.
+            Schaue dir deine Empfehlungen an, um Nutzer zu finden, denen du eine
+            Nachricht schreiben kannst.
+          </p>
+          <p class="text-gray-500">
+            Über neue Empfehlungen wirst du von uns per E-Mail informiert.
           </p>
           <!--    Button zu der Empfehlungsseite -->
           <div class="my-4">
             <a
               class="rounded bg-blue-500 py-2 px-4 font-bold text-white no-underline hover:bg-blue-700"
               routerLink="/recommendations"
-              >Zurück zur Übersicht</a
+              >Zu den Empfehlungen</a
             >
           </div>
         </div>
