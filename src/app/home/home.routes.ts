@@ -5,7 +5,7 @@ import { LoginPageComponent } from './feature/login-page.component';
 import { TermsAndConditionsComponent } from './feature/terms-and-conditions.component';
 import { AboutUsComponent } from './feature/about-us.component';
 import { BetaRegistrationPageComponent } from './feature/beta-registration-page.component';
-import { ContactComponent } from './feature/contact/contact.component';
+import { ContactComponent } from './feature/contact.component';
 import { NarrowPageComponent } from '@shared/ui/layout/narrow-page/narrow-page.component';
 import { loggedOutGuard } from '@shared/util/auth/logged-in.guard';
 import { ImprintComponent } from './feature/imprint.component';
