@@ -24,7 +24,11 @@ export class UnreadMessagesService {
     .pipe(
       startWith(-1),
       filter(() => !this.location.path().includes('chat')),
-      filter(() => this.profileService.getProfile()?.id !== null),
+      filter(
+        () =>
+          this.profileService.getProfile() !== null &&
+          this.profileService.getProfile()!.id !== undefined
+      ),
       switchMap(() => {
         return toApiResponse(this.chatHttp.getChats$());
       }),
