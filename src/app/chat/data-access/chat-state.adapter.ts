@@ -70,8 +70,22 @@ export const chatStateAdapter = createAdapter<ChatAdaptState>()({
   }),
 
   selectChat: (state, chatId: string | null) => ({
+    // TODO: clear unread chat for this chat
     ...state,
     activeChatId: chatId,
+    // TODO: clear unread chat for this chat
+    chats: state.chats.map((chat) => {
+      if (chat.id !== chatId) return chat;
+      return {
+        ...chat,
+        lastMessage: chat.lastMessage
+          ? {
+              ...chat.lastMessage,
+              readByParticipants: chat.participants.map((p) => p.id),
+            }
+          : null,
+      };
+    }),
   }),
 
   chatMessagesFetched: (state, { messages, chatId }: MessagesWithChatId) => {
