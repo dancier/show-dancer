@@ -116,6 +116,9 @@ export class ContactComponent implements OnInit {
   private authHttpService = inject(AuthHttpService);
   private eventLogService = inject(EventLogService);
 
+  // TODO: hier weiter
+  //public shouldShowCaptcha = this.authService.authData$.pipe();
+
   contactForm!: FormGroup;
   contactResponse?: OldAPIResponse<void>;
 

@@ -1,28 +1,33 @@
-import { Component, inject } from '@angular/core';
-import { RecommendationService } from './data-access/recommendation.service';
-import { AlertComponent } from '@shared/ui/alert/alert.component';
-import { RecommendedDancerComponent } from './ui/recommended-dancer.component';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { BehaviorSubject, filter, map, switchMap } from 'rxjs';
+import { AlertComponent } from '@shared/ui/alert/alert.component';
+import { RecommendationService } from './data-access/recommendation.service';
+import { RecommendedDancerComponent } from './ui/recommended-dancer.component';
 
 @Component({
   selector: 'app-recommendations',
+  standalone: true,
+  imports: [CommonModule, RecommendedDancerComponent, AlertComponent],
   template: `
-    <div>
+    <div class="my-12 mx-auto max-w-[1200px] px-4 md:px-10 lg:px-10">
       <ng-container *ngIf="visibleDancers$ | async as response; else loading">
         <ng-container *ngIf="response.isSuccess; else error">
           <ng-container *ngIf="response.payload.length > 0; else noDancers">
-            <h1 class="page-header">
+            <h1 class="page-header mb-10">
               Diese Tänzer könnten für Sie interessant sein
             </h1>
-            <div class="recommended-dancers">
-              <ng-container *ngFor="let recommendedDancer of response.payload">
+            <div class="">
+              <div
+                *ngFor="let recommendedDancer of response.payload"
+                class="mb-10"
+              >
                 <app-recommended-dancer
                   [dancer]="recommendedDancer"
                   (click)="openPublicProfile(recommendedDancer.id)"
                 ></app-recommended-dancer>
-              </ng-container>
+              </div>
             </div>
 
             <div
@@ -30,7 +35,7 @@ import { BehaviorSubject, filter, map, switchMap } from 'rxjs';
                 ((actualAmountOfDancers$ | async) || 0) >
                 response.payload.length
               "
-              class="load-more"
+              class="flex items-center justify-center"
             >
               <button class="btn-lg btn-secondary" (click)="showMoreDancers()">
                 Weitere anzeigen
@@ -93,9 +98,7 @@ import { BehaviorSubject, filter, map, switchMap } from 'rxjs';
       </ng-template>
     </div>
   `,
-  styleUrls: ['./recommendations.component.scss'],
-  standalone: true,
-  imports: [NgIf, NgFor, RecommendedDancerComponent, AlertComponent, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecommendationsComponent {
   recommendationsService = inject(RecommendationService);
