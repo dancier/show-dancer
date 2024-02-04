@@ -49,7 +49,7 @@ import { NgIf } from '@angular/common';
     </header>
 
     <main class="mx-auto max-w-[1200px] px-4 md:px-10">
-      <section class="py-12 sm:py-24">
+      <section class="pt-14 sm:pt-36">
         <div
           role="heading"
           aria-level="2"
@@ -58,40 +58,119 @@ import { NgIf } from '@angular/common';
           Finde Tanzpartner die zu dir passen
         </div>
         <p class="text-center text-xl sm:text-2xl">
-          Du füllst dein Profil aus. Wir kümmern uns um den Rest.
+          Sag uns, wer du bist und welchen Tanz du liebst – den Rest übernehmen
+          wir.
         </p>
 
         <div
-          class="mx-auto flex max-w-[1600px] flex-col gap-12 pt-16 text-lg sm:pt-24 lg:flex-row lg:gap-24"
+          class="mx-auto flex max-w-[1600px] flex-col gap-12 pt-16 text-lg sm:pt-20 lg:flex-row lg:gap-24"
         >
-          <section class="basis-1/3">
-            <div role="heading" aria-level="3" class="mb-3 font-bold">
-              Kostenlos
-            </div>
-            <p>
-              Die Tanzpartnersuche ist ein Service, den wir euch kostenlos zur
-              Verfügung stellen. Uns geht es nicht ums Geld - unser Ziel ist es,
-              Tänzer zu verbinden.
-            </p>
-          </section>
           <section class="basis-1/3">
             <div role="heading" aria-level="3" class="mb-3 font-bold">
               Auf dich zugeschnitten
             </div>
-            <p>
-              Nachdem du dein Profil ausgefüllt hast, schlagen wir dir
-              potentielle Tanzpartner vor, die deinen Wünschen entsprechen.
+            <p class="hyphens-auto mb-0">
+              Jeder Tänzer ist einzigartig. Deshalb bieten wir dir mithilfe
+              unseres Matching-Algorithmus maßgeschneiderte Partnerempfehlungen,
+              die so individuell sind wie du.
+            </p>
+          </section>
+          <section class="basis-1/3">
+            <div role="heading" aria-level="3" class="mb-3 font-bold">
+              Kostenlos
+            </div>
+            <p class="mb-0">
+              Wir glauben, dass die Liebe zum Tanz unbezahlbar ist. Deshalb ist
+              Dancier für dich kostenlos. Uns geht es nicht ums Geld - unser
+              Ziel ist es, Tänzer zu verbinden.
             </p>
           </section>
           <section class="basis-1/3">
             <div role="heading" aria-level="3" class="mb-3 font-bold">
               Open Source
             </div>
-            <p>
-              Dancier ist ein Open-Source-Projekt von engagierten Entwicklern.
-              Wir wollen die Plattform mit dir gestalten.
+            <p class="mb-0">
+              Dancier wächst mit seiner Gemeinschaft. Als Open-Source-Projekt
+              laden wir dich ein, mit uns gemeinsam die beste Plattform für
+              Tänzer zu gestalten.
             </p>
           </section>
+        </div>
+      </section>
+
+      <section class="py-14 sm:py-36">
+        <div class="pb-4 sm:pb-6">
+          <div
+            role="heading"
+            aria-level="2"
+            class="my-5 text-center font-playful text-3xl font-bold tracking-wide sm:text-5xl"
+          >
+            Das sind wir
+          </div>
+          <p class="text-center sm:text-2xl max-w-[800px] mx-auto my-5">
+            Bei Dancier dreht sich alles um die Liebe zum Tanz – eine
+            Leidenschaft, die uns alle verbindet.
+          </p>
+        </div>
+
+        <div class="flex pb-4 sm:pb-6 items-center justify-between flex-wrap">
+          <div
+            class="py-8 flex flex-col items-center gap-4 rounded-lg basis-1/2 md:basis-1/4"
+          >
+            <img
+              class="rounded-full w-36 h-36"
+              src="../../../assets/img/about-us/marc-profile.jpg"
+            />
+            <div>
+              <p class="font-bold mb-0">Marc Gorzala</p>
+            </div>
+          </div>
+
+          <div
+            class="py-8 flex flex-col items-center gap-4 rounded-lg basis-1/2 md:basis-1/4"
+          >
+            <img
+              class="rounded-full w-36 h-36"
+              src="../../../assets/img/about-us/dominik-profile.jpg"
+            />
+            <div>
+              <p class="font-bold mb-0">Dominik Halfkann</p>
+            </div>
+          </div>
+
+          <div
+            class="py-8 flex flex-col items-center gap-4 rounded-lg basis-1/2 md:basis-1/4"
+          >
+            <img
+              class="rounded-full w-36 h-36"
+              src="../../../assets/img/about-us/xiaofei-profile.jpg"
+            />
+            <div>
+              <p class="font-bold mb-0">Xiaofei Gorzala</p>
+            </div>
+          </div>
+
+          <div
+            class="py-8 flex flex-col items-center gap-4 rounded-lg basis-1/2 md:basis-1/4"
+          >
+            <img
+              class="rounded-full w-36 h-36"
+              src="../../../assets/img/about-us/jan-profile.jpg"
+            />
+            <div>
+              <p class="font-bold mb-0">Jan Stoppel</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-center sm:text-xl max-w-[800px] mx-auto">
+            Unser Team besteht aus tanzbegeisterten Menschen, die aus eigener
+            Erfahrung wissen, wie bereichernd die richtige Tanzpartnerschaft
+            sein kann. Deshalb haben wir Dancier ins Leben gerufen: eine
+            Plattform, die darauf ausgerichtet ist, dich mit Gleichgesinnten
+            zusammenzubringen.
+          </p>
         </div>
       </section>
     </main>

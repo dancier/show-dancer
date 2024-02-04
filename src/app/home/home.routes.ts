@@ -9,6 +9,7 @@ import { ContactComponent } from './feature/contact.component';
 import { NarrowPageComponent } from '@shared/ui/layout/narrow-page/narrow-page.component';
 import { loggedOutGuard } from '@shared/util/auth/logged-in.guard';
 import { ImprintComponent } from './feature/imprint.component';
+import { PrivacyComponent } from './feature/privacy.component';
 
 export const HOME_ROUTES: Routes = [
   {
@@ -34,6 +35,10 @@ export const HOME_ROUTES: Routes = [
       {
         path: 'terms-and-conditions',
         component: TermsAndConditionsComponent,
+      },
+      {
+        path: 'privacy',
+        component: PrivacyComponent,
       },
       {
         path: 'beta-registration',
