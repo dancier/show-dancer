@@ -49,7 +49,7 @@ import { NgIf } from '@angular/common';
     </header>
 
     <main class="mx-auto max-w-[1200px] px-4 md:px-10">
-      <section class="pt-12 sm:pt-24">
+      <section class="pt-14 sm:pt-36">
         <div
           role="heading"
           aria-level="2"
@@ -63,23 +63,13 @@ import { NgIf } from '@angular/common';
         </p>
 
         <div
-          class="mx-auto flex max-w-[1600px] flex-col gap-12 pt-16 text-lg sm:pt-24 lg:flex-row lg:gap-24"
+          class="mx-auto flex max-w-[1600px] flex-col gap-12 pt-16 text-lg sm:pt-20 lg:flex-row lg:gap-24"
         >
-          <section class="basis-1/3">
-            <div role="heading" aria-level="3" class="mb-3 font-bold">
-              Kostenlos
-            </div>
-            <p>
-              Wir glauben, dass die Liebe zum Tanz unbezahlbar ist. Deshalb ist
-              Dancier für dich kostenlos. Uns geht es nicht ums Geld - unser
-              Ziel ist es, Tänzer zu verbinden.
-            </p>
-          </section>
           <section class="basis-1/3">
             <div role="heading" aria-level="3" class="mb-3 font-bold">
               Auf dich zugeschnitten
             </div>
-            <p class="hyphens-auto">
+            <p class="hyphens-auto mb-0">
               Jeder Tänzer ist einzigartig. Deshalb bieten wir dir mithilfe
               unseres Matching-Algorithmus maßgeschneiderte Partnerempfehlungen,
               die so individuell sind wie du.
@@ -87,9 +77,19 @@ import { NgIf } from '@angular/common';
           </section>
           <section class="basis-1/3">
             <div role="heading" aria-level="3" class="mb-3 font-bold">
+              Kostenlos
+            </div>
+            <p class="mb-0">
+              Wir glauben, dass die Liebe zum Tanz unbezahlbar ist. Deshalb ist
+              Dancier für dich kostenlos. Uns geht es nicht ums Geld - unser
+              Ziel ist es, Tänzer zu verbinden.
+            </p>
+          </section>
+          <section class="basis-1/3">
+            <div role="heading" aria-level="3" class="mb-3 font-bold">
               Open Source
             </div>
-            <p>
+            <p class="mb-0">
               Dancier wächst mit seiner Gemeinschaft. Als Open-Source-Projekt
               laden wir dich ein, mit uns gemeinsam die beste Plattform für
               Tänzer zu gestalten.
@@ -98,8 +98,8 @@ import { NgIf } from '@angular/common';
         </div>
       </section>
 
-      <section class="py-12 sm:py-24 ">
-        <div class="pb-8">
+      <section class="py-14 sm:py-36">
+        <div class="pb-4 sm:pb-6">
           <div
             role="heading"
             aria-level="2"
@@ -113,10 +113,12 @@ import { NgIf } from '@angular/common';
           </p>
         </div>
 
-        <div class="flex pb-8 items-center justify-center gap-4">
-          <div class="px-10 py-8 flex flex-col items-center gap-4 rounded-lg">
+        <div class="flex pb-4 sm:pb-6 items-center justify-between flex-wrap">
+          <div
+            class="py-8 flex flex-col items-center gap-4 rounded-lg basis-1/2 md:basis-1/4"
+          >
             <img
-              class="rounded-full w-40 h-40"
+              class="rounded-full w-36 h-36"
               src="../../../assets/img/about-us/marc-profile.jpg"
             />
             <div>
@@ -124,9 +126,11 @@ import { NgIf } from '@angular/common';
             </div>
           </div>
 
-          <div class="px-10 py-8 flex flex-col items-center gap-4 rounded-lg">
+          <div
+            class="py-8 flex flex-col items-center gap-4 rounded-lg basis-1/2 md:basis-1/4"
+          >
             <img
-              class="rounded-full w-40 h-40"
+              class="rounded-full w-36 h-36"
               src="../../../assets/img/about-us/dominik-profile.jpg"
             />
             <div>
@@ -134,9 +138,11 @@ import { NgIf } from '@angular/common';
             </div>
           </div>
 
-          <div class="px-10 py-8 flex flex-col items-center gap-4 rounded-lg">
+          <div
+            class="py-8 flex flex-col items-center gap-4 rounded-lg basis-1/2 md:basis-1/4"
+          >
             <img
-              class="rounded-full w-40 h-40"
+              class="rounded-full w-36 h-36"
               src="../../../assets/img/about-us/xiaofei-profile.jpg"
             />
             <div>
@@ -144,9 +150,11 @@ import { NgIf } from '@angular/common';
             </div>
           </div>
 
-          <div class="px-10 py-8 flex flex-col items-center gap-4 rounded-lg">
+          <div
+            class="py-8 flex flex-col items-center gap-4 rounded-lg basis-1/2 md:basis-1/4"
+          >
             <img
-              class="rounded-full w-40 h-40"
+              class="rounded-full w-36 h-36"
               src="../../../assets/img/about-us/jan-profile.jpg"
             />
             <div>
