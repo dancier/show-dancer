@@ -67,23 +67,15 @@ import { RecommendedDancerComponent } from './ui/recommended-dancer.component';
       </ng-template>
 
       <ng-template #loading>
-        <h1 class="page-header">
+        <h1 class="page-header mb-10">
           Diese Tänzer könnten für Sie interessant sein
         </h1>
-        <div class="recommended-dancers">
+        <div class="recommended-dancers flex flex-col gap-10">
           <div class="rounded border bg-gray-100">
-            <div class="h-80 animate-pulse rounded-t bg-gray-400"></div>
-            <div class="space-y-4 p-6">
-              <div class="h-4 w-1/3 animate-pulse rounded bg-gray-400"></div>
-              <div class="h-4 w-3/4 animate-pulse rounded bg-gray-300"></div>
-            </div>
+            <div class="h-60 animate-pulse rounded-t bg-gray-400"></div>
           </div>
           <div class="rounded border bg-gray-100">
-            <div class="h-80 animate-pulse rounded-t bg-gray-400"></div>
-            <div class="space-y-4 p-6">
-              <div class="h-4 w-1/2 animate-pulse rounded bg-gray-400"></div>
-              <div class="h-4 w-3/4 animate-pulse rounded bg-gray-300"></div>
-            </div>
+            <div class="h-60 animate-pulse rounded-t bg-gray-400"></div>
           </div>
         </div>
       </ng-template>
