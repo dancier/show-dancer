@@ -34,16 +34,10 @@ export const PROFILE_ROUTES: Routes = [
   },
   {
     path: 'edit',
-    component: NarrowPageComponent,
+    component: EditProfileComponent,
     canActivate: [
       loggedInGuard,
       ...mapToCanActivate([DancerProfileSufficientGuard]),
-    ],
-    children: [
-      {
-        path: '',
-        component: EditProfileComponent,
-      },
     ],
   },
   {

@@ -1,78 +1,80 @@
-<h1 class="page-header mb-2">Profil bearbeiten</h1>
+<div class="my-10 max-w-[280px] mx-auto">
+  <h1 class="page-header mb-2">Profil bearbeiten</h1>
 
-<p class="mb-4">Hier kannst du dein Profil bearbeiten.</p>
+  <p class="mb-4">Hier kannst du dein Profil bearbeiten.</p>
 
-<h2 class="my-4 text-2xl">Profilbild</h2>
+  <h2 class="my-4 text-2xl">Profilbild</h2>
 
-<div class="edit-profile-image">
-  <div class="profile-image">
-    <img
-      alt="Profile Image"
-      [src]="
-        croppedImage
-          ? croppedImage
-          : (profileService.getProfileImageSrc() | async)
-      "
-      (error)="handleMissingImage($event)"
+  <div class="edit-profile-image">
+    <div class="profile-image">
+      <img
+        alt="Profile Image"
+        [src]="
+          croppedImage
+            ? croppedImage
+            : (profileService.getProfileImageSrc() | async)
+        "
+        (error)="handleMissingImage($event)"
+      />
+    </div>
+
+    <button class="btn-upload" mat-stroked-button (click)="fileInput.click()">
+      Neues Profilbild hochladen
+    </button>
+
+    <!-- Hidden input -->
+    <input
+      #fileInput
+      accept="image/*"
+      hidden
+      type="file"
+      (change)="fileChangeEvent($event)"
     />
+
+    <div *ngIf="imageChangedEvent" class="image-cropper-container">
+      <image-cropper
+        format="png"
+        [aspectRatio]="4 / 4"
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [roundCropper]="false"
+        (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+    </div>
   </div>
 
-  <button class="btn-upload" mat-stroked-button (click)="fileInput.click()">
-    Neues Profilbild hochladen
+  <h2 class="my-4 text-2xl">Persönliche Infos</h2>
+
+  <app-personal-data-form
+    [formGroup]="profileForm.controls.personalData"
+  ></app-personal-data-form>
+
+  <h2 class="my-4 text-2xl">Eigene Tanzerfahrung</h2>
+
+  <app-dance-experience-form
+    danceFormType="own"
+    [formGroup]="profileForm.controls.ownDances"
+  >
+  </app-dance-experience-form>
+
+  <h2 class="my-4 text-2xl">Tanzerfahrung des Partners</h2>
+
+  <app-dance-experience-form
+    danceFormType="partner"
+    [formGroup]="profileForm.controls.partnerDances"
+  >
+  </app-dance-experience-form>
+
+  <mat-error *ngIf="error">
+    <span> {{ error | errorMessage }} </span>
+  </mat-error>
+
+  <button
+    class="big-button"
+    color="primary"
+    mat-flat-button
+    (click)="saveProfile()"
+  >
+    Speichern
   </button>
-
-  <!-- Hidden input -->
-  <input
-    #fileInput
-    accept="image/*"
-    hidden
-    type="file"
-    (change)="fileChangeEvent($event)"
-  />
-
-  <div *ngIf="imageChangedEvent" class="image-cropper-container">
-    <image-cropper
-      format="png"
-      [aspectRatio]="4 / 4"
-      [imageChangedEvent]="imageChangedEvent"
-      [maintainAspectRatio]="true"
-      [roundCropper]="false"
-      (imageCropped)="imageCropped($event)"
-    ></image-cropper>
-  </div>
 </div>
-
-<h2 class="my-4 text-2xl">Persönliche Infos</h2>
-
-<app-personal-data-form
-  [formGroup]="profileForm.controls.personalData"
-></app-personal-data-form>
-
-<h2 class="my-4 text-2xl">Eigene Tanzerfahrung</h2>
-
-<app-dance-experience-form
-  danceFormType="own"
-  [formGroup]="profileForm.controls.ownDances"
->
-</app-dance-experience-form>
-
-<h2 class="my-4 text-2xl">Tanzerfahrung des Partners</h2>
-
-<app-dance-experience-form
-  danceFormType="partner"
-  [formGroup]="profileForm.controls.partnerDances"
->
-</app-dance-experience-form>
-
-<mat-error *ngIf="error">
-  <span> {{ error | errorMessage }} </span>
-</mat-error>
-
-<button
-  class="big-button"
-  color="primary"
-  mat-flat-button
-  (click)="saveProfile()"
->
-  Speichern
-</button>
