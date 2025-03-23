@@ -20,7 +20,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

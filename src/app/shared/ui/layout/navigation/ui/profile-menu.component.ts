@@ -6,7 +6,6 @@ import { ClickOutsideDirective } from '../../../../util/click-outside.directive'
 
 @Component({
   selector: 'app-profile-menu',
-  standalone: true,
   imports: [CommonModule, RouterLink, ClickOutsideDirective],
   template: `
     <div

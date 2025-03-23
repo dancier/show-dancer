@@ -10,7 +10,6 @@ import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component
   selector: 'app-logged-out-navigation',
   templateUrl: './logged-out-navigation.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     DesktopMenuBarComponent,
     MobileMenuButtonComponent,

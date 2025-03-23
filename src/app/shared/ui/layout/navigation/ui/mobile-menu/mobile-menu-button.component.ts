@@ -48,7 +48,6 @@ import { NgClass } from '@angular/common';
       </svg>
     </button>
   `,
-  standalone: true,
   imports: [NgClass],
 })
 export class MobileMenuButtonComponent {

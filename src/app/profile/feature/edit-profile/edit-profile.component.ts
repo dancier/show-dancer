@@ -35,7 +35,6 @@ type EditProfileForm = {
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
-  standalone: true,
   imports: [
     MatButtonModule,
     NgIf,

@@ -34,11 +34,10 @@ import { DatePipe, NgClass, NgIf } from '@angular/common';
       </div>
     </div>
     <div class="pt-1 text-right text-xs text-gray-500">
-      {{ message.createdAt | date : 'short' }}
+      {{ message.createdAt | date: 'short' }}
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NgIf, NgClass, DatePipe],
 })
 export class ChatSingleMessageComponent {

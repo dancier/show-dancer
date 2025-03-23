@@ -19,7 +19,6 @@ import { PersonalDataFormComponent } from '../../../ui/personal-data-form/person
   selector: 'app-init-personal-data',
   templateUrl: './init-personal-data.component.html',
   styleUrls: ['./init-personal-data.component.scss'],
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     PersonalDataFormComponent,

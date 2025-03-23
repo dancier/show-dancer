@@ -22,7 +22,6 @@ import { AsyncPipe, NgIf } from '@angular/common';
   selector: 'app-send-verification-link-form',
   templateUrl: './send-verification-link-form.component.html',
   styleUrls: ['./send-verification-link-form.component.scss'],
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NgIf,

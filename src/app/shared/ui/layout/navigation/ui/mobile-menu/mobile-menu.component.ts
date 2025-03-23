@@ -31,7 +31,6 @@ import { NgFor, NgIf } from '@angular/common';
       </ng-container>
     </div>
   `,
-  standalone: true,
   imports: [NgFor, RouterLinkActive, RouterLink, NgIf],
 })
 export class MobileMenuComponent {

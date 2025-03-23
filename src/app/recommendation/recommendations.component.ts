@@ -8,7 +8,6 @@ import { RecommendedDancerComponent } from './ui/recommended-dancer.component';
 
 @Component({
   selector: 'app-recommendations',
-  standalone: true,
   imports: [CommonModule, RecommendedDancerComponent, AlertComponent],
   template: `
     <div class="my-12 mx-auto max-w-[1200px] px-4 md:px-10 lg:px-10">

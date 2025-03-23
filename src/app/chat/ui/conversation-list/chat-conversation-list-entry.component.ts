@@ -30,7 +30,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
         "
         [ngClass]="{
           'bg-gray-100': isSelected(),
-          'border-gray-300': isSelected(),
+          'border-gray-300': isSelected()
         }"
         (click)="chatState.selectChat$.next(conversation()!.id)"
       >
@@ -68,9 +68,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  // eslint-disable-next-line
   host: { role: 'listitem' },
-  standalone: true,
   imports: [NgIf, NgClass, AsyncPipe],
 })
 export class ChatConversationListEntryComponent {

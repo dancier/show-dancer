@@ -51,7 +51,6 @@ type MessageComposerForm = FormGroup<{ message: FormControl<string> }>;
   changeDetection: ChangeDetectionStrategy.OnPush,
   // needed to remove the bottom margin from mat-form-field
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

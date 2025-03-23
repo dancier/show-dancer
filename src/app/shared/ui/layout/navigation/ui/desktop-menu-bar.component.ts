@@ -26,8 +26,11 @@ import { UnreadMessagesService } from '../../../../data-access/chat/unread-messa
         >
           <span
             [ngClass]="{
-            'text-teal-300': unreadChatsCount() > 0 && item.route.includes('chat') && !rla.isActive,
-          }"
+              'text-teal-300':
+                unreadChatsCount() > 0 &&
+                item.route.includes('chat') &&
+                !rla.isActive
+            }"
             >{{ item.name }}</span
           >
           <div
@@ -42,7 +45,6 @@ import { UnreadMessagesService } from '../../../../data-access/chat/unread-messa
       </div>
     </div>
   `,
-  standalone: true,
   imports: [NgFor, NgClass, RouterLinkActive, RouterLink, NgIf],
 })
 export class DesktopMenuBarComponent {

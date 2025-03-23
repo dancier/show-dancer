@@ -6,7 +6,6 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-password-changed',
   templateUrl: './password-changed.component.html',
   styleUrls: ['./password-changed.component.scss'],
-  standalone: true,
   imports: [MatButtonModule, RouterLink],
 })
 export class PasswordChangedComponent {

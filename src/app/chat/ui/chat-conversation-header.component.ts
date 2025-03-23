@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-conversation-header',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="bg-white">

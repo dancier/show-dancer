@@ -4,7 +4,6 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-imprint',
-  standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
     <h1 class="page-header">Impressum</h1>

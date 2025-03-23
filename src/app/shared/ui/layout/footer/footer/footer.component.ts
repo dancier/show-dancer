@@ -15,7 +15,6 @@ import { RouterLink } from '@angular/router';
       </div>
     </nav>
   `,
-  standalone: true,
   imports: [RouterLink],
 })
 export class FooterComponent {

@@ -5,7 +5,6 @@ import { SendVerificationLinkFormComponent } from '../../../ui/send-verification
   selector: 'app-verification-error',
   templateUrl: './verification-error.component.html',
   styleUrls: ['./verification-error.component.scss'],
-  standalone: true,
   imports: [SendVerificationLinkFormComponent],
 })
 export class VerificationErrorComponent {

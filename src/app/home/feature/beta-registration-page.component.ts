@@ -71,7 +71,6 @@ import { MatCardModule } from '@angular/material/card';
       }
     `,
   ],
-  standalone: true,
   imports: [MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class BetaRegistrationPageComponent {
