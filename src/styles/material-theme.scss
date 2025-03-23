@@ -70,24 +70,24 @@ $dancier-palette-accent: (
 );
 
 // see: https://material.angular.io/guide/theming
-$theme-primary: mat.define-palette($dancier-palette-primary);
-$theme-accent: mat.define-palette($dancier-palette-accent);
-$theme-warn: mat.define-palette($dancier-palette-primary);
+$theme-primary: mat.m2-define-palette($dancier-palette-primary);
+$theme-accent: mat.m2-define-palette($dancier-palette-accent);
+$theme-warn: mat.m2-define-palette($dancier-palette-primary);
 
 // Typography
-$theme-typography: mat.define-typography-config(
+$theme-typography: mat.m2-define-typography-config(
   $font-family:
     'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-  $body-1: mat.define-typography-level(18px, 1.35, 400),
-  $button: mat.define-typography-level(18px, 1.35, 400),
-  $caption: mat.define-typography-level(13px, 1.35, 400),
-  $body-2: mat.define-typography-level(18px, 1.35, 400),
-  $subtitle-2: mat.define-typography-level(18px, 1.35, 700),
+  $body-1: mat.m2-define-typography-level(18px, 1.35, 400),
+  $button: mat.m2-define-typography-level(18px, 1.35, 400),
+  $caption: mat.m2-define-typography-level(13px, 1.35, 400),
+  $body-2: mat.m2-define-typography-level(18px, 1.35, 400),
+  $subtitle-2: mat.m2-define-typography-level(18px, 1.35, 700),
 );
 
 @include mat.core;
 
-$theme: mat.define-light-theme(
+$theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $theme-primary,
