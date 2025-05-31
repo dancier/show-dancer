@@ -26,7 +26,6 @@ export type MenuItem = {
   selector: 'app-logged-in-navigation',
   templateUrl: './logged-in-navigation.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     DesktopMenuBarComponent,
     MobileMenuButtonComponent,

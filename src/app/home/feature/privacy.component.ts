@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-privacy',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <h1 class="page-header">Datenschutzerklärung</h1>

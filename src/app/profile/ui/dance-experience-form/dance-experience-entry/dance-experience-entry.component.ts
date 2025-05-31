@@ -28,7 +28,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   selector: 'app-dance-experience-entry',
   templateUrl: './dance-experience-entry.component.html',
   styleUrls: ['./dance-experience-entry.component.scss'],
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

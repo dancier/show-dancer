@@ -21,7 +21,6 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
   selector: 'app-new-password',
   templateUrl: './new-password.component.html',
   styleUrls: ['./new-password.component.scss'],
-  standalone: true,
   imports: [
     DataTestDirective,
     ReactiveFormsModule,

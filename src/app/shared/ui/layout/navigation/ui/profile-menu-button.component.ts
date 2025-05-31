@@ -30,7 +30,6 @@ import { handleAutoChangeDetectionStatus } from '@angular/cdk/testing';
       />
     </button>
   `,
-  standalone: true,
   imports: [AsyncPipe],
 })
 export class ProfileMenuButtonComponent {

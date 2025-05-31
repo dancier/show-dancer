@@ -50,7 +50,6 @@ import { map } from 'rxjs';
     <!--    </div>-->
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     NgIf,
     NgFor,

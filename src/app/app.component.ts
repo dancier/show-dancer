@@ -8,7 +8,6 @@ import { EnvironmentService } from '@shared/data-access/environment.service';
 @Component({
   selector: 'app-root',
   template: `<router-outlet></router-outlet>`,
-  standalone: true,
   imports: [RouterOutlet],
 })
 export class AppComponent implements OnInit {

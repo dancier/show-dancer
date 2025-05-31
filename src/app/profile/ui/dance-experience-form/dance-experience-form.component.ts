@@ -27,7 +27,6 @@ import { NgFor, NgIf } from '@angular/common';
   selector: 'app-dance-experience-form',
   templateUrl: './dance-experience-form.component.html',
   styleUrls: ['./dance-experience-form.component.scss'],
-  standalone: true,
   imports: [
     NgFor,
     DanceExperienceEntryComponent,

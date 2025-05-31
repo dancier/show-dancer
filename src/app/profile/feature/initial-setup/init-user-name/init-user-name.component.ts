@@ -26,7 +26,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   selector: 'app-init-user-name',
   templateUrl: './init-user-name.component.html',
   styleUrls: ['./init-user-name.component.scss'],
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

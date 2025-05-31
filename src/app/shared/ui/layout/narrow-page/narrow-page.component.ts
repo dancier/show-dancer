@@ -5,7 +5,6 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-narrow-page',
   templateUrl: './narrow-page.component.html',
   styleUrls: ['./narrow-page.component.scss'],
-  standalone: true,
   imports: [RouterOutlet],
 })
 export class NarrowPageComponent {

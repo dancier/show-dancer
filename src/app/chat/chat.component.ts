@@ -107,7 +107,6 @@ import { interval, take } from 'rxjs';
   styleUrls: ['./chat.component.scss'],
   providers: [ChatStateService],
   changeDetection: ChangeDetectionStrategy.Default,
-  standalone: true,
   imports: [
     NgIf,
     ChatConversationListComponent,

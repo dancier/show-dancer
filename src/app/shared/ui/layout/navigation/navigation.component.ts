@@ -8,7 +8,6 @@ import { AsyncPipe, NgIf } from '@angular/common';
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
-  standalone: true,
   imports: [
     NgIf,
     LoggedInNavigationComponent,

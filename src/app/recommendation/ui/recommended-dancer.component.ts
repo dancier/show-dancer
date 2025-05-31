@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recommended-dancer',
-  standalone: true,
   imports: [CommonModule],
   template: `<div
     class="flex flex-col sm:flex-row cursor-pointer gap-x-12 gap-y-8 rounded border bg-gray-50 px-6 sm:px-12 py-8 hover:bg-gray-200"

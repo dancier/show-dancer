@@ -11,7 +11,6 @@ import { ImageService } from '@shared/data-access/image.service';
 
 @Component({
   selector: 'app-own-profile',
-  standalone: true,
   imports: [
     CommonModule,
     DisplayDanceLevelPipe,

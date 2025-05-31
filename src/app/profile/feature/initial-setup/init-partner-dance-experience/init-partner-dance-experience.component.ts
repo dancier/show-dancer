@@ -15,7 +15,6 @@ import { DanceExperienceFormComponent } from '../../../ui/dance-experience-form/
   selector: 'app-init-partner-dance-experience',
   templateUrl: './init-partner-dance-experience.component.html',
   styleUrls: ['./init-partner-dance-experience.component.scss'],
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     DanceExperienceFormComponent,

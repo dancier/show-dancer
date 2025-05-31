@@ -6,7 +6,6 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss'],
-  standalone: true,
   imports: [DataTestDirective, SendVerificationLinkFormComponent],
 })
 export class ResetPasswordComponent {}

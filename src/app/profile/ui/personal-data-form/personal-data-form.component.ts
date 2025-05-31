@@ -31,7 +31,6 @@ const zipFormat = /\d{5}/g;
   selector: 'app-personal-data-form',
   templateUrl: './personal-data-form.component.html',
   styleUrls: ['./personal-data-form.component.scss'],
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

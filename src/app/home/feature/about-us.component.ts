@@ -161,7 +161,6 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
       }
     `,
   ],
-  standalone: true,
   imports: [DataTestDirective],
 })
 export class AboutUsComponent {

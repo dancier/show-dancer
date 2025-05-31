@@ -12,7 +12,6 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-init-profile-image',
   templateUrl: './init-profile-image.component.html',
   styleUrls: ['./init-profile-image.component.scss'],
-  standalone: true,
   imports: [MatButtonModule, NgIf, ImageCropperModule],
 })
 export class InitProfileImageComponent {

@@ -19,9 +19,8 @@ import {
     </app-chat-conversation-list-entry>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  // eslint-disable-next-line
   host: { role: 'list' },
-  standalone: true,
   imports: [NgFor, ChatConversationListEntryComponent, AsyncPipe],
 })
 export class ChatConversationListComponent {

@@ -23,7 +23,6 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
   selector: 'app-register-user-form',
   templateUrl: './register-user-form.component.html',
   styleUrls: ['./register-user-form.component.scss'],
-  standalone: true,
   imports: [
     DataTestDirective,
     ReactiveFormsModule,

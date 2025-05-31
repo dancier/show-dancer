@@ -95,7 +95,6 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
       </ng-template>
     </div>
   `,
-  standalone: true,
   imports: [
     DataTestDirective,
     NgIf,

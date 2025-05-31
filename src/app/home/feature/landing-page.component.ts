@@ -175,7 +175,6 @@ import { NgIf } from '@angular/common';
       </section>
     </main>
   `,
-  standalone: true,
   imports: [NgIf],
 })
 export class LandingPageComponent {

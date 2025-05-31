@@ -11,7 +11,6 @@ import { AlertComponent } from '@shared/ui/alert/alert.component';
 
 @Component({
   selector: 'app-public-profile',
-  standalone: true,
   imports: [
     CommonModule,
     AgePipe,

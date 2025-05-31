@@ -4,7 +4,6 @@ import { DisplayGenderPipe } from '../util/pipes/display-gender.pipe';
 
 @Component({
   selector: 'app-profile-data-entry',
-  standalone: true,
   imports: [CommonModule, DisplayGenderPipe],
   template: `
     <div class="flex items-start gap-x-7 gap-y-4 border-b px-2 py-4">

@@ -7,7 +7,6 @@ import { NavigationComponent } from '../navigation/navigation.component';
   selector: 'app-modern-layout',
   templateUrl: './modern-layout.component.html',
   styleUrls: ['./modern-layout.component.scss'],
-  standalone: true,
   imports: [NavigationComponent, RouterOutlet, FooterComponent],
 })
 export class ModernLayoutComponent {
