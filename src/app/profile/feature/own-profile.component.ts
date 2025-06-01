@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { DisplayDanceLevelPipe } from '../util/pipes/display-dance-level.pipe';
 import { DisplayDanceRolePipe } from '../util/pipes/display-dance-role.pipe';
@@ -20,7 +21,7 @@ import { ImageService } from '@shared/data-access/image.service';
     ProfileDataEntryComponent,
   ],
   template: `
-    <ng-container *ngIf="profileService.profile$ | async as profile">
+    <ng-container *ngIf="profile() as profile">
       <div
         class="my-12 mx-auto flex max-w-[1200px] flex-col gap-10 px-4 md:flex-row md:px-10 lg:px-10"
       >
@@ -28,7 +29,7 @@ import { ImageService } from '@shared/data-access/image.service';
           <img
             class="relative h-[250px] w-[250px] max-w-none rounded-full"
             alt="Profile Image"
-            [src]="profileService.getProfileImageSrc(250) | async"
+            [src]="profileImageSrc()"
             (error)="handleMissingImage($event)"
           />
         </div>
@@ -109,6 +110,9 @@ export class OwnProfileComponent {
   imageService = inject(ImageService);
   profileService = inject(OwnProfileService);
   router = inject(Router);
+
+  profile = toSignal(this.profileService.profile$);
+  profileImageSrc = toSignal(this.profileService.getProfileImageSrc(250));
 
   editProfile(): void {
     this.router.navigate(['profile', 'edit']);

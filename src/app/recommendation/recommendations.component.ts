@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { BehaviorSubject, filter, map, switchMap } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { AlertComponent } from '@shared/ui/alert/alert.component';
 import { RecommendationService } from './data-access/recommendation.service';
 import { RecommendedDancerComponent } from './ui/recommended-dancer.component';
@@ -11,7 +12,7 @@ import { RecommendedDancerComponent } from './ui/recommended-dancer.component';
   imports: [CommonModule, RecommendedDancerComponent, AlertComponent],
   template: `
     <div class="my-12 mx-auto max-w-[1200px] px-4 md:px-10 lg:px-10">
-      <ng-container *ngIf="visibleDancers$ | async as response; else loading">
+      <ng-container *ngIf="visibleDancers() as response; else loading">
         <ng-container *ngIf="response.isSuccess; else error">
           <ng-container *ngIf="response.payload.length > 0; else noDancers">
             <h1 class="page-header mb-10">
@@ -31,8 +32,7 @@ import { RecommendedDancerComponent } from './ui/recommended-dancer.component';
 
             <div
               *ngIf="
-                ((actualAmountOfDancers$ | async) || 0) >
-                response.payload.length
+                (actualAmountOfDancers() || 0) > response.payload.length
               "
               class="flex items-center justify-center"
             >
@@ -95,32 +95,36 @@ export class RecommendationsComponent {
   recommendationsService = inject(RecommendationService);
   router = inject(Router);
   recommendationsResponse$ = this.recommendationsService.getRecommendations$();
-  actualAmountOfDancers$ = this.recommendationsResponse$.pipe(
-    map((response) => {
-      if (response.isSuccess) {
-        return response.payload.length;
-      }
-      return 0;
-    })
+  actualAmountOfDancers = toSignal(
+    this.recommendationsResponse$.pipe(
+      map((response) => {
+        if (response.isSuccess) {
+          return response.payload.length;
+        }
+        return 0;
+      })
+    )
   );
 
   maxDancers = new BehaviorSubject<number>(10);
-  visibleDancers$ = this.maxDancers.asObservable().pipe(
-    switchMap(() => this.recommendationsResponse$),
-    filter((response) => response.isSuccess),
-    map((response) => {
-      if (response.isSuccess) {
-        const numOfDancers = Math.min(
-          this.maxDancers.getValue(),
-          response.payload.length
-        );
-        return {
-          ...response,
-          payload: response.payload.slice(0, numOfDancers),
-        };
-      }
-      return response;
-    })
+  visibleDancers = toSignal(
+    this.maxDancers.asObservable().pipe(
+      switchMap(() => this.recommendationsResponse$),
+      filter((response) => response.isSuccess),
+      map((response) => {
+        if (response.isSuccess) {
+          const numOfDancers = Math.min(
+            this.maxDancers.getValue(),
+            response.payload.length
+          );
+          return {
+            ...response,
+            payload: response.payload.slice(0, numOfDancers),
+          };
+        }
+        return response;
+      })
+    )
   );
 
   constructor() {}

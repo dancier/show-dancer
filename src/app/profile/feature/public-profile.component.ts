@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { PublicProfileService } from '../data-access/public-profile.service';
 import { AgePipe } from '@shared/util/age.pipe';
 import { DisplayDanceLevelPipe } from '../util/pipes/display-dance-level.pipe';
@@ -21,7 +22,7 @@ import { AlertComponent } from '@shared/ui/alert/alert.component';
     AlertComponent,
   ],
   template: `
-    <ng-container *ngIf="profileResponse$ | async as profileResponse">
+    <ng-container *ngIf="profileResponse() as profileResponse">
       <div
         class="my-12 mx-auto flex max-w-[1200px] flex-col gap-10 px-4 md:flex-row md:px-10 lg:px-10"
       >
@@ -149,8 +150,10 @@ export class PublicProfileComponent {
   public readonly profileService = inject(PublicProfileService);
   private readonly router = inject(Router);
 
-  public readonly profileResponse$ = this.profileService.getPublicProfile(
-    this.activeRoute.snapshot.params['participantId']
+  public readonly profileResponse = toSignal(
+    this.profileService.getPublicProfile(
+      this.activeRoute.snapshot.params['participantId']
+    )
   );
 
   handleMissingImage($event: ErrorEvent): void {

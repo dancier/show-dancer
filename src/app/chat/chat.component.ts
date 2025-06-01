@@ -5,6 +5,7 @@ import {
   Signal,
 } from '@angular/core';
 
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from '@shared/ui/alert/alert.component';
 import { ChatMessageComposerComponent } from './ui/message-composer/chat-message-composer.component';
@@ -84,7 +85,7 @@ import { interval, take } from 'rxjs';
 
       <ng-container
         *ngIf="
-          (delayLoading$ | async) === 0 &&
+          delayLoading() === 0 &&
           chatState.chatsFetchState() === 'loading'
         "
       >
@@ -121,6 +122,8 @@ import { interval, take } from 'rxjs';
 })
 export class ChatComponent {
   chatState = inject(ChatStateService);
-  delayLoading$ = interval(100).pipe(take(1));
+  delayLoading = toSignal(interval(100).pipe(take(1)), {
+    initialValue: -1,
+  });
   hasActiveChat: Signal<boolean> = this.chatState.hasActiveChat;
 }

@@ -1,5 +1,5 @@
 <form novalidate [formGroup]="verificationForm" (ngSubmit)="submitForm()">
-  <ng-container *ngIf="authStorageService.authData$ | async as authData">
+  <ng-container *ngIf="authData() as authData">
     <mat-card-content class="login-form-container flex flex-col">
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>E-Mail</mat-label>
@@ -17,7 +17,7 @@
           Bitte geben Sie eine gültige E-Mail Adresse an.
         </mat-error>
       </mat-form-field>
-      <ng-container *ngIf="!authData.isHuman || isCaptchaSolved">
+      <ng-container *ngIf="!authData?.isHuman || isCaptchaSolved">
         <div class="captcha">
           <re-captcha
             siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"

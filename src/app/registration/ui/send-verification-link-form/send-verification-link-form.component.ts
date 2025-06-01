@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { APIError, OldAPIResponse } from '@shared/util/http/response.types';
 import { LinkType } from '../../util/registration.types';
 import { Observable } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { AuthService } from '@shared/data-access/auth/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { RecaptchaModule } from 'ng-recaptcha';
@@ -47,6 +48,7 @@ export class SendVerificationLinkFormComponent implements OnInit {
   });
   isCaptchaSolved = false;
   captchaError = false;
+  authData = toSignal(this.authStorageService.authData$);
 
   constructor(
     private fb: NonNullableFormBuilder,

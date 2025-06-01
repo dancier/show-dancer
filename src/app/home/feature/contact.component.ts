@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '@shared/data-access/auth/auth.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { EventLogService } from '@shared/data-access/log/event-log.service';
 import { ContactService } from '../data-access/contact.service';
@@ -36,7 +37,7 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
 
         <form novalidate [formGroup]="contactForm" (ngSubmit)="submitForm()">
           <mat-card-content class="card-content-container flex flex-col">
-            <ng-container *ngIf="authService.authData$ | async as authData">
+            <ng-container *ngIf="authData() as authData">
               <mat-form-field appearance="fill" class="full-width">
                 <mat-label>E-Mail</mat-label>
                 <input
@@ -114,6 +115,8 @@ export class ContactComponent implements OnInit {
   public authService = inject(AuthService);
   private authHttpService = inject(AuthHttpService);
   private eventLogService = inject(EventLogService);
+
+  authData = toSignal(this.authService.authData$);
 
   // TODO: hier weiter
   //public shouldShowCaptcha = this.authService.authData$.pipe();
