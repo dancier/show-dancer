@@ -13,9 +13,4 @@
   "include": [
     "**/*.spec.ts",
   ],
-  "exclude": [
-    // This is to prevent global types clashing between jest and cypress
-    // See: https://github.com/cypress-io/cypress/issues/22059#issuecomment-1148921141
-    "../cypress.config.ts",
-  ]
 }
