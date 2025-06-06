@@ -4,6 +4,10 @@
 **/coverage
 .angular
 
+# e2e test files
+/tests
+
+
 # JS/TS files not containing code to be compiles (e.g. config files)
 cypress.config.ts
 jest.config.js

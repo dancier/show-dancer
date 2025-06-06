@@ -50,6 +50,7 @@
     "@angular/cli": "^19.2.4",
     "@angular/compiler-cli": "^19.2.3",
     "@ngneat/spectator": "^15.0.1",
+    "@playwright/test": "^1.52.0",
     "@types/jest": "^29.5.2",
     "@types/node": "^16.11.48",
     "@types/uuid": "^8.3.4",
