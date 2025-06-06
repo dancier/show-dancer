@@ -13,4 +13,5 @@ module.exports = {
   moduleNameMapper: pathsToModuleNameMapper(paths, { prefix: '<rootDir>' }),
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   globalSetup: 'jest-preset-angular/global-setup',
+  testPathIgnorePatterns: ['<rootDir>/tests/', '<rootDir>/node_modules/'],
 };
