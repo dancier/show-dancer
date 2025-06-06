@@ -1,15 +1,10 @@
 import { Page, Locator } from '@playwright/test';
-import { AngularHelpers } from '../helpers/angular-helpers';
 
 /**
  * Base page class with common functionality for all pages
  */
 export abstract class BasePage {
-  protected angular: AngularHelpers;
-
-  constructor(protected page: Page) {
-    this.angular = new AngularHelpers(page);
-  }
+  constructor(protected page: Page) {}
 
   /**
    * Navigate to this page
@@ -36,7 +31,7 @@ export abstract class BasePage {
    * Wait for the page to be fully loaded
    */
   async waitForPageLoad(): Promise<void> {
-    await this.angular.waitForAngularToLoad();
+    await this.page.waitForLoadState('networkidle');
   }
 
   /**

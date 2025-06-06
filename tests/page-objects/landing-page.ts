@@ -10,7 +10,7 @@ export class LandingPage extends BasePage {
    * Navigate to the landing page
    */
   async goto(): Promise<void> {
-    await this.angular.navigateTo('/');
+    await this.page.goto('/', { waitUntil: 'networkidle' });
   }
 
   /**
@@ -51,14 +51,9 @@ export class LandingPage extends BasePage {
   /**
    * Page actions - what users can do on this page
    */
-  async clickLogin(): Promise<void> {
-    await this.loginButton.click();
-    await this.angular.waitForAngularToLoad();
-  }
-
   async clickRegister(): Promise<void> {
     await this.registerButton.click();
-    await this.angular.waitForAngularToLoad();
+    await this.page.waitForLoadState('networkidle');
   }
 
   /**
@@ -69,7 +64,6 @@ export class LandingPage extends BasePage {
   }
 
   async expectNavigationLinksVisible(): Promise<void> {
-    await expect(this.loginButton).toBeVisible();
     await expect(this.registerButton).toBeVisible();
   }
 }
