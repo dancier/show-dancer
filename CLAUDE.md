@@ -14,7 +14,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - `npm test` - Run unit tests with Jest
 - `npm run lint` - Run ESLint on TypeScript and HTML files
+- `npx playwright test` - Run Playwright E2E tests
 - Individual test files can be run with Jest by specifying the file path
+
+#### Test Naming Conventions
+
+- Test descriptions use present tense without "should" (e.g., "handles page load gracefully" not "should handle page load gracefully")
 
 ### Code Quality
 

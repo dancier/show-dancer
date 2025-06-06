@@ -18,7 +18,7 @@ export class LandingPage extends BasePage {
    */
   async isDisplayed(): Promise<boolean> {
     try {
-      await this.pageTitle.waitFor({ state: 'visible', timeout: 5000 });
+      await this.mainHeading.waitFor({ state: 'visible', timeout: 5000 });
       return true;
     } catch {
       return false;
@@ -29,19 +29,24 @@ export class LandingPage extends BasePage {
    * Page elements - using Playwright's locator API
    */
   get pageTitle(): Locator {
-    return this.page.locator('h1').first();
+    return this.page.locator('[role="heading"][aria-level="1"]');
   }
 
-  get loginButton(): Locator {
-    return this.page.locator('a[href="/login"]');
+  get mainHeading(): Locator {
+    // Use the more specific and robust ARIA role selector
+    return this.page.locator('[role="heading"][aria-level="1"]');
+  }
+
+  get subHeading(): Locator {
+    return this.page.locator('text=Wir verbinden Tänzer');
   }
 
   get registerButton(): Locator {
-    return this.page.locator('a[href="/register"]');
+    return this.page.locator('button:has-text("Jetzt registrieren")');
   }
 
-  get recommendationsButton(): Locator {
-    return this.page.locator('a[href="/recommendations"]');
+  get heroSection(): Locator {
+    return this.page.locator('header');
   }
 
   /**

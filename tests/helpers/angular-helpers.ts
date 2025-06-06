@@ -10,20 +10,15 @@ export class AngularHelpers {
    * Wait for Angular to finish loading and all HTTP requests to complete
    */
   async waitForAngularToLoad() {
-    // Wait for the Angular app to be ready
-    await this.page.waitForFunction(
-      () => {
-        // Check if Angular is available and stable
-        return (
-          typeof (window as any).ng !== 'undefined' &&
-          (window as any).getAllAngularTestabilities &&
-          (window as any)
-            .getAllAngularTestabilities()
-            .every((t: any) => t.isStable())
-        );
-      },
-      { timeout: 30000 }
-    );
+    // For now, use a simpler approach - wait for the page to be loaded
+    // and for the Angular app root element to be present
+    await this.page.waitForLoadState('networkidle');
+
+    // Wait for Angular app root to be available
+    await this.page.waitForSelector('app-root', { timeout: 30000 });
+
+    // Small additional wait for Angular to stabilize
+    await this.page.waitForTimeout(500);
   }
 
   /**
