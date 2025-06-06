@@ -33,7 +33,6 @@ export class LandingPage extends BasePage {
   }
 
   get mainHeading(): Locator {
-    // Use the more specific and robust ARIA role selector
     return this.page.locator('[role="heading"][aria-level="1"]');
   }
 
