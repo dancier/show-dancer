@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Development
 
 - `npm run start` - Start development server with SSL at https://localhost:4200 (required for backend communication)
+- `npm run start:http` - Start development server without SSL at http://localhost:4200 (used for E2E testing)
 - `npm run build` - Build the project for production
 - `npm run watch` - Build in watch mode for development
 
@@ -16,12 +17,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run lint` - Run ESLint on TypeScript and HTML files
 - `npx playwright test` - Run Playwright E2E tests
 - `npx playwright test --reporter=line` - Run Playwright E2E tests with line reporter
+- `npx playwright test --ui` - Run Playwright tests in interactive UI mode
+- `npx playwright test --debug` - Run Playwright tests in debug mode
 - Always use the playwright line reporter for E2E tests
 - Individual test files can be run with Jest by specifying the file path
 
 #### Test Naming Conventions
 
 - Test descriptions use present tense without "should" (e.g., "handles page load gracefully" not "should handle page load gracefully")
+
+#### E2E Testing Architecture
+
+- Tests located in `/tests` directory following Playwright best practices
+- Page Object Model pattern used for maintainable test code
+- Base page classes provide common functionality across page objects
+- Tests run against HTTP development server (no SSL needed for mocked tests)
+- Chromium-only testing for development efficiency
+- Mock data centralized in `/tests/fixtures` for consistent test scenarios
 
 ### Code Quality
 
