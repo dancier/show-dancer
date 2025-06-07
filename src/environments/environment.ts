@@ -6,7 +6,8 @@ import { Environment } from './environment.type';
 
 export const environment: Environment = {
   production: false,
-  apiUrl: 'https://test-dancer.dancier.net',
+  apiUrl: 'http://localhost:3001',
+  // apiUrl: 'https://test-dancer.dancier.net',
   // apiUrl: '/api',
   mockBackend: false,
   removeTestAttributes: false,

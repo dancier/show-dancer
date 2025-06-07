@@ -1,6 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { FindDancersPage } from '../page-objects/find-dancers-page';
-import { mockDancers, mockApiResponses } from '../fixtures/mock-data';
+import {
+  mockDancers,
+  mockApiResponses,
+  mockAuthData,
+  mockProfile,
+} from '../fixtures/mock-data';
 
 test.describe('Find Dancers', () => {
   let findDancersPage: FindDancersPage;
@@ -12,6 +17,28 @@ test.describe('Find Dancers', () => {
   test('displays find dancers page with filter controls when navigating via top bar', async ({
     page,
   }) => {
+    // Set authentication state in localStorage before navigating
+    await page.addInitScript(() => {
+      localStorage.setItem(
+        'authData',
+        JSON.stringify({
+          isLoggedIn: true,
+          isHuman: true,
+          jwt: 'mock-jwt-token-for-testing',
+        })
+      );
+    });
+
+    // Mock the profile API call that will be triggered
+    await page.route('**/profile', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(mockProfile),
+      });
+    });
+
+    await page.goto('/'); // Navigate to home page first
     await findDancersPage.navFindLink.click();
 
     await expect(page).toHaveURL(/.*\/find-dancers/);

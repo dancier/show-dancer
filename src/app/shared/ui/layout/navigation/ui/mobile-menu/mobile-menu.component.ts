@@ -15,6 +15,7 @@ import { NgFor, NgIf } from '@angular/common';
           aria-current="page"
           routerLinkActive="bg-rose-900"
           [routerLink]="item.route"
+          [attr.data-testid]="'nav' + item.route.replace('/', '-')"
           >{{ item.name }}</a
         >
         <ng-container *ngIf="item.children">
@@ -25,6 +26,7 @@ import { NgFor, NgIf } from '@angular/common';
             aria-current="page"
             routerLinkActive="bg-rose-900"
             [routerLink]="childItem.route"
+            [attr.data-testid]="'nav' + childItem.route.replace('/', '-')"
             >{{ childItem.name }}</a
           >
         </ng-container>

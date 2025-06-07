@@ -21,6 +21,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npx playwright test --debug` - Run Playwright tests in debug mode
 - Always use the playwright line reporter for E2E tests
 - Individual test files can be run with Jest by specifying the file path
+- Run the linter after making modifications to TypeScript or HTML files
 
 #### Test Naming Conventions
 

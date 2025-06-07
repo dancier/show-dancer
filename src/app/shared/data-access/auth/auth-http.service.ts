@@ -36,6 +36,11 @@ export class AuthHttpService {
     private environment: EnvironmentService
   ) {
     this.baseUrl = `${this.environment.getApiUrl()}/authentication`;
+    this.mockLogin();
+  }
+
+  mockLogin(): void {
+    this.authStorageService.setLoginState(true, 'jwt-local-test-token');
   }
 
   register(

@@ -76,7 +76,10 @@ export class FindDancersPage extends BasePage {
   }
 
   async selectGender(gender: 'all' | 'male' | 'female'): Promise<void> {
-    await this.genderFilter.selectOption(gender.toUpperCase());
+    const radioButton = this.page.locator(
+      `[data-testid="gender-filter-${gender}"]`
+    );
+    await radioButton.click();
   }
 
   async setDistance(distance: string): Promise<void> {
