@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Testing & Quality
 
 - `npm test` - Run unit tests with Jest
-- `npm run lint` - Run ESLint on TypeScript and HTML files
+- `npm run lint -- --fix` - Run ESLint on TypeScript and HTML files with autofix on
 - `npx playwright test` - Run Playwright E2E tests
 - `npx playwright test --reporter=line` - Run Playwright E2E tests with line reporter
 - `npx playwright test --ui` - Run Playwright tests in interactive UI mode

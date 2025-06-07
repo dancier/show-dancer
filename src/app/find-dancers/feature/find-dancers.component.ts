@@ -10,24 +10,21 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
       <h1 class="page-header mb-10">Tänzer finden</h1>
 
       <!-- Responsive Grid Container -->
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         <!-- Filters Sidebar -->
-        <div class="lg:col-span-1 order-1 lg:order-1">
-          <div class="lg:sticky lg:top-8 space-y-6">
-            <form class="contents" [formGroup]="filtersForm">
-              <!-- Gender Filter -->
-              <div
-                class="bg-white shadow-sm border border-gray-200 rounded-lg p-6"
-              >
+        <div class="md:col-span-1 order-1 md:order-1">
+          <div class="md:sticky md:top-8 space-y-6">
+            <div
+              class="bg-white shadow-sm border border-gray-200 rounded-lg p-6"
+            >
+              <form class="space-y-6" [formGroup]="filtersForm">
+                <!-- Gender Filter -->
                 <fieldset>
                   <legend class="block text-sm font-medium text-gray-700 mb-3">
                     Geschlecht
                   </legend>
-                  <div
-                    data-testid="gender-filter"
-                    class="flex lg:flex-col space-x-3 lg:space-x-0 lg:space-y-2"
-                  >
-                    <label class="relative cursor-pointer flex-1 lg:flex-none">
+                  <div data-testid="gender-filter" class="flex flex-wrap gap-3">
+                    <label class="relative cursor-pointer">
                       <input
                         type="radio"
                         value="ALL"
@@ -42,7 +39,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
                       </div>
                     </label>
 
-                    <label class="relative cursor-pointer flex-1 lg:flex-none">
+                    <label class="relative cursor-pointer">
                       <input
                         type="radio"
                         value="MALE"
@@ -57,7 +54,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
                       </div>
                     </label>
 
-                    <label class="relative cursor-pointer flex-1 lg:flex-none">
+                    <label class="relative cursor-pointer">
                       <input
                         type="radio"
                         value="FEMALE"
@@ -73,55 +70,53 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
                     </label>
                   </div>
                 </fieldset>
-              </div>
 
-              <!-- Distance Filter -->
-              <div
-                class="bg-white shadow-sm border border-gray-200 rounded-lg p-6"
-              >
-                <label
-                  for="distance-filter"
-                  class="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Entfernung: {{ filtersForm.get('distance')?.value }} km
-                </label>
-                <div data-testid="distance-filter" class="relative">
-                  <input
-                    id="distance-filter"
-                    data-testid="distance-slider"
-                    type="range"
-                    min="5"
-                    max="100"
-                    step="5"
-                    formControlName="distance"
-                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                  />
-                  <div class="flex justify-between text-xs text-gray-500 mt-1">
-                    <span>5 km</span>
-                    <span>100 km</span>
+                <!-- Distance Filter -->
+                <div>
+                  <label
+                    for="distance-filter"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Entfernung: {{ filtersForm.get('distance')?.value }} km
+                  </label>
+                  <div data-testid="distance-filter" class="relative">
+                    <input
+                      id="distance-filter"
+                      data-testid="distance-slider"
+                      type="range"
+                      min="5"
+                      max="100"
+                      step="5"
+                      formControlName="distance"
+                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                    />
+                    <div
+                      class="flex justify-between text-xs text-gray-500 mt-1"
+                    >
+                      <span>5 km</span>
+                      <span>100 km</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Apply Button -->
-              <div
-                class="bg-white shadow-sm border border-gray-200 rounded-lg p-6 lg:p-6"
-              >
-                <button
-                  type="button"
-                  data-testid="apply-filters-button"
-                  class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
-                  (click)="applyFilters()"
-                >
-                  Filter anwenden
-                </button>
-              </div>
-            </form>
+                <!-- Apply Button -->
+                <div>
+                  <button
+                    type="button"
+                    data-testid="apply-filters-button"
+                    class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
+                    (click)="applyFilters()"
+                  >
+                    Filter anwenden
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
 
         <!-- Results Section -->
-        <div class="lg:col-span-3 order-2 lg:order-2">
+        <div class="md:col-span-2 order-2 md:order-2">
           <div data-testid="dancer-list" class="space-y-6">
             <ng-container *ngIf="showResults">
               <!-- Loading State -->
