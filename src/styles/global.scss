@@ -1,5 +1,6 @@
 @use 'sass:map';
-@import 'responsive';
+@use 'responsive';
+@use 'material-theme';
 
 /* dosis-regular - latin */
 @font-face {
@@ -7,7 +8,8 @@
   font-style: normal;
   font-weight: 400;
   src: url('../assets/fonts/dosis-v27-latin-regular.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src:
+    local(''),
     url('../assets/fonts/dosis-v27-latin-regular.eot?#iefix')
       format('embedded-opentype'),
     /* IE6-IE8 */ url('../assets/fonts/dosis-v27-latin-regular.woff2')
@@ -26,7 +28,8 @@
   font-style: normal;
   font-weight: 500;
   src: url('../assets/fonts/dosis-v27-latin-500.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src:
+    local(''),
     url('../assets/fonts/dosis-v27-latin-500.eot?#iefix')
       format('embedded-opentype'),
     /* IE6-IE8 */ url('../assets/fonts/dosis-v27-latin-500.woff2')
@@ -45,7 +48,8 @@
   font-style: normal;
   font-weight: 600;
   src: url('../assets/fonts/dosis-v27-latin-600.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src:
+    local(''),
     url('../assets/fonts/dosis-v27-latin-600.eot?#iefix')
       format('embedded-opentype'),
     /* IE6-IE8 */ url('../assets/fonts/dosis-v27-latin-600.woff2')
@@ -64,7 +68,8 @@
   font-style: normal;
   font-weight: 700;
   src: url('../assets/fonts/dosis-v27-latin-700.eot'); /* IE9 Compat Modes */
-  src: local(''),
+  src:
+    local(''),
     url('../assets/fonts/dosis-v27-latin-700.eot?#iefix')
       format('embedded-opentype'),
     /* IE6-IE8 */ url('../assets/fonts/dosis-v27-latin-700.woff2')
@@ -101,63 +106,63 @@
 //}
 
 .font-color-primary-800 {
-  color: map.get($dancier-palette-primary, 800);
+  color: map.get(material-theme.$dancier-palette-primary, 800);
 }
 
 .background-color-50 {
-  background-color: map.get($dancier-palette-primary, 50);
+  background-color: map.get(material-theme.$dancier-palette-primary, 50);
 }
 
 .background-color-100 {
-  background-color: map.get($dancier-palette-primary, 100);
+  background-color: map.get(material-theme.$dancier-palette-primary, 100);
 }
 
 .background-color-200 {
-  background-color: map.get($dancier-palette-primary, 200);
+  background-color: map.get(material-theme.$dancier-palette-primary, 200);
 }
 
 .background-color-300 {
-  background-color: map.get($dancier-palette-primary, 300);
+  background-color: map.get(material-theme.$dancier-palette-primary, 300);
 }
 
 .background-color-400 {
-  background-color: map.get($dancier-palette-primary, 400);
+  background-color: map.get(material-theme.$dancier-palette-primary, 400);
 }
 
 .background-color-500 {
-  background-color: map.get($dancier-palette-primary, 500);
+  background-color: map.get(material-theme.$dancier-palette-primary, 500);
 }
 
 .background-color-600 {
-  background-color: map.get($dancier-palette-primary, 600);
+  background-color: map.get(material-theme.$dancier-palette-primary, 600);
 }
 
 .background-color-900 {
-  background-color: map.get($dancier-palette-primary, 900);
+  background-color: map.get(material-theme.$dancier-palette-primary, 900);
 }
 
 .background-color-accent-50 {
-  background-color: map.get($dancier-palette-accent, 50);
+  background-color: map.get(material-theme.$dancier-palette-accent, 50);
 }
 
 .background-color-accent-200 {
-  background-color: map.get($dancier-palette-accent, a200);
+  background-color: map.get(material-theme.$dancier-palette-accent, a200);
 }
 
 .background-color-accent-100 {
-  background-color: map.get($dancier-palette-accent, 100);
+  background-color: map.get(material-theme.$dancier-palette-accent, 100);
 }
 
 .background-color-accent-400 {
-  background-color: map.get($dancier-palette-accent, 400);
+  background-color: map.get(material-theme.$dancier-palette-accent, 400);
 }
 
 .background-color-accent-800 {
-  background-color: map.get($dancier-palette-accent, 800);
+  background-color: map.get(material-theme.$dancier-palette-accent, 800);
 }
 
 .background-color-accent-900 {
-  background-color: map.get($dancier-palette-accent, 900);
+  background-color: map.get(material-theme.$dancier-palette-accent, 900);
 }
 
 .content-page-container {
@@ -166,40 +171,37 @@
 }
 
 .content-inner-container {
-  @include screen('xs') {
+  @include responsive.screen('xs') {
     padding: 16px;
   }
 
-  @include screen('gt-xs') {
+  @include responsive.screen('gt-xs') {
     margin: 16px 32px 0;
   }
 }
 
 .container-radius {
-  @include screen('xs') {
+  @include responsive.screen('xs') {
     border-radius: 0;
   }
 
-  @include screen('gt-xs') {
+  @include responsive.screen('gt-xs') {
     border-radius: 8px;
   }
 }
 
 .min-width-360-480 {
-  @include screen('gt-xs') {
+  @include responsive.screen('gt-xs') {
     min-width: 360px;
   }
-  @include screen('gt-sm') {
+  @include responsive.screen('gt-sm') {
     min-width: 480px;
   }
 }
 
 .button-width-relative {
-  @include screen('gt-xs') {
+  @include responsive.screen('gt-xs') {
     width: 40%;
-  }
-  @include screen('xs') {
-    width: 90%;
   }
 }
 
