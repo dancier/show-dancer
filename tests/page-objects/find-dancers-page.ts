@@ -76,10 +76,11 @@ export class FindDancersPage extends BasePage {
   }
 
   async selectGender(gender: 'all' | 'male' | 'female'): Promise<void> {
-    const radioButton = this.page.locator(
-      `[data-testid="gender-filter-${gender}"]`
-    );
-    await radioButton.click();
+    // Click the label that contains the radio button instead of the hidden input
+    const label = this.page
+      .locator(`[data-testid="gender-filter-${gender}"]`)
+      .locator('..');
+    await label.click();
   }
 
   async setDistance(distance: string): Promise<void> {
@@ -128,7 +129,7 @@ export class FindDancersPage extends BasePage {
   async expectEmptyState(): Promise<void> {
     await expect(this.emptyFindState).toBeVisible();
     await expect(this.emptyFindMessage).toContainText(
-      /keine.*gefunden|no.*found/i
+      /keine.*entsprechen|no.*found/i
     );
   }
 

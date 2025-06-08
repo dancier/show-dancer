@@ -43,7 +43,6 @@ export class DancersHttpService {
       params = params.set('range', filters.distance.toString());
     }
 
-    console.log('perform search');
     return this.http
       .get<Dancer[]>(this.dancersApiUrl, {
         ...this.defaultOptions,
