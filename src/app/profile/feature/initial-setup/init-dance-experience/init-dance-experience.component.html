@@ -12,9 +12,11 @@
   <app-dance-experience-form danceFormType="own" [formGroup]="form">
   </app-dance-experience-form>
 
-  <mat-error *ngIf="apiError">
-    <span> {{ apiError | errorMessage }} </span>
-  </mat-error>
+  @if (apiError) {
+    <mat-error>
+      <span> {{ apiError | errorMessage }} </span>
+    </mat-error>
+  }
 
   <button
     class="big-button btn-next"

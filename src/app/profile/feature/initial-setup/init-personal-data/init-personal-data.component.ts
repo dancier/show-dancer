@@ -11,7 +11,6 @@ import { PersonalDataForm } from '../../../ui/personal-data-form/personal-data-f
 import { ErrorMessagePipe } from '@shared/util/http/error-message.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { NgIf } from '@angular/common';
 import { PersonalDataFormComponent } from '../../../ui/personal-data-form/personal-data-form.component';
 
 @UntilDestroy()
@@ -22,7 +21,6 @@ import { PersonalDataFormComponent } from '../../../ui/personal-data-form/person
   imports: [
     ReactiveFormsModule,
     PersonalDataFormComponent,
-    NgIf,
     MatFormFieldModule,
     MatButtonModule,
     ErrorMessagePipe,

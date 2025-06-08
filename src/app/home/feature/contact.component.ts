@@ -17,16 +17,14 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { DataTestDirective } from '@shared/util/data-test.directive';
 
 @Component({
   selector: 'app-contact',
   template: `
     <div data-test="page-contact">
-      <ng-container
-        *ngIf="!contactResponse || !contactResponse.isSuccess; else success"
-      >
+      @if (!contactResponse || !contactResponse.isSuccess) {
         <h1 class="page-header">Kontaktiere uns</h1>
         <p>
           Du kannst das untenstehende Textfeld nutzen, um uns Wünsche,
@@ -36,7 +34,7 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
 
         <form novalidate [formGroup]="contactForm" (ngSubmit)="submitForm()">
           <mat-card-content class="card-content-container flex flex-col">
-            <ng-container *ngIf="authService.authData$ | async as authData">
+            @if (authService.authData$ | async; as authData) {
               <mat-form-field appearance="fill" class="full-width">
                 <mat-label>E-Mail</mat-label>
                 <input
@@ -56,22 +54,27 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
                 ></textarea>
               </mat-form-field>
 
-              <ng-container *ngIf="!authData.isHuman || isCaptchaSolved">
+              @if (!authData.isHuman || isCaptchaSolved) {
                 <div class="mb-4">
                   <re-captcha
                     siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"
                     (resolved)="captchaResolved($event)"
                   ></re-captcha>
                 </div>
-              </ng-container>
-              <mat-error *ngIf="captchaError">
-                Es ist ein Fehler aufgetreten, bitte versuche es später erneut.
-              </mat-error>
-              <mat-error *ngIf="contactResponse && !contactResponse.isSuccess">
-                <span>
-                  {{ contactResponse.error | errorMessage }}
-                </span>
-              </mat-error>
+              }
+              @if (captchaError) {
+                <mat-error>
+                  Es ist ein Fehler aufgetreten, bitte versuche es später
+                  erneut.
+                </mat-error>
+              }
+              @if (contactResponse && !contactResponse.isSuccess) {
+                <mat-error>
+                  <span>
+                    {{ contactResponse.error | errorMessage }}
+                  </span>
+                </mat-error>
+              }
 
               <button
                 class="mb-4"
@@ -81,23 +84,20 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
               >
                 Nachricht senden
               </button>
-            </ng-container>
+            }
           </mat-card-content>
         </form>
-      </ng-container>
-
-      <ng-template #success>
+      } @else {
         <h1 class="page-header">Vielen Dank!</h1>
         <p>
           Wir haben deine Nachricht erhalten und werden uns schnellstmöglich bei
           dir melden.
         </p>
-      </ng-template>
+      }
     </div>
   `,
   imports: [
     DataTestDirective,
-    NgIf,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,

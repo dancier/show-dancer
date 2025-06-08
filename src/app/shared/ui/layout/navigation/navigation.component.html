@@ -1,11 +1,11 @@
-<ng-container *ngIf="authStorageService.authData$ | async as authData">
-  <app-logged-in-navigation
-    *ngIf="authData.isLoggedIn"
-  ></app-logged-in-navigation>
-  <app-logged-out-navigation
-    *ngIf="!authData.isLoggedIn"
-  ></app-logged-out-navigation>
-</ng-container>
+@if (authStorageService.authData$ | async; as authData) {
+  @if (authData.isLoggedIn) {
+    <app-logged-in-navigation></app-logged-in-navigation>
+  }
+  @if (!authData.isLoggedIn) {
+    <app-logged-out-navigation></app-logged-out-navigation>
+  }
+}
 
 <!--&lt;!&ndash; eslint-disable @angular-eslint/template/cyclomatic-complexity &ndash;&gt;-->
 <!--<mat-toolbar class="header" color="primary">-->

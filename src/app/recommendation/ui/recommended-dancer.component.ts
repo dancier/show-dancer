@@ -69,9 +69,9 @@ import { Router } from '@angular/router';
             <div class="min-w-0 grow">
               <div class="mb-0.5 truncate whitespace-nowrap text-xl">
                 tanzt gerne
-                <span *ngFor="let dance of dancer.dances; let isLast = last">
-                  {{ dance }}{{ isLast ? '' : ', ' }}
-                </span>
+                @for (dance of dancer.dances; track dance; let isLast = $last) {
+                  <span>{{ dance }}{{ isLast ? '' : ', ' }}</span>
+                }
               </div>
             </div>
           </div>

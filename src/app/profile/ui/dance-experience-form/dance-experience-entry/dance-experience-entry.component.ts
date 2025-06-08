@@ -6,13 +6,7 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import {
-  AsyncPipe,
-  KeyValue,
-  KeyValuePipe,
-  NgFor,
-  NgIf,
-} from '@angular/common';
+import { AsyncPipe, KeyValue, KeyValuePipe } from '@angular/common';
 import { DanceExperienceEntryForm } from '../dance-form.type';
 import {
   DanceLevel,
@@ -33,9 +27,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    NgFor,
     MatOptionModule,
-    NgIf,
     MatSelectModule,
     AsyncPipe,
     KeyValuePipe,

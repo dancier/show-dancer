@@ -10,9 +10,11 @@
   <mat-form-field>
     <mat-label>Geschlecht</mat-label>
     <mat-select data-test="gender-field" formControlName="gender">
-      <mat-option *ngFor="let gender of genderList" [value]="gender.type">
-        {{ gender.description }}
-      </mat-option>
+      @for (gender of genderList; track gender.type) {
+        <mat-option [value]="gender.type">
+          {{ gender.description }}
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 
@@ -31,9 +33,9 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker startView="multi-year"></mat-datepicker>
     <mat-hint align="end">Nur dein Alter wird öffentlich angezeigt.</mat-hint>
-    <mat-error *ngIf="hasFieldError('birthDate', 'required')">
-      Bitte gib ein gültiges Geburtsdatum ein.
-    </mat-error>
+    @if (hasFieldError('birthDate', 'required')) {
+      <mat-error> Bitte gib ein gültiges Geburtsdatum ein. </mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field floatLabel="always">
@@ -45,16 +47,15 @@
       type="number"
     />
     <span matTextSuffix>cm</span>
-    <mat-error
-      *ngIf="
-        hasFieldError('size', 'required') ||
-        hasFieldError('size', 'min') ||
-        hasFieldError('size', 'max')
-      "
-      align="end"
-    >
-      Bitte gib eine gültige Körpergröße ein.
-    </mat-error>
+    @if (
+      hasFieldError('size', 'required') ||
+      hasFieldError('size', 'min') ||
+      hasFieldError('size', 'max')
+    ) {
+      <mat-error align="end">
+        Bitte gib eine gültige Körpergröße ein.
+      </mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field floatLabel="always">
@@ -66,15 +67,13 @@
       type="text"
     />
     <mat-hint align="end">Nur dein Wohnort wird öffentlich angezeigt.</mat-hint>
-    <mat-error
-      *ngIf="
-        hasFieldError('zipCode', 'required') ||
-        hasFieldError('zipCode', 'pattern') ||
-        hasFieldError('zipCode', 'cityLookup')
-      "
-    >
-      Bitte gib eine gültige Postleitzahl ein.
-    </mat-error>
+    @if (
+      hasFieldError('zipCode', 'required') ||
+      hasFieldError('zipCode', 'pattern') ||
+      hasFieldError('zipCode', 'cityLookup')
+    ) {
+      <mat-error> Bitte gib eine gültige Postleitzahl ein. </mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field floatLabel="always">

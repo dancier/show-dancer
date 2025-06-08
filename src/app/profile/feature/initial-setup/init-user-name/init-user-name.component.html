@@ -11,32 +11,27 @@
       type="username"
     />
     <mat-hint>Wird öffentlich angezeigt.</mat-hint>
-    <mat-error
-      *ngIf="hasUsernameFieldError('required')"
-      data-testid="username-field-empty"
-    >
-      Bitte gib einen Benutzernamen ein.
-    </mat-error>
-    <mat-error
-      *ngIf="hasUsernameFieldError('minlength')"
-      data-testid="username-field-empty"
-    >
-      Gib mindestens 3 Zeichen ein.
-    </mat-error>
+    @if (hasUsernameFieldError('required')) {
+      <mat-error data-testid="username-field-empty">
+        Bitte gib einen Benutzernamen ein.
+      </mat-error>
+    }
+    @if (hasUsernameFieldError('minlength')) {
+      <mat-error data-testid="username-field-empty">
+        Gib mindestens 3 Zeichen ein.
+      </mat-error>
+    }
   </mat-form-field>
 
   <app-alert alertType="warning" icon="warning">
     Dein Benutzername kann später nicht mehr geändert werden.
   </app-alert>
 
-  <app-alert
-    *ngIf="error"
-    alertType="error"
-    icon="error"
-    data-testid="username-error"
-  >
-    <span> {{ error | errorMessage }} </span>
-  </app-alert>
+  @if (error) {
+    <app-alert alertType="error" icon="error" data-testid="username-error">
+      <span> {{ error | errorMessage }} </span>
+    </app-alert>
+  }
 
   <button
     class="big-button"

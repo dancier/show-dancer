@@ -16,15 +16,16 @@ import { RouterLink } from '@angular/router';
       tabindex="-1"
     >
       <!-- Active: "bg-gray-100", Not Active: "" -->
-      <a
-        *ngFor="let item of menuItems"
-        href="#"
-        class="text-md block px-4 py-2 text-gray-700 no-underline hover:bg-gray-100 hover:text-gray-900"
-        role="menuitem"
-        tabindex="-1"
-        [routerLink]="item.route"
-        >{{ item.name }}</a
-      >
+      @for (item of menuItems; track item.route) {
+        <a
+          href="#"
+          class="text-md block px-4 py-2 text-gray-700 no-underline hover:bg-gray-100 hover:text-gray-900"
+          role="menuitem"
+          tabindex="-1"
+          [routerLink]="item.route"
+          >{{ item.name }}</a
+        >
+      }
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

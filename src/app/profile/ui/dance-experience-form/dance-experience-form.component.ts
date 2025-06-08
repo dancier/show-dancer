@@ -20,7 +20,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { map } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { DanceExperienceEntryComponent } from './dance-experience-entry/dance-experience-entry.component';
-import { NgFor, NgIf } from '@angular/common';
 
 @UntilDestroy()
 @Component({
@@ -28,10 +27,8 @@ import { NgFor, NgIf } from '@angular/common';
   templateUrl: './dance-experience-form.component.html',
   styleUrls: ['./dance-experience-form.component.scss'],
   imports: [
-    NgFor,
     DanceExperienceEntryComponent,
     ReactiveFormsModule,
-    NgIf,
     MatButtonModule,
   ],
 })

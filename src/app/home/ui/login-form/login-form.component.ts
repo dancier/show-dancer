@@ -12,7 +12,6 @@ import { APIError } from '@shared/util/http/response.types';
 import { ErrorMessagePipe } from '@shared/util/http/error-message.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
 import { DataTestDirective } from '@shared/util/data-test.directive';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,7 +24,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatFormFieldModule,
     MatInputModule,
     DataTestDirective,
-    NgIf,
     MatIconModule,
     MatButtonModule,
     RouterLink,

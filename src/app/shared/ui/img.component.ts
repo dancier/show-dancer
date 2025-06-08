@@ -15,20 +15,22 @@ import { WithAuthPipe } from '../util/auth/with-auth.pipe';
   standalone: true,
   imports: [CommonModule, WithAuthPipe],
   template: `
-    <img
-      *ngIf="!environment.isLocalDevelopment() && src"
-      [attr.alt]="altText"
-      [attr.src]="src"
-      [attr.class]="imgClass"
-      (error)="handleError($event)"
-    />
-    <img
-      *ngIf="environment.isLocalDevelopment() && src"
-      [attr.alt]="altText"
-      [attr.src]="src | withAuth | async"
-      [attr.class]="imgClass"
-      (error)="handleError($event)"
-    />
+    @if (!environment.isLocalDevelopment() && src) {
+      <img
+        [attr.alt]="altText"
+        [attr.src]="src"
+        [attr.class]="imgClass"
+        (error)="handleError($event)"
+      />
+    }
+    @if (environment.isLocalDevelopment() && src) {
+      <img
+        [attr.alt]="altText"
+        [attr.src]="src | withAuth | async"
+        [attr.class]="imgClass"
+        (error)="handleError($event)"
+      />
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

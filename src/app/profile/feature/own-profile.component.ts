@@ -21,7 +21,7 @@ import { ImageService } from '@shared/data-access/image.service';
     ProfileDataEntryComponent,
   ],
   template: `
-    <ng-container *ngIf="profileService.profile$ | async as profile">
+    @if (profileService.profile$ | async; as profile) {
       <div
         class="my-12 mx-auto flex max-w-[1200px] flex-col gap-10 px-4 md:flex-row md:px-10 lg:px-10"
       >
@@ -51,58 +51,67 @@ import { ImageService } from '@shared/data-access/image.service';
             <div class="grow-0">Profil bearbeiten</div>
           </button>
 
-          <app-profile-data-entry
-            *ngIf="profile.aboutMe"
-            icon="info-square"
-            label="Über mich"
-            class="block border-t"
-            [value]="profile.aboutMe"
-          ></app-profile-data-entry>
+          @if (profile.aboutMe) {
+            <app-profile-data-entry
+              icon="info-square"
+              label="Über mich"
+              class="block border-t"
+              [value]="profile.aboutMe"
+            ></app-profile-data-entry>
+          }
 
-          <app-profile-data-entry
-            *ngIf="profile.city"
-            icon="buildings"
-            label="Wohnort"
-            [value]="profile.city"
-          ></app-profile-data-entry>
+          @if (profile.city) {
+            <app-profile-data-entry
+              icon="buildings"
+              label="Wohnort"
+              [value]="profile.city"
+            ></app-profile-data-entry>
+          }
 
-          <app-profile-data-entry
-            *ngIf="profile.birthDate"
-            icon="calendar3"
-            label="Alter"
-            [value]="profile.birthDate | age"
-          ></app-profile-data-entry>
+          @if (profile.birthDate) {
+            <app-profile-data-entry
+              icon="calendar3"
+              label="Alter"
+              [value]="profile.birthDate | age"
+            ></app-profile-data-entry>
+          }
 
-          <app-profile-data-entry
-            *ngIf="profile.size"
-            icon="arrows-vertical"
-            label="Körpergröße"
-            [value]="profile.size + ' cm'"
-          ></app-profile-data-entry>
+          @if (profile.size) {
+            <app-profile-data-entry
+              icon="arrows-vertical"
+              label="Körpergröße"
+              [value]="profile.size + ' cm'"
+            ></app-profile-data-entry>
+          }
 
-          <app-profile-data-entry
-            *ngIf="profile.gender"
-            icon="gender-ambiguous"
-            label="Geschlecht"
-            [value]="profile.gender | displayGender"
-          ></app-profile-data-entry>
+          @if (profile.gender) {
+            <app-profile-data-entry
+              icon="gender-ambiguous"
+              label="Geschlecht"
+              [value]="profile.gender | displayGender"
+            ></app-profile-data-entry>
+          }
 
-          <app-profile-data-entry
-            *ngFor="let danceExperience of profile.ableTo"
-            icon="music-note-beamed"
-            label="Tanzerfahrung"
-            [value]="
-              danceExperience.dance +
-              ' (' +
-              (danceExperience.level | displayDanceLevel) +
-              ', ' +
-              (danceExperience.leading | displayDanceRole) +
-              ')'
-            "
-          ></app-profile-data-entry>
+          @for (
+            danceExperience of profile.ableTo;
+            track danceExperience.dance
+          ) {
+            <app-profile-data-entry
+              icon="music-note-beamed"
+              label="Tanzerfahrung"
+              [value]="
+                danceExperience.dance +
+                ' (' +
+                (danceExperience.level | displayDanceLevel) +
+                ', ' +
+                (danceExperience.leading | displayDanceRole) +
+                ')'
+              "
+            ></app-profile-data-entry>
+          }
         </div>
       </div>
-    </ng-container>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

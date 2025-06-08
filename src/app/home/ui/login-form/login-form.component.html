@@ -10,18 +10,16 @@
         placeholder="max.mustermann@beispiel.de"
         type="email"
       />
-      <mat-error
-        *ngIf="errorHandling('email', 'required')"
-        data-test="email-error-empty"
-      >
-        Bitte geben Sie Ihre E-Mail Adresse an.
-      </mat-error>
-      <mat-error
-        *ngIf="errorHandling('email', 'email')"
-        data-test="email-error-format"
-      >
-        Bitte geben Sie eine gültige E-Mail Adresse an.
-      </mat-error>
+      @if (errorHandling('email', 'required')) {
+        <mat-error data-test="email-error-empty">
+          Bitte geben Sie Ihre E-Mail Adresse an.
+        </mat-error>
+      }
+      @if (errorHandling('email', 'email')) {
+        <mat-error data-test="email-error-format">
+          Bitte geben Sie eine gültige E-Mail Adresse an.
+        </mat-error>
+      }
     </mat-form-field>
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Passwort</mat-label>
@@ -34,12 +32,11 @@
       <mat-icon matSuffix (click)="hide = !hide">{{
         hide ? 'visibility_off' : 'visibility'
       }}</mat-icon>
-      <mat-error
-        *ngIf="errorHandling('password', 'required')"
-        data-test="password-field-empty"
-      >
-        Bitte geben Sie ein Passwort ein.
-      </mat-error>
+      @if (errorHandling('password', 'required')) {
+        <mat-error data-test="password-field-empty">
+          Bitte geben Sie ein Passwort ein.
+        </mat-error>
+      }
     </mat-form-field>
     <button
       class="full-width"
@@ -50,23 +47,17 @@
     >
       Anmelden
     </button>
-    <mat-error *ngIf="error" class="my-2">
-      <span> {{ error | errorMessage }} </span>
-    </mat-error>
-    <ng-container
-      *ngIf="
-        error === 'EMAIL_NOT_VALIDATED';
-        then emailNotValidatedLink;
-        else passwordResetLink
-      "
-    ></ng-container>
-    <ng-template #emailNotValidatedLink>
+    @if (error) {
+      <mat-error class="my-2">
+        <span> {{ error | errorMessage }} </span>
+      </mat-error>
+    }
+    @if (error === 'EMAIL_NOT_VALIDATED') {
       <a class="my-4" [routerLink]="" (click)="resendLink()"
         >Keine E-Mail erhalten?</a
       >
-    </ng-template>
-    <ng-template #passwordResetLink>
+    } @else {
       <a class="my-4" href="registration/reset-password">Passwort vergessen?</a>
-    </ng-template>
+    }
   </div>
 </form>

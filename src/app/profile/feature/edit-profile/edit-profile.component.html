@@ -31,16 +31,18 @@
       (change)="fileChangeEvent($event)"
     />
 
-    <div *ngIf="imageChangedEvent" class="image-cropper-container">
-      <image-cropper
-        format="png"
-        [aspectRatio]="4 / 4"
-        [imageChangedEvent]="imageChangedEvent"
-        [maintainAspectRatio]="true"
-        [roundCropper]="false"
-        (imageCropped)="imageCropped($event)"
-      ></image-cropper>
-    </div>
+    @if (imageChangedEvent) {
+      <div class="image-cropper-container">
+        <image-cropper
+          format="png"
+          [aspectRatio]="4 / 4"
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [roundCropper]="false"
+          (imageCropped)="imageCropped($event)"
+        ></image-cropper>
+      </div>
+    }
   </div>
 
   <h2 class="my-4 text-2xl">Persönliche Infos</h2>
@@ -65,9 +67,11 @@
   >
   </app-dance-experience-form>
 
-  <mat-error *ngIf="error">
-    <span> {{ error | errorMessage }} </span>
-  </mat-error>
+  @if (error) {
+    <mat-error>
+      <span> {{ error | errorMessage }} </span>
+    </mat-error>
+  }
 
   <button
     class="big-button"

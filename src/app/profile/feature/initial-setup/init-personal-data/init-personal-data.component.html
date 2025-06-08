@@ -13,9 +13,11 @@
     [formGroup]="personalDataForm"
   ></app-personal-data-form>
 
-  <mat-error *ngIf="error">
-    <span> {{ error | errorMessage }} </span>
-  </mat-error>
+  @if (error) {
+    <mat-error>
+      <span> {{ error | errorMessage }} </span>
+    </mat-error>
+  }
 
   <button class="big-button" color="primary" mat-flat-button type="submit">
     Nächster Schritt

@@ -1,16 +1,21 @@
-<div
-  *ngFor="let danceGroup of danceExperiences.controls; let i = index"
-  class="dance-experience-entry"
->
-  <app-dance-experience-entry
-    [formGroup]="danceGroup"
-  ></app-dance-experience-entry>
-  <div *ngIf="danceExperiences.length > 1" class="entry-actions">
-    <button class="remove-button" mat-stroked-button (click)="removeDance(i)">
-      Tanz entfernen
-    </button>
+@for (danceGroup of danceExperiences.controls; track $index; let i = $index) {
+  <div class="dance-experience-entry">
+    <app-dance-experience-entry
+      [formGroup]="danceGroup"
+    ></app-dance-experience-entry>
+    @if (danceExperiences.length > 1) {
+      <div class="entry-actions">
+        <button
+          class="remove-button"
+          mat-stroked-button
+          (click)="removeDance(i)"
+        >
+          Tanz entfernen
+        </button>
+      </div>
+    }
   </div>
-</div>
+}
 
 <div class="add-button-container">
   <button class="add-button" mat-stroked-button (click)="addDance()">
