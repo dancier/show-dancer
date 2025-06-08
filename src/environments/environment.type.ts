@@ -11,6 +11,9 @@ export type Environment = {
 
   // whether to remove the data-test attributes from the DOM
   removeTestAttributes: boolean;
+
+  // whether to enable developer tools (dev-only features)
+  enableDevTools: boolean;
 };
 
 // type to use for the object inside window.env (see assets/env.template.js)

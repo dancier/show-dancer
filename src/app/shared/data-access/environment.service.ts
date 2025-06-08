@@ -36,4 +36,8 @@ export class EnvironmentService {
   public shouldRemoveTestAttributes(): boolean {
     return environment.removeTestAttributes;
   }
+
+  public getEnvironment(): typeof environment {
+    return environment;
+  }
 }
