@@ -23,6 +23,7 @@ import { UnreadMessagesService } from '../../../../data-access/chat/unread-messa
           aria-current="page"
           routerLinkActive="bg-rose-900"
           [routerLink]="item.route"
+          [attr.data-testid]="'nav' + item.route.replace('/', '-')"
         >
           <span
             [ngClass]="{

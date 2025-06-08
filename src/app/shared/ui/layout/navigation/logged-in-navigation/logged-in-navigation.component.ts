@@ -46,6 +46,7 @@ export class LoggedInNavigationComponent {
 
   menuItems: MenuItem[] = [
     { name: 'Empfehlungen', route: '/recommendations' },
+    { name: 'Tänzer finden', route: '/find-dancers' },
     { name: 'Nachrichten', route: '/chat' },
     { name: 'Über Uns', route: '/about-us' },
     { name: 'Kontakt', route: '/contact' },

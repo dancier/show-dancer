@@ -38,6 +38,10 @@ export class AuthHttpService {
     this.baseUrl = `${this.environment.getApiUrl()}/authentication`;
   }
 
+  mockLogin(): void {
+    this.authStorageService.setLoginState(true, 'jwt-local-test-token');
+  }
+
   register(
     userRegistration: UserRegistration
   ): Observable<OldAPIResponse<void>> {
@@ -69,13 +73,14 @@ export class AuthHttpService {
         this.defaultOptions
       )
       .pipe(
-        map(asSuccess),
-        tap((response) =>
+        map((response) => {
+          const successResponse = asSuccess(response);
           this.authStorageService.setLoginState(
             true,
-            response.payload?.accessToken
-          )
-        ),
+            successResponse.payload?.accessToken
+          );
+          return successResponse;
+        }),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             case 401:

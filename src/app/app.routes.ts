@@ -35,6 +35,14 @@ export const ROUTES: Routes = [
           ),
       },
       {
+        path: 'find-dancers',
+        canActivate: [loggedInGuard],
+        loadChildren: () =>
+          import('./find-dancers/find-dancers.routes').then(
+            (m) => m.FIND_DANCERS_ROUTES
+          ),
+      },
+      {
         path: '',
         loadChildren: () =>
           import('./home/home.routes').then((m) => m.HOME_ROUTES),
