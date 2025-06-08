@@ -1,6 +1,16 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+  computed,
+  effect,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { DancersHttpService } from '../data-access/dancers-http.service';
+import { Dancer } from '../data-access/types/dancer.types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-find-dancers',
@@ -118,10 +128,10 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
         <!-- Results Section -->
         <div class="md:col-span-2 order-2 md:order-2">
           <div data-testid="dancer-list" class="space-y-6">
-            <ng-container *ngIf="showResults">
+            <ng-container *ngIf="showResults()">
               <!-- Loading State -->
               <div
-                *ngIf="isLoading"
+                *ngIf="isLoading()"
                 data-testid="find-loading-state"
                 class="text-center py-8"
               >
@@ -135,11 +145,11 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
               <!-- Results -->
               <div
-                *ngIf="!isLoading && !hasError && dancers.length > 0"
+                *ngIf="!isLoading() && !hasError() && dancers().length > 0"
                 class="space-y-4"
               >
                 <div
-                  *ngFor="let dancer of dancers; trackBy: trackByDancerId"
+                  *ngFor="let dancer of dancers(); trackBy: trackByDancerId"
                   data-testid="dancer-card"
                   class="bg-white shadow-sm border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
                   tabindex="0"
@@ -189,7 +199,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
                 </div>
 
                 <!-- Show More Button -->
-                <div *ngIf="hasMoreResults" class="flex justify-center">
+                <div *ngIf="hasMoreResults()" class="flex justify-center">
                   <button
                     data-testid="show-more-button"
                     class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-rose-700 bg-rose-100 hover:bg-rose-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
@@ -202,7 +212,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
               <!-- Empty State -->
               <div
-                *ngIf="!isLoading && !hasError && dancers.length === 0"
+                *ngIf="!isLoading() && !hasError() && dancers().length === 0"
                 data-testid="empty-find-state"
                 class="text-center py-12"
               >
@@ -231,7 +241,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
               <!-- Error State -->
               <div
-                *ngIf="!isLoading && hasError"
+                *ngIf="!isLoading() && hasError()"
                 data-testid="find-error-state"
                 class="text-center py-12"
               >
@@ -267,28 +277,70 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FindDancersComponent {
+  private dancersService = inject(DancersHttpService);
+  private router = inject(Router);
+
+  // Form controls
   filtersForm = new FormGroup({
-    gender: new FormControl('ALL'),
-    distance: new FormControl(20),
+    gender: new FormControl<'ALL' | 'MALE' | 'FEMALE'>('ALL'),
+    distance: new FormControl<number>(20),
   });
 
-  showResults = false;
-  isLoading = false;
-  hasError = false;
-  dancers: any[] = [];
-  hasMoreResults = false;
+  // State signals
+  private searchFilters = signal<{
+    gender: 'ALL' | 'MALE' | 'FEMALE';
+    distance: number;
+  } | null>(null);
+  private searchState = signal<'idle' | 'loading' | 'success' | 'error'>(
+    'idle'
+  );
+  private searchResults = signal<Dancer[]>([]);
+
+  // Computed state signals
+  showResults = computed(() => this.searchFilters() !== null);
+  isLoading = computed(() => this.searchState() === 'loading');
+  hasError = computed(() => this.searchState() === 'error');
+  dancers = computed(() => this.searchResults());
+  hasMoreResults = signal(false); // For future pagination
+
+  constructor() {
+    // Effect to trigger API calls when filters change
+    effect(() => {
+      const filters = this.searchFilters();
+      if (filters) {
+        this.performSearch(filters);
+      }
+    });
+  }
+
+  private performSearch(filters: {
+    gender: 'ALL' | 'MALE' | 'FEMALE';
+    distance: number;
+  }): void {
+    this.searchState.set('loading');
+
+    this.dancersService.searchDancers$(filters).subscribe({
+      next: (response) => {
+        if (response.isSuccess) {
+          this.searchResults.set(response.payload);
+          this.searchState.set('success');
+        } else {
+          this.searchState.set('error');
+        }
+      },
+      error: () => {
+        this.searchState.set('error');
+      },
+    });
+  }
 
   applyFilters(): void {
-    this.showResults = true;
-    this.isLoading = true;
-    this.hasError = false;
+    const filters = {
+      gender: this.filtersForm.value.gender || 'ALL',
+      distance: this.filtersForm.value.distance || 20,
+    };
 
-    // Simulate API call - this will be replaced with actual service call
-    setTimeout(() => {
-      this.isLoading = false;
-      // Mock data for now
-      this.dancers = [];
-    }, 1000);
+    this.searchFilters.set(filters);
   }
 
   loadMoreDancers(): void {
@@ -296,10 +348,10 @@ export class FindDancersComponent {
   }
 
   viewProfile(dancerId: string): void {
-    // Navigate to profile view
+    this.router.navigate(['/profile/view', dancerId]);
   }
 
-  trackByDancerId(index: number, dancer: any): string {
+  trackByDancerId(index: number, dancer: Dancer): string {
     return dancer.id;
   }
 }

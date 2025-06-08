@@ -95,8 +95,10 @@ export class FindDancersPage extends BasePage {
   }
 
   async applyFilters(): Promise<void> {
+    // Start waiting for response before clicking. Note no await.
+    const responsePromise = this.page.waitForResponse(/.*\/dancers/);
     await this.applyFiltersButton.click();
-    await this.page.waitForResponse(/.*\/dancers/);
+    await responsePromise;
   }
 
   async clickFirstDancer(): Promise<string | null> {
