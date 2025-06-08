@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
@@ -37,17 +37,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   ],
 })
 export class InitUserNameComponent {
+  profileService = inject(OwnProfileService);
+  private profileHttpService = inject(ProfileHttpService);
+  private fb = inject(NonNullableFormBuilder);
+  private router = inject(Router);
+
   usernameForm = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
   });
   error?: APIError;
-
-  constructor(
-    public profileService: OwnProfileService,
-    private profileHttpService: ProfileHttpService,
-    private fb: NonNullableFormBuilder,
-    private router: Router
-  ) {}
 
   public hasUsernameFieldError(error: string): boolean {
     return this.usernameForm.controls.username.hasError(error);

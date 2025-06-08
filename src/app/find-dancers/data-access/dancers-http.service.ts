@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -17,16 +17,16 @@ import { catchError, map, Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class DancersHttpService {
+  private http = inject(HttpClient);
+  private environment = inject(EnvironmentService);
+
   private readonly defaultOptions = {
     withCredentials: true,
   };
 
   private readonly dancersApiUrl: string;
 
-  constructor(
-    private http: HttpClient,
-    private environment: EnvironmentService
-  ) {
+  constructor() {
     this.dancersApiUrl = `${this.environment.getApiUrl()}/dancers`;
   }
 

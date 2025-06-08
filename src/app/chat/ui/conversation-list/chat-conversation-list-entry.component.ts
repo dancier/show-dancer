@@ -6,7 +6,7 @@ import {
   Input,
   Signal,
 } from '@angular/core';
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChatStateService,
   SingleChatState,
@@ -19,6 +19,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-chat-conversation-list-entry',
+  standalone: true,
   template: `
     <ng-container>
       <div
@@ -70,7 +71,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line
   host: { role: 'listitem' },
-  imports: [NgIf, NgClass, AsyncPipe],
+  imports: [CommonModule],
 })
 export class ChatConversationListEntryComponent {
   chatState = inject(ChatStateService);

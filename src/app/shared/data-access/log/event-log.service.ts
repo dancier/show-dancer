@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Event, Topic } from './eventlog.types';
 import { AppInstanceStorageService } from './app-instance-storage.service';
 import { EventLogHttpService } from './event-log-http.service';
@@ -7,10 +7,8 @@ import { EventLogHttpService } from './event-log-http.service';
   providedIn: 'root',
 })
 export class EventLogService {
-  constructor(
-    private eventLogHttpService: EventLogHttpService,
-    private appInstanceStorageService: AppInstanceStorageService
-  ) {}
+  private eventLogHttpService = inject(EventLogHttpService);
+  private appInstanceStorageService = inject(AppInstanceStorageService);
 
   createAndPublishEvent(topic: Topic, payload: any = {}): void {
     const appInstanceId = this.appInstanceStorageService.getAppIntanceId()!;

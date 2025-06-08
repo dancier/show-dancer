@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
@@ -29,14 +29,12 @@ import { PersonalDataFormComponent } from '../../../ui/personal-data-form/person
   ],
 })
 export class InitPersonalDataComponent {
+  profileService = inject(OwnProfileService);
+  private router = inject(Router);
+
   personalDataForm = new FormGroup<Partial<PersonalDataForm>>({});
 
   error?: APIError;
-
-  constructor(
-    public profileService: OwnProfileService,
-    private router: Router
-  ) {}
 
   submitForm(): void {
     if (this.personalDataForm.valid) {

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   UntypedFormBuilder,
@@ -37,17 +37,15 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
   ],
 })
 export class RegisterUserFormComponent implements OnInit, OnDestroy {
+  private fb = inject(UntypedFormBuilder);
+  private authenticationService = inject(AuthHttpService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   registrationForm!: UntypedFormGroup;
   error?: APIError;
   formStatusSubscription: Subscription | undefined;
   loggedInAsHuman = false;
-
-  constructor(
-    private fb: UntypedFormBuilder,
-    private authenticationService: AuthHttpService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.initReactiveForm();

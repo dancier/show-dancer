@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   Router,
@@ -13,10 +13,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class DancerProfileSufficientGuard {
-  constructor(
-    private profileService: OwnProfileService,
-    private router: Router
-  ) {}
+  private profileService = inject(OwnProfileService);
+  private router = inject(Router);
 
   canActivate(
     _route: ActivatedRouteSnapshot,

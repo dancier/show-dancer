@@ -3,8 +3,8 @@ import { DesktopMenuBarComponent } from '../ui/desktop-menu-bar.component';
 import { MobileMenuButtonComponent } from '../ui/mobile-menu/mobile-menu-button.component';
 import { MobileMenuComponent } from '../ui/mobile-menu/mobile-menu.component';
 import { NgIf } from '@angular/common';
-import { ProfileMenuButtonComponent } from '../ui/profile-menu-button.component';
 import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-logged-out-navigation',
@@ -15,7 +15,7 @@ import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component
     MobileMenuButtonComponent,
     MobileMenuComponent,
     NgIf,
-    ProfileMenuButtonComponent,
+    CommonModule,
   ],
 })
 export class LoggedOutNavigationComponent {

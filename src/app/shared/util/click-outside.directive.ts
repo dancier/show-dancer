@@ -4,6 +4,7 @@ import {
   EventEmitter,
   HostListener,
   Output,
+  inject,
 } from '@angular/core';
 
 @Directive({
@@ -12,10 +13,10 @@ import {
   standalone: true,
 })
 export class ClickOutsideDirective {
+  private elementRef = inject(ElementRef);
+
   @Output()
   clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
-
-  constructor(private elementRef: ElementRef) {}
 
   @HostListener('document:click', ['$event'])
   public onClick(event: Event): void {

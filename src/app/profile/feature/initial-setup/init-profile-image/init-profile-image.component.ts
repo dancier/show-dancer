@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ImageUploadService } from '../../../data-access/image-upload.service';
 import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
 import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
@@ -15,15 +15,13 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [MatButtonModule, NgIf, ImageCropperModule],
 })
 export class InitProfileImageComponent {
+  private imageUploadService = inject(ImageUploadService);
+  private profileService = inject(OwnProfileService);
+  private router = inject(Router);
+
   croppedImage?: string | null | undefined;
   imageChangedEvent: any = '';
   uploadResponse?: OldAPIResponse<UploadedImageDao>;
-
-  constructor(
-    private imageUploadService: ImageUploadService,
-    private profileService: OwnProfileService,
-    private router: Router
-  ) {}
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;

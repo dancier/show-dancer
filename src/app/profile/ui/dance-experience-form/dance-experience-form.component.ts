@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -36,15 +36,13 @@ import { NgFor, NgIf } from '@angular/common';
   ],
 })
 export class DanceExperienceFormComponent implements OnInit {
+  profileService = inject(OwnProfileService);
+  private router = inject(Router);
+  private formGroupDirective = inject(FormGroupDirective);
+
   danceExperiences = new FormArray<FormGroup<DanceExperienceEntryForm>>([]);
 
   @Input() danceFormType: 'own' | 'partner' = 'own';
-
-  constructor(
-    public profileService: OwnProfileService,
-    private router: Router,
-    private formGroupDirective: FormGroupDirective
-  ) {}
 
   ngOnInit(): void {
     this.formGroupDirective.form.addControl('dances', this.danceExperiences);

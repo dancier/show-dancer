@@ -5,7 +5,7 @@ import {
   Signal,
 } from '@angular/core';
 import { ChatSingleMessageComponent } from './chat-single-message.component';
-import { AsyncPipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ChatMessage } from '../../data-access/chat.types';
 import { ChatStateService } from '../../data-access/chat-state.service';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -16,6 +16,7 @@ import { map } from 'rxjs';
 
 @Component({
   selector: 'app-chat-messages',
+  standalone: true,
   template: `
     <!--    <div class="relative">-->
     <div
@@ -50,14 +51,7 @@ import { map } from 'rxjs';
     <!--    </div>-->
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    NgIf,
-    NgFor,
-    ChatSingleMessageComponent,
-    NgClass,
-    AsyncPipe,
-    JsonPipe,
-  ],
+  imports: [NgIf, NgFor, ChatSingleMessageComponent, NgClass],
 })
 export class ChatMessagesComponent {
   chatState = inject(ChatStateService);

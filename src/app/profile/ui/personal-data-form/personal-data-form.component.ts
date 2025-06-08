@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -45,17 +45,17 @@ const zipFormat = /\d{5}/g;
   ],
 })
 export class PersonalDataFormComponent implements OnInit {
+  private formGroupDirective = inject(FormGroupDirective);
+  private fb = inject(NonNullableFormBuilder);
+  private profileService = inject(OwnProfileService);
+
   personalDataForm!: FormGroup<PersonalDataForm>;
 
   genderList = genderList;
   minDate: Date;
   maxDate: Date;
 
-  constructor(
-    private formGroupDirective: FormGroupDirective,
-    private fb: NonNullableFormBuilder,
-    private profileService: OwnProfileService
-  ) {
+  constructor() {
     // set min and max selectable date of birth relative to the current year
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 110, 0, 1);

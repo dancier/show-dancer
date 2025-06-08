@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Renderer2, inject } from '@angular/core';
 import { EnvironmentService } from '../data-access/environment.service';
 
 @Directive({
@@ -7,11 +7,15 @@ import { EnvironmentService } from '../data-access/environment.service';
   standalone: true,
 })
 export class DataTestDirective {
-  constructor(
-    private el: ElementRef,
-    private renderer: Renderer2,
-    private environment: EnvironmentService
-  ) {
+  private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
+  private environment = inject(EnvironmentService);
+
+  constructor() {
+    const el = this.el;
+    const renderer = this.renderer;
+    const environment = this.environment;
+
     if (environment.shouldRemoveTestAttributes()) {
       renderer.removeAttribute(el.nativeElement, 'data-test');
     }

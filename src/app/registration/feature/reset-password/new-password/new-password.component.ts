@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   NonNullableFormBuilder,
@@ -32,6 +32,11 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
   ],
 })
 export class NewPasswordComponent {
+  private fb = inject(NonNullableFormBuilder);
+  private authenticationService = inject(AuthHttpService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   newPasswordForm = this.fb.group(
     {
       password: new FormControl<string | null>(null, [Validators.required]),
@@ -44,13 +49,6 @@ export class NewPasswordComponent {
     }
   );
   error?: APIError;
-
-  constructor(
-    private fb: NonNullableFormBuilder,
-    private authenticationService: AuthHttpService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   public errorHandling(controlName: string, error: string): boolean {
     //@ts-ignore

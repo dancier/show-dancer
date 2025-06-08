@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../data-access/auth/auth.service';
 import { LoggedOutNavigationComponent } from './logged-out-navigation/logged-out-navigation.component';
 import { LoggedInNavigationComponent } from './logged-in-navigation/logged-in-navigation.component';
@@ -16,9 +16,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
   ],
 })
 export class NavigationComponent {
-  constructor(
-    public authStorageService: AuthService // private chatState: ChatStateService // needs to be initialized from the start
-  ) {}
+  authStorageService = inject(AuthService);
 
   // ngOnDestroy(): void {
   //   // this.chatService.stopPollingForChats();

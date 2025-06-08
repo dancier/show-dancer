@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   HttpEvent,
   HttpHandler,
@@ -12,7 +12,7 @@ import { AppInstanceStorageService } from '../../data-access/log/app-instance-st
   providedIn: 'root',
 })
 export class AppInstanceIdInterceptor implements HttpInterceptor {
-  constructor(private appInstanceStorageService: AppInstanceStorageService) {}
+  private appInstanceStorageService = inject(AppInstanceStorageService);
 
   intercept(
     req: HttpRequest<any>,
