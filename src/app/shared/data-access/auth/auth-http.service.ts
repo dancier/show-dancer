@@ -36,7 +36,6 @@ export class AuthHttpService {
     private environment: EnvironmentService
   ) {
     this.baseUrl = `${this.environment.getApiUrl()}/authentication`;
-    this.mockLogin();
   }
 
   mockLogin(): void {
@@ -74,13 +73,14 @@ export class AuthHttpService {
         this.defaultOptions
       )
       .pipe(
-        map(asSuccess),
-        tap((response) =>
+        map((response) => {
+          const successResponse = asSuccess(response);
           this.authStorageService.setLoginState(
             true,
-            response.payload?.accessToken
-          )
-        ),
+            successResponse.payload?.accessToken
+          );
+          return successResponse;
+        }),
         catchError((error: HttpErrorResponse) => {
           switch (error.status) {
             case 401:
