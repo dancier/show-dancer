@@ -20,16 +20,14 @@ import { AlertComponent } from '@shared/ui/alert/alert.component';
     AlertComponent,
   ],
   template: `
-    <ng-container *ngIf="profileResponse$ | async as profileResponse">
+    @if (profileResponse$ | async; as profileResponse) {
       <div
         class="my-12 mx-auto flex max-w-[1200px] flex-col gap-10 px-4 md:flex-row md:px-10 lg:px-10"
       >
-        <ng-container
-          *ngIf="
-            profileResponse.fetchStatus === 'success' &&
-            profileResponse.payload as profile
-          "
-        >
+        @if (
+          profileResponse.fetchStatus === 'success' && profileResponse.payload;
+          as profile
+        ) {
           <div class="mx-auto lg:px-16">
             <!--            TODO: use pipe-->
             <img
@@ -59,59 +57,68 @@ import { AlertComponent } from '@shared/ui/alert/alert.component';
               <div class="grow-0">Nachricht schreiben</div>
             </button>
 
-            <app-profile-data-entry
-              *ngIf="profile.aboutMe"
-              icon="info-square"
-              label="Über mich"
-              class="block border-t"
-              [value]="profile.aboutMe"
-            ></app-profile-data-entry>
+            @if (profile.aboutMe) {
+              <app-profile-data-entry
+                icon="info-square"
+                label="Über mich"
+                class="block border-t"
+                [value]="profile.aboutMe"
+              ></app-profile-data-entry>
+            }
 
-            <app-profile-data-entry
-              *ngIf="profile.city"
-              icon="buildings"
-              label="Wohnort"
-              [value]="profile.city"
-            ></app-profile-data-entry>
+            @if (profile.city) {
+              <app-profile-data-entry
+                icon="buildings"
+                label="Wohnort"
+                [value]="profile.city"
+              ></app-profile-data-entry>
+            }
 
-            <app-profile-data-entry
-              *ngIf="profile.age"
-              icon="calendar3"
-              label="Alter"
-              [value]="profile.age.toString()"
-            ></app-profile-data-entry>
+            @if (profile.age) {
+              <app-profile-data-entry
+                icon="calendar3"
+                label="Alter"
+                [value]="profile.age.toString()"
+              ></app-profile-data-entry>
+            }
 
-            <app-profile-data-entry
-              *ngIf="profile.size"
-              icon="arrows-vertical"
-              label="Körpergröße"
-              [value]="profile.size + ' cm'"
-            ></app-profile-data-entry>
+            @if (profile.size) {
+              <app-profile-data-entry
+                icon="arrows-vertical"
+                label="Körpergröße"
+                [value]="profile.size + ' cm'"
+              ></app-profile-data-entry>
+            }
 
-            <app-profile-data-entry
-              *ngIf="profile.gender"
-              icon="gender-ambiguous"
-              label="Geschlecht"
-              [value]="profile.gender | displayGender"
-            ></app-profile-data-entry>
+            @if (profile.gender) {
+              <app-profile-data-entry
+                icon="gender-ambiguous"
+                label="Geschlecht"
+                [value]="profile.gender | displayGender"
+              ></app-profile-data-entry>
+            }
 
-            <app-profile-data-entry
-              *ngFor="let danceExperience of profile.ableTo"
-              icon="music-note-beamed"
-              label="Tanzerfahrung"
-              [value]="
-                danceExperience.dance +
-                ' (' +
-                (danceExperience.level | displayDanceLevel) +
-                ', ' +
-                (danceExperience.leading | displayDanceRole) +
-                ')'
-              "
-            ></app-profile-data-entry>
+            @for (
+              danceExperience of profile.ableTo;
+              track danceExperience.dance
+            ) {
+              <app-profile-data-entry
+                icon="music-note-beamed"
+                label="Tanzerfahrung"
+                [value]="
+                  danceExperience.dance +
+                  ' (' +
+                  (danceExperience.level | displayDanceLevel) +
+                  ', ' +
+                  (danceExperience.leading | displayDanceRole) +
+                  ')'
+                "
+              ></app-profile-data-entry>
+            }
           </div>
-        </ng-container>
+        }
 
-        <ng-container *ngIf="profileResponse.fetchStatus === 'loading'">
+        @if (profileResponse.fetchStatus === 'loading') {
           <div class="mx-auto lg:px-16">
             <div
               class="relative h-[250px] w-[250px] max-w-none animate-pulse rounded-full bg-gray-400"
@@ -128,18 +135,18 @@ import { AlertComponent } from '@shared/ui/alert/alert.component';
             </div>
             <div class="border-b"></div>
           </div>
-        </ng-container>
+        }
 
-        <ng-container *ngIf="profileResponse.fetchStatus === 'error'">
+        @if (profileResponse.fetchStatus === 'error') {
           <app-alert alertType="error" icon="error" class="mx-auto">
             <span>
               Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später
               erneut.
             </span>
           </app-alert>
-        </ng-container>
+        }
       </div>
-    </ng-container>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

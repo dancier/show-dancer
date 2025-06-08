@@ -16,7 +16,7 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-send-verification-link-form',
@@ -24,7 +24,6 @@ import { AsyncPipe, NgIf } from '@angular/common';
   styleUrls: ['./send-verification-link-form.component.scss'],
   imports: [
     ReactiveFormsModule,
-    NgIf,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

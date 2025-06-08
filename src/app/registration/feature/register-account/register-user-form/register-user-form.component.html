@@ -9,18 +9,16 @@
       placeholder="max.mustermann@beispiel.de"
       type="email"
     />
-    <mat-error
-      *ngIf="errorHandling('email', 'required')"
-      data-test="email-error-empty"
-    >
-      Bitte geben Sie Ihre E-Mail Adresse an.
-    </mat-error>
-    <mat-error
-      *ngIf="errorHandling('email', 'email')"
-      data-test="email-error-format"
-    >
-      Bitte geben Sie eine gültige E-Mail Adresse an.
-    </mat-error>
+    @if (errorHandling('email', 'required')) {
+      <mat-error data-test="email-error-empty">
+        Bitte geben Sie Ihre E-Mail Adresse an.
+      </mat-error>
+    }
+    @if (errorHandling('email', 'email')) {
+      <mat-error data-test="email-error-format">
+        Bitte geben Sie eine gültige E-Mail Adresse an.
+      </mat-error>
+    }
   </mat-form-field>
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Passwort</mat-label>
@@ -30,12 +28,11 @@
       matInput
       type="password"
     />
-    <mat-error
-      *ngIf="errorHandling('password', 'required')"
-      data-test="password-field-empty"
-    >
-      Bitte geben Sie ein Passwort ein.
-    </mat-error>
+    @if (errorHandling('password', 'required')) {
+      <mat-error data-test="password-field-empty">
+        Bitte geben Sie ein Passwort ein.
+      </mat-error>
+    }
   </mat-form-field>
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Passwort wiederholen</mat-label>
@@ -45,18 +42,16 @@
       matInput
       type="password"
     />
-    <mat-error
-      *ngIf="errorHandling('passwordConfirm', 'required')"
-      data-test="password-confirm-field-empty"
-    >
-      Bitte geben Sie ein Passwort ein.
-    </mat-error>
-    <mat-error
-      *ngIf="errorHandling('passwordConfirm', 'matching')"
-      data-test="password-confirm-field-no-match"
-    >
-      Die eingegebenen Passwörter stimmen nicht überein.
-    </mat-error>
+    @if (errorHandling('passwordConfirm', 'required')) {
+      <mat-error data-test="password-confirm-field-empty">
+        Bitte geben Sie ein Passwort ein.
+      </mat-error>
+    }
+    @if (errorHandling('passwordConfirm', 'matching')) {
+      <mat-error data-test="password-confirm-field-no-match">
+        Die eingegebenen Passwörter stimmen nicht überein.
+      </mat-error>
+    }
   </mat-form-field>
   <div class="accept-terms mb-4 flex align-middle">
     <mat-checkbox formControlName="acceptTermsAndConditions"></mat-checkbox>
@@ -67,20 +62,16 @@
       gelesen und akzeptiere sie.
     </div>
   </div>
-  <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
-  <ng-container *ngIf="loggedInAsHuman; then thankYouHuman; else captcha">
-  </ng-container>
-  <ng-template #thankYouHuman>
+  @if (loggedInAsHuman) {
     <p class="mb-2">Vielen Dank!</p>
-  </ng-template>
-  <ng-template #captcha>
+  } @else {
     <div class="captcha mb-4">
       <re-captcha
         siteKey="6LetqBAgAAAAAJXA5K_U88bsxKtyp_vld6J0x-Nv"
         (resolved)="captchaResolved($event)"
       ></re-captcha>
     </div>
-  </ng-template>
+  }
   <button
     class="btn-block full-width"
     color="primary"
@@ -90,8 +81,9 @@
   >
     Registrieren
   </button>
-  <!-- eslint-disable-next-line @angular-eslint/template/cyclomatic-complexity -->
-  <mat-error *ngIf="error">
-    <span> {{ error | errorMessage }} </span>
-  </mat-error>
+  @if (error) {
+    <mat-error>
+      <span> {{ error | errorMessage }} </span>
+    </mat-error>
+  }
 </form>

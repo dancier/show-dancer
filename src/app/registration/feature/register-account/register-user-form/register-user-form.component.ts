@@ -14,7 +14,6 @@ import { ErrorMessagePipe } from '@shared/util/http/error-message.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DataTestDirective } from '@shared/util/data-test.directive';
@@ -28,7 +27,6 @@ import { DataTestDirective } from '@shared/util/data-test.directive';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    NgIf,
     MatCheckboxModule,
     RouterLink,
     RecaptchaModule,

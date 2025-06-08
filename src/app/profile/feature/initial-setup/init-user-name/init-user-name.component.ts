@@ -18,7 +18,6 @@ import { NameAvailability } from '../../../data-access/types/profile.types';
 import { ErrorMessagePipe } from '@shared/util/http/error-message.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { AlertComponent } from '@shared/ui/alert/alert.component';
-import { NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -30,7 +29,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    NgIf,
     AlertComponent,
     MatButtonModule,
     ErrorMessagePipe,

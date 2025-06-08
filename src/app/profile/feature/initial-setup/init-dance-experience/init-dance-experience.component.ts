@@ -8,7 +8,6 @@ import { APIError } from '@shared/util/http/response.types';
 import { ErrorMessagePipe } from '@shared/util/http/error-message.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { NgIf } from '@angular/common';
 import { DanceExperienceFormComponent } from '../../../ui/dance-experience-form/dance-experience-form.component';
 
 @Component({
@@ -18,7 +17,6 @@ import { DanceExperienceFormComponent } from '../../../ui/dance-experience-form/
   imports: [
     ReactiveFormsModule,
     DanceExperienceFormComponent,
-    NgIf,
     MatFormFieldModule,
     MatButtonModule,
     ErrorMessagePipe,

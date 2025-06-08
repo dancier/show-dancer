@@ -5,7 +5,7 @@ import {
   Signal,
 } from '@angular/core';
 import { ChatSingleMessageComponent } from './chat-single-message.component';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChatMessage } from '../../data-access/chat.types';
 import { ChatStateService } from '../../data-access/chat-state.service';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -19,39 +19,40 @@ import { map } from 'rxjs';
   standalone: true,
   template: `
     <!--    <div class="relative">-->
-    <div
-      *ngIf="ownUserId()"
-      class="flex h-[452px] flex-col-reverse overflow-auto p-8"
-    >
-      <div class="flex flex-col gap-8">
-        <app-chat-single-message
-          *ngFor="let message of activeChatMessages()"
-          class="max-w-[80%]"
-          [message]="message"
-          [isOwnMessage]="message.authorId === ownUserId()"
-          [isRead]="
-            message.readByParticipants
-              ? message.readByParticipants.length > 1
-              : false
-          "
-          [ngClass]="{
-            'self-start': message.authorId !== ownUserId(),
-            'self-end': message.authorId === ownUserId()
-          }"
-        ></app-chat-single-message>
-        <div
-          *ngIf="activeChatMessages().length === 0"
-          class="self-center rounded border border-gray-300 px-8 py-4 text-center text-gray-500"
-        >
-          <p>Noch gibt es hier nichts zu sehen</p>
-          <p class="mb-0">Schreibe jetzt deine erste Nachricht</p>
+    @if (ownUserId()) {
+      <div class="flex h-[452px] flex-col-reverse overflow-auto p-8">
+        <div class="flex flex-col gap-8">
+          @for (message of activeChatMessages(); track message.id) {
+            <app-chat-single-message
+              class="max-w-[80%]"
+              [message]="message"
+              [isOwnMessage]="message.authorId === ownUserId()"
+              [isRead]="
+                message.readByParticipants
+                  ? message.readByParticipants.length > 1
+                  : false
+              "
+              [ngClass]="{
+                'self-start': message.authorId !== ownUserId(),
+                'self-end': message.authorId === ownUserId()
+              }"
+            ></app-chat-single-message>
+          }
+          @if (activeChatMessages().length === 0) {
+            <div
+              class="self-center rounded border border-gray-300 px-8 py-4 text-center text-gray-500"
+            >
+              <p>Noch gibt es hier nichts zu sehen</p>
+              <p class="mb-0">Schreibe jetzt deine erste Nachricht</p>
+            </div>
+          }
         </div>
       </div>
-    </div>
+    }
     <!--    </div>-->
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgIf, NgFor, ChatSingleMessageComponent, NgClass],
+  imports: [ChatSingleMessageComponent, NgClass],
 })
 export class ChatMessagesComponent {
   chatState = inject(ChatStateService);

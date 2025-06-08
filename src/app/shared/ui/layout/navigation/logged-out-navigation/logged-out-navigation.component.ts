@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DesktopMenuBarComponent } from '../ui/desktop-menu-bar.component';
 import { MobileMenuButtonComponent } from '../ui/mobile-menu/mobile-menu-button.component';
 import { MobileMenuComponent } from '../ui/mobile-menu/mobile-menu.component';
-import { NgIf } from '@angular/common';
 import { MenuItem } from '../logged-in-navigation/logged-in-navigation.component';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +13,6 @@ import { CommonModule } from '@angular/common';
     DesktopMenuBarComponent,
     MobileMenuButtonComponent,
     MobileMenuComponent,
-    NgIf,
     CommonModule,
   ],
 })

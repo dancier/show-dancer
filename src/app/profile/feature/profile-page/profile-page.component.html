@@ -1,47 +1,48 @@
-<div *ngIf="profileService.profile$ | async as profile" class="profile">
-  <div class="profile-header">
-    <div class="profile-image">
-      <img
-        alt="Profile Image"
-        [src]="profileService.getProfileImageSrc() | async"
-      />
-    </div>
-    <div class="profile-info">
-      <h1 class="text-2xl">
-        {{ profile.dancerName }}, {{ profile.birthDate | age }}
-      </h1>
-      <div class="profile-location text-lg">
-        <!--  TODO: Location Icon -->
-        Dortmund
+@if (profileService.profile$ | async; as profile) {
+  <div class="profile">
+    <div class="profile-header">
+      <div class="profile-image">
+        <img
+          alt="Profile Image"
+          [src]="profileService.getProfileImageSrc() | async"
+        />
       </div>
-      <div class="profile-header-info text-lg">
-        <div>{{ profile.gender | displayGender }}</div>
-        <div>•</div>
-        <div>{{ profile.size }}cm groß</div>
+      <div class="profile-info">
+        <h1 class="text-2xl">
+          {{ profile.dancerName }}, {{ profile.birthDate | age }}
+        </h1>
+        <div class="profile-location text-lg">
+          <!--  TODO: Location Icon -->
+          Dortmund
+        </div>
+        <div class="profile-header-info text-lg">
+          <div>{{ profile.gender | displayGender }}</div>
+          <div>•</div>
+          <div>{{ profile.size }}cm groß</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <h2>Tanzerfahrung</h2>
-  <div class="dance-experience">
-    <div
-      *ngFor="let danceExperience of profile.ableTo"
-      class="dance-experience-item"
+    <h2>Tanzerfahrung</h2>
+    <div class="dance-experience">
+      @for (danceExperience of profile.ableTo; track danceExperience.dance) {
+        <div class="dance-experience-item">
+          <div class="dance-title">{{ danceExperience.dance }}</div>
+          <div class="dance-info">
+            {{ danceExperience.level | displayDanceLevel }},
+            {{ danceExperience.leading | displayDanceRole }}
+          </div>
+        </div>
+      }
+    </div>
+
+    <button
+      class="big-button"
+      color="primary"
+      mat-flat-button
+      (click)="editProfile()"
     >
-      <div class="dance-title">{{ danceExperience.dance }}</div>
-      <div class="dance-info">
-        {{ danceExperience.level | displayDanceLevel }},
-        {{ danceExperience.leading | displayDanceRole }}
-      </div>
-    </div>
+      Profil bearbeiten
+    </button>
   </div>
-
-  <button
-    class="big-button"
-    color="primary"
-    mat-flat-button
-    (click)="editProfile()"
-  >
-    Profil bearbeiten
-  </button>
-</div>
+}

@@ -30,18 +30,18 @@
         ></app-profile-menu-button>
       </div>
     </div>
-    <app-profile-menu
-      *ngIf="profilePopupOpen"
-      class="hidden md:block"
-      [menuItems]="profileMenuItems"
-      (clickOutside)="closeProfileMenu()"
-    >
-    </app-profile-menu>
+    @if (profilePopupOpen) {
+      <app-profile-menu
+        class="hidden md:block"
+        [menuItems]="profileMenuItems"
+        (clickOutside)="closeProfileMenu()"
+      >
+      </app-profile-menu>
+    }
   </div>
 
-  <app-mobile-menu
-    *ngIf="mobileMenuOpen"
-    [menuItems]="menuItems.concat(profileMenuItems)"
-  >
-  </app-mobile-menu>
+  @if (mobileMenuOpen) {
+    <app-mobile-menu [menuItems]="menuItems.concat(profileMenuItems)">
+    </app-mobile-menu>
+  }
 </nav>

@@ -6,7 +6,7 @@ import { DisplayDanceRolePipe } from '../../util/pipes/display-dance-role.pipe';
 import { DisplayDanceLevelPipe } from '../../util/pipes/display-dance-level.pipe';
 import { DisplayGenderPipe } from '../../util/pipes/display-gender.pipe';
 import { MatButtonModule } from '@angular/material/button';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile-page',
@@ -14,8 +14,6 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
   styleUrls: ['./profile-page.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     MatButtonModule,
     AsyncPipe,
     DisplayGenderPipe,

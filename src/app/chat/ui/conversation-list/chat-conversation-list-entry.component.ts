@@ -21,9 +21,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
   selector: 'app-chat-conversation-list-entry',
   standalone: true,
   template: `
-    <ng-container>
+    @if (conversation() && participant()) {
       <div
-        *ngIf="conversation() && participant()"
         class="active:bg-gray-150 mx-2 my-0.5 flex cursor-pointer items-center gap-6 rounded border border-white px-4 py-3 hover:bg-gray-100"
         tabindex="0"
         [attr.data-testid]="
@@ -61,12 +60,13 @@ import { toSignal } from '@angular/core/rxjs-interop';
             {{ participant()!.city }}
           </div>
         </div>
-        <div
-          *ngIf="hasUnreadMessages()"
-          class="h-2 w-2 grow-0 rounded-full bg-teal-500 fill-teal-500"
-        ></div>
+        @if (hasUnreadMessages()) {
+          <div
+            class="h-2 w-2 grow-0 rounded-full bg-teal-500 fill-teal-500"
+          ></div>
+        }
       </div>
-    </ng-container>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line

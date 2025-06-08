@@ -25,7 +25,7 @@
     (change)="fileChangeEvent($event)"
   />
 
-  <ng-container *ngIf="imageChangedEvent">
+  @if (imageChangedEvent) {
     <p class="mt-4 mb-2">Bitte schneide das Bild hier zu:</p>
     <div class="image-cropper-container">
       <image-cropper
@@ -36,7 +36,7 @@
         (imageCropped)="imageCropped($event)"
       ></image-cropper>
     </div>
-  </ng-container>
+  }
 
   <div class="buttons">
     <button class="btn-skip big-button" mat-button (click)="nextStep()">

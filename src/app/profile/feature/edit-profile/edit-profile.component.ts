@@ -21,7 +21,7 @@ import { ErrorMessagePipe } from '@shared/util/http/error-message.pipe';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DanceExperienceFormComponent } from '../../ui/dance-experience-form/dance-experience-form.component';
 import { PersonalDataFormComponent } from '../../ui/personal-data-form/personal-data-form.component';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { ImageService } from '@shared/data-access/image.service';
 
@@ -37,7 +37,6 @@ type EditProfileForm = {
   styleUrls: ['./edit-profile.component.scss'],
   imports: [
     MatButtonModule,
-    NgIf,
     ImageCropperModule,
     PersonalDataFormComponent,
     ReactiveFormsModule,

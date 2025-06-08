@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ChatConversationListEntryComponent } from './chat-conversation-list-entry.component';
-import { NgFor } from '@angular/common';
 import {
   ChatStateService,
   SingleChatState,
@@ -9,19 +8,15 @@ import {
 @Component({
   selector: 'app-chat-conversation-list',
   template: `
-    <app-chat-conversation-list-entry
-      *ngFor="
-        let conversation of chatState.chats();
-        trackBy: trackByConversationId
-      "
-      [conversationId]="conversation.id"
-    >
-    </app-chat-conversation-list-entry>
+    @for (conversation of chatState.chats(); track conversation.id) {
+      <app-chat-conversation-list-entry [conversationId]="conversation.id">
+      </app-chat-conversation-list-entry>
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line
   host: { role: 'list' },
-  imports: [NgFor, ChatConversationListEntryComponent],
+  imports: [ChatConversationListEntryComponent],
 })
 export class ChatConversationListComponent {
   chatState = inject(ChatStateService);

@@ -128,147 +128,153 @@ import { Router } from '@angular/router';
         <!-- Results Section -->
         <div class="md:col-span-2 order-2 md:order-2">
           <div data-testid="dancer-list" class="space-y-6">
-            <ng-container *ngIf="showResults()">
+            @if (showResults()) {
               <!-- Loading State -->
-              <div
-                *ngIf="isLoading()"
-                data-testid="find-loading-state"
-                class="text-center py-8"
-              >
-                <div
-                  class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-rose-600"
-                ></div>
-                <p class="mt-2 text-sm text-gray-500">
-                  Tänzer werden geladen...
-                </p>
-              </div>
+              @if (isLoading()) {
+                <div data-testid="find-loading-state" class="text-center py-8">
+                  <div
+                    class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-rose-600"
+                  ></div>
+                  <p class="mt-2 text-sm text-gray-500">
+                    Tänzer werden geladen...
+                  </p>
+                </div>
+              }
 
               <!-- Results -->
-              <div
-                *ngIf="!isLoading() && !hasError() && dancers().length > 0"
-                class="space-y-4"
-              >
-                <div
-                  *ngFor="let dancer of dancers(); trackBy: trackByDancerId"
-                  data-testid="dancer-card"
-                  class="bg-white shadow-sm border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
-                  tabindex="0"
-                  role="button"
-                  [attr.data-dancer-id]="dancer.id"
-                  [attr.aria-label]="
-                    'Profil von ' + dancer.dancerName + ' anzeigen'
-                  "
-                  (click)="viewProfile(dancer.id)"
-                  (keydown.enter)="viewProfile(dancer.id)"
-                  (keydown.space)="viewProfile(dancer.id)"
-                >
-                  <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0">
-                      <div
-                        class="h-16 w-16 bg-gray-300 rounded-full flex items-center justify-center"
-                      >
-                        <span class="text-gray-600 text-sm font-medium">
-                          {{ dancer.dancerName.charAt(0).toUpperCase() }}
-                        </span>
+              @if (!isLoading() && !hasError() && dancers().length > 0) {
+                <div class="space-y-4">
+                  @for (dancer of dancers(); track dancer.id) {
+                    <div
+                      data-testid="dancer-card"
+                      class="bg-white shadow-sm border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
+                      tabindex="0"
+                      role="button"
+                      [attr.data-dancer-id]="dancer.id"
+                      [attr.aria-label]="
+                        'Profil von ' + dancer.dancerName + ' anzeigen'
+                      "
+                      (click)="viewProfile(dancer.id)"
+                      (keydown.enter)="viewProfile(dancer.id)"
+                      (keydown.space)="viewProfile(dancer.id)"
+                    >
+                      <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                          <div
+                            class="h-16 w-16 bg-gray-300 rounded-full flex items-center justify-center"
+                          >
+                            <span class="text-gray-600 text-sm font-medium">
+                              {{ dancer.dancerName.charAt(0).toUpperCase() }}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                          <h3
+                            data-testid="dancer-name"
+                            class="text-lg font-medium text-gray-900"
+                          >
+                            {{ dancer.dancerName }}
+                          </h3>
+                          <p
+                            data-testid="dancer-age"
+                            class="text-sm text-gray-500"
+                          >
+                            {{ dancer.age }} Jahre
+                          </p>
+                          <p
+                            data-testid="dancer-location"
+                            class="text-sm text-gray-500"
+                          >
+                            {{ dancer.city }}, {{ dancer.country }}
+                          </p>
+                          @if (dancer.aboutMe) {
+                            <p class="mt-2 text-sm text-gray-700 line-clamp-2">
+                              {{ dancer.aboutMe }}
+                            </p>
+                          }
+                        </div>
                       </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                      <h3
-                        data-testid="dancer-name"
-                        class="text-lg font-medium text-gray-900"
-                      >
-                        {{ dancer.dancerName }}
-                      </h3>
-                      <p data-testid="dancer-age" class="text-sm text-gray-500">
-                        {{ dancer.age }} Jahre
-                      </p>
-                      <p
-                        data-testid="dancer-location"
-                        class="text-sm text-gray-500"
-                      >
-                        {{ dancer.city }}, {{ dancer.country }}
-                      </p>
-                      <p
-                        *ngIf="dancer.aboutMe"
-                        class="mt-2 text-sm text-gray-700 line-clamp-2"
-                      >
-                        {{ dancer.aboutMe }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                  }
 
-                <!-- Show More Button -->
-                <div *ngIf="hasMoreResults()" class="flex justify-center">
-                  <button
-                    data-testid="show-more-button"
-                    class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-rose-700 bg-rose-100 hover:bg-rose-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
-                    (click)="loadMoreDancers()"
-                  >
-                    Weitere anzeigen
-                  </button>
+                  <!-- Show More Button -->
+                  @if (hasMoreResults()) {
+                    <div class="flex justify-center">
+                      <button
+                        data-testid="show-more-button"
+                        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-rose-700 bg-rose-100 hover:bg-rose-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
+                        (click)="loadMoreDancers()"
+                      >
+                        Weitere anzeigen
+                      </button>
+                    </div>
+                  }
                 </div>
-              </div>
+              }
 
               <!-- Empty State -->
-              <div
-                *ngIf="!isLoading() && !hasError() && dancers().length === 0"
-                data-testid="empty-find-state"
-                class="text-center py-12"
-              >
-                <div class="mx-auto max-w-md">
-                  <div class="mx-auto h-12 w-12 text-gray-400">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-2.239"
-                      />
-                    </svg>
+              @if (!isLoading() && !hasError() && dancers().length === 0) {
+                <div data-testid="empty-find-state" class="text-center py-12">
+                  <div class="mx-auto max-w-md">
+                    <div class="mx-auto h-12 w-12 text-gray-400">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-2.239"
+                        />
+                      </svg>
+                    </div>
+                    <h3 class="mt-2 text-sm font-medium text-gray-900">
+                      Keine Tänzer gefunden
+                    </h3>
+                    <p
+                      data-testid="empty-find-message"
+                      class="mt-1 text-sm text-gray-500"
+                    >
+                      Keine Tänzer entsprechen den gewählten Filterkriterien.
+                    </p>
                   </div>
-                  <h3 class="mt-2 text-sm font-medium text-gray-900">
-                    Keine Tänzer gefunden
-                  </h3>
-                  <p
-                    data-testid="empty-find-message"
-                    class="mt-1 text-sm text-gray-500"
-                  >
-                    Keine Tänzer entsprechen den gewählten Filterkriterien.
-                  </p>
                 </div>
-              </div>
+              }
 
               <!-- Error State -->
-              <div
-                *ngIf="!isLoading() && hasError()"
-                data-testid="find-error-state"
-                class="text-center py-12"
-              >
-                <div class="mx-auto max-w-md">
-                  <div class="mx-auto h-12 w-12 text-red-400">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-                      />
-                    </svg>
+              @if (!isLoading() && hasError()) {
+                <div data-testid="find-error-state" class="text-center py-12">
+                  <div class="mx-auto max-w-md">
+                    <div class="mx-auto h-12 w-12 text-red-400">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                        />
+                      </svg>
+                    </div>
+                    <h3 class="mt-2 text-sm font-medium text-gray-900">
+                      Fehler beim Laden
+                    </h3>
+                    <p
+                      data-testid="find-error-message"
+                      class="mt-1 text-sm text-gray-500"
+                    >
+                      Es ist ein Fehler aufgetreten. Bitte versuchen Sie es
+                      später erneut.
+                    </p>
                   </div>
-                  <h3 class="mt-2 text-sm font-medium text-gray-900">
-                    Fehler beim Laden
-                  </h3>
-                  <p
-                    data-testid="find-error-message"
-                    class="mt-1 text-sm text-gray-500"
-                  >
-                    Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später
-                    erneut.
-                  </p>
                 </div>
-              </div>
-            </ng-container>
+              }
+            }
           </div>
         </div>
       </div>

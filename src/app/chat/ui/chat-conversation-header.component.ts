@@ -27,32 +27,33 @@ import { Router } from '@angular/router';
       >
         &larr; Zurück zur Übersicht
       </button>
-      <div
-        *ngIf="participant()"
-        class="border-b bg-gray-50 px-6 py-3 hover:cursor-pointer hover:bg-gray-100"
-        tabindex="0"
-        (click)="navigateToProfile(participant()!.id)"
-      >
-        <div class="flex gap-4">
-          <div class=" h-12 w-12 overflow-hidden rounded-full object-cover">
-            <img
-              class=""
-              [src]="
-                imageService.getDancerImageSrcOrDefault(
-                  participant()!.profileImageHash,
-                  48
-                )
-              "
-              [attr.alt]="'Profile Image of' + participant()!.dancerName"
-              (error)="handleMissingImage($event)"
-            />
-          </div>
-          <div>
-            <div class="text-lg">{{ participant()?.dancerName }}</div>
-            <div class="text-sm text-gray-600">Zum Profil wechseln</div>
+      @if (participant()) {
+        <div
+          class="border-b bg-gray-50 px-6 py-3 hover:cursor-pointer hover:bg-gray-100"
+          tabindex="0"
+          (click)="navigateToProfile(participant()!.id)"
+        >
+          <div class="flex gap-4">
+            <div class=" h-12 w-12 overflow-hidden rounded-full object-cover">
+              <img
+                class=""
+                [src]="
+                  imageService.getDancerImageSrcOrDefault(
+                    participant()!.profileImageHash,
+                    48
+                  )
+                "
+                [attr.alt]="'Profile Image of' + participant()!.dancerName"
+                (error)="handleMissingImage($event)"
+              />
+            </div>
+            <div>
+              <div class="text-lg">{{ participant()?.dancerName }}</div>
+              <div class="text-sm text-gray-600">Zum Profil wechseln</div>
+            </div>
           </div>
         </div>
-      </div>
+      }
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

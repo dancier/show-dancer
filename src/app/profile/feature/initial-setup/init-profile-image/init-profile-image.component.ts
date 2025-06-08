@@ -5,14 +5,13 @@ import { OwnProfileService } from '@shared/data-access/profile/own-profile.servi
 import { OldAPIResponse } from '@shared/util/http/response.types';
 import { UploadedImageDao } from '../../../data-access/types/profile.types';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-init-profile-image',
   templateUrl: './init-profile-image.component.html',
   styleUrls: ['./init-profile-image.component.scss'],
-  imports: [MatButtonModule, NgIf, ImageCropperModule],
+  imports: [MatButtonModule, ImageCropperModule],
 })
 export class InitProfileImageComponent {
   private imageUploadService = inject(ImageUploadService);
