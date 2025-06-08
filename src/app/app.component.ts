@@ -4,11 +4,15 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { AppInstanceStorageService } from '@shared/data-access/log/app-instance-storage.service';
 import { DancierBackendMockedService } from '@shared/data-access/dancier-backend-mocked.service';
 import { EnvironmentService } from '@shared/data-access/environment.service';
+import { DevToolsComponent } from '@shared/ui/dev-tools/dev-tools.component';
 
 @Component({
   selector: 'app-root',
-  template: `<router-outlet></router-outlet>`,
-  imports: [RouterOutlet],
+  template: `
+    <router-outlet></router-outlet>
+    <app-dev-tools></app-dev-tools>
+  `,
+  imports: [RouterOutlet, DevToolsComponent],
 })
 export class AppComponent implements OnInit {
   private eventLogService = inject(EventLogService);

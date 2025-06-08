@@ -8,4 +8,5 @@ export const environment: Environment = {
   apiUrl: env.apiUrl || 'API_URL_NOT_SET_IN_ENV',
   mockBackend: false,
   removeTestAttributes: false,
+  enableDevTools: false,
 };

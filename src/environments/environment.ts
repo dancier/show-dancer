@@ -11,6 +11,7 @@ export const environment: Environment = {
   // apiUrl: '/api',
   mockBackend: false,
   removeTestAttributes: false,
+  enableDevTools: true,
 };
 
 /*
