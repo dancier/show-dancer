@@ -1,0 +1,190 @@
+{
+  "uuid": "03e25b5e-89bd-42da-b5dd-88f5aadb9bcd",
+  "lastMigration": 33,
+  "name": "Dancier",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "cd588940-dc9d-46cf-9fe7-f5de85a573fc",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "",
+      "responses": [
+        {
+          "uuid": "4b125801-5e1a-4446-8757-d20fe3b1e6a3",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "8c3b1821-3e15-46e0-8a12-a52ddf4dfe49",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "profile",
+      "responses": [
+        {
+          "uuid": "3a2a3db4-97cb-4737-a0df-a46ae9a1492f",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "37zg",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "b5f21e75-0a08-4ea6-aa03-a9452e9ef7b2",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "dancers",
+      "responses": [
+        {
+          "uuid": "545d262a-923f-4533-ae2d-df6a18699582",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "hp2n",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "cd588940-dc9d-46cf-9fe7-f5de85a573fc"
+    },
+    {
+      "type": "route",
+      "uuid": "8c3b1821-3e15-46e0-8a12-a52ddf4dfe49"
+    },
+    {
+      "type": "route",
+      "uuid": "b5f21e75-0a08-4ea6-aa03-a9452e9ef7b2"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": false,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "http://localhost:4200"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With, x-app-instance-id"
+    },
+    {
+      "key": "Access-Control-Allow-Credentials",
+      "value": "true"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "eae8c9db-a937-4a8b-9cc4-5dac0419ebd9",
+      "id": "6ucx",
+      "name": "profiles",
+      "documentation": "",
+      "value": "[\n  {\n    id: 'test-user-1',\n    dancerName: 'TestUser',\n    email: 'test@example.com',\n    profileImageHash: 'test-hash',\n    ableTo: [],\n    wantsTo: [],\n    aboutMe: 'Test user for Playwright',\n    size: 175,\n    gender: 'MALE' as const,\n    birthDate: '1990-01-01',\n    zipCode: '12345',\n    city: 'Test City',\n    country: 'DE'\n  }\n]"
+    },
+    {
+      "uuid": "6ae30c3c-2952-4240-bd75-d1cf2eb21011",
+      "id": "37zg",
+      "name": "current user profile",
+      "documentation": "",
+      "value": "  {\n    id: 'test-user-1',\n    dancerName: 'TestUser',\n    email: 'test@example.com',\n    profileImageHash: 'test-hash',\n    ableTo: [],\n    wantsTo: [],\n    aboutMe: 'Test user for Playwright',\n    size: 175,\n    gender: 'MALE' as const,\n    birthDate: '1990-01-01',\n    zipCode: '12345',\n    city: 'Test City',\n    country: 'DE'\n  }"
+    },
+    {
+      "uuid": "38db9689-3a0c-410e-adee-b4f9ee8ef197",
+      "id": "hp2n",
+      "name": "dancers (for search)",
+      "documentation": "",
+      "value": "[\n  {\n    \"id\": \"uuid-1\",\n    \"dancerName\": \"Anna Mueller\",\n    \"age\": 28,\n    \"gender\": \"FEMALE\",\n    \"city\": \"Berlin\",\n    \"country\": \"DE\",\n    \"size\": 165,\n    \"profileImageHash\": \"hash-1\",\n    \"aboutMe\": \"I love dancing salsa and bachata\",\n    \"ableTo\": [],\n    \"wantsTo\": []\n  },\n  {\n    \"id\": \"uuid-2\",\n    \"dancerName\": \"Max Schmidt\",\n    \"age\": 32,\n    \"gender\": \"MALE\",\n    \"city\": \"Munich\",\n    \"country\": \"DE\",\n    \"size\": 180,\n    \"profileImageHash\": \"hash-2\",\n    \"aboutMe\": \"Passionate about swing and tango\",\n    \"ableTo\": [],\n    \"wantsTo\": []\n  },\n  {\n    \"id\": \"uuid-3\",\n    \"dancerName\": \"Sofia Garcia\",\n    \"age\": 25,\n    \"gender\": \"FEMALE\",\n    \"city\": \"Hamburg\",\n    \"country\": \"DE\",\n    \"size\": 170,\n    \"profileImageHash\": \"hash-3\",\n    \"aboutMe\": \"Ballroom dancing enthusiast\",\n    \"ableTo\": [],\n    \"wantsTo\": []\n  }\n]"
+    }
+  ],
+  "callbacks": []
+}
