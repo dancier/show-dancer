@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { EnvironmentService } from '@shared/data-access/environment.service';
 import { Router } from '@angular/router';
 import { DisplayDanceRolePipe } from '../../util/pipes/display-dance-role.pipe';
 import { DisplayDanceLevelPipe } from '../../util/pipes/display-dance-level.pipe';
 import { DisplayGenderPipe } from '../../util/pipes/display-gender.pipe';
-import { AgePipe } from '@shared/util/age.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 
@@ -19,18 +18,15 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
     NgFor,
     MatButtonModule,
     AsyncPipe,
-    AgePipe,
     DisplayGenderPipe,
     DisplayDanceLevelPipe,
     DisplayDanceRolePipe,
   ],
 })
 export class ProfilePageComponent {
-  constructor(
-    public profileService: OwnProfileService,
-    public environmentService: EnvironmentService,
-    private router: Router
-  ) {}
+  profileService = inject(OwnProfileService);
+  environmentService = inject(EnvironmentService);
+  private router = inject(Router);
 
   editProfile(): void {
     this.router.navigate(['profile', 'edit']);

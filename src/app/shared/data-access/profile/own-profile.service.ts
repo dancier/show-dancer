@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { ProfileHttpService } from './profile-http.service';
 import {
@@ -17,17 +17,17 @@ import { ImageService } from '../image.service';
   providedIn: 'root',
 })
 export class OwnProfileService {
+  private profileHttpService = inject(ProfileHttpService);
+  private authStorageService = inject(AuthService);
+  private environmentService = inject(EnvironmentService);
+  private imageService = inject(ImageService);
+
   private _profile = new BehaviorSubject<Profile | null>(null);
   public readonly profile$: Observable<Profile> = this._profile
     .asObservable()
     .pipe(filter(isNonNull));
 
-  constructor(
-    private profileHttpService: ProfileHttpService,
-    private authStorageService: AuthService,
-    private environmentService: EnvironmentService,
-    private imageService: ImageService
-  ) {
+  constructor() {
     // fetch profile data once the user is logged in
     this.authStorageService.authData$.subscribe((response) => {
       if (response.isLoggedIn) {

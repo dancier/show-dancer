@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormGroup,
   FormGroupDirective,
@@ -42,6 +42,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   ],
 })
 export class DanceExperienceEntryComponent implements OnInit {
+  private formGroupDirective = inject(FormGroupDirective);
+
   danceForm!: FormGroup<DanceExperienceEntryForm>;
 
   danceLevels: Record<DanceLevel, string> = {
@@ -61,8 +63,6 @@ export class DanceExperienceEntryComponent implements OnInit {
   danceTypeAutocompletions: string[] = ['Tango', 'Salsa', 'Standard'];
 
   filteredDanceTypeAutocompletions$!: Observable<string[]>;
-
-  constructor(private formGroupDirective: FormGroupDirective) {}
 
   // Preserve original property order
   originalOrder = (

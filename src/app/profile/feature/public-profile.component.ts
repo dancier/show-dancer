@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PublicProfileService } from '../data-access/public-profile.service';
-import { AgePipe } from '@shared/util/age.pipe';
 import { DisplayDanceLevelPipe } from '../util/pipes/display-dance-level.pipe';
 import { DisplayDanceRolePipe } from '../util/pipes/display-dance-role.pipe';
 import { DisplayGenderPipe } from '../util/pipes/display-gender.pipe';
@@ -11,9 +10,9 @@ import { AlertComponent } from '@shared/ui/alert/alert.component';
 
 @Component({
   selector: 'app-public-profile',
+  standalone: true,
   imports: [
     CommonModule,
-    AgePipe,
     DisplayDanceLevelPipe,
     DisplayDanceRolePipe,
     DisplayGenderPipe,

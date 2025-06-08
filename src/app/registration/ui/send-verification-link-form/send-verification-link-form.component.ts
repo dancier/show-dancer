@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
@@ -35,6 +35,12 @@ import { AsyncPipe, NgIf } from '@angular/common';
   ],
 })
 export class SendVerificationLinkFormComponent implements OnInit {
+  private fb = inject(NonNullableFormBuilder);
+  private authenticationService = inject(AuthHttpService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  authStorageService = inject(AuthService);
+
   @Input() linkType!: LinkType;
   submitButtonText?: string;
   redirectUrl?: string;
@@ -47,14 +53,6 @@ export class SendVerificationLinkFormComponent implements OnInit {
   });
   isCaptchaSolved = false;
   captchaError = false;
-
-  constructor(
-    private fb: NonNullableFormBuilder,
-    private authenticationService: AuthHttpService,
-    private router: Router,
-    private route: ActivatedRoute,
-    public authStorageService: AuthService
-  ) {}
 
   ngOnInit(): void {
     this.submitButtonText =

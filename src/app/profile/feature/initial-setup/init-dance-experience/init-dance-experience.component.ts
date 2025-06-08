@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { OwnProfileService } from '@shared/data-access/profile/own-profile.service';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -25,14 +25,12 @@ import { DanceExperienceFormComponent } from '../../../ui/dance-experience-form/
   ],
 })
 export class InitDanceExperienceComponent {
+  profileService = inject(OwnProfileService);
+  private router = inject(Router);
+
   form = new FormGroup<Partial<DanceExperienceForm>>({});
 
   apiError?: APIError;
-
-  constructor(
-    public profileService: OwnProfileService,
-    private router: Router
-  ) {}
 
   submitForm(): void {
     if (this.form.valid && this.form.value.dances) {

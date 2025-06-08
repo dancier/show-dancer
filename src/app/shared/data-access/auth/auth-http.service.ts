@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -24,17 +24,17 @@ import {
   providedIn: 'root',
 })
 export class AuthHttpService {
+  private http = inject(HttpClient);
+  private authStorageService = inject(AuthService);
+  private environment = inject(EnvironmentService);
+
   private defaultOptions = {
     withCredentials: true,
   };
 
   private readonly baseUrl: string;
 
-  constructor(
-    private http: HttpClient,
-    private authStorageService: AuthService,
-    private environment: EnvironmentService
-  ) {
+  constructor() {
     this.baseUrl = `${this.environment.getApiUrl()}/authentication`;
   }
 

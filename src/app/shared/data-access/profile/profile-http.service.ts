@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { catchError, map, Observable, of, shareReplay } from 'rxjs';
 import { EnvironmentService } from '../environment.service';
 import {
@@ -17,16 +17,16 @@ import {
   providedIn: 'root',
 })
 export class ProfileHttpService {
+  private http = inject(HttpClient);
+  private environment = inject(EnvironmentService);
+
   private defaultOptions = {
     withCredentials: true,
   };
   private readonly profileApiUrl: string;
   private readonly locationApiUrl: string;
 
-  constructor(
-    private http: HttpClient,
-    private environment: EnvironmentService
-  ) {
+  constructor() {
     this.profileApiUrl = `${this.environment.getApiUrl()}/profile`;
     this.locationApiUrl = `${this.environment.getApiUrl()}/location`;
   }

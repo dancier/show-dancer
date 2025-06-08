@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   UntypedFormBuilder,
@@ -33,15 +33,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   ],
 })
 export class LoginFormComponent implements OnInit {
+  private fb = inject(UntypedFormBuilder);
+  private authService = inject(AuthHttpService);
+  private router = inject(Router);
+
   loginForm!: UntypedFormGroup;
   hide = true;
   error?: APIError;
-
-  constructor(
-    private fb: UntypedFormBuilder,
-    private authService: AuthHttpService,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.initReactiveForm();

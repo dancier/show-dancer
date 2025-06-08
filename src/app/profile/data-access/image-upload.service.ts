@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '@shared/data-access/environment.service';
@@ -13,14 +13,12 @@ import { UploadedImageDao } from './types/profile.types';
   providedIn: 'root',
 })
 export class ImageUploadService {
+  private http = inject(HttpClient);
+  private environment = inject(EnvironmentService);
+
   private defaultOptions = {
     withCredentials: true,
   };
-
-  constructor(
-    private http: HttpClient,
-    private environment: EnvironmentService
-  ) {}
 
   dataURItoBlob(dataURI: string): Blob {
     const binary = atob(dataURI.split(',')[1]);

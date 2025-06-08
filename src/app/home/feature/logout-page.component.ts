@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { Subscription } from 'rxjs';
@@ -10,13 +10,11 @@ import { AuthService } from '@shared/data-access/auth/auth.service';
   standalone: true,
 })
 export class LogoutPageComponent implements OnInit, OnDestroy {
-  logoutSubscription: Subscription | undefined;
+  private authService = inject(AuthHttpService);
+  private authStorageService = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(
-    private authService: AuthHttpService,
-    private authStorageService: AuthService,
-    private router: Router
-  ) {}
+  logoutSubscription: Subscription | undefined;
 
   ngOnDestroy(): void {
     this.logoutSubscription?.unsubscribe();

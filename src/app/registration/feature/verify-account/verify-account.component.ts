@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { AuthHttpService } from '@shared/data-access/auth/auth-http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
@@ -10,13 +10,11 @@ import { Subscription, switchMap } from 'rxjs';
   standalone: true,
 })
 export class VerifyAccountComponent implements OnInit, OnDestroy {
-  verifySubscription: Subscription | undefined;
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private authService = inject(AuthHttpService);
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private authService: AuthHttpService
-  ) {}
+  verifySubscription: Subscription | undefined;
 
   ngOnInit(): void {
     this.verifySubscription = this.route.params

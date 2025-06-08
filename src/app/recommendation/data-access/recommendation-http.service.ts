@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EnvironmentService } from '@shared/data-access/environment.service';
 import { RecommendationsDto } from './types/recommendations.dto';
@@ -13,16 +13,16 @@ import { catchError, map, Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class RecommendationHttpService {
+  private http = inject(HttpClient);
+  private environment = inject(EnvironmentService);
+
   private readonly defaultOptions = {
     withCredentials: true,
   };
 
   private readonly recommendationsApiUrl: string;
 
-  constructor(
-    private http: HttpClient,
-    private environment: EnvironmentService
-  ) {
+  constructor() {
     // for local testing with mock-server
     // this.recommendationsApiUrl = `http://localhost:3000/recommendations`;
     this.recommendationsApiUrl = `${this.environment.getApiUrl()}/recommendations`;

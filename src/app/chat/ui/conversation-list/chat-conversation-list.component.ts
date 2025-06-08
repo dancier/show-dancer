@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ChatConversationListEntryComponent } from './chat-conversation-list-entry.component';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import {
   ChatStateService,
   SingleChatState,
@@ -21,7 +21,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line
   host: { role: 'list' },
-  imports: [NgFor, ChatConversationListEntryComponent, AsyncPipe],
+  imports: [NgFor, ChatConversationListEntryComponent],
 })
 export class ChatConversationListComponent {
   chatState = inject(ChatStateService);

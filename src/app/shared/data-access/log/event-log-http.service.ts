@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Event } from './eventlog.types';
 import { catchError, map, Observable, of } from 'rxjs';
 import { EnvironmentService } from '../environment.service';
@@ -13,14 +13,12 @@ import {
   providedIn: 'root',
 })
 export class EventLogHttpService {
+  private environment = inject(EnvironmentService);
+  private http = inject(HttpClient);
+
   private defaultOptions = {
     withCredentials: true,
   };
-
-  constructor(
-    private environment: EnvironmentService,
-    private http: HttpClient
-  ) {}
 
   postEvent$(event: Event): Observable<OldAPIResponse<void>> {
     return this.http

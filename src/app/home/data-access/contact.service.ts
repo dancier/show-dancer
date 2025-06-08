@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { catchError, Observable, of, shareReplay, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
@@ -18,15 +18,13 @@ import { EventLogService } from '@shared/data-access/log/event-log.service';
   providedIn: 'root',
 })
 export class ContactService {
+  private http = inject(HttpClient);
+  private environment = inject(EnvironmentService);
+  private eventLogService = inject(EventLogService);
+
   private defaultOptions = {
     withCredentials: true,
   };
-
-  constructor(
-    private http: HttpClient,
-    private environment: EnvironmentService,
-    private eventLogService: EventLogService
-  ) {}
 
   sendMessage(
     message: string,

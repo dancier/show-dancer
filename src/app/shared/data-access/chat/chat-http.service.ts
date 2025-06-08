@@ -23,6 +23,9 @@ import { OwnProfileService } from '../profile/own-profile.service';
   providedIn: 'root',
 })
 export class ChatHttpService {
+  private http = inject(HttpClient);
+  private environment = inject(EnvironmentService);
+
   private defaultOptions = {
     withCredentials: true,
   };
@@ -32,10 +35,7 @@ export class ChatHttpService {
 
   private profileService = inject(OwnProfileService);
 
-  constructor(
-    private http: HttpClient,
-    private environment: EnvironmentService
-  ) {
+  constructor() {
     this.chatApiUrl = `${this.environment.getApiUrl()}/chats`;
     this.dancerApiUrl = `${this.environment.getApiUrl()}/dancers`;
     this.messagesApiUrl = `${this.environment.getApiUrl()}/messages`;

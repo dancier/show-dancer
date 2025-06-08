@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { EnvironmentService } from './environment.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImageService {
+  private environmentService = inject(EnvironmentService);
+
   private readonly defaultImage = 'assets/img/profile-placeholder.svg';
   private readonly imageBaseUrl = `${this.environmentService.getApiUrl()}/images`;
-
-  constructor(private environmentService: EnvironmentService) {}
 
   getDancerImageSrcOrDefault(
     imageHash: string | undefined | null,

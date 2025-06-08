@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DisplayGenderPipe } from '../util/pipes/display-gender.pipe';
 
 @Component({
   selector: 'app-profile-data-entry',
-  imports: [CommonModule, DisplayGenderPipe],
+  standalone: true,
   template: `
     <div class="flex items-start gap-x-7 gap-y-4 border-b px-2 py-4">
       <div class="grow-0 pt-1.5">
@@ -22,6 +21,7 @@ import { DisplayGenderPipe } from '../util/pipes/display-gender.pipe';
       </div>
     </div>
   `,
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileDataEntryComponent {

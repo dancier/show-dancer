@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormGroup,
   NonNullableFormBuilder,
@@ -48,6 +48,12 @@ type EditProfileForm = {
   ],
 })
 export class EditProfileComponent {
+  private fb = inject(NonNullableFormBuilder);
+  profileService = inject(OwnProfileService);
+  private imageUploadService = inject(ImageUploadService);
+  private imageService = inject(ImageService);
+  private router = inject(Router);
+
   profileForm = new FormGroup<EditProfileForm>({
     personalData: new FormGroup({}),
     ownDances: new FormGroup({}),
@@ -57,14 +63,6 @@ export class EditProfileComponent {
   imageChangedEvent: any = '';
   uploadResponse?: OldAPIResponse<UploadedImageDao>;
   error?: APIError;
-
-  constructor(
-    private fb: NonNullableFormBuilder,
-    public profileService: OwnProfileService,
-    private imageUploadService: ImageUploadService,
-    private imageService: ImageService,
-    private router: Router
-  ) {}
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
