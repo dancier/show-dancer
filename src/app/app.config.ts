@@ -20,7 +20,6 @@ import {
 } from '@angular/common/http';
 import { AppInstanceIdInterceptor } from '@shared/util/logging/app-instance-id.interceptor';
 import { defaultStoreProvider } from '@state-adapt/angular';
-import { DancierBackendMockedService } from '@shared/data-access/dancier-backend-mocked.service';
 import { UnauthorizedInterceptor } from '@shared/util/auth/unauthorized.interceptor';
 import { WithCredentialsInterceptor } from '@shared/util/auth/with-credentials-interceptor.service';
 
@@ -54,7 +53,6 @@ export const APP_CONFIG: ApplicationConfig = {
       MatIconModule
     ),
     defaultStoreProvider,
-    DancierBackendMockedService,
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
     httpInterceptorProviders,

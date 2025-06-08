@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { EventLogService } from '@shared/data-access/log/event-log.service';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { AppInstanceStorageService } from '@shared/data-access/log/app-instance-storage.service';
-import { DancierBackendMockedService } from '@shared/data-access/dancier-backend-mocked.service';
 import { EnvironmentService } from '@shared/data-access/environment.service';
 import { DevToolsComponent } from '@shared/ui/dev-tools/dev-tools.component';
 
@@ -19,12 +18,10 @@ export class AppComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private appInstanceStorageService = inject(AppInstanceStorageService);
   private environment = inject(EnvironmentService);
-  private dancierMockBackend = inject(DancierBackendMockedService);
 
   ngOnInit(): void {
     this.publishInitialPageRequestEvent();
     this.publishAdvertisementEvent();
-    //this.enableMockedBackend();
   }
 
   publishInitialPageRequestEvent(): void {
@@ -47,11 +44,5 @@ export class AppComponent implements OnInit {
         );
       }
     });
-  }
-
-  private enableMockedBackend(): void {
-    if (this.environment.isMockBackendEnabled()) {
-      this.dancierMockBackend.mirageJsServer();
-    }
   }
 }
