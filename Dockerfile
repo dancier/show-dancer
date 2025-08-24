@@ -12,7 +12,6 @@ WORKDIR /app
 COPY . .
 # install node modules and build assets
 RUN npm ci && npm run build --prod
-
 # nginx state for serving content
 FROM nginx:alpine
 # Set working directory to nginx asset directory
@@ -20,7 +19,7 @@ WORKDIR /usr/share/nginx/html
 # Remove default nginx static assets
 RUN rm -rf ./*
 # Copy static assets from builder stage
-COPY --from=builder /app/dist/show-dancer .
+COPY --from=builder /app/dist/show-dancer/browser .
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
