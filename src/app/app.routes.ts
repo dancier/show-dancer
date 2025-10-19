@@ -27,14 +27,6 @@ export const ROUTES: Routes = [
           import('./chat/chat.routes').then((m) => m.CHAT_ROUTES),
       },
       {
-        path: 'recommendations',
-        canActivate: [loggedInGuard],
-        loadChildren: () =>
-          import('./recommendation/recommendation.routes').then(
-            (m) => m.RECOMMENDATION_ROUTES
-          ),
-      },
-      {
         path: 'find-dancers',
         canActivate: [loggedInGuard],
         loadChildren: () =>

@@ -57,12 +57,12 @@ import { interval, take } from 'rxjs';
             <p class="text-gray-500">
               Über neue Empfehlungen wirst du von uns per E-Mail informiert.
             </p>
-            <!--    Button zu der Empfehlungsseite -->
+            <!--    Button zur Tanzpartnersuche -->
             <div class="my-4">
               <a
                 class="rounded bg-blue-500 py-2 px-4 font-bold text-white no-underline hover:bg-blue-700"
-                routerLink="/recommendations"
-                >Zu den Empfehlungen</a
+                routerLink="/find-dancers"
+                >Tänzer finden</a
               >
             </div>
           </div>

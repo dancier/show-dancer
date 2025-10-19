@@ -18,7 +18,7 @@ export const loggedOutGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (authStorageService.getSnapshot().isLoggedIn) {
-    return router.createUrlTree(['/recommendations']);
+    return router.createUrlTree(['/find-dancers']);
   } else {
     return true;
   }

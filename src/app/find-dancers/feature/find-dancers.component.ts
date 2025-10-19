@@ -5,6 +5,7 @@ import {
   signal,
   computed,
   effect,
+  OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -129,6 +130,18 @@ import { Router } from '@angular/router';
         <div class="md:col-span-2 order-2 md:order-2">
           <div data-testid="dancer-list" class="space-y-6">
             @if (showResults()) {
+              <!-- Active Filter Display -->
+              <div
+                class="bg-rose-50 border border-rose-200 rounded-lg p-4 mb-6"
+              >
+                <p class="text-sm text-rose-800 font-medium">
+                  {{ filterDisplayMessage() }}
+                </p>
+                <p class="text-xs text-rose-600 mt-1">
+                  Du kannst den Suchradius jederzeit anpassen
+                </p>
+              </div>
+
               <!-- Loading State -->
               @if (isLoading()) {
                 <div data-testid="find-loading-state" class="text-center py-8">
@@ -231,13 +244,13 @@ import { Router } from '@angular/router';
                       </svg>
                     </div>
                     <h3 class="mt-2 text-sm font-medium text-gray-900">
-                      Keine Tänzer gefunden
+                      Keine Tänzer in deiner Nähe gefunden
                     </h3>
                     <p
                       data-testid="empty-find-message"
                       class="mt-1 text-sm text-gray-500"
                     >
-                      Keine Tänzer entsprechen den gewählten Filterkriterien.
+                      Vergrößere den Suchradius, um mehr Tanzpartner zu finden!
                     </p>
                   </div>
                 </div>
@@ -268,8 +281,8 @@ import { Router } from '@angular/router';
                       data-testid="find-error-message"
                       class="mt-1 text-sm text-gray-500"
                     >
-                      Es ist ein Fehler aufgetreten. Bitte versuchen Sie es
-                      später erneut.
+                      Die Suche konnte nicht durchgeführt werden. Bitte versuche
+                      es später nochmal.
                     </p>
                   </div>
                 </div>
@@ -282,14 +295,13 @@ import { Router } from '@angular/router';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FindDancersComponent {
+export class FindDancersComponent implements OnInit {
   private dancersService = inject(DancersHttpService);
   private router = inject(Router);
 
-  // Form controls
   filtersForm = new FormGroup({
     gender: new FormControl<'ALL' | 'MALE' | 'FEMALE'>('ALL'),
-    distance: new FormControl<number>(20),
+    distance: new FormControl<number>(50),
   });
 
   // State signals
@@ -309,6 +321,12 @@ export class FindDancersComponent {
   dancers = computed(() => this.searchResults());
   hasMoreResults = signal(false); // For future pagination
 
+  filterDisplayMessage = computed(() => {
+    const filters = this.searchFilters();
+    if (!filters) return '';
+    return `Tanzpartner im Umkreis von ${filters.distance} km`;
+  });
+
   constructor() {
     // Effect to trigger API calls when filters change
     effect(() => {
@@ -317,6 +335,10 @@ export class FindDancersComponent {
         this.performSearch(filters);
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.applyFilters();
   }
 
   private performSearch(filters: {

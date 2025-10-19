@@ -129,7 +129,7 @@ export class FindDancersPage extends BasePage {
   async expectEmptyState(): Promise<void> {
     await expect(this.emptyFindState).toBeVisible();
     await expect(this.emptyFindMessage).toContainText(
-      /keine.*entsprechen|no.*found/i
+      /vergrößere.*suchradius|increase.*search.*radius/i
     );
   }
 

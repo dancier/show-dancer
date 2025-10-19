@@ -53,7 +53,7 @@ export class LoginFormComponent implements OnInit {
         .login(this.loginForm.value as LoginRequest)
         .subscribe((response) => {
           if (response.isSuccess) {
-            this.router.navigate(['recommendations']);
+            this.router.navigate(['find-dancers']);
           } else {
             this.error = response.error;
           }
