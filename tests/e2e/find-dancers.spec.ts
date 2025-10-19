@@ -38,6 +38,15 @@ test.describe('Find Dancers', () => {
       });
     });
 
+    // Mock the dancers API call for auto-search on page load
+    await page.route(mockApiResponses.dancers.url, async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(mockDancers),
+      });
+    });
+
     await page.goto('/'); // Navigate to home page first
     await findDancersPage.navFindLink.click();
 
@@ -197,7 +206,6 @@ test.describe('Find Dancers', () => {
     });
 
     await findDancersPage.goto();
-    await findDancersPage.applyFilters();
 
     await findDancersPage.expectFindResultsVisible();
     await findDancersPage.expectDancerCardContent();
@@ -234,7 +242,6 @@ test.describe('Find Dancers', () => {
     });
 
     await findDancersPage.goto();
-    await findDancersPage.applyFilters();
 
     const initialCount = await findDancersPage.dancerCards.count();
 
@@ -277,7 +284,6 @@ test.describe('Find Dancers', () => {
     });
 
     await findDancersPage.goto();
-    await findDancersPage.applyFilters();
     await findDancersPage.expectEmptyState();
   });
 
@@ -314,7 +320,6 @@ test.describe('Find Dancers', () => {
     });
 
     await findDancersPage.goto();
-    await findDancersPage.applyFilters();
 
     const dancerId = await findDancersPage.clickFirstDancer();
 
@@ -352,7 +357,6 @@ test.describe('Find Dancers', () => {
     });
 
     await findDancersPage.goto();
-    await findDancersPage.applyFilters();
     await findDancersPage.expectErrorState();
   });
 
@@ -378,18 +382,33 @@ test.describe('Find Dancers', () => {
       });
     });
 
+    let requestCount = 0;
     await page.route(mockApiResponses.dancers.url, async (route) => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify(mockDancers),
-      });
+      requestCount++;
+      if (requestCount === 1) {
+        // First request (auto-search on load): respond quickly
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(mockDancers),
+        });
+      } else {
+        // Second request (manual button click): delay to show loading state
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(mockDancers),
+        });
+      }
     });
 
     await findDancersPage.goto();
 
-    // Start waiting for response before clicking. Note no await.
+    // Wait for initial auto-search to complete
+    await findDancersPage.expectLoadingStateHidden();
+
+    // Now trigger manual search to test loading state
     const responsePromise = page.waitForResponse(/.*\/dancers/);
     const findPromise = findDancersPage.applyFiltersButton.click();
 
